@@ -3,7 +3,9 @@ import React from 'react'
 import './NavBar.scss'
 const NavBar = () => {
   return (
-    <div className='navBar'>NavBar</div>
+    <div className='navBar'>
+      
+    </div>
   )
 }
 

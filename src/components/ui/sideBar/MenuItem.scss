@@ -4,6 +4,8 @@
     gap:10px;
     padding: 10px;
     border-radius: 7px;
+    cursor: pointer;
+    user-select: none;
     &:hover{
         background-color: rgb(236, 242, 255);
         color: rgb(93, 135, 255);
@@ -11,4 +13,45 @@
     .label{
         flex: 1 1 auto;
     }
+
+    &.active{
+        background-color: rgb(93, 135, 255);
+    }
+
+  
 }
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+}
+
+.subMenu{
+    transition: all .5s ease-in-out;
+}
+
+.subMenuItem{
+    display: flex;
+    gap:10px;
+    padding: 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    user-select: none;
+    margin-left: 20px;
+    &:hover{
+        background-color: rgb(236, 242, 255);
+        color: rgb(146, 147, 150);
+    }
+    .label{
+        flex: 1 1 auto;
+    }
+
+    &.active{
+        background-color: rgb(136, 136, 136);
+    }
+}
+
+
+

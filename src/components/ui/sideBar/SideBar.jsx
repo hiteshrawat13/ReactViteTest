@@ -3,7 +3,45 @@ import React from 'react'
 import './SideBar.scss'
 import AccordionMenu from './AccordionMenu'
 import MenuItem from './MenuItem'
+
+import { FaArrowAltCircleDown } from "react-icons/fa";
 const SideBar = () => {
+
+    const items=[
+        
+                {
+                    type:"menuItem",
+                    label:"Dashboard",
+                    icon:<FaArrowAltCircleDown/>
+                },
+                {
+                    type:"menuItem",
+                    label:"Dashboard",
+                    icon:<FaArrowAltCircleDown/>
+                },
+                {
+                    type:"menuItem",
+                    label:"Dashboard",
+                    icon:<FaArrowAltCircleDown/>
+                },
+                {
+                    type:"menuItem",
+                    label:"Dashboard",
+                    icon:<FaArrowAltCircleDown/>
+                }
+                ,
+                {
+                    type:"menuItem",
+                    label:"Dashboard",
+                    icon:<FaArrowAltCircleDown/>
+                },
+                {
+                    type:"accordion",
+                    label:"Dashboard",
+                    items:[]
+                }
+          
+    ]
   return (
     <div className='sideBar'>
         <div className='logo'>
@@ -11,22 +49,18 @@ const SideBar = () => {
         </div>
 
         <div className='menu'>
-            <MenuItem/>
-            <AccordionMenu/>
-            <MenuItem/>
-            <AccordionMenu/>
-            <MenuItem/>
-            <AccordionMenu/>
-            <MenuItem/>
-            <AccordionMenu/>
-            <MenuItem/>
-            <AccordionMenu/>
-            <MenuItem/>
-            <AccordionMenu/>
-            <MenuItem/>
-            <AccordionMenu/>
-            <MenuItem/>
-            <AccordionMenu/>
+            {
+                items.map((item,i)=>{
+                    if(item.type=="menuItem"){
+                        return <MenuItem icon={item.icon}/>
+                    }else if(item.type=="accordion"){
+                        return <AccordionMenu/>
+                    }
+                    
+                   
+                })
+            }
+           
         </div>
 
         <div className='logout'>

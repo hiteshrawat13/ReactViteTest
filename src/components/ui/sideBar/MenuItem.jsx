@@ -1,10 +1,10 @@
 import React from 'react'
 import { FaBeer } from 'react-icons/fa';
 import './MenuItem.scss'
-const MenuItem = () => {
+const MenuItem = ({icon}) => {
   return (
     <div className= "menuItem">
-            <FaBeer/>
+            {icon}
             <div className='label'>Menu 1</div>
            
     </div>

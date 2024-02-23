@@ -1,0 +1,23 @@
+.sideBar{
+    flex-basis: 20%;
+    border-right: 1px solid rgb(229, 234, 239);
+    display: flex;
+    flex-direction: column;
+    min-height:100vh;
+    position: relative;
+
+    .logo{
+        width: 180px;
+        
+    }
+
+    .menu{
+        flex:1;
+        padding: 20px;
+    }
+
+    .logout{
+        display: flex;
+        background-color: red;
+    }
+}

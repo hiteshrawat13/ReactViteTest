@@ -1,0 +1,14 @@
+
+.menuItem{
+    display: flex;
+    gap:10px;
+    padding: 10px;
+    border-radius: 7px;
+    &:hover{
+        background-color: rgb(236, 242, 255);
+        color: rgb(93, 135, 255);
+    }
+    .label{
+        flex: 1 1 auto;
+    }
+}

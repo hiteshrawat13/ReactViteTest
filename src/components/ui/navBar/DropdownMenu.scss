@@ -1,0 +1,13 @@
+.dropdown{
+    position: relative;
+
+    .menu{
+        position: absolute;
+       display: block;
+        transition: all 2s;
+        overflow: hidden;
+        &.collapsed{
+            display: none;
+        }
+    }
+}

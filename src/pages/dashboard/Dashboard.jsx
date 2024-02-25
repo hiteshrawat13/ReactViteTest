@@ -3,15 +3,17 @@ import NavBar from '../../components/ui/navBar/NavBar'
 import SideBar from '../../components/ui/sideBar/SideBar'
 
 import './Dashboard.scss'
+import { Outlet, useLocation } from 'react-router-dom'
 const Dashboard = () => {
+  
   return (
     <div className='container'>
        
             <SideBar/>
         
-        <div style={{flexBasis:"80%"}}>
+        <div style={{flex:"1"}}>
             <NavBar/>
-            <div>Content</div>
+            <Outlet/>
         </div>
         
     </div>

@@ -21,15 +21,24 @@
   
 }
 .hide{
-    display: none;
+   //display: none;
+ 
+   max-height: 0px;
+
 }
 
 .show{
-    display: block;
+  //display: block;
+
+  max-height: 100%;
+ 
 }
+
+
 
 .subMenu{
     transition: all .5s ease-in-out;
+    overflow: hidden;
 }
 
 .subMenuItem{

@@ -42,12 +42,6 @@ const SideBar = () => {
                 }
                 ,
                 {
-                    id:4,
-                    type:"menuItem",
-                    label:"Databases",
-                    icon:<FaArrowAltCircleDown/>
-                },
-                {
                     id:5,
                     type:"menuItem",
                     label:"Campaigns",

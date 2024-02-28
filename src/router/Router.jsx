@@ -1,4 +1,7 @@
 import App from "../App"
+import CreateCampaign from "../pages/campaign/CreateCampaign"
+import CreateNewCampaign from "../pages/campaign/CreateNewCampaign"
+import MyCampaigns from "../pages/campaign/MyCampaigns"
 import Login from "../pages/login/Login"
 
 
@@ -26,11 +29,15 @@ const Router=[
         },
         {
           path: '/campaigns',
-          element: <div>Campaigns</div>,
+          element: <MyCampaigns/>,
         },
         {
           path: '/campaigns/create',
-          element: <div>Create Campaign</div>,
+          element: <CreateCampaign/>,
+        },
+        {
+          path: '/campaigns/create/:campaign',
+          element: <CreateNewCampaign/>,
         },
         {
           path: '/exit',
@@ -40,8 +47,8 @@ const Router=[
   
     },
     {
-      path:"/login",
-      element:<Login/> 
+      path: "/login" ,
+      element: <Login/> 
     }
   
   ]

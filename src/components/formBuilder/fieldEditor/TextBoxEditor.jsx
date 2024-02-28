@@ -44,32 +44,32 @@ useEffect(()=>{
         <form onSubmit={handleSubmit}>
 
 {JSON.stringify()}
-            <label >
+            <label>
                 <span>Id</span>
                 <input type="text" name="id" defaultValue={formBuilder.fields[formBuilder.selectedField].id} />
             </label>
 
-            <label >
+            <label>
                 <span>Label</span>
                 <input type="text" name="label" defaultValue={formBuilder.fields[formBuilder.selectedField].label}/>
             </label>
 
-            <label >
+            <label>
                 <span>Name</span>
                 <input type="text" name="name" defaultValue={formBuilder.fields[formBuilder.selectedField].name} />
             </label>
 
-            <label >
+            <label>
                 <span>Placeholder</span>
                 <input type="text" name="placeholder" defaultValue={formBuilder.fields[formBuilder.selectedField].placeholder} />
             </label>
 
-            <label >
+            <label>
                 <span>Value</span>
                 <input type="text" name="value" defaultValue={formBuilder.fields[formBuilder.selectedField].value} />
             </label>
 
-            <label >
+            <label>
                 <span>Required?</span>
                 <input type="checkbox" name="isRequired" defaultChecked={formBuilder.fields[formBuilder.selectedField].isRequired} />
             </label>

@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { updateField } from '../../../store/formBuilder/FormBuilderSlice'
 
+
+import './Editor.scss'
+
+
 const TextBoxEditor = () => {
 const formBuilder = useSelector(state => state.formBuilder)
 const dispatch=useDispatch()
@@ -41,7 +45,7 @@ useEffect(()=>{
   return (
     <>
     <div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='editorForm'>
 
 {JSON.stringify()}
             <label>
@@ -72,6 +76,11 @@ useEffect(()=>{
             <label>
                 <span>Required?</span>
                 <input type="checkbox" name="isRequired" defaultChecked={formBuilder.fields[formBuilder.selectedField].isRequired} />
+            </label>
+
+            <label>
+                <span>Disabled?</span>
+                <input type="checkbox" name="isDisabled" defaultChecked={formBuilder.fields[formBuilder.selectedField].isDisabled} />
             </label>
 
             <input type="submit" />

@@ -3,6 +3,10 @@ import './FormBuilder.scss'
 import FormBuilderSlice, { addField, setSelectedField } from '../../store/formBuilder/FormBuilderSlice'
 import { useDispatch,useSelector } from 'react-redux'
 import TextBoxEditor from './fieldEditor/TextBoxEditor'
+import FieldList from './FieldList'
+
+
+
 const FormBuilder = () => {
   const formBuilder = useSelector(state => state.formBuilder)
  
@@ -15,9 +19,6 @@ const FormBuilder = () => {
     console.log(formBuilder);
   }
 
-  const handleFieldEdit=(fieldIndex)=>{
-    dispatch(setSelectedField(fieldIndex))
-  }
 
 
   const fieldEditor={
@@ -26,17 +27,34 @@ const FormBuilder = () => {
 
   return (
     <>
+    
     <button onClick={handleAdd}>Add</button>
     <div>Form Builder {formBuilder.selectedField}</div>
-    {
-      formBuilder.fields.map((field,i)=>{
-       return <div key={i} onClick={()=>handleFieldEdit(i)}>{field.label}</div>
-      })
-    }
 
-    <div className="fieldEditor">
-      {(formBuilder.selectedField!=-1)? fieldEditor[formBuilder.fields[formBuilder.selectedField].type]:null}
+    <div className='formBuilder'>
+      <div className='fieldList'>
+        {/* {
+          formBuilder.fields.map((field,i)=>{
+          return <div key={i} onClick={()=>handleFieldEdit(i)} className='field'>
+            <div className='fieldType'>{field.type}</div>
+            <div className='fieldLabel'>{field.label}</div>
+            </div>
+          })
+        } */}
+
+        <FieldList/>
+      </div>
+
+      <div className="fieldEditor">
+       
+        {(formBuilder.selectedField!=-1)? fieldEditor[formBuilder.fields[formBuilder.selectedField].type]:null}
+        </div>
+      
     </div>
+
+  
+
+    
     </>
   )
 }

@@ -22,7 +22,11 @@ export const FormBuilder = createSlice({
         const newArray = [...state.fields]; //making a new array
         newArray[state.selectedField] = payload.payload
         state.fields = newArray;
-    }
+    },
+
+    setFields:(state,payload) => {
+      state.fields = payload.payload;
+  }
 
     
     
@@ -32,7 +36,8 @@ export const FormBuilder = createSlice({
 export const {
   addField,
   setSelectedField,
-  updateField
+  updateField,
+  setFields
 } = FormBuilder.actions;
 
 export default FormBuilder.reducer;

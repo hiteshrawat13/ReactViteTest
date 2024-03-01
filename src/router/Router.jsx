@@ -2,6 +2,7 @@ import App from "../App"
 import CreateCampaign from "../pages/campaign/CreateCampaign"
 import CreateNewCampaign from "../pages/campaign/CreateNewCampaign"
 import MyCampaigns from "../pages/campaign/MyCampaigns"
+import Editor from "../pages/editor/Editor"
 import Login from "../pages/login/Login"
 
 
@@ -42,6 +43,11 @@ const Router=[
         {
           path: '/exit',
           element: <div>exit</div>,
+        }
+        ,
+        {
+          path: '/editor',
+          element: <Editor/>,
         }
       ]
   

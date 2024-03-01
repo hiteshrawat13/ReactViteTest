@@ -7,7 +7,7 @@ import './Editor.scss'
 import { fields } from './Fields'
 
 
-const TextBoxEditor = () => {
+const HiddenInputEditor = () => {
 const formBuilder = useSelector(state => state.formBuilder)
 const dispatch=useDispatch()
 
@@ -17,7 +17,7 @@ const dispatch=useDispatch()
 const handleSubmit=(e)=>{
     e.preventDefault()
     const children= e.target.querySelectorAll('input , textarea')
-    const state={type:fields.TextBox}
+    const state={type:fields.HiddenInput}
     for (let i = 0; i < children.length; i++) {
        const child = children[i]
        if(child.type=="checkbox"){
@@ -39,10 +39,7 @@ const handleSubmit=(e)=>{
     <>
     <div>
         <form onSubmit={handleSubmit} className='editorForm'>
-            <label>
-                <span>Id</span>
-                <input type="text" name="id" defaultValue={formBuilder.fields[formBuilder.selectedField].id} />
-            </label>
+         
 
             <label>
                 <span>Label</span>
@@ -55,25 +52,11 @@ const handleSubmit=(e)=>{
             </label>
 
             <label>
-                <span>Placeholder</span>
-                <input type="text" name="placeholder" defaultValue={formBuilder.fields[formBuilder.selectedField].placeholder} />
-            </label>
-
-            <label>
                 <span>Value</span>
                 <input type="text" name="value" defaultValue={formBuilder.fields[formBuilder.selectedField].value} />
             </label>
 
-            <label>
-                <span>Required?</span>
-                <input type="checkbox" name="isRequired" defaultChecked={formBuilder.fields[formBuilder.selectedField].isRequired} />
-            </label>
-
-            <label>
-                <span>Disabled?</span>
-                <input type="checkbox" name="isDisabled" defaultChecked={formBuilder.fields[formBuilder.selectedField].isDisabled} />
-            </label>
-
+    
             <input type="submit" />
         </form>
     </div>
@@ -81,4 +64,4 @@ const handleSubmit=(e)=>{
   )
 }
 
-export default TextBoxEditor
+export default HiddenInputEditor

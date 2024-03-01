@@ -7,17 +7,15 @@ import './Editor.scss'
 import { fields } from './Fields'
 
 
-const TextBoxEditor = () => {
+const SelectBoxEditor = () => {
 const formBuilder = useSelector(state => state.formBuilder)
 const dispatch=useDispatch()
-
-
 
     
 const handleSubmit=(e)=>{
     e.preventDefault()
     const children= e.target.querySelectorAll('input , textarea')
-    const state={type:fields.TextBox}
+    const state={type:fields.SelectBox}
     for (let i = 0; i < children.length; i++) {
        const child = children[i]
        if(child.type=="checkbox"){
@@ -54,14 +52,11 @@ const handleSubmit=(e)=>{
                 <input type="text" name="name" defaultValue={formBuilder.fields[formBuilder.selectedField].name} />
             </label>
 
-            <label>
-                <span>Placeholder</span>
-                <input type="text" name="placeholder" defaultValue={formBuilder.fields[formBuilder.selectedField].placeholder} />
-            </label>
 
             <label>
-                <span>Value</span>
-                <input type="text" name="value" defaultValue={formBuilder.fields[formBuilder.selectedField].value} />
+                <span>Options</span>
+                <textarea name="options" defaultValue={formBuilder.fields[formBuilder.selectedField].options}></textarea>
+              
             </label>
 
             <label>
@@ -81,4 +76,4 @@ const handleSubmit=(e)=>{
   )
 }
 
-export default TextBoxEditor
+export default SelectBoxEditor

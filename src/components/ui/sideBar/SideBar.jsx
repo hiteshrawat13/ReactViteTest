@@ -70,6 +70,14 @@ const SideBar = () => {
                     label:"Exit",
                     href:"/exit",
                     icon:<FaArrowAltCircleDown/>
+                },
+                
+                {
+                    id:9,
+                    type:"menuItem",
+                    label:"Editor",
+                    href:"/editor",
+                    icon:<FaArrowAltCircleDown/>
                 }
               
           

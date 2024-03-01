@@ -8,7 +8,11 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import "./FieldList.scss"
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { setSelectedField ,setFields} from '../../store/formBuilder/FormBuilderSlice';
+import { setSelectedField ,setFields, removeField, duplicateField} from '../../store/formBuilder/FormBuilderSlice';
+
+import { MdDelete } from "react-icons/md";
+import { IoDuplicate } from "react-icons/io5";
+
 const FieldList = () => {
 const formBuilder = useSelector(state => state.formBuilder)
  
@@ -18,6 +22,13 @@ const formBuilder = useSelector(state => state.formBuilder)
         dispatch(setSelectedField(fieldIndex))
     }
   
+    const handleDelete=(fieldIndex)=>{
+        dispatch(removeField(fieldIndex))
+    }
+
+    const handleDuplicate=(fieldIndex)=>{
+      dispatch(duplicateField(fieldIndex))
+  }
 
 // Function to update list on drop
   const handleDrop = (droppedItem) => {
@@ -29,47 +40,52 @@ const formBuilder = useSelector(state => state.formBuilder)
     // Add dropped item
     updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
     // Update State
-    setItemList(updatedList);
 
     dispatch(setFields(updatedList))
+    dispatch(setSelectedField(-1))
   };
 
   return (
-    <div className="App">
+    <>
       <DragDropContext onDragEnd={handleDrop}>
         <Droppable droppableId="list-container">
           {(provided) => (
             <div
-              className="list-container"
+              className=" fieldList"
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {formBuilder.fields.map((item, index) => (
-                <Draggable key={index} draggableId={index+"--"} index={index}>
+              {formBuilder.fields.map((item, index) => {
+                if(item==null)return null;
+                return <Draggable key={index} draggableId={index+"--"} index={index}>
                   {(provided) => (
                     <div
-                    onClick={()=>handleFieldEdit(index)} className='field'
+                    className='field'
                       ref={provided.innerRef}
                       {...provided.dragHandleProps}
                       {...provided.draggableProps}
                     >
-                      {item.label}
-
-
-
-                 
-
-
+                        <div className='display' onClick={()=>handleFieldEdit(index)} >
+                        <div className='fieldType'>{item.type}</div>
+                        <div className='fieldLable'>{item.label}</div>
+                        </div>
+                        
+                        <div className='buttons'>
+                          <button className="actionButton" onClick={()=>handleDelete(index)}><MdDelete /></button>
+                          <button className="actionButton" onClick={()=>handleDuplicate(index)}><IoDuplicate /></button>
+                        </div>
                     </div>
                   )}
                 </Draggable>
-              ))}
+}
+)}
               {provided.placeholder}
+             
             </div>
           )}
         </Droppable>
       </DragDropContext>
-    </div>
+    </>
   );
 }
 

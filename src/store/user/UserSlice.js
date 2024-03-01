@@ -19,13 +19,10 @@ export const UserSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-   
     setUser: (state,payload) => {
       state = payload;
     }
 
-    
-    
   },
 });
 

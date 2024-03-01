@@ -14,9 +14,11 @@ body{
     font-optical-sizing: auto;
     font-weight: 300;
     font-style: normal;
+    background-color: #e7eef7;
 }
 
 
+/* Works on Firefox */
 
 
 /* Form Start */

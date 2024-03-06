@@ -61,7 +61,7 @@ const FormBuilder = () => {
   return (
     <>
   
-    <select  ref={addFieldSelectBoxRef}>
+    <select ref={addFieldSelectBoxRef}>
     {
       Object.keys(fields).map( (field,i)=>{
         return <option key={i} value={field}>{field}</option>
@@ -82,10 +82,6 @@ const FormBuilder = () => {
         :<div>Select Field</div>}
       </div>
     </div>
-
-  
-
-    
     </>
   )
 }

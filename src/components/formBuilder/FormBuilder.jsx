@@ -17,9 +17,7 @@ const FormBuilder = () => {
  
   const dispatch=useDispatch()
 
-
   const handleAdd=()=>{
-    
     switch(addFieldSelectBoxRef.current.value){
       case fields.TextBox:
         dispatch(addField({field:{label:"Text Box",type:fields.TextBox}}))
@@ -55,9 +53,6 @@ const FormBuilder = () => {
   
   }
 
-
-
-
   return (
     <>
   
@@ -73,13 +68,14 @@ const FormBuilder = () => {
     <div>Form Builder {formBuilder.selectedField+1}</div>
     <div className='formBuilder'>
     
-    <FieldList/>
+      <FieldList/>
  
       <div className="fieldEditor">
         {
-        (formBuilder.selectedField!=-1)
-        ?        editors[formBuilder?.fields[formBuilder.selectedField]?.type]
-        :<div>Select Field</div>}
+          (formBuilder.selectedField!=-1)
+          ?        editors[formBuilder?.fields[formBuilder.selectedField]?.type]
+          :<div>Select Field</div>
+        }
       </div>
     </div>
     </>

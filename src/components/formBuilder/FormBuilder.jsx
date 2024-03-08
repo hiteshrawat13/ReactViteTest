@@ -17,7 +17,8 @@ const FormBuilder = () => {
  
   const dispatch=useDispatch()
 
-  const handleAdd=()=>{
+  const handleAdd=(e)=>{
+    e.preventDefault()
     switch(addFieldSelectBoxRef.current.value){
       case fields.TextBox:
         dispatch(addField({field:{label:"Text Box",type:fields.TextBox}}))

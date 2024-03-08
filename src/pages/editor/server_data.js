@@ -1,18 +1,34 @@
-const server_data=[
+ const server_data=[
+   
     {
+        
         type:"TextBox",
-        data:"EDM_TITLE",
+        data:"edmTitle",
+        label:"Edm Title"
     },
     {
-        type:"TextBox",
-        data:"EDM_ABSTRACT",
+        type:"Textarea",
+        data:"edmAbstract",
+        label:"Edm Abstract"
+    }, 
+    {
+        type:"checkbox",
+        data:"sameAsEdmTitle",
+        label:"Same As EDM Title",
+        onCheck:{hide:"LandingTitle"},
+        onUncheck:{show:"LandingTitle"}
     },
     {
+        id:"LandingTitle",
         type:"TextBox",
-        data:"LANDING_TITLE",
+        data:"landingTitle",
+        label:"Landing Title"
     },
     {
-        type:"TextBox",
-        data:"LANDING_ABSTRACT", 
+        type:"Textarea",
+        data:"landingAbstract",
+        label:"Landing Abstract"
     }
+    
 ]
+export default  server_data

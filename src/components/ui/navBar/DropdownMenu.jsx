@@ -11,8 +11,10 @@ const DropdownMenu = () => {
  
     useEffect(()=>{
       const handleClick=(e)=>{
-        if(!collapsed && !menuRef.current?.contains(e.target)){
+       
+        if(!menuRef.current?.contains(e.target)){
          setCollapsed(true)
+         
         }
        }
      
@@ -25,10 +27,10 @@ const DropdownMenu = () => {
     <div className='dropdown' ref={menuRef}>
         <button  className="btn_user" onClick={()=>setCollapsed(!collapsed)}><CiUser /></button>
         {/* <div className={`overlay ${(collapsed)?'hide':'show'}`} onClick={()=>setCollapsed(!collapsed)}>ss</div> */}
-        <div className={ `menu ${(collapsed)?'collapsed':''}` }  >
+        { !collapsed && <div className={ `menu` }  >
             <div>dssasdas meny</div>
             <div className="bubble"></div>
-        </div>
+        </div> }
 
     </div>
   )

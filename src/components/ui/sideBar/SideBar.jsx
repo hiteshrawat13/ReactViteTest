@@ -149,7 +149,7 @@ const SideBar = () => {
   return (
     <div className={`sideBar ${(customizer.isCollapse)?'collapsed':''}`}>
         <div className='logo'>
-            <img src="ondirect-logo.png" alt="logo" />
+            <img src="./ondirect-logo.png" alt="logo" />
         </div>
 
         <div className='menu'>

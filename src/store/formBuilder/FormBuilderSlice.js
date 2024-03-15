@@ -34,6 +34,16 @@ export const FormBuilder = createSlice({
     },
     setFields:(state,payload) => {
       state.fields = payload.payload;
+    },
+    loadFieldsFromJson:(state,payload)=>{
+      const obj=(payload.payload)
+      const newArray = []; //making a new array
+      obj.forEach((field,index)=> {
+       newArray.push(field)
+       })
+
+      
+      state.fields=newArray
     }
 
     
@@ -47,7 +57,8 @@ export const {
   duplicateField,
   setSelectedField,
   updateField,
-  setFields
+  setFields,
+  loadFieldsFromJson
 } = FormBuilder.actions;
 
 export default FormBuilder.reducer;

@@ -2,8 +2,12 @@ import React,{useState} from 'react'
 
 import './SideBar.scss'
 import MenuItem from './MenuItem'
+import Accordion from './Accordion'
 import { useSelector, useDispatch } from 'react-redux'
 import { FaArrowAltCircleDown } from "react-icons/fa";
+import { CiLogout } from "react-icons/ci";
+import Divider from './Divider'
+import Heading from './Heading'
 const SideBar = () => {
 
     const customizer = useSelector(state => state.customizer)
@@ -12,6 +16,12 @@ const SideBar = () => {
     console.log(customizer,"EE");
     const items=[
         
+        {
+            id:7854,
+            type:"heading",
+            label:"Dashboard",
+            
+        },
                 {
                     id:0,
                     type:"menuItem",
@@ -34,6 +44,11 @@ const SideBar = () => {
                     icon:<FaArrowAltCircleDown/>
                 },
                 {
+                    id:2121,
+                    type:"divider",
+                    
+                },
+                {
                     id:3,
                     type:"menuItem",
                     label:"IP List",
@@ -43,7 +58,7 @@ const SideBar = () => {
                 ,
                 {
                     id:5,
-                    type:"menuItem",
+                    type:"subMenuItem",
                     label:"Campaigns",
                     icon:<FaArrowAltCircleDown/>,
                     items:[
@@ -56,6 +71,48 @@ const SideBar = () => {
                         },
                         {
                             id:52,
+                            type:"menuItem",
+                            label:"Create Campaign",
+                            href:"/campaigns/create",
+                            icon:<FaArrowAltCircleDown/>
+                        },
+                        {
+                            id:5222,
+                            type:"menuItem",
+                            label:"Create Campaign",
+                            href:"/campaigns/create",
+                            icon:<FaArrowAltCircleDown/>
+                        },
+                        {
+                            id:5233,
+                            type:"menuItem",
+                            label:"Create Campaign",
+                            href:"/campaigns/create",
+                            icon:<FaArrowAltCircleDown/>
+                        },
+                        {
+                            id:52444,
+                            type:"menuItem",
+                            label:"Create Campaign",
+                            href:"/campaigns/create",
+                            icon:<FaArrowAltCircleDown/>
+                        },
+                        {
+                            id:52555,
+                            type:"menuItem",
+                            label:"Create Campaign",
+                            href:"/campaigns/create",
+                            icon:<FaArrowAltCircleDown/>
+                        },
+                        {
+                            id:52666,
+                            type:"menuItem",
+                            label:"Create Campaign",
+                            href:"/campaigns/create",
+                            icon:<FaArrowAltCircleDown/>
+                        },
+                        {
+                            id:52777,
                             type:"menuItem",
                             label:"Create Campaign",
                             href:"/campaigns/create",
@@ -92,20 +149,31 @@ const SideBar = () => {
   return (
     <div className={`sideBar ${(customizer.isCollapse)?'collapsed':''}`}>
         <div className='logo'>
-            <img src="https://modernize-nextjs.adminmart.com/images/logos/dark-logo.svg" alt="logo" />
+            <img src="ondirect-logo.png" alt="logo" />
         </div>
 
         <div className='menu'>
             {
                 items.map((item,i)=>{
-                    return <MenuItem  key={item.id} item={item} activeItem={active} handleActiveChange={handleActiveChange}/>
+                    if(item.type=="menuItem"){
+                        return <MenuItem  key={item.id} item={item} activeItem={active} handleActiveChange={handleActiveChange}/>
+
+                    }else if(item.type=="subMenuItem"){
+                        return <Accordion  key={item.id} item={item} activeItem={active} handleActiveChange={handleActiveChange} />
+                    }else if(item.type=="divider"){
+                        return <Divider key={item.id}/>
+                    }else if(item.type=="heading"){
+                        return <Heading key={item.id} label={item.label} />
+                    }
                 })
             }
            
         </div>
 
         <div className='logout'>
-            Logout
+        <CiLogout />
+        <div>Logout</div>
+            
         </div>
     </div>
   )

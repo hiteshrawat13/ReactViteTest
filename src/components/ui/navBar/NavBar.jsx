@@ -12,7 +12,7 @@ const NavBar = () => {
   const dispatch =useDispatch();
   return (
     <div className='navBar'>
-      <button onClick={()=>{dispatch(toggleSidebar())}}>
+      <button className="btn_hamburger" onClick={()=>{dispatch(toggleSidebar())}}>
       <RxHamburgerMenu />
       </button>
 

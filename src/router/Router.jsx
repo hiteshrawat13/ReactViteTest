@@ -44,17 +44,17 @@ const Router=[
           path: '/exit',
           element: <div>exit</div>,
         }
-        ,
-        {
-          path: '/editor',
-          element: <Editor/>,
-        }
+        
       ]
   
     },
     {
       path: "/login" ,
       element: <Login/> 
+    },
+    {
+      path: '/editor',
+      element: <Editor/>,
     }
   
   ]

@@ -18,12 +18,25 @@ const CreateCampaign = () => {
     <>
     <div>CreateCampaign</div>
 
-<div className='cardHolder'>
-    <div className='campaignCard' onClick={handleClick} data-campaign="TGIF"> TGIF</div>
-    <div className='campaignCard' onClick={handleClick} data-campaign="Alpha"> Alpha</div>
-    <div className='campaignCard' onClick={handleClick} data-campaign="Arc"> Arc</div>
-    <div className='campaignCard' onClick={handleClick} data-campaign="EBN"> EBN</div>
-</div>
+    <div className='cardHolder'>
+        <div className='campaignCard' onClick={handleClick} data-campaign="TGIF">
+          
+          <div className='title'>TGIF</div>
+          <div className='server'>resource.itbusinesstoday.com</div>
+        </div>
+        <div className='campaignCard' onClick={handleClick} data-campaign="Alpha">
+          <div className='title'>Alpha</div>
+          <div className='server'>resource.itbusinesstoday.com</div>
+        </div>
+        <div className='campaignCard' onClick={handleClick} data-campaign="Arc"> 
+          <div className='title'>Arc</div>
+          <div className='server'>resource.itbusinesstoday.com</div>
+        </div>
+        <div className='campaignCard' onClick={handleClick} data-campaign="EBN">
+          <div className='title'>EBN</div>
+          <div className='server'>resource.itbusinesstoday.com</div>
+        </div>
+    </div>
    
     
     </>

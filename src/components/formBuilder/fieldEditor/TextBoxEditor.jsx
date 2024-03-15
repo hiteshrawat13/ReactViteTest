@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState ,useRef} from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { updateField } from '../../../store/formBuilder/FormBuilderSlice'
 
@@ -7,16 +7,17 @@ import './Editor.scss'
 import { fields } from './Fields'
 
 
-const TextBoxEditor = () => {
+const TextBoxEditor = ({data}) => {
 const formBuilder = useSelector(state => state.formBuilder)
 const dispatch=useDispatch()
 
 
+const divRef=useRef()
 
     
 const handleSubmit=(e)=>{
     e.preventDefault()
-    const children= e.target.querySelectorAll('input , textarea')
+    const children= divRef.current.querySelectorAll('input , textarea')
     const state={type:fields.TextBox}
     for (let i = 0; i < children.length; i++) {
        const child = children[i]
@@ -36,48 +37,46 @@ const handleSubmit=(e)=>{
 
 
   return (
-    <>
-    <div>
-        <form onSubmit={handleSubmit} className='editorForm'>
+   
+    <div ref={divRef} className='editorForm'>
+       
             <label>
                 <span>Id</span>
-                <input type="text" name="id" defaultValue={formBuilder.fields[formBuilder.selectedField].id} />
+                <input type="text" name="id" defaultValue={data.id} />
             </label>
 
             <label>
                 <span>Label</span>
-                <input type="text" name="label" defaultValue={formBuilder.fields[formBuilder.selectedField].label}/>
+                <input type="text" name="label" defaultValue={data.label}/>
             </label>
 
             <label>
                 <span>Name</span>
-                <input type="text" name="name" defaultValue={formBuilder.fields[formBuilder.selectedField].name} />
+                <input type="text" name="name" defaultValue={data.name} />
             </label>
 
             <label>
                 <span>Placeholder</span>
-                <input type="text" name="placeholder" defaultValue={formBuilder.fields[formBuilder.selectedField].placeholder} />
+                <input type="text" name="placeholder" defaultValue={data.placeholder} />
             </label>
 
             <label>
                 <span>Value</span>
-                <input type="text" name="value" defaultValue={formBuilder.fields[formBuilder.selectedField].value} />
+                <input type="text" name="value" defaultValue={data.value} />
             </label>
 
             <label>
                 <span>Required?</span>
-                <input type="checkbox" name="isRequired" defaultChecked={formBuilder.fields[formBuilder.selectedField].isRequired} />
+                <input type="checkbox" name="isRequired" defaultChecked={data.isRequired} />
             </label>
 
             <label>
                 <span>Disabled?</span>
-                <input type="checkbox" name="isDisabled" defaultChecked={formBuilder.fields[formBuilder.selectedField].isDisabled} />
+                <input type="checkbox" name="isDisabled" defaultChecked={data.isDisabled} />
             </label>
 
-            <input type="submit" />
-        </form>
+            <button onClick={handleSubmit}>Submit</button>
     </div>
-    </>
   )
 }
 

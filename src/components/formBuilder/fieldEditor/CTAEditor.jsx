@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState ,useRef} from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { updateField } from '../../../store/formBuilder/FormBuilderSlice'
 
@@ -7,14 +7,16 @@ import './Editor.scss'
 import { fields } from './Fields'
 
 
-const CTAEditor = () => {
+const CTAEditor = ({data}) => {
 const formBuilder = useSelector(state => state.formBuilder)
 const dispatch=useDispatch()
+
+const divRef=useRef()
 
     
 const handleSubmit=(e)=>{
     e.preventDefault()
-    const children= e.target.querySelectorAll('input , textarea')
+    const children= divRef.current.querySelectorAll('input , textarea')
     const state={type:fields.CTA}
     for (let i = 0; i < children.length; i++) {
        const child = children[i]
@@ -34,19 +36,18 @@ const handleSubmit=(e)=>{
 
 
   return (
-    <>
-    <div>
-        <form onSubmit={handleSubmit} className='editorForm'>
+
+     <div ref={divRef} className='editorForm'>
+       
         
             <label>
                 <span>Label</span>
-                <input type="text" name="label" defaultValue={formBuilder.fields[formBuilder.selectedField].label}/>
+                <input type="text" name="label" defaultValue={data.label}/>
             </label>
 
-            <input type="submit" />
-        </form>
+            <button onClick={handleSubmit}>Submit</button>
     </div>
-    </>
+  
   )
 }
 

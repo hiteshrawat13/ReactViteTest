@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux'
 
 import {get,post} from '../../Api'
 
+import './Login.scss'
+
 const Login = () => {
 
   const [empId,setEmpId]=useState("103310")
@@ -23,9 +25,14 @@ const Login = () => {
 
   return (
   
-    <div>
-    <div>Login</div>
+    <div className='Login'>
+    
     <form onSubmit={handleSubmit}>
+    <div className='logoHolder'>
+    <img src='./ondirect-logo.png'/>
+    </div>
+     
+    <h1>Login to your account</h1>
       <label >
         <span>Emp Id:</span>
         <input type="text"  onChange={(e)=>setEmpId(e.target.value)} value={empId} />
@@ -35,7 +42,7 @@ const Login = () => {
         <input type="password"  onChange={(e)=>setPassword(e.target.value)} value={password}/>
       </label>
 
-      <input type="submit" defaultValue="Login"/>
+      <input type="submit" defaultValue="Login" />
     </form>
     </div>
    

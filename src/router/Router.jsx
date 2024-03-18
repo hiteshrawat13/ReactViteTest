@@ -2,7 +2,7 @@ import App from "../App"
 import CreateCampaign from "../pages/campaign/CreateCampaign"
 import CreateNewCampaign from "../pages/campaign/CreateNewCampaign"
 import MyCampaigns from "../pages/campaign/MyCampaigns"
-import Editor from "../pages/editor/Editor"
+import TGIF1STTouchEditor from "../pages/editor/TGIF1STTouchEditor"
 import Login from "../pages/login/Login"
 
 
@@ -44,17 +44,17 @@ const Router=[
           path: '/exit',
           element: <div>exit</div>,
         }
-        ,
-        {
-          path: '/editor',
-          element: <Editor/>,
-        }
+        
       ]
   
     },
     {
       path: "/login" ,
       element: <Login/> 
+    },
+    {
+      path: '/editor',
+      element: <TGIF1STTouchEditor/>,
     }
   
   ]

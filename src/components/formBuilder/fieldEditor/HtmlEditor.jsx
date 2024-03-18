@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState ,useRef} from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { updateField } from '../../../store/formBuilder/FormBuilderSlice'
 
@@ -7,10 +7,11 @@ import './Editor.scss'
 import { fields } from './Fields'
 
 
-const HtmlEditor = () => {
+const HtmlEditor = ({data}) => {
 const formBuilder = useSelector(state => state.formBuilder)
 const dispatch=useDispatch()
 
+const divRef=useRef()
     
 const handleSubmit=(e)=>{
     e.preventDefault()
@@ -36,25 +37,24 @@ const handleSubmit=(e)=>{
 
 
   return (
-    <>
-    <div>
-        <form onSubmit={handleSubmit} className='editorForm'>
+
+     <div ref={divRef} className='editorForm'>
+        
             <label>
                 <span>Label</span>
-                <input type="text" name="label" defaultValue={formBuilder.fields[formBuilder.selectedField].label}/>
+                <input type="text" name="label" defaultValue={data.label}/>
             </label>
 
             <label>
                 <span>Html</span>
-                <textarea name="html" defaultValue={formBuilder.fields[formBuilder.selectedField].html}></textarea>
+                <textarea name="html" defaultValue={data.html}></textarea>
               
             </label>
 
         
-            <input type="submit" />
-        </form>
+            <button onClick={handleSubmit}>Submit</button>
     </div>
-    </>
+  
   )
 }
 

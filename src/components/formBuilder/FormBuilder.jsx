@@ -1,13 +1,24 @@
-import React, { useRef, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import './FormBuilder.scss'
-import FormBuilderSlice, { addField, setSelectedField } from '../../store/formBuilder/FormBuilderSlice'
+import FormBuilderSlice, { addField, setSelectedField,loadFieldsFromJson } from '../../store/formBuilder/FormBuilderSlice'
 import { useDispatch,useSelector } from 'react-redux'
-import TextBoxEditor from './fieldEditor/TextBoxEditor'
 import FieldList from './FieldList'
-import SelectBoxEditor from './fieldEditor/SelectBoxEditor'
- import { fields,editors } from './fieldEditor/Fields'
+import { fields,editors } from './fieldEditor/Fields'
 
 
+
+ import  f from './../../pages/editor/default-fields.json'
+
+
+ const CTAEditor = React.lazy(() => import("./fieldEditor/CTAEditor"));
+const CheckBoxEditor = React.lazy(() => import( "./fieldEditor/CheckBoxEditor"));
+const CheckGroupEditor = React.lazy(() => import( "./fieldEditor/CheckGroupEditor"));
+const HiddenInputEditor = React.lazy(() => import( "./fieldEditor/HiddenInputEditor"));
+const  HtmlEditor = React.lazy(() => import( "./fieldEditor/HtmlEditor"));
+const  RadioGroupEditor= React.lazy(() => import( "./fieldEditor/RadioGroupEditor"));
+const SelectBoxEditor = React.lazy(() => import( "./fieldEditor/SelectBoxEditor"));
+const TextBoxEditor = React.lazy(() => import( "./fieldEditor/TextBoxEditor"));
+const TextEditor = React.lazy(() => import( "./fieldEditor/TextEditor"));
 
 const FormBuilder = () => {
 
@@ -17,9 +28,8 @@ const FormBuilder = () => {
  
   const dispatch=useDispatch()
 
-
-  const handleAdd=()=>{
-    
+  const handleAdd=(e)=>{
+    e.preventDefault()
     switch(addFieldSelectBoxRef.current.value){
       case fields.TextBox:
         dispatch(addField({field:{label:"Text Box",type:fields.TextBox}}))
@@ -56,7 +66,12 @@ const FormBuilder = () => {
   }
 
 
+  useEffect(()=>{
 
+  
+   dispatch(loadFieldsFromJson(f)) 
+   
+  },[])
 
   return (
     <>
@@ -73,13 +88,22 @@ const FormBuilder = () => {
     <div>Form Builder {formBuilder.selectedField+1}</div>
     <div className='formBuilder'>
     
-    <FieldList/>
+      <FieldList/>
  
       <div className="fieldEditor">
-        {
-        (formBuilder.selectedField!=-1)
-        ?        editors[formBuilder?.fields[formBuilder.selectedField]?.type]
-        :<div>Select Field</div>}
+        <Suspense fallback={<div>Loading ... </div>}>
+     
+    {(formBuilder?.fields[formBuilder.selectedField]?.type=="TextBox") && <TextBoxEditor key={Math.random()}  data={formBuilder?.fields[formBuilder.selectedField]}/> }
+    {(formBuilder?.fields[formBuilder.selectedField]?.type=="SelectBox") && <SelectBoxEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
+    {(formBuilder?.fields[formBuilder.selectedField]?.type=="CheckBox") && <CheckBoxEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
+    {(formBuilder?.fields[formBuilder.selectedField]?.type=="CheckGroup" ) && <CheckGroupEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
+    {(formBuilder?.fields[formBuilder.selectedField]?.type=="RadioGroup") && <RadioGroupEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
+    {(formBuilder?.fields[formBuilder.selectedField]?.type=="Text") && <TextEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
+    {(formBuilder?.fields[formBuilder.selectedField]?.type=="Html") && <HtmlEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
+    {(formBuilder?.fields[formBuilder.selectedField]?.type=="HiddenInput") && <HiddenInputEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
+    {(formBuilder?.fields[formBuilder.selectedField]?.type=="CTA") && <CTAEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
+      
+        </Suspense>
       </div>
     </div>
     </>

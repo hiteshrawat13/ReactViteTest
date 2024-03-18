@@ -25,15 +25,15 @@ export const fields={
 }
 
 export const editors={
-    "TextBox":<Suspense fallback={<div>Loading...</div>}><TextBoxEditor key={Math.random()} /></Suspense>,
-    "SelectBox":<Suspense fallback={<div>Loading...</div>}><SelectBoxEditor key={Math.random()} /></Suspense>,
-    "CheckBox":<Suspense fallback={<div>Loading...</div>}><CheckBoxEditor key={Math.random()} /></Suspense>,
-    "CheckGroup":<Suspense fallback={<div>Loading...</div>}><CheckGroupEditor key={Math.random()} /></Suspense>,
-    "RadioGroup":<Suspense fallback={<div>Loading...</div>}><RadioGroupEditor key={Math.random()} /></Suspense>,
-    "Text":<Suspense fallback={<div>Loading...</div>}><TextEditor key={Math.random()} /></Suspense>,
-    "Html":<Suspense fallback={<div>Loading...</div>}><HtmlEditor key={Math.random()} /></Suspense>,
-    "HiddenInput":<Suspense fallback={<div>Loading...</div>}><HiddenInputEditor key={Math.random()} /></Suspense>,
-    "CTA":<Suspense fallback={<div>Loading...</div>}><CTAEditor key={Math.random()} /></Suspense>
+    "TextBox":<TextBoxEditor key={Math.random()} />,
+    "SelectBox":<SelectBoxEditor key={Math.random()} />,
+    "CheckBox":<CheckBoxEditor key={Math.random()} />,
+    "CheckGroup":<CheckGroupEditor key={Math.random()} />,
+    "RadioGroup":<RadioGroupEditor key={Math.random()} />,
+    "Text":<TextEditor key={Math.random()} />,
+    "Html":<HtmlEditor key={Math.random()} />,
+    "HiddenInput":<HiddenInputEditor key={Math.random()} />,
+    "CTA":<CTAEditor key={Math.random()} />
 }
 
 

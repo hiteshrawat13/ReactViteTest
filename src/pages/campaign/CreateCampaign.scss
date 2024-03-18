@@ -4,15 +4,24 @@
 }
 
 .campaignCard{
-    padding: 10px;
+    padding: 15px;
     background-color: #fff;
-    box-shadow: 1px 1px 5px #6b6b6b;
+    border:1px solid #d1cece;
     border-radius: 5px;
     cursor: pointer;
     user-select: none;
     transition: all 0.5s;
 
+    .title{
+        font-size: 0.92rem;
+    }
+
+    .server{
+        font-size: 0.7rem;
+        color: #838181;
+        font-weight: 500;
+    }
     &:hover{
-        background-color: aquamarine;
+       
     }
 }

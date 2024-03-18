@@ -1,0 +1,36 @@
+.Stepper{
+    min-height: 400px;
+    
+
+    .tab{
+        padding: 10px;
+        background: none;
+        border:none;
+        border-bottom: 1px solid #433333;
+        padding: 10px;
+        font-weight: 600;
+        color:#444444;
+
+        &.selected{
+            color:#1c85b6;
+            background-color: aquamarine;
+            border-bottom: 1px solid #a72f2f;
+            border-radius: 5px 5px 0px 0px;
+        }
+    }
+
+
+
+    .show{
+        display: block;
+    }
+
+    .hide{
+        display: none;
+    }
+
+    .error{
+        border: 3px solid red;
+    }
+
+}

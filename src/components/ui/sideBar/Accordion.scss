@@ -1,5 +1,5 @@
 
-.menuItem{
+.accordion{
     display: flex;
     align-items: center;
     gap:10px;
@@ -23,7 +23,7 @@
     }
 
     &.active{
-        background-color: #41454e;
+        background-color: #fdeaea;
         color: #eb7f7f;
         font-weight: bold;
         border-left: 3px solid #e25b5b;
@@ -31,30 +31,34 @@
 
   
 }
+
+
+
+.subMenu{
+    transition: all .3s ease-in-out;
+    overflow: hidden;
+    margin-left: 23px;
+    border-left: 1px solid #dfdfdf;
+
+
+}
+
+.subMenuItem{
+    padding-left: 35px;
+}
+
+
 .hide{
-   //display: none;
+    //display: none;
+  
+    max-height: 0px;
  
-   max-height: 0px;
-
-}
-
-.show{
-  //display: block;
-
-  max-height: 100%;
+ }
  
-}
-
-
-
-// .subMenu{
-//     transition: all .5s ease-in-out;
-//     overflow: hidden;
-// }
-
-// .subMenuItem{
-//     padding-left: 35px;
-// }
-
-
-
+ .show{
+   //display: block;
+ 
+   max-height: 100%;
+  
+ }
+ 

@@ -22,11 +22,13 @@ const formBuilder = useSelector(state => state.formBuilder)
         dispatch(setSelectedField(fieldIndex))
     }
   
-    const handleDelete=(fieldIndex)=>{
-        dispatch(removeField(fieldIndex))
+    const handleDelete=(e,fieldIndex)=>{
+      e.preventDefault()
+      dispatch(removeField(fieldIndex))
     }
 
-    const handleDuplicate=(fieldIndex)=>{
+    const handleDuplicate=(e,fieldIndex)=>{
+      e.preventDefault()
       dispatch(duplicateField(fieldIndex))
   }
 
@@ -71,8 +73,8 @@ const formBuilder = useSelector(state => state.formBuilder)
                         </div>
                         
                         <div className='buttons'>
-                          <button className="actionButton" onClick={()=>handleDelete(index)}><MdDelete /></button>
-                          <button className="actionButton" onClick={()=>handleDuplicate(index)}><IoDuplicate /></button>
+                          <button className="actionButton" onClick={(e)=>handleDelete(e,index)}><MdDelete /></button>
+                          <button className="actionButton" onClick={(e)=>handleDuplicate(e,index)}><IoDuplicate /></button>
                         </div>
                     </div>
                   )}

@@ -4,10 +4,10 @@ import TGIF from '../../components/campaigns/tgif/TGIF';
 
 const CreateNewCampaign = () => {
    const params= useParams()
-   console.log(params);
+ 
 
    const campaign={
-    "TGIF":<TGIF/>
+    "TGIF":<TGIF key={Math.random()}/>
    }
 
   return (

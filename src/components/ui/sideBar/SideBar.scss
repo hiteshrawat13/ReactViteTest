@@ -1,23 +1,36 @@
 .sideBar{
-    flex-basis: 20%;
+    flex-basis: 16%;
     border-right: 1px solid rgb(229, 234, 239);
     display: flex;
     flex-direction: column;
     min-height:100vh;
+    background-color: #fff;
+    transition: all 0.5s;
+    max-height: 100vh;
     
     &.collapsed{
         flex: 0;
+        width: 0px;
+        overflow: hidden;
     }
 
     .logo{
-        width: 180px;
+        width: 100%;
+        border-bottom: 1px solid #dadada;
+        display: flex;
+        justify-content: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        img{
+            max-width: 70%;
+        }
         
     }
 
     .menu{
         flex:1;
-        padding: 20px;
-        overflow: auto;
+       overflow-y: scroll;
+       
     }
 
     
@@ -31,7 +44,7 @@
 
         .menu::-webkit-scrollbar
         {
-            width: 2px;
+            width: 1px;
             background-color: #F5F5F5;
         }
 
@@ -40,14 +53,27 @@
             border-radius: 10px;
             background-color: #FFF;
             background-image: -webkit-linear-gradient(top,
-                                                    #b6d7e6 0%,
-                                                    #bfe8f9 50%,
+                                                    #88888894 0%,
+                                                    #a08f9291 50%,
                                                     );
         }
 
     .logout{
         display: flex;
-        background-color: red;
+        padding: 10px;
+        background-color: #b42525;
+        color:#fff;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        transition: background-color 0.25s ease-in;
+
+        &:hover{
+            background-color: #680808;
+            
+        }
     }
 }
 

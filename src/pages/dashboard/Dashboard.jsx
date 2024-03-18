@@ -13,7 +13,10 @@ const Dashboard = () => {
         
         <div style={{flex:"1"}}>
             <NavBar/>
+            <div className='outletHolder'>
             <Outlet/>
+            </div>
+           
         </div>
         
     </div>

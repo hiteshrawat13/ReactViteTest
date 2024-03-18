@@ -68,7 +68,7 @@ const FormBuilder = () => {
 
   useEffect(()=>{
 
-    console.log(f);
+  
    dispatch(loadFieldsFromJson(f)) 
    
   },[])

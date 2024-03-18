@@ -7,3 +7,21 @@ label{
         display: block;
     }
 }
+
+
+
+input[type="text"],select,textarea{
+    width: 100%;
+    padding: 5px;
+    outline: none;
+    border-radius: 3px;
+    border:1px solid #e6e6e6;
+
+    &:focus{
+       outline:2px solid rgb(71, 95, 175);
+    }
+}
+
+input[type="submit"]{
+    padding: 5px;
+}

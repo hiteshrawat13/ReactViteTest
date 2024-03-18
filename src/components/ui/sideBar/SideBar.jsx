@@ -8,12 +8,15 @@ import { FaArrowAltCircleDown } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
 import Divider from './Divider'
 import Heading from './Heading'
+
+
+
+
 const SideBar = () => {
 
     const customizer = useSelector(state => state.customizer)
     const dispatch = useDispatch()
 
-    console.log(customizer,"EE");
     const items=[
         
         {
@@ -149,7 +152,7 @@ const SideBar = () => {
   return (
     <div className={`sideBar ${(customizer.isCollapse)?'collapsed':''}`}>
         <div className='logo'>
-            <img src="./ondirect-logo.png" alt="logo" />
+            <img src="/ondirect-logo.png" alt="logo" />
         </div>
 
         <div className='menu'>

@@ -19,7 +19,7 @@ import { useDispatch,useSelector } from 'react-redux'
 import Publish from './Publish.js'
 import Modal from '../../components/ui/Modal.jsx'
 
-const Editor = () => {
+const TGIF1STTouchEditor = () => {
 
   const [isOpened,setOpened]=useState(false)
 
@@ -78,7 +78,11 @@ const Editor = () => {
 
 
   return (
-    <>
+  
+
+    <div className='Editor'>
+
+    
 
 
 <form action="" onSubmit={handleSubmit}>
@@ -126,12 +130,12 @@ const Editor = () => {
 
     <label>
       <span>Privacy Policy</span>
-      <input  name="privacyPolicy" />
+      <input type="text" name="privacyPolicy" />
     </label>
 
     <label>
       <span>Sponsored By Text</span>
-      <input  name="sponsoredBy"  />
+      <input type="text" name="sponsoredBy"  />
     </label>
 
    {/* Step 1 end */}
@@ -143,7 +147,7 @@ const Editor = () => {
 
   <label>
       <span>EDM Page Title</span>
-      <input name="edmTitle" />
+      <input type="text" name="edmTitle" />
   </label>
 
     <label>
@@ -155,7 +159,7 @@ const Editor = () => {
 
     <label>
       <span>Landing Page Title</span>
-      <input  name="landingTitle" />
+      <input type="text" name="landingTitle" />
     
     </label>
 
@@ -168,14 +172,14 @@ const Editor = () => {
 
     <label>
       <span>EDM CTA</span>
-      <input  name="edmCTA" />
+      <input type="text" name="edmCTA" />
       
     </label>
 
 
     <label>
       <span>Landing CTA</span>
-      <input  name="landingCTA"  />
+      <input type="text" name="landingCTA"  />
       
     </label>
   {/* Step 2 end*/}
@@ -260,8 +264,11 @@ const Editor = () => {
 
 
 <button className='openModal' onClick={()=>setOpened(true)}>Open Modal</button>
-    </>
+
+
+</div>
+  
   )
 }
 
-export default Editor
+export default TGIF1STTouchEditor

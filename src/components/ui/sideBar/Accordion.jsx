@@ -26,7 +26,7 @@ const Accordion = ({ item, activeItem, handleActiveChange, isSubItem = null }) =
     onClick={() => {
       handleActiveChange(item);
       setCollapsed(!collapsed);
-      console.log(location, "location", item.href);
+     
       if (item.href) navigate(item.href)
 
     }}

@@ -84,6 +84,8 @@ const AdvancedDataTable = () => {
       paginationDefaultPage={currentPage}
       onChangeRowsPerPage={handlePerRowsChange}
       onChangePage={handlePageChange}
+      onRowClicked={(e)=>{alert(e);console.log(e,"EEEEEEEEEE");}}
+     
       selectableRows
       onSelectedRowsChange={({ selectedRows }) => console.log(selectedRows)}
     />

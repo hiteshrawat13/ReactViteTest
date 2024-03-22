@@ -26,7 +26,7 @@ export default class Utils{
     });
 
     static convertToEntities(str) {
-        var tstr = str;
+        var tstr = str ;
         var bstr = '';
         for(let i=0; i<tstr.length; i++)
         {
@@ -40,5 +40,17 @@ export default class Utils{
           }
         }
        return bstr;
+      }
+
+
+      static getFormHtml(fields,formRenderer){
+        let html=""
+        fields.forEach((field,index)=> {
+            if(formRenderer[field.type]){
+                html+=formRenderer[field.type](field)
+            }
+            
+        })
+        return html
       }
 }

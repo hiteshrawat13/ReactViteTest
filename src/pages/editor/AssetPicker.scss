@@ -1,0 +1,80 @@
+.AssetPicker{
+
+    .switches{
+        display: flex;
+        gap:5px;
+
+    }
+   
+    
+    .form-control {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        border:2px solid gray;
+        border-radius: 5px;
+        padding: 8px;
+        padding-left: 30px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        
+       &:has(input:checked) {
+           
+          display: block;
+          border:2px solid red;
+        }
+
+            input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+          }
+
+          .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #eee;
+            border-radius: 50%;
+          }
+          .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+          }
+
+
+          &:hover input ~ .checkmark {
+            background-color: #ccc;
+          }
+
+          input:checked ~ .checkmark {
+            background-color: #2196F3;
+          }
+          input:checked ~ .checkmark:after {
+            display: block;
+          }
+          .checkmark:after {
+            top: 9px;
+           left: 9px;
+           width: 8px;
+           height: 8px;
+           border-radius: 50%;
+           background: white;
+       }
+
+      }
+
+
+      input[type="file"]{
+        background-color: #f7fafc;
+        border: 2px dashed #d5dbe2;
+      }
+}

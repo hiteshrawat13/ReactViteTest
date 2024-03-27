@@ -113,10 +113,10 @@ const AdvancedDataTable = () => {
       paginationDefaultPage={currentPage}
       onChangeRowsPerPage={handlePerRowsChange}
       onChangePage={handlePageChange}
-      highlightOnHover={true}
-      onRowClicked={(e)=>{openLinksPopup(e)}}
-      // selectableRows
-      // onSelectedRowsChange={({ selectedRows }) => console.log(selectedRows)}
+      onRowClicked={(e)=>{alert(e);console.log(e,"EEEEEEEEEE");}}
+     
+      selectableRows
+      onSelectedRowsChange={({ selectedRows }) => console.log(selectedRows)}
     />
 
     {campData !== "" && (<LinksModal campData={campData} setCampData={setCampData} />)}

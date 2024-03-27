@@ -1,19 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  data: [], 
+  data: {}, 
   
 };
 
-export const FormBuilder = createSlice({
+export const CampaignSlice = createSlice({
   name: 'campaign',
   initialState,
   reducers: {
    
-    addField: (state,payload) => {
-      state.fields = [...state.fields,payload.payload.field];
-      state.selectedField=-1
-    }
+    setData: (state,payload) => {
+      state.data = payload.payload;
+    },
+    addData: (state,payload) => {
+      state.data = {...state.data,...payload.payload};
+    },
+    updateData: (state,payload) => {
+      const newObj = {...state.data}; //making a new array
+      newObj[payload.payload.prop] = payload.payload.value
+      state.data = newObj;
+  },
 
     
     
@@ -21,7 +28,9 @@ export const FormBuilder = createSlice({
 });
 
 export const {
-  addField,
-} = FormBuilder.actions;
+  setData,
+  addData,
+  updateData
+} = CampaignSlice.actions;
 
-export default FormBuilder.reducer;
+export default CampaignSlice.reducer;

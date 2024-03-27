@@ -1,4 +1,4 @@
-import React, { useRef,useState } from 'react'
+import React, { useEffect, useRef,useState } from 'react'
 
 
 import "./Editor.scss"
@@ -15,24 +15,82 @@ import Step from '../../components/ui/stepper/Step.jsx'
 
 import { useDispatch,useSelector } from 'react-redux'
 
+import JSZip from 'jszip'
+import { saveAs } from 'file-saver';
 
-import Publish from './Publish.js'
+
 import Modal from '../../components/ui/Modal.jsx'
+import RichEditor from './RichEditor.jsx'
+import AssetPicker from './AssetPicker.jsx'
+
+
+import {TGIFFormRenderer} from './FormRenderer.js'
+import { editors } from '../../components/formBuilder/fieldEditor/Fields.jsx'
+import PublishHelper from './PublishHelper.js'
+import Preview from './Preview.jsx'
+
+
+
+
+
+class PublishMe{
+  constructor(data){
+    this.data=data;
+  }
+
+
+
+
+
+
+}
+
+
 
 const TGIF1STTouchEditor = () => {
+
+
+  const formRef=useRef()
+ 
+
+  const [sameAsEDMTitle,setSameAsEDMTitle]=useState(true)
+  const [sameAsEDMAbstract,setSameAsEDMAbstract]=useState(true)
+  const [sameAsEDMCTA,setSameAsEDMCTA]=useState(true)
 
   const [isOpened,setOpened]=useState(false)
 
   const frameRef=useRef()
   const formBuilder = useSelector(state => state.formBuilder)
+  const campaign = useSelector(state => state.campaign)
  
   const dispatch=useDispatch()
 
-  const onSubmit = (data) =>{
-    console.log("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESUBMIT");
-    alert(data)
 
-    console.log("DATA",data);
+  const publishHelper=useRef(new PublishHelper())
+
+
+  const getData=()=>{
+    const inputs=formRef.current.querySelectorAll("input:not([type='submit']) , select, textarea")
+
+    const data={
+      baseUrl:"https://resource.itbusinesstoday.com/whitepapers/",
+      year:new Date().getFullYear().toString()
+    }
+     for (let i = 0; i < inputs.length; i++) {
+     
+      // console.log(inputs[i].name,inputs[i].value);
+      if(inputs[i].name){
+        if(inputs[i].type=="checkbox"){
+          data[inputs[i].name]=inputs[i].checked
+        }else{
+          data[inputs[i].name]=inputs[i].value
+        }
+        
+      }
+     }
+     data["form"]=formBuilder.fields
+
+     return data;
   }
 
 
@@ -40,70 +98,62 @@ const TGIF1STTouchEditor = () => {
     e.preventDefault();
    // alert("Submit Call")
 
-   const inputs=e.target.querySelectorAll("input:not([type='submit']) , select, textarea")
-   for (let i = 0; i < inputs.length; i++) {
    
-    console.log(inputs[i].name,inputs[i].value);
-   }
 
-   console.log(formBuilder.fields);
-   
+
+   publishHelper.current.setData(getData())
+   publishHelper.current.openPreview("landing")
+
+   console.log(publishHelper);
   }
 
 
   const handlePreview= async(e)=>{
     e.preventDefault()
-   const dd= Publish
-   console.log(dd.preview());
-
-   try {
-    const res= await fetch("tgif/template_files/landing.t")
-    const data=await res.text()
-
-    dd.setr("ererr")
-    dd.preview()
-
-
-  
-   
-   } catch (error) {
-      console.log(error);
-   }
+ 
+    publishHelper.current.setData(getData())
+    publishHelper.current.generateZip(JSZip,saveAs)
   
   }
 
-  function loadTemplate(){
 
-  }
+
+
+  
+  useEffect(()=>{
+    Object.keys(editors).forEach(editor=>{
+      if(!TGIFFormRenderer[editor]){
+        alert(`Form Renderer does not have key ${editor}.Please add it to form renderer`)
+      }
+    })
+    //TGIFFormRenderer
+  },[])
 
 
   return (
-  
-
-    <div className='Editor'>
-
-    
-
-
-<form action="" onSubmit={handleSubmit}>
+<div className='Editor'>
+<form  onSubmit={handleSubmit} ref={formRef}>
 
 
 
-<Stepper>
+<Stepper onStepChange={()=>{
+  publishHelper.current.setData(getData())
+}}>
   
   <Step title="Basic Info">
     
    {/* Step 1 */}
+
+
+   <div className='holder'>
    <label>
       <span>Pixel Link</span>
       <input type="text" name="pixelLink" />
-      
     </label>
 
     <label>
       <span>Link Name</span>
       <input type="text" name="linkName"/>
-      
     </label>
 
     <label>
@@ -111,8 +161,6 @@ const TGIF1STTouchEditor = () => {
       <input type="text" name="campId" />
     </label>
  
-
-
     <label>
       <span>Asset Type</span>
       <select  name="assetType" >
@@ -125,127 +173,106 @@ const TGIF1STTouchEditor = () => {
         <option value="Webinar OnDemand">Webinar OnDemand</option>
         <option value="Infographic">Infographic</option>
       </select>
-     
     </label>
 
     <label>
       <span>Privacy Policy</span>
-      <input type="text" name="privacyPolicy" />
+      <select  name="privacyPolicy"  >
+        <option value="">Select...</option>
+        <option value="https://itbusinesstoday.com/eu-data-protection/">EU</option>
+        <option value="https://itbusinesstoday.com/us-privacy-policy/">NON-EU</option>
+        <option value="https://itbusinesstoday.com/casl-policy/">CASL</option>
+      </select>
     </label>
 
     <label>
       <span>Sponsored By Text</span>
       <input type="text" name="sponsoredBy"  />
     </label>
-
+   </div>
+   
    {/* Step 1 end */}
     
   </Step>
 
   <Step title="Content">
   {/* Step 2 */}
-
-  <label>
-      <span>EDM Page Title</span>
-      <input type="text" name="edmTitle" />
-  </label>
-
-    <label>
-      <span>EDM Page Abstract</span>
-   
-     <textarea  name="edmAbstract"></textarea>
-    </label>
+  
 
 
-    <label>
-      <span>Landing Page Title</span>
-      <input type="text" name="landingTitle" />
+  <div style={{display:"flex",justifyContent:"space-between",gap:"10px",backgroundColor:"#fff"}}>
+
+    <div style={{width:"100%"}}>
+      <label>
+          <span>EDM Page Title</span>
+          <input type="text" name="edmTitle" />
+      </label>
+      <label>
+        <span>EDM Abstract</span>
+       
+      </label>
+      <RichEditor key={1211212} name="edmAbstract"/>
+      <label>
+        <span>EDM CTA</span>
+        <input type="text" name="edmCTA" />
+      </label>
+    </div>
+
+    <div style={{width:"100%"}}>
+      <label>
+        <span>Landing Page Title</span>
+        <input type="checkbox" name="sameAsEDMTitle" defaultChecked={sameAsEDMTitle} onChange={()=>{setSameAsEDMTitle(!sameAsEDMTitle)}}  />
+        { !sameAsEDMTitle && <input type="text" name="landingTitle" />}
+      </label>
+      <label>
+          <span>Landing Abstract</span>
+          
+      </label>
+      <input type="checkbox" name="sameAsEDMAbstract" defaultChecked={sameAsEDMAbstract} onChange={()=>{setSameAsEDMAbstract(!sameAsEDMAbstract)}} />
+      { !sameAsEDMAbstract && <RichEditor key={1211212} name="landingAbstract"/>}
+      <label>
+        <span>Landing CTA</span>
+        <input type="checkbox" name="sameAsEDMCTA" defaultChecked={sameAsEDMCTA} onChange={()=>{setSameAsEDMCTA(!sameAsEDMCTA)}} />
+        { !sameAsEDMCTA && <input type="text" name="landingCTA"  />}
+      </label>
+    </div>
+  </div>
+ 
     
-    </label>
 
-    <label>
-      <span>Landing Page Abstract</span>
-      
-      <textarea name="landingAbstract" ></textarea>
-     
-    </label>
+    
 
-    <label>
-      <span>EDM CTA</span>
-      <input type="text" name="edmCTA" />
-      
-    </label>
-
-
-    <label>
-      <span>Landing CTA</span>
-      <input type="text" name="landingCTA"  />
-      
-    </label>
+    
   {/* Step 2 end*/}
   </Step>
 
-  <Step title="Assets & Logo">
+  <Step title="Form">
   {/* Step 3 */}
 
-  <label>
-      <span>Logo</span>
-      <input type="text" name="logo" /><br/>
-      
-      <input type="file" name="pdf"  />
-    </label>
-    <label>
-      <span>Thumbnail</span>
-      <input type="text" name="thumbnail"/><br/>
-      <input type="file" name="pdf"  />
-    </label>
-    <hr/>
-    <label>
-      <span>Asset Type</span>
-      <select   name="asset" >
-      <option value="">Select...</option>
-        <option value="PDF">PDF</option>
-        <option value="MP4">MP4</option>
-        <option value="Client Link">Client Link</option>
-        <option value="IFRAME Html">IFRAME Html</option>
-      </select>
-     
-    </label>
-
-    
-
-    <label>
-      <span>Asset PDF</span>
-      <input type="text" /><br/>
-      <input type="file" name="pdf" />
-    </label>
-
-    <label>
-      <span>MP4</span>
-      <input type="text"/><br/>
-      <input type="file" name="mp4" />
-    </label>
-
-    <label>
-      <span>Client Link</span>
-      <input type="text" name="clientLink" />
-    </label>
-
-    <label>
-      <span>Iframe Html</span>
-      <input type="text" name="iframeHtml" />
-    </label>
+  <FormBuilder/>
 
   {/* Step 3 end */}
   </Step>
 
-  <Step title="Form">
+  <Step title="Assets & Logo">
     {/* Step 4 */}
-    <FormBuilder/>
+   
+    <label>
+      <span>Logo</span>
+      <input type="text" name="logo" /><br/>
+      <input type="file" name="logofile"  />
+    </label>
+    <label>
+      <span>Thumbnail</span>
+      <input type="text" name="thumbnail"/><br/>
+      <input type="file" name="thumbnailfile"  />
+    </label>
+   
+    <AssetPicker/>
     {/* Step 4 end */}
   </Step>
 
-  <Step title="Finish">
+  <Step title="Complete">
     {/* Step 5 */}
     <input type="submit" value="Submit" />
     <br/>
@@ -253,15 +280,17 @@ const TGIF1STTouchEditor = () => {
     {/* Step 5 end */}
   </Step>
 
+  <Step title="Preview">
+    {/* Step 5 */}
+    <Preview  publishHelper={publishHelper.current}/>
+    {/* Step 5 end */}
+  </Step>
+
 </Stepper>
     
 </form>
 
-
-
 {isOpened && <Modal setOpened={setOpened} title={"Title"}><div>hello</div></Modal>}
-
-
 
 <button className='openModal' onClick={()=>setOpened(true)}>Open Modal</button>
 

@@ -4,56 +4,49 @@
         "id": "firstname",
         "label": "First Name",
         "name": "firstname",
-        "required": true,
-        "uid": "099407d4-136a-46a8-b5bb-b0daae7db6d8"
+        "required": true
     },
     {
         "type": "TextBox",
         "id": "lastname",
         "label": "Last Name",
         "name": "data[0]",
-        "required": true,
-        "uid": "9abce533-c7d7-4fa8-87b1-87308d9c3611"
+        "required": true
     },
     {
         "type": "TextBox",
         "id": "email",
         "label": "Business Email",
         "name": "data[1]",
-        "required": true,
-        "uid": "aade974c-bac0-4fe4-84f4-6a26f783c391"
+        "required": true
     },
     {
         "type": "TextBox",
         "id": "phone",
         "label": "Phone",
         "name": "data[2]",
-        "required": true,
-        "uid": "dbdd652a-a73c-4933-ac17-aed4726cb973"
+        "required": true
     },
     {
         "type": "TextBox",
         "id": "company",
         "label": "Company",
         "name": "data[3]",
-        "required": true,
-        "uid": "98c324b8-d9c4-4150-b466-6a9e013698e0"
+        "required": true
     },
     {
         "type": "TextBox",
         "id": "address",
         "label": "Address",
         "name": "data[4]",
-        "required": true,
-        "uid": "e62aab41-7f13-4616-b9d1-f122a599e890"
+        "required": true
     },
     {
         "type": "TextBox",
         "id": "city",
         "label": "City",
         "name": "data[5]",
-        "required": true,
-        "uid": "c9c5dd9c-8faa-4091-b226-7cf8f6aba7e4"
+        "required": true
     },
     {
         "type": "SelectBox",
@@ -61,16 +54,14 @@
         "label": "Country",
         "name": "data[6]",
         "options": "Choose One\nAustralia\nNew Zealand",
-        "required": true,
-        "uid": "2503f16d-263c-45fb-9f75-0a3d33b852be"
+        "required": true
     },
     {
         "type": "TextBox",
         "id": "zip",
         "label": "ZIP Code",
         "name": "data[7]",
-        "required": true,
-        "uid": "2acc50a2-2eb1-4b6f-80e8-309a47adb916"
+        "required": true
     },
     {
         "type": "SelectBox",
@@ -78,8 +69,7 @@
         "label": "Company Size",
         "name": "data[8]",
         "options": "Choose One\n1 - 24\n25 - 99\n100 - 249\n250 - 499\n500 - 999\n1000 - 4999\n5000 - 9999\n&gt;10000",
-        "required": true,
-        "uid": "17147825-d07b-4544-9306-22fa7a6e8db5"
+        "required": true
     },
     {
         "type": "SelectBox",
@@ -87,16 +77,14 @@
         "label": "Revenue",
         "name": "data[9]",
         "options": "Choose One\n&lt;$1M\n$1M - $10M\n$10M - $50M\n$50M - $100M\n$100M - $250M\n$250M - $500M\n$500M - $1B\n&gt;$1B",
-        "required": true,
-        "uid": "5c77bbcb-428d-42e5-9a53-92b6cb4e0381"
+        "required": true
     },
     {
         "type": "TextBox",
         "id": "job_title",
         "label": "Job Title",
         "name": "data[10]",
-        "required": true,
-        "uid": "0d55744d-c5a6-49c6-8af7-f0b075cdcbb1"
+        "required": true
     },
     {
         "type": "SelectBox",
@@ -104,8 +92,7 @@
         "label": "Industry",
         "name": "data[11]",
         "options": "Choose One\nAccounting and Tax Preparation\nAdult Entertainment\nAdvertising, Marketing and PR\nAdvocacy Organizations\nAerospace and Defense\nAir Couriers and Cargo Services\nAirport, Harbor and Terminal Operations\nAlcoholic Beverages\nAlternative Energy Sources\nAmusement Parks and Attractions\nApparel Wholesalers\nArchitecture, Engineering and Design\nAudio, Video and Photography\nAutomobile Dealers\nAutomobile Parts Stores\nAutomobile Parts Wholesalers\nAutomobiles, Boats and Motor Vehicles\nAutomotive Repair &amp; Maintenance\nBanks\nBeer, Wine, and Liquor Stores\nBeer, Wine, and Liquor Wholesalers\nBiotechnology\nCable Television Providers\nCharitable Organizations and Foundations\nChemicals and Petrochemicals\nChemicals and Plastics Wholesalers\nClothing and Shoes Stores\nComputers &amp; Electronics Other\nComputers, Parts and Repair\nConcrete, Glass, and Building Materials\nConstruction Equipment and Supplies\nConstruction and Remodeling\nConsumer Electronics, Parts and Repair\nCredit Cards and Related Services\nCredit Unions\nCruise Ship Operations\nData Analytics, Management and Storage\nData and Records Management\nDepartment Stores\nDiagnostic Laboratories\nDoctors, Health Care Practitioners\nEcommerce and Internet Businesses\nEducation Colleges and Universities\nEducation Other\nElementary and Secondary Schools\nFacilities Management and Maintenance\nFarming and Mining Machinery and Equipment\nFarming and Ranching\nFishing, Hunting and Trapping\nFlorists\nFood, Dairy Product Manufacturing and Packaging\nForestry and Logging\nFreight Hauling (Rail and Truck)\nFuneral Homes and Funeral Services\nFurniture Manufacturing\nFurniture Stores\nGambling and Gaming Industries\nGames and Gaming\nGas and Electric Utilities\nGasoline Stations\nGasoline and Oil Refineries\nGrocery and Food Wholesalers\nGrocery and Specialty Food Stores\nHR and Recruiting Services\nHardware and Building Material Dealers\nHeavy Machinery\nHospitals\nHotels, Motels and Lodging\nIT and Network Services and Support\nInstruments and Controls\nInsurance and Risk Management\nInternational Bodies and Organizations\nInvestment Banking and Venture Capital\nJewelry, Luggage, and Leather Goods Stores\nLaundry and Dry Cleaning\nLegal Services\nLending and Mortgage\nLibraries, Archives and Museums\nLocal Government\nLumber, Construction Materials Wholesalers\nManagement Consulting\nMarine and Inland Shipping\nMedical Devices\nMedical Supplies and Equipment\nMetal &amp; Mineral Wholesalers\nMetals Manufacturing\nMining and Quarrying\nMotion Picture Exhibitors\nMotion Picture and Recording Producers\nMoving Companies and Services\nNational Government\nNetwork Security Products\nNetworking Equipment and Systems\nNewspapers, Books and Periodicals\nNon Alcoholic Beverages\nOffice Equipment and Supplies Wholesalers\nOffice Machinery and Equipment\nOffice Supplies Stores\nOther\nOutpatient Care Centers\nPaper and Paper Products\nParking Lots and Garage Management\nParticipatory Sports and Recreation\nPassenger Airlines\nPayroll Services\nPerforming Arts\nPeripherals Manufacturing\nPersonal Care\nPersonal Health Care Products\nPersonal and Private Banking\nPetroleum Products Wholesalers\nPharmaceuticals\nPhotofinishing Services\nPlastics and Rubber Manufacturing\nPostal, Express Delivery, and Couriers\nProfessional Associations\nProperty Leasing and Management\nRadio and Television Broadcasting\nReal Estate Agents and Appraisers\nReal Estate Investment, Development\nReligious Organizations\nRental Cars\nResidential and Long Term Care\nResorts and Casinos\nRestaurants and Bars\nSales Services\nSecurities Agents and Brokers\nSecurity Services\nSemiconductor and Microchip Manufacturing\nSewage Treatment Facilities\nSocial and Membership Organizations\nSoftware\nSpectator Sports and Teams\nSporting Goods, Hobby, Book, and Music Stores\nSports, Arts and Recreation Instruction\nState/Provincial Government\nTaxi and Limousine Services\nTechnical and Trade Schools\nTelecom Equipment and Accessories\nTelephone Service Providers and Carriers\nTest Preparation\nTextiles, Apparel and Accessories\nTools, Hardware and Light Machinery\nTrade Groups and Labor Unions\nTrains, Buses and Transit Systems\nTravel Agents &amp; Services\nTrust, Fiduciary, and Custody Activities\nVeterinary Clinics and Services\nVideo and Teleconferencing\nWarehousing and Storage\nWaste Management and Recycling\nWater Treatment and Utilities\nWireless and Mobile",
-        "required": true,
-        "uid": "0958d93d-80b2-4e46-a726-5e6782929aa7"
+        "required": true
     },
     {
         "type": "SelectBox",
@@ -113,7 +100,7 @@
         "label": "Job Function",
         "name": "data[12]",
         "options": "Choose One\nComputing &amp; IT\nEducation\nFinance\nGeneral Management\nGovernment\nHR\nLegal\nMarketing\nOperations\nOther\nResearch &amp; Development\nSales",
-        "required": true,
-        "uid": "7ac95a2a-c407-4353-be82-c4fd1aa4af89"
+        "required": true
+        
     }
 ]

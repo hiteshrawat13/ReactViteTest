@@ -12,7 +12,7 @@ const TGIFFormRenderer = {
                </label>
                </th>
                <td width="53%">
-               <input name="${obj.name}" ${obj.required ? "required" : ""} ${obj.readOnly ? "readonly" : ""} id="${obj.id}" value="${obj.value}" type="text">
+               <input name="${obj.name}" ${obj.required ? "required" : ""} ${obj.readOnly ? "readonly" : ""} id="${obj.id}" value="${obj.value || ''}" type="text">
                </td>
            </tr>
            `
@@ -35,7 +35,7 @@ const TGIFFormRenderer = {
         
         <select name="${obj.name}" ${obj.required ? "required" : ""} id="${obj.id}">
         
-        ${obj.options.split(/\r?\n/).map((option, index) => {
+        ${obj.options.length>0 && obj.options.split(/\r?\n/).map((option, index) => {
                 if (index == 0) {
                     return `<option value="">${option.trim()}</option>
                 `
@@ -61,7 +61,7 @@ const TGIFFormRenderer = {
         <td>
         <select name="${obj.name}" ${obj.required ? "required" : ""} id="${obj.id}">
      
-        ${obj.options.split(/\r?\n/).map((option, index) => {
+        ${obj.options.length>0  && obj.options.split(/\r?\n/).map((option, index) => {
                 if (index == 0 && obj.options.length > 1) {
                     return `<option value="">${option.trim()}</option>
                 `
@@ -176,7 +176,7 @@ const TGIFFormRenderer = {
 
     // Optin Checkbox only
 
-    Optin: (obj) => {
+    CheckBox: (obj) => {
         return `								   
        <tr>
        <th colspan="2" style="color:#444444;font-size:12px;">
@@ -212,6 +212,11 @@ const TGIFFormRenderer = {
     width:250px; color: white;  border-radius:8px; padding-top: 08px;margin-left: 26px; margin-top:0px;" class="btn btn-primary1"> ${obj.label}</button>
     </td>
     </tr>`
+    }
+,
+    HiddenInput: (obj) => {
+        return `<input type="hidden" name="${obj.name}" value="${obj.value}" />
+        `
     }
 
 }

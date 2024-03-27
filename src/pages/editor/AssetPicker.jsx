@@ -34,7 +34,7 @@ const AssetPicker = () => {
 
       try {
        
-       axios.post('http://localhost:8888/qq', {
+       axios.post('https://itbusinessplus.net/template/raj/test/LBUpload.php', {
           firstName: 'Fred',
           lastName: 'Flintstone',
           orders: [1, 2, 3],

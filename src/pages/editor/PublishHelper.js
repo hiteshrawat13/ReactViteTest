@@ -14,25 +14,16 @@ export default class PublishHelper{
         this.tgif=data
     }
 
- 
-
     async  getEdmHtml(){
 
-       
-
         let data=await Utils.loadFile(this.templatesFolderPath+"edm.t");
-       
         for (const [key, value] of Object.entries(this.tgif)) {
-         
-           
             try {
+                if(typeof value === 'string' || value instanceof String)
                 data=data.replaceAll(`##${key}##`,Utils.convertToEntities( value ) )
             } catch (error) {
                 console.log(error,key,value);
-            }
-                
-            
-           
+            } 
         }
 
         return data;
@@ -44,12 +35,15 @@ export default class PublishHelper{
         let data= await Utils.loadFile( this.templatesFolderPath+landing_page) ;
 
            
-        data=data.replaceAll(`##form##`,Utils.convertToEntities(Utils.getFormHtml(this.tgif.form,TGIFFormRenderer)))
+        const formHtml=Utils.getFormHtml(this.tgif.form,TGIFFormRenderer);
+        if(typeof formHtml === 'string' || formHtml instanceof String)
+        data=data.replaceAll(`##form##`,Utils.convertToEntities( formHtml ))
 
        
         for (const [key, value] of Object.entries(this.tgif)) {
          
             try {
+                if(typeof value === 'string' || value instanceof String)
                 data=data.replaceAll(`##${key}##`,Utils.convertToEntities( value ) )
             } catch (error) {
                 console.log(error,key,value,"in getLanding Html");
@@ -63,17 +57,15 @@ export default class PublishHelper{
     async getSendemailHtml(){
         let data=await Utils.loadFile(this.templatesFolderPath+"sendemail.t");
        
-
         if(this.tgif.assetFormat=="ClientLink") {
-            
             data=data.replaceAll(`##baseUrl####asset##`,this.tgif.clientLink )
         }
 
-
         for (const [key, value] of Object.entries(this.tgif)) {
-            console.log(key);
+           
 
             try {
+                if(typeof value === 'string' || value instanceof String)
                 data=data.replaceAll(`##${key}##`,Utils.convertToEntities(value) )
             } catch (error) {
                 console.log(error,key,value,"in getSendemail Html");
@@ -97,9 +89,9 @@ export default class PublishHelper{
         
 
         for (const [key, value] of Object.entries(this.tgif)) {
-           console.log(key);
-
+           
            try {
+            if(typeof value === 'string' || value instanceof String)
             data=data.replaceAll(`##${key}##`,Utils.convertToEntities(value) )
             } catch (error) {
                 console.log(error,key,value,"in getThankyou Html");
@@ -154,7 +146,6 @@ export default class PublishHelper{
         newwindow.addEventListener('load', async () => {
             try {
                 newwindow.document.getElementById("splogo").src=await Utils.fileToBase64(document.querySelector("[name='logofile']").files[0])
-
             } catch (error) {
                 console.log("Cannot base encode logo",error);
             }
@@ -170,9 +161,7 @@ export default class PublishHelper{
             }
             console.log();
         }, false);
-        if (window.focus) { newwindow.focus() }
-
-        
+        if (window.focus) { newwindow.focus() }    
     }
 
 

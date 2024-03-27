@@ -1,25 +1,25 @@
 import React, { useState } from 'react'
 
 import { useSelector } from 'react-redux'
-
-import {get,post} from '../../Api'
+import axios from "axios";
 
 import './Login.scss'
 
 const Login = () => {
 
-  const [empId,setEmpId]=useState("103310")
-  const [password,setPassword]=useState("12345")
+  const [empId,setEmpId]=useState("")
+  const [password,setPassword]=useState("")
 
 
  const user= useSelector((state)=>state.user)
 
-  const handleSubmit=(e)=>
+  const handleSubmit= async (e)=>
   {
     e.preventDefault();
-    console.log(empId,password);
 
-    get()
+    const response = await axios.post("http://localhost:8888/user/login",{'empid':empId,'password':password});
+    
+    console.log(response.data)
     
   }
 

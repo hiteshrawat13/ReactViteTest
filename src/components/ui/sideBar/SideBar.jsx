@@ -35,12 +35,19 @@ const SideBar = () => {
                 {
                     id:1,
                     type:"menuItem",
-                    label:"Users",
+                    label:"User Management",
                     href:"/users",
                     icon:<FaArrowAltCircleDown/>
                 },
                 {
-                    id:2,
+                    id:1,
+                    type:"menuItem",
+                    label:"Role Management",
+                    href:"/roles",
+                    icon:<FaArrowAltCircleDown/>
+                },
+                {
+                    id:3,
                     type:"menuItem",
                     label:"Masters",
                     href:"/masters",
@@ -52,7 +59,7 @@ const SideBar = () => {
                     
                 },
                 {
-                    id:3,
+                    id:4,
                     type:"menuItem",
                     label:"IP List",
                     href:"/ip",

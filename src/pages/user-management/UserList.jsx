@@ -2,26 +2,29 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import DataTable from "react-data-table-component";
-import LinksModal from "./LinksPopupModal.jsx";
+import UserPopup from "./UserPopup.jsx";
+import AddUser from "./AddUser.jsx";
 
-const AdvancedDataTable = () => {
+const UserList = () => {
    
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [totalRows, setTotalRows] = useState(0);
   const [perPage, setPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
-  const [campData, setCampData] = useState("");
   // const [deleted, setDeleted] = useState([]);
+  const [userData, setUserData] = useState("");
+  const [addUserPopup, setAddUserPopup] = useState(false);
 
   const fetchUsers = async (page, size = perPage) => {
     setLoading(true);
     const response = await axios.get(
-      `http://localhost:8888/camplist/getCampList?page=${page}&per_page=${size}`
+      `http://localhost:8888/user/getUsers?page=${page}&per_page=${size}`
     );
 
   setData(response.data.data)
 
+  console.log(response.data.data,"---");
     setTotalRows(response.data.totalItems);
     setLoading(false);
   };
@@ -45,43 +48,32 @@ const AdvancedDataTable = () => {
 
   const columns = [
     {
-      name: 'Campaign ID',
-      selector: row => row.camp_id,
+      name: 'Name',
+      selector: row => row.name,
       sortable: true,
     },
     {
-      name: 'Campaign Name',
-      selector: row => row.camp_name,
+      name: 'Employee ID',
+      selector: row => row.empid,
       sortable: true,
     },
 
     {
-      name: 'Category',
-      selector: row => row.Category,
+      name: 'Role',
+      selector: row => row.role,
       sortable: true,
     },
 
     {
-      name: 'Client Code',
-      selector: row => row.Client_Code,
+      name: 'Status',
+      selector: row => {return row.status ?  'Active' : 'Inactive' },
       sortable: true,
     },
 
     {
-      name: 'Country',
-      selector: row => row.Country,
-      sortable: true,
-    },
-
-    { 
-      name: 'Created By',
-      selector: row => row.camp_Created_By,
-      sortable: true,
+      name: 'Action',
+      cell: row => <button onClick={()=>openPopup(row)}>Edit</button>
     }
-   
-    // {
-    //   cell: row => <button onClick={()=>alert("DD")}>Delete</button>
-    // }
   ];
   
 
@@ -96,12 +88,19 @@ const AdvancedDataTable = () => {
     setPerPage(newPerPage);
   };
 
-  function openLinksPopup(data){
-    setCampData(data);
-  }
+
+function openPopup(rowData) {
+  setUserData(rowData);
+}
+
 
   return (
     <>
+
+<button onClick={()=>setAddUserPopup(true)}>Add User </button>
+
+{addUserPopup && (<AddUser setAddUserPopup={setAddUserPopup}/>)}
+
     <DataTable
       title="Users"
       columns={columns}
@@ -113,26 +112,15 @@ const AdvancedDataTable = () => {
       paginationDefaultPage={currentPage}
       onChangeRowsPerPage={handlePerRowsChange}
       onChangePage={handlePageChange}
-      highlightOnHover={true}
-      onRowClicked={(e)=>{openLinksPopup(e)}}
+      
       // selectableRows
       // onSelectedRowsChange={({ selectedRows }) => console.log(selectedRows)}
     />
-
-    {campData !== "" && (<LinksModal campData={campData} setCampData={setCampData} />)}
-     </>
+    {userData !== "" && (<UserPopup userData={userData} setUserData={setUserData} />)}
+    </>
   );
 }
 
-export default AdvancedDataTable
+export default UserList;
 
-
-
-const removeItem = (array, item) => {
-    const newArray = array.slice();
-    newArray.splice(newArray.findIndex(a => a === item), 1);
-  
-    return newArray;
-  };
-  
  

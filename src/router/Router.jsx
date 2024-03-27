@@ -4,7 +4,8 @@ import CreateNewCampaign from "../pages/campaign/CreateNewCampaign"
 import MyCampaigns from "../pages/campaign/MyCampaigns"
 import TGIF1STTouchEditor from "../pages/editor/TGIF1STTouchEditor"
 import Login from "../pages/login/Login"
-
+import UserList from "../pages/user-management/UserList"
+import RoleList from "../pages/user-management/RoleList"
 
 
 const Router=[
@@ -18,7 +19,15 @@ const Router=[
         },
         {
           path: '/users',
-          element: <div>Users</div>,
+          element: <UserList/>,
+        },
+        {
+          path: '/roles',
+          element: <RoleList/>,
+        },
+        {
+          path: '/modules',
+          element: <div>Module Management</div>,
         },
         {
           path: '/masters',

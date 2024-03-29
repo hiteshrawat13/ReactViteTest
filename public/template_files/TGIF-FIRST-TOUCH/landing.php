@@ -9,7 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
         <!-- ASSET TITLE -->
-        <title>##EDM_TITLE##</title>
+        <title>##LANDING_TITLE##</title>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
@@ -63,7 +63,7 @@
 				padding: 5px;
 			}
 			input.submit {
-				background: url("https://resource.itbusinesstoday.com/whitepapers/download-button-new.png") left top no-repeat;
+				background: url("##BASE_URL##download-button-new.png") left top no-repeat;
 				cursor: pointer;
 				height: 39px;
 				width: 160px;
@@ -164,11 +164,11 @@
                                 <tr style="background-color: white;">
                                     <!-- LOGO -->
                                     <td height="88" valign="middle" style="">
-                                        <img src="https://resource.itbusinesstoday.com/whitepapers/IT-BUSINESS-TODAY-COLOUR-1.png" alt="It Business Today" width="150" style="" />
+                                        <img src="##BASE_URL##IT-BUSINESS-TODAY-COLOUR-1.png" alt="It Business Today" width="150" style="" />
                                     </td>
                                     <td width="234" align="right">
                                         <div style="font-size: 14px; margin-top: 10px;">Sponsored by</div>
-                                        <img src="https://resource.itbusinesstoday.com/whitepapers/Harver-logo-clr-1.png" alt="Logo" style="width: 200px; margin-top: 1px; margin-bottom: 1px;" />
+                                        <img src="##LOGO_URL##" alt="Logo" style="width: 200px; margin-top: 1px; margin-bottom: 1px;" />
                                     </td>
 
                                     <!-- LOGO -->
@@ -182,27 +182,27 @@
                         <table width="100%">
                             <tbody>
                                 <tr>
-                                    <td colspan="2"><h1 style="font-size: 18px; color: #0066b2;">##EDM_TITLE##</h1></td>
+                                    <td colspan="2"><h1 style="font-size: 18px; color: #0066b2;">##LANDING_TITLE##</h1></td>
                                 </tr>
 
                                 <tr>
                                     <td width="53%" height="200" align="left" valign="top" style="">
                                         <!-- PDF IMAGE -->
                                         <div style="">
-                                            <img src="https://resource.itbusinesstoday.com/whitepapers/44575-Harver-CPL-Q1-4.png" style="width: 300px; border: 1px solid #e5e5e5; border-radius: 5px;" alt="thumbnail" />
+                                            <img src="##THUMBNAIL_URL##" style="width: 300px; border: 1px solid #e5e5e5; border-radius: 5px;" alt="thumbnail" />
                                         </div>
                                     </td>
                                     <td rowspan="2" width="47%" valign="top" align="left">
                                         <div class="formbg" style="box-shadow: 0px 0px 1px 1px #0066b2;">
                                             <!-- FORM -->
-                                            <form id="id3f" action="https://resource.itbusinesstoday.com/whitepapers/44575-Harver-CPL-Q1-4-sendemail.php?e=<?echo $emailencoded;?>" method="post">
+                                            <form id="id3f" action="##BASE_URL####LINK_NAME##-sendemail.php?e=<?echo $emailencoded;?>" method="post">
                                                 <div style="display: none;">
                                                     <img src="##PIXEL_LINK##" style="display: none;" />
                                                 </div>
 
                                                 <!--XXX ... DON'T CHANGE THIS CODE ... XXX-->
                                                 <input type="hidden" name="action" id="action" value="insert" />
-                                                <input type="hidden" name="camp_id" id="camp_id" value="44575-Harver-CPL-Q1-4" />
+                                                <input type="hidden" name="camp_id" id="camp_id" value="##LINK_NAME##" />
                                                 <input type="hidden" name="Pixel_link" id="Pixel_link" value="##PIXEL_LINK##" />
                                                 <!--XXX ... DON'T CHANGE THIS CODE ... XXX-->
 
@@ -221,7 +221,7 @@
                                         <p style="font-size: 14px; line-height: 1.5; color: #505050;"></p>
                                         <div class="sub" align="center" style="background-color: #e2ebf3; margin-top: 30px; margin-left: 13px; display: inline-flex; padding: 10px; width: 250px;">
                                             <p style="text-align: left; margin-top: 10px;">Please fill this form to get immediate access to this exclusive resource.</p>
-                                            <p><img src="https://resource.itbusinesstoday.com/whitepapers/Arrow-pr.png" alt="Arrow" style="width: 50px; margin-top: 30px;" /></p>
+                                            <p><img src="##BASE_URL##Arrow-pr.png" alt="Arrow" style="width: 50px; margin-top: 30px;" /></p>
                                         </div>
                                     </td>
                                 </tr>
@@ -232,10 +232,10 @@
                 <tr>
                     <td height="50" align="center" style="border-top: 1px solid rgb(192, 192, 192); background-color: #ffff;">
                         <div align="center" style="padding-top: 1%; padding-bottom: 1%; font-size: 11px;">
-                            <a href="https://resource.itbusinesstoday.com/whitepapers/unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> |
-                            <a href="https://itbusinesstoday.com/eu-data-protection/">Privacy Policy</a>
+                            <a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> |
+                            <a href="##PRIVACY_POLICY##">Privacy Policy</a>
                             <br />
-                            Copyright &#169; 2024 XDBS Corporation <br />
+                            Copyright &#169; ##YEAR## XDBS Corporation <br />
                             Hawthorne, CA 90250 USA <br />
                             3501, Jack Northorp Ave, Ste C3873
                         </div>

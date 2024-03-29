@@ -1,7 +1,7 @@
 <?
    $email=$_GET['e'];
    $emailstr="##PIXEL_LINK##".$email;
-   header( "refresh:5;url=https://resource.itbusinesstoday.com/whitepapers/44575-Harver-CPL-Q1-4.pdf" ); 
+   header( "refresh:5;url=##ASSET_URL##" ); 
    ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -12,7 +12,7 @@
         <style type="text/css">
 			@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
 
-			* {
+			*{
 				text-decoration: none;
 				font-family: "Noto Sans", sans-serif;
 			}
@@ -125,11 +125,11 @@
                             <tbody>
                                 <tr>
                                     <td width="440" height="88" valign="middle" style="">
-                                        <img src="https://resource.itbusinesstoday.com/whitepapers/IT-BUSINESS-TODAY-COLOUR-1.png" alt="It Business Today" width="150" style="" />
+                                        <img src="##BASE_URL##IT-BUSINESS-TODAY-COLOUR-1.png" alt="It Business Today" width="150" style="" />
                                     </td>
                                     <td width="234" align="right">
                                         <span style="font-size: 14px;">##SPONSORED_BY_TEXT##</span><br />
-                                        <img src="https://resource.itbusinesstoday.com/whitepapers/Harver-logo-clr-1.png" alt=" Logo" style="width: 200px; margin-top: 8px;" />
+                                        <img src="##LOGO_URL##" alt="Logo" style="width: 200px; margin-top: 8px;" />
                                     </td>
                                 </tr>
                             </tbody>
@@ -141,8 +141,10 @@
                         <table width="100%" cellspacing="0" cellpadding="10" border="0">
                             <tbody>
                                 <tr>
+								
+									<!-- For PDF / URL -->
                                     <td align="left" class="whitepaper" style="align-items: start; display: flex;">
-                                        <img style="width: 180px; height: auto !important;" alt="##EDM_TITLE##" src="https://resource.itbusinesstoday.com/whitepapers/44575-Harver-CPL-Q1-4.png" style="border: 1px solid #c4c5c600;" />
+                                        <img style="width: 180px; height: auto !important;" alt="##EDM_TITLE##" src="##THUMBNAIL_URL##" style="border: 1px solid #c4c5c600;" />
                                     </td>
 
                                     <td align="left" valign="top" class="style1">
@@ -151,7 +153,7 @@
                                             for downloading <strong>"##EDM_TITLE##"</strong> <br />
                                             <br />
                                             Your download will automatically start in <span id="countdown">5</span> seconds...<br />
-                                            If your download doesn't start automatically, <a class="help" href="https://resource.itbusinesstoday.com/whitepapers/44575-Harver-CPL-Q1-4.pdf">click here</a> to start your download.
+                                            If your download doesn't start automatically, <a  href="##ASSET_URL##">click here</a> to start your download.
                                         </span>
 
                                         <script>
@@ -168,9 +170,10 @@
                                         </script>
                                     </td>
 
+									<!-- For Webinar -->
                                     <!-- <td colspan="2">
 									<div style="font-size:18px;">##EDM_TITLE##</div><br>
-									  
+									  ##IFRAME##
 									</td>-->
 
                                 </tr>
@@ -182,10 +185,10 @@
                 <tr>
                     <td height="50" align="center" style="color: #d8d8d8; background: #202020;">
                         <div align="center" style="padding-top: 1.2%; padding-bottom: 1.3%; font-size: 11px; border-top: 1px solid #c0c0c0;">
-                            <a href="https://resource.itbusinesstoday.com/whitepapers/unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> |
-                            <a href="https://itbusinesstoday.com/eu-data-protection/">Privacy Policy</a>
+                            <a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> |
+                            <a href="##PRIVACY_POLICY##">Privacy Policy</a>
                             <br />
-                            Copyright &#169; 2024 XDBS Corporation<br />
+                            Copyright &#169; ##YEAR## XDBS Corporation<br />
                             Hawthorne, CA 90250 USA<br />
                             3501, Jack Northorp Ave, Ste C3873
                         </div>

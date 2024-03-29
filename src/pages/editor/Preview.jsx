@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef,useCallback } from 'react'
 import { json } from 'react-router-dom';
 
 const Preview = ({publishHelper}) => {
@@ -19,8 +19,12 @@ const Preview = ({publishHelper}) => {
         loadHtml(html)
     }
 
+ 
+
   return (
     <>
+
+   
 
     {
         publishHelper.getPreviewPages().map((page,i) => {

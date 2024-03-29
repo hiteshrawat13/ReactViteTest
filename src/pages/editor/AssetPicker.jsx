@@ -77,26 +77,26 @@ const AssetPicker = () => {
        
         <label className='form-control'>
         <FaFilePdf /> PDF
-        <input type="radio"  name="assetFormat" defaultValue="PDF" onChange={handleSelect}/>
+        <input type="radio"  name="ASSET_FORMAT" defaultValue="PDF" onChange={handleSelect}/>
         <span className="checkmark"></span>
         </label>
             
 
         <label className='form-control'>
         <BsFiletypeMp4 /> MP4
-        <input type="radio"  name="assetFormat" defaultValue="MP4" onChange={handleSelect}/>
+        <input type="radio"  name="ASSET_FORMAT" defaultValue="MP4" onChange={handleSelect}/>
         <span className="checkmark"></span>
         </label>
 
         <label className='form-control'>
         <IoIosLink /> Client Link
-        <input type="radio"  name="assetFormat" defaultValue="Client Link" onChange={handleSelect}/>
+        <input type="radio"  name="ASSET_FORMAT" defaultValue="Client Link" onChange={handleSelect}/>
         <span className="checkmark"></span>
         </label>
 
         <label className='form-control'>
         <PiFrameCornersThin /> Iframe
-        <input type="radio"  name="assetFormat" defaultValue="IFrame" onChange={handleSelect}/>
+        <input type="radio"  name="ASSET_FORMAT" defaultValue="IFrame" onChange={handleSelect}/>
         <span className="checkmark"></span>
         </label>
 
@@ -107,8 +107,8 @@ const AssetPicker = () => {
 {
     (selected=="PDF") && <label>
     <span>Asset PDF</span>
-    <input type="text" /><br/>
-    <input type="file" name="pdf" ref={pdfRef} />
+    <input type="text" name="PDF"/><br/>
+    <input type="file" name="PDF_FILE" ref={pdfRef} />
     <progress  ref={progressRef} max="100" defaultValue={0} value="0"></progress>
     <button onClick={handleUpload}>Upload</button>
   </label>
@@ -117,8 +117,8 @@ const AssetPicker = () => {
 {
     (selected=="MP4") &&   <label>
     <span>MP4</span>
-    <input type="text"/><br/>
-    <input type="file" name="mp4" />
+    <input type="text" name="MP4"/><br/>
+    <input type="file" name="MP4_FILE" />
     <button >Upload</button>
   </label>
 }
@@ -126,14 +126,14 @@ const AssetPicker = () => {
 {
     (selected=="Client Link") &&      <label>
     <span>Client Link</span>
-    <input type="text" name="clientLink" />
+    <input type="text" name="CLIENT_LINK" />
   </label>
 }
   
 {
     (selected=="IFrame") &&   <label>
     <span>Iframe Html</span>
-    <input type="text" name="iframeHtml" />
+    <input type="text" name="IFRAME" />
   </label>
 }
  

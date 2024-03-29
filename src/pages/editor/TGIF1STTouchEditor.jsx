@@ -57,6 +57,7 @@ const TGIF1STTouchEditor = () => {
   const [sameAsEDMAbstract,setSameAsEDMAbstract]=useState(true)
   const [sameAsEDMCTA,setSameAsEDMCTA]=useState(true)
 
+
   const [isOpened,setOpened]=useState(false)
 
   const frameRef=useRef()
@@ -73,8 +74,8 @@ const TGIF1STTouchEditor = () => {
     const inputs=formRef.current.querySelectorAll("input:not([type='submit']) , select, textarea")
 
     const data={
-      baseUrl:"https://resource.itbusinesstoday.com/whitepapers/",
-      year:new Date().getFullYear().toString()
+      BASE_URL:"https://resource.itbusinesstoday.com/whitepapers/",
+      YEAR:new Date().getFullYear().toString()
     }
      for (let i = 0; i < inputs.length; i++) {
      
@@ -102,7 +103,7 @@ const TGIF1STTouchEditor = () => {
 
 
    publishHelper.current.setData(getData())
-   publishHelper.current.openPreview("landing")
+  // publishHelper.current.openPreview("landing")
 
    console.log(publishHelper);
   }
@@ -117,9 +118,28 @@ const TGIF1STTouchEditor = () => {
   }
 
 
+  const handleLinkNameChange=(e)=>{
+
+    document.querySelector("[name='THUMBNAIL_NAME']").value=e.target.value
+   // document.querySelector("[name='PDF']").value=e.target.value
+    //document.querySelector("[name='MP4']").value=e.target.value
+  }
 
 
-  
+  const handleDrop = (event,target_name) => {
+    event.preventDefault();
+    const droppedFiles = event.dataTransfer.files;
+    if (droppedFiles.length > 0) {
+      //const newFiles = Array.from(droppedFiles);
+     // console.log(newFiles);
+      //setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+      document.querySelector(`[name="${target_name}"]`).files=droppedFiles
+      const eq =  new Event('change', { bubbles: true });
+
+      document.querySelector(`[name="${target_name}"]`).dispatchEvent(eq);
+    }
+  };
+
   useEffect(()=>{
     Object.keys(editors).forEach(editor=>{
       if(!TGIFFormRenderer[editor]){
@@ -136,34 +156,29 @@ const TGIF1STTouchEditor = () => {
 
 
 
-<Stepper onStepChange={()=>{
-  publishHelper.current.setData(getData())
-}}>
+<Stepper onStepChange={()=>{ publishHelper.current.setData(getData()) }}>
   
   <Step title="Basic Info">
-    
    {/* Step 1 */}
-
-
    <div className='holder'>
    <label>
       <span>Pixel Link</span>
-      <input type="text" name="pixelLink" />
+      <input type="text" name="PIXEL_LINK" />
     </label>
 
     <label>
       <span>Link Name</span>
-      <input type="text" name="linkName"/>
+      <input type="text" name="LINK_NAME" onChange={handleLinkNameChange} />
     </label>
 
     <label>
       <span>Camp Id</span>
-      <input type="text" name="campId" />
+      <input type="text" name="CAMP_ID" />
     </label>
  
     <label>
       <span>Asset Type</span>
-      <select  name="assetType" >
+      <select  name="ASSET_TYPE" >
         <option value="">Select...</option>
         <option value="White Paper">White Paper</option>
         <option value="Buyers/Comparision Guide">Buyers/Comparision Guide</option>
@@ -177,7 +192,7 @@ const TGIF1STTouchEditor = () => {
 
     <label>
       <span>Privacy Policy</span>
-      <select  name="privacyPolicy"  >
+      <select  name="PRIVACY_POLICY"  >
         <option value="">Select...</option>
         <option value="https://itbusinesstoday.com/eu-data-protection/">EU</option>
         <option value="https://itbusinesstoday.com/us-privacy-policy/">NON-EU</option>
@@ -187,87 +202,107 @@ const TGIF1STTouchEditor = () => {
 
     <label>
       <span>Sponsored By Text</span>
-      <input type="text" name="sponsoredBy"  />
+      <input type="text" name="SPONSORED_BY_TEXT"  />
     </label>
    </div>
-   
    {/* Step 1 end */}
     
   </Step>
 
   <Step title="Content">
   {/* Step 2 */}
-  
-
-
   <div style={{display:"flex",justifyContent:"space-between",gap:"10px",backgroundColor:"#fff"}}>
-
     <div style={{width:"100%"}}>
       <label>
           <span>EDM Page Title</span>
-          <input type="text" name="edmTitle" />
+          <input type="text" name="EDM_TITLE" />
       </label>
       <label>
         <span>EDM Abstract</span>
        
       </label>
-      <RichEditor key={1211212} name="edmAbstract"/>
+      <RichEditor key={1211212} name="EDM_ABSTRACT"/>
       <label>
         <span>EDM CTA</span>
-        <input type="text" name="edmCTA" />
+        <input type="text" name="EDM_CTA" />
       </label>
     </div>
 
     <div style={{width:"100%"}}>
       <label>
         <span>Landing Page Title</span>
-        <input type="checkbox" name="sameAsEDMTitle" defaultChecked={sameAsEDMTitle} onChange={()=>{setSameAsEDMTitle(!sameAsEDMTitle)}}  />
-        { !sameAsEDMTitle && <input type="text" name="landingTitle" />}
+        <input type="checkbox" name="SAME_AS_EDM_TITLE" defaultChecked={sameAsEDMTitle} onChange={()=>{setSameAsEDMTitle(!sameAsEDMTitle)}}  />
+        { !sameAsEDMTitle && <input type="text" name="LANDING_TITLE" />}
       </label>
       <label>
           <span>Landing Abstract</span>
-          
       </label>
-      <input type="checkbox" name="sameAsEDMAbstract" defaultChecked={sameAsEDMAbstract} onChange={()=>{setSameAsEDMAbstract(!sameAsEDMAbstract)}} />
-      { !sameAsEDMAbstract && <RichEditor key={1211212} name="landingAbstract"/>}
+      <input type="checkbox" name="SAME_AS_EDM_ABSTRACT" defaultChecked={sameAsEDMAbstract} onChange={()=>{setSameAsEDMAbstract(!sameAsEDMAbstract)}} />
+      { !sameAsEDMAbstract && <RichEditor key={1211212} name="LANDING_ABSTRACT"/>}
       <label>
         <span>Landing CTA</span>
-        <input type="checkbox" name="sameAsEDMCTA" defaultChecked={sameAsEDMCTA} onChange={()=>{setSameAsEDMCTA(!sameAsEDMCTA)}} />
-        { !sameAsEDMCTA && <input type="text" name="landingCTA"  />}
+        <input type="checkbox" name="SAME_AS_EDM_CTA" defaultChecked={sameAsEDMCTA} onChange={()=>{setSameAsEDMCTA(!sameAsEDMCTA)}} />
+        { !sameAsEDMCTA && <input type="text" name="LANDING_CTA"  />}
       </label>
     </div>
   </div>
- 
-    
-
-    
-
-    
   {/* Step 2 end*/}
   </Step>
 
   <Step title="Form">
   {/* Step 3 */}
-
-  <FormBuilder/>
-
+    <FormBuilder/>
   {/* Step 3 end */}
   </Step>
 
   <Step title="Assets & Logo">
     {/* Step 4 */}
-   
     <label>
       <span>Logo</span>
-      <input type="text" name="logo" /><br/>
-      <input type="file" name="logofile"  />
+      <input type="text" name="LOGO_NAME"/><br/>
+      <input type="file" name="LOGO_FILE" accept="image/png"
+      
+      onChange={(e)=>{
+        e.preventDefault()
+        console.log("EEE");
+        var reader = new FileReader();
+            reader.onload = function (e) {
+               
+                document.querySelector("#LOGO_PREVIEW").src=e.target.result
+            }
+        reader.readAsDataURL(e.target.files[0]);
+        
+      }}
+      />
+      <div  
+        onClick={(e)=>{e.preventDefault();document.querySelector(`[name="LOGO_FILE"]`).click();}}
+        onDrop={(e)=>handleDrop(e,"LOGO_FILE")}
+        onDragOver={(event) => event.preventDefault()}>Drop Here</div>
+        <img id='LOGO_PREVIEW' />
     </label>
     <label>
       <span>Thumbnail</span>
-      <input type="text" name="thumbnail"/><br/>
-      <input type="file" name="thumbnailfile"  />
+      <input type="text" name="THUMBNAIL_NAME" /><br/>
+      <input type="file" name="THUMBNAIL_FILE" accept="image/png" 
+        onChange={(e)=>{
+          e.preventDefault()
+          alert("OnChange")
+          console.log("EEE");
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            document.querySelector("#THUMBNAIL_PREVIEW").src=e.target.result
+          }
+          reader.readAsDataURL(e.target.files[0]);
+          
+        }}
+      />
+
+      <div  
+        onClick={(e)=>{e.preventDefault();document.querySelector(`[name="THUMBNAIL_FILE"]`).click();}}
+        onDrop={(e)=>handleDrop(e,"THUMBNAIL_FILE")}
+        onDragOver={(event) => event.preventDefault()}>Drop Here</div>
+        <img id='THUMBNAIL_PREVIEW' />
     </label>
-   
     <AssetPicker/>
     {/* Step 4 end */}
   </Step>
@@ -280,7 +315,7 @@ const TGIF1STTouchEditor = () => {
     {/* Step 5 end */}
   </Step>
 
-  <Step title="Preview">
+  <Step title="Preview" >
     {/* Step 5 */}
     <Preview  publishHelper={publishHelper.current}/>
     {/* Step 5 end */}
@@ -293,7 +328,6 @@ const TGIF1STTouchEditor = () => {
 {isOpened && <Modal setOpened={setOpened} title={"Title"}><div>hello</div></Modal>}
 
 <button className='openModal' onClick={()=>setOpened(true)}>Open Modal</button>
-
 
 </div>
   

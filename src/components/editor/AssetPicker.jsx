@@ -24,6 +24,20 @@ const AssetPicker = () => {
         setSelected(e.target.value)
     }
 
+    const handleDrop = (event,target_name) => {
+      event.preventDefault();
+      const droppedFiles = event.dataTransfer.files;
+      if (droppedFiles.length > 0) {
+        //const newFiles = Array.from(droppedFiles);
+       // console.log(newFiles);
+        //setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+        document.querySelector(`[name="${target_name}"]`).files=droppedFiles
+        const eq =  new Event('change', { bubbles: true });
+  
+        document.querySelector(`[name="${target_name}"]`).dispatchEvent(eq);
+      }
+    };
+
 
     const handleUpload= async (e)=>{
       e.preventDefault()
@@ -71,6 +85,55 @@ const AssetPicker = () => {
   return (
     <div className='AssetPicker'>
         
+        <label>
+      <span>Logo</span>
+      <input type="text" name="LOGO_NAME"/><br/>
+      <input type="file" name="LOGO_FILE" accept="image/png"
+      
+      onChange={(e)=>{
+        e.preventDefault()
+        console.log("EEE");
+        var reader = new FileReader();
+            reader.onload = function (e) {
+               
+                document.querySelector("#LOGO_PREVIEW").src=e.target.result
+            }
+        reader.readAsDataURL(e.target.files[0]);
+        
+      }}
+      />
+      <div  
+        onClick={(e)=>{e.preventDefault();document.querySelector(`[name="LOGO_FILE"]`).click();}}
+        onDrop={(e)=>handleDrop(e,"LOGO_FILE")}
+        onDragOver={(event) => event.preventDefault()}>Drop Here</div>
+        <img id='LOGO_PREVIEW' />
+    </label>
+    <label>
+      <span>Thumbnail</span>
+      <input type="text" name="THUMBNAIL_NAME" /><br/>
+      <input type="file" name="THUMBNAIL_FILE" accept="image/png" 
+        onChange={(e)=>{
+          e.preventDefault()
+          alert("OnChange")
+          console.log("EEE");
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            document.querySelector("#THUMBNAIL_PREVIEW").src=e.target.result
+          }
+          reader.readAsDataURL(e.target.files[0]);
+          
+        }}
+      />
+
+      <div  
+        onClick={(e)=>{e.preventDefault();document.querySelector(`[name="THUMBNAIL_FILE"]`).click();}}
+        onDrop={(e)=>handleDrop(e,"THUMBNAIL_FILE")}
+        onDragOver={(event) => event.preventDefault()}>Drop Here</div>
+        <img id='THUMBNAIL_PREVIEW' />
+    </label>
+
+
+
         <div className='switches'>
 
         

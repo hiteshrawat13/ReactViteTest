@@ -21,13 +21,13 @@ import { saveAs } from 'file-saver';
 
 import Modal from '../../components/ui/Modal.jsx'
 import RichEditor from './RichEditor.jsx'
-import AssetPicker from './AssetPicker.jsx'
+import AssetPicker from '../../components/editor/AssetPicker.jsx'
 
 
 import {TGIFFormRenderer} from './FormRenderer.js'
 import { editors } from '../../components/formBuilder/fieldEditor/Fields.jsx'
 import PublishHelper from './PublishHelper.js'
-import Preview from './Preview.jsx'
+import Preview from '../../components/editor/Preview.jsx'
 
 
 
@@ -126,19 +126,7 @@ const TGIF1STTouchEditor = () => {
   }
 
 
-  const handleDrop = (event,target_name) => {
-    event.preventDefault();
-    const droppedFiles = event.dataTransfer.files;
-    if (droppedFiles.length > 0) {
-      //const newFiles = Array.from(droppedFiles);
-     // console.log(newFiles);
-      //setFiles((prevFiles) => [...prevFiles, ...newFiles]);
-      document.querySelector(`[name="${target_name}"]`).files=droppedFiles
-      const eq =  new Event('change', { bubbles: true });
 
-      document.querySelector(`[name="${target_name}"]`).dispatchEvent(eq);
-    }
-  };
 
   useEffect(()=>{
     Object.keys(editors).forEach(editor=>{
@@ -257,52 +245,7 @@ const TGIF1STTouchEditor = () => {
 
   <Step title="Assets & Logo">
     {/* Step 4 */}
-    <label>
-      <span>Logo</span>
-      <input type="text" name="LOGO_NAME"/><br/>
-      <input type="file" name="LOGO_FILE" accept="image/png"
-      
-      onChange={(e)=>{
-        e.preventDefault()
-        console.log("EEE");
-        var reader = new FileReader();
-            reader.onload = function (e) {
-               
-                document.querySelector("#LOGO_PREVIEW").src=e.target.result
-            }
-        reader.readAsDataURL(e.target.files[0]);
-        
-      }}
-      />
-      <div  
-        onClick={(e)=>{e.preventDefault();document.querySelector(`[name="LOGO_FILE"]`).click();}}
-        onDrop={(e)=>handleDrop(e,"LOGO_FILE")}
-        onDragOver={(event) => event.preventDefault()}>Drop Here</div>
-        <img id='LOGO_PREVIEW' />
-    </label>
-    <label>
-      <span>Thumbnail</span>
-      <input type="text" name="THUMBNAIL_NAME" /><br/>
-      <input type="file" name="THUMBNAIL_FILE" accept="image/png" 
-        onChange={(e)=>{
-          e.preventDefault()
-          alert("OnChange")
-          console.log("EEE");
-          var reader = new FileReader();
-          reader.onload = function (e) {
-            document.querySelector("#THUMBNAIL_PREVIEW").src=e.target.result
-          }
-          reader.readAsDataURL(e.target.files[0]);
-          
-        }}
-      />
-
-      <div  
-        onClick={(e)=>{e.preventDefault();document.querySelector(`[name="THUMBNAIL_FILE"]`).click();}}
-        onDrop={(e)=>handleDrop(e,"THUMBNAIL_FILE")}
-        onDragOver={(event) => event.preventDefault()}>Drop Here</div>
-        <img id='THUMBNAIL_PREVIEW' />
-    </label>
+    
     <AssetPicker/>
     {/* Step 4 end */}
   </Step>

@@ -16,6 +16,8 @@ export default class PublishHelper{
     async  getEdmHtml(forPreview=false){
         let data=await Utils.loadFile(this.templatesFolderPath+"edm.html");
 
+        data=data.replaceAll(`##LOGO_URL##`,this.tgif["BASE_URL"]+this.tgif["LOGO_NAME"])
+        data=data.replaceAll(`##THUMBNAIL_URL##`,this.tgif["BASE_URL"]+this.tgif["THUMBNAIL_NAME"])
       
         for (const [key, value] of Object.entries(this.tgif)) {
         
@@ -31,51 +33,50 @@ export default class PublishHelper{
     }
 
     async getLandingHtml(forPreview=false){
+
+        
+
         const landing_page=(this.tgif.useNewLandingPageFormat)?"new_format_landing.php":"landing.php"
         let data= await Utils.loadFile( this.templatesFolderPath+landing_page) ;
+        
+        
+        if(this.tgif["SAME_AS_EDM_TITLE"]==true){ 
+            data=data.replaceAll(`##LANDING_TITLE##`,this.tgif["EDM_TITLE"])
+        }
 
-        // if(forPreview){
-        //     try {
-        //         const dataUrl=await Utils.fileToBase64(document.querySelector("[name='THUMBNAIL_FILE']").files[0])
-        //         data=data.replaceAll(`##THUMBNAIL_URL##`,dataUrl)
-        //     } catch (error) {
-        //         console.log("Cannot base encode logo",error);
-        //     }
-        // }else{
-        //     data=data.replaceAll(`##THUMBNAIL_URL##`,tgif["THUMBNAIL_NAME"])
-        // }
+        if(this.tgif["SAME_AS_EDM_ABSTRACT"]==true){
+            data=data.replaceAll(`##LANDING_ABSTRACT##`,this.tgif["EDM_ABSTRACT"])
+        }
+
+        if(this.tgif["SAME_AS_EDM_CTA"]==true){
+            data=data.replaceAll(`##LANDING_CTA##`,this.tgif["EDM_CTA"])
+        }
        
+        data=data.replaceAll(`##LOGO_URL##`,this.tgif["BASE_URL"]+this.tgif["LOGO_NAME"])
+        data=data.replaceAll(`##THUMBNAIL_URL##`,this.tgif["BASE_URL"]+this.tgif["THUMBNAIL_NAME"])
 
-       
-
-        data=data.replaceAll(`##THUMBNAIL_URL##`,this.tgif["THUMBNAIL_NAME"])
-           
         const formHtml=Utils.getFormHtml(this.tgif.form,TGIFFormRenderer);
-        if(typeof formHtml === 'string' || formHtml instanceof String)
-        data=data.replaceAll(`##form##`,Utils.convertToEntities( formHtml ))
 
-       
+        
+
+        if(typeof formHtml === 'string' || formHtml instanceof String)
+        data=data.replaceAll(`##FORM##`,Utils.convertToEntities( formHtml ))
         for (const [key, value] of Object.entries(this.tgif)) {
-         
             try {
                 if(typeof value === 'string' || value instanceof String)
                 data=data.replaceAll(`##${key}##`,Utils.convertToEntities( value ) )
             } catch (error) {
                 console.log(error,key,value,"in getLanding Html");
             }
-           
         }
-
         return data;
     }
 
     async getSendemailHtml(forPreview=false){
         let data=await Utils.loadFile(this.templatesFolderPath+"sendemail.php");
-       
         if(this.tgif.assetFormat=="ClientLink") {
             data=data.replaceAll(`##baseUrl####asset##`,this.tgif.clientLink )
         }
-
         for (const [key, value] of Object.entries(this.tgif)) {
             try {
                 if(typeof value === 'string' || value instanceof String)
@@ -83,22 +84,22 @@ export default class PublishHelper{
             } catch (error) {
                 console.log(error,key,value,"in getSendemail Html");
             }
-           
         }
         return data;
     }
 
     async getThanksHtml(forPreview=false){
-        let data=await Utils.loadFile(this.templatesFolderPath+"thanks.php");
-       
 
+
+
+        let data=await Utils.loadFile(this.templatesFolderPath+"thanks.php");
         if(this.tgif.assetFormat=="MP4" || this.tgif.assetFormat=="IFrame") {
-            
             data=data.replaceAll(`header( "refresh:5;url=##baseUrl####asset##" );`,"" ) //remove redirect
         }
-
        // data=data.replaceAll(`##thankyouContentHtml##`,Utils.convertToEntities(this.tgif.thankyouContentHtml) )
         
+       data=data.replaceAll(`##LOGO_URL##`,this.tgif["BASE_URL"]+this.tgif["LOGO_NAME"])
+       data=data.replaceAll(`##THUMBNAIL_URL##`,this.tgif["BASE_URL"]+this.tgif["THUMBNAIL_NAME"])
 
         for (const [key, value] of Object.entries(this.tgif)) {
            try {
@@ -118,60 +119,14 @@ export default class PublishHelper{
         switch(page){
             case "edm":
                 return await this.getEdmHtml(true);    
-            
             case "landing":
                 return await  this.getLandingHtml(true);    
-         
             case "sendemail":
                 return await this.getSendemailHtml(true);    
-
             case "thanks":
                 return await this.getThanksHtml(true);    
         }
     }
-
-
-    // async openPreview(page){
-    //     let winHtml=""
-    //     switch(page){
-    //         case "edm":
-    //         winHtml=await this.getEdmHtml();    
-    //         break;
-    //         case "landing":
-    //         winHtml=await  this.getLandingHtml();    
-    //         break;
-    //         case "sendemail":
-    //         winHtml=await this.getSendemailHtml();    
-    //         break;
-    //         case "thanks":
-    //         winHtml=await this.getThanksHtml();    
-    //         break;
-    //     }
-    //     const winUrl = URL.createObjectURL(
-    //         new Blob([winHtml], { type: "text/html" })
-    //     );
-    //     let newwindow = window.open(winUrl, 'LandingPage', 'height=500,width=1000');
-    //     newwindow.addEventListener('load', async () => {
-    //         try {
-    //             newwindow.document.getElementById("splogo").src=await Utils.fileToBase64(document.querySelector("[name='logofile']").files[0])
-    //         } catch (error) {
-    //             console.log("Cannot base encode logo",error);
-    //         }
-
-
-            
-        
-    //         try {
-    //             newwindow.document.getElementById("thumbnail").src=await Utils.fileToBase64(document.querySelector("[name='thumbnailfile']").files[0])
-
-    //         } catch (error) {
-    //             console.log("Cannot base encode thumbnail",error);
-    //         }
-    //         console.log();
-    //     }, false);
-    //     if (window.focus) { newwindow.focus() }    
-    // }
-
 
     async generateZip(JSZip,saveAs){
         var zip = new JSZip();
@@ -190,15 +145,20 @@ export default class PublishHelper{
             zip.file(`${this.tgif.thumbnail}`, thumbnailFile );
         }
 
-        const pdfFile=document.querySelector("[name='PDF']")?.files[0];
-        // if(document.querySelector("[name='PDF']") && document.querySelector("[name='PDF']").files[0] && (this.tgif.assetFormat=="PDF") ){
-        //     zip.file(`${this.tgif.asset}`, document.querySelector("[data-file='asset']").files[0] );
-        // }
 
-        const mp4File=document.querySelector("[name='mp4']")?.files[0]
-        // if(document.querySelector("[name='MP4']") && document.querySelector("[name='mp4']").files[0] && ( this.tgif.assetFormat=="MP4") ){
-        //     zip.file(`${this.tgif.asset}`, document.querySelector("[data-file='asset']").files[0] );
-        // }
+        try{
+            zip.file(`${this.tgif["PDF"]}`, document.querySelector("[name='PDF_FILE']").files[0] );
+        }catch(error){
+            console.log(error);
+        }
+       
+  
+
+        try{
+            zip.file(`${this.tgif["MP4"]}`, document.querySelector("[name='MP4_FILE']").files[0] );
+        }catch(error){
+            console.log(error);
+        }
 
         zip.generateAsync({ type: "blob" }).then( (blob) =>{ // 1) generate the zip file
             saveAs(blob, `${this.tgif.LINK_NAME}`);                          // 2) trigger the download

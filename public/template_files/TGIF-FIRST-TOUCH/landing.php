@@ -218,7 +218,7 @@
                                 </tr>
                                 <tr>
                                     <td valign="top" align="left" style="padding-right: 2%;">
-                                        <p style="font-size: 14px; line-height: 1.5; color: #505050;"></p>
+                                        <p style="font-size: 14px; line-height: 1.5; color: #505050;">##LANDING_ABSTRACT##</p>
                                         <div class="sub" align="center" style="background-color: #e2ebf3; margin-top: 30px; margin-left: 13px; display: inline-flex; padding: 10px; width: 250px;">
                                             <p style="text-align: left; margin-top: 10px;">Please fill this form to get immediate access to this exclusive resource.</p>
                                             <p><img src="##BASE_URL##Arrow-pr.png" alt="Arrow" style="width: 50px; margin-top: 30px;" /></p>

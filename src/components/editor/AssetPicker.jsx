@@ -9,15 +9,29 @@ import { IoIosLink } from "react-icons/io";
 import { PiFrameCornersThin } from "react-icons/pi";
 
 import axios from 'axios'
+import { useEffect } from 'react';
+
+import { socket } from '../../socket';
+
+
+
+
 
 
 const AssetPicker = () => {
 
+  const [sessionId, setSessionId] = useState( Math.random().toString(36).substr(2, 9))
+
+ 
     const [selected,setSelected]=useState("")
 
     const pdfRef=useRef()
 
     const progressRef=useRef()
+
+
+
+    
 
     const handleSelect=(e)=>{
         console.log(e.target.value);
@@ -47,15 +61,23 @@ const AssetPicker = () => {
 
 
       try {
-       
-       axios.post('https://itbusinessplus.net/template/raj/test/LBUpload.php', {
+        var bodyFormData = new FormData();
+        bodyFormData.append('sessionId',sessionId);
+        bodyFormData.append('file:',pdfRef.current.files[0] || null);
+      
+        axios.post('http://localhost:8888/upload_file', {
+       //axios.post('https://itbusinessplus.net/template/raj/test/LBUpload.php', {
           firstName: 'Fred',
           lastName: 'Flintstone',
+          sessionId:sessionId,
           orders: [1, 2, 3],
-          file: pdfRef.current.files[0] || null
+        
+          fileSize: pdfRef.current.files[0].size || null,
+         file: pdfRef.current.files[0] || null
           }, {
+          
             headers: {
-              'Content-Type': 'multipart/form-data'
+              'Content-Type': `multipart/form-data; boundary=${bodyFormData._boundary}`
             },
             onUploadProgress: function( progressEvent ) {
               //console.log(progressEvent);
@@ -82,6 +104,53 @@ const AssetPicker = () => {
    
 
     }
+
+   
+    const handleCancel= async (e)=>{
+      e.preventDefault()
+     
+      socket?.emit('terminate',"WWWW");
+      alert("TERMINATED")
+    }
+
+
+    const [isConnected, setIsConnected] = useState(socket.connected);
+    const [fooEvents, setFooEvents] = useState([]);
+    const [uploadProgress, setUploadProgress] = useState("");
+    useEffect(() => {
+      function onConnect() {
+        setIsConnected(true);
+      }
+  
+      function onDisconnect() {
+        setIsConnected(false);
+      }
+  
+      function onFooEvent(value) {
+        setFooEvents(previous => [...previous, value]);
+      }
+
+      function onUploadProgress(value) {
+          setUploadProgress(value)
+      }
+      
+      socket.connect();
+      socket.on('connect', onConnect);
+      socket.on('disconnect', onDisconnect);
+      socket.on('foo', onFooEvent);
+      socket.on("uploadProgress",onUploadProgress)
+      socket.emit('connectInit', sessionId);
+  
+      return () => {
+        socket.disconnect();
+        socket.off('connect', onConnect);
+        socket.off('disconnect', onDisconnect);
+        socket.off('foo', onFooEvent);
+        socket.off("uploadProgress",onUploadProgress)
+      };
+    }, []);
+
+ 
   return (
     <div className='AssetPicker'>
         
@@ -162,11 +231,7 @@ const AssetPicker = () => {
         <input type="radio"  name="ASSET_FORMAT" defaultValue="IFrame" onChange={handleSelect}/>
         <span className="checkmark"></span>
         </label>
-
-
-        </div>
-
-
+  </div>
 {
     (selected=="PDF") && <label>
     <span>Asset PDF</span>
@@ -174,9 +239,17 @@ const AssetPicker = () => {
     <input type="file" name="PDF_FILE" ref={pdfRef} />
     <progress  ref={progressRef} max="100" defaultValue={0} value="0"></progress>
     <button onClick={handleUpload}>Upload</button>
+    <button onClick={handleCancel}>Cancel</button>
+    <br>
+    
+    </br>
+isConnected:{isConnected}
+    <br>
+    
+    </br>
+    <div>{uploadProgress} </div>
   </label>
 }
-
 {
     (selected=="MP4") &&   <label>
     <span>MP4</span>
@@ -192,16 +265,15 @@ const AssetPicker = () => {
     <input type="text" name="CLIENT_LINK" />
   </label>
 }
-  
 {
     (selected=="IFrame") &&   <label>
     <span>Iframe Html</span>
     <input type="text" name="IFRAME" />
   </label>
 }
- 
-
-    <input type="hidden" name="TEST123" value={1121212} />
+  
+  
+  <input type="hidden" name="TEST123" value={1121212} />
        
 
      

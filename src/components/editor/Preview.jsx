@@ -15,7 +15,7 @@ const Preview = ({publishHelper}) => {
         console.log(e.target.dataset);
         const page=e.target.dataset.page;
         const html=await publishHelper.getPreview(page)
-        console.log(html,"WWWWWWWWWWWWWWWWWWWWW");
+        //console.log(html,"WWWWWWWWWWWWWWWWWWWWW");
         loadHtml(html)
     }
 

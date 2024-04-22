@@ -170,13 +170,51 @@ const AssetPicker = () => {
     //   };
     // }, []);
 
+
+    function debounce(func, wait, immediate) {
+      var timeout;
+      return function() {
+        var context = this, args = arguments;
+        var later = function() {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
+    };
  
   return (
     <div className='AssetPicker'>
         
         <label>
       <span>Logo</span>
-      <input type="text" name="LOGO_NAME"/><br/>
+      <input type="text" name="LOGO_NAME" onChange={debounce((e)=>{
+        console.log(e.target.value);
+        try {
+         
+        
+          axios.post('http://localhost:8888/check_url', {
+            url:  "https://resource.itbusinesstoday.com/whitepapers/"+e.target.value,
+            
+            }, {
+            
+             
+            }
+          ).then(data=>{
+            console.log(data,"Complete");
+          }).catch(err=>{
+            console.log(err,"ERROR");
+          })
+  
+        
+        } catch (error) {
+          console.log(error);
+        }
+
+      },1000)}/><br/>
       <input type="file" name="LOGO_FILE" accept="image/png"
       
       onChange={(e)=>{

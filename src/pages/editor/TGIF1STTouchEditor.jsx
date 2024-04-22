@@ -59,6 +59,10 @@ const TGIF1STTouchEditor = () => {
   const publishHelper=useRef(new PublishHelper())
 
 
+  const edmAbstractRichEditorRef = useRef();
+  const landingAbstractRichEditorRef = useRef();
+
+
   const getData=()=>{
     const inputs=formRef.current.querySelectorAll("input:not([type='submit']) , select, textarea")
 
@@ -192,11 +196,19 @@ const TGIF1STTouchEditor = () => {
           <span>EDM Page Title</span>
           <input type="text" name="EDM_TITLE" />
       </label>
+
+
+      <button onClick={(e)=>{
+        e.preventDefault()
+       
+       edmAbstractRichEditorRef.current.updateHtml("#####")
+
+        }}>Fetch</button>
       <label>
         <span>EDM Abstract</span>
        
       </label>
-      <RichEditor key={1211212} name="EDM_ABSTRACT"/>
+      <RichEditor ref={edmAbstractRichEditorRef} key={1211212}  name="EDM_ABSTRACT"/>
       <label>
         <span>EDM CTA</span>
         <input type="text" name="EDM_CTA" />
@@ -213,7 +225,7 @@ const TGIF1STTouchEditor = () => {
           <span>Landing Abstract</span>
       </label>
       <input type="checkbox" name="SAME_AS_EDM_ABSTRACT" defaultChecked={sameAsEDMAbstract} onChange={()=>{setSameAsEDMAbstract(!sameAsEDMAbstract)}} />
-      { !sameAsEDMAbstract && <RichEditor key={1211212} name="LANDING_ABSTRACT"/>}
+      { !sameAsEDMAbstract && <RichEditor key={1211212}  name="LANDING_ABSTRACT"/>}
       <label>
         <span>Landing CTA</span>
         <input type="checkbox" name="SAME_AS_EDM_CTA" defaultChecked={sameAsEDMCTA} onChange={()=>{setSameAsEDMCTA(!sameAsEDMCTA)}} />

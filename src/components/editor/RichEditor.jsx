@@ -1,4 +1,4 @@
-import React ,{useState} from 'react'
+import React ,{useState,forwardRef,useImperativeHandle} from 'react'
 
 import {   BtnBold,
     BtnBulletList,
@@ -15,11 +15,28 @@ import {   BtnBold,
     Separator,
     Toolbar,EditorProvider,Editor } from 'react-simple-wysiwyg'
 
-const RichEditor = ({name}) => {
-    const [html, setHtml] = useState('my <b>HTML</b>');
+const RichEditor = forwardRef(({name},ref) => {
+    const [html, setHtml] = useState("my <b>HTML</b>");
     function onChange(e) {
+      alert("OnChage")
         setHtml(e.target.value);
       }
+
+      const printSomething = () =>{
+        alert("print")
+        console.log('printing from child function')
+     }
+
+     const updateHtml=(html)=>{
+      setHtml(html);
+     
+     }
+     useImperativeHandle(ref, () => ({
+       printSomething: printSomething,
+       updateHtml: updateHtml
+     }));
+
+
   return (
     <>
     <EditorProvider key={Math.random} >
@@ -45,10 +62,10 @@ const RichEditor = ({name}) => {
         </Toolbar>
       </Editor>
     </EditorProvider>
-    <input type="hidden" name={name} value={html}/>
+    <input  name={name} value={html} onChange={onChange}/>
     
     </>
   )
-}
+})
 
 export default RichEditor

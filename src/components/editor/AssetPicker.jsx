@@ -57,8 +57,28 @@ const AssetPicker = () => {
       e.preventDefault()
 
       alert("OO")
+      function onConnect() {
+            setIsConnected(true);
+          }
       
-
+          function onDisconnect() {
+            setIsConnected(false);
+          }
+      
+          function onFooEvent(value) {
+            setFooEvents(previous => [...previous, value]);
+          }
+    
+          function onUploadProgress(value) {
+              setUploadProgress(value)
+          }
+      
+      socket.connect();
+      socket.on('connect', onConnect);
+      socket.on('disconnect', onDisconnect);
+      socket.on('foo', onFooEvent);
+      socket.on("uploadProgress",onUploadProgress)
+      socket.emit('connectInit', sessionId);
 
       try {
         var bodyFormData = new FormData();
@@ -117,38 +137,38 @@ const AssetPicker = () => {
     const [isConnected, setIsConnected] = useState(socket.connected);
     const [fooEvents, setFooEvents] = useState([]);
     const [uploadProgress, setUploadProgress] = useState("");
-    useEffect(() => {
-      function onConnect() {
-        setIsConnected(true);
-      }
+    // useEffect(() => {
+    //   function onConnect() {
+    //     setIsConnected(true);
+    //   }
   
-      function onDisconnect() {
-        setIsConnected(false);
-      }
+    //   function onDisconnect() {
+    //     setIsConnected(false);
+    //   }
   
-      function onFooEvent(value) {
-        setFooEvents(previous => [...previous, value]);
-      }
+    //   function onFooEvent(value) {
+    //     setFooEvents(previous => [...previous, value]);
+    //   }
 
-      function onUploadProgress(value) {
-          setUploadProgress(value)
-      }
+    //   function onUploadProgress(value) {
+    //       setUploadProgress(value)
+    //   }
       
-      socket.connect();
-      socket.on('connect', onConnect);
-      socket.on('disconnect', onDisconnect);
-      socket.on('foo', onFooEvent);
-      socket.on("uploadProgress",onUploadProgress)
-      socket.emit('connectInit', sessionId);
+    //   socket.connect();
+    //   socket.on('connect', onConnect);
+    //   socket.on('disconnect', onDisconnect);
+    //   socket.on('foo', onFooEvent);
+    //   socket.on("uploadProgress",onUploadProgress)
+    //   socket.emit('connectInit', sessionId);
   
-      return () => {
-        socket.disconnect();
-        socket.off('connect', onConnect);
-        socket.off('disconnect', onDisconnect);
-        socket.off('foo', onFooEvent);
-        socket.off("uploadProgress",onUploadProgress)
-      };
-    }, []);
+    //   return () => {
+    //     socket.disconnect();
+    //     socket.off('connect', onConnect);
+    //     socket.off('disconnect', onDisconnect);
+    //     socket.off('foo', onFooEvent);
+    //     socket.off("uploadProgress",onUploadProgress)
+    //   };
+    // }, []);
 
  
   return (

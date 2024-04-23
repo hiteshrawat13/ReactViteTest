@@ -20,7 +20,7 @@ import { saveAs } from 'file-saver';
 
 
 import Modal from '../../components/ui/Modal.jsx'
-import RichEditor from './RichEditor.jsx'
+import RichEditor from '../../components/editor/RichEditor.jsx'
 import AssetPicker from '../../components/editor/AssetPicker.jsx'
 
 
@@ -33,17 +33,6 @@ import Preview from '../../components/editor/Preview.jsx'
 
 
 
-class PublishMe{
-  constructor(data){
-    this.data=data;
-  }
-
-
-
-
-
-
-}
 
 
 
@@ -70,6 +59,10 @@ const TGIF1STTouchEditor = () => {
   const publishHelper=useRef(new PublishHelper())
 
 
+  const edmAbstractRichEditorRef = useRef();
+  const landingAbstractRichEditorRef = useRef();
+
+
   const getData=()=>{
     const inputs=formRef.current.querySelectorAll("input:not([type='submit']) , select, textarea")
 
@@ -78,7 +71,6 @@ const TGIF1STTouchEditor = () => {
       YEAR:new Date().getFullYear().toString()
     }
      for (let i = 0; i < inputs.length; i++) {
-     
       // console.log(inputs[i].name,inputs[i].value);
       if(inputs[i].name){
         if(inputs[i].type=="checkbox"){
@@ -86,7 +78,6 @@ const TGIF1STTouchEditor = () => {
         }else{
           data[inputs[i].name]=inputs[i].value
         }
-        
       }
      }
      data["form"]=formBuilder.fields
@@ -190,7 +181,7 @@ const TGIF1STTouchEditor = () => {
 
     <label>
       <span>Sponsored By Text</span>
-      <input type="text" name="SPONSORED_BY_TEXT"  />
+      <input type="text" name="SPONSORED_BY_TEXT" defaultValue={"Sponsored By"}  />
     </label>
    </div>
    {/* Step 1 end */}
@@ -205,11 +196,19 @@ const TGIF1STTouchEditor = () => {
           <span>EDM Page Title</span>
           <input type="text" name="EDM_TITLE" />
       </label>
+
+
+      <button onClick={(e)=>{
+        e.preventDefault()
+       
+       edmAbstractRichEditorRef.current.updateHtml("#####")
+
+        }}>Fetch</button>
       <label>
         <span>EDM Abstract</span>
        
       </label>
-      <RichEditor key={1211212} name="EDM_ABSTRACT"/>
+      <RichEditor ref={edmAbstractRichEditorRef} key={1211212}  name="EDM_ABSTRACT"/>
       <label>
         <span>EDM CTA</span>
         <input type="text" name="EDM_CTA" />
@@ -220,13 +219,13 @@ const TGIF1STTouchEditor = () => {
       <label>
         <span>Landing Page Title</span>
         <input type="checkbox" name="SAME_AS_EDM_TITLE" defaultChecked={sameAsEDMTitle} onChange={()=>{setSameAsEDMTitle(!sameAsEDMTitle)}}  />
-        { !sameAsEDMTitle && <input type="text" name="LANDING_TITLE" />}
+        { !sameAsEDMTitle  && <input type="text" name="LANDING_TITLE" />}
       </label>
       <label>
           <span>Landing Abstract</span>
       </label>
       <input type="checkbox" name="SAME_AS_EDM_ABSTRACT" defaultChecked={sameAsEDMAbstract} onChange={()=>{setSameAsEDMAbstract(!sameAsEDMAbstract)}} />
-      { !sameAsEDMAbstract && <RichEditor key={1211212} name="LANDING_ABSTRACT"/>}
+      { !sameAsEDMAbstract && <RichEditor key={1211212}  name="LANDING_ABSTRACT"/>}
       <label>
         <span>Landing CTA</span>
         <input type="checkbox" name="SAME_AS_EDM_CTA" defaultChecked={sameAsEDMCTA} onChange={()=>{setSameAsEDMCTA(!sameAsEDMCTA)}} />
@@ -250,7 +249,7 @@ const TGIF1STTouchEditor = () => {
     {/* Step 4 end */}
   </Step>
 
-  <Step title="Complete">
+  <Step title="Publish">
     {/* Step 5 */}
     <input type="submit" value="Submit" />
     <br/>

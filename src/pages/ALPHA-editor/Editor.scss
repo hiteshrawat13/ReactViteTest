@@ -1,0 +1,50 @@
+.Editor{
+    max-width: 1200px;
+    margin:0 auto;
+
+
+
+    .grid-2{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .holder{
+        background-color: #fff;
+        padding: 10px;
+    }
+
+    
+    label{
+        display: block;
+        span{
+            display: block;
+        }
+    }
+
+
+
+    input[type="text"],select,textarea{
+        width: 100%;
+        padding: 5px;
+        outline: none;
+        border-radius: 3px;
+        border:1px solid #e6e6e6;
+
+        &:focus{
+        outline:2px solid rgb(71, 95, 175);
+        }
+    }
+
+    input[type="submit"]{
+        padding: 5px;
+    }
+
+
+
+
+
+
+  
+
+}
+

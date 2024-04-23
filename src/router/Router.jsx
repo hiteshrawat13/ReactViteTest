@@ -6,6 +6,7 @@ import TGIF1STTouchEditor from "../pages/editor/TGIF1STTouchEditor"
 import Login from "../pages/login/Login"
 import UserList from "../pages/user-management/UserList"
 import RoleList from "../pages/user-management/RoleList"
+import AlphaEditor from "../pages/ALPHA-editor/AlphaEditor"
 
 
 const Router=[
@@ -64,6 +65,10 @@ const Router=[
     {
       path: '/editor',
       element: <TGIF1STTouchEditor/>,
+    },
+    {
+      path: '/editor2',
+      element: <AlphaEditor/>,
     }
   
   ]

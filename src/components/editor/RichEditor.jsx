@@ -18,12 +18,12 @@ import {   BtnBold,
 const RichEditor = forwardRef(({name},ref) => {
     const [html, setHtml] = useState("my <b>HTML</b>");
     function onChange(e) {
-      alert("OnChage")
+      //alert("OnChage")
         setHtml(e.target.value);
       }
 
       const printSomething = () =>{
-        alert("print")
+        //alert("print")
         console.log('printing from child function')
      }
 

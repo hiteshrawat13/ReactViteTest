@@ -25,6 +25,8 @@ const AssetPicker = () => {
  
     const [selected,setSelected]=useState("")
 
+    const [foundLogos,setFoundLogos]=useState([])
+
     const pdfRef=useRef()
 
     const progressRef=useRef()
@@ -34,8 +36,11 @@ const AssetPicker = () => {
     
 
     const handleSelect=(e)=>{
-        console.log(e.target.value);
-        setSelected(e.target.value)
+        console.log(e.target.dataset.val);
+        setSelected(e.target.dataset.val)
+
+        console.log( document.querySelector("[name='ASSET_FORMAT']").checked);
+       
     }
 
     const handleDrop = (event,target_name) => {
@@ -170,6 +175,52 @@ const AssetPicker = () => {
     //   };
     // }, []);
 
+    
+  const handleLogoSearch=(e)=>{
+    try {
+
+      const search_query=e.target.value;
+      const formData = new FormData();
+      formData.append("query", search_query);
+    
+      axios.post('https://resource.itbusinesstoday.com/whitepapers/download/searchlogotest.php', formData )
+      .then(result=>{
+
+        setFoundLogos(result.data.results)
+        console.log(result,"Complete");
+      }).catch(err=>{
+        console.log(err,"ERROR");
+      })
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleCheckUrl=(e)=>{
+    console.log(e.target.value);
+    try {
+     
+    
+      axios.post('http://localhost:8888/check_url', {
+        url:  "https://resource.itbusinesstoday.com/whitepapers/"+e.target.value,
+        
+        }, {
+        
+         
+        }
+      ).then(result=>{
+        console.log(result.data.status,"Complete");
+      }).catch(err=>{
+        console.log(err,"ERROR");
+      })
+
+    
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
     function debounce(func, wait, immediate) {
       var timeout;
@@ -191,30 +242,15 @@ const AssetPicker = () => {
         
         <label>
       <span>Logo</span>
-      <input type="text" name="LOGO_NAME" onChange={debounce((e)=>{
-        console.log(e.target.value);
-        try {
-         
-        
-          axios.post('http://localhost:8888/check_url', {
-            url:  "https://resource.itbusinesstoday.com/whitepapers/"+e.target.value,
-            
-            }, {
-            
-             
-            }
-          ).then(data=>{
-            console.log(data,"Complete");
-          }).catch(err=>{
-            console.log(err,"ERROR");
-          })
-  
-        
-        } catch (error) {
-          console.log(error);
-        }
+      <input type="text" name="LOGO_NAME" onChange={debounce((e)=>{handleLogoSearch(e)},500)}/>
+      <div>{
+        (foundLogos.length==0)? <div>Logo Not Found</div> :        foundLogos.map((logo,i)=>{
 
-      },1000)}/><br/>
+          return <div key={i}><img src={"https://resource.itbusinesstoday.com/whitepapers/download/"+logo}/></div>
+
+        })
+        }</div>
+      <br/>
       <input type="file" name="LOGO_FILE" accept="image/png"
       
       onChange={(e)=>{
@@ -267,31 +303,34 @@ const AssetPicker = () => {
        
         <label className='form-control'>
         <FaFilePdf /> PDF
-        <input type="radio"  name="ASSET_FORMAT" defaultValue="PDF" onChange={handleSelect}/>
+        <input type="radio"  data-val="PDF" checked={selected=="PDF"} onChange={handleSelect}/>
         <span className="checkmark"></span>
         </label>
             
 
         <label className='form-control'>
         <BsFiletypeMp4 /> MP4
-        <input type="radio"  name="ASSET_FORMAT" defaultValue="MP4" onChange={handleSelect}/>
+        <input type="radio"   data-val="MP4" checked={selected=="MP4"} onChange={handleSelect}/>
         <span className="checkmark"></span>
         </label>
 
         <label className='form-control'>
         <IoIosLink /> Client Link
-        <input type="radio"  name="ASSET_FORMAT" defaultValue="Client Link" onChange={handleSelect}/>
+        <input type="radio"   data-val="Client Link" checked={selected=="Client Link"} onChange={handleSelect}/>
         <span className="checkmark"></span>
         </label>
 
         <label className='form-control'>
         <PiFrameCornersThin /> Iframe
-        <input type="radio"  name="ASSET_FORMAT" defaultValue="IFrame" onChange={handleSelect}/>
+        <input type="radio"   data-val="IFrame" checked={selected=="IFrame"} onChange={handleSelect}/>
         <span className="checkmark"></span>
         </label>
+
+        <input type="hidden" name="ASSET_FORMAT" value={selected}/>
+        
   </div>
 {
-    (selected=="PDF") && <label>
+     <label style={{display:`${(selected=="PDF")?'block':'none'}`}}> 
     <span>Asset PDF</span>
     <input type="text" name="PDF"/><br/>
     <input type="file" name="PDF_FILE" ref={pdfRef} />
@@ -309,7 +348,7 @@ isConnected:{isConnected}
   </label>
 }
 {
-    (selected=="MP4") &&   <label>
+    <label style={{display:`${(selected=="MP4")?'block':'none'}`}}>
     <span>MP4</span>
     <input type="text" name="MP4"/><br/>
     <input type="file" name="MP4_FILE" />
@@ -318,20 +357,20 @@ isConnected:{isConnected}
 }
     
 {
-    (selected=="Client Link") &&      <label>
+  <label  style={{display:`${(selected=="Client Link")?'block':'none'}`}}>
     <span>Client Link</span>
     <input type="text" name="CLIENT_LINK" />
   </label>
 }
 {
-    (selected=="IFrame") &&   <label>
+  <label  style={{display:`${(selected=="IFrame")?'block':'none'}`}}>
     <span>Iframe Html</span>
     <input type="text" name="IFRAME" />
   </label>
 }
   
   
-  <input type="hidden" name="TEST123" value={1121212} />
+
        
 
      

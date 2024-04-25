@@ -112,6 +112,32 @@ export default class PublishHelper{
         return data;
     }
 
+
+    async getFiles(preview=0){
+        return [
+            {
+                name:`${this.tgif.LINK_NAME}-edm.html`,
+                data:(preview==0) && await this.getEdmHtml(),
+                preview:(preview==1) && await this.getEdmHtml(true) 
+            },
+            {
+                name:`${this.tgif.LINK_NAME}-landing.php`,
+                data:(preview==0) && await this.getLandingHtml(),
+                preview:(preview==1) && await this.getLandingHtml(true)
+            },
+            {
+                name:`${this.tgif.LINK_NAME}-sendemail.php`,
+                data:(preview==0) && await this.getSendemailHtml(),
+                preview:(preview==1) && await this.getSendemailHtml(true)
+            },
+            {
+                name:`${this.tgif.LINK_NAME}-thanks.php`,
+                data:(preview==0) && await this.getThanksHtml(),
+                preview:(preview==1) && await this.getThanksHtml()
+            }
+        ]
+    }
+
     getPreviewPages(){
         return ["edm","landing","sendemail","thanks"]
     }

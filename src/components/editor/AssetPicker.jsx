@@ -177,6 +177,13 @@ const AssetPicker = () => {
 
     
   const handleLogoSearch=(e)=>{
+
+    if(e.target.value.length==0){
+      document.querySelector(".logoList").style.display="none";
+      document.querySelector(`[name="LOGO_FILE"]`).value=""
+      document.querySelector("#LOGO_PREVIEW").src=""
+      return;
+    }
     try {
 
       const search_query=e.target.value;
@@ -187,6 +194,7 @@ const AssetPicker = () => {
       .then(result=>{
 
         setFoundLogos(result.data.results)
+        document.querySelector(".logoList").style.display="block";
         console.log(result,"Complete");
       }).catch(err=>{
         console.log(err,"ERROR");
@@ -243,22 +251,32 @@ const AssetPicker = () => {
         <label>
       <span>Logo</span>
       <input type="text" name="LOGO_NAME" onChange={debounce((e)=>{handleLogoSearch(e)},500)}/>
-      <div>{
-        (foundLogos.length==0)? <div>Logo Not Found</div> :        foundLogos.map((logo,i)=>{
+      <ul className='logoList' style={{display:"none"}}>{
+        (foundLogos==null)? <div>Logo Not Found</div> :        foundLogos.map((logo,i)=>{
 
-          return <div key={i}><img src={"https://resource.itbusinesstoday.com/whitepapers/download/"+logo}/></div>
+          return <li key={i} onClick={()=>{
+            document.querySelector("[name='LOGO_NAME']").value=logo;
+            document.querySelector(`[name="LOGO_FILE"]`).value=""
+            document.querySelector(".logoList").style.display="none";
+            document.querySelector("#LOGO_PREVIEW").src="https://resource.itbusinesstoday.com/whitepapers/download/"+logo
+         
+         
+          }}><img src={"https://resource.itbusinesstoday.com/whitepapers/download/"+logo} width={80}/></li>
 
         })
-        }</div>
-      <br/>
-      <input type="file" name="LOGO_FILE" accept="image/png"
+        }
+        
+        <li>
+        <input type="file" name="LOGO_FILE" accept="image/png"
       
       onChange={(e)=>{
         e.preventDefault()
         console.log("EEE");
         var reader = new FileReader();
             reader.onload = function (e) {
-               
+              
+              document.querySelector("[name='LOGO_NAME']").value=document.querySelector(`[name="LOGO_FILE"]`).files[0].name;
+              document.querySelector(".logoList").style.display="none";
                 document.querySelector("#LOGO_PREVIEW").src=e.target.result
             }
         reader.readAsDataURL(e.target.files[0]);
@@ -269,7 +287,14 @@ const AssetPicker = () => {
         onClick={(e)=>{e.preventDefault();document.querySelector(`[name="LOGO_FILE"]`).click();}}
         onDrop={(e)=>handleDrop(e,"LOGO_FILE")}
         onDragOver={(event) => event.preventDefault()}>Drop Here</div>
-        <img id='LOGO_PREVIEW' />
+
+        </li>
+        
+        
+        </ul>
+      <br/>
+    
+        <img id='LOGO_PREVIEW' width={80}/>
     </label>
     <label>
       <span>Thumbnail</span>
@@ -292,7 +317,7 @@ const AssetPicker = () => {
         onClick={(e)=>{e.preventDefault();document.querySelector(`[name="THUMBNAIL_FILE"]`).click();}}
         onDrop={(e)=>handleDrop(e,"THUMBNAIL_FILE")}
         onDragOver={(event) => event.preventDefault()}>Drop Here</div>
-        <img id='THUMBNAIL_PREVIEW' />
+        <img id='THUMBNAIL_PREVIEW' width={80}/>
     </label>
 
 

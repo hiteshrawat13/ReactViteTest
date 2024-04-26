@@ -43,6 +43,24 @@
 
 
 
+    .fileToUpload{
+        padding: 10px;
+        background-color: #fff;
+        margin:3px;
+
+        .fileName{
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .fileProgress{
+            font-size: 12px;
+        }
+
+
+    }
+
+
 
   
 

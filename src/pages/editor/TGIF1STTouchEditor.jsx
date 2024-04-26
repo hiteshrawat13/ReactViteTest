@@ -34,6 +34,7 @@ import axios from 'axios'
 
 
 import { socket } from '../../socket.js'
+import FTPUploader from '../../components/editor/FTPUploader.jsx'
 
 
 
@@ -43,6 +44,8 @@ const TGIF1STTouchEditor = () => {
 
 
   const formRef=useRef()
+
+  const FTPUploaderRef=useRef()
  
 
   const [sameAsEDMTitle,setSameAsEDMTitle]=useState(true)
@@ -136,54 +139,9 @@ const TGIF1STTouchEditor = () => {
       case 4:
         //alert("Publish Step")
       
-        let uploadFiles=[]
-        if( document.querySelector("[name='LOGO_FILE']").files[0]){
-          uploadFiles.push({
-            type:"file",
-            name:document.querySelector("[name='LOGO_NAME']").value,
-            file:document.querySelector("[name='LOGO_FILE']").files[0],
-            progress:0
-          })
-        }
 
-        if( document.querySelector("[name='THUMBNAIL_FILE']").files[0]){
-          uploadFiles.push({
-            type:"file",
-            name:document.querySelector("[name='THUMBNAIL_NAME']").value,
-            file:document.querySelector("[name='THUMBNAIL_FILE']").files[0],
-            progress:0
-          })
-        }
-
-        if( document.querySelector("[name='PDF_FILE']").files[0]){
-          uploadFiles.push({
-            type:"file",
-            name:document.querySelector("[name='PDF']").value,
-            file:document.querySelector("[name='PDF_FILE']").files[0],
-            progress:0
-          })
-        }
-
-        if( document.querySelector("[name='MP4_FILE']").files[0]){
-          uploadFiles.push({
-            type:"file",
-            name:document.querySelector("[name='MP4']").value,
-            file:document.querySelector("[name='MP4_FILE']").files[0],
-            progress:0
-          })
-        }
-
-        const templatefiles=await publishHelper.current.getFiles()
-        templatefiles.forEach((file)=>{
-          uploadFiles.push({
-            type:"templateFile",
-            name:file.name,
-            data:file.data,
-            progress:0
-          })
-        })
-
-        setFilesToUpload(uploadFiles)
+        FTPUploaderRef.current.handleUpdateFiles()
+        
         break;
       case 5:
         break;
@@ -242,106 +200,6 @@ const TGIF1STTouchEditor = () => {
 
   }
 
-
-
-  const [isConnected, setIsConnected] = useState(socket.connected);
-  const [fooEvents, setFooEvents] = useState([]);
-  const [uploadProgress, setUploadProgress] = useState("");
-  const [sessionId, setSessionId] = useState( Math.random().toString(36).substr(2, 9))
-  const [filesToUpload,setFilesToUpload]=useState([])
-  const handleUpload= async (e)=>{
-    e.preventDefault()
-    if(publishHelper.current.tgif.LINK_NAME.trim().length==0){
-      alert("Please fill link name")
-      return;
-    }
-
-    function onConnect() {
-          setIsConnected(true);
-    }
-    
-        function onDisconnect() {
-          setIsConnected(false);
-        }
-    
-        function onFooEvent(value) {
-          setFooEvents(previous => [...previous, value]);
-        }
-  
-        function onUploadProgress(value) {
-          console.log(value);
-          // 1. Find the todo with the provided id
-          const currentTodoIndex = filesToUpload.findIndex((file) => file.name === value.name);
-          // 2. Mark the todo as complete
-          const updatedTodo = {...filesToUpload[currentTodoIndex], progress :value.progress };
-  
-          // 3. Update the todo list with the updated todo
-          setFilesToUpload( (previous)=>[
-            ...previous.slice(0, currentTodoIndex),
-            updatedTodo,
-            ...previous.slice(currentTodoIndex + 1)])
-        }
-    
-    socket.connect();
-    socket.on('connect', onConnect);
-    socket.on('disconnect', onDisconnect);
-    socket.on('foo', onFooEvent);
-    socket.on("uploadProgress",onUploadProgress)
-    socket.emit('connectInit', sessionId);
-
-    try {
-      var bodyFormData = new FormData();
-    //   const templateFiles=await publishHelper.current.getFiles()
-      
-    //   bodyFormData.append(`templateFiles`, JSON.stringify(templateFiles));
-
-    bodyFormData.append('sessionId',sessionId);
-
- 
-  
-  
-    //  // bodyFormData.append('templateFiles',await publishHelper.current.getFiles());
-    //   bodyFormData.append('files[]',document.querySelector("[name='THUMBNAIL_FILE']").files[0] || null);
-    //   bodyFormData.append('files[]',document.querySelector("[name='PDF_FILE']").files[0] || null);
-
-    let templateFiles=[]
-    filesToUpload.forEach(file=>{
-      if(file.type==="file"){
-        bodyFormData.append('files[]',file.file,file.name);
-      }else if(file.type==="templateFile"){
-
-        
-        templateFiles.push(file)
-      }
-    })
-
-    bodyFormData.append(`templateFiles`, JSON.stringify(templateFiles) );
-    
-axios({
-  method: "post",
-  url: "http://localhost:8888/upload_file",
-  data: bodyFormData,
-  headers: { "Content-Type": "multipart/form-data" },
-})
-  .then(function (response) {
-    //handle success
-    console.log(response,"Complete");
-  })
-  .catch(function (err) {
-    //handle error
-    console.log(err,"ERROR");
-  });
-
-
-
-
-    
-    } catch (error) {
-      console.log(error);
-    }
-
-
-  }
 
 
 
@@ -494,21 +352,8 @@ axios({
     <br/>
     <button onClick={handlePreview}>Preview</button>
 
-
-     <div>
-      {filesToUpload.map((file,i)=>{
-        return <div key={i}> {file.name} <br/> {file.progress}</div>
-      })}
-
-
-     </div>
-
-
-     <button onClick={handlePublish}>Publish File</button>
-
-     <button onClick={handleUpload}>Upload Files</button>
-        <div>Upload Progress : {uploadProgress}</div>
-
+     <FTPUploader ref={FTPUploaderRef} publishHelper={publishHelper}/>
+    
     {/* Step 5 end */}
   </Step>
 

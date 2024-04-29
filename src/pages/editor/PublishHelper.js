@@ -1,6 +1,11 @@
 import Utils from "./Utils.js";
 import { TGIFFormRenderer } from "./FormRenderer.js";
 export default class PublishHelper{
+
+    
+
+    FTP_CONFIG_NAME="TGIF"
+
     
     //dont forget to add forward slash "/" at the end
     templatesFolderPath="./template_files/TGIF-FIRST-TOUCH/"
@@ -11,6 +16,7 @@ export default class PublishHelper{
 
     setData(data){
         this.tgif=data
+
     }
 
      getBase64(file) {

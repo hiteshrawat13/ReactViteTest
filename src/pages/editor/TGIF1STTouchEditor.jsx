@@ -123,6 +123,14 @@ const TGIF1STTouchEditor = () => {
     document.querySelector("[name='MP4']").value=e.target.value+".mp4"
   }
 
+  const handleCTAChange=(e)=>{
+
+    document.querySelector("[name='THUMBNAIL_NAME']").value=e.target.value+".png"
+    document.querySelector("[name='PDF']").value=e.target.value+".pdf"
+    document.querySelector("[name='MP4']").value=e.target.value+".mp4"
+  }
+
+
 
   const handleStepChange= async (step)=>{
     console.log("step",step);
@@ -137,67 +145,17 @@ const TGIF1STTouchEditor = () => {
       case 3:
         break;
       case 4:
-        //alert("Publish Step")
+     
       
 
-        FTPUploaderRef.current.handleUpdateFiles()
+      
         
         break;
       case 5:
+   //alert("Publish Step")
+      FTPUploaderRef.current.handleUpdateFiles()
         break;
     }
-  }
-
-
-
-
-
-
-
-
-
-
-  const handlePublish= async (e)=>{
-    e.preventDefault()
-
-    if(publishHelper.current.tgif.LINK_NAME.trim().length==0){
-      alert("Please fill link name")
-      return;
-    }
-    try {
-      
-
-     
-
-      console.log(publishHelper.current.tgif.LINK_NAME);
-    
-      axios.post('http://localhost:8888/upload_file', {
-     //axios.post('https://itbusinessplus.net/template/raj/test/LBUpload.php', {
-        files: await publishHelper.current.getFiles(),
-       
-       
-      
-       
-        }, {
-        
-          headers: {
-          
-          },
-        
-        }
-      ).then(data=>{
-        console.log(data,"Complete");
-      }).catch(err=>{
-        console.log(err,"ERROR");
-      })
-
-    
-    } catch (error) {
-      console.log(error);
-    }
-
- 
-
   }
 
 
@@ -280,6 +238,11 @@ const TGIF1STTouchEditor = () => {
       <span>Sponsored By Text</span>
       <input type="text" name="SPONSORED_BY_TEXT" defaultValue={"Sponsored By"}  />
     </label>
+
+    <label>
+      <span>Logo width</span>
+      <input type="number" name="LOGO_WIDTH" defaultValue={200}  />
+    </label>
    </div>
    {/* Step 1 end */}
     
@@ -315,17 +278,15 @@ const TGIF1STTouchEditor = () => {
     <div style={{width:"100%"}}>
       <label>
         <span>Landing Page Title</span>
-        <input type="checkbox" name="SAME_AS_EDM_TITLE" defaultChecked={sameAsEDMTitle} onChange={()=>{setSameAsEDMTitle(!sameAsEDMTitle)}}  />
+        <label><input type="checkbox" name="SAME_AS_EDM_TITLE" defaultChecked={sameAsEDMTitle} onChange={()=>{setSameAsEDMTitle(!sameAsEDMTitle)}}  />Same as EDM Title</label>
         { !sameAsEDMTitle  && <input type="text" name="LANDING_TITLE" />}
       </label>
-      <label>
-          <span>Landing Abstract</span>
-      </label>
-      <input type="checkbox" name="SAME_AS_EDM_ABSTRACT" defaultChecked={sameAsEDMAbstract} onChange={()=>{setSameAsEDMAbstract(!sameAsEDMAbstract)}} />
+      <label> <span>Landing Abstract</span></label>
+      <label><input type="checkbox" name="SAME_AS_EDM_ABSTRACT" defaultChecked={sameAsEDMAbstract} onChange={()=>{setSameAsEDMAbstract(!sameAsEDMAbstract)}} />Same as EDM Abstract</label>
       { !sameAsEDMAbstract && <RichEditor key={1211212}  name="LANDING_ABSTRACT"/>}
       <label>
         <span>Landing CTA</span>
-        <input type="checkbox" name="SAME_AS_EDM_CTA" defaultChecked={sameAsEDMCTA} onChange={()=>{setSameAsEDMCTA(!sameAsEDMCTA)}} />
+        <label><input type="checkbox" name="SAME_AS_EDM_CTA" defaultChecked={sameAsEDMCTA} onChange={()=>{setSameAsEDMCTA(!sameAsEDMCTA)}} />Same as EDM CTA</label>
         { !sameAsEDMCTA && <input type="text" name="LANDING_CTA"  />}
       </label>
     </div>
@@ -341,20 +302,8 @@ const TGIF1STTouchEditor = () => {
 
   <Step title="Assets & Logo">
     {/* Step 4 */}
-    
     <AssetPicker/>
     {/* Step 4 end */}
-  </Step>
-
-  <Step title="Publish">
-    {/* Step 5 */}
-    <input type="submit" value="Submit" />
-    <br/>
-    <button onClick={handlePreview}>Preview</button>
-
-     <FTPUploader ref={FTPUploaderRef} publishHelper={publishHelper}/>
-    
-    {/* Step 5 end */}
   </Step>
 
   <Step title="Preview" >
@@ -362,6 +311,19 @@ const TGIF1STTouchEditor = () => {
     <Preview  publishHelper={publishHelper.current}/>
     {/* Step 5 end */}
   </Step>
+
+  <Step title="Publish">
+    {/* Step 5 */}
+    <input type="submit" value="Submit" />
+    <br/>
+    <button onClick={handlePreview}>Download Zip</button>
+
+     <FTPUploader ref={FTPUploaderRef} publishHelper={publishHelper}/>
+    
+    {/* Step 5 end */}
+  </Step>
+
+
 
 </Stepper>
     

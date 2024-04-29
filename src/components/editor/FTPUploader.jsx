@@ -35,7 +35,7 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
     setFooEvents(previous => [...previous, value]);
   }
 
-  function onUploadProgress(value,filesToUpload) {
+  function onUploadProgress(value) {
     console.log(value);
     if (value.name == "UPLOAD_COMPLETE") {
       setUploading(false)
@@ -46,6 +46,8 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
       setUploadProgress(value.progress)
       return;
     }
+
+   
 
    // console.log("IN on progress filesupload:",filesToUpload);
 
@@ -121,13 +123,12 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
         })
 
         setFilesToUpload(uploadFiles)
-
-
-        console.log("IN  onevent filestoupload:",filesToUpload,uploadFiles);
   }
 
 
   
+
+
   useEffect(()=>{
 
 
@@ -139,17 +140,15 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
       socket.on('connect', onConnect);
       socket.on('disconnect', onDisconnect);
       socket.on('foo', onFooEvent);
-     
+      socket.on("uploadProgress", (value)=>onUploadProgress(value))
       socket.emit('connectInit', sessionId);
     }
     
-    socket.on("uploadProgress", (value)=>onUploadProgress(value,filesToUpload))
+  },[])
 
-
-   
+  useEffect(()=>{
 
     console.log("IN useEffect filestoupload:",filesToUpload);
-
 
   },[filesToUpload])
 
@@ -171,14 +170,13 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
       var bodyFormData = new FormData();
 
       bodyFormData.append('sessionId', sessionId);
+      bodyFormData.append('ftpConfigName', publishHelper.current.FTP_CONFIG_NAME);
 
       let templateFiles = []
       filesToUpload.forEach(file => {
         if (file.type === "file") {
           bodyFormData.append('files[]', file.file, file.name);
         } else if (file.type === "templateFile") {
-
-
           templateFiles.push(file)
         }
       })
@@ -194,6 +192,29 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
         .then(function (response) {
           //handle success
           console.log(response, "Complete");
+
+
+
+          response.data.forEach((file)=>{
+            const currentTodoIndex = filesToUpload.findIndex((file) => file.name === file.name);
+
+            // 2. Mark the todo as complete
+            if (currentTodoIndex != -1) {
+              const updatedTodo = { ...filesToUpload[currentTodoIndex], progress: file.status };
+              // 3. Update the todo list with the updated todo
+              setFilesToUpload((previous) => [
+                ...previous.slice(0, currentTodoIndex),
+                updatedTodo,
+                ...previous.slice(currentTodoIndex + 1)])
+            } else {
+              console.log("NOTFOUND", currentTodoIndex, filesToUpload, file.name);
+            }
+          })
+          
+
+
+          
+          setUploading(false)
         })
         .catch(function (err) {
           //handle error

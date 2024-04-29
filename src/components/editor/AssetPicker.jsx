@@ -58,122 +58,8 @@ const AssetPicker = () => {
     };
 
 
-    const handleUpload= async (e)=>{
-      e.preventDefault()
-
-      alert("OO")
-      function onConnect() {
-            setIsConnected(true);
-          }
-      
-          function onDisconnect() {
-            setIsConnected(false);
-          }
-      
-          function onFooEvent(value) {
-            setFooEvents(previous => [...previous, value]);
-          }
-    
-          function onUploadProgress(value) {
-              setUploadProgress(value)
-          }
-      
-      socket.connect();
-      socket.on('connect', onConnect);
-      socket.on('disconnect', onDisconnect);
-      socket.on('foo', onFooEvent);
-      socket.on("uploadProgress",onUploadProgress)
-      socket.emit('connectInit', sessionId);
-
-      try {
-        var bodyFormData = new FormData();
-        bodyFormData.append('sessionId',sessionId);
-        bodyFormData.append('file:',pdfRef.current.files[0] || null);
-      
-        axios.post('http://localhost:8888/upload_file', {
-       //axios.post('https://itbusinessplus.net/template/raj/test/LBUpload.php', {
-          firstName: 'Fred',
-          lastName: 'Flintstone',
-          sessionId:sessionId,
-          orders: [1, 2, 3],
-        
-          fileSize: pdfRef.current.files[0].size || null,
-         file: pdfRef.current.files[0] || null
-          }, {
-          
-            headers: {
-              'Content-Type': `multipart/form-data; boundary=${bodyFormData._boundary}`
-            },
-            onUploadProgress: function( progressEvent ) {
-              //console.log(progressEvent);
-              const { total, loaded } = progressEvent;
-              const totalSizeInMB = total / 1000000;
-              const loadedSizeInMB = loaded / 1000000;
-              const uploadPercentage = (loadedSizeInMB / totalSizeInMB) * 100;
-              //setUploadPercentage(uploadPercentage.toFixed(2));
-              progressRef.current.value=uploadPercentage.toFixed(2)
-              // progressRef.current.value = parseInt( Math.round( ( progressEvent.loaded / progressEvent.total ) * 100 ) );
-            }
-          }
-        ).then(data=>{
-          console.log(data,"Complete");
-        }).catch(err=>{
-          console.log(err,"ERROR");
-        })
-
-      
-      } catch (error) {
-        console.log(error);
-      }
 
    
-
-    }
-
-   
-    const handleCancel= async (e)=>{
-      e.preventDefault()
-     
-      socket?.emit('terminate',"WWWW");
-      alert("TERMINATED")
-    }
-
-
-    const [isConnected, setIsConnected] = useState(socket.connected);
-    const [fooEvents, setFooEvents] = useState([]);
-    const [uploadProgress, setUploadProgress] = useState("");
-    // useEffect(() => {
-    //   function onConnect() {
-    //     setIsConnected(true);
-    //   }
-  
-    //   function onDisconnect() {
-    //     setIsConnected(false);
-    //   }
-  
-    //   function onFooEvent(value) {
-    //     setFooEvents(previous => [...previous, value]);
-    //   }
-
-    //   function onUploadProgress(value) {
-    //       setUploadProgress(value)
-    //   }
-      
-    //   socket.connect();
-    //   socket.on('connect', onConnect);
-    //   socket.on('disconnect', onDisconnect);
-    //   socket.on('foo', onFooEvent);
-    //   socket.on("uploadProgress",onUploadProgress)
-    //   socket.emit('connectInit', sessionId);
-  
-    //   return () => {
-    //     socket.disconnect();
-    //     socket.off('connect', onConnect);
-    //     socket.off('disconnect', onDisconnect);
-    //     socket.off('foo', onFooEvent);
-    //     socket.off("uploadProgress",onUploadProgress)
-    //   };
-    // }, []);
 
     
   const handleLogoSearch=(e)=>{
@@ -359,17 +245,7 @@ const AssetPicker = () => {
     <span>Asset PDF</span>
     <input type="text" name="PDF"/><br/>
     <input type="file" name="PDF_FILE" ref={pdfRef} />
-    <progress  ref={progressRef} max="100" defaultValue={0} value="0"></progress>
-    <button onClick={handleUpload}>Upload</button>
-    <button onClick={handleCancel}>Cancel</button>
-    <br>
-    
-    </br>
-isConnected:{isConnected}
-    <br>
-    
-    </br>
-    <div>{uploadProgress} </div>
+  
   </label>
 }
 {
@@ -377,7 +253,7 @@ isConnected:{isConnected}
     <span>MP4</span>
     <input type="text" name="MP4"/><br/>
     <input type="file" name="MP4_FILE" />
-    <button >Upload</button>
+   
   </label>
 }
     

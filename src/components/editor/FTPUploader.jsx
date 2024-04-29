@@ -10,7 +10,10 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
   const [uploadProgress, setUploadProgress] = useState("");
   const [uploading, setUploading] = useState(false);
   const [sessionId, setSessionId] = useState(Math.random().toString(36).substr(2, 9))
+  const [socketId,setSocketId]=useState(null)
   const [filesToUpload, setFilesToUpload] = useState([])
+
+  const [onSocketProgress,setOnSocketProgress]=useState(null)
 
 
   useImperativeHandle(ref, () => ({
@@ -23,16 +26,20 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
 
 
 
-  function onConnect() {
+  function onConnect(e) {
+    console.log("onConnected",e);
     setIsConnected(true);
   }
 
-  function onDisconnect() {
+  function onDisconnect(e) {
+    console.log("onDisconnected",e);
     setIsConnected(false);
   }
 
   function onFooEvent(value) {
+    console.log("ON FOO",value);
     setFooEvents(previous => [...previous, value]);
+    setSocketId(value.id)
   }
 
   function onUploadProgress(value) {
@@ -47,24 +54,11 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
       return;
     }
 
+
+    setOnSocketProgress(value)
    
 
-   // console.log("IN on progress filesupload:",filesToUpload);
-
-    // 1. Find the todo with the provided id
-    const currentTodoIndex = filesToUpload.findIndex((file) => file.name === value.name);
-
-    // 2. Mark the todo as complete
-    if (currentTodoIndex != -1) {
-      const updatedTodo = { ...filesToUpload[currentTodoIndex], progress: value.progress };
-      // 3. Update the todo list with the updated todo
-      setFilesToUpload((previous) => [
-        ...previous.slice(0, currentTodoIndex),
-        updatedTodo,
-        ...previous.slice(currentTodoIndex + 1)])
-    } else {
-      console.log("NOTFOUND", currentTodoIndex, filesToUpload, value.name);
-    }
+  
 
   }
 
@@ -142,6 +136,13 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
       socket.on('foo', onFooEvent);
       socket.on("uploadProgress", (value)=>onUploadProgress(value))
       socket.emit('connectInit', sessionId);
+
+      console.log(isConnected,"EEE");
+    }
+
+    return ()=>{
+      console.log("disconnected");
+      socket?.disconnect();
     }
     
   },[])
@@ -151,6 +152,28 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
     console.log("IN useEffect filestoupload:",filesToUpload);
 
   },[filesToUpload])
+
+  useEffect(()=>{
+
+     // console.log("IN on progress filesupload:",filesToUpload);
+
+     if(onSocketProgress==null)return;
+    // 1. Find the todo with the provided id
+    const currentTodoIndex = filesToUpload.findIndex((file) => file.name === onSocketProgress.name);
+
+    // 2. Mark the todo as complete
+    if (currentTodoIndex != -1) {
+      const updatedTodo = { ...filesToUpload[currentTodoIndex], progress: onSocketProgress.progress };
+      // 3. Update the todo list with the updated todo
+      setFilesToUpload((previous) => [
+        ...previous.slice(0, currentTodoIndex),
+        updatedTodo,
+        ...previous.slice(currentTodoIndex + 1)])
+    } else {
+      console.log("NOTFOUND", currentTodoIndex, filesToUpload, onSocketProgress.name);
+    }
+
+  },[onSocketProgress])
 
 
   const handleUpload = async (e) => {
@@ -170,6 +193,7 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
       var bodyFormData = new FormData();
 
       bodyFormData.append('sessionId', sessionId);
+      bodyFormData.append('socketId', socketId);
       bodyFormData.append('ftpConfigName', publishHelper.current.FTP_CONFIG_NAME);
 
       let templateFiles = []
@@ -238,7 +262,7 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
 
   return (
     <>
-      <div>FTPUploader</div>
+      <div>FTPUploader [socket:{(isConnected)?"Connected":"Not Connected"}]   {socketId}</div>
 
 
       <div>

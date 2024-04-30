@@ -23,7 +23,7 @@ const RichEditor = forwardRef(({name},ref) => {
       }
 
       const printSomething = () =>{
-        alert("print")
+        //alert("print")
         console.log('printing from child function')
      }
 

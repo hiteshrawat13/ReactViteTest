@@ -1,6 +1,11 @@
 import Utils from "./Utils.js";
 import { TGIFFormRenderer } from "./FormRenderer.js";
 export default class PublishHelper{
+
+    
+
+    FTP_CONFIG_NAME="TGIF"
+
     
     //dont forget to add forward slash "/" at the end
     templatesFolderPath="./template_files/TGIF-FIRST-TOUCH/"
@@ -11,13 +16,66 @@ export default class PublishHelper{
 
     setData(data){
         this.tgif=data
+
     }
+
+     getBase64(file) {
+
+        return new Promise((resolve,reject)=>{
+
+            const NO_IMAGE="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAAyCAMAAACd646MAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAQJQTFRF////9vb26urq/f39/v7+6enp9/f34uLi1tbW4ODg7u7ura2tqKioq6ur8vLy2tra9fX1w8PD0dHRqampu7u72dnZ1dXV5OTkrKyswcHB5eXlv7+/0NDQsbGxs7Oz4+Pj4eHh6+vrsLCw3d3dtbW1y8vLwsLCxMTEycnJr6+vsrKy3Nzc7Ozsrq6u/Pz87+/v+fn5uLi45ubm+Pj4urq6xcXFysrK8/Pz9PT0qqqqvr6++/v7zMzMxsbGt7e329vb8PDw2NjYyMjItLS0z8/Pubm5x8fH8fHx+vr67e3t1NTUzc3N0tLSzs7OwMDA09PT19fXvb293t7etra239/f6OjoADPkJQAAA8RJREFUeJztl+tTUkEUwM/CFZKHYmoqFErlmAqkNKVFRC81p5ppqv+yaepDD2vsNZUWRphUFORQUhlZiISDyMXbnt17i0Z7KHdqpnE/cA+7d8/v7tk9Z88h8Bca+dsQQkiRCQJZ4gLoaB9ZFFWEGKnCDArVRXEBnxZSYO9UpNSD1OZhwycU6nOGj/TRQLLm2Y1ixRxY3qoHMZCUMQnKSohJqn2D/S2foD6uGqSaJBtfiwqkddoa5QNt7za/UA2yKdo21fxMhgh12ZanfMCaqUmoBrGGK7WbTBN8T3ZOOsLyQNcr2D6uHgS6Y1Q/g3iirSFlxCxpMipCnK9NtiAzl75ixyNlxBXf9kRFCOyOdAQYxBNtfKWMmKXOh2pCemNQ0KO5DBqSk12dGF1j5Xj9MghsTluTuBLtnrDiHduS7pEyGCtAvJl41zj6iS/UfZf1C/seF/LqQsAf1OcRcvAR7L5F/7vrAjzaqAkR/A+BxS5/EBx5e8Qetkck1SBmC/drR2OYm8fZNEp/9bs+luOJ8NtLa+AmwJGh8hD/4GZch6xD1iHrEJUhgwnMs3SSWBLYnSDnXlCVqyzNWNy24TY+pJW07GlM/wmkNp+jyfyWWeDpNm2CKwYHrnCxNeGIKBd9ly0+RR81844gwInbMvanV/SPkK0TmNubCi1B3tP8WSK9w0z0RF3hqve825NLeHQx0pF93BEAOHnrMNMy9NMreiVI0/TRi7zHNtf7QIb4QqLQPsbEKkmqnGGSdQ998fgddkv/oq0EWdLYn7OOnmd9qSCHeJdMybhux32O7rpXMm1tkIVDo/kCn17XLENOXxcXfKGGScAEQ7+l9D5eI8QbZMmQO94S8cqQfRNCumG+7wIVD42Zp0tVrA2S612K4tZ3vtGl/BxCjDQx1tZn5+np3j+uo+WdO4JTOsdx43uqqDh3c3WQYv8Ibv2Za0JahmwQ8GsPBzBV6h/BI64x4JSmGELY7IHzq4RoDD03wDFDzSJDkIfHeOMUrgRLSC89vOZFNOsazVUEeypf8IVoAckhBo1jK32heBt8V+HUcPU7PuHsUFmQU8PdXxLVU6IMOflNi/8yDN7VF9NqQHa91FemcQMYhIYUganVGKS8CH2jtpdqQKCGOsriogzxRJWiqz1BQ8vAk6yuHd2SrrcsiDUD7HMZxBdS1Bx9gKHFGSewVzcpfkDrKUcYZu4tV78cYnYGqPp2C1ZV1EKD5wA9/eAlMINWDuNy+WVxPcdo6HnhGcL18LHvdeyvIKtpx25Qxp/Wkf/P9fsVAGO0QhHG300AAAAASUVORK5CYII="
+            try{
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function () {
+                
+                  resolve(reader.result)
+                };
+                reader.onerror = function (error) {
+                    resolve(NO_IMAGE)
+                    
+                };
+            }catch(error){
+                resolve(NO_IMAGE)
+            }
+        
+
+
+        })
+        
+     }
+     
 
     async  getEdmHtml(forPreview=false){
         let data=await Utils.loadFile(this.templatesFolderPath+"edm.html");
 
-        data=data.replaceAll(`##LOGO_URL##`,this.tgif["BASE_URL"]+this.tgif["LOGO_NAME"])
-        data=data.replaceAll(`##THUMBNAIL_URL##`,this.tgif["BASE_URL"]+this.tgif["THUMBNAIL_NAME"])
+        if(forPreview==true){
+
+            const logoFile=document.querySelector("[name='LOGO_FILE']")?.files[0]
+            const thumbnailFile=document.querySelector("[name='THUMBNAIL_FILE']")?.files[0]
+           
+           
+           
+          if(logoFile){
+            const base64Logo= await this.getBase64( logoFile )
+            data=data.replaceAll(`##LOGO_URL##`,base64Logo)
+          }else{
+            data=data.replaceAll(`##LOGO_URL##`,this.tgif["BASE_URL"]+this.tgif["LOGO_NAME"])
+          }
+
+          if(thumbnailFile){
+            const base64Thumbnail= await this.getBase64( thumbnailFile )
+            data=data.replaceAll(`##THUMBNAIL_URL##`,base64Thumbnail)
+          }else{
+            data=data.replaceAll(`##THUMBNAIL_URL##`,this.tgif["BASE_URL"]+this.tgif["THUMBNAIL_NAME"])
+          }
+          
+        }else{
+            data=data.replaceAll(`##LOGO_URL##`,this.tgif["BASE_URL"]+this.tgif["LOGO_NAME"])
+            data=data.replaceAll(`##THUMBNAIL_URL##`,this.tgif["BASE_URL"]+this.tgif["THUMBNAIL_NAME"])
+        }
+
+       
       
         for (const [key, value] of Object.entries(this.tgif)) {
         
@@ -110,6 +168,32 @@ export default class PublishHelper{
             }
         }
         return data;
+    }
+
+
+    async getFiles(preview=0){
+        return [
+            {
+                name:`${this.tgif.LINK_NAME}-edm.html`,
+                data:(preview==0) && await this.getEdmHtml(),
+                preview:(preview==1) && await this.getEdmHtml(true) 
+            },
+            {
+                name:`${this.tgif.LINK_NAME}-landing.php`,
+                data:(preview==0) && await this.getLandingHtml(),
+                preview:(preview==1) && await this.getLandingHtml(true)
+            },
+            {
+                name:`${this.tgif.LINK_NAME}-sendemail.php`,
+                data:(preview==0) && await this.getSendemailHtml(),
+                preview:(preview==1) && await this.getSendemailHtml(true)
+            },
+            {
+                name:`${this.tgif.LINK_NAME}-thanks.php`,
+                data:(preview==0) && await this.getThanksHtml(),
+                preview:(preview==1) && await this.getThanksHtml()
+            }
+        ]
     }
 
     getPreviewPages(){

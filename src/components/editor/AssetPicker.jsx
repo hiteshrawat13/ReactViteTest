@@ -25,6 +25,8 @@ const AssetPicker = () => {
  
     const [selected,setSelected]=useState("")
 
+    const [foundLogos,setFoundLogos]=useState([])
+
     const pdfRef=useRef()
 
     const progressRef=useRef()
@@ -34,8 +36,11 @@ const AssetPicker = () => {
     
 
     const handleSelect=(e)=>{
-        console.log(e.target.value);
-        setSelected(e.target.value)
+        console.log(e.target.dataset.val);
+        setSelected(e.target.dataset.val)
+
+        console.log( document.querySelector("[name='ASSET_FORMAT']").checked);
+       
     }
 
     const handleDrop = (event,target_name) => {
@@ -53,122 +58,62 @@ const AssetPicker = () => {
     };
 
 
-    const handleUpload= async (e)=>{
-      e.preventDefault()
 
-      alert("OO")
-      function onConnect() {
-            setIsConnected(true);
-          }
-      
-          function onDisconnect() {
-            setIsConnected(false);
-          }
-      
-          function onFooEvent(value) {
-            setFooEvents(previous => [...previous, value]);
-          }
+   
+
     
-          function onUploadProgress(value) {
-              setUploadProgress(value)
-          }
-      
-      socket.connect();
-      socket.on('connect', onConnect);
-      socket.on('disconnect', onDisconnect);
-      socket.on('foo', onFooEvent);
-      socket.on("uploadProgress",onUploadProgress)
-      socket.emit('connectInit', sessionId);
+  const handleLogoSearch=(e)=>{
 
-      try {
-        var bodyFormData = new FormData();
-        bodyFormData.append('sessionId',sessionId);
-        bodyFormData.append('file:',pdfRef.current.files[0] || null);
-      
-        axios.post('http://localhost:8888/upload_file', {
-       //axios.post('https://itbusinessplus.net/template/raj/test/LBUpload.php', {
-          firstName: 'Fred',
-          lastName: 'Flintstone',
-          sessionId:sessionId,
-          orders: [1, 2, 3],
-        
-          fileSize: pdfRef.current.files[0].size || null,
-         file: pdfRef.current.files[0] || null
-          }, {
-          
-            headers: {
-              'Content-Type': `multipart/form-data; boundary=${bodyFormData._boundary}`
-            },
-            onUploadProgress: function( progressEvent ) {
-              //console.log(progressEvent);
-              const { total, loaded } = progressEvent;
-              const totalSizeInMB = total / 1000000;
-              const loadedSizeInMB = loaded / 1000000;
-              const uploadPercentage = (loadedSizeInMB / totalSizeInMB) * 100;
-              //setUploadPercentage(uploadPercentage.toFixed(2));
-              progressRef.current.value=uploadPercentage.toFixed(2)
-              // progressRef.current.value = parseInt( Math.round( ( progressEvent.loaded / progressEvent.total ) * 100 ) );
-            }
-          }
-        ).then(data=>{
-          console.log(data,"Complete");
-        }).catch(err=>{
-          console.log(err,"ERROR");
-        })
-
-      
-      } catch (error) {
-        console.log(error);
-      }
-
-   
-
+    if(e.target.value.length==0){
+      document.querySelector(".logoList").style.display="none";
+      document.querySelector(`[name="LOGO_FILE"]`).value=""
+      document.querySelector("#LOGO_PREVIEW").src=""
+      return;
     }
+    try {
 
-   
-    const handleCancel= async (e)=>{
-      e.preventDefault()
+      const search_query=e.target.value;
+      const formData = new FormData();
+      formData.append("query", search_query);
+    
+      axios.post('https://resource.itbusinesstoday.com/whitepapers/download/searchlogotest.php', formData )
+      .then(result=>{
+
+        setFoundLogos(result.data.results)
+        document.querySelector(".logoList").style.display="block";
+        console.log(result,"Complete");
+      }).catch(err=>{
+        console.log(err,"ERROR");
+      })
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleCheckUrl=(e)=>{
+    console.log(e.target.value);
+    try {
      
-      socket?.emit('terminate',"WWWW");
-      alert("TERMINATED")
+    
+      axios.post('http://localhost:8888/check_url', {
+        url:  "https://resource.itbusinesstoday.com/whitepapers/"+e.target.value,
+        
+        }, {
+        
+         
+        }
+      ).then(result=>{
+        console.log(result.data.status,"Complete");
+      }).catch(err=>{
+        console.log(err,"ERROR");
+      })
+
+    
+    } catch (error) {
+      console.log(error);
     }
-
-
-    const [isConnected, setIsConnected] = useState(socket.connected);
-    const [fooEvents, setFooEvents] = useState([]);
-    const [uploadProgress, setUploadProgress] = useState("");
-    // useEffect(() => {
-    //   function onConnect() {
-    //     setIsConnected(true);
-    //   }
-  
-    //   function onDisconnect() {
-    //     setIsConnected(false);
-    //   }
-  
-    //   function onFooEvent(value) {
-    //     setFooEvents(previous => [...previous, value]);
-    //   }
-
-    //   function onUploadProgress(value) {
-    //       setUploadProgress(value)
-    //   }
-      
-    //   socket.connect();
-    //   socket.on('connect', onConnect);
-    //   socket.on('disconnect', onDisconnect);
-    //   socket.on('foo', onFooEvent);
-    //   socket.on("uploadProgress",onUploadProgress)
-    //   socket.emit('connectInit', sessionId);
-  
-    //   return () => {
-    //     socket.disconnect();
-    //     socket.off('connect', onConnect);
-    //     socket.off('disconnect', onDisconnect);
-    //     socket.off('foo', onFooEvent);
-    //     socket.off("uploadProgress",onUploadProgress)
-    //   };
-    // }, []);
+  }
 
 
     function debounce(func, wait, immediate) {
@@ -191,38 +136,33 @@ const AssetPicker = () => {
         
         <label>
       <span>Logo</span>
-      <input type="text" name="LOGO_NAME" onChange={debounce((e)=>{
-        console.log(e.target.value);
-        try {
-         
-        
-          axios.post('http://localhost:8888/check_url', {
-            url:  "https://resource.itbusinesstoday.com/whitepapers/"+e.target.value,
-            
-            }, {
-            
-             
-            }
-          ).then(data=>{
-            console.log(data,"Complete");
-          }).catch(err=>{
-            console.log(err,"ERROR");
-          })
-  
-        
-        } catch (error) {
-          console.log(error);
-        }
+      <input type="text" name="LOGO_NAME" onChange={debounce((e)=>{handleLogoSearch(e)},500)}/>
+      <ul className='logoList' style={{display:"none"}}>{
+        (foundLogos==null)? <div>Logo Not Found</div> :        foundLogos.map((logo,i)=>{
 
-      },1000)}/><br/>
-      <input type="file" name="LOGO_FILE" accept="image/png"
+          return <li key={i} onClick={()=>{
+            document.querySelector("[name='LOGO_NAME']").value=logo;
+            document.querySelector(`[name="LOGO_FILE"]`).value=""
+            document.querySelector(".logoList").style.display="none";
+            document.querySelector("#LOGO_PREVIEW").src="https://resource.itbusinesstoday.com/whitepapers/download/"+logo
+         
+         
+          }}><img src={"https://resource.itbusinesstoday.com/whitepapers/download/"+logo} width={80}/></li>
+
+        })
+        }
+        
+        <li>
+        <input type="file" name="LOGO_FILE" accept="image/png"
       
       onChange={(e)=>{
         e.preventDefault()
         console.log("EEE");
         var reader = new FileReader();
             reader.onload = function (e) {
-               
+              
+              document.querySelector("[name='LOGO_NAME']").value=document.querySelector(`[name="LOGO_FILE"]`).files[0].name;
+              document.querySelector(".logoList").style.display="none";
                 document.querySelector("#LOGO_PREVIEW").src=e.target.result
             }
         reader.readAsDataURL(e.target.files[0]);
@@ -233,7 +173,14 @@ const AssetPicker = () => {
         onClick={(e)=>{e.preventDefault();document.querySelector(`[name="LOGO_FILE"]`).click();}}
         onDrop={(e)=>handleDrop(e,"LOGO_FILE")}
         onDragOver={(event) => event.preventDefault()}>Drop Here</div>
-        <img id='LOGO_PREVIEW' />
+
+        </li>
+        
+        
+        </ul>
+      <br/>
+    
+        <img id='LOGO_PREVIEW' width={80}/>
     </label>
     <label>
       <span>Thumbnail</span>
@@ -256,7 +203,7 @@ const AssetPicker = () => {
         onClick={(e)=>{e.preventDefault();document.querySelector(`[name="THUMBNAIL_FILE"]`).click();}}
         onDrop={(e)=>handleDrop(e,"THUMBNAIL_FILE")}
         onDragOver={(event) => event.preventDefault()}>Drop Here</div>
-        <img id='THUMBNAIL_PREVIEW' />
+        <img id='THUMBNAIL_PREVIEW' width={80}/>
     </label>
 
 
@@ -267,71 +214,64 @@ const AssetPicker = () => {
        
         <label className='form-control'>
         <FaFilePdf /> PDF
-        <input type="radio"  name="ASSET_FORMAT" defaultValue="PDF" onChange={handleSelect}/>
+        <input type="radio"  data-val="PDF" checked={selected=="PDF"} onChange={handleSelect}/>
         <span className="checkmark"></span>
         </label>
             
 
         <label className='form-control'>
         <BsFiletypeMp4 /> MP4
-        <input type="radio"  name="ASSET_FORMAT" defaultValue="MP4" onChange={handleSelect}/>
+        <input type="radio"   data-val="MP4" checked={selected=="MP4"} onChange={handleSelect}/>
         <span className="checkmark"></span>
         </label>
 
         <label className='form-control'>
         <IoIosLink /> Client Link
-        <input type="radio"  name="ASSET_FORMAT" defaultValue="Client Link" onChange={handleSelect}/>
+        <input type="radio"   data-val="Client Link" checked={selected=="Client Link"} onChange={handleSelect}/>
         <span className="checkmark"></span>
         </label>
 
         <label className='form-control'>
         <PiFrameCornersThin /> Iframe
-        <input type="radio"  name="ASSET_FORMAT" defaultValue="IFrame" onChange={handleSelect}/>
+        <input type="radio"   data-val="IFrame" checked={selected=="IFrame"} onChange={handleSelect}/>
         <span className="checkmark"></span>
         </label>
+
+        <input type="hidden" name="ASSET_FORMAT" value={selected}/>
+        
   </div>
 {
-    (selected=="PDF") && <label>
+     <label style={{display:`${(selected=="PDF")?'block':'none'}`}}> 
     <span>Asset PDF</span>
     <input type="text" name="PDF"/><br/>
     <input type="file" name="PDF_FILE" ref={pdfRef} />
-    <progress  ref={progressRef} max="100" defaultValue={0} value="0"></progress>
-    <button onClick={handleUpload}>Upload</button>
-    <button onClick={handleCancel}>Cancel</button>
-    <br>
-    
-    </br>
-isConnected:{isConnected}
-    <br>
-    
-    </br>
-    <div>{uploadProgress} </div>
+  
   </label>
 }
 {
-    (selected=="MP4") &&   <label>
+    <label style={{display:`${(selected=="MP4")?'block':'none'}`}}>
     <span>MP4</span>
     <input type="text" name="MP4"/><br/>
     <input type="file" name="MP4_FILE" />
-    <button >Upload</button>
+   
   </label>
 }
     
 {
-    (selected=="Client Link") &&      <label>
+  <label  style={{display:`${(selected=="Client Link")?'block':'none'}`}}>
     <span>Client Link</span>
     <input type="text" name="CLIENT_LINK" />
   </label>
 }
 {
-    (selected=="IFrame") &&   <label>
+  <label  style={{display:`${(selected=="IFrame")?'block':'none'}`}}>
     <span>Iframe Html</span>
     <input type="text" name="IFRAME" />
   </label>
 }
   
   
-  <input type="hidden" name="TEST123" value={1121212} />
+
        
 
      

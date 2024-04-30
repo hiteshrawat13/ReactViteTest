@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import './CreateCampaign.scss'
 import { useNavigate } from 'react-router-dom/dist'
-
+import Modal from '../../components/ui/Modal'
 const CreateCampaign = () => {
-
+  const [isOpened,setOpened]=useState(false)
     const navigate=useNavigate()
 
 
@@ -38,6 +38,18 @@ const CreateCampaign = () => {
         </div>
     </div>
    
+
+   
+{isOpened && 
+<Modal setOpened={setOpened} title={"My Modal"}>
+  
+  <div><label>First Name</label><input /></div>
+  
+  
+  </Modal>}
+
+<button className='openModal' onClick={()=>setOpened(true)}>Open Modal</button>
+
     
     </>
     

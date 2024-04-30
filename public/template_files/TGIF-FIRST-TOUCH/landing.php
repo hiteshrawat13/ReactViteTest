@@ -167,8 +167,8 @@
                                         <img src="##BASE_URL##IT-BUSINESS-TODAY-COLOUR-1.png" alt="It Business Today" width="150" style="" />
                                     </td>
                                     <td width="234" align="right">
-                                        <div style="font-size: 14px; margin-top: 10px;">Sponsored by</div>
-                                        <img src="##LOGO_URL##" alt="Logo" style="width: 200px; margin-top: 1px; margin-bottom: 1px;" />
+                                        <div style="font-size: 14px; margin-top: 10px;">##SPONSORED_BY_TEXT##</div>
+                                        <img src="##LOGO_URL##" alt="Logo" style="width: ##LOGO_WIDTH##px; margin-top: 1px; margin-bottom: 1px;" />
                                     </td>
 
                                     <!-- LOGO -->

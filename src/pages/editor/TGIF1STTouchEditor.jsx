@@ -30,7 +30,11 @@ import PublishHelper from './PublishHelper.js'
 import Preview from '../../components/editor/Preview.jsx'
 
 
+import axios from 'axios'
 
+
+import { socket } from '../../socket.js'
+import FTPUploader from '../../components/editor/FTPUploader.jsx'
 
 
 
@@ -40,6 +44,8 @@ const TGIF1STTouchEditor = () => {
 
 
   const formRef=useRef()
+
+  const FTPUploaderRef=useRef()
  
 
   const [sameAsEDMTitle,setSameAsEDMTitle]=useState(true)
@@ -109,12 +115,51 @@ const TGIF1STTouchEditor = () => {
   }
 
 
+
   const handleLinkNameChange=(e)=>{
 
-    document.querySelector("[name='THUMBNAIL_NAME']").value=e.target.value
-   // document.querySelector("[name='PDF']").value=e.target.value
-    //document.querySelector("[name='MP4']").value=e.target.value
+    document.querySelector("[name='THUMBNAIL_NAME']").value=e.target.value+".png"
+    document.querySelector("[name='PDF']").value=e.target.value+".pdf"
+    document.querySelector("[name='MP4']").value=e.target.value+".mp4"
   }
+
+  const handleCTAChange=(e)=>{
+
+    document.querySelector("[name='THUMBNAIL_NAME']").value=e.target.value+".png"
+    document.querySelector("[name='PDF']").value=e.target.value+".pdf"
+    document.querySelector("[name='MP4']").value=e.target.value+".mp4"
+  }
+
+
+
+  const handleStepChange= async (step)=>{
+    console.log("step",step);
+
+    switch(step){
+      case 0:
+        break;
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+      case 4:
+     
+      
+      
+
+      
+        
+        break;
+      case 5:
+   //alert("Publish Step")
+      FTPUploaderRef.current.handleUpdateFiles()
+        break;
+    }
+  }
+
+
 
 
 
@@ -129,13 +174,24 @@ const TGIF1STTouchEditor = () => {
   },[])
 
 
+
+
+
+
+
+
+
+
   return (
 <div className='Editor'>
 <form  onSubmit={handleSubmit} ref={formRef}>
 
 
 
-<Stepper onStepChange={()=>{ publishHelper.current.setData(getData()) }}>
+<Stepper onStepChange={(step)=>{ 
+  publishHelper.current.setData(getData()) 
+  handleStepChange(step)
+  }}>
   
   <Step title="Basic Info">
    {/* Step 1 */}
@@ -183,6 +239,11 @@ const TGIF1STTouchEditor = () => {
       <span>Sponsored By Text</span>
       <input type="text" name="SPONSORED_BY_TEXT" defaultValue={"Sponsored By"}  />
     </label>
+
+    <label>
+      <span>Logo width</span>
+      <input type="number" name="LOGO_WIDTH" defaultValue={200}  />
+    </label>
    </div>
    {/* Step 1 end */}
     
@@ -221,17 +282,15 @@ const TGIF1STTouchEditor = () => {
     <div style={{width:"100%"}}>
       <label>
         <span>Landing Page Title</span>
-        <input type="checkbox" name="SAME_AS_EDM_TITLE" defaultChecked={sameAsEDMTitle} onChange={()=>{setSameAsEDMTitle(!sameAsEDMTitle)}}  />
+        <label><input type="checkbox" name="SAME_AS_EDM_TITLE" defaultChecked={sameAsEDMTitle} onChange={()=>{setSameAsEDMTitle(!sameAsEDMTitle)}}  />Same as EDM Title</label>
         { !sameAsEDMTitle  && <input type="text" name="LANDING_TITLE" />}
       </label>
-      <label>
-          <span>Landing Abstract</span>
-      </label>
-      <input type="checkbox" name="SAME_AS_EDM_ABSTRACT" defaultChecked={sameAsEDMAbstract} onChange={()=>{setSameAsEDMAbstract(!sameAsEDMAbstract)}} />
+      <label> <span>Landing Abstract</span></label>
+      <label><input type="checkbox" name="SAME_AS_EDM_ABSTRACT" defaultChecked={sameAsEDMAbstract} onChange={()=>{setSameAsEDMAbstract(!sameAsEDMAbstract)}} />Same as EDM Abstract</label>
       { !sameAsEDMAbstract && <RichEditor key={1211212}  name="LANDING_ABSTRACT"/>}
       <label>
         <span>Landing CTA</span>
-        <input type="checkbox" name="SAME_AS_EDM_CTA" defaultChecked={sameAsEDMCTA} onChange={()=>{setSameAsEDMCTA(!sameAsEDMCTA)}} />
+        <label><input type="checkbox" name="SAME_AS_EDM_CTA" defaultChecked={sameAsEDMCTA} onChange={()=>{setSameAsEDMCTA(!sameAsEDMCTA)}} />Same as EDM CTA</label>
         { !sameAsEDMCTA && <input type="text" name="LANDING_CTA"  />}
       </label>
     </div>
@@ -247,17 +306,8 @@ const TGIF1STTouchEditor = () => {
 
   <Step title="Assets & Logo">
     {/* Step 4 */}
-    
     <AssetPicker/>
     {/* Step 4 end */}
-  </Step>
-
-  <Step title="Publish">
-    {/* Step 5 */}
-    <input type="submit" value="Submit" />
-    <br/>
-    <button onClick={handlePreview}>Preview</button>
-    {/* Step 5 end */}
   </Step>
 
   <Step title="Preview" >
@@ -266,11 +316,24 @@ const TGIF1STTouchEditor = () => {
     {/* Step 5 end */}
   </Step>
 
+  <Step title="Publish">
+    {/* Step 5 */}
+    <input type="submit" value="Submit" />
+    <br/>
+    <button onClick={handlePreview}>Download Zip</button>
+
+     <FTPUploader ref={FTPUploaderRef} publishHelper={publishHelper}/>
+    
+    {/* Step 5 end */}
+  </Step>
+
+
+
 </Stepper>
     
 </form>
 
-{isOpened && <Modal setOpened={setOpened} title={"Title"}><div>hello</div></Modal>}
+{isOpened && <Modal setOpened={setOpened} title={"My Modal"}><div>hello</div><div>hello</div><div>hello</div><div>hello</div><div>hello</div><div>hello</div></Modal>}
 
 <button className='openModal' onClick={()=>setOpened(true)}>Open Modal</button>
 

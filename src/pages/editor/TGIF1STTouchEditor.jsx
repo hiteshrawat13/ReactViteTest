@@ -248,8 +248,9 @@ const TGIF1STTouchEditor = () => {
 
   <Step title="Content">
   {/* Step 2 */}
-  <div style={{display:"flex",justifyContent:"space-between",gap:"10px",backgroundColor:"#fff"}}>
-    <div style={{width:"100%"}}>
+  <div id='contentContainer' >
+    <div className='contentContainerInner'>
+    <h4>EDM Page Content</h4>
       <label>
           <span>EDM Page Title</span>
           <input type="text" name="EDM_TITLE" />
@@ -276,7 +277,8 @@ const TGIF1STTouchEditor = () => {
       </label>
     </div>
 
-    <div style={{width:"100%"}}>
+    <div className='contentContainerInner' >
+    <h4>Landing Page Content</h4>
       <label>
         <span>Landing Page Title</span>
         <label><input type="checkbox" name="SAME_AS_EDM_TITLE" defaultChecked={sameAsEDMTitle} onChange={()=>{setSameAsEDMTitle(!sameAsEDMTitle)}}  />Same as EDM Title</label>

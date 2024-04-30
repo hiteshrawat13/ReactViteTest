@@ -72,7 +72,7 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
     let uploadFiles=[]
         if( document.querySelector("[name='LOGO_FILE']").files[0]){
           uploadFiles.push({
-            type:"file",
+            type:"logo",
             name:document.querySelector("[name='LOGO_NAME']").value,
             file:document.querySelector("[name='LOGO_FILE']").files[0],
             progress:0
@@ -188,7 +188,8 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
 
     setUploading(true)
 
-   
+
+    
 
     
 
@@ -201,7 +202,10 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
 
       let templateFiles = []
       filesToUpload.forEach(file => {
-        if (file.type === "file") {
+        if (file.type === "logo") {
+          bodyFormData.append('files[]', file.file, file.name);
+          bodyFormData.append('logoFile', file.name);
+        } else  if (file.type === "file") {
           bodyFormData.append('files[]', file.file, file.name);
         } else if (file.type === "templateFile") {
           templateFiles.push(file)

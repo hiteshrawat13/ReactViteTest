@@ -1,0 +1,72 @@
+.Editor {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .holder {
+        background-color: #fff;
+        padding: 20px;
+        width: 80%;
+        margin: auto;
+    }
+
+
+    label {
+        display: block;
+        margin: 10px 0px;
+
+        span {
+            display: block;
+            margin-bottom: 5px;
+        }
+    }
+
+
+    input[type="text"],
+    select,
+    textarea {
+        font-size: 15px;
+        width: 100%;
+        padding: 5px;
+        outline: none;
+        border-radius: 3px;
+        border: 1px solid #e6e6e6;
+        border: 0px;
+        border-bottom: 1px solid #c1c1c1;
+        color: #474747;
+        &:focus {
+            outline: 0px solid rgb(71, 95, 175);
+        }
+    }
+
+    input[type="submit"] {
+        padding: 5px;
+    }
+
+
+}
+
+#contentContainer {
+    display: flex;
+    justify-Content:space-between;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+    gap:10px;
+
+    .contentContainerInner{
+        padding: 10px;
+        background-color: white;
+        margin-bottom: 20px;
+
+        h4{
+            background: rgb(214, 214, 214);
+            padding: 5px 10px;
+            margin: -10px -10px 0px -10px;
+        }
+    }
+}

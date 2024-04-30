@@ -5,7 +5,7 @@ import axios from "axios";
 
 import "./Editor.scss"
 
-
+import "../../components/ui/editor/editorCommonCSS.scss"
 
 
 
@@ -22,7 +22,7 @@ import { saveAs } from 'file-saver';
 
 
 import Modal from '../../components/ui/Modal.jsx'
-import RichEditor from './RichEditor.jsx'
+import RichEditor from '../../components/editor/RichEditor.jsx'
 import AssetPicker from '../../components/editor/AssetPicker.jsx'
 
 
@@ -30,6 +30,7 @@ import {ALPHAFormRenderer} from './FormRenderer.js'
 import { editors } from '../../components/formBuilder/fieldEditor/Fields.jsx'
 import PublishHelper from './PublishHelper.js'
 import Preview from '../../components/editor/Preview.jsx'
+import LanguageDropdownList from '../../components/ui/editor/LanguageDropdownList.jsx';
 
 
 
@@ -57,6 +58,8 @@ const AlphaEditor = () => {
 
   const [sameAsEDMTitle,setSameAsEDMTitle]=useState(true)
   const [sameAsEDMHeading,setSameAsEDMHeading]=useState(true)
+  const [sameAsEDMTitleForThanksPage,setSameAsEDMTitleForThanksPage]=useState(true)
+  const [sameAsEDMHeadingForThanksPage,setSameAsEDMHeadingForThanksPage]=useState(true)
   const [sameAsEDMAbstract,setSameAsEDMAbstract]=useState(true)
   const [sameAsEDMCTA,setSameAsEDMCTA]=useState(true)
 
@@ -68,7 +71,7 @@ const AlphaEditor = () => {
   const campaign = useSelector(state => state.campaign)
  
   const dispatch=useDispatch()
-
+  const edmAbstractRichEditorRef = useRef();
 
   const publishHelper=useRef(new PublishHelper())
 
@@ -139,10 +142,6 @@ const AlphaEditor = () => {
     })
     //ALPHAFormRenderer
   },[])
-let [temp,setTemp]=useState('');
-let [temp1,setTemp1]=useState('');
-
-let [temp2,setTemp2]=useState('');
 
   async function getAllVals(e){
 console.log(e.target.value);
@@ -155,19 +154,12 @@ console.log(e.target.value);
   })
 // console.log(axiosResponse.data);
   const $ = cheerio.load(axiosResponse.data);
-  console.log($('title').html());
-  setTemp($('title').html())
-  setTemp1($('title').html())
-  setTemp2($('.col-sm-6>p').html())
+
+  edmAbstractRichEditorRef.current.updateHtml($('.col-sm-6').text())
   }
 
   return (
 <div className='Editor'>
-
-<label>
-      <span>Enter Link</span>
-      <input type="text" name="link" id='linkIn'  onChange={(e)=>getAllVals(e)} />
-    </label>
 
 <form  onSubmit={handleSubmit} ref={formRef}>
 
@@ -179,14 +171,16 @@ console.log(e.target.value);
    {/* Step 1 */}
    <div className='holder'>
 
+   <LanguageDropdownList/>
+
     <label>
       <span>Link Name</span>
-      <input type="text" name="LINK_NAME" onChange={handleLinkNameChange} />
+      <input type="text" name="LINK_NAME" placeholder='e.g - Alpha-LP-1234567-client-FY-Q-demo-1' onChange={handleLinkNameChange} />
     </label>
 
     <label>
       <span>Camp Id</span>
-      <input type="text" name="CAMP_ID" />
+      <input type="text" placeholder='e.g - 1234567' name="CAMP_ID" />
     </label>
  
     <label>
@@ -207,20 +201,21 @@ console.log(e.target.value);
       <span>Privacy Policy</span>
       <select  name="PRIVACY_POLICY"  >
         <option value="">Select...</option>
-        <option value="https://itbusinessplus.com/eu-privacy/">EU</option>
-        <option value="https://itbusinessplus.com/privacy-policy/">NON-EU</option>
-        <option value="https://www.itbusinessplus.com/casl-privacy-policy/">CASL</option>
+        <option value="<a href='https://itbusinessplus.com/eu-privacy/'>EU Data Protection Policy<a/>">EU</option>
+        <option value="<a href='https://itbusinessplus.com/privacy-policy/'>ITBP Privacy Policy<a/>">NON-EU</option>
+        <option value="<a href='https://www.itbusinessplus.com/casl-privacy-policy/'>CASL Privacy Policy<a/>">CASL</option>
+        <option value="<a href='https://www.itbusinessplus.com/privacy-policy/'>ITBP Privacy Policy<a/> | <a href='https://www.itbusinessplus.com/casl-privacy-policy/'>CASL Privacy Policy<a/>">Both ( NON-EU & CASL )</option>
       </select>
     </label>
 
     <label>
       <span>Sponsored By Text</span>
-      <input type="text" name="SPONSORED_BY_TEXT"  />
+      <input type="text" defaultValue={'Sponsored By'} name="SPONSORED_BY_TEXT"  />
     </label>
 
     <label>
       <span>Sponsor Name</span>
-      <input type="text" name="SPONSOR_NAME"  />
+      <input type="text" placeholder='e.g - SAP Conor, Microsft, etc.' name="SPONSOR_NAME"  />
     </label>
 
     <label>
@@ -235,48 +230,44 @@ console.log(e.target.value);
 
   <Step title="Content">
   {/* Step 2 */}
-  <div style={{display:"flex",justifyContent:"space-between",gap:"10px",backgroundColor:"#fff"}}>
-    <div style={{width:"100%"}}>
+  <div id='contentContainer' >
+    <div className='contentContainerInner' >
+      <h4>EDM Page Content</h4>
       <label>
           <span>EDM Page Title</span>
-          <input type="text" defaultValue={temp} name="EDM_TITLE" />
+          <input type="text" defaultValue={''} name="EDM_TITLE" />
       </label>
 
       <label>
           <span>EDM Page Headline</span>
-          <RichEditor value={temp1} key={12112121} name="EDM_HEADING"/>
       </label>
+      <RichEditor   key={12112121} name="EDM_HEADING"/>
 
       <label>
         <span>EDM Abstract</span>
-       
       </label>
-      <RichEditor value={temp2} key={1211212} name="EDM_ABSTRACT"/>
+      <RichEditor  key={1211212} name="EDM_ABSTRACT"/>
+
       <label>
         <span>EDM CTA</span>
         <input type="text" name="EDM_CTA" />
       </label>
 
-      <label>
-        <span>Email Subject Line</span>
-        <input type="text" name="EMAIL_SUBJECT_LINE" />
-      </label>
-
     </div>
 
-    <div style={{width:"100%"}}>
+    <div className='contentContainerInner' >
+    <h4>Landing Page Content</h4>
       <label>
-        <span>Landing Page Title</span>
+        <span>Landing Page Title <small>(check if same as edm title)</small></span>
         <input type="checkbox" name="SAME_AS_EDM_TITLE" defaultChecked={sameAsEDMTitle} onChange={()=>{setSameAsEDMTitle(!sameAsEDMTitle)}}  />
         { !sameAsEDMTitle && <input type="text" name="LANDING_TITLE" />}
       </label>
 
       <label>
-        <span>Landing Page Heading</span>
+        <span>Landing Page Heading <small>(check if same as edm Heading)</small></span>
         <input type="checkbox" name="SAME_AS_EDM_HEADING" defaultChecked={sameAsEDMHeading} onChange={()=>{setSameAsEDMHeading(!sameAsEDMHeading)}}  />
-        { !sameAsEDMHeading &&   <RichEditor key={12112122} name="LANDING_HEADING"/>}
       </label>
-
+      { !sameAsEDMHeading &&   <RichEditor key={121121122} name="LANDING_HEADING"/>}
 
       {/* <label>
           <span>Landing Abstract</span>
@@ -284,11 +275,44 @@ console.log(e.target.value);
       <input type="checkbox" name="SAME_AS_EDM_ABSTRACT" defaultChecked={sameAsEDMAbstract} onChange={()=>{setSameAsEDMAbstract(!sameAsEDMAbstract)}} />
       { !sameAsEDMAbstract && <RichEditor key={1211212} name="LANDING_ABSTRACT"/>} */}
       <label>
-        <span>Landing CTA</span>
+        <span>Landing CTA <small>(check if same as edm CTA)</small></span>
         <input type="checkbox" name="SAME_AS_EDM_CTA" defaultChecked={sameAsEDMCTA} onChange={()=>{setSameAsEDMCTA(!sameAsEDMCTA)}} />
         { !sameAsEDMCTA && <input type="text" name="LANDING_CTA"  />}
       </label>
     </div>
+
+    <div className='contentContainerInner' >
+    <h4>Sendmail File Content</h4>
+
+    <label>
+        <span>Email Subject Line</span>
+        <input type="text" name="EMAIL_SUBJECT_LINE" />
+      </label>
+
+
+    </div>
+
+    <div className='contentContainerInner' >
+    <h4>Thankyou Page Content</h4>
+      <label>
+        <span>Thankyou Page Title <small>(check if same as edm title)</small></span>
+        <input type="checkbox" name="SAME_AS_EDM_TITLETY" defaultChecked={sameAsEDMTitleForThanksPage} onChange={()=>{setSameAsEDMTitleForThanksPage(!sameAsEDMTitleForThanksPage)}}  />
+        { !sameAsEDMTitleForThanksPage && <input type="text" name="THANKYOU_TITLE" />}
+      </label>
+
+      <label>
+        <span>Thankyou Page Heading <small>(check if same as edm heading)</small></span>
+        <input type="checkbox" name="SAME_AS_EDM_HEADINGTY" defaultChecked={sameAsEDMHeadingForThanksPage} onChange={()=>{setSameAsEDMHeadingForThanksPage(!sameAsEDMHeadingForThanksPage)}}  />
+      </label>
+      { !sameAsEDMHeadingForThanksPage &&   <RichEditor key={1211222122} name="THANKYOU_HEADING"/>}
+
+      <label>
+        <span>Thankyou page CTA</span>
+       <input type="text" name="THANKYOU_CTA" defaultValue={'View & Download'}  />
+      </label>
+
+    </div>
+
   </div>
   {/* Step 2 end*/}
   </Step>
@@ -306,27 +330,28 @@ console.log(e.target.value);
     {/* Step 4 end */}
   </Step>
 
-  <Step title="Complete">
-    {/* Step 5 */}
-    <input type="submit" value="Submit" />
-    <br/>
-    <button onClick={handlePreview}>Preview</button>
-    {/* Step 5 end */}
-  </Step>
-
   <Step title="Preview" >
     {/* Step 5 */}
     <Preview  publishHelper={publishHelper.current}/>
     {/* Step 5 end */}
   </Step>
 
+  
+  <Step title="Complete">
+    {/* Step 6 */}
+    <input type="submit" value="Submit" />
+    <br/>
+    <button onClick={handlePreview}>Preview</button>
+    {/* Step 6 end */}
+  </Step>
+
 </Stepper>
     
 </form>
 
-{isOpened && <Modal setOpened={setOpened} title={"Title"}><div>hello</div></Modal>}
+{/* {isOpened && <Modal setOpened={setOpened} title={"Title"}><div>hello</div></Modal>} */}
 
-<button className='openModal' onClick={()=>setOpened(true)}>Open Modal</button>
+{/* <button className='openModal' onClick={()=>setOpened(true)}>Open Modal</button> */}
 
 </div>
   

@@ -102,6 +102,13 @@ export default class PublishHelper{
     async getThanksHtml(forPreview=false){
         let data=await Utils.loadFile(this.templatesFolderPath+"thanks.html");
        
+        if(this.alpha["SAME_AS_EDM_TITLETY"]==true){
+            data=data.replaceAll(`##THANKYOU_TITLE##`,this.alpha["EDM_TITLE"])
+        }
+        if(this.alpha["SAME_AS_EDM_HEADINGTY"]==true){
+            data=data.replaceAll(`##THANKYOU_HEADING##`,this.alpha["EDM_HEADING"])
+        }
+
 
         if(this.alpha.assetFormat=="MP4" || this.alpha.assetFormat=="IFrame") {
             

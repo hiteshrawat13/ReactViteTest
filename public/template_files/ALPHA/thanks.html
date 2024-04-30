@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "https://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="https://www.w3.org/1999/xhtml" 
   xmlns:v="urn:schemas-microsoft-com:vml"
-  xmlns:o="urn:schemas-microsoft-com:office:office">
+  xmlns:o="urn:schemas-microsoft-com:office:office" lang="##LANGUAGE##">
   <head>
     <meta https-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,10 +42,10 @@ text-align: left;font-size: 12px;}span.error {color: #e02f2f;}.button {border: n
             <tr>
               <td class="container-padding header" style="font-family:Helvetica, Arial, sans-serif;font-size:24px;font-weight:bold;padding-bottom:12px;color:#DF4726;padding-left:24px;padding-right:24px;background-color: #ffffff;">
 				<div class="col-md-12">
-						<img src="##BASE_URL##/itbp_logo_2019.png" alt="" style="width: 40%; padding-top:20px;">
+						<img src="##BASE_URL##/itbp_logo_2019.png" alt="" id="clientLogo" style="width: 40%; padding-top:20px;">
 				</div>
 				<div class="col-md-12">
-					</br><img src="##BASE_URL##/New-Featured-Content-logo.png" alt="Sprinklr" style="width: 40%;"> 
+					</br><img src="##BASE_URL##/New-Featured-Content-logo.png" id="clientLogo2" alt="Sprinklr" style="width: 40%;"> 
 				</div>
               </td>
             </tr>
@@ -54,17 +54,17 @@ text-align: left;font-size: 12px;}span.error {color: #e02f2f;}.button {border: n
                 <div class=" text-left">
                   <div class="row" style="margin-right: 15px;margin-left: 15px;">
                     <div class="">
-                      <h3>##EDM_TITLE##</h3>
+                      <h3 id="ThanksTitle">##THANKYOU_TITLE##</h3>
             <!--Heading-->	  <p style="text-align: left;font-size: 16px;"><b></b></p>  
-                        <p style="text-align: left;font-size: 16px;">
-                        ##EDM_HEADING##  
+                        <p style="text-align: left;font-size: 16px;" id="thanksHeading">
+                        ##THANKYOU_HEADING##  
                         </p>  
-                      <p style="text-align: left;font-size: 16px;">##SPONSORED_BY_TEXT##:  ##SPONSOR_NAME##      </p>
+                      <p style="text-align: left;font-size: 16px;" id="sponsorbyText" >##SPONSORED_BY_TEXT##:  ##SPONSOR_NAME##      </p>
                       </div>
                     <div class="col-md-12 well">
                       <div class="col-sm-12">
                         
-                        <a href='##ASSET_URL##'><button class="button button2">View & Download</button></a>
+                        <a href='##ASSET_URL##'><button class="button button2" id="thanksDownloadBtn">##THANKYOU_CTA##</button></a>
 						
                       </div>
                       
@@ -77,7 +77,7 @@ text-align: left;font-size: 12px;}span.error {color: #e02f2f;}.button {border: n
             <tr>
               <td class="container-padding footer-text" align="left" style="font-family:Helvetica, Arial, sans-serif; font-size:12px; line-height:16px; color:#aaaaaa; padding-left:24px; padding-right:24px">
                 <center><br>
-                  <a href="https://www.itbusinessplus.com/unsubscribe/">Click here to unsubscribe</a> | <a href="##PRIVACY_POLICY##"> ITBP Privacy Policy</a>
+                  <a href="https://www.itbusinessplus.com/unsubscribe/">Click here to unsubscribe</a> | ##PRIVACY_POLICY##
                   <br>
                   Copyright &#169; ##YEAR## XDBS Corporation<br>3501, Jack Northorp Ave, Ste C3873 
 				  <br>Hawthorne, CA 90250 USA

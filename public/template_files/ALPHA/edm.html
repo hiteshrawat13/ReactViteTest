@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "https://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="https://www.w3.org/1999/xhtml" 
  xmlns:v="urn:schemas-microsoft-com:vml"
- xmlns:o="urn:schemas-microsoft-com:office:office">
+ xmlns:o="urn:schemas-microsoft-com:office:office" lang="##LANGUAGE##">
 <head>
   <!--[if gte mso 9]><xml>
    <o:OfficeDocumentSettings>
@@ -170,10 +170,10 @@ ul li{
                <tr>
                   <td class="container-padding header" style="font-family:Helvetica, Arial, sans-serif;font-size:24px;font-weight:bold;padding-bottom:12px;color:#DF4726;padding-left:24px;padding-right:24px;background-color: #ffffff;">
 					<div class="col-md-12">
-						<img src="##BASE_URL##/itbp_logo_2019.png" alt="Sprinklr" style="width: 50%;margin-top:25px;">
+						<img src="##BASE_URL##/itbp_logo_2019.png" id="clientLogo" alt="Sprinklr" style="width: 50%;margin-top:25px;">
 					</div>
 					<div class="col-md-12">
-						</br><img src="##BASE_URL##/New-Featured-Content-logo.png" alt="Sprinklr" style="width: 50%;"> 
+						</br><img src="##BASE_URL##/New-Featured-Content-logo.png" id="clientLogo2" alt="Sprinklr" style="width: 50%;"> 
 				    </div>
                   </td>
                </tr>
@@ -182,18 +182,18 @@ ul li{
                      <div class="text-left">
                         <div class="row" style="margin-right: 15px;margin-left: 15px;">
 						<div class="">
-						<h3>##EDM_TITLE##</h3>
+						<h3 id="edmTitle">##EDM_TITLE##</h3>
 	<!--Heading-->	  <p style="text-align: left;font-size: 16px;"><b></b></p>  
-						  <p style="text-align: left;font-size: 16px;">
+						  <p style="text-align: left;font-size: 16px;" id="edmHeading">
 						  ##EDM_HEADING##  
 						  </p>  
-						<p style="text-align: left;font-size: 16px;">##SPONSORED_BY_TEXT##:  ##SPONSOR_NAME##      </p>
+						<p style="text-align: left;font-size: 16px;" id="sponsorbyText">##SPONSORED_BY_TEXT## :  ##SPONSOR_NAME##      </p>
 						</div>
 						<div class="col-md-12 well" style="background-color:white;">
                            <div class="col-sm-6" style="border-right: 2px #e0e0e0 solid;">    
 								 
 								 
-							<p style="text-align: left;font-size: 14px; color:black;line-height: 160%">
+							<p style="text-align: left;font-size: 14px; color:black;line-height: 160%" id="edmAbstract">
 
                 ##EDM_ABSTRACT##
  
@@ -203,18 +203,18 @@ ul li{
                            </div>
 						   <div class="col-sm-6">
 								<center>
-<img style="width: 180px; margin-left: 6px; margin-bottom: 10px;margin-top: 8px;" src="##LOGO_URL##"></center>
+<img id="sponsorLogo" style="width: 180px; margin-left: 6px; margin-bottom: 10px;margin-top: 8px;" src="##LOGO_URL##"></center>
 								
 								<img src="##THUMBNAIL_URL##" width=100% style="padding-top:0px; border: 1px solid #cccccc;"/>
                              
                            </div>
 						   <div class="sky-form">
-                            <a href="##BASE_URL####LINK_NAME##-landing.html" target=_BLANK><button type="submit" class="button" style="background-color: #4c77c7;     padding: 0 246px;float: left;margin: 45px 0 0 10px;">##EDM_CTA##</button></a>
+                            <a href="##BASE_URL####LINK_NAME##-landing.html" target=_BLANK><button type="submit" class="button" style="background-color: #4c77c7;padding: 0 246px;float: left;margin: 45px 0 0 10px;" id="edmCTA">##EDM_CTA##</button></a>
                           </div>
 						 
 									
                           </div>
-                           <small>You are agreeing to receive communication from the Sponsor and consent to the processing, and storage of your contact details in accordance with the Sponsor's privacy policy.</small>
+                           <small id="edmOptin">You are agreeing to receive communication from the Sponsor and consent to the processing, and storage of your contact details in accordance with the Sponsor's privacy policy.</small>
                         </div>
                      </div>
                   </td>
@@ -223,7 +223,7 @@ ul li{
 			  
                   <td class="container-padding footer-text" align="left" style="font-family:Helvetica, Arial, sans-serif;font-size:12px;line-height:16px;color:#aaaaaa;padding-left:24px;padding-right:24px">
                      <center><br>
-                     <a href="https://www.itbusinessplus.com/unsubscribe/">Click here to unsubscribe</a> | <a href="##PRIVACY_POLICY##"> ITBP Privacy Policy</a> 
+                     <a href="https://www.itbusinessplus.com/unsubscribe/">Click here to unsubscribe</a> | ##PRIVACY_POLICY##
                      <br>
                      Copyright &#169; ##YEAR## XDBS Corporation<br>3501, Jack Northorp Ave, Ste C3873 <br>Hawthorne, CA 90250 USA 
                      </center>  

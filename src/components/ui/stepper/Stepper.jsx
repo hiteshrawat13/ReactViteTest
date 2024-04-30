@@ -38,9 +38,9 @@ const Stepper = ({children,onStepChange=null}) => {
       
 </div>
 
-<div >
+{/* <div >
   Current Step: <strong> {step}</strong>
-</div>
+</div> */}
 
         {
             children.map((child,i)=>{ 

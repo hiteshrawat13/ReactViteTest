@@ -18,7 +18,7 @@ import {   BtnBold,
 const RichEditor = forwardRef(({name},ref) => {
     const [html, setHtml] = useState("my <b>HTML</b>");
     function onChange(e) {
-      alert("OnChage")
+     
         setHtml(e.target.value);
       }
 
@@ -62,7 +62,7 @@ const RichEditor = forwardRef(({name},ref) => {
         </Toolbar>
       </Editor>
     </EditorProvider>
-    <input  name={name} value={html} onChange={onChange}/>
+    <input  name={name} value={html} onChange={onChange} hidden/>
     
     </>
   )

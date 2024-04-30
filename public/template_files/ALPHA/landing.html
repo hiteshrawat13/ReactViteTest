@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "https://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="https://www.w3.org/1999/xhtml" 
   xmlns:v="urn:schemas-microsoft-com:vml"
-  xmlns:o="urn:schemas-microsoft-com:office:office">
+  xmlns:o="urn:schemas-microsoft-com:office:office" lang="##LANGUAGE##">
   <head>
     <meta https-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -198,10 +198,10 @@ text-align: left;font-size: 12px;}span.error {color: #e02f2f;}h3 {justify-conten
             <tr>
               <td class="container-padding header" style="font-family:Helvetica, Arial, sans-serif;font-size:24px;font-weight:bold;padding-bottom:12px;color:#DF4726;padding-left:24px;padding-right:24px;background-color: #ffffff;">
 				<div class="col-md-12">
-						<img src="##BASE_URL##/itbp_logo_2019.png" alt="Credit Union Journal" style="width: 40%;margin-top:25px;">
+						<img src="##BASE_URL##/itbp_logo_2019.png" id="clientLogo" alt="Credit Union Journal" style="width: 40%;margin-top:25px;">
 				</div>
 				<div class="col-md-12">
-					<br/><img src="##BASE_URL##/New-Featured-Content-logo.png" alt="Sprinklr" style="width: 40%;"> 
+					<br/><img src="##BASE_URL##/New-Featured-Content-logo.png" id="clientLogo2" alt="Sprinklr" style="width: 40%;"> 
 				</div>
               </td>
             </tr>
@@ -217,16 +217,16 @@ text-align: left;font-size: 12px;}span.error {color: #e02f2f;}h3 {justify-conten
 					</div>
                     <div class="col-md-12 well" style="background-color:white;">
                       
-                        <img src="##THUMBNAIL_URL##" width=100% style="border: 1px solid #cccccc;"/>
+                        <img src="##THUMBNAIL_URL##" id="landingThumbnail" width=100% style="border: 1px solid #cccccc;"/>
 						<br />
                       
                         <form action="##LINK_NAME##-sendmail.php" method="POST" id="sky-form" class="sky-form" autocomplete="off">
                           <header>
-								<h3 style="font-size: 24px; text-align: left;">##LANDING_TITLE##</h3><br>
-						     <p style="text-align: left;font-size: 16px;">
+								<h3 style="font-size: 24px; text-align: left;" id="landingTitle">##LANDING_TITLE##</h3><br>
+						     <p style="text-align: left;font-size: 16px;" id="LandingHeading">
 							 ##LANDING_HEADING## 
 							 </p>
-						  <p style="text-align: left;font-size: 16px;">##SPONSORED_BY_TEXT##:  ##SPONSOR_NAME##   </p>
+						  <p style="text-align: left;font-size: 16px;" id="sponsorbyText">##SPONSORED_BY_TEXT##:  ##SPONSOR_NAME##   </p>
                           </header>
 						  
 						  
@@ -241,7 +241,7 @@ text-align: left;font-size: 12px;}span.error {color: #e02f2f;}h3 {justify-conten
 							
                           </fieldset>
                           <footer>
-                            <button type="submit" name="submit" class="button" style="background-color: #4c77c7;width: 100%; margin-right: -24px;">##LANDING_CTA##</button>
+                            <button type="submit" name="submit" class="button" style="background-color: #4c77c7;width: 100%; margin-right: -24px;" id="landingCTA">##LANDING_CTA##</button>
                           </footer>
                         </form>
                      
@@ -254,7 +254,7 @@ text-align: left;font-size: 12px;}span.error {color: #e02f2f;}h3 {justify-conten
             <tr>
               <td class="container-padding footer-text" align="left" style="font-family:Helvetica, Arial, sans-serif;font-size:12px;line-height:16px;color:#aaaaaa;padding-left:24px;padding-right:24px">
                 <center><br>
-                  <a href="https://www.itbusinessplus.com/unsubscribe/">Click here to unsubscribe</a> | <a href="http://itbusinessplus.com/eu-privacy/"> ITBP Privacy Policy</a>
+                  <a href="https://www.itbusinessplus.com/unsubscribe/">Click here to unsubscribe</a> | ##PRIVACY_POLICY##
                   <br>
                   Copyright &#169; 2024 XDBS Corporation<br>3501, Jack Northorp Ave, Ste C3873
 				  <br>Hawthorne, CA 90250 USA 

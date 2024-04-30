@@ -178,7 +178,10 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
 
   const handleUpload = async (e) => {
     e.preventDefault()
-    if (publishHelper.current.tgif.LINK_NAME.trim().length == 0) {
+
+
+    
+    if (publishHelper.current.LINK_NAME.trim().length == 0) {
       alert("Please fill link name")
       return;
     }

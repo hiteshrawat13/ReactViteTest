@@ -1,9 +1,14 @@
 import Utils from "./Utils.js";
 import { TGIFFormRenderer } from "./FormRenderer.js";
+
+
+import {translations} from './translations.js'
+
 export default class PublishHelper{
 
     
-
+    BASE_URL="https://resource.itbusinesstoday.com/whitepapers/"
+    YEAR=new Date().getFullYear().toString()
     FTP_CONFIG_NAME="TGIF"
 
     
@@ -11,13 +16,15 @@ export default class PublishHelper{
     templatesFolderPath="./template_files/TGIF-FIRST-TOUCH/"
 
     constructor(){
-       // this.tgif=tgif
+       // this=tgif
     }
 
-    setData(data){
-        this.tgif=data
-
+    setFtpConfig(){
+        this.FTP_CONFIG_NAME=ftpConfigName
     }
+
+
+
 
      getBase64(file) {
 
@@ -54,30 +61,40 @@ export default class PublishHelper{
             const logoFile=document.querySelector("[name='LOGO_FILE']")?.files[0]
             const thumbnailFile=document.querySelector("[name='THUMBNAIL_FILE']")?.files[0]
            
-           
-           
           if(logoFile){
             const base64Logo= await this.getBase64( logoFile )
             data=data.replaceAll(`##LOGO_URL##`,base64Logo)
           }else{
-            data=data.replaceAll(`##LOGO_URL##`,this.tgif["BASE_URL"]+this.tgif["LOGO_NAME"])
+            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+this["LOGO_NAME"])
           }
 
           if(thumbnailFile){
             const base64Thumbnail= await this.getBase64( thumbnailFile )
             data=data.replaceAll(`##THUMBNAIL_URL##`,base64Thumbnail)
           }else{
-            data=data.replaceAll(`##THUMBNAIL_URL##`,this.tgif["BASE_URL"]+this.tgif["THUMBNAIL_NAME"])
+            data=data.replaceAll(`##THUMBNAIL_URL##`,this["BASE_URL"]+this["THUMBNAIL_NAME"])
           }
           
         }else{
-            data=data.replaceAll(`##LOGO_URL##`,this.tgif["BASE_URL"]+this.tgif["LOGO_NAME"])
-            data=data.replaceAll(`##THUMBNAIL_URL##`,this.tgif["BASE_URL"]+this.tgif["THUMBNAIL_NAME"])
+            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+this["LOGO_NAME"])
+            data=data.replaceAll(`##THUMBNAIL_URL##`,this["BASE_URL"]+this["THUMBNAIL_NAME"])
         }
+
+
+
+       const languageCode=this["LANGUAGE"]
+
+        console.log("===",translations);
+       data=data.replaceAll(`##EDM_OPTIN##`,translations[languageCode]['edmOptin'])
+        
+
+
+
+
 
        
       
-        for (const [key, value] of Object.entries(this.tgif)) {
+        for (const [key, value] of Object.entries(this)) {
         
             try {
                 if(typeof value === 'string' || value instanceof String)
@@ -94,32 +111,32 @@ export default class PublishHelper{
 
         
 
-        const landing_page=(this.tgif.useNewLandingPageFormat)?"new_format_landing.php":"landing.php"
+        const landing_page=(this.useNewLandingPageFormat)?"new_format_landing.php":"landing.php"
         let data= await Utils.loadFile( this.templatesFolderPath+landing_page) ;
         
         
-        if(this.tgif["SAME_AS_EDM_TITLE"]==true){ 
-            data=data.replaceAll(`##LANDING_TITLE##`,this.tgif["EDM_TITLE"])
+        if(this["SAME_AS_EDM_TITLE"]==true){ 
+            data=data.replaceAll(`##LANDING_TITLE##`,this["EDM_TITLE"])
         }
 
-        if(this.tgif["SAME_AS_EDM_ABSTRACT"]==true){
-            data=data.replaceAll(`##LANDING_ABSTRACT##`,this.tgif["EDM_ABSTRACT"])
+        if(this["SAME_AS_EDM_ABSTRACT"]==true){
+            data=data.replaceAll(`##LANDING_ABSTRACT##`,this["EDM_ABSTRACT"])
         }
 
-        if(this.tgif["SAME_AS_EDM_CTA"]==true){
-            data=data.replaceAll(`##LANDING_CTA##`,this.tgif["EDM_CTA"])
+        if(this["SAME_AS_EDM_CTA"]==true){
+            data=data.replaceAll(`##LANDING_CTA##`,this["EDM_CTA"])
         }
        
-        data=data.replaceAll(`##LOGO_URL##`,this.tgif["BASE_URL"]+this.tgif["LOGO_NAME"])
-        data=data.replaceAll(`##THUMBNAIL_URL##`,this.tgif["BASE_URL"]+this.tgif["THUMBNAIL_NAME"])
+        data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+this["LOGO_NAME"])
+        data=data.replaceAll(`##THUMBNAIL_URL##`,this["BASE_URL"]+this["THUMBNAIL_NAME"])
 
-        const formHtml=Utils.getFormHtml(this.tgif.form,TGIFFormRenderer);
+        const formHtml=Utils.getFormHtml(this.form,TGIFFormRenderer);
 
         
 
         if(typeof formHtml === 'string' || formHtml instanceof String)
         data=data.replaceAll(`##FORM##`,Utils.convertToEntities( formHtml ))
-        for (const [key, value] of Object.entries(this.tgif)) {
+        for (const [key, value] of Object.entries(this)) {
             try {
                 if(typeof value === 'string' || value instanceof String)
                 data=data.replaceAll(`##${key}##`,Utils.convertToEntities( value ) )
@@ -132,10 +149,10 @@ export default class PublishHelper{
 
     async getSendemailHtml(forPreview=false){
         let data=await Utils.loadFile(this.templatesFolderPath+"sendemail.php");
-        if(this.tgif.assetFormat=="ClientLink") {
-            data=data.replaceAll(`##baseUrl####asset##`,this.tgif.clientLink )
+        if(this.assetFormat=="ClientLink") {
+            data=data.replaceAll(`##baseUrl####asset##`,this.clientLink )
         }
-        for (const [key, value] of Object.entries(this.tgif)) {
+        for (const [key, value] of Object.entries(this)) {
             try {
                 if(typeof value === 'string' || value instanceof String)
                 data=data.replaceAll(`##${key}##`,Utils.convertToEntities(value) )
@@ -151,15 +168,27 @@ export default class PublishHelper{
 
 
         let data=await Utils.loadFile(this.templatesFolderPath+"thanks.php");
-        if(this.tgif.assetFormat=="MP4" || this.tgif.assetFormat=="IFrame") {
+        if(this.assetFormat=="MP4" || this.assetFormat=="IFrame") {
             data=data.replaceAll(`header( "refresh:5;url=##baseUrl####asset##" );`,"" ) //remove redirect
         }
-       // data=data.replaceAll(`##thankyouContentHtml##`,Utils.convertToEntities(this.tgif.thankyouContentHtml) )
+       // data=data.replaceAll(`##thankyouContentHtml##`,Utils.convertToEntities(this.thankyouContentHtml) )
         
-       data=data.replaceAll(`##LOGO_URL##`,this.tgif["BASE_URL"]+this.tgif["LOGO_NAME"])
-       data=data.replaceAll(`##THUMBNAIL_URL##`,this.tgif["BASE_URL"]+this.tgif["THUMBNAIL_NAME"])
+       data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+this["LOGO_NAME"])
+       data=data.replaceAll(`##THUMBNAIL_URL##`,this["BASE_URL"]+this["THUMBNAIL_NAME"])
 
-        for (const [key, value] of Object.entries(this.tgif)) {
+
+
+
+       
+        const languageCode=this["LANGUAGE"]
+        console.log("===",translations);
+        data=data.replaceAll(`##THANKYOU##`,translations[languageCode]['thankyou'])
+        
+
+
+
+
+        for (const [key, value] of Object.entries(this)) {
            try {
             if(typeof value === 'string' || value instanceof String)
                 data=data.replaceAll(`##${key}##`,Utils.convertToEntities(value) )
@@ -174,22 +203,22 @@ export default class PublishHelper{
     async getFiles(preview=0){
         return [
             {
-                name:`${this.tgif.LINK_NAME}-edm.html`,
+                name:`${this.LINK_NAME}-edm.html`,
                 data:(preview==0) && await this.getEdmHtml(),
                 preview:(preview==1) && await this.getEdmHtml(true) 
             },
             {
-                name:`${this.tgif.LINK_NAME}-landing.php`,
+                name:`${this.LINK_NAME}-landing.php`,
                 data:(preview==0) && await this.getLandingHtml(),
                 preview:(preview==1) && await this.getLandingHtml(true)
             },
             {
-                name:`${this.tgif.LINK_NAME}-sendemail.php`,
+                name:`${this.LINK_NAME}-sendemail.php`,
                 data:(preview==0) && await this.getSendemailHtml(),
                 preview:(preview==1) && await this.getSendemailHtml(true)
             },
             {
-                name:`${this.tgif.LINK_NAME}-thanks.php`,
+                name:`${this.LINK_NAME}-thanks.php`,
                 data:(preview==0) && await this.getThanksHtml(),
                 preview:(preview==1) && await this.getThanksHtml()
             }
@@ -214,24 +243,24 @@ export default class PublishHelper{
 
     async generateZip(JSZip,saveAs){
         var zip = new JSZip();
-        zip.file(`${this.tgif.LINK_NAME}-edm.html`, await this.getEdmHtml());
-        zip.file(`${this.tgif.LINK_NAME}-landing.php`, await this.getLandingHtml());
-        zip.file(`${this.tgif.LINK_NAME}-sendemail.php`, await this.getSendemailHtml());
-        zip.file(`${this.tgif.LINK_NAME}-thanks.php`, await this.getThanksHtml());
+        zip.file(`${this.LINK_NAME}-edm.html`, await this.getEdmHtml());
+        zip.file(`${this.LINK_NAME}-landing.php`, await this.getLandingHtml());
+        zip.file(`${this.LINK_NAME}-sendemail.php`, await this.getSendemailHtml());
+        zip.file(`${this.LINK_NAME}-thanks.php`, await this.getThanksHtml());
         
         const logoFile=document.querySelector("[name='LOGO_FILE']")?.files[0];
         if(logoFile){
-            zip.file(`${this.tgif.logoName}`, logoFile );
+            zip.file(`${this.logoName}`, logoFile );
         }
 
         const thumbnailFile=document.querySelector("[name='THUMBNAIL_FILE']")?.files[0];
         if(thumbnailFile){
-            zip.file(`${this.tgif.thumbnail}`, thumbnailFile );
+            zip.file(`${this.thumbnail}`, thumbnailFile );
         }
 
 
         try{
-            zip.file(`${this.tgif["PDF"]}`, document.querySelector("[name='PDF_FILE']").files[0] );
+            zip.file(`${this["PDF"]}`, document.querySelector("[name='PDF_FILE']").files[0] );
         }catch(error){
             console.log(error);
         }
@@ -239,13 +268,13 @@ export default class PublishHelper{
   
 
         try{
-            zip.file(`${this.tgif["MP4"]}`, document.querySelector("[name='MP4_FILE']").files[0] );
+            zip.file(`${this["MP4"]}`, document.querySelector("[name='MP4_FILE']").files[0] );
         }catch(error){
             console.log(error);
         }
 
         zip.generateAsync({ type: "blob" }).then( (blob) =>{ // 1) generate the zip file
-            saveAs(blob, `${this.tgif.LINK_NAME}`);                          // 2) trigger the download
+            saveAs(blob, `${this.LINK_NAME}`);                          // 2) trigger the download
         }, (err)=> {
             alert(error)
         });

@@ -69,39 +69,24 @@ const TGIF1STTouchEditor = () => {
   const landingAbstractRichEditorRef = useRef();
 
 
-  const getData=()=>{
+  const updateData=()=>{
     const inputs=formRef.current.querySelectorAll("input:not([type='submit']) , select, textarea")
-
-    const data={
-      BASE_URL:"https://resource.itbusinesstoday.com/whitepapers/",
-      YEAR:new Date().getFullYear().toString()
-    }
      for (let i = 0; i < inputs.length; i++) {
       // console.log(inputs[i].name,inputs[i].value);
       if(inputs[i].name){
         if(inputs[i].type=="checkbox"){
-          data[inputs[i].name]=inputs[i].checked
+          publishHelper.current[inputs[i].name]=inputs[i].checked
         }else{
-          data[inputs[i].name]=inputs[i].value
+          publishHelper.current[inputs[i].name]=inputs[i].value
         }
       }
      }
-     data["form"]=formBuilder.fields
-
-     return data;
+     publishHelper.current["form"]=formBuilder.fields
   }
 
 
   const handleSubmit=(e)=>{
     e.preventDefault();
-   // alert("Submit Call")
-
-   
-
-
-   publishHelper.current.setData(getData())
-  // publishHelper.current.openPreview("landing")
-
    console.log(publishHelper);
   }
 
@@ -109,7 +94,7 @@ const TGIF1STTouchEditor = () => {
   const handlePreview= async(e)=>{
     e.preventDefault()
  
-    publishHelper.current.setData(getData())
+
     publishHelper.current.generateZip(JSZip,saveAs)
   
   }
@@ -189,13 +174,25 @@ const TGIF1STTouchEditor = () => {
 
 
 <Stepper onStepChange={(step)=>{ 
-  publishHelper.current.setData(getData()) 
+  updateData()
   handleStepChange(step)
   }}>
   
   <Step title="Basic Info">
    {/* Step 1 */}
    <div className='holder'>
+
+   <label>
+      <span>Language</span>
+      <select  name="LANGUAGE" >
+       
+        <option value="en-us">en-us</option>
+       
+      </select>
+    </label>
+
+
+
    <label>
       <span>Pixel Link</span>
       <input type="text" name="PIXEL_LINK" />
@@ -303,7 +300,7 @@ const TGIF1STTouchEditor = () => {
 
   <Step title="Assets & Logo">
     {/* Step 4 */}
-    <AssetPicker/>
+    <AssetPicker publishHelper={publishHelper}/>
     {/* Step 4 end */}
   </Step>
 

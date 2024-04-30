@@ -138,6 +138,11 @@
                 </tr>
                 <tr>
                     <td style="padding: 10px; background: #fff; border-top: 1px solid rgb(192, 192, 192); border-bottom: 0px;">
+
+                    <style>
+                    
+                    </style>
+
                         <table width="100%" cellspacing="0" cellpadding="10" border="0">
                             <tbody>
                                 <tr>
@@ -147,7 +152,7 @@
                                         <img style="width: 180px; height: auto !important;" alt="##EDM_TITLE##" src="##THUMBNAIL_URL##" style="border: 1px solid #c4c5c600;" />
                                     </td>
 
-                                    <td align="left" valign="top" class="style1">
+                                    <td align="left" valign="top" class="style1 thankyou">
                                         <h1 style="color: #0066b2; font: 20px 'Noto Sans', sans-serif; margin: 0 0 10px 0; padding: 0;">Thank you...</h1>
                                         <span style="font-size: 14px; line-height: 1.6;">
                                             for downloading <strong>"##EDM_TITLE##"</strong> <br />
@@ -155,6 +160,13 @@
                                             Your download will automatically start in <span id="countdown">5</span> seconds...<br />
                                             If your download doesn't start automatically, <a  href="##ASSET_URL##">click here</a> to start your download.
                                         </span>
+
+
+                                        ##THANKYOU##
+
+
+
+
 
                                         <script>
                                             var timeleft = 5;

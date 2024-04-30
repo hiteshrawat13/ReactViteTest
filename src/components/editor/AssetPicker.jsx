@@ -18,7 +18,7 @@ import { socket } from '../../socket';
 
 
 
-const AssetPicker = () => {
+const AssetPicker = ({publishHelper}) => {
 
   const [sessionId, setSessionId] = useState( Math.random().toString(36).substr(2, 9))
 
@@ -76,7 +76,7 @@ const AssetPicker = () => {
       const formData = new FormData();
       formData.append("query", search_query);
     
-      axios.post('https://resource.itbusinesstoday.com/whitepapers/download/searchlogotest.php', formData )
+      axios.post(publishHelper.current.BASE_URL+'logo/searchlogotest.php', formData )
       .then(result=>{
 
         setFoundLogos(result.data.results)
@@ -97,7 +97,7 @@ const AssetPicker = () => {
      
     
       axios.post('http://localhost:8888/check_url', {
-        url:  "https://resource.itbusinesstoday.com/whitepapers/"+e.target.value,
+        url:  publishHelper.current.BASE_URL+e.target.value,
         
         }, {
         
@@ -144,10 +144,10 @@ const AssetPicker = () => {
             document.querySelector("[name='LOGO_NAME']").value=logo;
             document.querySelector(`[name="LOGO_FILE"]`).value=""
             document.querySelector(".logoList").style.display="none";
-            document.querySelector("#LOGO_PREVIEW").src="https://resource.itbusinesstoday.com/whitepapers/download/"+logo
+            document.querySelector("#LOGO_PREVIEW").src=publishHelper.current.BASE_URL+"logo/"+logo
          
          
-          }}><img src={"https://resource.itbusinesstoday.com/whitepapers/download/"+logo} width={80}/></li>
+          }}><img src={publishHelper.current.BASE_URL+"logo/"+logo} width={80}/></li>
 
         })
         }

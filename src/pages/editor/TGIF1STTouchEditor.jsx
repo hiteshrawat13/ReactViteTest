@@ -259,6 +259,9 @@ const TGIF1STTouchEditor = () => {
       <button onClick={(e)=>{
         e.preventDefault()
        
+
+        console.log(edmAbstractRichEditorRef.current,"REFEREnce|");
+
        edmAbstractRichEditorRef.current.updateHtml("#####")
 
         }}>Fetch</button>

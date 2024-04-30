@@ -22,6 +22,20 @@ const TextEditor = React.lazy(() => import( "./fieldEditor/TextEditor"));
 
 const FormBuilder = () => {
 
+  // below code is prevent user from accidental exit *****************************************
+
+  window.addEventListener('beforeunload', function(e) {
+    // Cancel the event
+    e.preventDefault();
+   
+    // Display a confirmation dialog
+    var confirmationMessage = 'Are you sure you want to leave?';
+    e.returnValue = confirmationMessage;
+    return confirmationMessage;
+});
+
+  // ********************************************************************************************
+
   const addFieldSelectBoxRef=useRef()
   
   const formBuilder = useSelector(state => state.formBuilder)
@@ -76,14 +90,14 @@ const FormBuilder = () => {
   return (
     <>
   
-    <select ref={addFieldSelectBoxRef}>
+    <select ref={addFieldSelectBoxRef} id='AddFieldSelectBox'>
     {
       Object.keys(fields).map( (field,i)=>{
         return <option key={i} value={field}>{field}</option>
       })
     }
     </select>
-    <button onClick={handleAdd}>Add</button>
+    <button onClick={handleAdd} id='addBtn'>Add</button>
 
     <div>Form Builder {formBuilder.selectedField+1}</div>
     <div className='formBuilder'>

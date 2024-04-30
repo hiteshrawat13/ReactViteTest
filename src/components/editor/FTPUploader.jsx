@@ -136,7 +136,6 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
       socket.on('foo', onFooEvent);
       socket.on("uploadProgress", (value)=>onUploadProgress(value))
       socket.emit('connectInit', sessionId);
-
       console.log(isConnected,"EEE");
     }
 
@@ -187,7 +186,7 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
     }
 
     setUploading(true)
-
+    handleUpdateFiles()
 
     
 

@@ -215,7 +215,7 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
 
       axios({
         method: "post",
-        url: "http://localhost:8888/upload_file",
+        url: `http://localhost:8888/upload_file/${publishHelper.current.FTP_CONFIG_NAME}/${socketId}`,
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })

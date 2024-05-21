@@ -1,20 +1,21 @@
-import React ,{forwardRef,useEffect,useImperativeHandle,useState} from 'react'
+import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react'
 
 import axios from 'axios'
-
+import JSZip from 'jszip'
+import { saveAs } from 'file-saver';
 import { socket } from '../../socket'
 
-const FTPUploader = forwardRef(({publishHelper},ref) => {
+const FTPUploader = forwardRef(({ publishHelper }, ref) => {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [fooEvents, setFooEvents] = useState([]);
   const [uploadProgress, setUploadProgress] = useState("");
   const [uploading, setUploading] = useState(false);
   const [sessionId, setSessionId] = useState(Math.random().toString(36).substr(2, 9))
-  const [socketId,setSocketId]=useState(null)
+  const [socketId, setSocketId] = useState(null)
   const [filesToUpload, setFilesToUpload] = useState([])
 
-  const [onSocketProgress,setOnSocketProgress]=useState(null)
-
+  const [onSocketProgress, setOnSocketProgress] = useState(null)
+  const [uploadedLinks, setUploadedLinks] = useState([])
 
   useImperativeHandle(ref, () => ({
     handleUpdateFiles
@@ -27,17 +28,17 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
 
 
   function onConnect(e) {
-    console.log("onConnected",e);
+    console.log("onConnected", e);
     setIsConnected(true);
   }
 
   function onDisconnect(e) {
-    console.log("onDisconnected",e);
+    console.log("onDisconnected", e);
     setIsConnected(false);
   }
 
   function onFooEvent(value) {
-    console.log("ON FOO",value);
+    console.log("ON FOO", value);
     setFooEvents(previous => [...previous, value]);
     setSocketId(value.id)
   }
@@ -56,108 +57,106 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
 
 
     setOnSocketProgress(value)
-   
 
-  
 
   }
 
 
 
 
-  const handleUpdateFiles=async ()=>{
-    console.log("isConnected",isConnected);
+  const handleUpdateFiles = async () => {
+    console.log("isConnected", isConnected);
 
     alert("handleUpdateFiles")
-    let uploadFiles=[]
-        if( document.querySelector("[name='LOGO_FILE']").files[0]){
-          uploadFiles.push({
-            type:"logo",
-            name:document.querySelector("[name='LOGO_NAME']").value,
-            file:document.querySelector("[name='LOGO_FILE']").files[0],
-            progress:0
-          })
-        }
+    let uploadFiles = []
+    if (document.querySelector("[name='LOGO_FILE']").files[0]) {
+      uploadFiles.push({
+        type: "logo",
+        name: document.querySelector("[name='LOGO_NAME']").value,
+        file: document.querySelector("[name='LOGO_FILE']").files[0],
+        progress: 0
+      })
+    }
 
-        if( document.querySelector("[name='THUMBNAIL_FILE']").files[0]){
-          uploadFiles.push({
-            type:"file",
-            name:document.querySelector("[name='THUMBNAIL_NAME']").value,
-            file:document.querySelector("[name='THUMBNAIL_FILE']").files[0],
-            progress:0
-          })
-        }
+    if (document.querySelector("[name='THUMBNAIL_FILE']").files[0]) {
+      uploadFiles.push({
+        type: "file",
+        name: document.querySelector("[name='THUMBNAIL_NAME']").value,
+        file: document.querySelector("[name='THUMBNAIL_FILE']").files[0],
+        progress: 0
+      })
+    }
 
-        if( document.querySelector("[name='PDF_FILE']").files[0]){
-          uploadFiles.push({
-            type:"file",
-            name:document.querySelector("[name='PDF']").value,
-            file:document.querySelector("[name='PDF_FILE']").files[0],
-            progress:0
-          })
-        }
+    if (document.querySelector("[name='PDF_FILE']").files[0]) {
+      uploadFiles.push({
+        type: "file",
+        name: document.querySelector("[name='PDF']").value,
+        file: document.querySelector("[name='PDF_FILE']").files[0],
+        progress: 0
+      })
+    }
 
-        if( document.querySelector("[name='MP4_FILE']").files[0]){
-          uploadFiles.push({
-            type:"file",
-            name:document.querySelector("[name='MP4']").value,
-            file:document.querySelector("[name='MP4_FILE']").files[0],
-            progress:0
-          })
-        }
+    if (document.querySelector("[name='MP4_FILE']").files[0]) {
+      uploadFiles.push({
+        type: "file",
+        name: document.querySelector("[name='MP4']").value,
+        file: document.querySelector("[name='MP4_FILE']").files[0],
+        progress: 0
+      })
+    }
 
-        const templatefiles=await publishHelper.current.getFiles()
-        templatefiles.forEach((file)=>{
-          uploadFiles.push({
-            type:"templateFile",
-            name:file.name,
-            data:file.data,
-            progress:0
-          })
-        })
+    const templatefiles = await publishHelper.current.getFiles()
+    templatefiles.forEach((file) => {
+      uploadFiles.push({
+        type: "templateFile",
+        name: file.name,
+        data: file.data,
+        progress: 0
+      })
+    })
 
-        setFilesToUpload(uploadFiles)
+    setFilesToUpload(uploadFiles)
   }
 
 
-  
 
 
-  useEffect(()=>{
+
+  useEffect(() => {
 
 
-    
 
 
-    if(isConnected==false){
+
+    if (isConnected == false) {
       socket.connect();
       socket.on('connect', onConnect);
       socket.on('disconnect', onDisconnect);
       socket.on('foo', onFooEvent);
-      socket.on("uploadProgress", (value)=>onUploadProgress(value))
+      socket.on("uploadProgress", (value) => onUploadProgress(value))
       socket.emit('connectInit', sessionId);
 
-      console.log(isConnected,"EEE");
+      console.log(isConnected, "EEE");
     }
 
-    return ()=>{
+    return () => {
       console.log("disconnected");
       socket?.disconnect();
     }
-    
-  },[])
 
-  useEffect(()=>{
+  }, [])
 
-    console.log("IN useEffect filestoupload:",filesToUpload);
+  useEffect(() => {
 
-  },[filesToUpload])
+    console.log("IN useEffect filestoupload:", filesToUpload);
 
-  useEffect(()=>{
+  }, [filesToUpload])
 
-     // console.log("IN on progress filesupload:",filesToUpload);
+  useEffect(() => {
 
-     if(onSocketProgress==null)return;
+    // console.log("IN on progress filesupload:",filesToUpload);
+
+    if (onSocketProgress == null) return;
     // 1. Find the todo with the provided id
     const currentTodoIndex = filesToUpload.findIndex((file) => file.name === onSocketProgress.name);
 
@@ -173,14 +172,14 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
       console.log("NOTFOUND", currentTodoIndex, filesToUpload, onSocketProgress.name);
     }
 
-  },[onSocketProgress])
+  }, [onSocketProgress])
 
 
   const handleUpload = async (e) => {
     e.preventDefault()
 
 
-    
+
     if (publishHelper.current.LINK_NAME.trim().length == 0) {
       alert("Please fill link name")
       return;
@@ -189,9 +188,9 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
     setUploading(true)
 
 
-    
 
-    
+
+
 
     try {
       var bodyFormData = new FormData();
@@ -200,12 +199,26 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
       bodyFormData.append('socketId', socketId);
       bodyFormData.append('ftpConfigName', publishHelper.current.FTP_CONFIG_NAME);
 
+      let tempdata={
+        campid: document.querySelector("[name='CAMP_ID']").value,
+        campname:document.querySelector("[name='CAMP_NAME']").value,
+        category:'CS',
+        clientcode:'ALPHA',
+        country:document.querySelector("[name='REGION']").value,
+        editedby:'Raj',
+        linktitle:document.querySelector("[name='EDM_TITLE']").value,
+        link:document.querySelector("[name='LINK_NAME']").value + '-edm.html',
+        linkcreatedby:'Raj',
+        language:document.querySelector("[name='LANGUAGE']").value,
+      }
+
+      bodyFormData.append('campdata',JSON.stringify(tempdata));
       let templateFiles = []
       filesToUpload.forEach(file => {
         if (file.type === "logo") {
           bodyFormData.append('files[]', file.file, file.name);
           bodyFormData.append('logoFile', file.name);
-        } else  if (file.type === "file") {
+        } else if (file.type === "file") {
           bodyFormData.append('files[]', file.file, file.name);
         } else if (file.type === "templateFile") {
           templateFiles.push(file)
@@ -226,7 +239,7 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
 
 
 
-          response.data.forEach((file)=>{
+          response.data.forEach((file) => {
             const currentTodoIndex = filesToUpload.findIndex((file) => file.name === file.name);
 
             // 2. Mark the todo as complete
@@ -241,15 +254,21 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
               console.log("NOTFOUND", currentTodoIndex, filesToUpload, file.name);
             }
           })
-          
 
 
-          
+          setUploadedLinks([...uploadedLinks,{
+            title: document.querySelector("[name='EDM_TITLE']").value,
+            links:`${publishHelper.current.BASE_URL}${document.querySelector("[name='LINK_NAME']").value}-edm.html`,
+          }])
+
           setUploading(false)
         })
         .catch(function (err) {
           //handle error
           console.log(err, "ERROR");
+
+          alert(err.response.data.message)
+
           setUploading(false)
         });
 
@@ -265,24 +284,69 @@ const FTPUploader = forwardRef(({publishHelper},ref) => {
 
   }
 
-
+  const handlePreview= async(e)=>{
+    e.preventDefault()
+ 
+    publishHelper.current.generateZip(JSZip,saveAs)
+  
+  }
 
   return (
     <>
-      <div>FTPUploader [socket:{(isConnected)?"Connected":"Not Connected"}]   {socketId}</div>
+      <span> [ server : {(isConnected) ? <span style={{color:'green'}}>Connected</span> : <span style={{color:'red'}}>Not Connected</span>} ]  </span>
 
+  
+        <div className='uploadListDiv'>
+          
+        <h4>File Upload List</h4>
 
-      <div>
-        {filesToUpload.map((file, i) => {
-          return <div className="fileToUpload" key={i}>
-            <div className='fileName'>{file.name} </div> <div className='fileProgress'>{file.progress}</div>
-          </div>
-        })}
-      </div>
+          {filesToUpload.map((file, i) => {
+            return <div className="fileToUpload" key={i}>
+              <div className='fileName'>{file.name} </div> <div className='fileProgress'>{file.progress}</div>
+            </div>
+          })}
 
+{(uploading == true) ? <button id='uploadFilesBtn' style={{background:'white',color:'#5a93f6'}}>Uploading... {uploadProgress}</button> : <button onClick={handleUpload} id='uploadFilesBtn'>Upload Files</button>}
 
+<button onClick={handlePreview} id='downloadZipBtn'>Download ZIP</button>
+        </div>
+      
 
-      {(uploading == true) ? <div>Uploading {uploadProgress}</div> : <button onClick={handleUpload}>Upload Files</button>}
+        <div className='linksTableAfterUpload'>
+        <h4>Links Table</h4>
+
+<table border="1" cellPadding="5">
+<thead>
+      <tr>
+      <th>Asset Name</th>
+      <th>Link</th>
+      </tr>
+    </thead>
+
+  <tbody>
+   {
+    uploadedLinks.length <=0 ?
+    <tr className='linksTableInner'>
+      <td>No Data Found</td>
+      <td><a href='' >No Data Found</a></td>
+    </tr>
+
+    :
+
+    uploadedLinks.map((val, i) => {
+      return  <tr className='linksTableInner' key={i}>
+      <td>{val.title}</td>
+      <td><a href={val.links} >{val.links}</a></td>
+    </tr>
+    })
+
+   }
+    
+  </tbody>
+</table>
+
+</div>
+    
 
     </>
 

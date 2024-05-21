@@ -32,7 +32,7 @@ preg_match_all($pattern, $temp, $matches);
 $email = array_shift($matches[0]);
 //DON'T CHANGE THIS CODE END
 
-$ENDURL = "##BASE_URL####LINK_NAME##-thankyou.html";
+$ENDURL = "##BASE_URL####LINK_NAME##-thanks.html";
 
 $subject = '##EMAIL_SUBJECT_LINE##';
 
@@ -97,7 +97,7 @@ $bodyD = "<table>
 		file_get_contents("https://engage.biz-tech-insights.com/api-final/api/public/index.php/api/insert/user/w8/".base64_encode($ENDURL).",".base64_encode($URL)."/".base64_encode($temp)."/".$camp_id."/".$ip_address); 
 		
 		//Change this
-		echo "<script>window.location.href = '##BASE_URL####LINK_NAME##-thankyou.html';</script>";
+		echo "<script>window.location.href = '##BASE_URL####LINK_NAME##-thanks.html';</script>";
 	}else{
 		//Change this
 		header( "refresh:3;url=##BASE_URL####LINK_NAME##-landing.html" );

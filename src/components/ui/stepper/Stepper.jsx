@@ -52,10 +52,10 @@ const Stepper = ({children,onStepChange=null}) => {
         }
        
 
-       <div>
+       {/* <div>
         <button onClick={handlePrevious} disabled={(step>0)?false:true}>Previous</button> 
         <button onClick={handleNext} disabled={(step<children.length-1)?false:true}>Next</button>
-        </div>
+        </div> */}
 
     </div>
 }

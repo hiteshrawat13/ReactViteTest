@@ -33,28 +33,14 @@ import Preview from '../../components/editor/Preview.jsx'
 import LanguageDropdownList from '../../components/ui/editor/LanguageDropdownList.jsx';
 
 
-
-
-
-class PublishMe{
-  constructor(data){
-    this.data=data;
-  }
-
-
-
-
-
-
-}
-
+import FTPUploader from '../../components/editor/FTPUploader.jsx'
 
 
 const AlphaEditor = () => {
 
 
   const formRef=useRef()
- 
+  const FTPUploaderRef=useRef()
 
   const [sameAsEDMTitle,setSameAsEDMTitle]=useState(true)
   const [sameAsEDMHeading,setSameAsEDMHeading]=useState(true)
@@ -76,28 +62,40 @@ const AlphaEditor = () => {
   const publishHelper=useRef(new PublishHelper())
 
 
-  const getData=()=>{
+  const updateData=()=>{
     const inputs=formRef.current.querySelectorAll("input:not([type='submit']) , select, textarea")
 
-    const data={
-      BASE_URL: inputs[3].options[inputs[3].selectedIndex].text == "EU"?"https://eu.itbusinessplus.com/whitepaper/" : "https://resource.itbusinessplus.com/whitepapers/",
-      YEAR:new Date().getFullYear().toString()
+    // below code is to add privacy policy acording to region =====================
+    if(inputs[4].options[inputs[4].selectedIndex].value == "EU"){
+      inputs[5].value =  "<a href='https://itbusinessplus.com/eu-privacy/'>EU Data Protection Policy</a>"
+
+    }else if(inputs[4].options[inputs[4].selectedIndex].value == "CASL"){
+      inputs[5].value = "<a href='https://www.itbusinessplus.com/casl-privacy-policy/'>CASL Privacy Policy</a>"
+
+    }else if(inputs[4].options[inputs[4].selectedIndex].value == "BOTH"){
+      inputs[5].value ="<a href='https://www.itbusinessplus.com/privacy-policy/'>ITBP Privacy Policy</a> | <a href='https://www.itbusinessplus.com/casl-privacy-policy/'>CASL Privacy Policy</a>"
+
+    }else{
+      inputs[5].value ="<a href='https://itbusinessplus.com/privacy-policy/'>ITBP Privacy Policy</a>"
     }
+
+    
+    // ===========================================================================
+
      for (let i = 0; i < inputs.length; i++) {
      
       // console.log(inputs[i].name,inputs[i].value);
       if(inputs[i].name){
         if(inputs[i].type=="checkbox"){
-          data[inputs[i].name]=inputs[i].checked
+          publishHelper.current[inputs[i].name]=inputs[i].checked
         }else{
-          data[inputs[i].name]=inputs[i].value
+          publishHelper.current[inputs[i].name]=inputs[i].value
         }
         
       }
      }
-     data["form"]=formBuilder.fields
-
-     return data;
+     publishHelper.current["form"]=formBuilder.fields
+     publishHelper.current.BASE_URL= (publishHelper.current["REGION"] == "EU")?"https://eu.itbusinessplus.com/whitepaper/" : "https://resource.itbusinessplus.com/whitepapers/"
   }
 
 
@@ -105,32 +103,60 @@ const AlphaEditor = () => {
     e.preventDefault();
    // alert("Submit Call")
 
-   
-
-
-   publishHelper.current.setData(getData())
   // publishHelper.current.openPreview("landing")
 
    console.log(publishHelper);
   }
 
 
-  const handlePreview= async(e)=>{
-    e.preventDefault()
- 
-    publishHelper.current.setData(getData())
-    publishHelper.current.generateZip(JSZip,saveAs)
-  
-  }
+
 
 
   const handleLinkNameChange=(e)=>{
 
-    document.querySelector("[name='THUMBNAIL_NAME']").value=e.target.value
-   // document.querySelector("[name='PDF']").value=e.target.value
+    document.querySelector("[name='THUMBNAIL_NAME']").value=e.target.value+'.png'
+   document.querySelector("[name='PDF']").value=e.target.value+'.pdf'
+   document.querySelector("[name='MP4']").value=e.target.value+'.mp4'
     //document.querySelector("[name='MP4']").value=e.target.value
   }
 
+
+
+  const handleCTAChange=(e)=>{
+
+    document.querySelector("[name='THUMBNAIL_NAME']").value=e.target.value+".png"
+    document.querySelector("[name='PDF']").value=e.target.value+".pdf"
+    document.querySelector("[name='MP4']").value=e.target.value+".mp4"
+  }
+
+
+
+  const handleStepChange= async (step)=>{
+    console.log("step",step);
+
+    switch(step){
+      case 0:
+        break;
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+      case 4:
+     
+      
+      
+
+      
+        
+        break;
+      case 5:
+   //alert("Publish Step")
+      FTPUploaderRef.current.handleUpdateFiles()
+        break;
+    }
+  }
 
 
 
@@ -165,7 +191,10 @@ console.log(e.target.value);
 
 
 
-<Stepper onStepChange={()=>{ publishHelper.current.setData(getData()) }}>
+<Stepper onStepChange={(step)=>{ 
+  updateData() 
+  handleStepChange(step)
+  }}>
   
   <Step title="Basic Info">
    {/* Step 1 */}
@@ -173,17 +202,25 @@ console.log(e.target.value);
 
    <LanguageDropdownList/>
 
+   <label>
+      <span>Campaign Name</span>
+      <input type="text" name="CAMP_NAME" placeholder='Paste Email Subject Line here' />
+    </label>
+
+
+   <label>
+      <span>Camp Id</span>
+      <input type="text" placeholder='e.g - 1234567' name="CAMP_ID" />
+    </label>
+
     <label>
       <span>Link Name</span>
       <input type="text" name="LINK_NAME" placeholder='e.g - Alpha-LP-1234567-client-FY-Q-demo-1' onChange={handleLinkNameChange} />
     </label>
 
-    <label>
-      <span>Camp Id</span>
-      <input type="text" placeholder='e.g - 1234567' name="CAMP_ID" />
-    </label>
+   
  
-    <label>
+    <label style={{display:'none'}}>
       <span>Asset Type</span>
       <select  name="ASSET_TYPE" >
         <option value="">Select...</option>
@@ -198,16 +235,18 @@ console.log(e.target.value);
     </label>
 
     <label>
-      <span>Privacy Policy</span>
-      <select  name="PRIVACY_POLICY"  >
+      <span>Region</span>
+      <select  name="REGION" >
         <option value="">Select...</option>
-        <option value="<a href='https://itbusinessplus.com/eu-privacy/'>EU Data Protection Policy<a/>">EU</option>
-        <option value="<a href='https://itbusinessplus.com/privacy-policy/'>ITBP Privacy Policy<a/>">NON-EU</option>
-        <option value="<a href='https://www.itbusinessplus.com/casl-privacy-policy/'>CASL Privacy Policy<a/>">CASL</option>
-        <option value="<a href='https://www.itbusinessplus.com/privacy-policy/'>ITBP Privacy Policy<a/> | <a href='https://www.itbusinessplus.com/casl-privacy-policy/'>CASL Privacy Policy<a/>">Both ( NON-EU & CASL )</option>
+        <option value="EU">EU</option>
+        <option value="NON-EU">NON-EU</option>
+        <option value="CASL">CASL</option>
+        <option value="BOTH">Both ( NON-EU & CASL )</option>
       </select>
     </label>
 
+    <input type="text" name="PRIVACY_POLICY" defaultValue='' hidden/>
+       
     <label>
       <span>Sponsored By Text</span>
       <input type="text" defaultValue={'Sponsored By'} name="SPONSORED_BY_TEXT"  />
@@ -326,7 +365,7 @@ console.log(e.target.value);
   <Step title="Assets & Logo">
     {/* Step 4 */}
     
-    <AssetPicker/>
+    <AssetPicker   publishHelper={publishHelper}/>
     {/* Step 4 end */}
   </Step>
 
@@ -337,11 +376,18 @@ console.log(e.target.value);
   </Step>
 
   
-  <Step title="Complete">
+  <Step title="Publish">
     {/* Step 6 */}
-    <input type="submit" value="Submit" />
+    <div className='uploaderOuter'>
+
+      {/* <input type="submit" value="Submit" /> */}
     <br/>
-    <button onClick={handlePreview}>Preview</button>
+   
+
+    <FTPUploader ref={FTPUploaderRef} publishHelper={publishHelper}/>
+    
+    </div>
+
     {/* Step 6 end */}
   </Step>
 

@@ -14,7 +14,7 @@ const Preview = ({publishHelper}) => {
         e.preventDefault()
         console.log(e.target.dataset);
         const page=e.target.dataset.page;
-        const html=await publishHelper.getPreview(page)
+        const html=await publishHelper.current.getPreview(page)
         //console.log(html,"WWWWWWWWWWWWWWWWWWWWW");
         loadHtml(html)
     }
@@ -23,9 +23,6 @@ const Preview = ({publishHelper}) => {
 
   return (
     <>
-
-   
-
     {
         publishHelper.getPreviewPages().map((page,i) => {
             return <button onClick={handlePreview} key={i} data-page={page}>{page}</button>

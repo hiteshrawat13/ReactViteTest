@@ -26,6 +26,11 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
 
 
 
+  function handleErrors(err){
+    console.log("SOCKET_ERROR",err);
+    
+  }
+
 
   function onConnect(e) {
     console.log("onConnected", e);
@@ -40,7 +45,14 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
   function onFooEvent(value) {
     console.log("ON FOO", value);
     setFooEvents(previous => [...previous, value]);
-    setSocketId(value.id)
+
+    if(value.id==null){
+      socket.connect();
+      alert("socket id not detected connecting again")
+    }else{
+      setSocketId(value.id)
+    }
+    
   }
 
   function onUploadProgress(value) {
@@ -135,6 +147,13 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
       socket.on('foo', onFooEvent);
       socket.on("uploadProgress", (value) => onUploadProgress(value))
       socket.emit('connectInit', sessionId);
+
+
+
+      socket.on('connect_error', err => handleErrors(err))
+      socket.on('connect_failed', err => handleErrors(err))
+
+      console.log(isConnected,"EEE");
 
     }
 
@@ -238,7 +257,11 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
 
 
 
+
           response.data.forEach((file) => {
+
+          response.data.forEach((file)=>{
+
             const currentTodoIndex = filesToUpload.findIndex((file) => file.name === file.name);
 
             // 2. Mark the todo as complete
@@ -269,11 +292,8 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
           alert(err.response.data.message)
 
           setUploading(false)
+      
         });
-
-
-
-
 
     } catch (error) {
       console.log(error);

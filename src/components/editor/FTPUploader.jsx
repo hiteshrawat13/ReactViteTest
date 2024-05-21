@@ -136,7 +136,6 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
       socket.on("uploadProgress", (value) => onUploadProgress(value))
       socket.emit('connectInit', sessionId);
 
-      console.log(isConnected, "EEE");
     }
 
     return () => {
@@ -186,7 +185,7 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
     }
 
     setUploading(true)
-
+    handleUpdateFiles()
 
 
 
@@ -229,7 +228,7 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
 
       axios({
         method: "post",
-        url: "http://localhost:8888/upload_file",
+        url: `http://localhost:8888/upload_file/${publishHelper.current.FTP_CONFIG_NAME}/${socketId}`,
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })

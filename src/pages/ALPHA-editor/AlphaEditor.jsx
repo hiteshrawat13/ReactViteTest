@@ -371,7 +371,7 @@ console.log(e.target.value);
 
   <Step title="Preview" >
     {/* Step 5 */}
-    <Preview  publishHelper={publishHelper}/>
+    <Preview  publishHelper={publishHelper.current}/>
     {/* Step 5 end */}
   </Step>
 

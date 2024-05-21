@@ -186,45 +186,17 @@ export default class PublishHelper{
         return data;
     }
 
-
     async getThanksVidHtml(forPreview=false){
         let data=await Utils.loadFile(this.templatesFolderPath+"thanks-vid.html");
 
             data=data.replaceAll(`##THANKYOU_TITLE##`,this["EDM_TITLE"])
                 
         for (const [key, value] of Object.entries(this)) {
-
-
-    async getThanks2Html(forPreview=false){
-        let data=await Utils.loadFile(this.templatesFolderPath+"thanks.html");
-       
-        if(this.alpha["SAME_AS_EDM_TITLETY"]==true){
-            data=data.replaceAll(`##THANKYOU_TITLE##`,this.alpha["EDM_TITLE"])
-        }
-        if(this.alpha["SAME_AS_EDM_HEADINGTY"]==true){
-            data=data.replaceAll(`##THANKYOU_HEADING##`,this.alpha["EDM_HEADING"])
-        }
-
-
-        if(this.alpha.assetFormat=="MP4" || this.alpha.assetFormat=="IFrame") {
-            
-            data=data.replaceAll(`header( "refresh:5;url=##baseUrl####asset##" );`,"" ) //remove redirect
-        }
-
-       // data=data.replaceAll(`##thankyouContentHtml##`,Utils.convertToEntities(this.alpha.thankyouContentHtml) )
-        
-
-        for (const [key, value] of Object.entries(this.alpha)) {
-
            try {
             if(typeof value === 'string' || value instanceof String)
                 data=data.replaceAll(`##${key}##`,Utils.convertToEntities(value) )
             } catch (error) {
-
                 console.log(error,key,value,"in getThankyou-vid Html");
-
-                console.log(error,key,value,"in getThankyou Html");
-
             }
         }
         return data;
@@ -232,7 +204,6 @@ export default class PublishHelper{
 
 
     async getFiles(preview=0){
-
 
         if(this["ASSET_FORMAT"]=='MP4' || this["ASSET_FORMAT"]=='IFrame'){
             return [
@@ -299,39 +270,6 @@ export default class PublishHelper{
         }else{
             return ["edm","landing","sendemail","thanks"]
         }
-
-        return [
-            {
-                name:`${this.LINK_NAME}-edm.html`,
-                data:(preview==0) && await this.getEdmHtml(),
-                preview:(preview==1) && await this.getEdmHtml(true) 
-            },
-            {
-                name:`${this.LINK_NAME}-landing.html`,
-                data:(preview==0) && await this.getLandingHtml(),
-                preview:(preview==1) && await this.getLandingHtml(true)
-            },
-            {
-                name:`${this.LINK_NAME}-sendemail.php`,
-                data:(preview==0) && await this.getSendemailHtml(),
-                preview:(preview==1) && await this.getSendemailHtml(true)
-            },
-            {
-                name:`${this.LINK_NAME}-thanks.html`,
-                data:(preview==0) && await this.getThanksHtml(),
-                preview:(preview==1) && await this.getThanksHtml()
-            },
-            {
-                name:`${this.LINK_NAME}-thanks2.html`,
-                data:(preview==0) && await this.getThanks2Html(),
-                preview:(preview==1) && await this.getThanks2Html()
-            }
-        ]
-    }
-
-    getPreviewPages(){
-        return ["edm","landing","sendemail","thanks","thanks2"]
-
     }
     async getPreview(page){
         switch(page){
@@ -347,16 +285,11 @@ export default class PublishHelper{
             case "thanks":
                 return await this.getThanksHtml(true);    
 
-
            
                 case "thanks-vid":
                     if(this["ASSET_FORMAT"]=='MP4' || this["ASSET_FORMAT"]=='IFrame'){
                     return await this.getThanksVidHtml(true);   
             }
-
-            case "thanks2":
-                    return await this.getThanks2Html(true);    
-
         }
     }
 

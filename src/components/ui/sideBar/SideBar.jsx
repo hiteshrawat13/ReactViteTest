@@ -85,48 +85,6 @@ const SideBar = () => {
                             label:"Create Campaign",
                             href:"/campaigns/create",
                             icon:<FaArrowAltCircleDown/>
-                        },
-                        {
-                            id:5222,
-                            type:"menuItem",
-                            label:"Create Campaign",
-                            href:"/campaigns/create",
-                            icon:<FaArrowAltCircleDown/>
-                        },
-                        {
-                            id:5233,
-                            type:"menuItem",
-                            label:"Create Campaign",
-                            href:"/campaigns/create",
-                            icon:<FaArrowAltCircleDown/>
-                        },
-                        {
-                            id:52444,
-                            type:"menuItem",
-                            label:"Create Campaign",
-                            href:"/campaigns/create",
-                            icon:<FaArrowAltCircleDown/>
-                        },
-                        {
-                            id:52555,
-                            type:"menuItem",
-                            label:"Create Campaign",
-                            href:"/campaigns/create",
-                            icon:<FaArrowAltCircleDown/>
-                        },
-                        {
-                            id:52666,
-                            type:"menuItem",
-                            label:"Create Campaign",
-                            href:"/campaigns/create",
-                            icon:<FaArrowAltCircleDown/>
-                        },
-                        {
-                            id:52777,
-                            type:"menuItem",
-                            label:"Create Campaign",
-                            href:"/campaigns/create",
-                            icon:<FaArrowAltCircleDown/>
                         }
                     ]
                 },

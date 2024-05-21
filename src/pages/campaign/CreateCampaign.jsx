@@ -10,7 +10,7 @@ const CreateCampaign = () => {
 
     const handleClick=(path)=>{
         
-        navigate(`/campaigns/create/${path}`)
+        navigate(`/${path}`)
     }
 
   return (
@@ -19,23 +19,23 @@ const CreateCampaign = () => {
     <div>CreateCampaign</div>
 
     <div className='cardHolder'>
-        <div className='campaignCard' onClick={()=>handleClick("TGIF")} >
+        <div className='campaignCard' onClick={()=>handleClick("editor")} >
           
           <div className='title'>TGIF</div>
           <div className='server'>resource.itbusinesstoday.com</div>
         </div>
-        <div className='campaignCard' onClick={()=>handleClick("Alpha")} >
+        <div className='campaignCard' onClick={()=>handleClick("editor2")} >
           <div className='title'>Alpha</div>
           <div className='server'>resource.itbusinesstoday.com</div>
         </div>
-        <div className='campaignCard' onClick={()=>handleClick("Arc")} > 
+        {/* <div className='campaignCard' onClick={()=>handleClick("Arc")} > 
           <div className='title'>Arc</div>
           <div className='server'>resource.itbusinesstoday.com</div>
         </div>
         <div className='campaignCard' onClick={()=>handleClick("EBN")}>
           <div className='title'>EBN</div>
           <div className='server'>resource.itbusinesstoday.com</div>
-        </div>
+        </div> */}
     </div>
    
 

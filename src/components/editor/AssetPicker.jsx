@@ -135,8 +135,8 @@ const AssetPicker = ({publishHelper}) => {
     <div className='AssetPicker'>
         
         <label>
-      <span>Logo</span>
-      <input type="text" name="LOGO_NAME" onChange={debounce((e)=>{handleLogoSearch(e)},500)}/>
+        <h4>LOGO</h4>
+      <input type="text" name="LOGO_NAME" placeholder='Search Logo Here' onChange={debounce((e)=>{handleLogoSearch(e)},500)}/>
       <ul className='logoList' style={{display:"none"}}>{
         (foundLogos==null)? <div>Logo Not Found</div> :        foundLogos.map((logo,i)=>{
 
@@ -147,13 +147,16 @@ const AssetPicker = ({publishHelper}) => {
             document.querySelector("#LOGO_PREVIEW").src=publishHelper.current.BASE_URL+"logo/"+logo
          
          
-          }}><img src={publishHelper.current.BASE_URL+"logo/"+logo} width={80}/></li>
+          }}><img src={publishHelper.current.BASE_URL+"logo/"+logo} /> <p> {logo}</p></li>
 
         })
         }
         
         <li>
-        <input type="file" name="LOGO_FILE" accept="image/png"
+
+        <div className="drop-zone" style={{margin:"10px auto",fontSize: '18px'}}>
+    <span className="drop-zone__prompt">Drop file here or click to upload</span>
+    <input type="file" name="LOGO_FILE" accept="image/png" className="drop-zone__input" 
       
       onChange={(e)=>{
         e.preventDefault()
@@ -169,48 +172,65 @@ const AssetPicker = ({publishHelper}) => {
         
       }}
       />
-      <div  
+  </div>
+       
+      {/* <div  
         onClick={(e)=>{e.preventDefault();document.querySelector(`[name="LOGO_FILE"]`).click();}}
         onDrop={(e)=>handleDrop(e,"LOGO_FILE")}
-        onDragOver={(event) => event.preventDefault()}>Drop Here</div>
+        onDragOver={(event) => event.preventDefault()}>Drop Here</div> */}
 
         </li>
         
         
         </ul>
       <br/>
-    
-        <img id='LOGO_PREVIEW' width={80}/>
+
+    <div id='logoPrevievDiv'>
+      <p>Logo Preview</p>
+    <img id='LOGO_PREVIEW'/>
+    </div>
+        
     </label>
     <label>
-      <span>Thumbnail</span>
+    <h4>Thumbnail</h4>
+      
       <input type="text" name="THUMBNAIL_NAME" /><br/>
-      <input type="file" name="THUMBNAIL_FILE" accept="image/png" 
-        onChange={(e)=>{
-          e.preventDefault()
-          alert("OnChange")
-          console.log("EEE");
-          var reader = new FileReader();
-          reader.onload = function (e) {
-            document.querySelector("#THUMBNAIL_PREVIEW").src=e.target.result
-          }
-          reader.readAsDataURL(e.target.files[0]);
-          
-        }}
-      />
 
-      <div  
+      <div className="drop-zone">
+    <span className="drop-zone__prompt">Drop file here or click to upload</span>
+    <input type="file" name="THUMBNAIL_FILE" accept="image/png" className="drop-zone__input" 
+     onChange={(e)=>{
+      e.preventDefault()
+      // alert("OnChange")
+      console.log("EEE");
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        document.querySelector("#THUMBNAIL_PREVIEW").src=e.target.result
+      }
+      reader.readAsDataURL(e.target.files[0]);
+      
+    }}
+    />
+  </div>
+
+
+      {/* <div  
         onClick={(e)=>{e.preventDefault();document.querySelector(`[name="THUMBNAIL_FILE"]`).click();}}
         onDrop={(e)=>handleDrop(e,"THUMBNAIL_FILE")}
-        onDragOver={(event) => event.preventDefault()}>Drop Here</div>
-        <img id='THUMBNAIL_PREVIEW' width={80}/>
+        onDragOver={(event) => event.preventDefault()}>Drop Here</div> */}
+
+        <div id='thumbnailPreviewDiv'>
+          <p>Thumbnail Preview</p>
+        <img id='THUMBNAIL_PREVIEW' />
+        </div>
+       
     </label>
 
 
 
+        <label>
+        <h4>Asset</h4>
         <div className='switches'>
-
-        
        
         <label className='form-control'>
         <FaFilePdf /> PDF
@@ -238,41 +258,61 @@ const AssetPicker = ({publishHelper}) => {
         </label>
 
         <input type="hidden" name="ASSET_FORMAT" value={selected}/>
-        
-  </div>
+        </div>
+ 
 {
-     <label style={{display:`${(selected=="PDF")?'block':'none'}`}}> 
+     <div style={{display:`${(selected=="PDF")?'block':'none'}`}}> 
     <span>Asset PDF</span>
     <input type="text" name="PDF"/><br/>
-    <input type="file" name="PDF_FILE" ref={pdfRef} />
-  
-  </label>
+
+    <div className="drop-zone">
+    <span className="drop-zone__prompt" id='pdfSelect'>Drop file here or click to upload</span>
+    <input type="file" name="PDF_FILE" ref={pdfRef} className="drop-zone__input"
+     onChange={(e)=>{
+      e.preventDefault()
+      // alert("OnChange")
+        document.querySelector("#pdfSelect").innerHTML=e.target.files[0].name
+     
+    }}
+     />
+  </div>
+
+
+  </div>
 }
 {
-    <label style={{display:`${(selected=="MP4")?'block':'none'}`}}>
+    <div style={{display:`${(selected=="MP4")?'block':'none'}`}}>
     <span>MP4</span>
     <input type="text" name="MP4"/><br/>
-    <input type="file" name="MP4_FILE" />
    
-  </label>
+    <div className="drop-zone">
+    <span className="drop-zone__prompt" id='videoSelect'>Drop file here or click to upload</span>
+    <input type="file" name="MP4_FILE" className="drop-zone__input" 
+      onChange={(e)=>{
+        e.preventDefault()
+        // alert("OnChange")
+          document.querySelector("#videoSelect").innerHTML=e.target.files[0].name
+       
+      }}
+    />
+  </div>
+  </div>
 }
     
 {
-  <label  style={{display:`${(selected=="Client Link")?'block':'none'}`}}>
+  <div  style={{display:`${(selected=="Client Link")?'block':'none'}`}}>
     <span>Client Link</span>
     <input type="text" name="CLIENT_LINK" />
-  </label>
+  </div>
 }
 {
-  <label  style={{display:`${(selected=="IFrame")?'block':'none'}`}}>
+  <div  style={{display:`${(selected=="IFrame")?'block':'none'}`}}>
     <span>Iframe Html</span>
     <input type="text" name="IFRAME" />
-  </label>
+  </div>
 }
-  
-  
 
-       
+</label>
 
      
     </div>

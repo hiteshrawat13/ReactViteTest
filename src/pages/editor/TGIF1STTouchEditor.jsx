@@ -198,15 +198,40 @@ const TGIF1STTouchEditor = () => {
       <input type="text" name="PIXEL_LINK" />
     </label>
 
+
+
+
     <label>
-      <span>Link Name</span>
-      <input type="text" name="LINK_NAME" onChange={handleLinkNameChange} />
+      <span>Campaign Name</span>
+      <input type="text" name="CAMP_NAME" placeholder='Paste Email Subject Line here' />
     </label>
+
 
     <label>
       <span>Camp Id</span>
       <input type="text" name="CAMP_ID" />
     </label>
+
+
+    <label>
+      <span>Link Name</span>
+      <input type="text" name="LINK_NAME" onChange={handleLinkNameChange} />
+    </label>
+
+
+    <label>
+      <span>Region</span>
+      <select  name="REGION" >
+        <option value="">Select...</option>
+        <option value="EU">EU</option>
+        <option value="NON-EU">NON-EU</option>
+        <option value="CASL">CASL</option>
+        <option value="BOTH">Both ( NON-EU & CASL )</option>
+      </select>
+    </label>
+
+    <input type="text" name="PRIVACY_POLICY" defaultValue='' hidden/>
+       
  
     <label>
       <span>Asset Type</span>
@@ -222,15 +247,7 @@ const TGIF1STTouchEditor = () => {
       </select>
     </label>
 
-    <label>
-      <span>Privacy Policy</span>
-      <select  name="PRIVACY_POLICY"  >
-        <option value="">Select...</option>
-        <option value="https://itbusinesstoday.com/eu-data-protection/">EU</option>
-        <option value="https://itbusinesstoday.com/us-privacy-policy/">NON-EU</option>
-        <option value="https://itbusinesstoday.com/casl-policy/">CASL</option>
-      </select>
-    </label>
+
 
     <label>
       <span>Sponsored By Text</span>
@@ -317,12 +334,10 @@ const TGIF1STTouchEditor = () => {
 
   <Step title="Publish">
     {/* Step 5 */}
-    <input type="submit" value="Submit" />
-    <br/>
-    <button onClick={handlePreview}>Download Zip</button>
 
+    <div className='uploaderOuter'>
      <FTPUploader ref={FTPUploaderRef} publishHelper={publishHelper}/>
-    
+    </div>
     {/* Step 5 end */}
   </Step>
 

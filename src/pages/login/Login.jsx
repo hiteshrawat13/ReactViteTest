@@ -16,17 +16,13 @@ const Login = () => {
   const handleSubmit= async (e)=>
   {
     e.preventDefault();
-
     const response = await axios.post("http://localhost:8888/user/login",{'empid':empId,'password':password});
-    
     console.log(response.data)
-    
   }
 
   return (
   
     <div className='Login'>
-    
     <form onSubmit={handleSubmit}>
     <div className='logoHolder'>
     <img src='./ondirect-logo.png'/>

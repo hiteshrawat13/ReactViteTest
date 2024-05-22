@@ -264,9 +264,7 @@ export default class PublishHelper{
 
     getPreviewPages(){
         if(this["ASSET_FORMAT"]=='MP4' || this["ASSET_FORMAT"]=='IFrame'){
-
-        return ["edm","landing","sendemail","thanks","thanks-vid"]
-
+            return ["edm","landing","sendemail","thanks","thanks-vid"]
         }else{
             return ["edm","landing","sendemail","thanks"]
         }
@@ -285,10 +283,9 @@ export default class PublishHelper{
             case "thanks":
                 return await this.getThanksHtml(true);    
 
-           
-                case "thanks-vid":
-                    if(this["ASSET_FORMAT"]=='MP4' || this["ASSET_FORMAT"]=='IFrame'){
-                    return await this.getThanksVidHtml(true);   
+            case "thanks-vid":
+                if(this["ASSET_FORMAT"]=='MP4' || this["ASSET_FORMAT"]=='IFrame'){
+                return await this.getThanksVidHtml(true);   
             }
         }
     }
@@ -318,10 +315,7 @@ export default class PublishHelper{
             zip.file(`${this.thumbnail}`, thumbnailFile );
         }
 
-        // const pdfFile=document.querySelector("[name='PDF']")?.files[0];
-
-        // const mp4File=document.querySelector("[name='mp4']")?.files[0]
-
+       
         zip.generateAsync({ type: "blob" }).then( (blob) =>{ // 1) generate the zip file
             saveAs(blob, `${this.LINK_NAME}`);                          // 2) trigger the download
         }, (err)=> {

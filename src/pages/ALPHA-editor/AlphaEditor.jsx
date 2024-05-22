@@ -41,6 +41,7 @@ const AlphaEditor = () => {
 
   const formRef=useRef()
   const FTPUploaderRef=useRef()
+  const PreviewRef=useRef()
 
   const [sameAsEDMTitle,setSameAsEDMTitle]=useState(true)
   const [sameAsEDMHeading,setSameAsEDMHeading]=useState(true)
@@ -148,6 +149,7 @@ const AlphaEditor = () => {
       
       
 
+      PreviewRef.current.handleUpdatePreviewButtons()
       
         
         break;
@@ -371,7 +373,7 @@ console.log(e.target.value);
 
   <Step title="Preview" >
     {/* Step 5 */}
-    <Preview  publishHelper={publishHelper.current}/>
+    <Preview  ref={PreviewRef} publishHelper={publishHelper.current}/>
     {/* Step 5 end */}
   </Step>
 

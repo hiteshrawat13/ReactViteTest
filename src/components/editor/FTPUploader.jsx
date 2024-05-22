@@ -21,12 +21,6 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
     handleUpdateFiles
   }));
 
-
-
-
-
-
-
   function onConnect(e) {
     console.log("onConnected", e);
     setIsConnected(true);
@@ -54,11 +48,7 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
       setUploadProgress(value.progress)
       return;
     }
-
-
     setOnSocketProgress(value)
-
-
   }
 
 
@@ -239,7 +229,7 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
 
 
           response.data.forEach((file) => {
-            const currentTodoIndex = filesToUpload.findIndex((file) => file.name === file.name);
+            const currentTodoIndex = filesToUpload.findIndex((file1) => file1.name === file.name);
 
             // 2. Mark the todo as complete
             if (currentTodoIndex != -1) {
@@ -263,11 +253,8 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
           setUploading(false)
         })
         .catch(function (err) {
-          //handle error
           console.log(err, "ERROR");
-
           alert(err.response.data.message)
-
           setUploading(false)
         });
 
@@ -285,9 +272,7 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
 
   const handlePreview= async(e)=>{
     e.preventDefault()
- 
     publishHelper.current.generateZip(JSZip,saveAs)
-  
   }
 
   return (

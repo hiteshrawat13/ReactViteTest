@@ -1,7 +1,10 @@
-import React, { useEffect, useRef,useCallback } from 'react'
+import React, { useEffect, useRef,useCallback,forwardRef ,useImperativeHandle,useState} from 'react'
 import { json } from 'react-router-dom';
 
-const Preview = ({publishHelper}) => {
+const Preview = forwardRef(({ publishHelper }, ref) => {
+
+    const [buttons,setButtons] = useState(publishHelper.getPreviewPages())
+
     const iframeRef=useRef()
 
     const loadHtml=(html)=>{
@@ -10,14 +13,27 @@ const Preview = ({publishHelper}) => {
         iframeRef.current.src = URL.createObjectURL(blob);
     }
 
-    const handlePreview=async (e)=>{
-        e.preventDefault()
-        console.log(e.target.dataset);
-        const page=e.target.dataset.page;
+    const handlePreview=async (page,e=null)=>{
+        e?.preventDefault()
+       
         const html=await publishHelper.getPreview(page)
         //console.log(html,"WWWWWWWWWWWWWWWWWWWWW");
         loadHtml(html)
     }
+
+
+    useImperativeHandle(ref, () => ({
+        handleUpdatePreviewButtons
+      }));
+
+
+      const handleUpdatePreviewButtons= () => {
+
+        setButtons(publishHelper.getPreviewPages())
+
+        const page1=buttons[0]
+        handlePreview(page1)
+      }
 
  
 
@@ -27,8 +43,8 @@ const Preview = ({publishHelper}) => {
    
 
     {
-        publishHelper.getPreviewPages().map((page,i) => {
-            return <button onClick={handlePreview} key={i} data-page={page}>{page}</button>
+        buttons.map((page,i) => {
+            return <button onClick={(e)=>handlePreview(page,e)} key={i}>{page}</button>
         })
     }
     
@@ -37,6 +53,6 @@ const Preview = ({publishHelper}) => {
     
     </>
   )
-}
+})
 
 export default Preview

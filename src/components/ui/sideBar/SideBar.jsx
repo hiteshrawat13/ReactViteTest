@@ -57,13 +57,6 @@ const SideBar = () => {
                     id:2121,
                     type:"divider",
                     
-                },
-                {
-                    id:4,
-                    type:"menuItem",
-                    label:"IP List",
-                    href:"/ip",
-                    icon:<FaArrowAltCircleDown/>
                 }
                 ,
                 {
@@ -89,13 +82,6 @@ const SideBar = () => {
                     ]
                 },
                 
-                {
-                    id:8,
-                    type:"menuItem",
-                    label:"Exit",
-                    href:"/exit",
-                    icon:<FaArrowAltCircleDown/>
-                },
                 
                 {
                     id:9,

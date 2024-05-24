@@ -46,12 +46,13 @@ const TGIF1STTouchEditor = () => {
   const formRef=useRef()
 
   const FTPUploaderRef=useRef()
+  const PreviewRef=useRef()
  
 
   const [sameAsEDMTitle,setSameAsEDMTitle]=useState(true)
   const [sameAsEDMAbstract,setSameAsEDMAbstract]=useState(true)
   const [sameAsEDMCTA,setSameAsEDMCTA]=useState(true)
-
+  const [newLandingPageFormat,setNewLandingPageFormat]=useState(false)
 
   const [isOpened,setOpened]=useState(false)
 
@@ -132,7 +133,7 @@ const TGIF1STTouchEditor = () => {
       case 4:
      
       
-      
+      PreviewRef.current.handleUpdatePreviewButtons()
 
       
         
@@ -221,7 +222,7 @@ const TGIF1STTouchEditor = () => {
 
     <label>
       <span>Region</span>
-      <select  name="REGION" >
+      <select  name="REGION"  >
         <option value="">Select...</option>
         <option value="EU">EU</option>
         <option value="NON-EU">NON-EU</option>
@@ -276,11 +277,8 @@ const TGIF1STTouchEditor = () => {
 
       <button onClick={(e)=>{
         e.preventDefault()
-       
-
         console.log(edmAbstractRichEditorRef.current,"REFEREnce|");
-
-       edmAbstractRichEditorRef.current.updateHtml("#####")
+        edmAbstractRichEditorRef.current.updateHtml("#####")
 
         }}>Fetch</button>
       <label>
@@ -309,6 +307,13 @@ const TGIF1STTouchEditor = () => {
         <label><input type="checkbox" name="SAME_AS_EDM_CTA" defaultChecked={sameAsEDMCTA} onChange={()=>{setSameAsEDMCTA(!sameAsEDMCTA)}} />Same as EDM CTA</label>
         { !sameAsEDMCTA && <input type="text" name="LANDING_CTA"  />}
       </label>
+
+      <label>
+        
+        <label><input type="checkbox" name="NEW_LANDING_PAGE_FORMAT" defaultChecked={newLandingPageFormat} onChange={()=>{setNewLandingPageFormat(!newLandingPageFormat)}} />New Landing Page Format</label>
+        { newLandingPageFormat && <><label>BOX TEXT<input type="text" name="NEW_LANDING_PAGE_FORMAT_BOX_TEXT"  defaultValue={"Please fill this form to get immediate access to this exclusive resource."} /> </label></>}
+      </label>
+
     </div>
   </div>
   {/* Step 2 end*/}
@@ -328,7 +333,7 @@ const TGIF1STTouchEditor = () => {
 
   <Step title="Preview" >
     {/* Step 5 */}
-    <Preview  publishHelper={publishHelper.current}/>
+    <Preview  ref={PreviewRef} publishHelper={publishHelper.current}/>
     {/* Step 5 end */}
   </Step>
 

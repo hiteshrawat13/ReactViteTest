@@ -147,46 +147,9 @@
                             <tbody>
                                 <tr>
 								
-									<!-- For PDF / URL -->
-                                    <td align="left" class="whitepaper" style="align-items: start; display: flex;">
-                                        <img style="width: 180px; height: auto !important;" alt="##EDM_TITLE##" src="##THUMBNAIL_URL##" style="border: 1px solid #c4c5c600;" />
-                                    </td>
+									##BODY##
 
-                                    <td align="left" valign="top" class="style1 thankyou">
-                                        <h1 style="color: #0066b2; font: 20px 'Noto Sans', sans-serif; margin: 0 0 10px 0; padding: 0;">Thank you...</h1>
-                                        <span style="font-size: 14px; line-height: 1.6;">
-                                            for downloading <strong>"##EDM_TITLE##"</strong> <br />
-                                            <br />
-                                            Your download will automatically start in <span id="countdown">5</span> seconds...<br />
-                                            If your download doesn't start automatically, <a  href="##ASSET_URL##">click here</a> to start your download.
-                                        </span>
-
-
-                                        ##THANKYOU##
-
-
-
-
-
-                                        <script>
-                                            var timeleft = 5;
-                                            var downloadTimer = setInterval(function () {
-                                                if (timeleft <= 0) {
-                                                    clearInterval(downloadTimer);
-                                                    document.getElementById("countdown").innerHTML = "0";
-                                                } else {
-                                                    document.getElementById("countdown").innerHTML = timeleft + "";
-                                                }
-                                                timeleft -= 1;
-                                            }, 1000);
-                                        </script>
-                                    </td>
-
-									<!-- For Webinar -->
-                                    <!-- <td colspan="2">
-									<div style="font-size:18px;">##EDM_TITLE##</div><br>
-									  ##IFRAME##
-									</td>-->
+									
 
                                 </tr>
                             </tbody>
@@ -197,8 +160,8 @@
                 <tr>
                     <td height="50" align="center" style="color: #d8d8d8; background: #202020;">
                         <div align="center" style="padding-top: 1.2%; padding-bottom: 1.3%; font-size: 11px; border-top: 1px solid #c0c0c0;">
-                            <a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> |
-                            <a href="##PRIVACY_POLICY##">Privacy Policy</a>
+							<a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> |
+                            ##PRIVACY##
                             <br />
                             Copyright &#169; ##YEAR## XDBS Corporation<br />
                             Hawthorne, CA 90250 USA<br />

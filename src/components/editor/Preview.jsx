@@ -19,6 +19,7 @@ const Preview = forwardRef(({ publishHelper }, ref) => {
         const html=await publishHelper.getPreview(page)
         //console.log(html,"WWWWWWWWWWWWWWWWWWWWW");
         loadHtml(html)
+
     }
 
 
@@ -35,23 +36,55 @@ const Preview = forwardRef(({ publishHelper }, ref) => {
         handlePreview(page1)
       }
 
- 
+
+ const changeWidthLiveLogo =(e)=>{
+iframeRef.current.contentDocument.getElementById('sponsorLogo').width=e.target.value;  
+ }
+
+ const changeWidthLiveThumbnail =(e)=>{
+  iframeRef.current.contentDocument.getElementById('edmThumbnail').width=e.target.value;  
+   }
 
   return (
-    <>
+    <div style={{display: 'flex'}}>
 
-   
-
-    {
+   <div className="iframOuter" style={{    width: '100%'}}>
+   {
         buttons.map((page,i) => {
-            return <button onClick={(e)=>handlePreview(page,e)} key={i}>{page}</button>
+            return <button className='previewBtns' 
+            style={{'padding': '4px 13px',
+              'border': '1px solid #5a93f6',
+              'color': '#5a93f6',
+              'background': 'transparent',
+              'margin-right': '10px'}} onClick={(e)=>handlePreview(page,e)} key={i}>{page}</button>
         })
     }
     
     <br></br>
-    <iframe ref={iframeRef} style={{width: "calc(100% - 70px)",height:"calc(100% - 70px)",minHeight:"1000px"}}></iframe>
+    <iframe ref={iframeRef} style={{'margin-top':'2px',width: "calc(100% - 70px)",height:"calc(100% - 70px)",minHeight:"1000px"}}></iframe>
+   </div>
+
+   
     
-    </>
+    <span style={{    background: 'white',
+    'display': 'inline-block',
+    'height': 'fit-content',
+    'padding': '10px',
+    'marginTop':'25px'
+    }}>
+
+      <h4 style={{'marginBottom':'10px','marginTop':'0px'}}>Editor :</h4>
+
+    <label htmlFor="" style={{'marginBottom':'10px'}}>Sponsor Logo Width</label>
+    <input type="number" style={{'padding':'5px'}} defaultValue={200} name="LOGO_WIDTH" onChange={changeWidthLiveLogo}/>
+
+    <label htmlFor="" style={{'marginBottom':'10px'}}>Thumbnail Width</label>
+    <input type="number" style={{'padding':'5px'}} defaultValue={300} name="THUMBNAIL_WIDTH" onChange={changeWidthLiveThumbnail}/>
+
+    </span>
+
+  
+    </div>
   )
 })
 

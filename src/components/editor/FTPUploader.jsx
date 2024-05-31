@@ -202,6 +202,8 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
       }
 
       bodyFormData.append('campdata',JSON.stringify(tempdata));
+
+      
       let templateFiles = []
       filesToUpload.forEach(file => {
         if (file.type === "logo") {

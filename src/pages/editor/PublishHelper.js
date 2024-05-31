@@ -89,6 +89,28 @@ export default class PublishHelper{
         
 
 
+       switch(this["REGION"]){
+        case "EU":
+            data=data.replaceAll(`##PRIVACY##`,`<a href="https://itbusinesstoday.com/eu-data-protection/">Privacy Policy</a>`)
+            break;
+        case "NON-EU":
+            data=data.replaceAll(`##PRIVACY##`,`<a href="https://itbusinesstoday.com/us-privacy-policy/">Privacy Policy</a>`)
+            break;
+        case "CASL":
+            data=data.replaceAll(`##PRIVACY##`,`<a href="https://itbusinesstoday.com/casl-policy/">CASL Privacy Policy</a>`)
+            break;
+        case "BOTH":
+            data=data.replaceAll(`##PRIVACY##`,`<a href="https://itbusinesstoday.com/us-privacy-policy/">Privacy Policy</a> | <a href="https://itbusinesstoday.com/casl-policy/">CASL Privacy Policy</a>
+            `)
+            break;
+        default:
+            data=data.replaceAll(`##PRIVACY##`,`<b style='color:red;'>NO PRIVACY SELECTED</b>`)
+            break
+
+
+       }
+
+
 
 
 
@@ -123,12 +145,73 @@ export default class PublishHelper{
             data=data.replaceAll(`##LANDING_ABSTRACT##`,this["EDM_ABSTRACT"])
         }
 
+        
+
         if(this["SAME_AS_EDM_CTA"]==true){
             data=data.replaceAll(`##LANDING_CTA##`,this["EDM_CTA"])
         }
+
+
+
+
+        switch(this["REGION"]){
+            case "EU":
+                data=data.replaceAll(`##PRIVACY##`,`<a href="https://itbusinesstoday.com/eu-data-protection/">Privacy Policy</a>`)
+                break;
+            case "NON-EU":
+                data=data.replaceAll(`##PRIVACY##`,`<a href="https://itbusinesstoday.com/us-privacy-policy/">Privacy Policy</a>`)
+                break;
+            case "CASL":
+                data=data.replaceAll(`##PRIVACY##`,`<a href="https://itbusinesstoday.com/casl-policy/">CASL Privacy Policy</a>`)
+                break;
+            case "BOTH":
+                data=data.replaceAll(`##PRIVACY##`,`<a href="https://itbusinesstoday.com/us-privacy-policy/">Privacy Policy</a> | <a href="https://itbusinesstoday.com/casl-policy/">CASL Privacy Policy</a>
+                `)
+                break;
+            default:
+                data=data.replaceAll(`##PRIVACY##`,`<b style='color:red;'>NO PRIVACY SELECTED</b>`)
+                break
+    
+    
+           }
+
+        
        
-        data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+this["LOGO_NAME"])
-        data=data.replaceAll(`##THUMBNAIL_URL##`,this["BASE_URL"]+this["THUMBNAIL_NAME"])
+
+
+        if(this["NEW_LANDING_PAGE_FORMAT"]==true){
+            data=data.replaceAll(`##BODY##`,` <div class="sub" align="center" style="background-color: #e2ebf3; margin-top: 30px; margin-left: 13px; display: inline-flex; padding: 10px; width: 250px;">
+            <p style="text-align: left; margin-top: 10px;">${this["NEW_LANDING_PAGE_FORMAT_BOX_TEXT"]}</p>
+            <p><img src="##BASE_URL##Arrow-pr.png" alt="Arrow" style="width: 50px; margin-top: 30px;" /></p>
+        </div>`)
+            data=data.replaceAll(`##BODY##`,``)
+        }else{
+            data=data.replaceAll(`##BODY##`,`<p style="font-size: 14px; line-height: 1.5; color: #505050;">${ (this["LANDING_ABSTRACT"])?this["LANDING_ABSTRACT"]:this["EDM_ABSTRACT"] }</p>`)
+        }
+       
+        if(forPreview==true){
+
+            const logoFile=document.querySelector("[name='LOGO_FILE']")?.files[0]
+            const thumbnailFile=document.querySelector("[name='THUMBNAIL_FILE']")?.files[0]
+           
+          if(logoFile){
+            const base64Logo= await this.getBase64( logoFile )
+            data=data.replaceAll(`##LOGO_URL##`,base64Logo)
+          }else{
+            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+this["LOGO_NAME"])
+          }
+
+          if(thumbnailFile){
+            const base64Thumbnail= await this.getBase64( thumbnailFile )
+            data=data.replaceAll(`##THUMBNAIL_URL##`,base64Thumbnail)
+          }else{
+            data=data.replaceAll(`##THUMBNAIL_URL##`,this["BASE_URL"]+this["THUMBNAIL_NAME"])
+          }
+          
+        }else{
+            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+this["LOGO_NAME"])
+            data=data.replaceAll(`##THUMBNAIL_URL##`,this["BASE_URL"]+this["THUMBNAIL_NAME"])
+        }
 
         const formHtml=Utils.getFormHtml(this.form,TGIFFormRenderer);
 
@@ -148,7 +231,18 @@ export default class PublishHelper{
     }
 
     async getSendemailHtml(forPreview=false){
+
+
+
         let data=await Utils.loadFile(this.templatesFolderPath+"sendemail.php");
+
+
+        if(forPreview==true){
+            //Remove sendmail redirect
+            data=data.replaceAll(`window.location.href = '##BASE_URL####LINK_NAME##-thanks.php';`,"" )
+            
+        }
+
         if(this.assetFormat=="ClientLink") {
             data=data.replaceAll(`##baseUrl####asset##`,this.clientLink )
         }
@@ -168,26 +262,122 @@ export default class PublishHelper{
 
 
         let data=await Utils.loadFile(this.templatesFolderPath+"thanks.php");
-        if(this.assetFormat=="MP4" || this.assetFormat=="IFrame") {
+
+        if(this["ASSET_FORMAT"]=='MP4' || this["ASSET_FORMAT"]=='IFrame'){
             data=data.replaceAll(`header( "refresh:5;url=##baseUrl####asset##" );`,"" ) //remove redirect
+           
+
+            if(this["ASSET_FORMAT"]=='MP4'){
+                data=data.replaceAll(`##BODY##`,`
+                <!-- For Webinar -->
+                <td colspan="2">
+                <div style="font-size:18px;">##EDM_TITLE##</div><br>
+                <video width="100%" height="480" controls>
+    <source src="${this["MP4"]}" type="video/mp4">
+    Your browser does not support the video tag.
+    </video>
+                </td>`)
+            }
+
+            if(this["ASSET_FORMAT"]=='IFrame'){
+                data=data.replaceAll(`##BODY##`,`
+                <!-- For Webinar -->
+                <td colspan="2">
+                <div style="font-size:18px;">##EDM_TITLE##</div><br>
+                <iframe src="${this["IFRAME"]}" width="100%" height="380" title="##EDM_TITLE##"></iframe>
+                </td>`)
+            }
+        }else{
+
+            const languageCode=this["LANGUAGE"]
+            console.log("===",translations);
+           
+
+
+            data=data.replaceAll(`##BODY##`,` <!-- For PDF / URL -->
+                                    <td align="left" class="whitepaper" style="align-items: start; display: flex;">
+                                        <img style="width: 180px; height: auto !important;" alt="##EDM_TITLE##" src="##THUMBNAIL_URL##" style="border: 1px solid #c4c5c600;" />
+                                    </td>
+
+                                    <td align="left" valign="top" class="style1 thankyou">
+                                        <!--<h1 style="color: #0066b2; font: 20px 'Noto Sans', sans-serif; margin: 0 0 10px 0; padding: 0;">Thank you...</h1>
+                                        <span style="font-size: 14px; line-height: 1.6;">
+                                            for downloading <strong>"##EDM_TITLE##"</strong> <br />
+                                            <br />
+                                            Your download will automatically start in <span id="countdown">5</span> seconds...<br />
+                                            If your download doesn't start automatically, <a  href="##ASSET_URL##">click here</a> to start your download.
+                                        </span>-->
+
+                                        ##THANKYOU##
+
+                                        <script>
+                                            var timeleft = 5;
+                                            var downloadTimer = setInterval(function () {
+                                                if (timeleft <= 0) {
+                                                    clearInterval(downloadTimer);
+                                                    document.getElementById("countdown").innerHTML = "0";
+                                                } else {
+                                                    document.getElementById("countdown").innerHTML = timeleft + "";
+                                                }
+                                                timeleft -= 1;
+                                            }, 1000);
+                                        </script>
+                                    </td>`);
+            data=data.replaceAll(`##THANKYOU##`,translations[languageCode]['thankyou'])
         }
-       // data=data.replaceAll(`##thankyouContentHtml##`,Utils.convertToEntities(this.thankyouContentHtml) )
+       
         
-       data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+this["LOGO_NAME"])
-       data=data.replaceAll(`##THUMBNAIL_URL##`,this["BASE_URL"]+this["THUMBNAIL_NAME"])
 
 
+        switch(this["REGION"]){
+            case "EU":
+                data=data.replaceAll(`##PRIVACY##`,`<a href="https://itbusinesstoday.com/eu-data-protection/">Privacy Policy</a>`)
+                break;
+            case "NON-EU":
+                data=data.replaceAll(`##PRIVACY##`,`<a href="https://itbusinesstoday.com/us-privacy-policy/">Privacy Policy</a>`)
+                break;
+            case "CASL":
+                data=data.replaceAll(`##PRIVACY##`,`<a href="https://itbusinesstoday.com/casl-policy/">CASL Privacy Policy</a>`)
+                break;
+            case "BOTH":
+                data=data.replaceAll(`##PRIVACY##`,`<a href="https://itbusinesstoday.com/us-privacy-policy/">Privacy Policy</a> | <a href="https://itbusinesstoday.com/casl-policy/">CASL Privacy Policy</a>
+                `)
+                break;
+            default:
+                data=data.replaceAll(`##PRIVACY##`,`<b style='color:red;'>NO PRIVACY SELECTED</b>`)
+                break;
+    
+           }
+
+
+        
+           if(forPreview==true){
+
+            const logoFile=document.querySelector("[name='LOGO_FILE']")?.files[0]
+            const thumbnailFile=document.querySelector("[name='THUMBNAIL_FILE']")?.files[0]
+           
+          if(logoFile){
+            const base64Logo= await this.getBase64( logoFile )
+            data=data.replaceAll(`##LOGO_URL##`,base64Logo)
+          }else{
+            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+this["LOGO_NAME"])
+          }
+
+          if(thumbnailFile){
+            const base64Thumbnail= await this.getBase64( thumbnailFile )
+            data=data.replaceAll(`##THUMBNAIL_URL##`,base64Thumbnail)
+          }else{
+            data=data.replaceAll(`##THUMBNAIL_URL##`,this["BASE_URL"]+this["THUMBNAIL_NAME"])
+          }
+          
+        }else{
+            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+this["LOGO_NAME"])
+            data=data.replaceAll(`##THUMBNAIL_URL##`,this["BASE_URL"]+this["THUMBNAIL_NAME"])
+        }
 
 
        
-        const languageCode=this["LANGUAGE"]
-        console.log("===",translations);
-        data=data.replaceAll(`##THANKYOU##`,translations[languageCode]['thankyou'])
         
-
-
-
-
         for (const [key, value] of Object.entries(this)) {
            try {
             if(typeof value === 'string' || value instanceof String)
@@ -226,6 +416,8 @@ export default class PublishHelper{
     }
 
     getPreviewPages(){
+
+        
         return ["edm","landing","sendemail","thanks"]
     }
     async getPreview(page){
@@ -233,7 +425,7 @@ export default class PublishHelper{
             case "edm":
                 return await this.getEdmHtml(true);    
             case "landing":
-                return await  this.getLandingHtml(true);    
+                return await this.getLandingHtml(true);    
             case "sendemail":
                 return await this.getSendemailHtml(true);    
             case "thanks":

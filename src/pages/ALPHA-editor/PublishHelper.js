@@ -295,6 +295,9 @@ export default class PublishHelper{
 
 
     async generateZip(JSZip,saveAs){
+
+        console.log(this,"======================");
+
         var zip = new JSZip();
         zip.file(`${this.LINK_NAME}-edm.html`, await this.getEdmHtml());
         zip.file(`${this.LINK_NAME}-landing.html`, await this.getLandingHtml());

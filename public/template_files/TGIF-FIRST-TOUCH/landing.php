@@ -218,11 +218,9 @@
                                 </tr>
                                 <tr>
                                     <td valign="top" align="left" style="padding-right: 2%;">
-                                        <p style="font-size: 14px; line-height: 1.5; color: #505050;">##LANDING_ABSTRACT##</p>
-                                        <div class="sub" align="center" style="background-color: #e2ebf3; margin-top: 30px; margin-left: 13px; display: inline-flex; padding: 10px; width: 250px;">
-                                            <p style="text-align: left; margin-top: 10px;">Please fill this form to get immediate access to this exclusive resource.</p>
-                                            <p><img src="##BASE_URL##Arrow-pr.png" alt="Arrow" style="width: 50px; margin-top: 30px;" /></p>
-                                        </div>
+                                    
+
+                                        ##BODY##
                                     </td>
                                 </tr>
                             </tbody>
@@ -232,8 +230,8 @@
                 <tr>
                     <td height="50" align="center" style="border-top: 1px solid rgb(192, 192, 192); background-color: #ffff;">
                         <div align="center" style="padding-top: 1%; padding-bottom: 1%; font-size: 11px;">
-                            <a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> |
-                            <a href="##PRIVACY_POLICY##">Privacy Policy</a>
+                        <a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> |
+                                            ##PRIVACY##
                             <br />
                             Copyright &#169; ##YEAR## XDBS Corporation <br />
                             Hawthorne, CA 90250 USA <br />

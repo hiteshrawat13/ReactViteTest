@@ -7,12 +7,12 @@ import './Editor.scss'
 import { fields } from './Fields'
 
 import Modal from '../../ui/Modal'
-
+import { FaPencilAlt } from "react-icons/fa";
 
 const SelectBoxEditor = ({data}) => {
+    const [isOptionsModalOpened,setOptionsModalOpened]=useState(false)
 
-    const [isModalOpened,setModalOpened]=useState(false)
-
+    const [options, setOptions] = useState(data.options)
 
 
 const formBuilder = useSelector(state => state.formBuilder)
@@ -78,17 +78,22 @@ function stripHtml(html)
 
 
 
-            { <Modal setOpened={setModalOpened} isOpened={isModalOpened} title={"My Modal"} style={{width:"90%",height:"90%"}}>
-    
-<label style={{width:"90%",height:"90%"}}>
-                <span>Options  <button onClick={handleRemoveTags}>Remove Tags</button></span>
-                <textarea ref={textareaRef} name="options" defaultValue={data.options} style={{width:"90%",height:"90%"}}></textarea>
-              
-            </label>
-    
-    </Modal>}
+            <label>
+                <span>Options</span>
+                <textarea name="options" value={options} onChange={(e) => { setOptions(e.target.value) }}></textarea>
 
-<button className='openModal' onClick={(e)=>{e.preventDefault();setModalOpened(true)} }>Edit Option Values</button>
+            </label>
+
+
+            {<Modal setOpened={setOptionsModalOpened} isOpened={isOptionsModalOpened} title={"My Modal"} style={{ width: "90%", height: "90%" }}>
+
+                <label style={{ width: "90%", height: "90%" }}>
+                    <span>Label</span>
+                    <textarea type="text" name="options" value={options} onChange={(e) => { setOptions(e.target.value) }} style={{ width: "90%", height: "90%" }} />
+                </label>
+
+            </Modal>}
+            <button className='openModal' onClick={(e) => { e.preventDefault(); setOptionsModalOpened(true) }}><FaPencilAlt /></button>
 
 
           

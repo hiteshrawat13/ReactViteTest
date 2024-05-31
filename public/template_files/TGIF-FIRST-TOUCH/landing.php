@@ -189,7 +189,7 @@
                                     </td>
                                     <td width="234" align="right">
                                         <div style="font-size: 14px; margin-top: 10px;">##SPONSORED_BY_TEXT##</div>
-                                        <img src="##LOGO_URL##" alt="Logo" style="width: ##LOGO_WIDTH##px; margin-top: 1px; margin-bottom: 1px;" />
+                                        <img id="sponsorLogo" src="##LOGO_URL##" alt="Logo" width="##LOGO_WIDTH##" style=" margin-top: 1px; margin-bottom: 1px;" />
                                     </td>
 
                                     <!-- LOGO -->
@@ -210,7 +210,7 @@
                                     <td width="53%" height="200" align="left" valign="top" style="">
                                         <!-- PDF IMAGE -->
                                         <div style="">
-                                            <img src="##THUMBNAIL_URL##" style="width: 300px; border: 1px solid #e5e5e5; border-radius: 5px;" alt="thumbnail" />
+                                            <img id="edmThumbnail" src="##THUMBNAIL_URL##" width="##THUMBNAIL_WIDTH##" style=" border: 1px solid #e5e5e5; border-radius: 5px;" alt="thumbnail" />
                                         </div>
                                     </td>
                                     <td rowspan="2" width="47%" valign="top" align="left">

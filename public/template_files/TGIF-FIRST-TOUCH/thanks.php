@@ -129,7 +129,7 @@
                                     </td>
                                     <td width="234" align="right">
                                         <span style="font-size: 14px;">##SPONSORED_BY_TEXT##</span><br />
-                                        <img src="##LOGO_URL##" alt="Logo" style="width: ##LOGO_WIDTH##px; margin-top: 8px;" />
+                                        <img id="sponsorLogo" src="##LOGO_URL##" alt="Logo" width="##LOGO_WIDTH##" style=" margin-top: 8px;" />
                                     </td>
                                 </tr>
                             </tbody>

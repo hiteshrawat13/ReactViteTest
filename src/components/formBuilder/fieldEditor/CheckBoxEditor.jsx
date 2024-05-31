@@ -7,11 +7,11 @@ import Modal from '../../ui/Modal'
 import './Editor.scss'
 import { fields } from './Fields'
 
-
+import { FaPencilAlt } from "react-icons/fa";
 const CheckBoxEditor = ({data}) => {
     const [isModalOpened,setModalOpened]=useState(false)
-
-
+    const [isLabelModalOpened, setLabelModalOpened] = useState(false)
+    const [label, setLabel] = useState(data.label)
 const formBuilder = useSelector(state => state.formBuilder)
 const dispatch=useDispatch()
 
@@ -49,18 +49,20 @@ const handleSubmit=(e)=>{
             </label>
 
        
-
-            { <Modal setOpened={setModalOpened} isOpened={isModalOpened} title={"My Modal"} style={{width:"90%",height:"90%"}}>
-    
-            <label  style={{width:"90%",height:"90%"}}>
+            <label>
                 <span>Label</span>
-                <textarea type="text" name="label" defaultValue={data.label}  style={{width:"90%",height:"90%"}}/>
+                <textarea name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} />
             </label>
-        
-        </Modal>}
-        <button className='openModal' onClick={(e)=>{e.preventDefault();setModalOpened(true)} }>Edit Label Text</button>
 
+            {<Modal setOpened={setLabelModalOpened} isOpened={isLabelModalOpened} title={"My Modal"} style={{ width: "90%", height: "90%" }}>
 
+                <label style={{ width: "90%", height: "90%" }}>
+                    <span>Label</span>
+                    <textarea type="text" name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} style={{ width: "90%", height: "90%" }} />
+                </label>
+
+            </Modal>}
+            <button className='openModal' onClick={(e) => { e.preventDefault(); setLabelModalOpened(true) }}><FaPencilAlt /></button>
 
             <label>
                 <span>Name</span>

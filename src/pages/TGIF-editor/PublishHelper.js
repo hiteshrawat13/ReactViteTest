@@ -297,7 +297,7 @@ export default class PublishHelper{
            
             data=data.replaceAll(`##BODY##`,` <!-- For PDF / URL -->
                                     <td align="left" class="whitepaper" style="align-items: start; display: flex;">
-                                        <img style="width: 180px; height: auto !important;" alt="##EDM_TITLE##" src="##THUMBNAIL_URL##" style="border: 1px solid #c4c5c600;" />
+                                        <img id="edmThumbnail" style=" height: auto !important;" alt="##EDM_TITLE##" src="##THUMBNAIL_URL##" width="##THUMBNAIL_WIDTH##" style="border: 1px solid #c4c5c600;" />
                                     </td>
 
                                     <td align="left" valign="top" class="style1 thankyou">

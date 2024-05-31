@@ -10,8 +10,11 @@ import Modal from '../../ui/Modal'
 import { FaPencilAlt } from "react-icons/fa";
 
 const SelectBoxEditor = ({data}) => {
-    const [isOptionsModalOpened,setOptionsModalOpened]=useState(false)
+    const [isLabelModalOpened, setLabelModalOpened] = useState(false)
+    const [isOptionsModalOpened, setOptionsModalOpened] = useState(false)
 
+
+    const [label, setLabel] = useState(data.label)
     const [options, setOptions] = useState(data.options)
 
 
@@ -68,8 +71,19 @@ function stripHtml(html)
 
             <label>
                 <span>Label</span>
-                <input type="text" name="label" defaultValue={data.label}/>
+                <textarea name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} />
             </label>
+
+            {<Modal setOpened={setLabelModalOpened} isOpened={isLabelModalOpened} title={"My Modal"} style={{ width: "90%", height: "90%" }}>
+
+                <label style={{ width: "90%", height: "90%" }}>
+                    <span>Label</span>
+                    <textarea type="text" name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} style={{ width: "90%", height: "90%" }} />
+                </label>
+
+            </Modal>}
+            <button className='openModal' onClick={(e) => { e.preventDefault(); setLabelModalOpened(true) }}><FaPencilAlt /></button>
+
 
             <label>
                 <span>Name</span>

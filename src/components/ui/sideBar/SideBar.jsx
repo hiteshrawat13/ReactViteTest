@@ -80,16 +80,10 @@ const SideBar = () => {
                             icon:<FaArrowAltCircleDown/>
                         }
                     ]
-                },
-                
-                
-                {
-                    id:9,
-                    type:"menuItem",
-                    label:"Editor",
-                    href:"/editor",
-                    icon:<FaArrowAltCircleDown/>
                 }
+                
+                
+               
               
           
     ]

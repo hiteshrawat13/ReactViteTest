@@ -137,7 +137,7 @@ const TGIFFormRenderer = {
    .custom-radio{
            display: flex;
            align-items: center;
-       gap: 3px;
+       gap: 4px;
    }
 
    .custom-radio p{
@@ -147,7 +147,6 @@ const TGIFFormRenderer = {
 <td colspan="2" align="center" valign="top" style="padding-top: 10px;">
    <div   style="color: #FF0000; line-height:1%;
        padding: 5px;
-       margin-top:10px;
        text-align: left;
    
        font:  13px/18px 'Noto Sans', sans-serif;;">  
@@ -156,7 +155,7 @@ const TGIFFormRenderer = {
 
        <div class="check-group">
 
-       ${obj.options.split(/\r?\n/).map(option => `
+       ${obj.options?.split(/\r?\n/).map(option => `
        <label class="custom-control custom-radio" style="color:#000">
            <input type="radio"   name="${obj.name}" value="${option.trim()}" ${obj.required ? "required" : ""} >
            <p>${option.trim()}</p>

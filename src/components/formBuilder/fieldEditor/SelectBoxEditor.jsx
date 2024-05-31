@@ -6,12 +6,21 @@ import { updateField } from '../../../store/formBuilder/FormBuilderSlice'
 import './Editor.scss'
 import { fields } from './Fields'
 
+import Modal from '../../ui/Modal'
+
 
 const SelectBoxEditor = ({data}) => {
+
+    const [isModalOpened,setModalOpened]=useState(false)
+
+
+
 const formBuilder = useSelector(state => state.formBuilder)
 const dispatch=useDispatch()
 
 const divRef=useRef()
+
+const textareaRef=useRef()
 
     
 const handleSubmit=(e)=>{
@@ -33,12 +42,25 @@ const handleSubmit=(e)=>{
 }
 
 
+const handleRemoveTags=()=>{
+   const strippedHtml= stripHtml(textareaRef.current.value)
+   textareaRef.current.value=strippedHtml
+}
+
+function stripHtml(html)
+{
+   let tmp = document.createElement("DIV");
+   tmp.innerHTML = html;
+   return tmp.textContent || tmp.innerText || "";
+}
 
 
   return (
  
      <div ref={divRef} className='editorForm'>
        
+       
+
             <label>
                 <span>Id</span>
                 <input type="text" name="id" defaultValue={data.id} />
@@ -55,10 +77,26 @@ const handleSubmit=(e)=>{
             </label>
 
 
-            <label>
-                <span>Options</span>
-                <textarea name="options" defaultValue={data.options}></textarea>
+
+            { <Modal setOpened={setModalOpened} isOpened={isModalOpened} title={"My Modal"} style={{width:"90%",height:"90%"}}>
+    
+<label style={{width:"90%",height:"90%"}}>
+                <span>Options  <button onClick={handleRemoveTags}>Remove Tags</button></span>
+                <textarea ref={textareaRef} name="options" defaultValue={data.options} style={{width:"90%",height:"90%"}}></textarea>
               
+            </label>
+    
+    </Modal>}
+
+<button className='openModal' onClick={(e)=>{e.preventDefault();setModalOpened(true)} }>Edit Option Values</button>
+
+
+          
+
+
+            <label>
+                <span>Full Width?</span>
+                <input type="checkbox" name="isFullWidth" defaultChecked={data.isFullWidth} />
             </label>
 
             <label>

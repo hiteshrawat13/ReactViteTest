@@ -2,12 +2,16 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { updateField } from '../../../store/formBuilder/FormBuilderSlice'
 
+import Modal from '../../ui/Modal'
 
 import './Editor.scss'
 import { fields } from './Fields'
 
 
 const CheckBoxEditor = ({data}) => {
+    const [isModalOpened,setModalOpened]=useState(false)
+
+
 const formBuilder = useSelector(state => state.formBuilder)
 const dispatch=useDispatch()
 
@@ -44,10 +48,19 @@ const handleSubmit=(e)=>{
                 <input type="text" name="id" defaultValue={data.id} />
             </label>
 
-            <label>
+       
+
+            { <Modal setOpened={setModalOpened} isOpened={isModalOpened} title={"My Modal"} style={{width:"90%",height:"90%"}}>
+    
+            <label  style={{width:"90%",height:"90%"}}>
                 <span>Label</span>
-                <input type="text" name="label" defaultValue={data.label}/>
+                <textarea type="text" name="label" defaultValue={data.label}  style={{width:"90%",height:"90%"}}/>
             </label>
+        
+        </Modal>}
+        <button className='openModal' onClick={(e)=>{e.preventDefault();setModalOpened(true)} }>Edit Label Text</button>
+
+
 
             <label>
                 <span>Name</span>
@@ -56,7 +69,7 @@ const handleSubmit=(e)=>{
 
             <label>
                 <span>Value</span>
-                <textarea name="value" defaultValue={data.value}></textarea>
+                <input type="text" name="value" defaultValue={data.value} />
               
             </label>
 

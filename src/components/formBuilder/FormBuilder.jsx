@@ -7,15 +7,15 @@ import { fields,editors } from './fieldEditor/Fields'
 
 
 
- import  f from './../../pages/editor/default-fields.json'
+ import  f from '../../pages/TGIF-editor/default-fields.json'
 
 
- const CTAEditor = React.lazy(() => import("./fieldEditor/CTAEditor"));
+const CTAEditor = React.lazy(() => import("./fieldEditor/CTAEditor"));
 const CheckBoxEditor = React.lazy(() => import( "./fieldEditor/CheckBoxEditor"));
 const CheckGroupEditor = React.lazy(() => import( "./fieldEditor/CheckGroupEditor"));
 const HiddenInputEditor = React.lazy(() => import( "./fieldEditor/HiddenInputEditor"));
-const  HtmlEditor = React.lazy(() => import( "./fieldEditor/HtmlEditor"));
-const  RadioGroupEditor= React.lazy(() => import( "./fieldEditor/RadioGroupEditor"));
+const HtmlEditor = React.lazy(() => import( "./fieldEditor/HtmlEditor"));
+const RadioGroupEditor= React.lazy(() => import( "./fieldEditor/RadioGroupEditor"));
 const SelectBoxEditor = React.lazy(() => import( "./fieldEditor/SelectBoxEditor"));
 const TextBoxEditor = React.lazy(() => import( "./fieldEditor/TextBoxEditor"));
 const TextEditor = React.lazy(() => import( "./fieldEditor/TextEditor"));

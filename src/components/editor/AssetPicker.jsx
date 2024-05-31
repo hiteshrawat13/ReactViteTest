@@ -171,6 +171,9 @@ const AssetPicker = ({publishHelper}) => {
         reader.readAsDataURL(e.target.files[0]);
         
       }}
+
+      onDrop={(e)=>handleDrop(e,"LOGO_FILE")}
+      onDragOver={(event) => event.preventDefault()}
       />
   </div>
        
@@ -210,6 +213,9 @@ const AssetPicker = ({publishHelper}) => {
       reader.readAsDataURL(e.target.files[0]);
       
     }}
+
+    onDrop={(e)=>handleDrop(e,"THUMBNAIL_FILE")}
+    onDragOver={(event) => event.preventDefault()}
     />
   </div>
 
@@ -274,6 +280,10 @@ const AssetPicker = ({publishHelper}) => {
         document.querySelector("#pdfSelect").innerHTML=e.target.files[0].name
      
     }}
+
+
+    onDrop={(e)=>handleDrop(e,"PDF_FILE")}
+    onDragOver={(event) => event.preventDefault()}
      />
   </div>
 

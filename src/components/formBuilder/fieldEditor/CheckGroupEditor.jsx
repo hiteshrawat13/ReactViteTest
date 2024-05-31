@@ -3,11 +3,22 @@ import { useSelector,useDispatch } from 'react-redux'
 import { updateField } from '../../../store/formBuilder/FormBuilderSlice'
 
 
+import Modal from '../../ui/Modal'
+
 import './Editor.scss'
 import { fields } from './Fields'
 
+import { FaPencilAlt } from "react-icons/fa";
 
 const CheckGroupEditor = ({data}) => {
+
+
+    const [label, setLabel] = useState(data.label)
+    const [options, setOptions] = useState(data.options)
+
+const [isLabelModalOpened,setLabelModalOpened]=useState(false)
+const [isOptionsModalOpened,setOptionsModalOpened]=useState(false)
+
 const formBuilder = useSelector(state => state.formBuilder)
 const dispatch=useDispatch()
 
@@ -46,8 +57,19 @@ const handleSubmit=(e)=>{
 
             <label>
                 <span>Label</span>
-                <input type="text" name="label" defaultValue={data.label}/>
+                <textarea name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} />
             </label>
+
+            {<Modal setOpened={setLabelModalOpened} isOpened={isLabelModalOpened} title={"My Modal"} style={{ width: "90%", height: "90%" }}>
+
+                <label style={{ width: "90%", height: "90%" }}>
+                    <span>Label</span>
+                    <textarea type="text" name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} style={{ width: "90%", height: "90%" }} />
+                </label>
+
+            </Modal>}
+            <button className='openModal' onClick={(e) => { e.preventDefault(); setLabelModalOpened(true) }}><FaPencilAlt /></button>
+
 
             <label>
                 <span>Name</span>
@@ -57,9 +79,20 @@ const handleSubmit=(e)=>{
 
             <label>
                 <span>Options</span>
-                <textarea name="options" defaultValue={data.options}></textarea>
-              
+                <textarea name="options" value={options} onChange={(e) => { setOptions(e.target.value) }}></textarea>
+
             </label>
+
+
+            {<Modal setOpened={setOptionsModalOpened} isOpened={isOptionsModalOpened} title={"My Modal"} style={{ width: "90%", height: "90%" }}>
+
+                <label style={{ width: "90%", height: "90%" }}>
+                    <span>Label</span>
+                    <textarea type="text" name="options" value={options} onChange={(e) => { setOptions(e.target.value) }} style={{ width: "90%", height: "90%" }} />
+                </label>
+
+            </Modal>}
+            <button className='openModal' onClick={(e) => { e.preventDefault(); setOptionsModalOpened(true) }}><FaPencilAlt /></button>
 
             <label>
                 <span>Required?</span>

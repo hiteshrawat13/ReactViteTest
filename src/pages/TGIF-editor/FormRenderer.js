@@ -108,6 +108,8 @@ const TGIFFormRenderer = {
 
        <div class="check-group">
 
+
+       
        ${obj.options.split(/\r?\n/).map(option => `
        <div class="custom-control custom-radio" style="color:#000">
            <input type="checkbox"    name="${obj.name}[]" value="${option.trim()}" ${obj.required ? "required" : ""}>

@@ -52,7 +52,7 @@ const TGIF1STTouchEditor = () => {
   const [sameAsEDMTitle,setSameAsEDMTitle]=useState(true)
   const [sameAsEDMAbstract,setSameAsEDMAbstract]=useState(true)
   const [sameAsEDMCTA,setSameAsEDMCTA]=useState(true)
-  const [newLandingPageFormat,setNewLandingPageFormat]=useState(false)
+  const [newLandingPageFormat,setNewLandingPageFormat]=useState(true)
 
   const [isOpened,setOpened]=useState(false)
 
@@ -83,6 +83,22 @@ const TGIF1STTouchEditor = () => {
       }
      }
      publishHelper.current["form"]=formBuilder.fields
+  }
+
+
+  const validateData=()=>{
+    let errors=[]
+    const inputs=formRef.current.querySelectorAll("input:not([type='submit']) , select, textarea")
+    for (let i = 0; i < inputs.length; i++) {
+     // console.log(inputs[i].name,inputs[i].value);
+      if(inputs[i].hasAttribute('required') &&  inputs[i].value==='' ){
+        errors.push(inputs[i].name)
+      }
+    }
+
+    console.log(errors.map(err=>err+ " is required").join("\n"));
+
+    alert(errors.map(err=>err+ " is required").join("\n"))
   }
 
 
@@ -120,9 +136,10 @@ const TGIF1STTouchEditor = () => {
 
   const handleStepChange= async (step)=>{
     console.log("step",step);
-
+    validateData()
     switch(step){
       case 0:
+        
         break;
       case 1:
         break;
@@ -185,8 +202,8 @@ const TGIF1STTouchEditor = () => {
 
    <label>
       <span>Language</span>
-      <select  name="LANGUAGE" >
-       
+      <select  name="LANGUAGE" required>
+        
         <option value="en-us">en-us</option>
        
       </select>
@@ -196,7 +213,7 @@ const TGIF1STTouchEditor = () => {
 
    <label>
       <span>Pixel Link</span>
-      <input type="text" name="PIXEL_LINK" />
+      <input type="text" name="PIXEL_LINK" required/>
     </label>
 
 
@@ -204,25 +221,25 @@ const TGIF1STTouchEditor = () => {
 
     <label>
       <span>Campaign Name</span>
-      <input type="text" name="CAMP_NAME" placeholder='Paste Email Subject Line here' />
+      <input type="text" name="CAMP_NAME" required placeholder='Paste Email Subject Line here' />
     </label>
 
 
     <label>
       <span>Camp Id</span>
-      <input type="text" name="CAMP_ID" />
+      <input type="text" name="CAMP_ID" required />
     </label>
 
 
     <label>
       <span>Link Name</span>
-      <input type="text" name="LINK_NAME" onChange={handleLinkNameChange} />
+      <input type="text" name="LINK_NAME" required onChange={handleLinkNameChange} />
     </label>
 
 
     <label>
       <span>Region</span>
-      <select  name="REGION"  >
+      <select  name="REGION"  required>
         <option value="">Select...</option>
         <option value="EU">EU</option>
         <option value="NON-EU">NON-EU</option>
@@ -236,7 +253,7 @@ const TGIF1STTouchEditor = () => {
  
     <label>
       <span>Asset Type</span>
-      <select  name="ASSET_TYPE" >
+      <select  name="ASSET_TYPE" required>
         <option value="">Select...</option>
         <option value="White Paper">White Paper</option>
         <option value="Buyers/Comparision Guide">Buyers/Comparision Guide</option>
@@ -252,12 +269,12 @@ const TGIF1STTouchEditor = () => {
 
     <label>
       <span>Sponsored By Text</span>
-      <input type="text" name="SPONSORED_BY_TEXT" defaultValue={"Sponsored By"}  />
+      <input type="text" name="SPONSORED_BY_TEXT" required defaultValue={"Sponsored By"}  />
     </label>
 
     <label>
       <span>Logo width</span>
-      <input type="number" name="LOGO_WIDTH" defaultValue={200}  />
+      <input type="number" name="LOGO_WIDTH" required defaultValue={200}  />
     </label>
    </div>
    {/* Step 1 end */}
@@ -271,24 +288,24 @@ const TGIF1STTouchEditor = () => {
     <h4>EDM Page Content</h4>
       <label>
           <span>EDM Page Title</span>
-          <input type="text" name="EDM_TITLE" />
+          <input type="text" name="EDM_TITLE" required />
       </label>
 
-
+{/* 
       <button onClick={(e)=>{
         e.preventDefault()
         console.log(edmAbstractRichEditorRef.current,"REFEREnce|");
         edmAbstractRichEditorRef.current.updateHtml("#####")
 
-        }}>Fetch</button>
+        }}>Fetch</button> */}
       <label>
         <span>EDM Abstract</span>
        
       </label>
-      <RichEditor ref={edmAbstractRichEditorRef} key={1211212}  name="EDM_ABSTRACT"/>
+      <RichEditor ref={edmAbstractRichEditorRef} key={1211212}  name="EDM_ABSTRACT" required/>
       <label>
         <span>EDM CTA</span>
-        <input type="text" name="EDM_CTA" />
+        <input type="text" name="EDM_CTA" required defaultValue={"Download Now"}/>
       </label>
     </div>
 
@@ -302,11 +319,11 @@ const TGIF1STTouchEditor = () => {
       <label> <span>Landing Abstract</span></label>
       <label><input type="checkbox" name="SAME_AS_EDM_ABSTRACT" defaultChecked={sameAsEDMAbstract} onChange={()=>{setSameAsEDMAbstract(!sameAsEDMAbstract)}} />Same as EDM Abstract</label>
       { !sameAsEDMAbstract && <RichEditor key={1211212}  name="LANDING_ABSTRACT"/>}
-      <label>
+      {/* <label>
         <span>Landing CTA</span>
         <label><input type="checkbox" name="SAME_AS_EDM_CTA" defaultChecked={sameAsEDMCTA} onChange={()=>{setSameAsEDMCTA(!sameAsEDMCTA)}} />Same as EDM CTA</label>
         { !sameAsEDMCTA && <input type="text" name="LANDING_CTA"  />}
-      </label>
+      </label> */}
 
       <label>
         
@@ -351,10 +368,10 @@ const TGIF1STTouchEditor = () => {
 </Stepper>
     
 </form>
-
+{/* 
 {isOpened && <Modal setOpened={setOpened} title={"My Modal"}><div>hello</div><div>hello</div><div>hello</div><div>hello</div><div>hello</div><div>hello</div></Modal>}
 
-<button className='openModal' onClick={()=>setOpened(true)}>Open Modal</button>
+<button className='openModal' onClick={()=>setOpened(true)}>Open Modal</button> */}
 
 </div>
   

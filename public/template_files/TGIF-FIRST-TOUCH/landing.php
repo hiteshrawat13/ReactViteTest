@@ -114,27 +114,48 @@
         </style>
 
         <script>
-            $().ready(function () {
-                // validate the comment form when it is submitted
-                $("#id3f").validate({
-                    // initialize the plugin
+        $( document ).ready(function() {
+	
+		   
+		   jQuery.validator.addMethod(
+    "email",
+    function(value, element) {
+        // Regular expression for email validation
+        return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value);
+    },
+    "Please enter a valid email address."
+);
+		   
+		});
+		
+		
+		$().ready(function() {
+		// validate the comment form when it is submitted
+			$("#id3f").validate(
+			
+			{ // initialize the plugin
+       
+					errorPlacement: function (error, element) {
+						if (element.attr("type") == "radio") {
+							error.appendTo(element.closest(".check-group"));
+						} else if (element.attr("type") == "checkbox") {
+							error.appendTo(element.closest(".check-group"));
+						} else {
+							error.appendTo($(element).parent());
+						} 
+					
+					},
+					 submitHandler: function (form) {
+						//console.log("Submitted!");
+						//alert("Submit");
+						form.submit();
+					}
+			}
+	
+			);
+		}
+		);
 
-                    errorPlacement: function (error, element) {
-                        if (element.attr("type") == "radio") {
-                            error.appendTo(element.closest("th"));
-                        } else if (element.attr("type") == "checkbox") {
-                            error.appendTo(element.closest("th"));
-                        } else {
-                            error.appendTo($(element).parent());
-                        }
-                    },
-                    submitHandler: function (form) {
-                        //console.log("Submitted!");
-                        //alert("Submit");
-                        form.submit();
-                    },
-                });
-            });
         </script>
 
         <script>

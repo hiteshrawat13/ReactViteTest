@@ -102,5 +102,12 @@
         "options": "Choose One\nComputing &amp; IT\nEducation\nFinance\nGeneral Management\nGovernment\nHR\nLegal\nMarketing\nOperations\nOther\nResearch &amp; Development\nSales",
         "required": true
         
+    },
+    {
+        "type": "CTA",
+        "id": "cta",
+        "label": "Download Now"
+        
+       
     }
 ]

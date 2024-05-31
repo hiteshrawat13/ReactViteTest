@@ -2,12 +2,20 @@ import React, { useEffect, useState ,useRef} from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { updateField } from '../../../store/formBuilder/FormBuilderSlice'
 
+import { FaPencilAlt } from "react-icons/fa";
 
 import './Editor.scss'
 import { fields } from './Fields'
 
+import Modal from '../../ui/Modal'
 
 const HtmlEditor = ({data}) => {
+
+
+  const [html,setHtml]=useState(data.html)
+
+  const [isModalOpened,setModalOpened]=useState(false)
+
 const formBuilder = useSelector(state => state.formBuilder)
 const dispatch=useDispatch()
 
@@ -15,7 +23,7 @@ const divRef=useRef()
     
 const handleSubmit=(e)=>{
     e.preventDefault()
-    const children= e.target.querySelectorAll('input , textarea')
+    const children= divRef.current.querySelectorAll('input , textarea')
     const state={type:fields.Html}
     for (let i = 0; i < children.length; i++) {
        const child = children[i]
@@ -23,12 +31,13 @@ const handleSubmit=(e)=>{
         state[child.name]=child.checked
        }else if(child.type=="submit"){
        
-       }else if(child.type=="submit"){
-       
        }else{
         state[child.name]=child.value
        } 
     }
+
+
+   
     dispatch(updateField(state))
     console.log(state);
 }
@@ -47,9 +56,24 @@ const handleSubmit=(e)=>{
 
             <label>
                 <span>Html</span>
-                <textarea name="html" defaultValue={data.html}></textarea>
+                <textarea name="html" onChange={(e)=>{setHtml(e.target.value)}} value={html}></textarea>
               
             </label>
+
+
+            { <Modal setOpened={setModalOpened} isOpened={isModalOpened} title={"My Modal"} style={{width:"90%",height:"90%"}}>
+    
+    <label style={{width:"90%",height:"90%"}}>
+                    
+                    <textarea  name="html" value={html} onChange={(e)=>{setHtml(e.target.value)}} style={{width:"90%",height:"90%"}}></textarea>
+                  
+                </label>
+        
+        </Modal>}
+    
+    <button className='openModal' onClick={(e)=>{e.preventDefault();setModalOpened(true)} }><FaPencilAlt /></button>
+    
+    
 
         
             <button onClick={handleSubmit}>Submit</button>

@@ -231,9 +231,6 @@ export default class PublishHelper{
     }
 
     async getSendemailHtml(forPreview=false){
-
-
-
         let data=await Utils.loadFile(this.templatesFolderPath+"sendemail.php");
 
 
@@ -242,10 +239,18 @@ export default class PublishHelper{
             data=data.replaceAll(`window.location.href = '##BASE_URL####LINK_NAME##-thanks.php';`,"" )
             
         }
-
-        if(this.assetFormat=="ClientLink") {
-            data=data.replaceAll(`##baseUrl####asset##`,this.clientLink )
+        if(this["ASSET_FORMAT"]=='PDF'){
+            data=data.replaceAll(`##ASSET_URL##`, this["BASE_URL"]+this["PDF"])
+        }else  if(this["ASSET_FORMAT"]=='MP4'){
+            data=data.replaceAll(`##ASSET_URL##`, this["BASE_URL"]+this["MP4"])
+        }else  if(this["ASSET_FORMAT"]=='Client Link'){
+            data=data.replaceAll(`##ASSET_URL##`, this["CLIENT_LINK"] )
+        }else  if(this["ASSET_FORMAT"]=='IFrame'){
+            data=data.replaceAll(`##ASSET_URL##`, this["IFRAME"] )
         }
+
+
+      
         for (const [key, value] of Object.entries(this)) {
             try {
                 if(typeof value === 'string' || value instanceof String)
@@ -259,12 +264,10 @@ export default class PublishHelper{
 
     async getThanksHtml(forPreview=false){
 
-
-
         let data=await Utils.loadFile(this.templatesFolderPath+"thanks.php");
 
         if(this["ASSET_FORMAT"]=='MP4' || this["ASSET_FORMAT"]=='IFrame'){
-            data=data.replaceAll(`header( "refresh:5;url=##baseUrl####asset##" );`,"" ) //remove redirect
+            data=data.replaceAll(`header( "refresh:5;url=##ASSET_URL##" );`,"" ) //remove redirect
            
 
             if(this["ASSET_FORMAT"]=='MP4'){
@@ -273,9 +276,9 @@ export default class PublishHelper{
                 <td colspan="2">
                 <div style="font-size:18px;">##EDM_TITLE##</div><br>
                 <video width="100%" height="480" controls>
-    <source src="${this["MP4"]}" type="video/mp4">
-    Your browser does not support the video tag.
-    </video>
+                <source src="${this["MP4"]}" type="video/mp4">
+                Your browser does not support the video tag.
+                </video>
                 </td>`)
             }
 
@@ -292,8 +295,6 @@ export default class PublishHelper{
             const languageCode=this["LANGUAGE"]
             console.log("===",translations);
            
-
-
             data=data.replaceAll(`##BODY##`,` <!-- For PDF / URL -->
                                     <td align="left" class="whitepaper" style="align-items: start; display: flex;">
                                         <img style="width: 180px; height: auto !important;" alt="##EDM_TITLE##" src="##THUMBNAIL_URL##" style="border: 1px solid #c4c5c600;" />
@@ -323,6 +324,7 @@ export default class PublishHelper{
                                             }, 1000);
                                         </script>
                                     </td>`);
+
             data=data.replaceAll(`##THANKYOU##`,translations[languageCode]['thankyou'])
         }
        
@@ -377,6 +379,18 @@ export default class PublishHelper{
 
 
        
+
+        if(this["ASSET_FORMAT"]=='PDF'){
+            data=data.replaceAll(`##ASSET_URL##`, this["BASE_URL"]+this["PDF"] )
+        }else  if(this["ASSET_FORMAT"]=='MP4'){
+            data=data.replaceAll(`##ASSET_URL##`, this["BASE_URL"]+this["MP4"]  )
+        }else  if(this["ASSET_FORMAT"]=='Client Link'){
+            data=data.replaceAll(`##ASSET_URL##`, this["CLIENT_LINK"] )
+        }else  if(this["ASSET_FORMAT"]=='IFrame'){
+            data=data.replaceAll(`##ASSET_URL##`, this["IFRAME"] )
+        }
+
+
         
         for (const [key, value] of Object.entries(this)) {
            try {
@@ -442,28 +456,32 @@ export default class PublishHelper{
         
         const logoFile=document.querySelector("[name='LOGO_FILE']")?.files[0];
         if(logoFile){
-            zip.file(`${this.logoName}`, logoFile );
+            zip.file(`${this["LOGO_NAME"]}`, logoFile );
         }
 
         const thumbnailFile=document.querySelector("[name='THUMBNAIL_FILE']")?.files[0];
         if(thumbnailFile){
-            zip.file(`${this.thumbnail}`, thumbnailFile );
+            zip.file(`${this["THUMBNAIL_NAME"]}`, thumbnailFile );
         }
 
 
-        try{
-            zip.file(`${this["PDF"]}`, document.querySelector("[name='PDF_FILE']").files[0] );
-        }catch(error){
-            console.log(error);
-        }
-       
-  
 
-        try{
-            zip.file(`${this["MP4"]}`, document.querySelector("[name='MP4_FILE']").files[0] );
-        }catch(error){
-            console.log(error);
+        if(this["ASSET_FORMAT"]=="PDF" ){
+            try{
+                zip.file(`${this["PDF"]}`, document.querySelector("[name='PDF_FILE']").files[0] );
+            }catch(error){
+                console.log(error);
+            }
+           
+        }else if(this["ASSET_FORMAT"]=="MP4"){
+            try{
+                zip.file(`${this["MP4"]}`, document.querySelector("[name='MP4_FILE']").files[0] );
+            }catch(error){
+                console.log(error);
+            }
         }
+
+   
 
         zip.generateAsync({ type: "blob" }).then( (blob) =>{ // 1) generate the zip file
             saveAs(blob, `${this.LINK_NAME}`);                          // 2) trigger the download

@@ -140,10 +140,18 @@
                     <td style="padding: 10px; background: #fff; border-top: 1px solid rgb(192, 192, 192); border-bottom: 0px;">
 
                     <style>
-                    
+                    .content_body h1{
+
+						color: #0066b2;    font:  20px 'Noto Sans',sans-serif; margin: 0 0 10px 0; padding: 0;
+					}
+
+					.content_body span{
+
+						font-size:14px;line-height:1.6;
+					}
                     </style>
 
-                        <table width="100%" cellspacing="0" cellpadding="10" border="0">
+                        <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
                             <tbody>
                                 <tr>
 								

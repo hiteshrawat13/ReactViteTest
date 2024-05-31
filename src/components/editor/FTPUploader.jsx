@@ -57,7 +57,6 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
   const handleUpdateFiles = async () => {
     console.log("isConnected", isConnected);
 
-    alert("handleUpdateFiles")
     let uploadFiles = []
     if (document.querySelector("[name='LOGO_FILE']").files[0]) {
       uploadFiles.push({
@@ -113,11 +112,6 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
 
 
   useEffect(() => {
-
-
-
-
-
     if (isConnected == false) {
       socket.connect();
       socket.on('connect', onConnect);
@@ -292,7 +286,9 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
             </div>
           })}
 
-{(uploading == true) ? <button id='uploadFilesBtn' style={{background:'white',color:'#5a93f6'}}>Uploading... {uploadProgress}</button> : <button onClick={handleUpload} id='uploadFilesBtn'>Upload Files</button>}
+{(uploading == true) ? 
+<button id='uploadFilesBtn' style={{background:'white',color:'#5a93f6'}}>Uploading... {uploadProgress}</button> 
+  : <button onClick={handleUpload} id='uploadFilesBtn'>Upload Files</button>}
 
 <button onClick={handlePreview} id='downloadZipBtn'>Download ZIP</button>
         </div>

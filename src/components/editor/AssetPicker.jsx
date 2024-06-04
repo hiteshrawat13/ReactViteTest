@@ -91,29 +91,29 @@ const AssetPicker = ({publishHelper}) => {
     }
   }
 
-  const handleCheckUrl=(e)=>{
-    console.log(e.target.value);
-    try {
+  // const handleCheckUrl=(e)=>{
+  //   console.log(e.target.value);
+  //   try {
      
     
-      axios.post('http://localhost:8888/check_url', {
-        url:  publishHelper.current.BASE_URL+e.target.value,
+  //     axios.post('http://192.168.28.93:8888/check_url', {
+  //       url:  publishHelper.current.BASE_URL+e.target.value,
         
-        }, {
+  //       }, {
         
          
-        }
-      ).then(result=>{
-        console.log(result.data.status,"Complete");
-      }).catch(err=>{
-        console.log(err,"ERROR");
-      })
+  //       }
+  //     ).then(result=>{
+  //       console.log(result.data.status,"Complete");
+  //     }).catch(err=>{
+  //       console.log(err,"ERROR");
+  //     })
 
     
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
 
     function debounce(func, wait, immediate) {

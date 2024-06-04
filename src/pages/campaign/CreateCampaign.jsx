@@ -40,7 +40,7 @@ const CreateCampaign = () => {
    
 
    
-{isOpened && 
+{/* {isOpened && 
 <Modal setOpened={setOpened} title={"My Modal"}>
   
   <div><label>First Name</label><input /></div>
@@ -48,7 +48,7 @@ const CreateCampaign = () => {
   
   </Modal>}
 
-<button className='openModal' onClick={()=>setOpened(true)}>Open Modal</button>
+<button className='openModal' onClick={()=>setOpened(true)}>Open Modal</button> */}
 
     
     </>

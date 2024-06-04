@@ -2,6 +2,7 @@
 import axios from "axios";
 import DataTable from "react-data-table-component";
 import '../campaign/LinksPopupModal.scss'
+import Config from '../../Config';
 
 const RolePopup = ({ roleData, setRoleData }) => {
 
@@ -13,7 +14,7 @@ const [accessFormValue2 , setAccessformValue2] = useState({});
 useEffect(() => {
     (async () => {
         const response1 = await axios.get(
-            `http://localhost:8888/user/getAllModules`
+            `http://192.168.28.93:8888/user/getAllModules`
         );
 
 
@@ -42,9 +43,7 @@ async function fetchAccess(accessFormValue) {
     try {
         
    
-    const response = await axios.get(
-        `http://localhost:8888/user/getRolePermission?roleid=${roleData.id}`
-    );
+    const response = await axios.get(Config.API_BASE_URL+`/user/getRolePermission?roleid=${roleData.id}`);
     
     response.data.roles.forEach(element => {
 
@@ -78,7 +77,7 @@ async function updatePermissions(e){
 e.preventDefault();
 try {
 
-    const response = await axios.post("http://localhost:8888/user/editRole",{'roleid':roleData.id,'accessFormValue':accessFormValue2});
+    const response = await axios.post("http://192.168.28.93:8888/user/editRole",{'roleid':roleData.id,'accessFormValue':accessFormValue2});
 
     alert(response.data.message)
     location.reload();
@@ -92,7 +91,7 @@ async function deleteRole(){
 
     try {
 
-        const response = await axios.post("http://localhost:8888/user/deleteRole",{'roleid':roleData.id});
+        const response = await axios.post("http://192.168.28.93:8888/user/deleteRole",{'roleid':roleData.id});
     
         alert(response.data.message)
         

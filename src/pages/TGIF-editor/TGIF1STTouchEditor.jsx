@@ -4,7 +4,7 @@ import React, { useEffect, useRef,useState } from 'react'
 import "./Editor.scss"
 
 
-
+import cheerio from 'cheerio'
 
 
 import FormBuilder from '../../components/formBuilder/FormBuilder.jsx'
@@ -35,6 +35,7 @@ import axios from 'axios'
 
 import { socket } from '../../socket.js'
 import FTPUploader from '../../components/editor/FTPUploader.jsx'
+import Config from '../../Config.js'
 
 
 
@@ -98,7 +99,7 @@ const TGIF1STTouchEditor = () => {
 
     console.log(errors.map(err=>err+ " is required").join("\n"));
 
-    alert(errors.map(err=>err+ " is required").join("\n"))
+    //alert(errors.map(err=>err+ " is required").join("\n"))
   }
 
 
@@ -132,6 +133,49 @@ const TGIF1STTouchEditor = () => {
     document.querySelector("[name='MP4']").value=e.target.value+".mp4"
   }
 
+  function isValidHttpUrl(string) {
+    try {
+      const newUrl = new URL(string);
+      return newUrl.protocol === 'http:' || newUrl.protocol === 'https:';
+    } catch (err) {
+      return false;
+    }
+  }
+  const handleGrabFormFields=(e)=>{
+    e.preventDefault();
+   const clientLink= document.querySelector("[name='CLIENT_LINK").value;
+  
+    if(isValidHttpUrl(clientLink)){
+      alert("grab")
+
+      axios.post( Config.API_BASE_URL +"/grab_tgif_client_link_form",{link:clientLink})
+      .then((response) => {
+        alert("DATA"+response)
+       // console.log("RESPONSE",response.data.response);
+
+        let $ = cheerio.load(response.data.response);
+
+        const data = []
+        $("form input,form select,form input[type=`email`]").each(function (i, elm) {
+           
+            data.push($(elm).attr("aria-labelledby") || $(elm).parent('tr').children('th').text() )
+        });
+        console.log(data);
+
+
+      })
+      .catch((error)=>{
+        alert("ERROR"+error)
+        console.log("ERROR",error);
+      });
+
+    }else{
+      alert("Invalid url")
+    }
+
+    
+    
+  }
 
 
   const handleStepChange= async (step)=>{
@@ -332,6 +376,16 @@ const TGIF1STTouchEditor = () => {
       </label>
 
     </div>
+  </div>
+
+
+  <div id='contentContainer' >
+  <h4>Grab form fields from client link:</h4>
+      <label>
+          <span>Client link:</span>
+          <input type="text" name="CLIENT_LINK" />
+          <button onClick={handleGrabFormFields}> Grab </button>
+      </label>
   </div>
   {/* Step 2 end*/}
   </Step>

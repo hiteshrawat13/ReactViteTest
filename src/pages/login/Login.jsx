@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import axios from "axios";
 
 import './Login.scss'
+import Config from '../../Config';
 
 const Login = () => {
 
@@ -16,7 +17,7 @@ const Login = () => {
   const handleSubmit= async (e)=>
   {
     e.preventDefault();
-    const response = await axios.post("http://localhost:8888/user/login",{'empid':empId,'password':password});
+    const response = await axios.post(Config.API_BASE_URL+"/user/login",{'empid':empId,'password':password});
     console.log(response.data)
   }
 

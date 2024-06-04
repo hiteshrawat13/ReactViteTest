@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import '../campaign/LinksPopupModal.scss'
+import Config from '../../Config';
 
 const AddUser = ({setAddUserPopup }) => {
 
@@ -9,9 +10,7 @@ const AddUser = ({setAddUserPopup }) => {
 
     useEffect(() => {
         (async () => {
-            const response = await axios.get(
-                `http://localhost:8888/user/getAllRoles`
-            );
+            const response = await axios.get(Config.API_BASE_URL+`/user/getAllRoles`);
 
             setRoleList(response.data.roles)
             // console.log(response.data.roles);

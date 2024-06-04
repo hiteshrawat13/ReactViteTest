@@ -4,6 +4,7 @@ import axios from "axios";
 import DataTable from "react-data-table-component";
 import RolePopup from "./RolePopup.jsx";
 import AddRole from "./AddRole.jsx";
+import Config from "../../Config.js";
 const RoleList = () => {
    
   const [data, setData] = useState([]);
@@ -16,9 +17,7 @@ const RoleList = () => {
 
   const fetchRoles = async () => {
     setLoading(true);
-    const response = await axios.get(
-      `http://localhost:8888/user/getAllRoles`
-    );
+    const response = await axios.get(Config.API_BASE_URL+`/user/getAllRoles`);
 
   setData(response.data.roles)
   console.log(response.data.roles,"---");

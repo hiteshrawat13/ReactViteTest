@@ -4,6 +4,7 @@ import axios from "axios";
 import DataTable from "react-data-table-component";
 import UserPopup from "./UserPopup.jsx";
 import AddUser from "./AddUser.jsx";
+import Config from "../../Config.js";
 
 const UserList = () => {
    
@@ -18,9 +19,7 @@ const UserList = () => {
 
   const fetchUsers = async (page, size = perPage) => {
     setLoading(true);
-    const response = await axios.get(
-      `http://localhost:8888/user/getUsers?page=${page}&per_page=${size}`
-    );
+    const response = await axios.get(Config.API_BASE_URL+`/user/getUsers?page=${page}&per_page=${size}`);
 
   setData(response.data.data)
 

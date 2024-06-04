@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import '../campaign/LinksPopupModal.scss'
+import Config from '../../Config';
 
 const AddRole = ({setAddRolePopup }) => {
 
@@ -20,7 +21,7 @@ async function submitForm(e){
 e.preventDefault();
 try {
     // make axios post request
-    const response = await axios.post("http://localhost:8888/user/roleCreate",formValue);
+    const response = await axios.post(Config.API_BASE_URL+"/user/roleCreate",formValue);
 
     alert(response.data.message)
     location.reload();

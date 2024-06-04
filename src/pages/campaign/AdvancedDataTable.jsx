@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import axios from "axios";
 import DataTable from "react-data-table-component";
 import LinksModal from "./LinksPopupModal.jsx";
+import Config from "../../Config.js";
 
 const AdvancedDataTable = () => {
    
@@ -17,7 +18,7 @@ const AdvancedDataTable = () => {
   const fetchUsers = async (page, size = perPage) => {
     setLoading(true);
     const response = await axios.get(
-      `http://localhost:8888/camplist/getCampList?page=${page}&per_page=${size}`
+      Config.API_BASE_URL+`/camplist/getCampList?page=${page}&per_page=${size}`
     );
 
   setData(response.data.data)

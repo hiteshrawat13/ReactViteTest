@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './LinksPopupModal.scss'
 import axios from "axios";
 import DataTable from "react-data-table-component";
+import Config from '../../Config';
 
 
 const LinksModal = ({ campData, setCampData }) => {
@@ -13,7 +14,7 @@ const LinksModal = ({ campData, setCampData }) => {
     useEffect(() => {
         (async () => {
             const response = await axios.get(
-                `http://localhost:8888/camplist/getLinks?camp_name=${campData.camp_name}`
+                Config.API_BASE_URL+`/camplist/getLinks?camp_name=${campData.camp_name}`
             );
 
             setLinks(response.data)

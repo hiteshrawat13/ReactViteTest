@@ -4,6 +4,7 @@ import axios from 'axios'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver';
 import { socket } from '../../socket'
+import Config from '../../Config';
 
 const FTPUploader = forwardRef(({ publishHelper }, ref) => {
   const [isConnected, setIsConnected] = useState(socket.connected);
@@ -214,7 +215,7 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
 
       axios({
         method: "post",
-        url: `http://localhost:8888/upload_file/${publishHelper.current.FTP_CONFIG_NAME}/${socketId}`,
+        url: Config.API_BASE_URL+`/upload_file/${publishHelper.current.FTP_CONFIG_NAME}/${socketId}`,
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })

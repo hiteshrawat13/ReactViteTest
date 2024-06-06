@@ -13,13 +13,17 @@ export const CustomizerSlice = createSlice({
    
     toggleSidebar: (state) => {
       state.isCollapse = !state.isCollapse;
+    },
+
+    hideSidebar: (state) => {
+      state.isCollapse = true;
     }
     
   },
 });
 
 export const {
-  toggleSidebar,
+  toggleSidebar,hideSidebar
 } = CustomizerSlice.actions;
 
 export default CustomizerSlice.reducer;

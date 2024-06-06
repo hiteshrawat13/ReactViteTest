@@ -9,6 +9,8 @@ import RoleList from "../pages/user-management/RoleList"
 import AlphaEditor from "../pages/ALPHA-editor/AlphaEditor"
 
 
+
+
 const Router=[
     {
     
@@ -17,42 +19,62 @@ const Router=[
         {
           path: "/",
           element: <div>Dashboard</div>,
+          title:"Dashboard"
         },
         {
           path: '/users',
           element: <UserList/>,
+          title:"User Management"
         },
         {
           path: '/roles',
           element: <RoleList/>,
+          title:"Role Management"
         },
         {
           path: '/modules',
           element: <div>Module Management</div>,
+          title:"Module Management"
         },
         {
           path: '/masters',
           element: <div>Masters</div>,
+          title:"Masters"
         },
         {
           path: '/ip',
           element: <div>Ip</div>,
+          title:"IP"
         },
         {
           path: '/campaigns',
           element: <MyCampaigns/>,
+          title:"My Campaigns"
         },
         {
           path: '/campaigns/create',
           element: <CreateCampaign/>,
+          title:"Create Campaign"
         },
         {
           path: '/campaigns/create/:campaign',
           element: <CreateNewCampaign/>,
+          title:"Create Campaign"
         },
         {
           path: '/exit',
           element: <div>exit</div>,
+          title:"Exit"
+        },
+        {
+          path: '/editor',
+          element: <TGIF1STTouchEditor/>,
+          title:"TGIF Editor"
+        },
+        {
+          path: '/editor2',
+          element: <AlphaEditor/>,
+          title:"Alpha Editor"
         }
         
       ]
@@ -62,14 +84,7 @@ const Router=[
       path: "/login" ,
       element: <Login/> 
     },
-    {
-      path: '/editor',
-      element: <TGIF1STTouchEditor/>,
-    },
-    {
-      path: '/editor2',
-      element: <AlphaEditor/>,
-    }
+   
   
   ]
 

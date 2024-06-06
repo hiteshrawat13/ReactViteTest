@@ -29,7 +29,7 @@ async function submitForm(e){
 e.preventDefault();
 try {
     // make axios post request
-    const response = await axios.post("http://localhost:8888/user/createUser",formValue);
+    const response = await axios.post(Config.API_BASE_URL+"/user/createUser",formValue);
 
     alert(response.data.message)
     location.reload();

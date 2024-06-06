@@ -379,14 +379,14 @@ const TGIF1STTouchEditor = () => {
   </div>
 
 
-  <div id='contentContainer' >
+  {/* <div id='contentContainer' >
   <h4>Grab form fields from client link:</h4>
       <label>
           <span>Client link:</span>
           <input type="text" name="CLIENT_LINK" />
           <button onClick={handleGrabFormFields}> Grab </button>
       </label>
-  </div>
+  </div> */}
   {/* Step 2 end*/}
   </Step>
 

@@ -6,7 +6,11 @@ import axios from "axios";
 import './Login.scss'
 import Config from '../../Config';
 
+import { AuthProvider, useAuth } from '../../AuthContext.jsx';
+
 const Login = () => {
+
+ const {login}=useAuth()
 
   const [empId,setEmpId]=useState("")
   const [password,setPassword]=useState("")
@@ -17,12 +21,15 @@ const Login = () => {
   const handleSubmit= async (e)=>
   {
     e.preventDefault();
-    const response = await axios.post(Config.API_BASE_URL+"/user/login",{'empid':empId,'password':password});
-    console.log(response.data)
+  
+
+   login({empId,password})
+
+    
   }
 
   return (
-  
+ 
     <div className='Login'>
     <form onSubmit={handleSubmit}>
     <div className='logoHolder'>
@@ -42,7 +49,7 @@ const Login = () => {
       <input type="submit" defaultValue="Login" />
     </form>
     </div>
-   
+ 
   )
 }
 

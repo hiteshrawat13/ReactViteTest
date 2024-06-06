@@ -165,12 +165,9 @@ const ALPHAFormRenderer = {
 
     CTA: (obj) => {
         return `
-    <tr>
-    <td colspan='2'>
-        <button type="submit" value="" aria-label="download" style="background-color:#0066b2;    
-    width:250px; color: white;  border-radius:8px; padding-top: 08px;margin-left: 26px; margin-top:0px;" class="btn btn-primary1"> ${obj.label}</button>
-    </td>
-    </tr>`
+        <footer>
+        <button type="submit" name="submit" class="button" style="background-color: #4c77c7;width: 100%; margin-right: -24px;" id="landingCTA">${obj.label}</button>
+      </footer>`
     }
 ,
     HiddenInput: (obj) => {

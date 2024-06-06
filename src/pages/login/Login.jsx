@@ -6,11 +6,11 @@ import axios from "axios";
 import './Login.scss'
 import Config from '../../Config';
 
-import { AuthProvider, useAuth } from '../../AuthContext.jsx';
+
 
 const Login = () => {
 
- const {login}=useAuth()
+
 
   const [empId,setEmpId]=useState("")
   const [password,setPassword]=useState("")
@@ -23,7 +23,7 @@ const Login = () => {
     e.preventDefault();
   
 
-   login({empId,password})
+   
 
     
   }

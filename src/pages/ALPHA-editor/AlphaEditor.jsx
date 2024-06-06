@@ -315,11 +315,11 @@ console.log(e.target.value);
       </label>
       <input type="checkbox" name="SAME_AS_EDM_ABSTRACT" defaultChecked={sameAsEDMAbstract} onChange={()=>{setSameAsEDMAbstract(!sameAsEDMAbstract)}} />
       { !sameAsEDMAbstract && <RichEditor key={1211212} name="LANDING_ABSTRACT"/>} */}
-      <label>
+      {/* <label>
         <span>Landing CTA <small>(check if same as edm CTA)</small></span>
         <input type="checkbox" name="SAME_AS_EDM_CTA" defaultChecked={sameAsEDMCTA} onChange={()=>{setSameAsEDMCTA(!sameAsEDMCTA)}} />
         { !sameAsEDMCTA && <input type="text" name="LANDING_CTA"  />}
-      </label>
+      </label> */}
     </div>
 
     <div className='contentContainerInner' >

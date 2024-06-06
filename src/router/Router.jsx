@@ -86,14 +86,7 @@ const Router=[
       element: <Login/> 
     },
 
-    {
-      path: '/editor',
-      element: Auth()?<TGIF1STTouchEditor/>: <Login/>,
-    },
-    {
-      path: '/editor2',
-      element: Auth()?<AlphaEditor/>: <Login/>,
-    }
+ 
 
   
   ]

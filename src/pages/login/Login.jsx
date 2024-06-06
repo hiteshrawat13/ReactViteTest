@@ -9,7 +9,11 @@ import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from 'react-router-dom';
 
+
+
 const Login = () => {
+
+
 
   const [empId,setEmpId]=useState("")
   const [password,setPassword]=useState("")
@@ -20,6 +24,7 @@ const Login = () => {
   const handleSubmit= async (e)=>
   {
     e.preventDefault();
+
     try{
       const response = await axios.post(Config.API_BASE_URL+"/user/login",{'empid':empId,'password':password});
       console.log(response.data);
@@ -37,10 +42,11 @@ const Login = () => {
       console.log(e.response.data.messsage);
     }
    
+
   }
 
   return (
-  
+ 
     <div className='Login'>
     <form onSubmit={handleSubmit}>
     <div className='logoHolder'>
@@ -60,7 +66,7 @@ const Login = () => {
       <input type="submit" defaultValue="Login" style={{'marginTop':'15px'}}/>
     </form>
     </div>
-   
+ 
   )
 }
 

@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
-
+import { useDispatch } from 'react-redux'
 import './CreateCampaign.scss'
 import { useNavigate } from 'react-router-dom/dist'
 import Modal from '../../components/ui/Modal'
+import {hideSidebar} from '../../store/customizer/CustomizerSlice';
 const CreateCampaign = () => {
   const [isOpened,setOpened]=useState(false)
     const navigate=useNavigate()
-
+    const dispatch =useDispatch();
 
     const handleClick=(path)=>{
         
         navigate(`/${path}`)
+
+        //Hide Sidebar
+        dispatch(hideSidebar())
     }
 
   return (

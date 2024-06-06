@@ -106,7 +106,8 @@ const SideBar = () => {
     }
 
   return (
-    <div className={`sideBar ${(customizer.isCollapse)?'collapsed':''}`}>
+    <div className={`sideBar ${(customizer.isCollapse)?'collapsed':'opened'}`}>
+        <div className='sideBarHolder'>
         <div className='logo'>
             <img src="/ondirect-logo.png" alt="logo" />
         </div>
@@ -134,6 +135,8 @@ const SideBar = () => {
         <div onClick={logOutFun}>Logout</div>
             
         </div>
+        </div>
+        
     </div>
   )
 }

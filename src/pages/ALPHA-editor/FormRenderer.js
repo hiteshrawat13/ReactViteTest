@@ -7,7 +7,7 @@ const ALPHAFormRenderer = {
 
         <section>	
         <label class="input" for="${obj.id}">
-        <input type="text" name="${obj.name}" placeholder="${obj.label}" ${obj.required ? "required" : ""} ${obj.readOnly ? "readonly" : ""} id="${obj.id}" value="${obj.value || ''}" type="text">
+        <input type="text" name="${obj.name}" placeholder="${obj.label}" ${obj.isRequired ? "required" : ""} ${obj.isDisabled ? "readonly" : ""} id="${obj.id}" value="${obj.value || ''}" type="text">
         <b class="tooltip tooltip-bottom-right">${obj.label}</b>
         </label>
       </section>
@@ -23,7 +23,7 @@ const ALPHAFormRenderer = {
 
         <section>
         <label class="select" for="${obj.id}" >
-        <select name="${obj.name}" ${obj.required ? "required" : ""} id="${obj.id}" >
+        <select name="${obj.name}" ${obj.isRequired ? "required" : ""} id="${obj.id}" >
             <option value="" selected disabled>${obj.label} </option>
             
             ${obj.options.length>0 && obj.options.split(/\r?\n/).map((option, index) => {
@@ -64,13 +64,13 @@ const ALPHAFormRenderer = {
    
        font:  13px/18px 'Noto Sans', sans-serif;;">  
 
-       ${obj.label} ${obj.required ? `<span style="color: red;">*</span>` : ""}<br><br>
+       ${obj.label} ${obj.isRequired ? `<span style="color: red;">*</span>` : ""}<br><br>
 
        <div class="check-group">
 
        ${obj.options.split(/\r?\n/).map(option => `
        <div class="custom-control custom-radio" style="color:#000">
-           <input type="checkbox"    name="${obj.name}[]" value="${option.trim()}" ${obj.required ? "required" : ""}>
+           <input type="checkbox"    name="${obj.name}[]" value="${option.trim()}" ${obj.isRequired ? "required" : ""}>
            <label>${option.trim()}</label>
        </div>
        `).join("")}
@@ -110,13 +110,13 @@ const ALPHAFormRenderer = {
    
        font:  13px/18px 'Noto Sans', sans-serif;">  
 
-       ${obj.label} ${obj.required ? `<span style="color: red;">*</span>` : ""}<br><br>
+       ${obj.label} ${obj.isRequired ? `<span style="color: red;">*</span>` : ""}<br><br>
 
        <div class="check-group">
 
        ${obj.options.split(/\r?\n/).map(option => `
        <label class="custom-control custom-radio" style="color:#000">
-           <input type="radio"   name="${obj.name}" value="${option.trim()}" ${obj.required ? "required" : ""} >
+           <input type="radio"   name="${obj.name}" value="${option.trim()}" ${obj.isRequired ? "required" : ""} >
            <p>${option.trim()}</p>
        </label>
        `).join("")}
@@ -140,7 +140,7 @@ const ALPHAFormRenderer = {
         return `								   
 
        <section>
-       <input type="checkbox" name="${obj.name}" id="${obj.id}" ${obj.required ? "required" : ""} value="${obj.value}" />&nbsp; 
+       <input type="checkbox" name="${obj.name}" id="${obj.id}" ${obj.isRequired ? "required" : ""} value="${obj.value}" />&nbsp; 
  <label for="${obj.id}" style="display: inline; font-weight: normal;">${obj.label}</label>
 <br>
      </section>

@@ -8,11 +8,11 @@ const TGIFFormRenderer = {
                <th width="47%">
                <label for="${obj.id}">
                    <span title="Required Field">${obj.label}</span>
-                   ${obj.required ? `<span class="mandatory" style="color:red">*</span>` : ""}
+                   ${obj.isRequired ? `<span class="mandatory" style="color:red">*</span>` : ""}
                </label>
                </th>
                <td width="53%">
-               <input name="${obj.name}" ${obj.required ? "required" : ""} ${obj.readOnly ? "readonly" : ""} id="${obj.id}" value="${obj.value || ''}" type="text">
+               <input name="${obj.name}" ${obj.isRequired ? "required" : ""} ${obj.isDisabled ? "readonly" : ""} id="${obj.id}" value="${obj.value || ''}" type="text">
                </td>
            </tr>
            `
@@ -30,10 +30,10 @@ const TGIFFormRenderer = {
         <td colspan="2">
         <label for="${obj.id}">
             <span title="Required Field">${obj.label}</span>
-            ${obj.required ? `<span class="mandatory" style="color:red">*</span>` : ""}
+            ${obj.isRequired ? `<span class="mandatory" style="color:red">*</span>` : ""}
         </label>
         
-        <select name="${obj.name}" ${obj.required ? "required" : ""} id="${obj.id}">
+        <select name="${obj.name}" ${obj.isRequired ? "required" : ""} id="${obj.id}">
         
         ${obj.options.length>0 && obj.options.split(/\r?\n/).map((option, index) => {
                 if (index == 0) {
@@ -55,11 +55,11 @@ const TGIFFormRenderer = {
         <th>
         <label for="${obj.id}">
             <span title="Required Field">${obj.label}</span>
-            ${obj.required ? `<span class="mandatory" style="color:red">*</span>` : ""}
+            ${obj.isRequired ? `<span class="mandatory" style="color:red">*</span>` : ""}
         </label>
         </th>
         <td>
-        <select name="${obj.name}" ${obj.required ? "required" : ""} id="${obj.id}">
+        <select name="${obj.name}" ${obj.isRequired ? "required" : ""} id="${obj.id}">
      
         ${obj.options.length>0  && obj.options.split(/\r?\n/).map((option, index) => {
                 if (index == 0 && obj.options.length > 1) {
@@ -104,7 +104,7 @@ const TGIFFormRenderer = {
    
        font:  13px/18px 'Noto Sans', sans-serif;;">  
 
-       ${obj.label} ${obj.required ? `<span style="color: red;">*</span>` : ""}<br><br>
+       ${obj.label} ${obj.isRequired ? `<span style="color: red;">*</span>` : ""}<br><br>
 
        <div class="check-group">
 
@@ -112,7 +112,7 @@ const TGIFFormRenderer = {
        
        ${obj.options.split(/\r?\n/).map(option => `
        <div class="custom-control custom-radio" style="color:#000">
-           <input type="checkbox"    name="${obj.name}[]" value="${option.trim()}" ${obj.required ? "required" : ""}>
+           <input type="checkbox"    name="${obj.name}[]" value="${option.trim()}" ${obj.isRequired ? "required" : ""}>
            <label>${option.trim()}</label>
        </div>
        `).join("")}
@@ -151,13 +151,13 @@ const TGIFFormRenderer = {
    
        font:  13px/18px 'Noto Sans', sans-serif;;">  
 
-       ${obj.label} ${obj.required ? `<span style="color: red;">*</span>` : ""}<br><br>
+       ${obj.label} ${obj.isRequired ? `<span style="color: red;">*</span>` : ""}<br><br>
 
        <div class="check-group">
 
        ${obj.options?.split(/\r?\n/).map(option => `
        <label class="custom-control custom-radio" style="color:#000">
-           <input type="radio"   name="${obj.name}" value="${option.trim()}" ${obj.required ? "required" : ""} >
+           <input type="radio"   name="${obj.name}" value="${option.trim()}" ${obj.isRequired ? "required" : ""} >
            <p>${option.trim()}</p>
        </label>
        `).join("")}
@@ -182,7 +182,7 @@ const TGIFFormRenderer = {
        <tr>
        <th colspan="2" style="color:#444444;font-size:12px;">
        <div class="check-group" style="display:flex;align-items:start;">
-       <input type="checkbox" name="${obj.name}" id="${obj.id}" ${obj.required ? "required" : ""} value="${obj.value}"/>	
+       <input type="checkbox" name="${obj.name}" id="${obj.id}" ${obj.isRequired ? "required" : ""} value="${obj.value}"/>	
        <label>${obj.label}</label>
        </div>
        </th>

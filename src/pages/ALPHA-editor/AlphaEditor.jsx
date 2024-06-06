@@ -67,17 +67,17 @@ const AlphaEditor = () => {
     const inputs=formRef.current.querySelectorAll("input:not([type='submit']) , select, textarea")
 
     // below code is to add privacy policy acording to region =====================
-    if(inputs[5].options[inputs[5].selectedIndex].value == "EU"){
-      inputs[6].value =  "<a href='https://itbusinessplus.com/eu-privacy/'>EU Data Protection Policy</a>"
+    if(inputs[6].options[inputs[5].selectedIndex].value == "EU"){
+      inputs[7].value =  "<a href='https://itbusinessplus.com/eu-privacy/'>EU Data Protection Policy</a>"
 
-    }else if(inputs[5].options[inputs[4].selectedIndex].value == "CASL"){
-      inputs[6].value = "<a href='https://www.itbusinessplus.com/casl-privacy-policy/'>CASL Privacy Policy</a>"
+    }else if(inputs[6].options[inputs[5].selectedIndex].value == "CASL"){
+      inputs[7].value = "<a href='https://www.itbusinessplus.com/casl-privacy-policy/'>CASL Privacy Policy</a>"
 
-    }else if(inputs[5].options[inputs[4].selectedIndex].value == "BOTH"){
-      inputs[6].value ="<a href='https://www.itbusinessplus.com/privacy-policy/'>ITBP Privacy Policy</a> | <a href='https://www.itbusinessplus.com/casl-privacy-policy/'>CASL Privacy Policy</a>"
+    }else if(inputs[6].options[inputs[5].selectedIndex].value == "BOTH"){
+      inputs[7].value ="<a href='https://www.itbusinessplus.com/privacy-policy/'>ITBP Privacy Policy</a> | <a href='https://www.itbusinessplus.com/casl-privacy-policy/'>CASL Privacy Policy</a>"
 
     }else{
-      inputs[6].value ="<a href='https://itbusinessplus.com/privacy-policy/'>ITBP Privacy Policy</a>"
+      inputs[7].value ="<a href='https://itbusinessplus.com/privacy-policy/'>ITBP Privacy Policy</a>"
     }
 
     
@@ -201,6 +201,8 @@ console.log(e.target.value);
   <Step title="Basic Info">
    {/* Step 1 */}
    <div className='holder'>
+   <input type="hidden" name="CLIENT_CODE" value="ALPHA"/>
+
 
    <LanguageDropdownList/>
 

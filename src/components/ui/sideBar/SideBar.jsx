@@ -12,6 +12,8 @@ import Cookies from "js-cookie";
 import { useNavigate } from 'react-router-dom';
 
 
+import logo from "../../../ondirect-logo.png"
+
 const SideBar = () => {
 
     const customizer = useSelector(state => state.customizer)
@@ -109,7 +111,7 @@ const SideBar = () => {
     <div className={`sideBar ${(customizer.isCollapse)?'collapsed':'opened'}`}>
         <div className='sideBarHolder'>
         <div className='logo'>
-            <img src="/ondirect-logo.png" alt="logo" />
+            <img src={logo} alt="logo" />
         </div>
 
         <div className='menu'>

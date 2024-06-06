@@ -192,7 +192,7 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
         campid: document.querySelector("[name='CAMP_ID']").value,
         campname:document.querySelector("[name='CAMP_NAME']").value,
         category:'CS',
-        clientcode:'ALPHA',
+        clientcode:document.querySelector("[name='CLIENT_CODE']").value,
         country:document.querySelector("[name='REGION']").value,
         editedby:userName,
         linktitle:document.querySelector("[name='EDM_TITLE']").value,
@@ -324,7 +324,7 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
     uploadedLinks.map((val, i) => {
       return  <tr className='linksTableInner' key={i}>
       <td>{val.title}</td>
-      <td><a href={val.links} >{val.links}</a></td>
+      <td><a href={val.links}  target='_BLANK'>{val.links}</a></td>
     </tr>
     })
 

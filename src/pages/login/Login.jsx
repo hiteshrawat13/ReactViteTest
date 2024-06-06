@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from 'react-router-dom';
 
+import toast,{Toaster} from 'react-hot-toast';
 
 
 const Login = () => {
@@ -40,14 +41,17 @@ const Login = () => {
     }catch(e){
       console.log(e);
       console.log(e.response.data.messsage);
+      toast.error(e.response.data.messsage)
     }
    
 
   }
 
   return (
- 
+    <>
+<div><Toaster/></div>
     <div className='Login'>
+      
     <form onSubmit={handleSubmit}>
     <div className='logoHolder'>
     <img src='./ondirect-logo.png'/>
@@ -66,7 +70,7 @@ const Login = () => {
       <input type="submit" defaultValue="Login" style={{'marginTop':'15px'}}/>
     </form>
     </div>
- 
+    </>
   )
 }
 

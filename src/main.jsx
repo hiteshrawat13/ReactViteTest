@@ -12,7 +12,7 @@ import {
 
 import Router from './router/Router.jsx';
 
-const router = createBrowserRouter(Router);
+const router = createBrowserRouter(Router ,{ basename: "/CAMPAIGN_TOOL_V1/ReactViteTest/dist" });
 
 
 import { Provider } from 'react-redux';

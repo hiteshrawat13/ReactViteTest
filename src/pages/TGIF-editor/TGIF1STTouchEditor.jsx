@@ -244,6 +244,9 @@ const TGIF1STTouchEditor = () => {
    {/* Step 1 */}
    <div className='holder'>
 
+
+   <input type="hidden" name="CLIENT_CODE" value="TGIF"/>
+
    <label>
       <span>Language</span>
       <select  name="LANGUAGE" required>
@@ -316,10 +319,10 @@ const TGIF1STTouchEditor = () => {
       <input type="text" name="SPONSORED_BY_TEXT" required defaultValue={"Sponsored By"}  />
     </label>
 
-    <label>
+    {/* <label>
       <span>Logo width</span>
       <input type="number" name="LOGO_WIDTH" required defaultValue={200}  />
-    </label>
+    </label> */}
    </div>
    {/* Step 1 end */}
     

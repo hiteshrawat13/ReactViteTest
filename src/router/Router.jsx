@@ -7,12 +7,13 @@ import Login from "../pages/login/Login"
 import UserList from "../pages/user-management/UserList"
 import RoleList from "../pages/user-management/RoleList"
 import AlphaEditor from "../pages/ALPHA-editor/AlphaEditor"
+import Auth from '../Auth';
 
 
 const Router=[
     {
     
-      element: <App/>,
+      element: Auth()?<App/> : <Login/>,
       children: [
         {
           path: "/",
@@ -64,11 +65,11 @@ const Router=[
     },
     {
       path: '/editor',
-      element: <TGIF1STTouchEditor/>,
+      element: Auth()?<TGIF1STTouchEditor/>: <Login/>,
     },
     {
       path: '/editor2',
-      element: <AlphaEditor/>,
+      element: Auth()?<AlphaEditor/>: <Login/>,
     }
   
   ]

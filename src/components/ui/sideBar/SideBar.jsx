@@ -8,14 +8,15 @@ import { FaArrowAltCircleDown } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
 import Divider from './Divider'
 import Heading from './Heading'
-
-
+import Cookies from "js-cookie";
+import { useNavigate } from 'react-router-dom';
 
 
 const SideBar = () => {
 
     const customizer = useSelector(state => state.customizer)
     const dispatch = useDispatch()
+    const navigate = useNavigate();
 
     const items=[
         
@@ -94,6 +95,16 @@ const SideBar = () => {
         console.log(item);
     }
 
+    const logOutFun =()=>{
+        Cookies.remove("user_name");
+      Cookies.remove("user_id");
+      Cookies.remove("access_token");
+      Cookies.remove("user_permissions");
+
+        navigate('/login');
+         window.location.reload();
+    }
+
   return (
     <div className={`sideBar ${(customizer.isCollapse)?'collapsed':''}`}>
         <div className='logo'>
@@ -120,7 +131,7 @@ const SideBar = () => {
 
         <div className='logout'>
         <CiLogout />
-        <div>Logout</div>
+        <div onClick={logOutFun}>Logout</div>
             
         </div>
     </div>

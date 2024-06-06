@@ -5,8 +5,13 @@ import JSZip from 'jszip'
 import { saveAs } from 'file-saver';
 import { socket } from '../../socket'
 import Config from '../../Config';
+import Cookies from 'js-cookie';
+
 
 const FTPUploader = forwardRef(({ publishHelper }, ref) => {
+
+  const userName = Cookies.get('user_id');
+
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [fooEvents, setFooEvents] = useState([]);
   const [uploadProgress, setUploadProgress] = useState("");
@@ -189,10 +194,10 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
         category:'CS',
         clientcode:'ALPHA',
         country:document.querySelector("[name='REGION']").value,
-        editedby:'Raj',
+        editedby:userName,
         linktitle:document.querySelector("[name='EDM_TITLE']").value,
         link:document.querySelector("[name='LINK_NAME']").value + '-edm.html',
-        linkcreatedby:'Raj',
+        linkcreatedby:userName,
         language:document.querySelector("[name='LANGUAGE']").value,
       }
 

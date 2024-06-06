@@ -189,6 +189,45 @@ export default class PublishHelper{
     async getThanksVidHtml(forPreview=false){
         let data=await Utils.loadFile(this.templatesFolderPath+"thanks-vid.html");
 
+
+
+        if(this["ASSET_FORMAT"]=='MP4' || this["ASSET_FORMAT"]=='IFrame'){
+            data=data.replaceAll(`header( "refresh:5;url=##ASSET_URL##" );`,"" ) //remove redirect
+           
+
+            if(this["ASSET_FORMAT"]=='MP4'){
+                data=data.replaceAll(`##BODY##`,`
+                <!-- For Webinar -->
+                <div class="col-md-12 well">
+                      <div class="col-sm-12">
+                        
+                         <video class="jw-video jw-reset" tabindex="-1" disableremoteplayback="" webkit-playsinline="" height="480" width="853" playsinline="" style="object-fit: fill;" controls>
+								   <source src="${this["MP4"]}"  type="video/mp4">
+								 </video>  
+						
+                      </div>
+                      
+                    </div>`)
+            }
+
+            if(this["ASSET_FORMAT"]=='IFrame'){
+                data=data.replaceAll(`##BODY##`,`
+
+                <div class="col-md-12 well">
+                <div class="col-sm-12">
+                  
+                <br>
+                <iframe src="${this["IFRAME"]}" width="100%" height="380" title="##EDM_TITLE##"></iframe>
+                  
+                </div>
+                
+              </div> 
+               `)
+            }
+
+        }
+
+
             data=data.replaceAll(`##THANKYOU_TITLE##`,this["EDM_TITLE"])
                 
         for (const [key, value] of Object.entries(this)) {

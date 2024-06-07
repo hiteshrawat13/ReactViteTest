@@ -54,7 +54,7 @@ export default class PublishHelper{
      
 
     async  getEdmHtml(forPreview=false){
-        let data=await Utils.loadFile(this.templatesFolderPath+"edm.html");
+        let data=await Utils.loadFile(this.templatesFolderPath+"edm.html.txt");
 
         if(forPreview==true){
 
@@ -133,7 +133,7 @@ export default class PublishHelper{
 
         
 
-        const landing_page=(this.useNewLandingPageFormat)?"new_format_landing.php":"landing.php"
+        const landing_page=(this.useNewLandingPageFormat)?"new_format_landing.php.txt":"landing.php.txt"
         let data= await Utils.loadFile( this.templatesFolderPath+landing_page) ;
         
         
@@ -231,7 +231,7 @@ export default class PublishHelper{
     }
 
     async getSendemailHtml(forPreview=false){
-        let data=await Utils.loadFile(this.templatesFolderPath+"sendemail.php");
+        let data=await Utils.loadFile(this.templatesFolderPath+"sendemail.php.txt");
 
 
         if(forPreview==true){
@@ -264,7 +264,7 @@ export default class PublishHelper{
 
     async getThanksHtml(forPreview=false){
 
-        let data=await Utils.loadFile(this.templatesFolderPath+"thanks.php");
+        let data=await Utils.loadFile(this.templatesFolderPath+"thanks.php.txt");
 
         if(this["ASSET_FORMAT"]=='MP4' || this["ASSET_FORMAT"]=='IFrame'){
             data=data.replaceAll(`header( "refresh:5;url=##ASSET_URL##" );`,"" ) //remove redirect

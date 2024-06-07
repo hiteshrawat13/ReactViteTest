@@ -8,15 +8,17 @@ import Router from "../../router/Router"
 const Dashboard = () => {
   const path=useLocation()
   return (
-    <div className='container'>
+    <div >
        
-            <SideBar/>
-        
-        <div style={{flex:"1 1 0%",width:"84%"}}>
+           
             <NavBar title={Router[0].children.filter(route=>route.path==path.pathname)[0].title}/>
-            <div className='outletHolder'>
+        <div style={{flex:"1 1 0%",width:"100%"}} className='container'>
+             <SideBar/>
+            <div className='outletHolder' style={{width:"100%"}}>
             <Outlet/>
             </div>
+
+        
            
         </div>
         

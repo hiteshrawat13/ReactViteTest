@@ -7,6 +7,8 @@ import './NavBar.scss'
 import { RxHamburgerMenu } from "react-icons/rx";
 import {toggleSidebar} from '../../../store/customizer/CustomizerSlice';
 import DropdownMenu from './DropdownMenu';
+import logo from "../../../ondirect-logo.png"
+
 const NavBar = ({title="CB Tool"}) => {
 
 
@@ -15,12 +17,18 @@ const NavBar = ({title="CB Tool"}) => {
   return (
     <div className='navBar'>
      
+
       <button className="btn_hamburger" onClick={()=>{dispatch(toggleSidebar())}}>
         
+      
+
+
       <RxHamburgerMenu />
       </button>
-
-      <div>
+      <div className='logo' style={{marginRight:"auto"}}>
+            <img src={logo} alt="logo" style={{width:"200px"}} />
+        </div>
+      <div style={{marginRight:"auto"}}>
         <b>{title}</b>
       </div>
       <DropdownMenu/>

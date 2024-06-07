@@ -5,9 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>##EDM_TITLE##</title>
 
-        <!-- JS, Popper.js, and jQuery -->
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+        
         <style>
             @import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
 			* {
@@ -184,7 +182,7 @@
                                     </td>
                                     <td style="display: flex; flex: start;">
                                         <a href="##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#" target="_blank">
-                                            <img   style="border: 1px solid #e5e5e5;"   src="##THUMBNAIL_URL##" alt="##EDM_TITLE##" class="img" />
+                                            <img  width="300" style="border: 1px solid #e5e5e5;"   src="##THUMBNAIL_URL##" alt="##EDM_TITLE##" class="img" />
                                         </a>
 
                                     </td>

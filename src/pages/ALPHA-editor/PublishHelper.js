@@ -47,7 +47,7 @@ export default class PublishHelper{
 
     async  getEdmHtml(forPreview=false){
         this.DecideFTPServer(); //<= this code decide ftp server
-        let data=await Utils.loadFile(this.templatesFolderPath+"edm.html");
+        let data=await Utils.loadFile(this.templatesFolderPath+"edm.html.txt");
 
         if(forPreview==true){
 
@@ -88,7 +88,7 @@ export default class PublishHelper{
     }
 
     async getLandingHtml(forPreview=false){
-        const landing_page=(this.useNewLandingPageFormat)?"new_format_landing.html":"landing.html"
+        const landing_page=(this.useNewLandingPageFormat)?"new_format_landing.html.txt":"landing.html.txt"
         let data= await Utils.loadFile( this.templatesFolderPath+landing_page) ;
        
         if(this["SAME_AS_EDM_TITLE"]==true){
@@ -136,7 +136,7 @@ export default class PublishHelper{
     }
 
     async getSendemailHtml(forPreview=false){
-        let data=await Utils.loadFile(this.templatesFolderPath+"sendemail.php");
+        let data=await Utils.loadFile(this.templatesFolderPath+"sendemail.php.txt");
        
         if(this.assetFormat=="ClientLink") {
             data=data.replaceAll(`##baseUrl####asset##`,this.clientLink )
@@ -157,7 +157,7 @@ export default class PublishHelper{
     }
 
     async getThanksHtml(forPreview=false){
-        let data=await Utils.loadFile(this.templatesFolderPath+"thanks.html");
+        let data=await Utils.loadFile(this.templatesFolderPath+"thanks.html.txt");
 
         if(this.assetFormat=="ClientLink") {
             data=data.replaceAll(`##baseUrl####asset##`,this.clientLink )
@@ -187,7 +187,7 @@ export default class PublishHelper{
     }
 
     async getThanksVidHtml(forPreview=false){
-        let data=await Utils.loadFile(this.templatesFolderPath+"thanks-vid.html");
+        let data=await Utils.loadFile(this.templatesFolderPath+"thanks-vid.html.txt");
 
 
 
@@ -349,17 +349,33 @@ export default class PublishHelper{
         
         const logoFile=document.querySelector("[name='LOGO_FILE']")?.files[0];
         if(logoFile){
-            zip.file(`${this.logoName}`, logoFile );
+            zip.file(`${this["LOGO_NAME"]}`, logoFile );
         }
 
         const thumbnailFile=document.querySelector("[name='THUMBNAIL_FILE']")?.files[0];
         if(thumbnailFile){
-            zip.file(`${this.thumbnail}`, thumbnailFile );
+            zip.file(`${this["THUMBNAIL_NAME"]}`, thumbnailFile );
+        }
+
+
+        if(this["ASSET_FORMAT"]=="PDF" ){
+            try{
+                zip.file(`${this["PDF"]}`, document.querySelector("[name='PDF_FILE']").files[0] );
+            }catch(error){
+                console.log(error);
+            }
+           
+        }else if(this["ASSET_FORMAT"]=="MP4"){
+            try{
+                zip.file(`${this["MP4"]}`, document.querySelector("[name='MP4_FILE']").files[0] );
+            }catch(error){
+                console.log(error);
+            }
         }
 
        
         zip.generateAsync({ type: "blob" }).then( (blob) =>{ // 1) generate the zip file
-            saveAs(blob, `${this.LINK_NAME}`);                          // 2) trigger the download
+            saveAs(blob, `${this.LINK_NAME}.zip`);                          // 2) trigger the download
         }, (err)=> {
             alert(error)
         });

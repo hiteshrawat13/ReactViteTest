@@ -4,6 +4,7 @@ import './SideBar.scss'
 import MenuItem from './MenuItem'
 import Accordion from './Accordion'
 import { useSelector, useDispatch } from 'react-redux'
+import {toggleSidebar,hideSidebar} from '../../../store/customizer/CustomizerSlice';
 import { FaArrowAltCircleDown } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
 import Divider from './Divider'
@@ -92,7 +93,17 @@ const SideBar = () => {
     ]
 
     const [active,setActive]=useState(0);
+
+
+
+
     const handleActiveChange=(item)=>{
+
+        if(item.type=="menuItem"){
+            dispatch(toggleSidebar())
+        }
+      
+
         setActive(item.id)
         console.log(item);
     }
@@ -108,11 +119,17 @@ const SideBar = () => {
     }
 
   return (
-    <div className={`sideBar ${(customizer.isCollapse)?'collapsed':'opened'}`}>
-        <div className='sideBarHolder'>
-        <div className='logo'>
-            <img src={logo} alt="logo" />
-        </div>
+    <>
+       <div className='backdrop' 
+       onClick={()=> dispatch(hideSidebar())}
+       style={{display:`${(customizer.isCollapse)?'none':'block'}`,position:"absolute",zIndex:"9",background:"#00000052",width:"100%",height:"100%",right:"0"}}>
+
+</div>
+    <div className={`sideBar ${(customizer.isCollapse)?'collapsed':'opened'}`} style={{position:"absolute",zIndex:"10"}}>
+        <div className='sideBarHolder' >
+        {/*  */}
+
+     
 
         <div className='menu'>
             {
@@ -140,6 +157,8 @@ const SideBar = () => {
         </div>
         
     </div>
+    </>
+    
   )
 }
 

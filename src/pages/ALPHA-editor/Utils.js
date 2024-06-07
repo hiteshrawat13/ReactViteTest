@@ -12,7 +12,7 @@ export default class Utils{
     }
 
     static async loadFile (path) {
-        const res = await fetch(path)
+        const res = await fetch(path, {cache: "no-store"})
         const text = await res.text()
       
         return text;

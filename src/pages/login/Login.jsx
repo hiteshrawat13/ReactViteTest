@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router-dom';
 import toast,{Toaster} from 'react-hot-toast';
 
 
+import logo from "../../ondirect-logo.png"
+
 const Login = () => {
 
 
@@ -54,7 +56,7 @@ const Login = () => {
       
     <form onSubmit={handleSubmit}>
     <div className='logoHolder'>
-    <img src='./ondirect-logo.png'/>
+    <img src={logo}/>
     </div>
      
     <h1>Login to your account</h1>

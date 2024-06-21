@@ -1,92 +1,323 @@
-.sideBar{
-    flex-basis: 200px;
-    width:200px;
+// .sideBar{
+//     flex-basis: 260px;
+//     width:260px;
 
-    border-right: 1px solid rgb(229, 234, 239);
-    display: flex;
-    flex-direction: column;
-    min-height:100vh;
-    background-color: #fff;
-    transition: all 0.5s;
-    max-height: 100vh;
+//     border-right: 1px solid rgb(229, 234, 239);
+//     display: flex;
+//     flex-direction: column;
+//     min-height:100vh;
+//     background-color: #fff;
+//     transition: all 0.5s;
+//     max-height: 100vh;
     
-    &.collapsed{
-        flex-basis: 0%;
-        width: 0px;
+//     &.collapsed{
+//         flex-basis:70px;
+//         width: 70px;
 
-        overflow: hidden;
-    }
+//         overflow: hidden;
 
-    .sideBarHolder{
+//          .label{
+
+//             display: none;
+//         }
+
+//         .Heading{
+
+//             display: none;
+//         }
+
+//         .menuItem{
+//             justify-content: center;
+//         }
+//     }
+
+//     .sideBarHolder{
        
-    }
+//     }
 
-    // .logo{
-    //     width: 100%;
-    //     border-bottom: 1px solid #dadada;
-    //     display: flex;
-    //     justify-content: center;
-    //     padding-top: 10px;
-    //     padding-bottom: 10px;
-    //     img{
-    //         max-width: 70%;
-    //     }
+//     // .logo{
+//     //     width: 100%;
+//     //     border-bottom: 1px solid #dadada;
+//     //     display: flex;
+//     //     justify-content: center;
+//     //     padding-top: 10px;
+//     //     padding-bottom: 10px;
+//     //     img{
+//     //         max-width: 70%;
+//     //     }
         
-    // }
+//     // }
 
-    .menu{
-        flex:1;
-       overflow-y: scroll;
+//     .menu{
+//         flex:1;
+//        overflow-y: scroll;
+
        
-    }
+//     }
 
     
 
-            .menu::-webkit-scrollbar-track
-        {
-            -webkit-box-shadow: inset 0 0 6px rgba(122, 122, 122, 0.1);
-            background-color: #fffdfd;
-            border-radius: 10px;
-        }
+//             .menu::-webkit-scrollbar-track
+//         {
+//             -webkit-box-shadow: inset 0 0 6px rgba(122, 122, 122, 0.1);
+//             background-color: #fffdfd;
+//             border-radius: 10px;
+//         }
 
-        .menu::-webkit-scrollbar
-        {
-            width: 1px;
-            background-color: #F5F5F5;
-        }
+//         .menu::-webkit-scrollbar
+//         {
+//             width: 1px;
+//             background-color: #F5F5F5;
+//         }
 
-        .menu::-webkit-scrollbar-thumb
-        {
-            border-radius: 10px;
-            background-color: #FFF;
-            background-image: -webkit-linear-gradient(top,
-                                                    #88888894 0%,
-                                                    #a08f9291 50%,
-                                                    );
-        }
+//         .menu::-webkit-scrollbar-thumb
+//         {
+//             border-radius: 10px;
+//             background-color: #FFF;
+//             background-image: -webkit-linear-gradient(top,
+//                                                     #88888894 0%,
+//                                                     #a08f9291 50%,
+//                                                     );
+//         }
 
-    .logout{
-        display: flex;
-        padding: 10px;
-        background-color: #b42525;
-        color:#fff;
-        justify-content: center;
-        align-content: center;
-        align-items: center;
-        gap: 5px;
-        cursor: pointer;
-        transition: background-color 0.25s ease-in;
+//     .logout{
+//         display: flex;
+//         padding: 10px;
+//         background-color: #b42525;
+//         color:#fff;
+//         justify-content: center;
+//         align-content: center;
+//         align-items: center;
+//         gap: 5px;
+//         cursor: pointer;
+//         transition: background-color 0.25s ease-in;
 
-        &:hover{
-            background-color: #680808;
+//         &:hover{
+//             background-color: #680808;
             
-        }
+//         }
+//     }
+// }
+
+
+
+
+
+
+ .sideBar {
+    user-select: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 65px;
+    background: #353b48;
+    transition: all 0.4s ease;
+   
+
+
+    .simplebar-scrollbar::before {
+        background-color: #8395a7 !important;
     }
-}
-
-
-
-
-
+    
+    .simplebar-track.simplebar-horizontal {
+        display: none;
+    }
 
  
+    .simplebar-track.simplebar-vertical {
+        width: 10px;
+      }
+
+    &.collapsed:hover{
+       
+        z-index: 99;
+        width: 255px;
+
+        ~ .outletHolder{
+            //left: 250px;
+          //  width: calc(100% - 255px);
+          }
+
+          ~ .outletHolder .navBar{
+           
+          
+            // width: calc(100% - 255px);
+          }
+
+          .label{
+            display: block;
+         }
+
+         .Heading{
+            visibility: visible;
+
+            .text{
+                display: block;
+            }
+            .threeDots{
+                display: none;
+            }
+         }
+
+         .accordion  .arrow{
+            display: block;
+          }
+
+
+    }
+   
+
+    &.opened{
+        width: 255px;
+
+        ~ .outletHolder{
+            left: 255px;
+            width: calc(100% - 255px);
+          }
+
+          ~ .outletHolder .navBar{
+           
+          
+            // width: calc(100% - 250px);
+          }
+
+          .Heading{
+            visibility: visible;
+
+            .text{
+                display: block;
+            }
+            .threeDots{
+                display: none;
+            }
+         }
+
+        
+    }
+
+    &.collapsed  {
+
+        overflow: hidden;
+        .label{
+            display: none;
+         }
+
+         .Heading{
+            visibility: hidden;
+         }
+
+
+         ~ .outletHolder .navBar{
+           
+           
+           // width: calc(100% - 65px);
+          }
+
+          .accordion  .arrow{
+            display: none;
+          }
+
+          .Heading{
+            visibility: visible;
+
+            .text{
+                display: none;
+            }
+            .threeDots{
+                display: block;
+            }
+         }
+
+
+    
+    }
+
+
+
+
+    .sideBarHolder{
+      width: 255px;
+
+      min-height: 1000px;
+      overflow-x: hidden;
+   
+      
+    }
+
+    .Heading{
+        padding-left: 20px;
+        color:#dcdde1;
+
+        .text{
+            text-transform: uppercase;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+    }
+
+
+    svg{
+        height: 20px;
+        width: 20px;
+        color:#dcdde1;
+    }
+    .label{
+        color:#dcdde1;
+        font-size: 0.8em;
+        min-width: 150px;
+    }
+
+    .menuItem{
+        display: flex;
+        gap:8px;
+
+        cursor: pointer;
+        padding: 10px 20px;
+
+
+        &.active{
+            background-color: #40739e;
+        }
+
+        &:hover{
+            background-color: #718093;
+        }
+        
+    }
+
+    .accordionHolder{
+        position: relative;
+    }
+
+    .accordion {
+        display: flex;
+        gap:8px;
+        padding: 10px 20px;
+        cursor: pointer;
+
+       .arrow{
+            height:12px;
+            width:12px;
+          }
+
+
+          &.active{
+            color:red !important;
+          }
+    }
+
+    .subMenu{
+
+       // padding-left: 20px;
+
+       
+
+        &.show{
+            display: block;
+        }
+        &.hide{
+            display: none;
+        }
+    }
+ }

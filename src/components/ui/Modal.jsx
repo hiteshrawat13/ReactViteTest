@@ -6,6 +6,7 @@ const Modal = ({children,setOpened,isOpened,title,...props}) => {
     
   return (
     <div className={`Modal `} style={{display:isOpened?"flex":"none"}}>
+      <div>
         <div className='modalOverlay' onClick={()=>setOpened(false)}></div>
         <div className='modalContent' {...props}>
             <div>
@@ -17,6 +18,7 @@ const Modal = ({children,setOpened,isOpened,title,...props}) => {
             
             {children}
         </div>
+      </div>
     </div>
   )
 }

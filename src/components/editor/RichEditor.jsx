@@ -13,10 +13,11 @@ import {   BtnBold,
     BtnUndo,
     HtmlButton,
     Separator,
+    
     Toolbar,EditorProvider,Editor } from 'react-simple-wysiwyg'
 
-const RichEditor = forwardRef(({name},ref) => {
-    const [html, setHtml] = useState("my <b>HTML</b>");
+const RichEditor = forwardRef(({name,htmlValue="my <b>HTML</b>"},ref) => {
+    const [html, setHtml] = useState(htmlValue);
     function onChange(e) {
      
         setHtml(e.target.value);

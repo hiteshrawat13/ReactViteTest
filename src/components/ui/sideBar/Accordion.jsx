@@ -4,6 +4,8 @@ import MenuItem from './MenuItem';
 
 import './Accordion.scss'
 import { useLocation } from 'react-router-dom';
+
+
 const Accordion = ({ item, activeItem, handleActiveChange, isSubItem = null }) => {
 
   const [collapsed, setCollapsed] = useState(true)
@@ -20,7 +22,7 @@ const Accordion = ({ item, activeItem, handleActiveChange, isSubItem = null }) =
 
   }, [location])
 
-  return <>
+  return <div className='accordionHolder'>
   <div
     className={`accordion ${(active)?'active':''}`}
     onClick={() => {
@@ -29,18 +31,15 @@ const Accordion = ({ item, activeItem, handleActiveChange, isSubItem = null }) =
      
       if (item.href) navigate(item.href)
 
-    }}
-  >
+    }}  >
     {item.icon}
     <div className='label'>{item.label}</div>
-    {(item.items) ? <IoIosArrowDown style={{transform:`${(collapsed)?'rotate(-90deg)':'rotate(0deg)'}`,transition:"all 0.3s"}}/> : null}
+    {(item.items) ? <IoIosArrowDown className="arrow" style={{transform:`${(collapsed)?'rotate(-90deg)':'rotate(0deg)'}`,transition:"all 0.3s"}}/> : null}
   </div>
 
   {
     (item.items) ?
-      <div
-        className={`subMenu ${(collapsed == false) ? 'show' : 'hide'}`}
-      >
+      <div className={`subMenu ${(collapsed == false) ? 'show' : 'hide'}`} >
 
         {
           item.items.map((subItem) => {
@@ -50,7 +49,7 @@ const Accordion = ({ item, activeItem, handleActiveChange, isSubItem = null }) =
       </div>
       : null
   }
-</>
+</div>
 }
 
 export default Accordion

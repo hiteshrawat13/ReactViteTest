@@ -8,6 +8,7 @@ import UserList from "../pages/user-management/UserList"
 import RoleList from "../pages/user-management/RoleList"
 import AlphaEditor from "../pages/ALPHA-editor/AlphaEditor"
 import Auth from '../Auth';
+import CampaignDetails from "../pages/campaign/CampaignDetails"
 
 
 
@@ -61,6 +62,11 @@ const Router=[
           path: '/campaigns/create/:campaign',
           element: <CreateNewCampaign/>,
           title:"Create Campaign"
+        },
+        {
+          path: '/campaigns/details',
+          element: <CampaignDetails/>,
+          title:"Campaign Details"
         },
         {
           path: '/exit',

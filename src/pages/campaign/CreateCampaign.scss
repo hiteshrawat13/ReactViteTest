@@ -25,3 +25,30 @@
        
     }
 }
+
+
+.modalBody{
+    padding: 10px;
+
+
+    label{
+        display: block;
+        margin: 20px 0px;
+
+        span{
+            display: block;
+            font-size: 13px;
+            font-weight: 400;
+            color: #464646;
+        }
+
+        input,select{
+            width: 100%;
+            padding: 8px;
+            outline: none;
+            border:1px solid #ededed;
+        }
+
+    }
+
+}

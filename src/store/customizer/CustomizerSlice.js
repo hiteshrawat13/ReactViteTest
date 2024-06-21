@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 
-  isCollapse: true, // to make sidebar Mini by default
+  isCollapse: false, // to make sidebar Mini by default
 
 };
 

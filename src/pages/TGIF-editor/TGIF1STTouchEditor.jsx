@@ -68,6 +68,7 @@ const TGIF1STTouchEditor = () => {
 
 
   const edmAbstractRichEditorRef = useRef();
+  const edmOptinRichEditorRef = useRef();
   const landingAbstractRichEditorRef = useRef();
 
 
@@ -319,6 +320,11 @@ const TGIF1STTouchEditor = () => {
       <input type="text" name="SPONSORED_BY_TEXT" required defaultValue={"Sponsored By"}  />
     </label>
 
+
+
+
+
+
     {/* <label>
       <span>Logo width</span>
       <input type="number" name="LOGO_WIDTH" required defaultValue={200}  />
@@ -350,6 +356,19 @@ const TGIF1STTouchEditor = () => {
        
       </label>
       <RichEditor ref={edmAbstractRichEditorRef} key={1211212}  name="EDM_ABSTRACT" required/>
+
+
+
+
+    
+    
+      <label>
+        <span>EDM Optin</span>
+        <input type="text" name="EDM_OPTIN" required defaultValue={"By clicking/downloading the asset, you agree to allow the sponsor to have your contact information and for the sponsor to contact you."}/>
+      </label>
+
+
+
       <label>
         <span>EDM CTA</span>
         <input type="text" name="EDM_CTA" required defaultValue={"Download Now"}/>

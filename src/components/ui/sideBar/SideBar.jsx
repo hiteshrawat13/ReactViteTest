@@ -6,6 +6,14 @@ import Accordion from './Accordion'
 import { useSelector, useDispatch } from 'react-redux'
 import {toggleSidebar,hideSidebar} from '../../../store/customizer/CustomizerSlice';
 import { FaArrowAltCircleDown } from "react-icons/fa";
+
+import { GoDot } from "react-icons/go";
+import { MdSpaceDashboard } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
+import { MdOutlineSecurity } from "react-icons/md";
+import { SiTask } from "react-icons/si";
+import { FaDatabase } from "react-icons/fa";
+
 import { CiLogout } from "react-icons/ci";
 import Divider from './Divider'
 import Heading from './Heading'
@@ -14,6 +22,10 @@ import { useNavigate } from 'react-router-dom';
 
 
 import logo from "../../../ondirect-logo.png"
+
+
+import SimpleBar from 'simplebar-react';
+import 'simplebar-react/dist/simplebar.min.css';
 
 const SideBar = () => {
 
@@ -34,28 +46,28 @@ const SideBar = () => {
                     type:"menuItem",
                     label:"Dashboard",
                     href:"/",
-                    icon:<FaArrowAltCircleDown/>
+                    icon:<MdSpaceDashboard  size={"1.5em"} />
                 },
                 {
                     id:1,
                     type:"menuItem",
                     label:"User Management",
                     href:"/users",
-                    icon:<FaArrowAltCircleDown/>
+                    icon:<FaUser size={"1.5em"} />
                 },
                 {
                     id:1,
                     type:"menuItem",
                     label:"Role Management",
                     href:"/roles",
-                    icon:<FaArrowAltCircleDown/>
+                    icon:<MdOutlineSecurity size={"1.5em"} />
                 },
                 {
                     id:3,
                     type:"menuItem",
                     label:"Masters",
                     href:"/masters",
-                    icon:<FaArrowAltCircleDown/>
+                    icon:<FaDatabase size={"1.5em"} />
                 },
                 {
                     id:2121,
@@ -67,21 +79,21 @@ const SideBar = () => {
                     id:5,
                     type:"subMenuItem",
                     label:"Campaigns",
-                    icon:<FaArrowAltCircleDown/>,
+                    icon:<SiTask  size={"1.5em"} />,
                     items:[
                         {
                             id:51,
                             type:"menuItem",
                             label:"My Campaigns",
                             href:"/campaigns",
-                            icon:<FaArrowAltCircleDown/>
+                            icon:<GoDot size={"1.5em"}/>
                         },
                         {
                             id:52,
                             type:"menuItem",
                             label:"Create Campaign",
                             href:"/campaigns/create",
-                            icon:<FaArrowAltCircleDown/>
+                            icon:<GoDot size={"1.5em"} />
                         }
                     ]
                 }
@@ -99,9 +111,9 @@ const SideBar = () => {
 
     const handleActiveChange=(item)=>{
 
-        if(item.type=="menuItem"){
-            dispatch(toggleSidebar())
-        }
+        // if(item.type=="menuItem"){
+        //     dispatch(toggleSidebar())
+        // }
       
 
         setActive(item.id)
@@ -120,12 +132,14 @@ const SideBar = () => {
 
   return (
     <>
-       <div className='backdrop' 
+     
+       {/* <div className='backdrop' 
        onClick={()=> dispatch(hideSidebar())}
        style={{display:`${(customizer.isCollapse)?'none':'block'}`,position:"absolute",zIndex:"9",background:"#00000052",width:"100%",height:"100%",right:"0"}}>
 
-</div>
-    <div className={`sideBar ${(customizer.isCollapse)?'collapsed':'opened'}`} style={{position:"absolute",zIndex:"10"}}>
+</div> */}
+    <div className={`sideBar ${(customizer.isCollapse)?'collapsed':'opened'}`} >
+    <SimpleBar style={{ maxHeight: "100%" }} forceVisible={ 'y' }>
         <div className='sideBarHolder' >
         {/*  */}
 
@@ -149,14 +163,13 @@ const SideBar = () => {
            
         </div>
 
-        <div className='logout'>
-        <CiLogout />
-        <div onClick={logOutFun}>Logout</div>
-            
+    
         </div>
-        </div>
-        
+        </SimpleBar>
     </div>
+
+
+    
     </>
     
   )

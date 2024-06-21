@@ -85,8 +85,8 @@ export default class PublishHelper{
        const languageCode=this["LANGUAGE"]
 
         console.log("===",translations);
-       data=data.replaceAll(`##EDM_OPTIN##`,translations[languageCode]['edmOptin'])
-        
+       //data=data.replaceAll(`##EDM_OPTIN##`,translations[languageCode]['edmOptin'])
+       data=data.replaceAll(`##EDM_OPTIN##`,this['EDM_OPTIN'])
 
 
        switch(this["REGION"]){

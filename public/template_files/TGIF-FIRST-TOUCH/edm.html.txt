@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="##LANGUAGE##">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
@@ -197,9 +197,10 @@
                             <tbody class="table table-borderless table-responsive">
                                 <tr scope="col">
                                     <td style="">
-                                        <p style="font-size: 11px; color: #666; margin-bottom: 2%;">
+                                        <p style="font-size: 11px; color: #666; margin-bottom: 18px;">
 											##EDM_OPTIN##
                                         </p>
+                                     
 
 
                                         <div align="left" style="padding-left: 30px;">
@@ -235,7 +236,7 @@
                                         <div style="padding-top: 15px; font-size: 14px; color: #505050;">
                                             Best regards,<br />
                                             The Editorial Team<br />
-                                            ITBusinesstoday
+                                            ITBusinessToday
                                         </div>
                                     </td>
                                 </tr>

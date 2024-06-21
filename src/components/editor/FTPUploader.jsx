@@ -188,22 +188,22 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
       bodyFormData.append('socketId', socketId);
       bodyFormData.append('ftpConfigName', publishHelper.current.FTP_CONFIG_NAME);
 
-      let tempdata={
+      let tempdata = {
         campid: document.querySelector("[name='CAMP_ID']").value,
-        campname:document.querySelector("[name='CAMP_NAME']").value,
-        category:'CS',
-        clientcode:document.querySelector("[name='CLIENT_CODE']").value,
-        country:document.querySelector("[name='REGION']").value,
-        editedby:userName,
-        linktitle:document.querySelector("[name='EDM_TITLE']").value,
-        link:document.querySelector("[name='LINK_NAME']").value + '-edm.html',
-        linkcreatedby:userName,
-        language:document.querySelector("[name='LANGUAGE']").value,
+        campname: document.querySelector("[name='CAMP_NAME']").value,
+        category: 'CS',
+        clientcode: document.querySelector("[name='CLIENT_CODE']").value,
+        country: document.querySelector("[name='REGION']").value,
+        editedby: userName,
+        linktitle: document.querySelector("[name='EDM_TITLE']").value,
+        link: document.querySelector("[name='LINK_NAME']").value + '-edm.html',
+        linkcreatedby: userName,
+        language: document.querySelector("[name='LANGUAGE']").value,
       }
 
-      bodyFormData.append('campdata',JSON.stringify(tempdata));
+      bodyFormData.append('campdata', JSON.stringify(tempdata));
 
-      
+
       let templateFiles = []
       filesToUpload.forEach(file => {
         if (file.type === "logo") {
@@ -220,7 +220,7 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
 
       axios({
         method: "post",
-        url: Config.API_BASE_URL+`/upload_file/${publishHelper.current.FTP_CONFIG_NAME}/${socketId}`,
+        url: Config.API_BASE_URL + `/upload_file/${publishHelper.current.FTP_CONFIG_NAME}/${socketId}`,
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
@@ -247,9 +247,9 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
           })
 
 
-          setUploadedLinks([...uploadedLinks,{
+          setUploadedLinks([...uploadedLinks, {
             title: document.querySelector("[name='EDM_TITLE']").value,
-            links:`${publishHelper.current.BASE_URL}${document.querySelector("[name='LINK_NAME']").value}-edm.html`,
+            links: `${publishHelper.current.BASE_URL}${document.querySelector("[name='LINK_NAME']").value}-edm.html`,
           }])
 
           setUploading(false)
@@ -272,69 +272,69 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
 
   }
 
-  const handlePreview= async(e)=>{
+  const handlePreview = async (e) => {
     e.preventDefault()
-    publishHelper.current.generateZip(JSZip,saveAs)
+    publishHelper.current.generateZip(JSZip, saveAs)
   }
 
   return (
     <>
-      <span> [ server : {(isConnected) ? <span style={{color:'green'}}>Connected</span> : <span style={{color:'red'}}>Not Connected</span>} ]  </span>
+      <span> [ server : {(isConnected) ? <span style={{ color: 'green' }}>Connected</span> : <span style={{ color: 'red' }}>Not Connected</span>} ]  </span>
 
-  
-        <div className='uploadListDiv'>
-          
+
+      <div className='uploadListDiv'>
+
         <h4>File Upload List</h4>
 
-          {filesToUpload.map((file, i) => {
-            return <div className="fileToUpload" key={i}>
-              <div className='fileName'>{file.name} </div> <div className='fileProgress'>{file.progress}</div>
-            </div>
-          })}
+        {filesToUpload.map((file, i) => {
+          return <div className="fileToUpload" key={i}>
+            <div className='fileName'>{file.name} </div> <div className='fileProgress'>{file.progress}</div>
+          </div>
+        })}
 
-{(uploading == true) ? 
-<button id='uploadFilesBtn' style={{background:'white',color:'#5a93f6'}}>Uploading... {uploadProgress}</button> 
-  : <button onClick={handleUpload} id='uploadFilesBtn'>Upload Files</button>}
+        {(uploading == true) ?
+          <button id='uploadFilesBtn' style={{ background: 'white', color: '#5a93f6' }}>Uploading... {uploadProgress}</button>
+          : <button onClick={handleUpload} id='uploadFilesBtn'>Upload Files</button>}
 
-<button onClick={handlePreview} id='downloadZipBtn'>Download ZIP</button>
-        </div>
-      
+        <button onClick={handlePreview} id='downloadZipBtn'>Download ZIP</button>
+      </div>
 
-        <div className='linksTableAfterUpload'>
+
+      <div className='linksTableAfterUpload'>
         <h4>Links Table</h4>
 
-<table border="1" cellPadding="5">
-<thead>
-      <tr>
-      <th>Asset Name</th>
-      <th>Link</th>
-      </tr>
-    </thead>
+        <table border="1" cellPadding="5">
+          <thead>
+            <tr>
+              <th>Asset Name</th>
+              <th>Link</th>
+            </tr>
+          </thead>
 
-  <tbody>
-   {
-    uploadedLinks.length <=0 ?
-    <tr className='linksTableInner'>
-      <td>No Data Found</td>
-      <td><a href='' >No Data Found</a></td>
-    </tr>
+          <tbody>
+            {
+              uploadedLinks.length <= 0 ?
+                <tr className='linksTableInner'>
+                  <td>No Data Found</td>
+                  <td><a href='' >No Data Found</a></td>
+                </tr>
 
-    :
+                :
 
-    uploadedLinks.map((val, i) => {
-      return  <tr className='linksTableInner' key={i}>
-      <td>{val.title}</td>
-      <td><a href={val.links}  target='_BLANK'>{val.links}</a></td>
-    </tr>
-    })
+                uploadedLinks.map((val, i) => {
+                  return <tr className='linksTableInner' key={i}>
+                    <td>{val.title}</td>
+                    <td><a href={val.links} target='_BLANK'>{val.links}</a></td>
+                  </tr>
+                })
 
-   }
-    
-  </tbody>
-</table>
+            }
 
-</div>
-    
+          </tbody>
+        </table>
+
+      </div>
+
 
     </>
 

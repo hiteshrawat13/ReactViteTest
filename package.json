@@ -1,5 +1,5 @@
 {
-  "homepage" : "/cbtool/",
+  "homepage": "/cbtool/",
   "name": "reactvitetest",
   "private": true,
   "version": "0.0.0",
@@ -29,6 +29,7 @@
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.23.1",
     "react-simple-wysiwyg": "^3.0.2",
+    "simplebar-react": "^3.2.6",
     "socket.io-client": "^4.7.5"
   },
   "devDependencies": {

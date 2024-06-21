@@ -26,7 +26,7 @@ const NavBar = ({title="CB Tool"}) => {
       <RxHamburgerMenu />
       </button>
       <div className='logo' style={{marginRight:"auto"}}>
-            <img src={logo} alt="logo" style={{width:"200px"}} />
+            <img src={logo} alt="logo" style={{width:"150px"}} />
         </div>
       <div style={{marginRight:"auto"}}>
         <b>{title}</b>

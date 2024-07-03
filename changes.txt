@@ -8,3 +8,13 @@ https://bootstrapdemos.adminmart.com/modernize/dist/main/index.html
 https://wrapbootstrap.com/tag/admin-dashboard
 
 https://github.com/alfinauzikri/Admin-Template-and-UI-Kit?tab=readme-ov-file
+
+
+https://preview.tabler.io/form-elements.html
+
+
+issue
+
+cors error for edm landing page get ==>heroku app link raj OR  create php file to fetch all files
+sendmail data get => create php file to fetch sendmail
+XXXXmetadata of files pdf client link path path

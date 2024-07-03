@@ -4,7 +4,7 @@ import './CreateCampaign.scss'
 import { useNavigate } from 'react-router-dom/dist'
 
 import {hideSidebar} from '../../store/customizer/CustomizerSlice';
-
+import Cookies from "js-cookie";
 
 import Modal from '../../components/ui/Modal'
 
@@ -12,51 +12,49 @@ import axios from 'axios';
 
 import Config from '../../Config';
 
+import { useForm} from 'react-hook-form';
 
 const CreateCampaign = () => {
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue
+  } = useForm();
+
+
   const formRef=useRef();
-  const clientCodeInputRef=useRef()
-  const categoryInputRef=useRef()
-  const campaignIdInputRef=useRef()
-  const campaignNameInputRef=useRef()
-  const countryInputRef=useRef()
-  const campCreatedByInputRef=useRef()
-  const lastEditedByInputRef=useRef()
-  const commentInputRef=useRef()
-
-
   const [isModalOpened,setModalOpened]=useState(false)
 
     const navigate=useNavigate()
     const dispatch =useDispatch();
 
-    const handleClick=(path)=>{
+    const handleClick=(path,clientCode)=>{
       setModalOpened(true)
-       // navigate(`/${path}`)
 
+    //  clientCodeInputRef.current.value=clientCode
+       // navigate(`/${path}`)
+       setValue('clientCode', clientCode, { shouldValidate: true })
         //Hide Sidebar
        // dispatch(hideSidebar())
     }
 
-    const handleCreateCampaign=async (e)=>{
-      e.preventDefault();
-
-
-      const clientCode=clientCodeInputRef.current.value
-      const category =categoryInputRef.current.value
-      const campaignId=campaignIdInputRef.current.value
-      const campaignName=campaignNameInputRef.current.value
-      const campCreatedBy=campCreatedByInputRef.current.value
-      const lastEditedBy=lastEditedByInputRef.current.value
-      const comment=commentInputRef.current.value
-      const country=countryInputRef.current.value
+    const handleCreateCampaign=async (data)=>{
+     
+      const {
+        clientCode,
+        category,
+        campaignId,
+        campaignName,
+        campCreatedBy,
+        lastEditedBy,
+        comment,
+        country
+      }= data
 
       try{
-
- 
-        const response=await axios.post(Config.API_BASE_URL + `/camplist/createCampaign`,
-        {
+        const response=await axios.post(Config.API_BASE_URL + `/camplist/createCampaign`,{
           clientCode,
           category,
           campaignId,
@@ -67,12 +65,25 @@ const CreateCampaign = () => {
           country
         })
 
-        console.log("Success",response);
+        if(response.data.status==200){
+          navigate(`/editor/${clientCode}`,{state: { 
+            clientCode,
+            category,
+            campaignId,
+            campaignName,
+            campCreatedBy,
+            lastEditedBy,
+            comment,
+            country
+  
+          }})
+        }else{
+          alert(response.data.message)
+        }
+        
       }catch(err){
         console.log(err, "ERROR");
       }
-
-     
     }
 
     
@@ -83,12 +94,12 @@ const CreateCampaign = () => {
     <div>CreateCampaign</div>
 
     <div className='cardHolder'>
-        <div className='campaignCard' onClick={()=>handleClick("editor")} >
+        <div className='campaignCard' onClick={()=>handleClick("editor","TGIF")} >
           
           <div className='title'>TGIF</div>
           <div className='server'>resource.itbusinesstoday.com</div>
         </div>
-        <div className='campaignCard' onClick={()=>handleClick("editor2")} >
+        <div className='campaignCard' onClick={()=>handleClick("editor2","ALPHA")} >
           <div className='title'>Alpha</div>
           <div className='server'>resource.itbusinesstoday.com</div>
         </div>
@@ -102,67 +113,95 @@ const CreateCampaign = () => {
         </div> */}
 
 
-{<Modal setOpened={setModalOpened} isOpened={isModalOpened} title={"My Modal"} style={{ display:"flex",flexDirection:"column", width: "45%", height: "auto" }}>
+{<Modal setOpened={setModalOpened} isOpened={isModalOpened} title={"Create New Campaign"} style={{ display:"flex",flexDirection:"column", height: "auto" }} width='35%'>
 
-<div style={{overflowY:"scroll",flex:"1"}} className='modalBody'>
-<form method="post" ref={formRef} onSubmit={handleCreateCampaign}>
-
-
-
-<label>
-  <span>Client Code</span>
-<input value="TGIF" name="client_code"  />
-</label>
-<label>
-  <span>Client Code</span>
-<input value="TGIF" name="client_code"  />
-</label>
-
-
-<label>
-  <span>Client Code</span>
-<input value="TGIF" name="client_code" ref={clientCodeInputRef}/>
-</label>
-
- <label>
- <span>Category</span>
-<input value="CS" name="category" ref={categoryInputRef}/>
-</label> 
-
-<label><span>Campaign Id</span>
-<input type="text" name="campaign_id" ref={campaignIdInputRef}/>
-</label>
-
-
-<label><span>Campaign Name</span>
-<input type="text" name="campaign_name" ref={campaignNameInputRef}/>
-</label>
-
-
-<label>
-<span>Country</span>
-  <select name="country"  ref={countryInputRef}>
-    <option>EU</option>
-    <option>NON-EU</option>
-  </select>
-</label>
-
-
-<label><span>camp_Created_By</span>
-<input type="text" name="camp_Created_By" ref={campCreatedByInputRef} value="Hitesh" />
-</label>
-
-<label><span>last_edited_By</span>
-<input type="text" name="last_edited_By" ref={lastEditedByInputRef} value="Hitesh"/>
-</label>
-
-<label><span>comment</span>
-<input type="text" name="comment" ref={commentInputRef}  />
-</label>
+<div className='modalBody'>
+<form method="post" ref={formRef} 
+// onSubmit={handleCreateCampaign}
+ style={{display:"flex",flexDirection:"column",gap:"10px"}} onSubmit={handleSubmit((data) => handleCreateCampaign(data))}>
 
 
 
-<input type="submit" value="Create"  />
+
+            
+
+<div  style={{display:"flex",gap:"12px"}}>
+ 
+    <div style={{flexBasis:"50%"}}>
+        <span style={{display:"block"}}>Client Code</span>
+        <input {...register('clientCode', { required: true })} readOnly style={{width:"100%",background:"#b2bec3"}}/>
+        {errors.clientCode && <p>client_code is required.</p>}
+    </div>
+
+    <div style={{flexBasis:"50%"}}>
+        <span style={{display:"block"}}>Category</span>
+        <input value="CS" {...register('category', { required: true })}  readOnly style={{width:"100%",background:"#b2bec3"}}/>
+        {errors.category && <p>category is required.</p>}
+    </div>
+
+</div>
+
+
+
+<div  style={{display:"flex",gap:"12px"}}>
+ 
+    <div style={{flexBasis:"50%"}}>
+        <span style={{display:"block"}}>Campaign Id</span>
+        <input type="text" {...register('campaignId', { required: true })} style={{width:"100%"}}/>
+        {errors.campaignId && <p>campaign_id is required.</p>}
+    </div>
+
+
+    <div style={{flexBasis:"50%"}}>
+        <span style={{display:"block"}}>Country</span>
+        <select {...register('country', { required: true })} style={{width:"100%"}}>
+          <option>EU</option>
+          <option>NON-EU</option>
+        </select>
+        {errors.country && <p>country is required.</p>}
+    </div>
+</div>
+
+
+
+<div  style={{display:"flex",gap:"12px"}}>
+ 
+    <div style={{flexBasis:"100%"}}>
+        <span style={{display:"block"}}>Campaign Name</span>
+        <input type="text"  {...register('campaignName', { required: true })}  style={{width:"100%"}}/>
+        {errors.campaignName && <p>campaign_name is required.</p>}
+    </div>
+
+    {/* <div style={{flexBasis:"50%"}}>
+        <span style={{display:"block"}}>camp_Created_By</span>
+        <input type="text" name="camp_Created_By" ref={campCreatedByInputRef} value={Cookies.get('user_name')} readOnly style={{width:"100%"}}/>
+    </div> */}
+
+</div>
+
+
+<div  style={{display:"flex",gap:"12px"}}>
+ 
+    {/* <div style={{display:"none",flexBasis:"50%"}}>
+        <span style={{display:"block"}}>last_edited_By</span>
+        <input type="text" name="last_edited_By" ref={lastEditedByInputRef} value={Cookies.get('user_name')} readOnly style={{width:"100%"}}/>
+    </div> */}
+
+    <div style={{flexBasis:"100%"}}>
+        <span style={{display:"block"}}>comment</span>
+        <input type="text"  {...register('comment')}   style={{width:"100%"}} />
+    </div>
+
+</div>
+<input type="hidden"  {...register('campCreatedBy', { required: true })} value={Cookies.get('user_name')} readOnly  />
+<input type="hidden"   {...register('lastEditedBy', { required: true })} value={Cookies.get('user_name')} readOnly />
+
+<div>
+<input type="submit" value="Create"  style={{width:"100%",padding:"5px",background:"#6ab04c",color:"#fff",border:"none"}}/>
+</div>
+
+
+
 </form>
 </div>
 

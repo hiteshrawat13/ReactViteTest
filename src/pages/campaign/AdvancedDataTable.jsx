@@ -98,6 +98,8 @@ const AdvancedDataTable = () => {
   };
 
   function openLinksPopup(data){
+
+   
     setCampData(data);
   }
 

@@ -8,7 +8,16 @@ import Config from '../../Config';
 import Cookies from 'js-cookie';
 
 
+import { useDispatch,useSelector } from 'react-redux'
+import FormBuilderSlice, { addField, setSelectedField,loadFieldsFromJson } from '../../store/formBuilder/FormBuilderSlice'
+
+
 const FTPUploader = forwardRef(({ publishHelper }, ref) => {
+
+
+  const formBuilder = useSelector(state => state.formBuilder)
+ 
+  const dispatch=useDispatch()
 
   const userName = Cookies.get('user_id');
 
@@ -196,7 +205,7 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
         country: document.querySelector("[name='REGION']").value,
         editedby: userName,
         linktitle: document.querySelector("[name='EDM_TITLE']").value,
-        link: document.querySelector("[name='LINK_NAME']").value + '-edm.html',
+        link: publishHelper.current.BASE_URL+document.querySelector("[name='LINK_NAME']").value + '-edm.html',
         linkcreatedby: userName,
         language: document.querySelector("[name='LANGUAGE']").value,
       }
@@ -207,8 +216,9 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
       let templateFiles = []
       filesToUpload.forEach(file => {
         if (file.type === "logo") {
+          bodyFormData.append('logoFile', file.name);//order important here  first logoFile then files[]
           bodyFormData.append('files[]', file.file, file.name);
-          bodyFormData.append('logoFile', file.name);
+          
         } else if (file.type === "file") {
           bodyFormData.append('files[]', file.file, file.name);
         } else if (file.type === "templateFile") {
@@ -277,6 +287,22 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
     publishHelper.current.generateZip(JSZip, saveAs)
   }
 
+
+  const serializeData=(e)=>{
+    e.preventDefault()
+    console.log(publishHelper.current);
+
+    localStorage.setItem("CAMP_DATA",JSON.stringify(publishHelper.current))
+  }
+
+  const loadCampData=(e)=>{
+    e.preventDefault()
+  
+    const campData=JSON.parse( localStorage.getItem("CAMP_DATA") )
+    publishHelper.current.loadCampData(campData)
+    dispatch(loadFieldsFromJson((publishHelper.current["form"]))) 
+  }
+
   return (
     <>
       <span> [ server : {(isConnected) ? <span style={{ color: 'green' }}>Connected</span> : <span style={{ color: 'red' }}>Not Connected</span>} ]  </span>
@@ -297,6 +323,11 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
           : <button onClick={handleUpload} id='uploadFilesBtn'>Upload Files</button>}
 
         <button onClick={handlePreview} id='downloadZipBtn'>Download ZIP</button>
+      </div>
+
+      <div>
+      <button onClick={serializeData} id='serializeDataBtn'>Serialize Data</button>
+      <button onClick={loadCampData} id='sloadCampDataBtn'>Load Camp Data</button>
       </div>
 
 

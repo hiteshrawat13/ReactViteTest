@@ -99,6 +99,17 @@ const handleSubmit=(e)=>{
                 <input type="checkbox" name="isRequired" defaultChecked={data.isRequired} />
             </label>
 
+            
+            <label>
+                <span>Disabled?</span>
+                <input type="checkbox" name="isDisabled" defaultChecked={data.isDisabled} />
+            </label>
+
+            <label>
+                <span>ReadOnly?</span>
+                <input type="checkbox" name="isReadOnly" defaultChecked={data.isReadOnly} />
+            </label>
+
         
 
             <button onClick={handleSubmit}>Submit</button>

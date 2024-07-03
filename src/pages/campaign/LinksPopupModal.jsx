@@ -4,9 +4,12 @@ import axios from "axios";
 import DataTable from "react-data-table-component";
 import Config from '../../Config';
 
+import { useNavigate } from 'react-router-dom';
+import * as cheerio from 'cheerio';
+
 
 const LinksModal = ({ campData, setCampData }) => {
-
+    const navigate=useNavigate()
     const [miniSwitch, setMiniSwitch] = useState(false);
     const [links, setLinks] = useState('');
 
@@ -21,6 +24,68 @@ const LinksModal = ({ campData, setCampData }) => {
         })()
         //   return () => {  }
     }, [])
+
+
+    const handleCreateLink=(campData)=>{
+
+        const { 
+            Client_Code:clientCode,
+            Category:category,
+            camp_id:campaignId,
+            camp_name:campaignName,
+            camp_Created_By:campCreatedBy,
+            last_edited_By:lastEditedBy,
+            comment:comment,
+            Country:country
+  
+          }=campData
+
+
+        navigate(`/editor/${clientCode}`,{state: { 
+            clientCode,
+            category,
+            campaignId,
+            campaignName,
+            campCreatedBy,
+            lastEditedBy,
+            comment,
+            country
+  
+          }})
+    }
+
+
+    const parsePage=(d)=>{
+        console.log(d.link);
+        axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
+        
+        axios(d.link, {
+            method: 'GET',
+            mode: 'no-cors',
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'same-origin',
+          }).then(response => {
+            alert(response)
+          }).catch(function (error){
+            alert("ERROR")
+             });
+        
+        
+        // axios
+        //     .get(d.link)
+        //     .then(function (response) {
+        //         const $ = cheerio.load(response);
+        //         console.log(response);
+        //     })
+        //     .catch(function (error){
+        //         console.log(error);
+        //     });
+       
+    }
 
     const columns = [
         {
@@ -58,6 +123,9 @@ const LinksModal = ({ campData, setCampData }) => {
                         </li>
                         <li  >
                             <a id="add-links-tab" onClick={() => setMiniSwitch(true)} >Camp Details</a>
+                        </li>
+                        <li  >
+                            <a   onClick={() => handleCreateLink(campData)} >Create Link</a>
                         </li>
                     </ul>
                     <button type="button" className="btn closeBtn" id="cancelBtn" onClick={() => setCampData("")}>
@@ -114,6 +182,7 @@ const LinksModal = ({ campData, setCampData }) => {
                                 title="Links Table"
                                 columns={columns}
                                 data={links}
+                                onRowClicked={parsePage}
                                 // progressPending={'loading'}
                                 pagination
                             />

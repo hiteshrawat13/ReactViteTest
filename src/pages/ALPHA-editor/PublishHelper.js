@@ -15,7 +15,7 @@ export default class PublishHelper{
     }    
 
     //dont forget to add forward slash "/" at the end
-    templatesFolderPath="./template_files/ALPHA/"
+    templatesFolderPath="../template_files/ALPHA/"
 
     constructor(){
        // this=alpha
@@ -71,7 +71,7 @@ export default class PublishHelper{
         }else{
         data=data.replaceAll(`##THUMBNAIL_URL##`,this["BASE_URL"]+this["THUMBNAIL_NAME"])
 
-        data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+this["LOGO_NAME"])
+        data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+'/logo/'+this["LOGO_NAME"])
         }
 
         for (const [key, value] of Object.entries(this)) {
@@ -252,7 +252,7 @@ export default class PublishHelper{
                     preview:(preview==1) && await this.getEdmHtml(true) 
                 },
                 {
-                    name:`${this.LINK_NAME}-landing.php`,
+                    name:`${this.LINK_NAME}-landing.html`,
                     data:(preview==0) && await this.getLandingHtml(),
                     preview:(preview==1) && await this.getLandingHtml(true)
                 },
@@ -280,7 +280,7 @@ export default class PublishHelper{
                     preview:(preview==1) && await this.getEdmHtml(true) 
                 },
                 {
-                    name:`${this.LINK_NAME}-landing.php`,
+                    name:`${this.LINK_NAME}-landing.html`,
                     data:(preview==0) && await this.getLandingHtml(),
                     preview:(preview==1) && await this.getLandingHtml(true)
                 },

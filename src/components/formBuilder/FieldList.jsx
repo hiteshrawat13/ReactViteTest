@@ -112,7 +112,7 @@ const formBuilder = useSelector(state => state.formBuilder)
 
                           <div >
                             <div className="typeIcon" title={item.type} 
-                              style={{position:"relative",color:"#60a3bc"}}> {getIcon(item.type)}  
+                              style={{position:"relative",color:"#60a3bc"}}> {getIcon(item.type,item.inputType)}  
                              </div>
                           </div>
 

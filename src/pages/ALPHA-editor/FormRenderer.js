@@ -7,7 +7,7 @@ const ALPHAFormRenderer = {
 
         <section>	
         <label class="input" for="${obj.id}">
-        <input type="text" name="${obj.name}" placeholder="${obj.label}" ${obj.isRequired ? "required" : ""} ${obj.isDisabled ? "readonly" : ""} id="${obj.id}" value="${obj.value || ''}" type="text">
+        <input type="${(obj.inputType)?obj.inputType:'text'}" name="${obj.name}" placeholder="${obj.label}" ${obj.isRequired ? "required" : ""}  id="${obj.id}" value="${obj.value || ''}"  ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""} />
         <b class="tooltip tooltip-bottom-right">${obj.label}</b>
         </label>
       </section>
@@ -23,7 +23,7 @@ const ALPHAFormRenderer = {
 
         <section>
         <label class="select" for="${obj.id}" >
-        <select name="${obj.name}" ${obj.isRequired ? "required" : ""} id="${obj.id}" >
+        <select name="${obj.name}" ${obj.isRequired ? "required" : ""} id="${obj.id}"  ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""} >
             <option value="" selected disabled>${obj.label} </option>
             
             ${obj.options.length>0 && obj.options.split(/\r?\n/).map((option, index) => {
@@ -70,7 +70,7 @@ const ALPHAFormRenderer = {
 
        ${obj.options.split(/\r?\n/).map(option => `
        <div class="custom-control custom-radio" style="color:#000">
-           <input type="checkbox"    name="${obj.name}[]" value="${option.trim()}" ${obj.isRequired ? "required" : ""}>
+           <input type="checkbox"    name="${obj.name}[]" value="${option.trim()}" ${obj.isRequired ? "required" : ""}   ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""} />
            <label>${option.trim()}</label>
        </div>
        `).join("")}
@@ -116,7 +116,7 @@ const ALPHAFormRenderer = {
 
        ${obj.options.split(/\r?\n/).map(option => `
        <label class="custom-control custom-radio" style="color:#000">
-           <input type="radio"   name="${obj.name}" value="${option.trim()}" ${obj.isRequired ? "required" : ""} >
+           <input type="radio"   name="${obj.name}" value="${option.trim()}" ${obj.isRequired ? "required" : ""}  ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""} />
            <p>${option.trim()}</p>
        </label>
        `).join("")}
@@ -140,7 +140,7 @@ const ALPHAFormRenderer = {
         return `								   
 
        <section>
-       <input type="checkbox" name="${obj.name}" id="${obj.id}" ${obj.isRequired ? "required" : ""} value="${obj.value}" />&nbsp; 
+       <input type="checkbox" name="${obj.name}" id="${obj.id}" ${obj.isRequired ? "required" : ""} value="${obj.value}"   ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""} />&nbsp; 
  <label for="${obj.id}" style="display: inline; font-weight: normal;">${obj.label}</label>
 <br>
      </section>
@@ -171,7 +171,7 @@ const ALPHAFormRenderer = {
     }
 ,
     HiddenInput: (obj) => {
-        return `<input type="hidden" name="${obj.name}" value="${obj.value}" />
+        return `<input type="hidden" id="${obj.id}" name="${obj.name}" value="${obj.value}" />
         `
     }
 

@@ -36,6 +36,7 @@ import axios from 'axios'
 import { socket } from '../../socket.js'
 import FTPUploader from '../../components/editor/FTPUploader.jsx'
 import Config from '../../Config.js'
+import { useLocation } from 'react-router-dom'
 
 
 
@@ -43,6 +44,7 @@ import Config from '../../Config.js'
 
 const TGIF1STTouchEditor = () => {
 
+  const location=useLocation()
 
   const formRef=useRef()
 
@@ -218,6 +220,9 @@ const TGIF1STTouchEditor = () => {
         alert(`Form Renderer does not have key ${editor}.Please add it to form renderer`)
       }
     })
+
+
+    
     //TGIFFormRenderer
   },[])
 
@@ -246,7 +251,7 @@ const TGIF1STTouchEditor = () => {
    <div className='holder'>
 
 
-   <input type="hidden" name="CLIENT_CODE" value="TGIF"/>
+   <input type="hidden" name="CLIENT_CODE" value={location?.state?.clientCode}/>
 
    <label>
       <span>Language</span>
@@ -269,13 +274,13 @@ const TGIF1STTouchEditor = () => {
 
     <label>
       <span>Campaign Name</span>
-      <input type="text" name="CAMP_NAME" required placeholder='Paste Email Subject Line here' />
+      <input type="text" name="CAMP_NAME" required placeholder='Paste Email Subject Line here' value={location?.state?.campaignName} readOnly/>
     </label>
 
 
     <label>
       <span>Camp Id</span>
-      <input type="text" name="CAMP_ID" required />
+      <input type="text" name="CAMP_ID" required  value={location?.state?.campaignId} readOnly/>
     </label>
 
 

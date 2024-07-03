@@ -41,7 +41,10 @@ const handleSubmit=(e)=>{
   
      <div ref={divRef} className='editorForm'>
         
-         
+            <label>
+                <span>Id</span>
+                <input type="text" name="id" defaultValue={data.id} />
+            </label>
 
             <label>
                 <span>Label</span>

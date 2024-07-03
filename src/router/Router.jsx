@@ -1,6 +1,6 @@
 import App from "../App"
 import CreateCampaign from "../pages/campaign/CreateCampaign"
-import CreateNewCampaign from "../pages/campaign/CreateNewCampaign"
+
 import MyCampaigns from "../pages/campaign/MyCampaigns"
 import TGIF1STTouchEditor from "../pages/TGIF-editor/TGIF1STTouchEditor"
 import Login from "../pages/login/Login"
@@ -59,11 +59,6 @@ const Router=[
           title:"Create Campaign"
         },
         {
-          path: '/campaigns/create/:campaign',
-          element: <CreateNewCampaign/>,
-          title:"Create Campaign"
-        },
-        {
           path: '/campaigns/details',
           element: <CampaignDetails/>,
           title:"Campaign Details"
@@ -74,18 +69,16 @@ const Router=[
           title:"Exit"
         },
         {
-          path: '/editor',
+          path: '/editor/TGIF',
           element: <TGIF1STTouchEditor/>,
           title:"TGIF Editor"
         },
         {
-          path: '/editor2',
+          path: '/editor/ALPHA',
           element: <AlphaEditor/>,
           title:"Alpha Editor"
         }
-        
       ]
-  
     },
     {
       path: "/login" ,

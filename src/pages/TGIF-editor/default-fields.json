@@ -1,6 +1,7 @@
 [
     {
         "type": "TextBox",
+        "inputType": "text",
         "id": "firstname",
         "label": "First Name",
         "name": "firstname",
@@ -8,6 +9,7 @@
     },
     {
         "type": "TextBox",
+        "inputType": "text",
         "id": "lastname",
         "label": "Last Name",
         "name": "data[0]",
@@ -15,6 +17,7 @@
     },
     {
         "type": "TextBox",
+        "inputType": "email",
         "id": "email",
         "label": "Business Email",
         "name": "data[1]",
@@ -22,6 +25,7 @@
     },
     {
         "type": "TextBox",
+        "inputType": "number",
         "id": "phone",
         "label": "Phone",
         "name": "data[2]",
@@ -29,6 +33,7 @@
     },
     {
         "type": "TextBox",
+        "inputType": "text",
         "id": "company",
         "label": "Company",
         "name": "data[3]",
@@ -36,6 +41,7 @@
     },
     {
         "type": "TextBox",
+        "inputType": "text",
         "id": "address",
         "label": "Address",
         "name": "data[4]",
@@ -43,6 +49,7 @@
     },
     {
         "type": "TextBox",
+        "inputType": "text",
         "id": "city",
         "label": "City",
         "name": "data[5]",
@@ -58,6 +65,7 @@
     },
     {
         "type": "TextBox",
+        "inputType": "text",
         "id": "zip",
         "label": "ZIP Code",
         "name": "data[7]",
@@ -81,6 +89,7 @@
     },
     {
         "type": "TextBox",
+        "inputType": "text",
         "id": "job_title",
         "label": "Job Title",
         "name": "data[10]",

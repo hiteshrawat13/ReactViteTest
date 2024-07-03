@@ -22,7 +22,7 @@ const TextEditor = React.lazy(() => import( "./fieldEditor/TextEditor"));
 
 
 import { RiListRadio } from "react-icons/ri";
-import { PiTextbox } from "react-icons/pi";
+import { PiTextTBold } from "react-icons/pi";
 import { GoSingleSelect } from "react-icons/go";
 import { MdOutlineCheckBox } from "react-icons/md";
 
@@ -31,6 +31,9 @@ import { LuText } from "react-icons/lu";
 import { FaCode } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
 import { ImDownload2 } from "react-icons/im";
+import { MdOutlineAlternateEmail } from "react-icons/md";
+import { MdNumbers } from "react-icons/md";
+
 
 
 const FormBuilder = () => {
@@ -94,10 +97,20 @@ const FormBuilder = () => {
 
 
   
-  const getIcon=(type)=>{
+  const getIcon=(type,inputType="text")=>{
+    //inputType => it is a text box only  input type like text, email, number
+
+
+    let textBoxLogo=<PiTextTBold  size={20} />
+    switch(inputType){
+      case "text":break;
+      case "email":textBoxLogo=<MdOutlineAlternateEmail  size={20}/>; break;
+      case "number":textBoxLogo=<MdNumbers size={20} />;break;
+    }
+
     switch(type){
      
-      case "TextBox": return <PiTextbox size={20} />;
+      case "TextBox": return textBoxLogo;
       case "SelectBox": return <GoSingleSelect size={20} />;
       case "CheckBox": return <MdOutlineCheckBox size={20} />;
       case "CheckGroup": return <RiCheckboxMultipleLine size={20} />;
@@ -155,24 +168,25 @@ const FormBuilder = () => {
       <FieldList getIcon={getIcon} />
  
       <div className="fieldEditor">
+      <div className='fieldEditorHolder'>
+          {(!formBuilder?.fields[formBuilder.selectedField]?.type) 
+          &&  
+          <div className='editorFallback'><span>Field Properties<br></br>Select the form field to update filed properties.</span></div> }
 
-      {(!formBuilder?.fields[formBuilder.selectedField]?.type) 
-      &&  
-      <div className='editorFallback'><span>Field Properties<br></br>Select the form field to update filed properties.</span></div> }
-
-        <Suspense fallback={<div>Loading ... </div>}>
-     
-    {(formBuilder?.fields[formBuilder.selectedField]?.type=="TextBox") && <TextBoxEditor key={Math.random()}  data={formBuilder?.fields[formBuilder.selectedField]}/>  }
-    {(formBuilder?.fields[formBuilder.selectedField]?.type=="SelectBox") && <SelectBoxEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
-    {(formBuilder?.fields[formBuilder.selectedField]?.type=="CheckBox") && <CheckBoxEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
-    {(formBuilder?.fields[formBuilder.selectedField]?.type=="CheckGroup" ) && <CheckGroupEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
-    {(formBuilder?.fields[formBuilder.selectedField]?.type=="RadioGroup") && <RadioGroupEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
-    {(formBuilder?.fields[formBuilder.selectedField]?.type=="Text") && <TextEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
-    {(formBuilder?.fields[formBuilder.selectedField]?.type=="Html") && <HtmlEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
-    {(formBuilder?.fields[formBuilder.selectedField]?.type=="HiddenInput") && <HiddenInputEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
-    {(formBuilder?.fields[formBuilder.selectedField]?.type=="CTA") && <CTAEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
-      
-        </Suspense>
+            <Suspense fallback={<div>Loading ... </div>}>
+        
+        {(formBuilder?.fields[formBuilder.selectedField]?.type=="TextBox") && <TextBoxEditor key={Math.random()}  data={formBuilder?.fields[formBuilder.selectedField]}/>  }
+        {(formBuilder?.fields[formBuilder.selectedField]?.type=="SelectBox") && <SelectBoxEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
+        {(formBuilder?.fields[formBuilder.selectedField]?.type=="CheckBox") && <CheckBoxEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
+        {(formBuilder?.fields[formBuilder.selectedField]?.type=="CheckGroup" ) && <CheckGroupEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
+        {(formBuilder?.fields[formBuilder.selectedField]?.type=="RadioGroup") && <RadioGroupEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
+        {(formBuilder?.fields[formBuilder.selectedField]?.type=="Text") && <TextEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
+        {(formBuilder?.fields[formBuilder.selectedField]?.type=="Html") && <HtmlEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
+        {(formBuilder?.fields[formBuilder.selectedField]?.type=="HiddenInput") && <HiddenInputEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
+        {(formBuilder?.fields[formBuilder.selectedField]?.type=="CTA") && <CTAEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} /> }
+          
+            </Suspense>
+        </div>
       </div>
     </div>
     </>

@@ -17,7 +17,7 @@ const divRef=useRef()
     
 const handleSubmit=(e)=>{
     e.preventDefault()
-    const children= divRef.current.querySelectorAll('input , textarea')
+    const children= divRef.current.querySelectorAll('input , textarea,select')
     const state={type:fields.TextBox}
     for (let i = 0; i < children.length; i++) {
        const child = children[i]
@@ -40,6 +40,15 @@ const handleSubmit=(e)=>{
    
     <div ref={divRef} className='editorForm'>
        
+            <label>
+                <span>Input Type</span>
+                <select name="type" defaultValue={data.inputType}>
+                    <option value="text">Text</option>
+                    <option value="email">Email</option>
+                    <option value="number">Number</option>
+                </select>
+            </label>
+
             <label>
                 <span>Id</span>
                 <input type="text" name="id" defaultValue={data.id} />
@@ -65,6 +74,8 @@ const handleSubmit=(e)=>{
                 <input type="text" name="value" defaultValue={data.value} />
             </label>
 
+         
+
             <label>
                 <span>Required?</span>
                 <input type="checkbox" name="isRequired" defaultChecked={data.isRequired} />
@@ -73,6 +84,11 @@ const handleSubmit=(e)=>{
             <label>
                 <span>Disabled?</span>
                 <input type="checkbox" name="isDisabled" defaultChecked={data.isDisabled} />
+            </label>
+
+            <label>
+                <span>ReadOnly?</span>
+                <input type="checkbox" name="isReadOnly" defaultChecked={data.isReadOnly} />
             </label>
 
             <button onClick={handleSubmit}>Submit</button>

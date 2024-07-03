@@ -7,24 +7,36 @@ import {translations} from './translations.js'
 export default class PublishHelper{
 
     
-    BASE_URL="https://resource.itbusinesstoday.com/whitepapers/"
+    BASE_URL="https://resource.itbusinesstoday.com/whitepapers/download/"
     YEAR=new Date().getFullYear().toString()
     FTP_CONFIG_NAME="TGIF"
 
     
     //dont forget to add forward slash "/" at the end
-    templatesFolderPath="./template_files/TGIF-FIRST-TOUCH/"
+    templatesFolderPath="../template_files/TGIF-FIRST-TOUCH/"
 
     constructor(){
        // this=tgif
     }
 
+    loadCampData(campData){
+        for (const [key, value] of Object.entries(campData)) {
+      
+            this[key]=value
+
+           // console.log(key,value);
+            try{
+                document.querySelector(`[name="${key}"`).value=value
+            }catch(error){
+                console.error("Cannot set to null",key,value);
+            }
+        }
+        console.log(this);
+    }
+
     setFtpConfig(){
         this.FTP_CONFIG_NAME=ftpConfigName
     }
-
-
-
 
      getBase64(file) {
 
@@ -65,7 +77,7 @@ export default class PublishHelper{
             const base64Logo= await this.getBase64( logoFile )
             data=data.replaceAll(`##LOGO_URL##`,base64Logo)
           }else{
-            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+this["LOGO_NAME"])
+            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+"logo/"+this["LOGO_NAME"])
           }
 
           if(thumbnailFile){
@@ -76,7 +88,7 @@ export default class PublishHelper{
           }
           
         }else{
-            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+this["LOGO_NAME"])
+            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+"logo/"+this["LOGO_NAME"])
             data=data.replaceAll(`##THUMBNAIL_URL##`,this["BASE_URL"]+this["THUMBNAIL_NAME"])
         }
 
@@ -198,7 +210,7 @@ export default class PublishHelper{
             const base64Logo= await this.getBase64( logoFile )
             data=data.replaceAll(`##LOGO_URL##`,base64Logo)
           }else{
-            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+this["LOGO_NAME"])
+            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+"logo/"+this["LOGO_NAME"])
           }
 
           if(thumbnailFile){
@@ -209,7 +221,7 @@ export default class PublishHelper{
           }
           
         }else{
-            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+this["LOGO_NAME"])
+            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+"logo/"+this["LOGO_NAME"])
             data=data.replaceAll(`##THUMBNAIL_URL##`,this["BASE_URL"]+this["THUMBNAIL_NAME"])
         }
 
@@ -362,7 +374,7 @@ export default class PublishHelper{
             const base64Logo= await this.getBase64( logoFile )
             data=data.replaceAll(`##LOGO_URL##`,base64Logo)
           }else{
-            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+this["LOGO_NAME"])
+            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+"logo/"+this["LOGO_NAME"])
           }
 
           if(thumbnailFile){
@@ -373,7 +385,7 @@ export default class PublishHelper{
           }
           
         }else{
-            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+this["LOGO_NAME"])
+            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+"logo/"+this["LOGO_NAME"])
             data=data.replaceAll(`##THUMBNAIL_URL##`,this["BASE_URL"]+this["THUMBNAIL_NAME"])
         }
 

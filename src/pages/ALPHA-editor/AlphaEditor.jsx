@@ -34,10 +34,12 @@ import LanguageDropdownList from '../../components/ui/editor/LanguageDropdownLis
 
 
 import FTPUploader from '../../components/editor/FTPUploader.jsx'
+import { useLocation } from 'react-router-dom';
 
 
 const AlphaEditor = () => {
 
+  const location=useLocation()
 
   const formRef=useRef()
   const FTPUploaderRef=useRef()
@@ -96,7 +98,7 @@ const AlphaEditor = () => {
       }
      }
      publishHelper.current["form"]=formBuilder.fields
-     publishHelper.current.BASE_URL= (publishHelper.current["REGION"] == "EU")?"https://eu.itbusinessplus.com/whitepaper/" : "https://resource.itbusinessplus.com/whitepapers/"
+     publishHelper.current.BASE_URL= (publishHelper.current["REGION"] == "EU")?"https://eu.itbusinessplus.com/whitepaper/test/" : "https://resource.itbusinessplus.com/whitepapers/cbtooltest/"
   }
 
 
@@ -201,20 +203,20 @@ console.log(e.target.value);
   <Step title="Basic Info">
    {/* Step 1 */}
    <div className='holder'>
-   <input type="hidden" name="CLIENT_CODE" value="ALPHA"/>
+   <input type="hidden" name="CLIENT_CODE" value={location?.state?.clientCode}/>
 
 
    <LanguageDropdownList/>
 
    <label>
       <span>Campaign Name</span>
-      <input type="text" name="CAMP_NAME" placeholder='Paste Email Subject Line here' />
+      <input type="text" name="CAMP_NAME" placeholder='Paste Email Subject Line here' value={location?.state?.campaignName} readOnly />
     </label>
 
 
    <label>
       <span>Camp Id</span>
-      <input type="text" placeholder='e.g - 1234567' name="CAMP_ID" />
+      <input type="text" placeholder='e.g - 1234567' name="CAMP_ID" value={location?.state?.campaignId} readOnly />
     </label>
 
     <label>

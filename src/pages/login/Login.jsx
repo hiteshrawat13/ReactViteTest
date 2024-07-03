@@ -41,6 +41,7 @@ const Login = () => {
       window.location.reload();
       
     }catch(e){
+     
       console.log(e);
       console.log(e.response.data.messsage);
       toast.error(e.response.data.messsage)

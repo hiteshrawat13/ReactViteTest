@@ -8,7 +8,16 @@
     .fieldEditor{
         flex: 1;
 
+        .fieldEditorHolder{
+            position: sticky;
+       
+            position: -webkit-sticky;
+            top: 65px; /* required */
+        }
+     
+
         .editorFallback{
+          
             width: 100%;
             padding: 10px;
             background-color: #c8d6e5;

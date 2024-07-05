@@ -41,12 +41,12 @@ $mail->addAddress($email, $firstname);
 
 $mail->isHTML(true);
 
-$mail->Subject = "Thank you for requesting ##ASSET_TYPE##";
+$mail->Subject = 'Thank you for requesting "##ASSET_TYPE##"';
 $mail->Body = "<table>
 				
 				 <tr><td>Dear&nbsp;<b>$firstname,</b></td></tr>
 				 <tr><td>&nbsp;</td></tr>
-				 <tr><td>Thank you for requesting <b>##EDM_TITLE##</b>. You can view it immediately by clicking <a href='##ASSET_URL##'>HERE</a>!</td></tr>
+				 <tr><td>Thank you for requesting <b>\"##EDM_TITLE##\"</b>. You can view it immediately by clicking <a href='##ASSET_URL##'>HERE</a>!</td></tr>
 				 <tr><td>&nbsp;</td></tr>
 
 				 <tr><td>&nbsp;</td></tr>

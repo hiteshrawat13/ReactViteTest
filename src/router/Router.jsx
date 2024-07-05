@@ -9,6 +9,7 @@ import RoleList from "../pages/user-management/RoleList"
 import AlphaEditor from "../pages/ALPHA-editor/AlphaEditor"
 import Auth from '../Auth';
 import CampaignDetails from "../pages/campaign/CampaignDetails"
+import Test from "../Test/Test"
 
 
 
@@ -83,6 +84,11 @@ const Router=[
     {
       path: "/login" ,
       element: <Login/> 
+    },
+
+    {
+      path: "/test" ,
+      element: <Test/> 
     },
 
  

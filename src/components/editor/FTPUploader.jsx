@@ -142,7 +142,7 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
       socket?.disconnect();
     }
 
-  }, [])
+  }, [socket])
 
   useEffect(() => {
 

@@ -26,9 +26,34 @@ export default class PublishHelper{
 
            // console.log(key,value);
             try{
-                document.querySelector(`[name="${key}"`).value=value
+              const inp=  document.querySelector(`[name="${key}"]`)
+                if(inp.type=="checkbox"){
+                    inp.checked=value
+                    // Used to update richeditor value event
+                  //  document.querySelector(`[name="${key}"]`)._valueTracker.setValue(value)
+                  //  inp.dispatchEvent(new Event("input"));
+                  //  inp.dispatchEvent(new Event("change"));
+                  //  document.querySelector(`[name="${key}"]`).dispatchEvent(new Event("input", { bubbles: true }));
+                    //end for Rich Editor value enet
+                    document.querySelector(`[name="${key}"]`)._valueTracker.setChecked(false)
+  Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'checked').set.call(inp, value);
+  var event = new Event('click', { bubbles: true});
+  inp.dispatchEvent(event);
+
+
+                  }else{
+                    document.querySelector(`[name="${key}"]`).value=value
+                    // Used to update richeditor value event
+                        document.querySelector(`[name="${key}"]`)._valueTracker.setValue('')
+                        document.querySelector(`[name="${key}"]`).dispatchEvent(new Event("input", { bubbles: true }));
+                        //end for Rich Editor value enet
+                  }
+               
+             
+                
+
             }catch(error){
-                console.error("Cannot set to null",key,value);
+                console.error("Cannot set to null",key,value,error);
             }
         }
         console.log(this);

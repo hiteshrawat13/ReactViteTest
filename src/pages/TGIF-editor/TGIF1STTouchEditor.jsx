@@ -11,9 +11,9 @@ import FormBuilder from '../../components/formBuilder/FormBuilder.jsx'
 import Stepper from '../../components/ui/stepper/Stepper.jsx'
 import Step from '../../components/ui/stepper/Step.jsx'
 
-
-
 import { useDispatch,useSelector } from 'react-redux'
+import {setData, addData, updateData } from '../../store/campaign/CampaignSlice.js'
+
 
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver';
@@ -44,6 +44,10 @@ import { useLocation } from 'react-router-dom'
 
 const TGIF1STTouchEditor = () => {
 
+  const campaignData = useSelector(state => state.campaignData)
+ 
+  const dispatch=useDispatch()
+
   const location=useLocation()
 
   const formRef=useRef()
@@ -63,7 +67,7 @@ const TGIF1STTouchEditor = () => {
   const formBuilder = useSelector(state => state.formBuilder)
   const campaign = useSelector(state => state.campaign)
  
-  const dispatch=useDispatch()
+ 
 
 
   const publishHelper=useRef(new PublishHelper())
@@ -251,7 +255,7 @@ const TGIF1STTouchEditor = () => {
    <div className='holder'>
 
 
-   <input type="hidden" name="CLIENT_CODE" value={location?.state?.clientCode}/>
+   <input type="text" name="CLIENT_CODE" value={location?.state?.clientCode}/>
 
    <label>
       <span>Language</span>
@@ -385,11 +389,11 @@ const TGIF1STTouchEditor = () => {
       <label>
         <span>Landing Page Title</span>
         <label><input type="checkbox" name="SAME_AS_EDM_TITLE" defaultChecked={sameAsEDMTitle} onChange={()=>{setSameAsEDMTitle(!sameAsEDMTitle)}}  />Same as EDM Title</label>
-        { !sameAsEDMTitle  && <input type="text" name="LANDING_TITLE" />}
+        <input type="text" name="LANDING_TITLE" style={{display:(sameAsEDMTitle==true)?'none':'block'}} />
       </label>
       <label> <span>Landing Abstract</span></label>
       <label><input type="checkbox" name="SAME_AS_EDM_ABSTRACT" defaultChecked={sameAsEDMAbstract} onChange={()=>{setSameAsEDMAbstract(!sameAsEDMAbstract)}} />Same as EDM Abstract</label>
-      { !sameAsEDMAbstract && <RichEditor key={1211212}  name="LANDING_ABSTRACT"/>}
+      <RichEditor key={1211212}  name="LANDING_ABSTRACT" style={{display:(sameAsEDMAbstract==true)?'none':'block'}}/>
       {/* <label>
         <span>Landing CTA</span>
         <label><input type="checkbox" name="SAME_AS_EDM_CTA" defaultChecked={sameAsEDMCTA} onChange={()=>{setSameAsEDMCTA(!sameAsEDMCTA)}} />Same as EDM CTA</label>

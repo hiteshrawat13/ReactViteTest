@@ -20,6 +20,7 @@ const RichEditor = forwardRef(({name,htmlValue="my <b>HTML</b>"},ref) => {
     const [html, setHtml] = useState(htmlValue);
     function onChange(e) {
      
+     
         setHtml(e.target.value);
       }
 
@@ -63,7 +64,9 @@ const RichEditor = forwardRef(({name,htmlValue="my <b>HTML</b>"},ref) => {
         </Toolbar>
       </Editor>
     </EditorProvider>
-    <input  name={name} value={html} onChange={onChange} hidden/>
+    <input type="text" style={{display:"none"}} name={name} 
+      value={html}
+     onChange={onChange} />
     
     </>
   )

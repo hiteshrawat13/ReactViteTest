@@ -170,8 +170,14 @@ const AlphaEditor = () => {
         alert(`Form Renderer does not have key ${editor}.Please add it to form renderer`)
       }
     })
+
+
+
     //ALPHAFormRenderer
   },[])
+
+
+
 
   async function getAllVals(e){
 console.log(e.target.value);
@@ -203,7 +209,7 @@ console.log(e.target.value);
   <Step title="Basic Info">
    {/* Step 1 */}
    <div className='holder'>
-   <input type="hidden" name="CLIENT_CODE" value={location?.state?.clientCode}/>
+   <input type="text" name="CLIENT_CODE" value={location?.state?.clientCode}  required  readOnly/>
 
 
    <LanguageDropdownList/>

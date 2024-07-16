@@ -55,6 +55,30 @@ const LinksModal = ({ campData, setCampData }) => {
     }
 
 
+
+    const handleEditLink=async (e,linkId)=>{
+
+        e.preventDefault()
+        try {
+            const response = await axios.post(
+                Config.API_BASE_URL+`/camplist/getLinkJsonData?id=${linkId}`
+            );
+
+            alert(response )
+            console.log(response.data);
+            const jobject=JSON.parse(response.data.json_data)
+            navigate(`/editor/${jobject['CLIENT_CODE']}`,{state: { 
+                json_data:jobject
+      
+              }})
+        } catch (error) {
+            alert(error)
+            console.log(error);
+        }
+    
+    }
+
+
     const parsePage=(d)=>{
         console.log(d.link);
         axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
@@ -107,6 +131,12 @@ const LinksModal = ({ campData, setCampData }) => {
             name: 'Created By',
             selector: row => row.Link_Created_By,
             sortable: true,
+        },
+        {
+            cell:(row) => <button onClick={(e)=>handleEditLink(e,row.id)} id={row.ID}>Action</button>,
+            ignoreRowClick: true,
+            allowOverflow: true,
+            button: true,
         },
     ]
 

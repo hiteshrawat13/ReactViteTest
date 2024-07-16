@@ -9,7 +9,7 @@ export const store = configureStore({
     customizer: CustomizerReducer,
     user: UserSlice,
     formBuilder:FormBuilderSlice,
-    campaignSlice:CampaignSlice
+    campaignData:CampaignSlice
   
   },
 });

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 
-
+import MyComponent from './MyComponent'
 
 import './App.css'
 import Dashboard from './pages/dashboard/Dashboard'
@@ -14,7 +14,9 @@ function App() {
   return (
     <>
       
-        <Dashboard/>
+        {/* <Dashboard/>   */}
+
+        <MyComponent/>   
       
     </>
   )

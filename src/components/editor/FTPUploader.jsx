@@ -10,11 +10,14 @@ import Cookies from 'js-cookie';
 
 import { useDispatch,useSelector } from 'react-redux'
 import FormBuilderSlice, { addField, setSelectedField,loadFieldsFromJson } from '../../store/formBuilder/FormBuilderSlice'
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 const FTPUploader = forwardRef(({ publishHelper }, ref) => {
 
 
+  const navigate=useNavigate()
+  const location=useLocation()
   const formBuilder = useSelector(state => state.formBuilder)
  
   const dispatch=useDispatch()
@@ -208,10 +211,10 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
         link: publishHelper.current.BASE_URL+document.querySelector("[name='LINK_NAME']").value + '-edm.html',
         linkcreatedby: userName,
         language: document.querySelector("[name='LANGUAGE']").value,
+        json_data: JSON.stringify(publishHelper.current)
       }
 
       bodyFormData.append('campdata', JSON.stringify(tempdata));
-
 
       let templateFiles = []
       filesToUpload.forEach(file => {
@@ -292,7 +295,9 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
     e.preventDefault()
     console.log(publishHelper.current);
 
-    localStorage.setItem("CAMP_DATA",JSON.stringify(publishHelper.current))
+    const json_data=JSON.stringify(publishHelper.current)
+
+    localStorage.setItem("CAMP_DATA",json_data)
   }
 
   const loadCampData=(e)=>{
@@ -302,6 +307,15 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
     publishHelper.current.loadCampData(campData)
     dispatch(loadFieldsFromJson((publishHelper.current["form"]))) 
   }
+
+  useEffect(()=>{
+    if(location?.state?.json_data){
+      const campData=( location?.state?.json_data )
+      publishHelper.current.loadCampData(campData)
+      console.log("CAMPDATA:--",publishHelper.current);
+      dispatch(loadFieldsFromJson((publishHelper.current["form"]))) 
+    }
+  },[location])
 
   return (
     <>

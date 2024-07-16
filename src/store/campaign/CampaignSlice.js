@@ -6,7 +6,7 @@ const initialState = {
 };
 
 export const CampaignSlice = createSlice({
-  name: 'campaign',
+  name: 'campaignData',
   initialState,
   reducers: {
    
@@ -20,7 +20,7 @@ export const CampaignSlice = createSlice({
       const newObj = {...state.data}; //making a new array
       newObj[payload.payload.prop] = payload.payload.value
       state.data = newObj;
-  },
+    },
 
     
     

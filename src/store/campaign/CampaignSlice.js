@@ -11,15 +11,27 @@ export const CampaignSlice = createSlice({
   reducers: {
    
     setData: (state,payload) => {
-      state.data = payload.payload;
+     
+      const newObj = {...state}; //making a new array
+      newObj.data = payload.payload;
+      state = newObj;
+      
     },
     addData: (state,payload) => {
-      state.data = {...state.data,...payload.payload};
+     
+      const newObj = {...state}; //making a new array
+      newObj.data  = payload.payload
+      state = newObj;
+      return state; // return is important to get it updated
+       
+      
     },
     updateData: (state,payload) => {
-      const newObj = {...state.data}; //making a new array
-      newObj[payload.payload.prop] = payload.payload.value
-      state.data = newObj;
+       
+      const newObj = {...state}; //making a new array
+      newObj.data[payload.payload.prop] = payload.payload.value
+      state = newObj;
+       
     },
 
     

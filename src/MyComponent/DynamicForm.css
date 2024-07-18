@@ -1,3 +1,8 @@
+form{
+    background-color: #fff;
+    padding: 1rem;
+}
+
 .container{
     max-width: 1000px;
     margin:0 auto;
@@ -13,15 +18,18 @@
 
 
     .label{
-        font-weight: bold;
+        font-size: 0.89rem;
+        font-weight: 500;
         color: rgb(51, 46, 40);
+        margin-bottom: 5px;
     }
 
     input,select,textarea{
+        display: block;
         width:100%;
         max-width: 100%;
         padding: 8px;
-        border:1px solid #ededed;
+        border:1px solid #e6e2e2;
         outline: 0px solid #928383;
     }
 
@@ -39,14 +47,16 @@
     display: inline-block;
     width: 40px;
     height: 20px;
-  }
+    /* Hide default HTML checkbox */
+    input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+}
   
-  /* Hide default HTML checkbox */
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
+  
+   
   
   /* The slider */
   .slider {
@@ -95,3 +105,59 @@
   .slider.round:before {
     border-radius: 50%;
   }
+
+
+
+
+
+
+  .checkbox {
+
+    label{
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;user-select: none;
+    }
+
+
+    
+  input[type="checkbox"] {
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    -webkit-appearance: none;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    font-size: 2rem;
+    padding: 0.1rem;
+    background-color: #ccc;
+
+  }
+
+  
+    input[type="checkbox"]::before {
+        content: "";
+        width: 22px;
+        height: 22px;
+        clip-path: polygon(73% 7%, 98% 22%, 52% 72%, 3% 50%, 18% 29%, 45% 42%);
+        transform: scale(0);
+        background-color: #2196F3;
+      }
+    
+    
+      input[type="checkbox"]:checked::before {
+        transform: scale(1);
+      }
+     
+    
+      input[type="checkbox"]:hover {
+        color: black;
+      }
+  }
+  
+  
+  
+  
+  
+  

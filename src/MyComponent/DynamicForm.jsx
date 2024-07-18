@@ -7,7 +7,7 @@ import {setData, addData, updateData } from '../store/campaign/CampaignSlice'
 import './DynamicForm.css'
 const DynamicForm = ({campaignData}) => {
 
-const { register, handleSubmit, watch, formState: { errors } } = useForm();
+const { register, handleSubmit, watch, formState } = useForm();
 const dispatch=useDispatch()
 
 const form_comp=(fields)=>{
@@ -20,17 +20,23 @@ const form_comp=(fields)=>{
                 return <div className='col' key={i}>{form_comp(field.children)}</div>
    
               case "input":
-              return <div className='field input' key={i}>
+                const showInput=( field.showIfChecked==undefined || (field.showIfChecked && campaignData.data[field.showIfChecked]==true) )
+              return  showInput && <div className='field input' key={i}>
                       <span className='label'>{field.label || field.name}</span>
                       <input type="text" 
                       {...register(field.name, { required: true })} 
-                      value={campaignData.data[field.name] || '' }
+                      value={campaignData.data[field.name] || field.value || '' }
+                      {...(field.style && {style:field.style})}
                       onChange={e => { dispatch(updateData({prop:field.name,value:e.target.value})) }}  />
+
+                    <div>
+                   {formState.errors[field.name] && formState.errors[field.name].message}
+                    </div>
                   </div>
 
 
             case "textarea":
-                return <div className='field textarea' key={i}>
+                return  (field.showIfChecked && campaignData.data[field.showIfChecked]==true) && <div className='field textarea' key={i}>
                         <span className='label'>{field.label || field.name}</span>
                         <textarea 
                         {...register(field.name, { required: true })} 
@@ -45,7 +51,7 @@ const form_comp=(fields)=>{
                       <select {...register(field.name, { required: true })} 
                       value={campaignData.data[field.name] || ''}
                       onChange={e => { dispatch(updateData({prop:field.name,value:e.target.value})) }} >
-                          {field.optons.map((option,i)=>{
+                          {field.options && field.options.map((option,i)=>{
                               return <option key={i} value={option.value}>{option.label}</option>
                           })}
                       </select>
@@ -54,17 +60,20 @@ const form_comp=(fields)=>{
 
               case "checkbox":
               return  <div className='field checkbox' key={i}>
-                      <span className='label'>{field.label || field.name}</span>
+                     <label>
                       <input type="checkbox" 
                       {...register(field.name, { required: false })} 
                       checked={campaignData.data[field.name] || false} 
                       onChange={e => { 
                           if(field.onChange){func(field.onChange)} dispatch(updateData({prop:field.name,value:e.target.checked})) 
                       }}
-                      />  
+                      /> 
+                        <span className='label'>{field.label || field.name}</span>
+                    </label>
+
                   </div>
             case "switch":
-                return <div className='field checkbox' key={i}>  
+                return <div className='field switch' key={i}>  
                 <label className="switch">
                 
                 <input type="checkbox"
@@ -76,16 +85,13 @@ const form_comp=(fields)=>{
                 
                 />
                 <span className="slider round"></span>
-                
                 </label>
                 <span className='label'>{field.name}</span>
                 </div>
             
-
               case "button":
               return  <div className='field button' key={i}>
-                      <span></span>
-                      <button>Ok</button>
+                      <button>{field.label}</button>
                   </div>
              
           }
@@ -103,8 +109,7 @@ const form_comp=(fields)=>{
   const onSubmit = data =>  {
     dispatch(setData(data))
     console.log(data );
-
-        
+  
  };
 
   return (
@@ -120,6 +125,9 @@ dispatch(addData({"CAMP_NAME":new Date().toISOString(),"EDM_ABSTRACT":Math.rando
 // dispatch(updateData({prop:"CAMP_NAME",value:new Date().toISOString()}))
 
 }}>Update Data</button>
+
+
+
         </div>
   )
 }

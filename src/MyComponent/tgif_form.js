@@ -16,6 +16,21 @@ const  fields=[
         type:"row",
         children:[
             {
+                type:"select",
+                name:"LANGUAGE",
+                label:"Language",
+                required:true,
+                options:[
+                    { label:"Select..",value:"" },
+                    { label:"en-us",value:"en-us"}
+                ]
+            }
+        ]
+    },
+    {
+        type:"row",
+        children:[
+            {
                 type:"input",
                 name:"CAMP_NAME",
                 label:"Campaign Name",
@@ -74,9 +89,24 @@ const  fields=[
                 required:true,
                 options:[
                     { label:"Select..",value:"" },
+                    { label:"EU",value:"EU" },
                     { label:"NON-EU",value:"NON-EU" },
-                    { label:"EU",value:"EU" }
+                    { label:"CASL",value:"CASL" },
+                    { label:"BOTH",value:"Both ( NON-EU & CASL )" }
                 ]
+            }
+        ]
+    },
+    {
+        type:"row",
+        children:[
+            {
+                type:"input",
+                name:"PRIVACY_POLICY",
+                label:"Privacy Policy",
+                required:true,
+                readOnly:true,
+                style:{}
             }
         ]
     },
@@ -89,8 +119,15 @@ const  fields=[
                 label:"Asset Type",
                 required:true,
                 options:[
-                    { label:"Whitepaper",value:"Whitepaper" },
-                    { label:"Webinar",value:"Webinar" }
+                    { label:"Select..",value:"" },
+                    { label:"White Paper",value:"White Paper" },
+                    { label:"Buyers/Comparision Guide",value:"Buyers/Comparision Guide" },
+                    { label:"E Book",value:"E Book" },
+                    { label:"Case Study",value:"Case Study" },
+                    { label:"Report",value:"Report" },
+                    { label:"Webinar OnDemand",value:"Webinar OnDemand" },
+                    { label:"Video",value:"Video" },
+                    { label:"Infographic",value:"Infographic" },
                 ]
             }
         ]
@@ -102,6 +139,20 @@ const  fields=[
                 type:"input",
                 name:"SPONSORED_BY_TEXT",
                 label:"Sponsored By Text",
+                value:"Sponsored By",
+                required:true,
+                readOnly:true,
+                style:{}
+            }
+        ]
+    },
+    {
+        type:"row",
+        children:[
+            {
+                type:"input",
+                name:"LOGO_WIDTH",
+                label:"Logo Width",
                 required:true,
                 readOnly:true,
                 style:{}
@@ -145,6 +196,19 @@ const  fields=[
                 required:true,
                 readOnly:true,
                 value:"By clicking/downloading the asset, you agree to allow the sponsor to have your contact information and for the sponsor to contact you."
+            }
+        ]
+    },
+    {
+        type:"row",
+        children:[
+            {
+                type:"input",
+                name:"EDM_CTA",
+                label:"EDM cta button text",
+                required:true,
+                readOnly:true,
+                value:"Download Now"
             }
         ]
     },

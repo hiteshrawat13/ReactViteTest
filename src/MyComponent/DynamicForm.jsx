@@ -7,7 +7,7 @@ import {setData, addData, updateData } from '../store/campaign/CampaignSlice'
 import './DynamicForm.css'
 const DynamicForm = ({campaignData}) => {
 
-const { register, handleSubmit, watch, formState } = useForm();
+const { register, setValue ,handleSubmit, watch, formState:{errors} } = useForm();
 const dispatch=useDispatch()
 
 const form_comp=(fields)=>{
@@ -24,37 +24,62 @@ const form_comp=(fields)=>{
               return  showInput && <div className='field input' key={i}>
                       <span className='label'>{field.label || field.name}</span>
                       <input type="text" 
-                      {...register(field.name, { required: true })} 
-                      value={campaignData.data[field.name] || field.value || '' }
+                      className={`${(errors[field.name])?"field-error":""}`}
+                      {...register(field.name, { required: field.required || false })} 
+                    //  defaultValue={campaignData.data[field.name] || field.value || '' }
                       {...(field.style && {style:field.style})}
-                      onChange={e => { dispatch(updateData({prop:field.name,value:e.target.value})) }}  />
+                      onChange={e => { 
+                        setValue(field.name, e.target.value,{	shouldValidate: true});
+                        //dispatch(updateData({prop:field.name,value:e.target.value}))
+                         }} 
+                         
+                         />
 
-                    <div>
-                   {formState.errors[field.name] && formState.errors[field.name].message}
+                    <div className='error'> 
+                    { errors[field.name] && <p>{field.label} is required</p>  }
                     </div>
                   </div>
 
 
             case "textarea":
-                return  (field.showIfChecked && campaignData.data[field.showIfChecked]==true) && <div className='field textarea' key={i}>
+                return  <div className='field textarea' key={i}>
                         <span className='label'>{field.label || field.name}</span>
                         <textarea 
-                        {...register(field.name, { required: true })} 
-                        value={campaignData.data[field.name] || '' }
-                        onChange={e => { dispatch(updateData({prop:field.name,value:e.target.value})) }} ></textarea>
+                         className={`${(errors[field.name])?"field-error":""}`}
+                        {...register(field.name, {required: field.required || false })} 
+                       // value={campaignData.data[field.name] || '' }
+                        {...(field.style && {style:field.style})}
+                        onChange={e => { 
+                            setValue(field.name, e.target.value,{	shouldValidate: true});
+                           // dispatch(updateData({prop:field.name,value:e.target.value})) 
+                            }} ></textarea>
+
+                      <div className='error'> 
+                      { errors[field.name] && <p>{field.label} is required</p>  }
+                      </div>
                     </div>
        
 
               case "select":
               return <div className='field select' key={i}>
                       <span className='label'>{field.label || field.name}</span>
-                      <select {...register(field.name, { required: true })} 
-                      value={campaignData.data[field.name] || ''}
-                      onChange={e => { dispatch(updateData({prop:field.name,value:e.target.value})) }} >
+                      <select 
+                      className={`${(errors[field.name])?"field-error":""}`}
+                      {...register(field.name, { required: field.required || false })} 
+                      //value={campaignData.data[field.name] || ''}
+                      {...(field.style && {style:field.style})}
+                      onChange={e => { 
+                        setValue(field.name, e.target.value,{	shouldValidate: true});
+                        //dispatch(updateData({prop:field.name,value:e.target.value})) 
+                        }} >
                           {field.options && field.options.map((option,i)=>{
                               return <option key={i} value={option.value}>{option.label}</option>
                           })}
                       </select>
+
+                      <div className='error'> 
+                      { errors[field.name] && <p>{field.label} is required</p>  }
+                      </div>
                   </div>
            
 
@@ -62,14 +87,21 @@ const form_comp=(fields)=>{
               return  <div className='field checkbox' key={i}>
                      <label>
                       <input type="checkbox" 
-                      {...register(field.name, { required: false })} 
-                      checked={campaignData.data[field.name] || false} 
+                      className={`${(errors[field.name])?"field-error":""}`}
+                      {...register(field.name, { required: field.required || false })} 
+                      //checked={campaignData.data[field.name] || false} 
+                      {...(field.style && {style:field.style})}
                       onChange={e => { 
-                          if(field.onChange){func(field.onChange)} dispatch(updateData({prop:field.name,value:e.target.checked})) 
+                          //if(field.onChange){func(field.onChange)} 
+                          setValue(field.name, e.target.checked, {	shouldValidate: true});
+                          //dispatch(updateData({prop:field.name,value:e.target.checked})) 
                       }}
                       /> 
                         <span className='label'>{field.label || field.name}</span>
                     </label>
+                    <div className='error'> 
+                      { errors[field.name] && <p>{field.label} is required</p>  }
+                    </div>
 
                   </div>
             case "switch":
@@ -77,10 +109,14 @@ const form_comp=(fields)=>{
                 <label className="switch">
                 
                 <input type="checkbox"
-                  {...register(field.name, { required: false })} 
-                  checked={campaignData.data[field.name] || false} 
+                 className={`${(errors[field.name])?"field-error":""}`}
+                  {...register(field.name, { required: field.required || false })} 
+                  //checked={campaignData.data[field.name] || false} 
+                  {...(field.style && {style:field.style})}
                   onChange={e => { 
-                      if(field.onChange){func(field.onChange)} dispatch(updateData({prop:field.name,value:e.target.checked})) 
+                      //if(field.onChange){func(field.onChange)} 
+                      setValue(field.name, e.target.checked);
+                      //dispatch(updateData({prop:field.name,value:e.target.checked})) 
                   }}
                 
                 />
@@ -90,8 +126,8 @@ const form_comp=(fields)=>{
                 </div>
             
               case "button":
-              return  <div className='field button' key={i}>
-                      <button>{field.label}</button>
+              return  <div className='field button ' key={i}>
+                      <button className='cta'>{field.label}</button>
                   </div>
              
           }
@@ -108,6 +144,7 @@ const form_comp=(fields)=>{
 
   const onSubmit = data =>  {
     dispatch(setData(data))
+    alert(JSON.stringify(data))
     console.log(data );
   
  };

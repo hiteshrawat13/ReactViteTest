@@ -14,7 +14,8 @@ export const CampaignSlice = createSlice({
      
       const newObj = {...state}; //making a new array
       newObj.data = payload.payload;
-      state = newObj;
+      return newObj;
+      
       
     },
     addData: (state,payload) => {

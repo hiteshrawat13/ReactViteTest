@@ -5,7 +5,8 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { setData, addData, updateData } from '../store/campaign/CampaignSlice'
 
 import './DynamicForm.css'
-const DynamicForm = forwardRef( ({ campaignData ,fields},ref) => {
+import Assets from './Assets';
+const DynamicForm = forwardRef( ({ campaignData ,fields,setFile=null},ref) => {
 
   const { register, setValue, handleSubmit, watch, formState: { errors }, reset ,trigger} = useForm();
   const dispatch = useDispatch()
@@ -47,19 +48,20 @@ const DynamicForm = forwardRef( ({ campaignData ,fields},ref) => {
         case "file":
           return  <div className='field file' key={i}>
             <span className='label'>{field.label || field.name}</span>
-            <input type="file"
-              className={`${(errors[field.name]) ? "field-error" : ""}`}
-              {...register(field.name, { required: field.required || false})}
-              //  defaultValue={campaignData.data[field.name] || field.value || '' }
-              {...(field.style && { style: field.style })}
-              onChange={e => {
-                trigger(field.name)
+            <button 
               
-              // setValue(field.name, e.target.files, { shouldValidate: true });
-                //dispatch(updateData({prop:field.name,value:e.target.value}))
-              }}
+            onClick={(e)=>{
+              e.preventDefault()
+              if(setFile)
+              {
+               
+                setFile(field.name)
+              }else{
+                
+              }
+            }}
 
-            />
+            >Select File</button>
 
             <div className='error'>
               {errors[field.name] && <p>{field.label} is required</p>}
@@ -155,6 +157,9 @@ const DynamicForm = forwardRef( ({ campaignData ,fields},ref) => {
           return <div className='field button ' key={i}>
             <button className='cta'>{field.label}</button>
           </div>
+
+case "assets":
+  return  <Assets/>
         case "step":
             return   <div className='step' key={i}><form  onSubmit={handleSubmit(onSubmit)}>{form_comp(field.children)}</form></div>
 

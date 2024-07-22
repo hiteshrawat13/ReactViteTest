@@ -10,6 +10,11 @@ const MyComponent = () => {
 
   const assetsRef=useRef(null)
 
+  const logoFileRef=useRef()
+  const thumbnailFileRef=useRef()
+  const pdfFileRef=useRef()
+  const mp4FileRef=useRef()
+
  const dispatch= useDispatch()
    
    
@@ -24,27 +29,41 @@ const MyComponent = () => {
 
 
 
+    const setFile=(label)=>{
+      alert(label+" called")
+      switch(label){
+        case "LOGO_FILE":
+          logoFileRef.current?.click()
+        break;
+        case "THUMBNAIL_FILE":
+          thumbnailFileRef.current?.click()
+        break;
+        case "PDF_FILE":
+          alert("PDF")
+        break;
+      }
+    }
   
 
  
   return (
     <div>
 
- 
+
+    <input type="file" name='LOGO_FILE' ref={logoFileRef}/>
+    <input type="file" name='THUMBNAIL_FILE' ref={thumbnailFileRef} />
+    <input type="file" name='PDF_FILE' ref={pdfFileRef}/>
+    <input type="file" name='MP4_FILE' ref={mp4FileRef}/>
 
 {fields.map((field,i)=>{
-   if(fields[step].title=="Assets"){
-    return <Assets/>
-  }
-  if(fields[step].type=="step"){
-
+  
     
       return <div style={{display:(step==i)?"block":"none"}}>
       <DynamicForm 
-    { ...(fields[step].title=="Assets") && {ref:assetsRef} }
+    { ...(fields[step].title=="Assets") && {setFile:setFile} }
      key={step} 
     campaignData={campaignData} fields={fields[step].children} /></div>
-  }
+  
     
 
     

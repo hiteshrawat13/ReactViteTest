@@ -14,9 +14,9 @@ function App() {
   return (
     <>
       
-        {/* <Dashboard/>   */}
+    <Dashboard/> 
 
-        <MyComponent/>   
+      {/* <MyComponent/>    */}
       
     </>
   )

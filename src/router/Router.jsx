@@ -17,7 +17,8 @@ import Test from "../Test/Test"
 const Router=[
     {
     
-      element: /*Auth()?*/<App/> /*: <Login/>*/,
+      element: Auth()?<App/> : <Login/>,
+      
       children: [
         {
           path: "/",

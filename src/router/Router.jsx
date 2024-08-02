@@ -10,6 +10,7 @@ import AlphaEditor from "../pages/ALPHA-editor/AlphaEditor"
 import Auth from '../Auth';
 import CampaignDetails from "../pages/campaign/CampaignDetails"
 import Test from "../Test/Test"
+import Editor from "../pages/editor/Editor"
 
 
 
@@ -69,6 +70,11 @@ const Router=[
           path: '/exit',
           element: <div>exit</div>,
           title:"Exit"
+        },
+        {
+          path: '/editor',
+          element: <Editor/>,
+          title:"Editor"
         },
         {
           path: '/editor/TGIF',

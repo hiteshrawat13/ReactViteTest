@@ -53,7 +53,7 @@
 				padding: 5px;
 			}
 			table.leadForm input[type="text"],
-			input[type="email"] {
+			input[type="email"],input[type="number"] {
 				border-radius: 2px;
 				width: 150px;
 				height: 22px;
@@ -98,11 +98,10 @@
 
 			label.error {
 				display: block;
+                color:red;
 			}
 
-			[type="checkbox"].error {
-				outline: 2px solid #c00;
-			}
+			
 
 
                      <!--[if gte IE 9]>

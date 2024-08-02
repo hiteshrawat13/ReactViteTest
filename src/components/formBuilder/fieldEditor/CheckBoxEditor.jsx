@@ -8,7 +8,9 @@ import './Editor.scss'
 import { fields } from './Fields'
 
 import { FaPencilAlt } from "react-icons/fa";
-const CheckBoxEditor = ({ data }) => {
+
+
+const CheckBoxEditor = ({ data ,toast}) => {
     const [isModalOpened, setModalOpened] = useState(false)
     const [isLabelModalOpened, setLabelModalOpened] = useState(false)
     const [label, setLabel] = useState(data.label)
@@ -34,6 +36,7 @@ const CheckBoxEditor = ({ data }) => {
         }
         dispatch(updateField(state))
         console.log(state);
+        toast.success('Field Updated')
     }
 
 
@@ -42,7 +45,7 @@ const CheckBoxEditor = ({ data }) => {
     return (
 
         <div ref={divRef} className='editorForm'>
-
+           
             <label>
                 <span>Id</span>
                 <input type="text" name="id" defaultValue={data.id} />

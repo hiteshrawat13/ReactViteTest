@@ -181,9 +181,10 @@ const TGIFFormRenderer = {
         return `								   
        <tr>
        <th colspan="2" style="color:#444444;font-size:12px;">
-       <div class="check-group" style="display:flex;align-items:start;">
+       <div class="check-group">
+       <label  style="display:flex;align-items:start;">
        <input type="checkbox" name="${obj.name}" id="${obj.id}" ${obj.isRequired ? "required" : ""} value="${obj.value}"   ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""} />	
-       <label>${obj.label}</label>
+       ${obj.label}</label>
        </div>
        </th>
        </tr>
@@ -196,7 +197,7 @@ const TGIFFormRenderer = {
         return `								   
        <tr>
        <th colspan="2" style="color:#444444;font-size:12px;">
-       <div class="check-group" style="display:flex;align-items:start;">
+       <div class="" style="display:flex;align-items:start;">
       <label>${obj.label}</label>
        </div>
        </th>

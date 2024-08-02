@@ -163,6 +163,8 @@ export default class PublishHelper{
             data=data.replaceAll(`##baseUrl####asset##`,this.clientLink )
         }else if(this["ASSET_FORMAT"]=='MP4' || this["ASSET_FORMAT"]=='IFrame'){
             data=data.replaceAll(`##ASSET_URL##`,this["BASE_URL"]+this["LINK_NAME"]+'thanks-vid.html' )
+        }else{
+            data=data.replaceAll(`##ASSET_URL##`,this["BASE_URL"]+this["LINK_NAME"]+'.pdf' )
         }
 
         if(this["SAME_AS_EDM_TITLETY"]==true){

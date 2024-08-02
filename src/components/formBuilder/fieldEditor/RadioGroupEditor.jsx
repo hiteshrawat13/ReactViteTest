@@ -8,7 +8,7 @@ import { fields } from './Fields'
 
 import { FaPencilAlt } from "react-icons/fa";
 
-const RadioGroupEditor = ({ data }) => {
+const RadioGroupEditor = ({ data ,toast}) => {
 
     const [isLabelModalOpened, setLabelModalOpened] = useState(false)
     const [isOptionsModalOpened, setOptionsModalOpened] = useState(false)
@@ -39,6 +39,7 @@ const RadioGroupEditor = ({ data }) => {
         }
         dispatch(updateField(state))
         console.log(state);
+        toast.success('Field Updated')
     }
 
 

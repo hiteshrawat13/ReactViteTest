@@ -45,7 +45,7 @@ text-align: left;font-size: 12px;}span.error {color: #e02f2f;}.button {border: n
 						<img src="##BASE_URL##/itbp_logo_2019.png" alt="" id="clientLogo" style="width: 40%; padding-top:20px;">
 				</div>
 				<div class="col-md-12">
-					</br><img src="##BASE_URL##/New-Featured-Content-logo.png" id="clientLogo2" alt="Sprinklr" style="width: 40%;"> 
+					</br><img src="##BASE_URL##/New-Featured-Content-logo.png" id="clientLogo2" alt="Logo" style="width: 40%;"> 
 				</div>
               </td>
             </tr>

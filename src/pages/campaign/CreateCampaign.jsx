@@ -155,8 +155,11 @@ const CreateCampaign = () => {
     <div style={{flexBasis:"50%"}}>
         <span style={{display:"block"}}>Country</span>
         <select {...register('country', { required: true })} style={{width:"100%"}}>
-          <option>EU</option>
-          <option>NON-EU</option>
+          <option value="">Select..</option>
+          <option value="EU">EU</option>
+          <option value="NON-EU">NON-EU</option>
+          <option value="CASL">CASL</option>
+          <option value="BOTH">Both ( NON-EU & CASL )</option>
         </select>
         {errors.country && <p>country is required.</p>}
     </div>

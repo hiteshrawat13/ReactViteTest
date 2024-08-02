@@ -7,7 +7,7 @@ import './Editor.scss'
 import { fields } from './Fields'
 
 
-const CTAEditor = ({data}) => {
+const CTAEditor = ({data,toast}) => {
 const formBuilder = useSelector(state => state.formBuilder)
 const dispatch=useDispatch()
 
@@ -30,6 +30,7 @@ const handleSubmit=(e)=>{
     }
     dispatch(updateField(state))
     console.log(state);
+    toast.success('Field Updated')
 }
 
 

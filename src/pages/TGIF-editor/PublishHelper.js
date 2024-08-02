@@ -362,7 +362,13 @@ export default class PublishHelper{
                                         </script>
                                     </td>`);
 
-            data=data.replaceAll(`##THANKYOU##`,translations[languageCode]['thankyou'])
+                                    try{
+                                        data=data.replaceAll(`##THANKYOU##`,translations[languageCode]['thankyou'])
+                                    }catch(error){
+                                        //set default language to en if error find language in translations file
+                                        data=data.replaceAll(`##THANKYOU##`,translations["en"]['thankyou'])
+                                    }
+          
         }
        
         

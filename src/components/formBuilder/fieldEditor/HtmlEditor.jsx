@@ -9,7 +9,7 @@ import { fields } from './Fields'
 
 import Modal from '../../ui/Modal'
 
-const HtmlEditor = ({data}) => {
+const HtmlEditor = ({data,toast}) => {
 
 
   const [html,setHtml]=useState(data.html)
@@ -40,6 +40,7 @@ const handleSubmit=(e)=>{
    
     dispatch(updateField(state))
     console.log(state);
+    toast.success('Field Updated')
 }
 
 

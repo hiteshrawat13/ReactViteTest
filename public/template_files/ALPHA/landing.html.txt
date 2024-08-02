@@ -198,10 +198,10 @@ text-align: left;font-size: 12px;}span.error {color: #e02f2f;}h3 {justify-conten
             <tr>
               <td class="container-padding header" style="font-family:Helvetica, Arial, sans-serif;font-size:24px;font-weight:bold;padding-bottom:12px;color:#DF4726;padding-left:24px;padding-right:24px;background-color: #ffffff;">
 				<div class="col-md-12">
-						<img src="##BASE_URL##/itbp_logo_2019.png" id="clientLogo" alt="Credit Union Journal" style="width: 40%;margin-top:25px;">
+						<img src="##BASE_URL##/itbp_logo_2019.png" id="clientLogo" alt="Logo" style="width: 40%;margin-top:25px;">
 				</div>
 				<div class="col-md-12">
-					<br/><img src="##BASE_URL##/New-Featured-Content-logo.png" id="clientLogo2" alt="Sprinklr" style="width: 40%;"> 
+					<br/><img src="##BASE_URL##/New-Featured-Content-logo.png" id="clientLogo2" alt="Logo" style="width: 40%;"> 
 				</div>
               </td>
             </tr>

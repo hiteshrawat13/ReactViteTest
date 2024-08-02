@@ -7,7 +7,7 @@ import './Editor.scss'
 import { fields } from './Fields'
 
 
-const HiddenInputEditor = ({data}) => {
+const HiddenInputEditor = ({data,toast}) => {
 const formBuilder = useSelector(state => state.formBuilder)
 const dispatch=useDispatch()
 
@@ -32,6 +32,7 @@ const handleSubmit=(e)=>{
     }
     dispatch(updateField(state))
     console.log(state);
+    toast.success('Field Updated')
 }
 
 

@@ -1,5 +1,5 @@
 const translations={
-    "en-us":{
+    "en":{
         edmOptin:`By clicking/downloading the asset, you agree to allow the sponsor to have your contact information and for the sponsor to contact you.`,
         thankyou:`<h1>Thank you...</h1>
         <span>for downloading <strong>"##EDM_TITLE##"</strong><br><br>

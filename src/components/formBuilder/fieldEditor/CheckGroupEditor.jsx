@@ -10,7 +10,7 @@ import { fields } from './Fields'
 
 import { FaPencilAlt } from "react-icons/fa";
 
-const CheckGroupEditor = ({data}) => {
+const CheckGroupEditor = ({data,toast}) => {
 
 
     const [label, setLabel] = useState(data.label)
@@ -41,6 +41,7 @@ const handleSubmit=(e)=>{
     }
     dispatch(updateField(state))
     console.log(state);
+    toast.success('Field Updated')
 }
 
 

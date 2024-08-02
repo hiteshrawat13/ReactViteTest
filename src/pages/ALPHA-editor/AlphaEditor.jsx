@@ -116,11 +116,15 @@ const AlphaEditor = () => {
 
 
   const handleLinkNameChange=(e)=>{
+    const LINK_NAME=e.target.value.replace(/\s+/g, '-')
+    e.target.value=LINK_NAME
+    document.querySelector("[name='THUMBNAIL_NAME']").value=LINK_NAME+'.png'
+   document.querySelector("[name='PDF']").value=LINK_NAME+'.pdf'
+   document.querySelector("[name='MP4']").value=LINK_NAME+'.mp4'
+ 
 
-    document.querySelector("[name='THUMBNAIL_NAME']").value=e.target.value+'.png'
-   document.querySelector("[name='PDF']").value=e.target.value+'.pdf'
-   document.querySelector("[name='MP4']").value=e.target.value+'.mp4'
-    //document.querySelector("[name='MP4']").value=e.target.value
+
+
   }
 
 
@@ -248,7 +252,7 @@ console.log(e.target.value);
 
     <label>
       <span>Region</span>
-      <select  name="REGION" >
+      <select  name="REGION" value={location?.state?.country}>
         <option value="">Select...</option>
         <option value="EU">EU</option>
         <option value="NON-EU">NON-EU</option>

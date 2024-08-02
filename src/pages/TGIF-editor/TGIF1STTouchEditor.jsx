@@ -38,7 +38,7 @@ import FTPUploader from '../../components/editor/FTPUploader.jsx'
 import Config from '../../Config.js'
 import { useLocation } from 'react-router-dom'
 
-
+import LanguageDropdownList from '../../components/ui/editor/LanguageDropdownList.jsx';
 
 
 
@@ -127,10 +127,11 @@ const TGIF1STTouchEditor = () => {
 
 
   const handleLinkNameChange=(e)=>{
-
-    document.querySelector("[name='THUMBNAIL_NAME']").value=e.target.value+".png"
-    document.querySelector("[name='PDF']").value=e.target.value+".pdf"
-    document.querySelector("[name='MP4']").value=e.target.value+".mp4"
+    const LINK_NAME=e.target.value.replace(/\s+/g, '-')
+    e.target.value=LINK_NAME
+    document.querySelector("[name='THUMBNAIL_NAME']").value=LINK_NAME+".png"
+    document.querySelector("[name='PDF']").value=LINK_NAME+".pdf"
+    document.querySelector("[name='MP4']").value=LINK_NAME+".mp4"
   }
 
   const handleCTAChange=(e)=>{
@@ -256,7 +257,7 @@ const TGIF1STTouchEditor = () => {
 
 
    <input type="text" name="CLIENT_CODE" value={location?.state?.clientCode}/>
-
+{/* 
    <label>
       <span>Language</span>
       <select  name="LANGUAGE" required>
@@ -264,7 +265,10 @@ const TGIF1STTouchEditor = () => {
         <option value="en-us">en-us</option>
        
       </select>
-    </label>
+    </label> */}
+
+
+    <LanguageDropdownList/>
 
 
 
@@ -296,7 +300,7 @@ const TGIF1STTouchEditor = () => {
 
     <label>
       <span>Region</span>
-      <select  name="REGION"  required>
+      <select  name="REGION" value={location?.state?.country} required>
         <option value="">Select...</option>
         <option value="EU">EU</option>
         <option value="NON-EU">NON-EU</option>

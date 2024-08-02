@@ -7,7 +7,7 @@ import './Editor.scss'
 import { fields } from './Fields'
 
 
-const TextBoxEditor = ({data}) => {
+const TextBoxEditor = ({data,toast}) => {
 const formBuilder = useSelector(state => state.formBuilder)
 const dispatch=useDispatch()
 
@@ -31,6 +31,7 @@ const handleSubmit=(e)=>{
     }
     dispatch(updateField(state))
     console.log(state);
+    toast.success('Field Updated')
 }
 
 
@@ -42,7 +43,7 @@ const handleSubmit=(e)=>{
        
             <label>
                 <span>Input Type</span>
-                <select name="type" defaultValue={data.inputType}>
+                <select name="inputType" defaultValue={data.inputType}>
                     <option value="text">Text</option>
                     <option value="email">Email</option>
                     <option value="number">Number</option>

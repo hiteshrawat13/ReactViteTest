@@ -9,7 +9,7 @@ import { fields } from './Fields'
 import Modal from '../../ui/Modal'
 import { FaPencilAlt } from "react-icons/fa";
 
-const SelectBoxEditor = ({data}) => {
+const SelectBoxEditor = ({data,toast}) => {
     const [isLabelModalOpened, setLabelModalOpened] = useState(false)
     const [isOptionsModalOpened, setOptionsModalOpened] = useState(false)
 
@@ -42,6 +42,7 @@ const handleSubmit=(e)=>{
     }
     dispatch(updateField(state))
     console.log(state);
+    toast.success('Field Updated')
 }
 
 

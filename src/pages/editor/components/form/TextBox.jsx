@@ -10,7 +10,7 @@ const TextBox = ({label,name,required,...rest}) => {
     <div>
         <label>{label}</label>
         <input type="text" {...rest} {...register(name, { required: required })}/>
-        {errors[name] && <p>{name} is required</p>}
+        {errors[name] && <p>This field is required</p>}
        
     </div>
   )

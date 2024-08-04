@@ -1,10 +1,15 @@
 import React, { forwardRef, useImperativeHandle } from 'react'
-import { useForm } from 'react-hook-form';
+import { useForm ,FormProvider} from 'react-hook-form';
+import TextBox from './TextBox';
 
 
 
-const Form = forwardRef( ({ children },ref) => {
-    const { register, handleSubmit } = useForm();
+const Form = forwardRef( ({ next,children },ref) => {
+    const methods = useForm()
+    const onSubmit = (data) =>{
+        next()
+        alert("EE"+data)
+    }
 
     useImperativeHandle(ref, () => {
         return {
@@ -14,11 +19,12 @@ const Form = forwardRef( ({ children },ref) => {
 
 
     return (
-        <form ref={ref} onSubmit={(e)=>{e.preventDefault();handleSubmit((data) => alert("EE"+data)  )} }>
-            <input {...register("camp_name", { required: true })} />
-            <input {...register("camp_id", { required: true })} />
-            <input type="submit" value="Save" />
-        </form>
+        <FormProvider {...methods}>
+            <form ref={ref} onSubmit={methods.handleSubmit(onSubmit) }>
+                {children}
+                <input type="submit" value="Save" />
+            </form>
+        </FormProvider>
     )
 } )
 

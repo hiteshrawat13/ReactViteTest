@@ -18,8 +18,8 @@ import Editor from "../pages/editor/Editor"
 const Router=[
     {
     
-      element: Auth()?<App/> : <Login/>,
-      
+      //element: Auth()?<App/> : <Login/>,
+      element: <App/>  ,
       children: [
         {
           path: "/",

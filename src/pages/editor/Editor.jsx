@@ -9,7 +9,7 @@ import Form from './components/form/Form';
 
 const Editor = () => {
 
-  const formRef=useRef()
+  const stepperRef=useRef()
 
   useEffect(() => {
     const importComponent = async () => {
@@ -22,9 +22,7 @@ const Editor = () => {
 
 
 
-  const handleSubmit=(data)=>{
-    alert(data)
-  }
+
 
 
   return (
@@ -33,24 +31,23 @@ const Editor = () => {
       
 
 
-    <Stepper>
-      <Step title="Basic Info">
+    <Stepper ref={stepperRef}>
+      <Step title="Basic Info"  >
         Step 1
-
-        <Form onSubmit={handleSubmit}>
-
-        </Form>
-   
-
+        Step 1
+        <TextBox label="Campaign Name" name="camp_name" required={true}/>
       </Step>
       <Step title="Abstract & Title">
         Step 2
+        <TextBox label="Campaign Name" name="camp_name" required={true}/>
       </Step>
       <Step title="Form">
         Step 3
+        <TextBox label="Campaign Name" name="camp_name" required={true}/>
       </Step>
       <Step title="Logo & Assets">
         Step 4
+        <TextBox label="Campaign Name" name="camp_name" required={true}/>
       </Step>
     </Stepper>
 

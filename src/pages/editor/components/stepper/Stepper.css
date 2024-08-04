@@ -1,0 +1,117 @@
+/* .steps{
+    .tabs{
+        display: flex;
+        justify-content: center;
+
+        label{
+            ::before{
+                content: "";
+                display: block;
+                width: 50px;
+                height: 50px;
+                background-color: aqua;
+            }
+        }
+
+        label:has(input[type="radio"]:checked){
+            color:red;
+        }
+        input[type="radio"]{
+          appearance: none;
+        }
+    }
+} */
+
+
+
+.wizard-progress {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    position: relative;
+
+    .step {
+        display: table-cell;
+        text-align: center;
+        vertical-align: top;
+        overflow: visible;
+        position: relative;
+        font-size: 14px;
+        color: green;
+        font-weight: bold;
+
+        input[type="radio"] {
+            appearance: none;
+        }
+
+        &:not(:last-child):before {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 59%;
+            top: -12px;
+            background-color: green;
+            height: 3px;
+            width: 80%;
+
+
+        }
+
+
+
+        .node {
+            display: inline-block;
+            border: 6px solid green;
+            background-color: green;
+            border-radius: 18px;
+            height: 18px;
+            width: 18px;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            margin-left: -10px;
+        }
+
+        &.disabled{
+            &:before {
+                background-color:rgb(139, 139, 131);
+            }
+            .node{
+                border: 6px solid rgb(116, 116, 116);
+                background-color: rgb(129, 125, 125);
+            }
+        }
+
+     
+
+        &.complete {
+            &:before {
+                background-color: blue;
+            }
+
+            .node {
+                border-color: blue;
+                background-color: blue;
+
+                &:before {
+                    font-family: FontAwesome;
+                    content: "\f00c";
+                }
+            }
+        }
+
+        &.in-progress {
+            &:before {
+                background: blue;
+                background: -moz-linear-gradient(left, blue 0%, green 100%);
+                background: -webkit-linear-gradient(left, blue 0%, green 100%);
+                background: linear-gradient(to right, blue 0%, green 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{blue}', endColorstr='#{green}', GradientType=1);
+            }
+
+            .node {
+                border-color: blue;
+            }
+        }
+    }
+}

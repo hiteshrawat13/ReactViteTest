@@ -3,7 +3,14 @@ import React, { forwardRef, useImperativeHandle, useState } from 'react'
 
 import { StepperContext } from './StepperContext';
 import "./Stepper.css"
+
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
+import { setData, addData, updateData } from '../../../../store/campaign/CampaignSlice'
+
 const Stepper = forwardRef(({ children, onStepChange = null },ref) => {
+
+    const dispatch = useDispatch()
+    const campaignDataState = useSelector(state => state.campaignData)
     const [step, setStep] = useState(0)
 
    
@@ -13,13 +20,16 @@ const Stepper = forwardRef(({ children, onStepChange = null },ref) => {
   
     useImperativeHandle(ref, () => {
         return {
-          hi(){alert("hi")}
+       //   hi(){alert("hi")}
         };
     }, []);
 
     const handleSubmitOfCurrentForm=(data)=>{
-        alert(data)
-        console.log(data);
+        //alert(data)
+        console.log(data,"SUBMIT DATA");
+        dispatch(addData(data))
+       
+        console.log(campaignDataState.data,"STATE");
     }
 
    
@@ -36,20 +46,22 @@ const Stepper = forwardRef(({ children, onStepChange = null },ref) => {
     }
     const handleNext = async (e) => {
         e?.preventDefault()
-
-
         const isCurrentStepValid= await currentStepFormTriggerMethod.trigger()
-        if(!isCurrentStepValid){alert("form not valid");return}
+        if(!isCurrentStepValid){
+           // alert("form not valid");
+            return}
         await currentStepFormTriggerMethod.handleSubmit(handleSubmitOfCurrentForm)()
         setStep((step) => { return (step + 1 < children.length-1) ? step + 1 : children.length -1})
         setTotalStepsExplored(previousValue => ++previousValue)
-        
         if (onStepChange) onStepChange(step)
     }
     const handlePrevious = async (e) => {
         e?.preventDefault()
         const isCurrentStepValid= await currentStepFormTriggerMethod.trigger()
-        if(!isCurrentStepValid){alert("form not valid");return}
+        if(!isCurrentStepValid){
+            //alert("form not valid");
+            return
+        }
         await currentStepFormTriggerMethod.handleSubmit(handleSubmitOfCurrentForm)()
         setStep((step) => { return (step - 1 > 0) ? step - 1 : 0 })
         if (onStepChange) onStepChange(step)
@@ -67,7 +79,7 @@ const Stepper = forwardRef(({ children, onStepChange = null },ref) => {
                         <span>i {child.props.title}</span>
                         
                         </label>
-                    return <button key={i} onClick={(e) => handleTabChange(e, i)} className={`tab ${(step == i) ? 'selected' : ''}`}  {...(i+1>totalStepsExplored && {disabled:true}) }> {totalStepsExplored} {child.props.title || `Step ${i}`} </button>
+                 
                 })
             }
         </div>

@@ -8,12 +8,12 @@ const Form = forwardRef( ({ next,children },ref) => {
     const methods = useForm()
     const onSubmit = (data) =>{
         next()
-        alert("EE"+data)
+       // alert("EE"+data)
     }
 
     useImperativeHandle(ref, () => {
         return {
-          hi(){alert("hi")}
+        //  hi(){alert("hi")}
         };
     }, []);
 

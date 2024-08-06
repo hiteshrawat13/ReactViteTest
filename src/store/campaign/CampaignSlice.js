@@ -21,7 +21,7 @@ export const CampaignSlice = createSlice({
     addData: (state,payload) => {
      
       const newObj = {...state}; //making a new array
-      newObj.data  = payload.payload
+      newObj.data  ={ ...newObj.data , ...payload.payload }
       state = newObj;
       return state; // return is important to get it updated
        

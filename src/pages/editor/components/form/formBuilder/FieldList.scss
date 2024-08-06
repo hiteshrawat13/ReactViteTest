@@ -1,0 +1,90 @@
+.fieldList{
+    width: 100%;
+    flex:2;
+    display: flex;
+    flex-direction: column;
+
+    padding:0px 0px;
+
+  
+    // overflow: hidden;
+    // overflow-y: scroll;
+    // max-height: 500px;
+    // min-height: 300px;
+ 
+    
+    .field{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: #ffffff;
+        padding: 5px;
+        user-select: none;
+        margin-bottom:8px;
+        border-radius:0px;
+        // box-shadow: 1px 1px 2px #cdd0da;
+        border: 1px solid #dfe6e9;
+        padding: 5px;
+        cursor: pointer;
+
+        &.selected{
+            border: 1px solid #10ac84;
+        }
+
+        &:hover{
+            border: 1px solid #74b9ff;
+        }
+
+        .display{
+            position: relative;
+           width: 100%;
+           display: flex;
+           flex-direction: column;
+           gap:10px;
+
+           
+
+          
+            
+
+           
+        }
+        .buttons{
+            display: flex;
+            gap:6px;
+
+            .actionButton{
+                height:30px;
+                width:30px;
+                text-align: center;
+                
+                border:none;
+                color:#5a93f6;
+                font-size: 1.2rem;
+                border-radius: 0px;
+                cursor: pointer;
+
+                &:hover{
+                    background-color: #e5efff;
+                }
+            }
+        }
+
+
+
+        &.delete{
+            animation-name: delete;
+            animation-duration: 500s;
+        }
+    }
+}
+
+
+@keyframes delete {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(0);
+    }
+  }

@@ -13,7 +13,7 @@ const Step =  ({ children }) => {
     const methods = useForm()
     const onSubmit = (data) =>{
      // Stepper.setIsStepValid(true)
-        alert("EE"+data)
+       // alert("EE"+data)
         console.log(data);
         Stepper.handleNext()
     }

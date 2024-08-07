@@ -6,7 +6,7 @@ import { updateField } from '../../../../../../store/formBuilder/FormBuilderSlic
 import './Editor.scss'
 import { fields } from './Fields'
 
-import Modal from '../../ui/Modal'
+import Modal from '../../../../../../components/ui/Modal'
 import { FaPencilAlt } from "react-icons/fa";
 
 const SelectBoxEditor = ({data,toast}) => {

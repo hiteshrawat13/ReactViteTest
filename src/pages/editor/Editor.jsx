@@ -9,6 +9,7 @@ import SelectBox from './components/form/SelectBox';
 import RichTextEditor from './components/form/RichTextEditor';
 import   CheckBox  from './components/form/CheckBox';
 import FormBuilder from './components/form/formBuilder/FormBuilder';
+import AssetPicker from './components/AssetPicker'
  
 
 
@@ -38,8 +39,12 @@ const Editor = () => {
 
 
     <Stepper ref={stepperRef}>
+    <Step title="Logo & Assets">
+        Assets Logo
+        <AssetPicker/>
+      </Step>
       <Step title="Basic Info"  >
-       
+      
         <TextBox label="Client Code" name="CLIENT_CODE" required={true}/>
         <TextBox label="Campaign Name" name="CAMP_NAME" required={true}/>
         <TextBox label="Campaign Id" name="CAMP_ID" required={true}/>
@@ -92,6 +97,7 @@ const Editor = () => {
       </Step>
       <Step title="Logo & Assets">
         Assets Logo
+        
       </Step>
       <Step title="Preview">
         Preview

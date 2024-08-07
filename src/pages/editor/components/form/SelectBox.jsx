@@ -13,8 +13,8 @@ const SelectBox = ({label,name,required,options,...rest}) => {
             defaultValue={campaignDataState.data[name] || ""}
             {...rest} 
             {...register(name, { required: required })}>
-                {options?.map(opt=>{
-                    return <option value={opt.value}>{opt.label}</option>
+                {options?.map((opt,i)=>{
+                    return <option value={opt.value} key={i}>{opt.label}</option>
                 })}
             </select>
             {errors[name] && <p>This field is required</p>}

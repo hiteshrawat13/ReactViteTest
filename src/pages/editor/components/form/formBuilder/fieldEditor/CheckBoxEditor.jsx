@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { updateField } from '../../../store/formBuilder/FormBuilderSlice'
+import { updateField } from '../../../../../../store/formBuilder/FormBuilderSlice'
 
-import Modal from '../../ui/Modal'
+import Modal from '../../../../../../components/ui/Modal'
 
 import './Editor.scss'
 import { fields } from './Fields'

@@ -1,6 +1,6 @@
 import React, { useEffect, useState ,useRef} from 'react'
 import { useSelector,useDispatch } from 'react-redux'
-import { updateField } from '../../../store/formBuilder/FormBuilderSlice'
+import { updateField } from '../../../../../../store/formBuilder/FormBuilderSlice'
 
 
 import './Editor.scss'

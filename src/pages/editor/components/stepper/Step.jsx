@@ -10,7 +10,7 @@ const Step =  ({ children }) => {
   
 
   const Stepper=useContext(StepperContext)
-    const methods = useForm()
+    const methods = useForm({mode: "onChange"})
     const onSubmit = (data) =>{
      // Stepper.setIsStepValid(true)
        // alert("EE"+data)

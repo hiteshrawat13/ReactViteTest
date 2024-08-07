@@ -1,13 +1,13 @@
 import React, { useEffect, useState ,useRef} from 'react'
 import { useSelector,useDispatch } from 'react-redux'
-import { updateField } from '../../../store/formBuilder/FormBuilderSlice'
+import { updateField } from '../../../../../../store/formBuilder/FormBuilderSlice'
 
 import { FaPencilAlt } from "react-icons/fa";
 
 import './Editor.scss'
 import { fields } from './Fields'
 
-import Modal from '../../ui/Modal'
+import Modal from '../../../../../../components/ui/Modal'
 
 const HtmlEditor = ({data,toast}) => {
 

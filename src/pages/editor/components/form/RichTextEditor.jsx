@@ -31,8 +31,8 @@ const RichTextEditor = ({name,required=false}) => {
         rules={{
             required: required,
           }}
-          defaultValue={campaignDataState.data[name] || ""}
-          value={campaignDataState.data[name] || ""}
+          // defaultValue={campaignDataState.data[name] }
+          // value={campaignDataState.data[name]}
         render={({ field: { onChange, onBlur, value, ref } }) => (
             <EditorProvider key={Math.random} ><Editor value={value} onChange={onChange} onBlur={onBlur}    >
             <Toolbar  >

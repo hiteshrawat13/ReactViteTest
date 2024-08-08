@@ -10,6 +10,7 @@ import RichTextEditor from './components/form/RichTextEditor';
 import CheckBox from './components/form/CheckBox';
 import FormBuilder from './components/form/formBuilder/FormBuilder';
 import AssetPicker from './components/AssetPicker'
+import FTPUpload from './components/form/FTPUpload';
 
 
 
@@ -39,9 +40,14 @@ const Editor = () => {
 
 
       <Stepper ref={stepperRef}>
+      
         <Step title="Logo & Assets">
           Assets Logo
           <AssetPicker />
+        </Step>
+        <Step title="Publish">
+          Publish
+          <FTPUpload/>
         </Step>
         <Step title="Basic Info"  >
 
@@ -102,9 +108,7 @@ const Editor = () => {
         <Step title="Preview">
           Preview
         </Step>
-        <Step title="Publish">
-          Publish
-        </Step>
+        
       </Stepper>
 
     </div>

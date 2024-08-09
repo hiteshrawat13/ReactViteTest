@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
  
 
 import { StepperContext } from './StepperContext';
@@ -7,19 +7,31 @@ import "./Stepper.css"
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { setData, addData, updateData } from '../../../../store/campaign/CampaignSlice'
 
-const Stepper = forwardRef(({ children, onStepChange = null },ref) => {
+const Stepper = forwardRef(({ children, onStepChange = null},ref) => {
 
+    
     const dispatch = useDispatch()
     const campaignDataState = useSelector(state => state.campaignData)
     const [step, setStep] = useState(0)
     const [currentStepFormTriggerMethod, setCurrentStepFormTriggerMethod]=useState(null)
     const [totalStepsExplored,setTotalStepsExplored]=useState(1)
-
+    const publishHelper=useRef()
+    const [isPublishHelperLoaded,setIsPublishHelperLoaded]=useState(false)
 
     const logoFileRef=useRef()
     const thumbnailFileRef=useRef()
     const pdfFileRef=useRef()
     const mp4FileRef=useRef()
+
+    useEffect(()=>{
+        const importComponent = async () => {
+          const module = await import('http://localhost:5173/cbtool/template_files/ARC-1ST-TOUCH/TestPublishHelper.js');
+          const helper=new module.default()
+          publishHelper.current=helper;
+          setIsPublishHelperLoaded(true)
+        };
+        importComponent();
+    },[])
   
     useImperativeHandle(ref, () => {
         return {
@@ -99,7 +111,9 @@ const Stepper = forwardRef(({ children, onStepChange = null },ref) => {
             logoFileRef,
             thumbnailFileRef,
             pdfFileRef,
-            mp4FileRef
+            mp4FileRef,
+            publishHelper,
+            isPublishHelperLoaded
 
             }}>
         {

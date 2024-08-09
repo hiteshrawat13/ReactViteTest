@@ -11,6 +11,7 @@ import CheckBox from './components/form/CheckBox';
 import FormBuilder from './components/form/formBuilder/FormBuilder';
 import AssetPicker from './components/AssetPicker'
 import FTPUpload from './components/form/FTPUpload';
+import Preview from './components/Preview';
 
 
 
@@ -18,29 +19,27 @@ const Editor = () => {
 
 
   const stepperRef = useRef()
+  
 
-  useEffect(() => {
-    const importComponent = async () => {
-      const test = await import('http://localhost:5173/cbtool/test.js');
-      console.log("TEST11111", new test.Test().hi());
-    };
-
-    //  importComponent();
-  }, []);
+ 
 
 
 
 
 
+ 
 
   return (
     <div>
       {/* TESTING THIS EDITOR PAGE NOT USABLE NOW */}
-
-
-
-      <Stepper ref={stepperRef}>
       
+    { <Stepper ref={stepperRef}  >
+      
+
+        <Step title="Preview">
+          <Preview/>
+        </Step>
+
         <Step title="Logo & Assets">
           Assets Logo
           <AssetPicker />
@@ -105,11 +104,9 @@ const Editor = () => {
           Assets Logo
 
         </Step>
-        <Step title="Preview">
-          Preview
-        </Step>
+      
         
-      </Stepper>
+      </Stepper>}
 
     </div>
   )

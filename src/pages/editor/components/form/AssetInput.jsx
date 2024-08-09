@@ -25,13 +25,13 @@ const AssetPicker = () => {
 
             <div className='radio-switches'>
                 <input type="radio" {...register("ASSET_FORMAT", { required: true })} className="radio-switch" id="PDF" value="PDF" />
-                <label for="PDF">PDF</label>
+                <label htmlFor="PDF">PDF</label>
                 <input type="radio" {...register("ASSET_FORMAT", { required: true })} className="radio-switch" id="MP4" value="MP4" />
-                <label for="MP4">MP4</label>
+                <label htmlFor="MP4">MP4</label>
                 <input type="radio" {...register("ASSET_FORMAT", { required: true })} className="radio-switch" id="CLIENT_LINK" value="CLIENT_LINK" />
-                <label for="CLIENT_LINK">Client Link</label>
+                <label htmlFor="CLIENT_LINK">Client Link</label>
                 <input type="radio" {...register("ASSET_FORMAT", { required: true })} className="radio-switch" id="IFRAME" value="IFRAME" />
-                <label for="IFRAME">IFrame</label>
+                <label htmlFor="IFRAME">IFrame</label>
             </div>
             {errors["ASSET_FORMAT"] && <p>Asset format is required</p>}
 

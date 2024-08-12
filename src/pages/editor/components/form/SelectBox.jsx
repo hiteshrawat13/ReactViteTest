@@ -7,7 +7,7 @@ const SelectBox = ({label,name,required,options,...rest}) => {
     const { register, formState: { errors } } = useFormContext()
    
     return (
-        <div>
+        <div className='form-group'>
             <label>{label}</label>
             <select 
             defaultValue={campaignDataState.data[name] || ""}

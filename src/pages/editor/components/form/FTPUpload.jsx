@@ -3,11 +3,14 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { StepperContext } from '../stepper/StepperContext'
 
 const FTPUpload = () => {
-    const campaignDataState = useSelector(state => state.campaignData)
-    const {logoFileRef,thumbnailFileRef,pdfFileRef,mp4FileRef} = useContext(StepperContext)
-    const [filesToUpload, setFilesToUpload] = useState([])
-    const handleGetFiles=async ()=>{
-      let uploadFiles = []
+  const { publishHelper } = useContext(StepperContext)
+
+  const campaignDataState = useSelector(state => state.campaignData)
+  const { logoFileRef, thumbnailFileRef, pdfFileRef, mp4FileRef } = useContext(StepperContext)
+  const [filesToUpload, setFilesToUpload] = useState([])
+
+  const handleGetFiles = async () => {
+    let uploadFiles = []
     if (logoFileRef.current.files[0]) {
       uploadFiles.push({
         type: "logo",
@@ -44,33 +47,42 @@ const FTPUpload = () => {
       })
     }
 
-    // const templatefiles = await publishHelper.current.getFiles()
-    // templatefiles.forEach((file) => {
-    //   uploadFiles.push({
-    //     type: "templateFile",
-    //     name: file.name,
-    //     data: file.data,
-    //     progress: 0
-    //   })
-    // })
+    const templatefiles = await publishHelper.current.getPageFiles({})
+    templatefiles.forEach((file) => {
+      uploadFiles.push({
+        type: "templateFile",
+        name: file.name,
+        data: file.data,
+        progress: 0
+      })
+    })
     setFilesToUpload(uploadFiles)
-    }
 
-    useEffect(() => {
-     handleGetFiles()
-    }, [])
-    
+  }
+
+  useEffect(() => {
+    handleGetFiles()
+  }, [publishHelper.current])
+
+
+
+
+
+
+
+
   return (
     <div>
 
+
       <div>Display File List</div>
       <div>Upload Button</div>
-      
+
       {filesToUpload.map((file, i) => {
-          return <div className="fileToUpload" key={i}>
-            <div className='fileName'>{file.name} </div> <div className='fileProgress'>{file.progress}</div>
-          </div>
-        })}
+        return <div className="fileToUpload" key={i}>
+          <div className='fileName'>{file.name} </div> <div className='fileProgress'>{file.progress}</div>
+        </div>
+      })}
     </div>
   )
 }

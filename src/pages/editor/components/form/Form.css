@@ -1,0 +1,58 @@
+
+.form-group{
+    padding: 10px;
+
+
+    label{
+        font-size: 13px;
+        font-weight: bold;
+        color:rgb(51, 49, 49);
+        padding-bottom:5px;
+    }
+
+    .input-holder{
+        position: relative;
+
+        .error-icon{
+            position: absolute;
+            right:0;
+            top:50%;
+            transform: translateY(-50%) translateX(-50%);
+            display: block;
+            height: 13px;
+            width:13px;
+            background-color: red;
+            color:#fff;
+        }
+    }
+
+    input[type="text"] , select{
+
+        display: block;
+        padding: 5px 4px;
+        border-radius: 4px;
+        border:1px solid rgba(97, 95, 95, 0.39);
+        width: 100%;
+        box-shadow: inset 0px 0px 4px #c5c5c5b8;
+
+        &:focus{
+            outline:1px solid rgb(80, 145, 219);
+            box-shadow: 0px 0px 10px #4f7cdb;
+        }
+    }
+
+    span.error{
+        color:red;
+        font-size: 12px;
+    }
+
+
+
+
+
+
+    .drop-zone{
+
+    }
+
+}

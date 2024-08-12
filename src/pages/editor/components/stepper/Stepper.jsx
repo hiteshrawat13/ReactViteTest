@@ -85,6 +85,7 @@ const Stepper = forwardRef(({ children, onStepChange = null},ref) => {
     
     return <div className='steps'>
         <div>
+            {/* THESE FILE INPUTS ARE USED FRO LOGO THUMBNAIL PDF MP4 TO KEEP IN STATE */}
             <input type="file" name="LOGO_FILE" accept="image/png" className="" ref={logoFileRef} />
             <input type="file" name="THUMBNAIL_FILE" accept="image/png" className="" ref={thumbnailFileRef}/>
             <input type="file" name="PDF_FILE" className="" ref={pdfFileRef}/>

@@ -96,4 +96,4 @@ const ARCFormRenderer = {
 
 }
 
-export{TGIFFormRenderer}
+export{ARCFormRenderer}

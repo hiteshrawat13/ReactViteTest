@@ -35,19 +35,10 @@ const Editor = () => {
       
     { <Stepper ref={stepperRef}  >
       
-
-        <Step title="Preview">
+    <Step title="Preview">
           <Preview/>
         </Step>
-
-        <Step title="Logo & Assets">
-          Assets Logo
-          <AssetPicker />
-        </Step>
-        <Step title="Publish">
-          Publish
-          <FTPUpload/>
-        </Step>
+       
         <Step title="Basic Info"  >
 
           <TextBox label="Client Code" name="CLIENT_CODE" required={true} />
@@ -100,9 +91,20 @@ const Editor = () => {
           Forms
           <FormBuilder />
         </Step>
+     
+
         <Step title="Logo & Assets">
           Assets Logo
+          <AssetPicker />
+        </Step>
 
+        
+
+        
+
+        <Step title="Publish">
+          Publish
+          <FTPUpload/>
         </Step>
       
         

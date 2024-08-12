@@ -8,12 +8,16 @@ const TextBox = ({label,name,required,...rest}) => {
 
  
   return (
-    <div>
+    <div className='form-group'>
         <label>{label}</label>
+        <div className='input-holder'>
         <input type="text" 
         defaultValue={campaignDataState.data[name]||""}
         {...rest} {...register(name, { required: required })}/>
-        {errors[name] && <p>This field is required</p>}
+        {errors[name] && <div className='error-icon'>!</div>}
+        </div>
+      
+        {errors[name] && <span className='error'>This field is required</span>}
        
     </div>
   )

@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle } from 'react'
 import { useForm ,FormProvider} from 'react-hook-form';
 import TextBox from './TextBox';
-
+import './Form.css'
 
 
 const Form = forwardRef( ({ next,children },ref) => {

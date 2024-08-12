@@ -6,7 +6,7 @@ const CheckBox = ({label,name="1",required=false,...rest}) => {
     const campaignDataState = useSelector(state => state.campaignData)
     const {register,formState: { errors }} = useFormContext() 
   return (
-    <div>
+    <div className='form-group'>
     
     <input type="checkbox" 
     defaultChecked={campaignDataState.data[name]}

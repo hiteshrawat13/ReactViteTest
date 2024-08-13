@@ -47,6 +47,7 @@ const Editor = () => {
           <TextBox label="Link Name" name="LINK_NAME" required={true} />
           <SelectBox label="Region" name="REGION" required={true}
             options={[
+              { label: "Select..", value: "" },
               { label: "EU", value: "EU" },
               { label: "NON-EU", value: "NON-EU" },
               { label: "CASL", value: "CASL" },
@@ -55,7 +56,7 @@ const Editor = () => {
 
           <SelectBox label="Asset Type" name="ASSET_TYPE" required={true}
             options={[
-
+              { label: "Select..", value: "" },
               { label: "White Paper", value: "White Paper" },
               { label: "Buyers/Comparision Guide", value: "Buyers/Comparision Guide" },
               { label: "E Book", value: "E Book" },

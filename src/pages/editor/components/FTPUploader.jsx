@@ -347,9 +347,7 @@ const FTPUploader = forwardRef(({ publishHelper }, ref) => {
                   <td>No Data Found</td>
                   <td><a href='' >No Data Found</a></td>
                 </tr>
-
                 :
-
                 uploadedLinks.map((val, i) => {
                   return <tr className='linksTableInner' key={i}>
                     <td>{val.title}</td>

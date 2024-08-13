@@ -1,6 +1,5 @@
 
 .form-group{
-    padding: 10px;
 
 
     label{
@@ -14,15 +13,19 @@
         position: relative;
 
         .error-icon{
+            display: flex;
             position: absolute;
-            right:0;
-            top:50%;
-            transform: translateY(-50%) translateX(-50%);
-            display: block;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%) translateX(-125%);
             height: 13px;
-            width:13px;
+            width: 13px;
             background-color: red;
-            color:#fff;
+            border-radius: 30px;
+            color: #fff;
+            justify-content: center;
+            align-items: center;
+            font-size: 9px;
         }
     }
 
@@ -47,6 +50,8 @@
     }
 
 
+    
+
 
 
 
@@ -55,4 +60,26 @@
 
     }
 
+}
+
+.file-preview{
+    
+    img{
+        width: 150px;
+        
+    }
+}
+
+.drop-zone{
+    padding: 20px;
+    border:2px dashed rgb(98, 144, 187);
+    background-color: rgb(202, 228, 247);
+    font-size: 13px;
+    text-align: center;
+    cursor: pointer;
+
+    .selected-file-name{
+      font-weight: bold;  
+      color: #47bb47;
+    }
 }

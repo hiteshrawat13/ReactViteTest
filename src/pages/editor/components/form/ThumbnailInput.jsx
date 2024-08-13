@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { StepperContext } from '../stepper/StepperContext'
 import { useFormContext } from 'react-hook-form'
+import TextBox from './TextBox'
 
 const ThumbnailPicker = () =>  {
     const campaignDataState = useSelector(state => state.campaignData)
@@ -48,23 +49,30 @@ const ThumbnailPicker = () =>  {
 
     }, [])
     return (
-        <div>
+        <div style={{display:"flex"}}>
+
+            <div className='file-preview'>
+                <p>Logo Preview</p>
+                <img id='THUMBNAIL_PREVIEW' ref={thumbnailPreviewRef} />
+            </div>
+
             <div>
-                <input type="text" {...register("THUMBNAIL_NAME", { required: true })} placeholder='Search Logo Here' />
-                {errors["THUMBNAIL_NAME"] && <p>Thumbnail file name is required</p>}
+
+
+                
+                <TextBox label="Thumbnail Name" name="THUMBNAIL_NAME" required={true} />
+                {/* <input type="text" {...register("THUMBNAIL_NAME", { required: true })} placeholder='Search Logo Here' />
+                {errors["THUMBNAIL_NAME"] && <p>Thumbnail file name is required</p>} */}
                 <div className="drop-zone" 
                 onClick={handleDropZoneClick}
                 onDrop={handleDropZoneDrop}
                 onDragOver={(event) => event.preventDefault()}
                 >
                     Drop thumbnail here or click to select a thumbnail file.<br />
-                    {selectedThumbnailFileName}
+                    <div className='selected-file-name'>{selectedThumbnailFileName}</div>
                 </div>
             </div>
-            <div>
-                <p>Logo Preview</p>
-                <img id='THUMBNAIL_PREVIEW' ref={thumbnailPreviewRef} />
-            </div>
+          
         </div>
     )
 }

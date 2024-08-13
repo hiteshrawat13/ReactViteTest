@@ -44,7 +44,7 @@ const Stepper = forwardRef(({ children, onStepChange = null},ref) => {
         console.log(data,"SUBMIT DATA");
         dispatch(addData(data))
        
-        console.log(campaignDataState.data,"STATE");
+        console.log("REDUX-STATE:-",campaignDataState.data);
     }
 
    
@@ -84,6 +84,9 @@ const Stepper = forwardRef(({ children, onStepChange = null},ref) => {
 
     
     return <div className='steps'>
+        <div>
+            {JSON.stringify(campaignDataState.data, null, 2)}
+        </div>
         <div>
             {/* THESE FILE INPUTS ARE USED FRO LOGO THUMBNAIL PDF MP4 TO KEEP IN STATE */}
             <input type="file" name="LOGO_FILE" accept="image/png" className="" ref={logoFileRef} />

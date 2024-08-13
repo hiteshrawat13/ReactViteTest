@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { useFormContext,Controller } from 'react-hook-form'
 import {   BtnBold,
@@ -16,11 +16,16 @@ import {   BtnBold,
     Separator,
     
     Toolbar,EditorProvider,Editor } from 'react-simple-wysiwyg'
- 
+
 const RichTextEditor = ({name,required=false}) => {
-    const { register, formState: { errors },control } = useFormContext()
+    const { register,unregister, formState: { errors },control } = useFormContext()
     const campaignDataState = useSelector(state => state.campaignData)
- 
+    useEffect(() => {
+  
+      return () => {
+        unregister(name)
+      }
+    }, [])
   return (
     <div>
         

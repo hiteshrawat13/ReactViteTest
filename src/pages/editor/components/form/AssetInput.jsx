@@ -21,6 +21,29 @@ const AssetPicker = () => {
 
     useEffect(()=>{
         setValue("ASSET_FORMAT",campaignDataState.data["ASSET_FORMAT"])
+
+
+        function onPDFFileChange(e) {
+            e.preventDefault()
+            setValue("PDF",Stepper?.pdfFileRef?.current?.files[0]?.name)
+            setSelectedPDFFileName(Stepper?.pdfFileRef?.current?.files[0]?.name)
+        }
+
+        function onMP4FileChange(e) {
+            e.preventDefault()
+            setValue("MP4",Stepper?.mp4FileRef?.current?.files[0]?.name)
+            setSelectedMP4FileName(Stepper?.mp4FileRef?.current?.files[0]?.name)
+        }
+       
+            Stepper?.pdfFileRef?.current?.addEventListener("change", onPDFFileChange);
+            Stepper?.mp4FileRef?.current?.addEventListener("change", onMP4FileChange);
+
+        return function cleanup() {
+            Stepper.pdfFileRef?.current?.removeEventListener("change", onPDFFileChange);
+            Stepper.mp4FileRef?.current?.removeEventListener("change", onMP4FileChange);
+        };
+
+
     },[])
 
 
@@ -34,6 +57,7 @@ const AssetPicker = () => {
         if (droppedFiles.length > 0) {
         Stepper.pdfFileRef.current.files=droppedFiles
         setValue("PDF",Stepper.pdfFileRef.current.files[0].name)
+        setSelectedPDFFileName(Stepper.pdfFileRef.current.files[0].name)
         }
     }
 
@@ -47,6 +71,7 @@ const AssetPicker = () => {
         if (droppedFiles.length > 0) {
         Stepper.mp4FileRef.current.files=droppedFiles
         setValue("MP4",Stepper.mp4FileRef.current.files[0].name)
+        setSelectedMP4FileName(Stepper.mp4FileRef.current.files[0].name)
         }
     }
 
@@ -68,8 +93,8 @@ const AssetPicker = () => {
             {errors["ASSET_FORMAT"] && <p>Asset format is required</p>}
 
 
-            {(assetFormatValue == "PDF") && <TextBox label="PDF" required="true" name="PDF" />}
-            {(assetFormatValue == "MP4") && <TextBox label="MP4" required="true" name="MP4" />}
+            {(assetFormatValue == "PDF") && <TextBox label="PDF" required="true" name="PDF_NAME" />}
+            {(assetFormatValue == "MP4") && <TextBox label="MP4" required="true" name="MP4_NAME" />}
             {(assetFormatValue == "CLIENT_LINK") && <TextBox label="Client Link" required="true" name="CLIENT_LINK" />}
             {(assetFormatValue == "IFRAME") && <TextBox label="IFrame" required="true" name="IFRAME" />}
 
@@ -81,7 +106,7 @@ const AssetPicker = () => {
                 onDragOver={(event) => event.preventDefault()}
                 >
                     Drop pdf file here or click to select a pdf file.<br />
-                    {selectedPDFFileName}
+                    <div className='selected-file-name'>{selectedPDFFileName}</div>
                 </div>
             </div>
             }
@@ -93,7 +118,7 @@ const AssetPicker = () => {
                 onDragOver={(event) => event.preventDefault()}
                 >
                     Drop mp4 file here or click to select a mp4 file.<br />
-                    {selectedMP4FileName}
+                    <div className='selected-file-name'>{selectedMP4FileName}</div>
                 </div>
             </div>
             }

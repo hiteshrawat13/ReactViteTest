@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { useFormContext } from 'react-hook-form'
 import { StepperContext } from '../stepper/StepperContext'
+import TextBox from './TextBox'
 const LogoPicker = () => {
     const campaignDataState = useSelector(state => state.campaignData)
     const logoPreviewRef=useRef()
@@ -47,23 +48,27 @@ const LogoPicker = () => {
 
     }, [])
     return (
-        <div>
+        <div style={{display:"flex"}}>
+            <div className='file-preview'>
+                <p>Logo Preview</p>
+                <img id='LOGO_PREVIEW' ref={logoPreviewRef} />
+            </div>
             <div>
-                <input type="text" {...register("LOGO_NAME", { required: true })} placeholder='Search Logo Here' />
-                {errors["LOGO_NAME"] && <p>Logo file name is required</p>}
+
+                <TextBox label="Logo Name" name="LOGO_NAME" required={true} />
+
+                {/* <input type="text" {...register("LOGO_NAME", { required: true })} placeholder='Search Logo Here' />
+                {errors["LOGO_NAME"] && <p>Logo file name is required</p>} */}
                 <div className="drop-zone" 
                 onClick={handleDropZoneClick}
                 onDrop={handleDropZoneDrop}
                 onDragOver={(event) => event.preventDefault()}
                 >
                     Drop logo here or click to select a logo.<br />
-                    {selectedLogoFileName}
+                    <div className='selected-file-name'>{selectedLogoFileName}</div>
                 </div>
             </div>
-            <div>
-                <p>Logo Preview</p>
-                <img id='LOGO_PREVIEW' ref={logoPreviewRef} />
-            </div>
+         
         </div>
     )
 }

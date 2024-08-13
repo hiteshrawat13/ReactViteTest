@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 
 const TextBox = ({label,name,required,...rest}) => {
   const campaignDataState = useSelector(state => state.campaignData)
-  const {register,formState: { errors }} = useFormContext() 
+  const {register,unregister,formState: { errors }} = useFormContext() 
 
+  useEffect(() => {
+  
+    return () => {
+      unregister(name)
+    }
+  }, [])
+  
  
   return (
     <div className='form-group'>

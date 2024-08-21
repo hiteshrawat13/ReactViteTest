@@ -60,6 +60,13 @@
 
     }
 
+    .btn-primary{
+        padding: 10px;
+        color:#fff;
+        color: #4f7cdb;
+        border:1px solid #385cac;
+    }
+
 }
 
 .file-preview{

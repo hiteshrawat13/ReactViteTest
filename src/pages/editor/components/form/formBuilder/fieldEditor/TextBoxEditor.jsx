@@ -1,14 +1,13 @@
 import React, { useEffect, useState ,useRef} from 'react'
 import { useSelector,useDispatch } from 'react-redux'
-import { updateField } from '../../../../../../store/formBuilder/FormBuilderSlice'
+import { updateField } from '../../../../../../store/campaign/CampaignSlice'
 
 
 import './Editor.scss'
 import { fields } from './Fields'
 
 
-const TextBoxEditor = ({data,toast}) => {
-const formBuilder = useSelector(state => state.formBuilder)
+const TextBoxEditor = ({ id,data,toast,handleFieldDataUpdate}) => {
 const dispatch=useDispatch()
 
 
@@ -29,7 +28,8 @@ const handleSubmit=(e)=>{
         state[child.name]=child.value
        } 
     }
-    dispatch(updateField(state))
+    //dispatch(updateField(state))
+    handleFieldDataUpdate(id,state)
     console.log(state);
     toast.success('Field Updated')
 }

@@ -7,7 +7,7 @@ import "./Stepper.css"
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { setData, addData, updateData } from '../../../../store/campaign/CampaignSlice'
 
-const Stepper = forwardRef(({ children, onStepChange = null},ref) => {
+const Stepper = forwardRef(({ children, onStepChange = null,publishHelper},ref) => {
 
     
     const dispatch = useDispatch()
@@ -15,7 +15,7 @@ const Stepper = forwardRef(({ children, onStepChange = null},ref) => {
     const [step, setStep] = useState(0)
     const [currentStepFormTriggerMethod, setCurrentStepFormTriggerMethod]=useState(null)
     const [totalStepsExplored,setTotalStepsExplored]=useState(1)
-    const publishHelper=useRef()
+    //const publishHelper=useRef()
     const [isPublishHelperLoaded,setIsPublishHelperLoaded]=useState(false)
 
     const logoFileRef=useRef()
@@ -23,15 +23,17 @@ const Stepper = forwardRef(({ children, onStepChange = null},ref) => {
     const pdfFileRef=useRef()
     const mp4FileRef=useRef()
 
-    useEffect(()=>{
-        const importComponent = async () => {
-          const module = await import('http://localhost:5173/cbtool/template_files/ARC-1ST-TOUCH/TestPublishHelper.js');
-          const helper=new module.default()
-          publishHelper.current=helper;
-          setIsPublishHelperLoaded(true)
-        };
-        importComponent();
-    },[])
+    // useEffect(()=>{
+    //     const importComponent = async () => {
+    //      // const module = await import('http://localhost:5173/cbtool/template_files/ARC-1ST-TOUCH/TestPublishHelper.js');
+    //    const module = await import('../../templates/ARC-1ST-TOUCH/TestPublishHelper');
+
+    //      const helper=new module.default(campaignDataState,null)
+    //       publishHelper.current=helper;
+    //       setIsPublishHelperLoaded(true)
+    //     };
+    //     importComponent();
+    // },[])
   
     useImperativeHandle(ref, () => {
         return {
@@ -84,25 +86,32 @@ const Stepper = forwardRef(({ children, onStepChange = null},ref) => {
 
     
     return <div className='steps'>
-        <div>
-            {JSON.stringify(campaignDataState.data, null, 2)}
-        </div>
-        <div>
+     
+        <div style={{display:"none"}}>
             {/* THESE FILE INPUTS ARE USED FRO LOGO THUMBNAIL PDF MP4 TO KEEP IN STATE */}
             <input type="file" name="LOGO_FILE" accept="image/png" className="" ref={logoFileRef} />
             <input type="file" name="THUMBNAIL_FILE" accept="image/png" className="" ref={thumbnailFileRef}/>
             <input type="file" name="PDF_FILE" className="" ref={pdfFileRef}/>
             <input type="file" name="MP4_FILE" className="" ref={mp4FileRef}/>
         </div>
+        {/* PROGRESS STEPS */}
         <div className='tabs wizard-progress'>
             {
                 children.map((child, i) => {
-
-                    return <label className={`step ${(i< step) ? 'complete' :''}  ${(step == i) ? 'in-progress':''}  ${(i+1>totalStepsExplored) ? 'disabled' :''} `   }>
-                        <input type="radio" name="stepper-progress" onChange={(e) => handleTabChange(e, i)}  checked={step == i}  {...(i+1>totalStepsExplored && {disabled:true}) }/>
+                    return <label 
+                    className={`step ${(i< step) ? 'complete' :''}  
+                    ${(step == i) ? 'in-progress':''}  
+                    ${(i+1>totalStepsExplored) ? 'disabled' :''} `}>
+                        <input 
+                        type="radio" 
+                        name="stepper-progress" 
+                        onChange={(e) => handleTabChange(e, i)}  
+                        checked={step == i}  
+                        {...(i+1>totalStepsExplored && {disabled:true}) }
+                        />
                         <div class="node"></div>
                         <span>i {child.props.title}</span>
-                        </label>
+                    </label>
                 })
             }
         </div>
@@ -117,7 +126,7 @@ const Stepper = forwardRef(({ children, onStepChange = null},ref) => {
             pdfFileRef,
             mp4FileRef,
             publishHelper,
-            isPublishHelperLoaded
+           // isPublishHelperLoaded
 
             }}>
         {

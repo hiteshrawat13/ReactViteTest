@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  data: {}, 
+  data: {
+    form:[]
+  }, 
   
 };
 
@@ -35,6 +37,47 @@ export const CampaignSlice = createSlice({
        
     },
 
+
+
+
+
+    // FORM BUILDER
+    addField: (state,payload) => {
+      state.data.form = [...state.data.form,payload.payload.field];
+      
+    },
+    removeField: (state,payload) => {
+      const indexToRemove=payload.payload
+      state.data.form = [...state.data.form.slice(0, indexToRemove), ...state.data.form.slice(indexToRemove + 1)];
+      
+    },
+    duplicateField: (state,payload) => {
+      const indexToDuplicate=payload.payload
+      state.data.form = [...state.data.form.slice(0, indexToDuplicate),state.data.form[indexToDuplicate],state.data.form[indexToDuplicate], ...state.data.form.slice(indexToDuplicate + 1)];
+      
+    },
+    setSelectedField: (state,payload) => {
+      state.selectedField = payload.payload;
+    },
+    updateField: (state,payload) => {
+        const newArray = [...state.data.form]; //making a new array
+        newArray[payload.payload.fieldId] = payload.payload.state
+        state.data.form = newArray;
+    },
+    setFields:(state,payload) => {
+      state.data.form = payload.payload;
+    },
+    loadFieldsFromJson:(state,payload)=>{
+      const obj=(payload.payload)
+      const newArray = []; //making a new array
+      obj.forEach((field,index)=> {
+       newArray.push(field)
+       })
+
+      
+      state.data.form=newArray
+    }
+
     
     
   },
@@ -43,7 +86,15 @@ export const CampaignSlice = createSlice({
 export const {
   setData,
   addData,
-  updateData
+  updateData,
+
+  addField,
+  removeField,
+  duplicateField,
+  setSelectedField,
+  updateField,
+  setFields,
+  loadFieldsFromJson
 } = CampaignSlice.actions;
 
 export default CampaignSlice.reducer;

@@ -2,13 +2,10 @@ import React, { forwardRef, useContext, useEffect, useImperativeHandle } from 'r
 import { useForm ,FormProvider} from 'react-hook-form';
  
 import { StepperContext } from './StepperContext';
+import { useSelector } from 'react-redux';
 
 
 const Step =  ({ children }) => {
-
-
-  
-
   const Stepper=useContext(StepperContext)
     const methods = useForm({mode: "onChange"})
     const onSubmit = (data) =>{
@@ -18,21 +15,15 @@ const Step =  ({ children }) => {
         Stepper.handleNext()
     }
 
-     
-
     useEffect(()=>{
-
      Stepper.setCurrentStepFormTriggerMethod({trigger:methods.trigger,handleSubmit:methods.handleSubmit})
-   
     },[])
-
-  
-
 
     return (
         <FormProvider {...methods}>
-            <form   onSubmit={methods.handleSubmit(onSubmit) }>
+            <form   onSubmit={methods.handleSubmit(onSubmit) } >
                 {children}
+               
                 {/* <input type="submit" value="Save" /> */}
             </form>
         </FormProvider>

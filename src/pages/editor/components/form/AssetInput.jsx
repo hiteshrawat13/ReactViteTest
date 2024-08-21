@@ -25,13 +25,13 @@ const AssetPicker = () => {
 
         function onPDFFileChange(e) {
             e.preventDefault()
-            setValue("PDF",Stepper?.pdfFileRef?.current?.files[0]?.name)
+            //setValue("PDF",Stepper?.pdfFileRef?.current?.files[0]?.name)
             setSelectedPDFFileName(Stepper?.pdfFileRef?.current?.files[0]?.name)
         }
 
         function onMP4FileChange(e) {
             e.preventDefault()
-            setValue("MP4",Stepper?.mp4FileRef?.current?.files[0]?.name)
+            //setValue("MP4",Stepper?.mp4FileRef?.current?.files[0]?.name)
             setSelectedMP4FileName(Stepper?.mp4FileRef?.current?.files[0]?.name)
         }
        
@@ -56,7 +56,7 @@ const AssetPicker = () => {
         const droppedFiles = e.dataTransfer.files;
         if (droppedFiles.length > 0) {
         Stepper.pdfFileRef.current.files=droppedFiles
-        setValue("PDF",Stepper.pdfFileRef.current.files[0].name)
+        //setValue("PDF",Stepper.pdfFileRef.current.files[0].name)
         setSelectedPDFFileName(Stepper.pdfFileRef.current.files[0].name)
         }
     }
@@ -70,7 +70,7 @@ const AssetPicker = () => {
         const droppedFiles = e.dataTransfer.files;
         if (droppedFiles.length > 0) {
         Stepper.mp4FileRef.current.files=droppedFiles
-        setValue("MP4",Stepper.mp4FileRef.current.files[0].name)
+        //setValue("MP4",Stepper.mp4FileRef.current.files[0].name)
         setSelectedMP4FileName(Stepper.mp4FileRef.current.files[0].name)
         }
     }
@@ -80,17 +80,19 @@ const AssetPicker = () => {
         <div>
             <h4>Asset</h4>
 
-            <div className='radio-switches'>
-                <input type="radio" {...register("ASSET_FORMAT", { required: true })} className="radio-switch" id="PDF" value="PDF" />
-                <label htmlFor="PDF">PDF</label>
-                <input type="radio" {...register("ASSET_FORMAT", { required: true })} className="radio-switch" id="MP4" value="MP4" />
-                <label htmlFor="MP4">MP4</label>
-                <input type="radio" {...register("ASSET_FORMAT", { required: true })} className="radio-switch" id="CLIENT_LINK" value="CLIENT_LINK" />
-                <label htmlFor="CLIENT_LINK">Client Link</label>
-                <input type="radio" {...register("ASSET_FORMAT", { required: true })} className="radio-switch" id="IFRAME" value="IFRAME" />
-                <label htmlFor="IFRAME">IFrame</label>
+            <div  className='form-group'>
+                <div className='radio-switches'>
+                    <input type="radio" {...register("ASSET_FORMAT", { required: true })} className="radio-switch" id="PDF" value="PDF" />
+                    <label htmlFor="PDF">PDF</label>
+                    <input type="radio" {...register("ASSET_FORMAT", { required: true })} className="radio-switch" id="MP4" value="MP4" />
+                    <label htmlFor="MP4">MP4</label>
+                    <input type="radio" {...register("ASSET_FORMAT", { required: true })} className="radio-switch" id="CLIENT_LINK" value="CLIENT_LINK" />
+                    <label htmlFor="CLIENT_LINK">Client Link</label>
+                    <input type="radio" {...register("ASSET_FORMAT", { required: true })} className="radio-switch" id="IFRAME" value="IFRAME" />
+                    <label htmlFor="IFRAME">IFrame</label>
+                </div>
+                {errors["ASSET_FORMAT"] && <span className='error'>Asset format is required</span>}
             </div>
-            {errors["ASSET_FORMAT"] && <p>Asset format is required</p>}
 
 
             {(assetFormatValue == "PDF") && <TextBox label="PDF" required="true" name="PDF_NAME" />}

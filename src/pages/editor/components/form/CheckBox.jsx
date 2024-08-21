@@ -4,9 +4,9 @@ import { useFormContext } from 'react-hook-form'
 
 const CheckBox = ({label,name="1",required=false,...rest}) => {
     const campaignDataState = useSelector(state => state.campaignData)
-    const {register,unregister,formState: { errors }} = useFormContext() 
+    const {register,unregister,setValue,formState: { errors }} = useFormContext() 
     useEffect(() => {
-  
+      setValue(name,campaignDataState.data[name]||"")
       return () => {
         unregister(name)
       }
@@ -15,7 +15,7 @@ const CheckBox = ({label,name="1",required=false,...rest}) => {
     <div className='form-group'>
     
     <input type="checkbox" 
-    defaultChecked={campaignDataState.data[name]}
+    //defaultChecked={campaignDataState.data[name]}
     {...rest} 
     {...register(name, { required: required })}/>
     {errors[name] && <p>This field is required</p>} 

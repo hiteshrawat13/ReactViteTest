@@ -1,6 +1,6 @@
 import React, { useEffect, useState ,useRef} from 'react'
 import { useSelector,useDispatch } from 'react-redux'
-import { updateField } from '../../../../../../store/formBuilder/FormBuilderSlice'
+import { updateField } from '../../../../../../store/campaign/CampaignSlice'
 
 
 import Modal from '../../../../../../components/ui/Modal'
@@ -10,7 +10,7 @@ import { fields } from './Fields'
 
 import { FaPencilAlt } from "react-icons/fa";
 
-const CheckGroupEditor = ({data,toast}) => {
+const CheckGroupEditor = ({ id,data,toast,handleFieldDataUpdate}) => {
 
 
     const [label, setLabel] = useState(data.label)
@@ -19,7 +19,6 @@ const CheckGroupEditor = ({data,toast}) => {
 const [isLabelModalOpened,setLabelModalOpened]=useState(false)
 const [isOptionsModalOpened,setOptionsModalOpened]=useState(false)
 
-const formBuilder = useSelector(state => state.formBuilder)
 const dispatch=useDispatch()
 
 const divRef=useRef()
@@ -39,7 +38,8 @@ const handleSubmit=(e)=>{
         state[child.name]=child.value
        } 
     }
-    dispatch(updateField(state))
+    //dispatch(updateField(state))
+    handleFieldDataUpdate(id,state)
     console.log(state);
     toast.success('Field Updated')
 }

@@ -12,7 +12,7 @@ const Preview = forwardRef(({ }, ref) => {
 
     const loadButtons = async () => {
 
-      setButtons(await publishHelper.current?.getPageFiles({ forPreview: true }))
+      setButtons(await publishHelper.getPageFiles({ forPreview: true }))
     }
     loadButtons()
 
@@ -69,7 +69,7 @@ const Preview = forwardRef(({ }, ref) => {
         }
 
         <br></br>
-        <iframe ref={iframeRef} style={{ 'margin-top': '2px', width: "calc(100% - 70px)", height: "calc(100% - 70px)", minHeight: "1000px" }}></iframe>
+        <iframe ref={iframeRef}   style={{ 'margin-top': '2px', width: "calc(100% - 70px)", height: "calc(100% - 70px)", minHeight: "1000px" }}></iframe>
       </div>
 
 

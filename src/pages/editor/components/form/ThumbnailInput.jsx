@@ -18,7 +18,7 @@ const ThumbnailPicker = () =>  {
         const droppedFiles = e.dataTransfer.files;
         if (droppedFiles.length > 0) {
         Stepper.thumbnailFileRef.current.files=droppedFiles
-        setValue("THUMBNAIL_NAME",Stepper.thumbnailFileRef.current.files[0].name)
+        //setValue("THUMBNAIL_NAME",Stepper.thumbnailFileRef.current.files[0].name)
         setThumbnailPreview()
         }
     }
@@ -38,7 +38,7 @@ const ThumbnailPicker = () =>  {
             e.preventDefault()
             // update the scroll position
             setSelectedThumbnailFileName(Stepper.thumbnailFileRef.current.files[0].name || null)
-            setValue("THUMBNAIL_NAME",Stepper.thumbnailFileRef.current.files[0].name)
+            //setValue("THUMBNAIL_NAME",Stepper.thumbnailFileRef.current.files[0].name)
             setThumbnailPreview()
         }
         if (Stepper.thumbnailFileRef && Stepper.thumbnailFileRef.current)

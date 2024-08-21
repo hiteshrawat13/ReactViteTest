@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { updateField } from '../../../../../../store/formBuilder/FormBuilderSlice'
+import { updateField } from '../../../../../../store/campaign/CampaignSlice'
 
 import Modal from '../../../../../../components/ui/Modal'
 
@@ -10,11 +10,11 @@ import { fields } from './Fields'
 import { FaPencilAlt } from "react-icons/fa";
 
 
-const CheckBoxEditor = ({ data ,toast}) => {
+const CheckBoxEditor = ({ id, data ,toast,handleFieldDataUpdate}) => {
     const [isModalOpened, setModalOpened] = useState(false)
     const [isLabelModalOpened, setLabelModalOpened] = useState(false)
     const [label, setLabel] = useState(data.label)
-    const formBuilder = useSelector(state => state.formBuilder)
+   
     const dispatch = useDispatch()
 
     const divRef = useRef()
@@ -34,7 +34,8 @@ const CheckBoxEditor = ({ data ,toast}) => {
                 state[child.name] = child.value
             }
         }
-        dispatch(updateField(state))
+       // dispatch(updateField(state))
+        handleFieldDataUpdate(id,state)
         console.log(state);
         toast.success('Field Updated')
     }

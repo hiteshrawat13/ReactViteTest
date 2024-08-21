@@ -11,7 +11,7 @@ const FTPUpload = () => {
 
   const handleGetFiles = async () => {
     let uploadFiles = []
-    if (logoFileRef.current.files[0]) {
+    if (logoFileRef?.current?.files[0]) {
       uploadFiles.push({
         type: "logo",
         name: campaignDataState.data['LOGO_NAME'],
@@ -20,7 +20,7 @@ const FTPUpload = () => {
       })
     }
 
-    if (thumbnailFileRef.current.files[0]) {
+    if (thumbnailFileRef?.current?.files[0]) {
       uploadFiles.push({
         type: "file",
         name: campaignDataState.data['THUMBNAIL_NAME'],
@@ -29,25 +29,25 @@ const FTPUpload = () => {
       })
     }
 
-    if (pdfFileRef.current.files[0]) {
+    if (pdfFileRef?.current?.files[0]) {
       uploadFiles.push({
         type: "file",
-        name: campaignDataState.data['PDF'],
+        name: campaignDataState.data['PDF_NAME'],
         file: pdfFileRef.current.files[0],
         progress: 0
       })
     }
 
-    if (mp4FileRef.current.files[0]) {
+    if (mp4FileRef?.current?.files[0]) {
       uploadFiles.push({
         type: "file",
-        name: campaignDataState.data['MP4'],
+        name: campaignDataState.data['MP4_NAME'],
         file: mp4FileRef.current.files[0],
         progress: 0
       })
     }
 
-    const templatefiles = await publishHelper.current.getPageFiles({})
+    const templatefiles = await publishHelper.getPageFiles({})
     templatefiles.forEach((file) => {
       uploadFiles.push({
         type: "templateFile",

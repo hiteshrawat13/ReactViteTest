@@ -8,18 +8,18 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import "./FieldList.scss"
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { setSelectedField ,setFields, removeField, duplicateField} from '../../../../../store/formBuilder/FormBuilderSlice';
+import { setSelectedField ,setFields, removeField, duplicateField} from '../../../../../store/campaign/CampaignSlice';
 import { MdDelete } from "react-icons/md";
 import { IoDuplicate } from "react-icons/io5";
 import { FaAsterisk } from "react-icons/fa";
 
-const FieldList = ({getIcon}) => {
-const formBuilder = useSelector(state => state.formBuilder)
+const FieldList = ({getIcon,setSelectedField,selectedField}) => {
+const state= useSelector(state => state.campaignData.data)
  
     const dispatch= useDispatch()
         
     const handleFieldEdit=(fieldIndex)=>{
-        dispatch(setSelectedField(fieldIndex))
+       setSelectedField(fieldIndex)
     }
   
     const handleDelete=(e,fieldIndex)=>{
@@ -36,7 +36,7 @@ const formBuilder = useSelector(state => state.formBuilder)
   const handleDrop = (droppedItem) => {
     // Ignore drop outside droppable container
     if (!droppedItem.destination) return;
-    var updatedList = [...formBuilder.fields];
+    var updatedList = [...state.form];
     // Remove dragged item
     const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
     // Add dropped item
@@ -44,7 +44,7 @@ const formBuilder = useSelector(state => state.formBuilder)
     // Update State
 
     dispatch(setFields(updatedList))
-    dispatch(setSelectedField(droppedItem.destination.index))
+    setSelectedField(droppedItem.destination.index)
 
 
     console.log(droppedItem);
@@ -54,6 +54,7 @@ const formBuilder = useSelector(state => state.formBuilder)
 
   return (
     <>
+     
       <DragDropContext onDragEnd={handleDrop}>
         <Droppable droppableId="list-container">
           {(provided) => (
@@ -63,12 +64,12 @@ const formBuilder = useSelector(state => state.formBuilder)
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {formBuilder.fields.map((item, index) => {
+              {state.form?.map((item, index) => {
                 if(item==null)return null;
                 return <Draggable key={index} draggableId={index+""} index={index}>
                   {(provided) => (
                     <div
-                    className={`field ${(formBuilder.selectedField==index)? 'selected':''}`}
+                    className={`field ${(selectedField==index)? 'selected':''}`}
 
                       ref={provided.innerRef}
                       {...provided.dragHandleProps}
@@ -81,7 +82,7 @@ const formBuilder = useSelector(state => state.formBuilder)
                         
 
 
-                        <div style={{display:"grid",gridTemplateColumns:"auto auto 1fr auto",gap:"10px"}}>
+                        <div style={{display:"grid",gridTemplateColumns:"18px 18px 1fr 180px auto",gap:"10px"}}>
                           
                           <div>
                             <div  style={{
@@ -89,7 +90,8 @@ const formBuilder = useSelector(state => state.formBuilder)
                               display:"flex",
                               justifyContent:"center",
                               alignItems:"center",
-                              backgroundColor:"#dfe4ea",
+                              backgroundColor:(item.isRequired)?"#ffc4c4":"#dfe4ea",
+                              borderRadius:"20px",
                               color:"#2f3542",
                               height:"18px",
                               width:"18px",
@@ -97,34 +99,36 @@ const formBuilder = useSelector(state => state.formBuilder)
                                 
                                 {index+1}
                               
-                              <div  title="Required Field" style={{
+                              {/* <div  title="Required Field" style={{
                                 position:"absolute",
                                 top:"-7px",
                                 right:"-4px",
                                 color:"#ff7675"}}>{(item.isRequired)?<FaAsterisk size={8}/>:null}</div>
-                              
+                               */}
                               
                               </div>
                           </div>
 
                           <div >
                             <div className="typeIcon" title={item.type} 
-                              style={{position:"relative",color:"#60a3bc"}}> {getIcon(item.type,item.inputType)}  
+                              style={{position:"relative",color:"#60a3bc",width:"15px"}}> {getIcon(item.type,item.inputType)}  
                              </div>
                           </div>
 
                           <div>
-                            <div style={{
+                            <div style={{fontSize:"12px",color:"#8f8f8f"}}>
+                              <div className='fieldLabel' style={{color:"#000" }}>{item.label}</div> 
+                            </div>
+                            {/* <div className='fieldLabel' style={{fontSize:"14px",fontWeight:"bold",color:"#2f3542"}}>{item.label}</div> */}
+                          </div>
+
+                          <div style={{
                               display:"flex",
-                              justifyContent:"space-between",
                               fontSize:"12px",
                               color:"#8f8f8f"
                               }}>
-                              <div className='fieldId'>{item.id}</div>
-                              <div className='fieldName'>{item.name}</div>
-                            </div>
-                            <div className='fieldLabel' style={{fontSize:"14px",fontWeight:"bold",color:"#2f3542"}}>{item.label}</div>
-                            
+                          <div className='fieldId' style={{width:"80px",textAlign:"right",textOverflow: "ellipsis"}} >{item.id}</div>
+                          <div className='fieldName' style={{width:"80px",textAlign:"right",textOverflow: "ellipsis"}}>{item.name}</div>
                           </div>
 
                           <div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState ,useRef} from 'react'
 import { useSelector,useDispatch } from 'react-redux'
-import { updateField } from '../../../../../../store/formBuilder/FormBuilderSlice'
+import { updateField } from '../../../../../../store/campaign/CampaignSlice'
 
 import { FaPencilAlt } from "react-icons/fa";
 
@@ -9,14 +9,13 @@ import { fields } from './Fields'
 
 import Modal from '../../../../../../components/ui/Modal'
 
-const HtmlEditor = ({data,toast}) => {
+const HtmlEditor = ({ id,data,toast,handleFieldDataUpdate}) => {
 
 
   const [html,setHtml]=useState(data.html)
 
   const [isModalOpened,setModalOpened]=useState(false)
 
-const formBuilder = useSelector(state => state.formBuilder)
 const dispatch=useDispatch()
 
 const divRef=useRef()
@@ -38,7 +37,8 @@ const handleSubmit=(e)=>{
 
 
    
-    dispatch(updateField(state))
+    //dispatch(updateField(state))
+    handleFieldDataUpdate(id,state)
     console.log(state);
     toast.success('Field Updated')
 }

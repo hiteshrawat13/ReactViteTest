@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react'
 import './FormBuilder.scss'
-import FormBuilderSlice, { addField, setSelectedField,loadFieldsFromJson } from '../../../../../store/formBuilder/FormBuilderSlice'
+import  { addField,updateField,loadFieldsFromJson } from '../../../../../store/campaign/CampaignSlice'
 import { useDispatch,useSelector } from 'react-redux'
 import FieldList from './FieldList'
 import { fields,editors } from './fieldEditor/Fields'
@@ -54,8 +54,9 @@ const FormBuilder = () => {
 
   const addFieldSelectBoxRef=useRef()
   
-  const formBuilder = useSelector(state => state.formBuilder)
+  const state = useSelector(state => state.campaignData.data)
  
+  const [selectedField,setSelectedField]= useState(-1)
   const dispatch=useDispatch()
 
   const handleAdd=(value)=>{
@@ -126,9 +127,12 @@ const FormBuilder = () => {
   }
 
 
-  useEffect(()=>{
+  const handleFieldDataUpdate=(id,state)=>{
+    dispatch(updateField({fieldId:id,state:state}))
+  }
 
-  
+
+  useEffect(()=>{
    dispatch(loadFieldsFromJson(f)) 
    
   },[])
@@ -162,30 +166,33 @@ const FormBuilder = () => {
 
     </div>
 
-    <div>Form Builder {formBuilder.selectedField+1}</div>
+    <div>Form Builder {selectedField+1}</div>
     <div className='formBuilder'>
     
-      <FieldList getIcon={getIcon} />
+      <FieldList getIcon={getIcon} setSelectedField={setSelectedField} selectedField={selectedField} />
  
+
+
       <div className="fieldEditor">
       <div className='fieldEditorHolder'>
-          {(!formBuilder?.fields[formBuilder.selectedField]?.type) 
+          {( selectedField==-1 || !state.form[selectedField]?.type) 
           &&  
           <div className='editorFallback'><span>Field Properties<br></br>Select the form field to update filed properties.</span></div> }
 
-            <Suspense fallback={<div>Loading ... </div>}>
+          {state.form[selectedField] &&   <Suspense fallback={<div>Loading ... </div>}>
         
-        {(formBuilder?.fields[formBuilder.selectedField]?.type=="TextBox") && <TextBoxEditor key={Math.random()}  data={formBuilder?.fields[formBuilder.selectedField]} toast={toast}/>  }
-        {(formBuilder?.fields[formBuilder.selectedField]?.type=="SelectBox") && <SelectBoxEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} toast={toast} /> }
-        {(formBuilder?.fields[formBuilder.selectedField]?.type=="CheckBox") && <CheckBoxEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} toast={toast} /> }
-        {(formBuilder?.fields[formBuilder.selectedField]?.type=="CheckGroup" ) && <CheckGroupEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} toast={toast} /> }
-        {(formBuilder?.fields[formBuilder.selectedField]?.type=="RadioGroup") && <RadioGroupEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} toast={toast} /> }
-        {(formBuilder?.fields[formBuilder.selectedField]?.type=="Text") && <TextEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} toast={toast} /> }
-        {(formBuilder?.fields[formBuilder.selectedField]?.type=="Html") && <HtmlEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} toast={toast} /> }
-        {(formBuilder?.fields[formBuilder.selectedField]?.type=="HiddenInput") && <HiddenInputEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} toast={toast} /> }
-        {(formBuilder?.fields[formBuilder.selectedField]?.type=="CTA") && <CTAEditor key={Math.random()} data={formBuilder?.fields[formBuilder.selectedField]} toast={toast}/> }
-          
-            </Suspense>
+        {(state.form[selectedField]?.type=="TextBox") && <TextBoxEditor key={Math.random()}  data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField}/>  }
+        {(state.form[selectedField]?.type=="SelectBox") && <SelectBoxEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate}  id={selectedField} /> }
+        {(state.form[selectedField]?.type=="CheckBox") && <CheckBoxEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate}  id={selectedField} /> }
+        {(state.form[selectedField]?.type=="CheckGroup" ) && <CheckGroupEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate}  id={selectedField} /> }
+        {(state.form[selectedField]?.type=="RadioGroup") && <RadioGroupEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate}  id={selectedField} /> }
+        {(state.form[selectedField]?.type=="Text") && <TextEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate}  id={selectedField} /> }
+        {(state.form[selectedField]?.type=="Html") && <HtmlEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate}  id={selectedField} /> }
+        {(state.form[selectedField]?.type=="HiddenInput") && <HiddenInputEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate}  id={selectedField} /> }
+        {(state.form[selectedField]?.type=="CTA") && <CTAEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate}  id={selectedField}/> }
+        </Suspense>
+
+} 
         </div>
       </div>
 

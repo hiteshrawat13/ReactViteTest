@@ -17,28 +17,29 @@ import {   BtnBold,
     
     Toolbar,EditorProvider,Editor } from 'react-simple-wysiwyg'
 
-const RichTextEditor = ({name,required=false}) => {
-    const { register,unregister, formState: { errors },control } = useFormContext()
+const RichTextEditor = ({label,name,required=false,width=null}) => {
+    const { register,unregister,setValue, formState: { errors },control } = useFormContext()
     const campaignDataState = useSelector(state => state.campaignData)
     useEffect(() => {
-  
+      setValue( name, campaignDataState.data[name] ?? null)
       return () => {
         unregister(name)
       }
     }, [])
   return (
-    <div>
+    <div className='form-group'>
         
-        
+        <label>{label}</label>
         <Controller
         control={control}
         name={name}
         rules={{
             required: required,
           }}
-          // defaultValue={campaignDataState.data[name] }
+          //defaultValue={campaignDataState.data[name] }
           // value={campaignDataState.data[name]}
         render={({ field: { onChange, onBlur, value, ref } }) => (
+          <div className='input-holder'  {...((width!=null) && {style:{width}}) }>
             <EditorProvider key={Math.random} ><Editor value={value} onChange={onChange} onBlur={onBlur}    >
             <Toolbar  >
             {/* <BtnUndo />
@@ -59,12 +60,12 @@ const RichTextEditor = ({name,required=false}) => {
               <BtnStyles />
             </Toolbar>
           </Editor></EditorProvider>
+          {errors[name] && <div className='error-icon'>!</div>}
+          </div>
         )}
       />
-          {errors[name] && <p>This field is required</p>}
-        {/* 
-   
-    </EditorProvider> */}
+          {errors[name] && <span className='error'>This field is required</span>}
+        
        
 
     </div>

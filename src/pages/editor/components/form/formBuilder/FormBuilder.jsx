@@ -101,25 +101,26 @@ const FormBuilder = () => {
   const getIcon=(type,inputType="text")=>{
     //inputType => it is a text box only  input type like text, email, number
 
+    const iconSize=15
 
-    let textBoxLogo=<PiTextTBold  size={20} />
+    let textBoxLogo=<PiTextTBold  size={iconSize} />
     switch(inputType){
       case "text":break;
-      case "email":textBoxLogo=<MdOutlineAlternateEmail  size={20}/>; break;
-      case "number":textBoxLogo=<MdNumbers size={20} />;break;
+      case "email":textBoxLogo=<MdOutlineAlternateEmail  size={iconSize}/>; break;
+      case "number":textBoxLogo=<MdNumbers size={iconSize} />;break;
     }
 
     switch(type){
      
       case "TextBox": return textBoxLogo;
-      case "SelectBox": return <GoSingleSelect size={20} />;
-      case "CheckBox": return <MdOutlineCheckBox size={20} />;
-      case "CheckGroup": return <RiCheckboxMultipleLine size={20} />;
+      case "SelectBox": return <GoSingleSelect size={iconSize} />;
+      case "CheckBox": return <MdOutlineCheckBox size={iconSize} />;
+      case "CheckGroup": return <RiCheckboxMultipleLine size={iconSize} />;
       case "RadioGroup": return <RiListRadio />;
-      case "Text": return <LuText size={20} />;
-      case "Html": return <FaCode size={20} />;
-      case "HiddenInput": return <FaEyeSlash size={20} />;
-      case "CTA": return <ImDownload2 size={20} />;
+      case "Text": return <LuText size={iconSize} />;
+      case "Html": return <FaCode size={iconSize} />;
+      case "HiddenInput": return <FaEyeSlash size={iconSize} />;
+      case "CTA": return <ImDownload2 size={iconSize} />;
         
 
 

@@ -214,23 +214,16 @@ export default class PublishHelper{
 
             if(this["ASSET_FORMAT"]=='IFrame'){
                 data=data.replaceAll(`##BODY##`,`
-
                 <div class="col-md-12 well">
                 <div class="col-sm-12">
-                  
                 <br>
                 <iframe src="${this["IFRAME"]}" width="100%" height="380" title="##EDM_TITLE##"></iframe>
-                  
-                </div>
-                
-              </div> 
-               `)
+                </div> 
+              </div> `)
             }
 
         }
-
-
-            data=data.replaceAll(`##THANKYOU_TITLE##`,this["EDM_TITLE"])
+        data=data.replaceAll(`##THANKYOU_TITLE##`,this["EDM_TITLE"])
                 
         for (const [key, value] of Object.entries(this)) {
            try {

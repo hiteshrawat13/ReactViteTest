@@ -16,7 +16,7 @@ const Step =  ({ children }) => {
     }
 
     useEffect(()=>{
-     Stepper.setCurrentStepFormTriggerMethod({trigger:methods.trigger,handleSubmit:methods.handleSubmit})
+     Stepper.setCurrentStepFormTriggerMethod({trigger:methods.trigger,handleSubmit:methods.handleSubmit,methods})
     },[])
 
     return (

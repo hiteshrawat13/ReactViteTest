@@ -90,11 +90,12 @@ const state= useSelector(state => state.campaignData.data)
                               display:"flex",
                               justifyContent:"center",
                               alignItems:"center",
-                              backgroundColor:(item.isRequired)?"#ffc4c4":"#dfe4ea",
+                              backgroundColor:(item.isRequired)?"transparent":"#dfe4ea",
                               borderRadius:"20px",
-                              color:"#2f3542",
-                              height:"18px",
-                              width:"18px",
+                              border:"1px solid #888",
+                              color:"#000",
+                              height:"19px",
+                              width:"19px",
                               fontSize:"10px"}}>
                                 
                                 {index+1}
@@ -111,7 +112,7 @@ const state= useSelector(state => state.campaignData.data)
 
                           <div >
                             <div className="typeIcon" title={item.type} 
-                              style={{position:"relative",color:"#60a3bc",width:"15px"}}> {getIcon(item.type,item.inputType)}  
+                              style={{position:"relative",color:"#3d7181",width:"10px"}}> {getIcon(item.type,item.inputType)}  
                              </div>
                           </div>
 
@@ -133,8 +134,8 @@ const state= useSelector(state => state.campaignData.data)
 
                           <div>
                             <div className='buttons'>
-                              <button className="actionButton" style={{color:"#e66767"}} onClick={(e)=>handleDelete(e,index)}><MdDelete /></button>
-                              <button className="actionButton" onClick={(e)=>handleDuplicate(e,index)}><IoDuplicate /></button>
+                              <button className="actionButton" style={{color:"#e66767"}} onClick={(e)=>handleDelete(e,index)} title="Delete"><MdDelete /></button>
+                              <button className="actionButton" onClick={(e)=>handleDuplicate(e,index)} title="Duplicate"><IoDuplicate /></button>
                             </div>
                           </div>
                           

@@ -11,12 +11,24 @@ class PublishHelper{
         this.state=state
     }
 
+    getFormHtml(fields,formRenderer){
+        let html=""
+        fields.forEach((field,index)=> {
+            if(formRenderer[field.type]){
+                html+=formRenderer[field.type](field)
+            }
+            
+        })
+        return html
+    }
+
     async getEdmHtml({forPreview}){
         let data=edm_html;
         return data
     }
     getLandingHtml({forPreview}){
-        return landing_html 
+
+        return this.getFormHtml(this.state.form ,ARCFormRenderer)
     }
     getSendmailHtml({forPreview}){
         return sendemail_html
@@ -30,9 +42,6 @@ class PublishHelper{
     async getPageFiles({forPreview=false}){
         let files=[]
 
-         
-        console.log(this.state,"====================");
-        
         files.push({ name:`${ this.state["LINK_NAME"] }-edm.html`, data: await this.getEdmHtml({forPreview}) })
         files.push({ name:`${ this.state["LINK_NAME"] }-landing.html`, data: await this.getLandingHtml({forPreview}) })
         files.push({ name:`${ this.state["LINK_NAME"] }-sendemail.php`, data: await this.getSendmailHtml({forPreview}) })

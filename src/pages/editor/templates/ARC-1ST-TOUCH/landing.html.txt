@@ -1,27 +1,16 @@
 <html lang="en">
     <head>
         <title>##LANDING_TITLE##</title>
-
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <style>
-            @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
-        </style>
-
+        <style>  @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap"); </style>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        <!-- <script src="https://itbusinessplus.com/ffe176a3.js">
-</script> -->
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
-        <script src="https://eu.itbusinessplus.com/whitepaper/js/form-validation.js"></script>
-
         <script type="text/javascript">
             $(function () {
                 // Validation
-
                 jQuery.validator.addMethod(
                     "email",
                     function (value, element) {
@@ -67,8 +56,6 @@
 				
             }
 			
-
-
             @media (max-width: 499px) {
                 .img-center {
                     font-size: 0pt;line-height: 0pt;display: flex;flex-direction: column;align-content: center;align-items: center;
@@ -199,7 +186,7 @@
             <center style="font-size: 10px;">
                 Copyright © 2024 XDBS Corporation<span class="mobile-block"> </span> <br />
                 3501, Jack Northorp Ave, Ste C3873<br />
-                Hawthorne, CA 90250 USA<!-- <br> (302) 566-3002 -->
+                Hawthorne, CA 90250 USA
                 <span class="mobile-block"> </span> <span class="mobile-block"> </span> <br />
                 Please <a href="https://www.itbusinessplus.com/privacy-policy/"> click here</a> to read our privacy policy.<br />
                 <a href="https://www.itbusinessplus.com/unsubscribe/">Click here to unsubscribe</a>

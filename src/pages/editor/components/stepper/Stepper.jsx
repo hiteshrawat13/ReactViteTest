@@ -7,7 +7,7 @@ import "./Stepper.css"
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { setData, addData, updateData } from '../../../../store/campaign/CampaignSlice'
 
-const Stepper = forwardRef(({ children, onStepChange = null,publishHelper},ref) => {
+const Stepper = forwardRef(({ children, onStepChange = null,setCurrentFormValue=null,publishHelper},ref) => {
 
     
     const dispatch = useDispatch()
@@ -34,10 +34,18 @@ const Stepper = forwardRef(({ children, onStepChange = null,publishHelper},ref) 
     //     };
     //     importComponent();
     // },[])
-  
+
+
+
+    const onWatch=(watchValue)=>{
+        if(setCurrentFormValue)setCurrentFormValue(watchValue)
+    }
+    
+
     useImperativeHandle(ref, () => {
         return {
-       //   hi(){alert("hi")}
+             hi(){alert("hi")},
+          
         };
     }, []);
 
@@ -99,9 +107,12 @@ const Stepper = forwardRef(({ children, onStepChange = null,publishHelper},ref) 
             {
                 children.map((child, i) => {
                     return <label 
-                    className={`step ${(i< step) ? 'complete' :''}  
-                    ${(step == i) ? 'in-progress':''}  
-                    ${(i+1>totalStepsExplored) ? 'disabled' :''} `}>
+                    className={
+                        `step 
+                        ${(i< step) ? 'complete' :''}  
+                        ${(step == i) ? 'in-progress':''}  
+                        ${(i+1>totalStepsExplored) ? 'disabled' :''}`
+                    }>
                         <input 
                         type="radio" 
                         name="stepper-progress" 
@@ -110,7 +121,7 @@ const Stepper = forwardRef(({ children, onStepChange = null,publishHelper},ref) 
                         {...(i+1>totalStepsExplored && {disabled:true}) }
                         />
                         <div class="node"></div>
-                        <span>i {child.props.title}</span>
+                        <span>{child.props.title}</span>
                     </label>
                 })
             }
@@ -126,12 +137,11 @@ const Stepper = forwardRef(({ children, onStepChange = null,publishHelper},ref) 
             pdfFileRef,
             mp4FileRef,
             publishHelper,
-           // isPublishHelperLoaded
 
             }}>
         {
             children.map((child, i) => {
-                return (i == step) && <div key={i}  >{child}</div>  
+                return (i == step) && <div key={i}  >{React.cloneElement(child,{onWatch})}</div>  
             })
         }
         </StepperContext.Provider>

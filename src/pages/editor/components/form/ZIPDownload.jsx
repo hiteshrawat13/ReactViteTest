@@ -15,8 +15,8 @@ const ZIPDownload = () => {
        
         console.log("======================",data);
 
-        publishHelper?.current?.setState(data)
-        const templatefiles = await publishHelper.getPageFiles({})
+       
+        const templatefiles = await publishHelper.getPageFiles({state:data})
         
         templatefiles.forEach((file) => {
             zip.file(file.name, file.data);

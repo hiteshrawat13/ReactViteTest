@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import {
     Stepper,
@@ -17,21 +17,19 @@ import {
 } from '../../components/form/index'
 import { setData, addData, updateData } from '../../../../store/campaign/CampaignSlice'
 import { useDispatch } from 'react-redux';
-
-import { useSelector } from 'react-redux';
-
 import publishHelper from '../ARC-1ST-TOUCH/TestPublishHelper'
 const Editor = () => {
     const dispatch = useDispatch()
-    const campaignDataState = useSelector(state => state.campaignData)
-    
-  return (
-    <Stepper publishHelper={new publishHelper(campaignDataState.data)}>
+    const [watch,setWatch]=useState({})  //this is used to get current form value which is changes during key down events
+  return (<>
+  { JSON.stringify(watch)}
+    <Stepper publishHelper={new publishHelper()}   setCurrentFormValue={setWatch}>
 
         
 
         <Step title="Basic Info"  >
           <TextBox label="Client Code" name="CLIENT_CODE" required={true} width="10%" />
+          {(watch["CLIENT_CODE"]==="Hitesh") && <>IT WORKS</>}
           <TextBox label="Campaign Name" name="CAMP_NAME" required={true} width="50%" />
           <TextBox label="Campaign Id" name="CAMP_ID" required={true} width="10%" />
           <TextBox label="Link Name" name="LINK_NAME" required={true} width="50%"
@@ -71,25 +69,20 @@ const Editor = () => {
           <TextBox label="Sponsored By Text" name="SPONSORED_BY_TEXT" required={true} />
         </Step>
         <Step title="Abstract & Title">
+
           <TextBox label="EDM Title" name="EDM_TITLE" required={true} width="60%" />
           <RichTextEditor label="Edm Abstract" name="EDM_ABSTRACT" required={true} />
           <TextBox label="EDM Optin" name="EDM_OPTIN" required={true} />
           <TextBox label="EDM CTA" name="EDM_CTA" required={true} width="20%" />
           <CheckBox label="Same As EDM title" name="SAME_AS_EDM_TITLE" />
-          <TextBox label="Landing Page Title"
-            name="LANDING_TITLE"
-            required={true}
-            watcher="SAME_AS_EDM_TITLE"
-            showConditionValue={true}
-          />
+          { (watch["SAME_AS_EDM_TITLE"] == true) && <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} /> }
           <CheckBox label="Same As EDM abstract" name="SAME_AS_EDM_ABSTRACT" />
-          <RichTextEditor label="Landing Abstract" name="LANDING_ABSTRACT" required={true} />
+          { (watch["SAME_AS_EDM_ABSTRACT"] == true) && <RichTextEditor label="Landing Abstract" name="LANDING_ABSTRACT" required={true} /> }
           <CheckBox label="New Landing Page Format" name="NEW_LANDING_PAGE_FORMAT" />
-          <TextBox label="BOX TEXT" name="NEW_LANDING_PAGE_FORMAT_BOX_TEXT" required={true} />
-
-
+          { (watch["NEW_LANDING_PAGE_FORMAT"] == true) && <TextBox label="BOX TEXT" name="NEW_LANDING_PAGE_FORMAT_BOX_TEXT" required={true} /> }
 
         </Step>
+
         <Step title="Form">
           Forms
           <FormBuilder />
@@ -111,8 +104,8 @@ const Editor = () => {
           <ZIPDownload />
         </Step>
 
-
       </Stepper>
+      </>
   )
 }
 

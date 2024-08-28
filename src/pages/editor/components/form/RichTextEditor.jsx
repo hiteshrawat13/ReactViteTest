@@ -29,7 +29,7 @@ const RichTextEditor = ({label,name,required=false,width=null}) => {
   return (
     <div className='form-group'>
         
-        <label>{label}</label>
+        <label>{label}{(required)&& <span style={{color:"red"}}>*</span>}</label>
         <Controller
         control={control}
         name={name}

@@ -14,7 +14,7 @@ const SelectBox = ({label,name,required,options,width=null,...rest}) => {
       }, [])
     return (
         <div className='form-group'>
-            <label>{label}</label>
+            <label>{label}{(required)&& <span style={{color:"red"}}>*</span>}</label>
             <div className='input-holder'  {...((width!=null) && {style:{width}}) }>
             <select 
             //defaultValue={campaignDataState.data[name] || ""}

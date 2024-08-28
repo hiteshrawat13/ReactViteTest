@@ -47,7 +47,7 @@ const FTPUpload = () => {
       })
     }
 
-    const templatefiles = await publishHelper.getPageFiles({})
+    const templatefiles = await publishHelper.getPageFiles({state: campaignDataState.data})
     templatefiles.forEach((file) => {
       uploadFiles.push({
         type: "templateFile",

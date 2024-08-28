@@ -62,7 +62,7 @@
         .node {
             display: inline-block;
             border: 6px solid green;
-            background-color: green;
+            background-color: rgb(84, 133, 240);
             border-radius: 18px;
             height: 18px;
             width: 18px;
@@ -86,31 +86,32 @@
 
         &.complete {
             &:before {
-                background-color: blue;
+                background-color: rgb(36, 168, 47);
             }
 
             .node {
-                border-color: blue;
-                background-color: blue;
+                border-color: rgb(90, 194, 107);
+                background-color: rgb(54, 206, 112);
 
                 &:before {
-                    font-family: FontAwesome;
-                    content: "\f00c";
+                    content: "✓";
+                    color: #fff;
+                    display: block;
+                    position: absolute;
+                    top: -7px;
+                    left: -2px;
                 }
             }
         }
 
         &.in-progress {
             &:before {
-                background: blue;
-                background: -moz-linear-gradient(left, blue 0%, green 100%);
-                background: -webkit-linear-gradient(left, blue 0%, green 100%);
-                background: linear-gradient(to right, blue 0%, green 100%);
-                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{blue}', endColorstr='#{green}', GradientType=1);
+                background: #444;
+                
             }
 
             .node {
-                border-color: blue;
+                border-color: rgb(39, 153, 168);
             }
         }
     }

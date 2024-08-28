@@ -13,13 +13,13 @@ const CheckBox = ({label,name="1",required=false,...rest}) => {
     }, [])
   return (
     <div className='form-group'>
-    
+    <label>
     <input type="checkbox" 
     //defaultChecked={campaignDataState.data[name]}
     {...rest} 
     {...register(name, { required: required })}/>
     {errors[name] && <p>This field is required</p>} 
-    <label>{label}</label>
+    {label}{(required)&& <span style={{color:"red"}}>*</span>}</label>
     </div>
   )
 }

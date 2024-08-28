@@ -7,9 +7,8 @@ class PublishHelper{
     constructor(state){
         this.state=state
     }
-    setState(state){
-        this.state=state
-    }
+ 
+   
 
     getFormHtml(fields,formRenderer){
         let html=""
@@ -24,13 +23,31 @@ class PublishHelper{
 
     async getEdmHtml({forPreview}){
         let data=edm_html;
+
+        // for (const [key, value] of Object.entries(this.state)) {
+        //     try {
+        //         if(typeof value === 'string' || value instanceof String)
+        //         data=data.replaceAll(`##${key}##`,Utils.convertToEntities( value ) )
+        //     } catch (error) {
+        //         console.log("Error while replaceAll in getEdmHtml() of publishHelper ",error,key,value);
+        //     } 
+        // }
         return data
     }
-    getLandingHtml({forPreview}){
-
-        return this.getFormHtml(this.state.form ,ARCFormRenderer)
+    getLandingHtml({forPreview}){        
+        return JSON.stringify(this.thumbnailDataUrl)+" "+JSON.stringify(this.state)
     }
     getSendmailHtml({forPreview}){
+
+        // for (const [key, value] of Object.entries(this.state)) {
+        //     try {
+        //         if(typeof value === 'string' || value instanceof String)
+        //         data=data.replaceAll(`##${key}##`,Utils.convertToEntities( value ) )
+        //     } catch (error) {
+        //         console.log("Error while replaceAll in getSendmailHtml() of publishHelper ",error,key,value);
+        //     } 
+        // }
+
         return sendemail_html
     }
     getThankyouHtml({forPreview}){
@@ -39,7 +56,13 @@ class PublishHelper{
     getThankyouDoubleOptinHtml({forPreview}){
 
     }
-    async getPageFiles({forPreview=false}){
+    async getPageFiles({forPreview=false,logoDataUrl=null,thumbnailDataUrl=null,state=null}){
+        
+
+        this.logoDataUrl=logoDataUrl
+        this.thumbnailDataUrl=thumbnailDataUrl
+        this.state=state
+        
         let files=[]
 
         files.push({ name:`${ this.state["LINK_NAME"] }-edm.html`, data: await this.getEdmHtml({forPreview}) })

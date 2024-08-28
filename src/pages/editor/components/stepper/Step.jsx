@@ -1,13 +1,30 @@
 import React, { forwardRef, useContext, useEffect, useImperativeHandle } from 'react'
-import { useForm ,FormProvider} from 'react-hook-form';
+import { useForm ,FormProvider, useWatch} from 'react-hook-form';
  
 import { StepperContext } from './StepperContext';
-import { useSelector } from 'react-redux';
 
 
-const Step =  ({ children }) => {
+
+const Step =  ({ children ,onWatch=null}) => {
   const Stepper=useContext(StepperContext)
     const methods = useForm({mode: "onChange"})
+
+
+    
+  
+    const watchedValue=useWatch(methods)
+    
+    useEffect(() => {
+      console.log(watchedValue);
+      
+      if(onWatch)onWatch(watchedValue)
+  
+      return () => {
+       
+      }
+    }, [watchedValue])
+    
+
     const onSubmit = (data) =>{
      // Stepper.setIsStepValid(true)
        // alert("EE"+data)

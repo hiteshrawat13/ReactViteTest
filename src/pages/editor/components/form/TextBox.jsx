@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 
-const TextBox = ({label,name,required,watcher=null,showConditionValue=null,width=null,onChange=null,...rest}) => {
+const TextBox = ({label,name,required,width=null,onChange=null,...rest}) => {
   const campaignDataState = useSelector(state => state.campaignData)
   const {register,unregister,getValues,setValue,watch,formState: { errors }} = useFormContext() 
 
@@ -13,19 +13,19 @@ const TextBox = ({label,name,required,watcher=null,showConditionValue=null,width
     }
   }, [])
 
-  const watchVal=watch(watcher)
-  useEffect(() => {
-    return () => { }
-  }, [watchVal])
-  if(watcher!=null && watchVal!=showConditionValue)
-  {
-    return;
-  }
+  // const watchVal=watch(watcher)
+  // useEffect(() => {
+  //   return () => { }
+  // }, [watchVal])
+  // if(watcher!=null && watchVal!=showConditionValue)
+  // {
+  //   return;
+  // }
   
  
   return (
       <div className='form-group'>
-        <label>{label}</label>
+        <label>{label}{(required)&& <span style={{color:"red"}}>*</span>}</label>
         <div className='input-holder' {...((width!=null) && {style:{width}}) }>
         <input type="text" 
         //defaultValue={campaignDataState.data[name]||""}

@@ -38,6 +38,7 @@ const Stepper = forwardRef(({ children, onStepChange = null,setCurrentFormValue=
 
 
     const onWatch=(watchValue)=>{
+        //This function detected form value change
         if(setCurrentFormValue)setCurrentFormValue(watchValue)
     }
     

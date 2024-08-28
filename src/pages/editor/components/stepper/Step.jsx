@@ -16,7 +16,7 @@ const Step =  ({ children ,onWatch=null}) => {
     
     useEffect(() => {
       console.log(watchedValue);
-      
+      //This condition passes to top form value change
       if(onWatch)onWatch(watchedValue)
   
       return () => {

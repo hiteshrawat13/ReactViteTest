@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>5 common drainage design challenges and how to solve them</title>
+        <title>##EDM_TITLE##</title>
 
         <meta charset="UTF-8" />
         <style type="text/css" media="screen">
@@ -134,7 +134,7 @@
                                                         <div class="img-center" style="font-size: 0pt; line-height: 0pt;">
                                                             <a href="#" target="_blank">
                                                                 <img
-                                                                    src="https://resource.itbusinessplus.com/whitepapers/itbp_logo_2019.png"
+                                                                    src="##BASE_URL##itbp_logo_2019.png"
                                                                     border="0"
                                                                     width="244"
                                                                     height="auto"
@@ -144,7 +144,7 @@
                                                             </a>
 
                                                             <img
-                                                                src="https://resource.itbusinessplus.com/whitepapers/autodesk_logo_1.png"
+                                                                src="##BASE_URL####LOGO_NAME##"
                                                                 border="0"
                                                                 height="auto"
                                                                 alt="logo"
@@ -224,7 +224,7 @@
                                                                                             class="h3-2-center"
                                                                                             style="color: #4e3b3b; min-width: auto !important; font-size: 24px; line-height: 33px; text-align: center; font-family: Helvetica;"
                                                                                         >
-                                                                                            <b>5 common drainage design challenges and how to solve them</b>
+                                                                                            <b>##EDM_TITLE##</b>
                                                                                         </div>
                                                                                         <table
                                                                                             width="100%"
@@ -282,25 +282,8 @@
                                                                                             style="color: #1e1e1e; min-width: auto !important; font-size: 15px; line-height: 23px; margin-top: 20px; font-family: helvetica;"
                                                                                         >
                                                                                             <span id="copyText">
-                                                                                                <p style="margin-bottom: 20px;"></p>
-                                                                                                <p>
-                                                                                                    Drainage design can be challenging and inefficient from tracking multiple iterations of a design using multiple programs to complete a
-                                                                                                    single analysis. The process often consumes significant time and budget during a critical time in the project lifecycle.&nbsp;
-                                                                                                </p>
-
-                                                                                                <p>
-                                                                                                    In this ebook, we cover five obstacles you might encounter with your drainage designs, along with practical solutions to overcome them using
-                                                                                                    advanced software capabilities:<br />
-                                                                                                </p>
-
-                                                                                                <ol>
-                                                                                                    <li>You have to do a lot of manual design work</li>
-                                                                                                    <li>The iterative design process is hard to track</li>
-                                                                                                    <li>Green infrastructure design is complex</li>
-                                                                                                    <li>It’s difficult to get buy-in from non-technical stakeholders</li>
-                                                                                                    <li>You’re up against local regulatory compliance</li>
-                                                                                                </ol>
-                                                                                                <p></p>
+                                                                                                
+                                                                                                ##EDM_ABSTRACT##
                                                                                             </span>
                                                                                         </div>
 
@@ -354,9 +337,9 @@
                                                                             </tbody>
                                                                         </table>
                                                                         <div class="fluid-img" style="font-size: 0pt; line-height: 0pt; text-align: left; padding-bottom: 20px;">
-                                                                            <a href="https://resource.itbusinessplus.com/whitepapers/Arc-96680-APAC-ABM-Autodesk-Asia-CS-TH-1-landing.html" target="_blank">
+                                                                            <a href="##BASE_URL##Arc-96680-APAC-ABM-Autodesk-Asia-CS-TH-1-landing.html" target="_blank">
                                                                                 <center>
-                                                                                    <img src="https://resource.itbusinessplus.com/whitepapers/Arc-96680-APAC-ABM-Autodesk-Asia-CS-TH-1.png" style="width: 380px; border: 1px solid black;" />
+                                                                                    <img src="##BASE_URL####THUMBNAIL_NAME##" style="width: 380px; border: 1px solid black;" />
                                                                                 </center>
                                                                             </a>
                                                                         </div>
@@ -401,13 +384,13 @@
                                                                                                                             style="color:#ffffff;  font-family: 'Roboto', sans-serif; !important; font-size:18px; line-height:20px; text-align:center;"
                                                                                                                         >
                                                                                                                             <a
-                                                                                                                                href="https://resource.itbusinessplus.com/whitepapers/Arc-96680-APAC-ABM-Autodesk-Asia-CS-TH-1-landing.html"
+                                                                                                                                href="##BASE_URL##Arc-96680-APAC-ABM-Autodesk-Asia-CS-TH-1-landing.html"
                                                                                                                                 target="_blank"
                                                                                                                                 class="link-white"
                                                                                                                                 style="color: #ffffff; text-decoration: none;"
                                                                                                                             >
                                                                                                                                 <span class="link-white" style="color: #ffffff; text-decoration: none; font-family: 'Roboto', sans-serif;">
-                                                                                                                                    Download Now
+                                                                                                                                    ##EDM_CTA##
                                                                                                                                 </span>
                                                                                                                             </a>
                                                                                                                         </div>
@@ -497,7 +480,7 @@
                                                                                         </table>
 
                                                                                         <div class="text-footer" style="color: #666666; min-width: auto !important; font-size: 15px; line-height: 18px; text-align: center;">
-                                                                                            Copyright © 2024 XDBS Corporation<span class="mobile-block"> </span> <br />
+                                                                                            Copyright &#169; ##YEAR## XDBS Corporation<span class="mobile-block"> </span> <br />
                                                                                             3501, Jack Northorp Ave, Ste C3873<br />
                                                                                             Hawthorne, CA 90250 USA<!-- <br> (302) 566-3002 -->
                                                                                             <span class="mobile-block"> </span> <span class="mobile-block"> </span> <br />

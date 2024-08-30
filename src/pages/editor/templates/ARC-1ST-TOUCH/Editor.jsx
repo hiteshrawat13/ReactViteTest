@@ -8,6 +8,7 @@ import {
     SelectBox,
     RichTextEditor,
     CheckBox,
+    HiddenField,
     FormBuilder,
     AssetPicker,
     FTPUpload,
@@ -20,26 +21,31 @@ import { useDispatch } from 'react-redux';
 import publishHelper from '../ARC-1ST-TOUCH/TestPublishHelper'
 const Editor = () => {
     const dispatch = useDispatch()
-    const [watch,setWatch]=useState({})  //this is used to get current form value which is changes during key down events
+    //this is used to get current form value which is changes during key down events
+    const [watch,setWatch]=useState({})  
+    
+    const setValue=(key,value)=>{
+      dispatch(updateData({ prop: key, value:value }))
+    }
+
+
   return (<>
-  { JSON.stringify(watch)}
+
     <Stepper publishHelper={new publishHelper()}   setCurrentFormValue={setWatch}>
-
-        
-
         <Step title="Basic Info"  >
+          <HiddenField name="BASE_URL" value="https://resource.itbusinessplus.com/whitepapers/"/>
           <TextBox label="Client Code" name="CLIENT_CODE" required={true} width="10%" />
           {(watch["CLIENT_CODE"]==="Hitesh") && <>IT WORKS</>}
-          <TextBox label="Campaign Name" name="CAMP_NAME" required={true} width="50%" />
+          <TextBox label="Campaign Name" name="CAMP_NAME" required={true}  placeholder="Campaign email subject line here" width="50%" />
           <TextBox label="Campaign Id" name="CAMP_ID" required={true} width="10%" />
           <TextBox label="Link Name" name="LINK_NAME" required={true} width="50%"
             onChange={
               (e) => {
                 console.log(e.target.value);
                 const val = e.target.value
-                dispatch(updateData({ prop: "THUMBNAIL_NAME", value: `${val}.png` }))
-                dispatch(updateData({ prop: "PDF_NAME", value: `${val}.pdf` }))
-                dispatch(updateData({ prop: "MP4_NAME", value: `${val}.mp4` }))
+                setValue("THUMBNAIL_NAME",`${val}.png`)
+                setValue("PDF_NAME",`${val}.pdf`)
+                setValue("MP4_NAME",`${val}.mp4`)
               }
 
             } />

@@ -10,7 +10,7 @@ import RichTextEditor from './RichTextEditor';
 import CheckBox from './CheckBox';
 import FTPUpload from './FTPUpload';
 import ZIPDownload from './ZIPDownload';
-
+import HiddenField from './HiddenField';
 export {
     Stepper,
     Step,
@@ -19,6 +19,7 @@ export {
     SelectBox,
     RichTextEditor,
     CheckBox,
+    HiddenField,
     FormBuilder,
     AssetPicker,
     FTPUpload,

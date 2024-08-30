@@ -70,11 +70,11 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-10 img-center" style="font-size: 0pt; line-height: 0pt;">
                     <a href="#" target="_blank">
-                        <img src="https://resource.itbusinessplus.com/whitepapers/itbp_logo_2019.png" border="0" width="244" height="auto" alt="" style="padding-top: 20px; padding-bottom: 10px;" />
+                        <img src="##BASE_URL##itbp_logo_2019.png" border="0" width="244" height="auto" alt="" style="padding-top: 20px; padding-bottom: 10px;" />
                     </a>
 
                     <img
-                        src="https://resource.itbusinessplus.com/whitepapers/autodesk_logo_1.png"
+                        src="##BASE_URL####LOGO_NAME##"
                         border="0"
                         height="auto"
                         alt=""
@@ -120,7 +120,7 @@
                         </div>
                         <div class="row heading1">
                             <center>
-                                <img src="https://resource.itbusinessplus.com/whitepapers/Arc-96680-APAC-ABM-Autodesk-Asia-CS-TH-1.png" style="width:100% ;max-width:505px; border: 1px solid black; margin-top: 20px;" class="responsive" />
+                                <img src="##BASE_URL####THUMBNAIL_NAME##" style="width:100% ;max-width:505px; border: 1px solid black; margin-top: 20px;" class="responsive" />
                             </center>
                         </div>
                     </div>
@@ -145,17 +145,10 @@
                                 <!--XXX ... DON'T CHANGE THIS CODE ... XXX-->
 
                                 <fieldset>
-                                    
+                                    ##FORM##
                                 </fieldset>
 
-                                <input
-                                    type="submit"
-                                    id="submitBtn"
-                                    name="btn"
-                                    class="submit_button"
-                                    value="Download Now"
-                                     
-                                />
+                               
 
                        
                                 <section style="padding: 12px;">

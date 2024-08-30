@@ -8,6 +8,7 @@ import { fields } from './Fields'
 
 import Modal from '../../../../../../components/ui/Modal'
 import { FaPencilAlt } from "react-icons/fa";
+import OptionList from '../../OptionList'
 
 const SelectBoxEditor = ({ id,data,toast,handleFieldDataUpdate}) => {
     const [isLabelModalOpened, setLabelModalOpened] = useState(false)
@@ -35,7 +36,13 @@ const handleSubmit=(e)=>{
        }else if(child.type=="submit"){
        
        }else{
-        state[child.name]=child.value
+
+        if(child.name=="options"){
+            state[child.name]=options
+        }else{
+            state[child.name]=child.value
+        }
+        
        } 
     }
     //dispatch(updateField(state))
@@ -94,17 +101,16 @@ function stripHtml(html)
 
             <label>
                 <span>Options</span>
-                <textarea name="options" value={options} onChange={(e) => { setOptions(e.target.value) }}></textarea>
+                <textarea name="options"  ></textarea>
 
             </label>
 
 
             {<Modal setOpened={setOptionsModalOpened} isOpened={isOptionsModalOpened} title={"My Modal"} style={{ width: "90%", height: "90%" }}>
 
-                <label style={{ width: "90%", height: "90%" }}>
-                    <span>Label</span>
-                    <textarea type="text" name="options" value={options} onChange={(e) => { setOptions(e.target.value) }} style={{ width: "90%", height: "90%" }} />
-                </label>
+               
+
+                 <OptionList  setOptions={setOptions} options={options}/>
 
             </Modal>}
             <button className='openModal' onClick={(e) => { e.preventDefault(); setOptionsModalOpened(true) }}><FaPencilAlt /></button>

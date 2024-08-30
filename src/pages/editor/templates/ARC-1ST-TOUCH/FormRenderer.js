@@ -83,10 +83,7 @@ const ARCFormRenderer = {
 
 
     CTA: (obj) => {
-        return `
-    <input type="submit" id="submitBtn" name="btn" class="submit_button" value="${obj.label}" style="font-size: 14px; line-height: 1.5em;text-align: justify;padding-left:36px;font-family: calibri, sans-serif;font-style:normal;    padding-right: 30px;font-weight: 500;">
-    
-    `
+        return ` <input type="submit" id="submitBtn" name="btn" class="submit_button" value="${obj.label}" />`
     }
     ,
     HiddenInput: (obj) => {

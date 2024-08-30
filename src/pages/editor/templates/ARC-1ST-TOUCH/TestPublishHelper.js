@@ -32,10 +32,42 @@ class PublishHelper{
         //         console.log("Error while replaceAll in getEdmHtml() of publishHelper ",error,key,value);
         //     } 
         // }
+
+        
+        for (const [key, value] of Object.entries(this.state)) {
+            try {
+                if(typeof value === 'string' || value instanceof String)
+                data=data.replaceAll(`##${key}##`,( value ) )
+            } catch (error) {
+                console.log("Error while replaceAll in getLandingHtml() of publishHelper ",error,key,value);
+            } 
+        }
         return data
     }
-    getLandingHtml({forPreview}){        
-        return JSON.stringify(this.thumbnailDataUrl)+" "+JSON.stringify(this.state)
+    getLandingHtml({forPreview}){     
+        
+        let data=landing_html
+
+        if(forPreview){
+            if(this.logoDataUrl)data=data.replaceAll(`##BASE_URL####LOGO_NAME##`, this.logoDataUrl )
+            if(this.thumbnailDataUrl)data=data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, this.thumbnailDataUrl )
+        }
+
+
+        data=data.replaceAll(`##FORM##`, this.getFormHtml(this.state.form,ARCFormRenderer) )
+
+        for (const [key, value] of Object.entries(this.state)) {
+            try {
+                if(typeof value === 'string' || value instanceof String)
+                data=data.replaceAll(`##${key}##`,( value ) )
+            } catch (error) {
+                console.log("Error while replaceAll in getLandingHtml() of publishHelper ",error,key,value);
+            } 
+        }
+        
+
+        return data
+        //return JSON.stringify(this.thumbnailDataUrl)+" "+JSON.stringify(this.state)
     }
     getSendmailHtml({forPreview}){
 
@@ -48,9 +80,27 @@ class PublishHelper{
         //     } 
         // }
 
+        
+        for (const [key, value] of Object.entries(this.state)) {
+            try {
+                if(typeof value === 'string' || value instanceof String)
+                data=data.replaceAll(`##${key}##`,( value ) )
+            } catch (error) {
+                console.log("Error while replaceAll in getSendmailHtml of publishHelper ",error,key,value);
+            } 
+        }
         return sendemail_html
     }
     getThankyouHtml({forPreview}){
+        
+        for (const [key, value] of Object.entries(this.state)) {
+            try {
+                if(typeof value === 'string' || value instanceof String)
+                data=data.replaceAll(`##${key}##`,( value ) )
+            } catch (error) {
+                console.log("Error while replaceAll in getThankyou of publishHelper ",error,key,value);
+            } 
+        }
         return "thankyou"
     }
     getThankyouDoubleOptinHtml({forPreview}){

@@ -96,7 +96,7 @@ const Stepper = forwardRef(({ children, onStepChange = null,setCurrentFormValue=
     
     return <div className='steps'>
      
-     {JSON.stringify(campaignDataState.data)}
+     {/* {JSON.stringify(campaignDataState.data)} */}
         <div style={{display:"none"}}>
             {/* THESE FILE INPUTS ARE USED FRO LOGO THUMBNAIL PDF MP4 TO KEEP IN STATE */}
             <input type="file" name="LOGO_FILE" accept="image/png" className="" ref={logoFileRef} />

@@ -1,18 +1,32 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import Modal from '../../../../components/ui/Modal';
+// import Modal from '../../../../components/ui/Modal';
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 
 const OptionList = ({ setOptions, options }) => {
 
     const [data, setData] = useState(Array.isArray(options) ? [...Object.assign([], options)] : [])
 
-
+    const labelsTextareaRef = useRef()
+    const valuesTextareaRef = useRef()
     const [isOptionAddModalOpened, setOptionAddModalOpened] = useState(false)
 
 
     useEffect(() => {
         setOptions(data)
+       
+     
+
+        console.log("EEE");
+        
+
     }, [data])
+
+
+
+
+    
 
     const handleDrop = (droppedItem) => {
         // Ignore drop outside droppable container
@@ -33,6 +47,8 @@ const OptionList = ({ setOptions, options }) => {
         const index = e.target.dataset.index
         var updatedList = [...data];
         updatedList[index] = { ...updatedList[index], label: e.target.value };
+
+        
         setData(updatedList)
     }
 
@@ -41,6 +57,7 @@ const OptionList = ({ setOptions, options }) => {
         const index = e.target.dataset.index
         var updatedList = [...data];
         updatedList[index] = { ...updatedList[index], value: e.target.value };
+        
         setData(updatedList)
 
     }
@@ -52,6 +69,7 @@ const OptionList = ({ setOptions, options }) => {
         const index = e.target.dataset.index
         var updatedList = [...data];
         updatedList.push({ label: "", value: "" });
+        
         setData(updatedList)
     }
     const handleDeleteItem = (e) => {
@@ -59,8 +77,20 @@ const OptionList = ({ setOptions, options }) => {
         const index = e.target.dataset.index
         var updatedList = [...data];
         updatedList.splice(index, 1);
+        
         setData(updatedList)
     }
+
+
+    const handleDisableCheckboxChange = (e) => {
+        e.preventDefault()
+        const index = e.target.dataset.index
+        var updatedList = [...data];
+        updatedList[index] = { ...updatedList[index], disabled: e.target.checked };
+        
+        setData(updatedList)
+    }
+    
 
 
 
@@ -88,7 +118,7 @@ const OptionList = ({ setOptions, options }) => {
                 return { label: label, value: label }
             })
         }
-
+        
         setData(updatedList)
 
 
@@ -99,36 +129,29 @@ const OptionList = ({ setOptions, options }) => {
     }
 
 
-    const labelsTextareaRef = useRef()
-    const valuesTextareaRef = useRef()
+
     return (
         <>
             <div style={{ position: "relative" }}>
+                <Modal open={isOptionAddModalOpened} onClose={() => setOptionAddModalOpened(false)}>
 
-
-                {<Modal setOpened={setOptionAddModalOpened} isOpened={isOptionAddModalOpened} title={"My Modal"} style={{ width: "90%", height: "90%" }}>
-
-
-                    <div style={{ zIndex: "999", width: "100%", display: `${(isOptionAddModalOpened) ? 'block' : 'none'}` }}>
-                        <div style={{ padding: "10px", background: "#888888", maxHeight: "auto" }}>
+                <div style={{ padding: "10px", background: "#888888", maxHeight: "auto" }}>
                             <div style={{ display: "flex", gap: "10px" }}>
-                                <textarea ref={labelsTextareaRef} style={{ width: "100%", minHeight: "300px", height: "auto", resize: "none" }}></textarea>
-                                <textarea ref={valuesTextareaRef} style={{ width: "100%", minHeight: "300px", height: "auto", resize: "none" }}></textarea>
+                                <textarea  ref={labelsTextareaRef} style={{ width: "100%", minHeight: "300px", height: "auto", resize: "none" }} defaultValue={data.map(item=>item.label+"\r\n").join("")}></textarea>
+                                <textarea  ref={valuesTextareaRef} style={{ width: "100%", minHeight: "300px", height: "auto", resize: "none" }} defaultValue={data.map(item=>item.value+"\r\n").join("")}></textarea>
                             </div>
 
                             <button style={{ marginTop: "5px" }} onClick={handleOptionTextData}>Add Options</button>
                         </div>
+                </Modal>
 
+                <button onClick={(e) => { 
+                    e.preventDefault(); 
+                    setOptionAddModalOpened(true);
+                    labelsTextareaRef.current.value=data.join("")
+                    valuesTextareaRef.current.value=data.join("")
+                    }}>+</button>
 
-                    </div>
-                </Modal>}
-
-
-
-
-
-
-                <button onClick={(e) => { e.preventDefault(); setOptionAddModalOpened(true) }}>+</button>
                 <div style={{ position: "relative", maxHeight: "400px", overflowY: "scroll" }}>
 
                     <DragDropContext onDragEnd={handleDrop}>
@@ -155,13 +178,15 @@ const OptionList = ({ setOptions, options }) => {
                                                 >
                                                     <div className='display' >
 
-                                                        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "10px" }}>
-
+                                                        <div style={{ display: "grid", gridTemplateColumns: "5px 1fr", gap: "10px" }}>
+                                                            <div style={{display:"flex",alignItems:"center",fontSize:"12px",color:"#444"}}>{index}</div>
                                                             <div>
                                                                 <div style={{ display: "flex", gap: "18px", padding: "5px 10px 5px 20px" }} >
 
                                                                     <input type="text" value={item.label} data-index={index} onChange={handleLabelChange} />
                                                                     <input type="text" value={item.value} data-index={index} onChange={handleValueChange} />
+                                                        
+                                                                    <input type="checkbox" checked={item.disabled || false} data-index={index} onChange={handleDisableCheckboxChange} />
 
                                                                     <button style={{ width: "18px" }} data-index={index} onClick={handleDeleteItem}>X</button>
                                                                 </div>

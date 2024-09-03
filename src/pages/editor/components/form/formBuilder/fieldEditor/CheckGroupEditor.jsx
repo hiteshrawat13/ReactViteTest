@@ -3,12 +3,15 @@ import { useSelector,useDispatch } from 'react-redux'
 import { updateField } from '../../../../../../store/campaign/CampaignSlice'
 
 
-import Modal from '../../../../../../components/ui/Modal'
+// import Modal from '../../../../../../components/ui/Modal'
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 
 import './Editor.scss'
 import { fields } from './Fields'
 
 import { FaPencilAlt } from "react-icons/fa";
+import OptionList from '../../OptionList'
 
 const CheckGroupEditor = ({ id,data,toast,handleFieldDataUpdate}) => {
 
@@ -38,6 +41,7 @@ const handleSubmit=(e)=>{
         state[child.name]=child.value
        } 
     }
+    state["options"]=options
     //dispatch(updateField(state))
     handleFieldDataUpdate(id,state)
     console.log(state);
@@ -61,14 +65,20 @@ const handleSubmit=(e)=>{
                 <textarea name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} />
             </label>
 
-            {<Modal setOpened={setLabelModalOpened} isOpened={isLabelModalOpened} title={"My Modal"} style={{ width: "90%", height: "90%" }}>
+            {/* {<Modal setOpened={setLabelModalOpened} isOpened={isLabelModalOpened} title={"My Modal"} style={{ width: "90%", height: "90%" }}>
 
                 <label style={{ width: "90%", height: "90%" }}>
                     <span>Label</span>
                     <textarea type="text" name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} style={{ width: "90%", height: "90%" }} />
                 </label>
 
-            </Modal>}
+            </Modal>} */}
+            <Modal open={isLabelModalOpened} onClose={() => setLabelModalOpened(false)}>
+                <label style={{ width: "90%", height: "90%" }}>
+                    <span>Label</span>
+                    <textarea type="text" name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} style={{ width: "90%", height: "90%" }} />
+                </label>
+            </Modal>
             <button className='openModal' onClick={(e) => { e.preventDefault(); setLabelModalOpened(true) }}><FaPencilAlt /></button>
 
 
@@ -80,20 +90,25 @@ const handleSubmit=(e)=>{
 
             <label>
                 <span>Options</span>
-                <textarea name="options" value={options} onChange={(e) => { setOptions(e.target.value) }}></textarea>
-
+              
             </label>
 
 
-            {<Modal setOpened={setOptionsModalOpened} isOpened={isOptionsModalOpened} title={"My Modal"} style={{ width: "90%", height: "90%" }}>
+            {/* {<Modal setOpened={setOptionsModalOpened} isOpened={isOptionsModalOpened} title={"My Modal"} style={{ width: "90%", height: "90%" }}>
 
                 <label style={{ width: "90%", height: "90%" }}>
                     <span>Label</span>
                     <textarea type="text" name="options" value={options} onChange={(e) => { setOptions(e.target.value) }} style={{ width: "90%", height: "90%" }} />
                 </label>
 
-            </Modal>}
-            <button className='openModal' onClick={(e) => { e.preventDefault(); setOptionsModalOpened(true) }}><FaPencilAlt /></button>
+            </Modal>} */}
+            <Modal 
+            center
+            open={isOptionsModalOpened} 
+            onClose={() => setOptionsModalOpened(false)}>
+            <OptionList  setOptions={setOptions} options={options}/>
+            </Modal>
+            <button className='openModal' onClick={(e) => { e.preventDefault(); setOptionsModalOpened(true) }}> {options?.length} options <FaPencilAlt /></button>
 
             <label>
                 <span>Required?</span>

@@ -7,7 +7,8 @@ import { FaPencilAlt } from "react-icons/fa";
 import './Editor.scss'
 import { fields } from './Fields'
 
-import Modal from '../../../../../../components/ui/Modal'
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 
 const HtmlEditor = ({ id,data,toast,handleFieldDataUpdate}) => {
 
@@ -62,15 +63,19 @@ const handleSubmit=(e)=>{
             </label>
 
 
-            { <Modal setOpened={setModalOpened} isOpened={isModalOpened} title={"My Modal"} style={{width:"90%",height:"90%"}}>
-    
+         
+
+
+        <Modal 
+center
+open={isModalOpened} 
+onClose={() =>setModalOpened(false)}>
     <label style={{width:"90%",height:"90%"}}>
                     
                     <textarea  name="html" value={html} onChange={(e)=>{setHtml(e.target.value)}} style={{width:"90%",height:"90%"}}></textarea>
                   
                 </label>
-        
-        </Modal>}
+</Modal>
     
     <button className='openModal' onClick={(e)=>{e.preventDefault();setModalOpened(true)} }><FaPencilAlt /></button>
     

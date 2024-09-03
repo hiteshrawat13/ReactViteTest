@@ -19,9 +19,8 @@ const ARCFormRenderer = {
         <div class="form-group">
             <b class="tooltip tooltip-bottom-right">Enter the ${obj.label}</b>
 			<select class="form-control" name="${obj.name}"   ${obj.isRequired ? "required" : ""} id="${obj.id}"  ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""}>
-            <option value="" selected="" disabled="">${obj.label}</option>
-            ${obj.options.length > 0 && obj.options.split(/\r?\n/).map((option, index) => {
-            return `<option value="${option.trim()}">${option.trim()}</option> `
+            ${obj.options.length > 0 && obj.options.map((option, index) => {
+            return `<option value="${option.value}"  ${(option.disabled)?"disabled":""} >${option.label}</option> `
         }).join("")}
             </select> 
         </div>
@@ -42,8 +41,8 @@ const ARCFormRenderer = {
 <div class="form-group">
 	<p>${obj.label}</p>
 	
-        ${obj.options?.split(/\r?\n/).map(option => `
-            <input type="radio" name="${obj.name}" value="${option.trim()}" ${obj.isRequired ? "required" : ""} ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""}> ${option.trim()}<br>
+        ${obj.options?.map(option => `
+            <input type="radio" name="${obj.name}" value="${option.value}" ${obj.isRequired ? "required" : ""} ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""}> ${option.label}<br>
             `).join("")}
 
 </div>

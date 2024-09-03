@@ -65,7 +65,15 @@ export const CampaignSlice = createSlice({
         state.data.form = newArray;
     },
     setFields:(state,payload) => {
-      state.data.form = payload.payload;
+      const obj=(payload.payload)
+      const newArray = []; //making a new array
+      obj.forEach((field,index)=> {
+       newArray.push(field)
+       })
+
+      
+      state.data.form=newArray
+     
     },
     loadFieldsFromJson:(state,payload)=>{
       const obj=(payload.payload)

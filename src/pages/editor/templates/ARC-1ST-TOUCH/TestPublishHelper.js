@@ -22,18 +22,7 @@ class PublishHelper{
     }
 
     async getEdmHtml({forPreview}){
-        let data=edm_html;
-
-        // for (const [key, value] of Object.entries(this.state)) {
-        //     try {
-        //         if(typeof value === 'string' || value instanceof String)
-        //         data=data.replaceAll(`##${key}##`,Utils.convertToEntities( value ) )
-        //     } catch (error) {
-        //         console.log("Error while replaceAll in getEdmHtml() of publishHelper ",error,key,value);
-        //     } 
-        // }
-
-        
+        let data=edm_html;        
         for (const [key, value] of Object.entries(this.state)) {
             try {
                 if(typeof value === 'string' || value instanceof String)

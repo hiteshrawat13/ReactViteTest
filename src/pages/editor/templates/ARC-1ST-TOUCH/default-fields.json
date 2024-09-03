@@ -1,0 +1,122 @@
+[
+    {
+        "type": "TextBox",
+        "inputType": "text",
+        "id": "firstname",
+        "label": "First Name",
+        "name": "firstname",
+        "isRequired": true
+    },
+    {
+        "type": "TextBox",
+        "inputType": "text",
+        "id": "lastname",
+        "label": "Last Name",
+        "name": "data[0]",
+        "isRequired": true
+    },
+    {
+        "type": "TextBox",
+        "inputType": "email",
+        "id": "email",
+        "label": "Business Email",
+        "name": "data[1]",
+        "isRequired": true
+    },
+    {
+        "type": "TextBox",
+        "inputType": "number",
+        "id": "phone",
+        "label": "Phone",
+        "name": "data[2]",
+        "isRequired": true
+    },
+    {
+        "type": "TextBox",
+        "inputType": "text",
+        "id": "company",
+        "label": "Company",
+        "name": "data[3]",
+        "isRequired": true
+    },
+    {
+        "type": "TextBox",
+        "inputType": "text",
+        "id": "address",
+        "label": "Address",
+        "name": "data[4]",
+        "isRequired": true
+    },
+    {
+        "type": "TextBox",
+        "inputType": "text",
+        "id": "city",
+        "label": "City",
+        "name": "data[5]",
+        "isRequired": true
+    },
+    {
+        "type": "SelectBox",
+        "id": "country",
+        "label": "Country",
+        "name": "data[6]",
+        "options": [],
+        "isRequired": true
+    },
+    {
+        "type": "TextBox",
+        "inputType": "text",
+        "id": "zip",
+        "label": "ZIP Code",
+        "name": "data[7]",
+        "isRequired": true
+    },
+    {
+        "type": "SelectBox",
+        "id": "company_size",
+        "label": "Company Size",
+        "name": "data[8]",
+        "options": [],
+        "isRequired": true
+    },
+    {
+        "type": "SelectBox",
+        "id": "revenue",
+        "label": "Revenue",
+        "name": "data[9]",
+        "options": [],
+        "isRequired": true
+    },
+    {
+        "type": "TextBox",
+        "inputType": "text",
+        "id": "job_title",
+        "label": "Job Title",
+        "name": "data[10]",
+        "isRequired": true
+    },
+    {
+        "type": "SelectBox",
+        "id": "industry",
+        "label": "Industry",
+        "name": "data[11]",
+        "options": [],
+        "isRequired": true
+    },
+    {
+        "type": "SelectBox",
+        "id": "job_function",
+        "label": "Job Function",
+        "name": "data[12]",
+        "options": [],
+        "isRequired": true
+        
+    },
+    {
+        "type": "CTA",
+        "id": "cta",
+        "label": "Download Now"
+        
+       
+    }
+]

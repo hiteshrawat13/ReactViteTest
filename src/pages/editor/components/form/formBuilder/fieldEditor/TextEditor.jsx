@@ -5,12 +5,15 @@ import { updateField } from '../../../../../../store/campaign/CampaignSlice'
 
 import './Editor.scss'
 import { fields } from './Fields'
-
-
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
+import { FaPencilAlt } from "react-icons/fa";
 const TextEditor = ({ id,data,toast,handleFieldDataUpdate}) => {
 const dispatch=useDispatch()
-
+const [isModalOpened,setModalOpened]=useState(false)
 const divRef=useRef()
+
+const [textContent,setTextContent]=useState(data.label)
     
 const handleSubmit=(e)=>{
     e.preventDefault()
@@ -40,8 +43,24 @@ const handleSubmit=(e)=>{
      <div ref={divRef} className='editorForm'>
             <label>
                 <span>Label</span>
-                <input type="text" name="label" defaultValue={data.label}/>
+                <input type="text" name="label" onChange={(e)=>{setTextContent(e.target.value)}} value={textContent}/>
             </label>
+
+            <Modal 
+center
+open={isModalOpened} 
+onClose={() =>setModalOpened(false)}>
+    <label style={{width:"90%",height:"90%"}}>
+                    
+                    <textarea  name="label" value={textContent} onChange={(e)=>{setTextContent(e.target.value)}} style={{width:"90%",height:"90%"}}></textarea>
+                  
+                </label>
+</Modal>
+    
+    <button className='openModal' onClick={(e)=>{e.preventDefault();setModalOpened(true)} }><FaPencilAlt /></button>
+    
+
+
             <button onClick={handleSubmit}>Submit</button>
     </div>
     </>

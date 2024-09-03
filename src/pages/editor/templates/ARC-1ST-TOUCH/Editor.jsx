@@ -19,6 +19,9 @@ import {
 import { setData, addData, updateData } from '../../../../store/campaign/CampaignSlice'
 import { useDispatch } from 'react-redux';
 import publishHelper from '../ARC-1ST-TOUCH/TestPublishHelper'
+
+
+import defaultFieldsJson from "../ARC-1ST-TOUCH/default-fields.json"
 const Editor = () => {
     const dispatch = useDispatch()
     //this is used to get current form value which is changes during key down events
@@ -91,7 +94,7 @@ const Editor = () => {
 
         <Step title="Form">
           Forms
-          <FormBuilder />
+          <FormBuilder defaultFieldsJson={defaultFieldsJson}/>
         </Step>
 
 

@@ -6,7 +6,10 @@ import { updateField } from '../../../../../../store/campaign/CampaignSlice'
 import './Editor.scss'
 import { fields } from './Fields'
 
-import Modal from '../../../../../../components/ui/Modal'
+//import Modal from '../../../../../../components/ui/Modal'
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
+
 import { FaPencilAlt } from "react-icons/fa";
 import OptionList from '../../OptionList'
 
@@ -36,15 +39,10 @@ const handleSubmit=(e)=>{
        }else if(child.type=="submit"){
        
        }else{
-
-        if(child.name=="options"){
-            state[child.name]=options
-        }else{
             state[child.name]=child.value
-        }
-        
        } 
     }
+    state["options"]=options
     //dispatch(updateField(state))
     handleFieldDataUpdate(id,state)
     console.log(state);
@@ -81,14 +79,23 @@ function stripHtml(html)
                 <textarea name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} />
             </label>
 
-            {<Modal setOpened={setLabelModalOpened} isOpened={isLabelModalOpened} title={"My Modal"} style={{ width: "90%", height: "90%" }}>
+            {/* {<Modal setOpened={setLabelModalOpened} isOpened={isLabelModalOpened} title={"My Modal"} style={{ width: "90%", height: "90%" }}>
 
                 <label style={{ width: "90%", height: "90%" }}>
                     <span>Label</span>
                     <textarea type="text" name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} style={{ width: "90%", height: "90%" }} />
                 </label>
 
-            </Modal>}
+            </Modal>} */}
+
+<Modal open={isLabelModalOpened} onClose={() => setLabelModalOpened(false)}>
+<label style={{ width: "90%", height: "90%" }}>
+                    <span>Label</span>
+                    <textarea type="text" name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} style={{ width: "90%", height: "90%" }} />
+                </label>
+      </Modal>
+
+
             <button className='openModal' onClick={(e) => { e.preventDefault(); setLabelModalOpened(true) }}><FaPencilAlt /></button>
 
 
@@ -101,19 +108,28 @@ function stripHtml(html)
 
             <label>
                 <span>Options</span>
-                <textarea name="options"  ></textarea>
-
+                
+                
             </label>
 
-
+{/* 
             {<Modal setOpened={setOptionsModalOpened} isOpened={isOptionsModalOpened} title={"My Modal"} style={{ width: "90%", height: "90%" }}>
 
                
 
                  <OptionList  setOptions={setOptions} options={options}/>
 
-            </Modal>}
-            <button className='openModal' onClick={(e) => { e.preventDefault(); setOptionsModalOpened(true) }}><FaPencilAlt /></button>
+            </Modal>} */}
+
+
+<Modal 
+center
+open={isOptionsModalOpened} 
+onClose={() => setOptionsModalOpened(false)}>
+<OptionList  setOptions={setOptions} options={options}/>
+</Modal>
+            
+            <button className='openModal' onClick={(e) => { e.preventDefault(); setOptionsModalOpened(true) }}>{options?.length} options <FaPencilAlt /></button>
 
 
           

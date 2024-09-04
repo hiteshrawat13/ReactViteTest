@@ -149,7 +149,19 @@ const Stepper = forwardRef(({ children, onStepChange = null,setCurrentFormValue=
         </StepperContext.Provider>
  
 
-        <div>
+<div style={{
+            width:"100%",
+            height:"30px"
+            }}></div>
+        <div style={{
+            width:"auto",
+            position:"relative",
+            bottom:"0px",
+            display:"flex",
+            justifyContent:"space-between",
+            background:"#fff",
+            padding:"10px"
+            }}>
             {(step>0) && <button onClick={handlePrevious}>Previous</button>}
             {(step<children.length-1) && <button onClick={handleNext}>Next</button>}
         </div>

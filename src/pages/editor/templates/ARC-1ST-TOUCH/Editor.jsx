@@ -31,6 +31,10 @@ const Editor = () => {
       dispatch(updateData({ prop: key, value:value }))
     }
 
+    useEffect(()=>{
+      setValue("FTP_CONFIG_NAME","TGIF")
+      alert("TGIF")
+    },[])
 
   return (<>
 
@@ -45,6 +49,8 @@ const Editor = () => {
             onChange={
               (e) => {
                 console.log(e.target.value);
+                e.target.value=e.target.value.replace(/\s+/g, '-');
+
                 const val = e.target.value
                 setValue("THUMBNAIL_NAME",`${val}.png`)
                 setValue("PDF_NAME",`${val}.pdf`)

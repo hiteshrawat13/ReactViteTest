@@ -40,26 +40,34 @@ const RichTextEditor = ({label,name,required=false,width=null}) => {
           // value={campaignDataState.data[name]}
         render={({ field: { onChange, onBlur, value, ref } }) => (
           <div className='input-holder'  {...((width!=null) && {style:{width}}) }>
-            <EditorProvider key={Math.random} ><Editor value={value} onChange={onChange} onBlur={onBlur}    >
-            <Toolbar  >
-            {/* <BtnUndo />
-              <BtnRedo /> */}
-              <Separator />
-              <BtnBold />
-              <BtnItalic />
-              <BtnUnderline />
-              <BtnStrikeThrough />
-              <Separator />
-              <BtnNumberedList />
-              <BtnBulletList />
-              <Separator />
-              <BtnLink />
-              <BtnClearFormatting />
-              <HtmlButton />
-              <Separator />
-              <BtnStyles />
-            </Toolbar>
-          </Editor></EditorProvider>
+            <EditorProvider key={Math.random} >
+              
+              <Editor 
+                value={value} 
+                onChange={onChange} 
+                onBlur={onBlur} 
+                containerProps={{ style: { resize: 'vertical' ,minHeight:"300px"} }}  
+              >
+              <Toolbar  >
+              {/* <BtnUndo />
+                <BtnRedo /> */}
+                <Separator />
+                <BtnBold />
+                <BtnItalic />
+                <BtnUnderline />
+                <BtnStrikeThrough />
+                <Separator />
+                <BtnNumberedList />
+                <BtnBulletList />
+                <Separator />
+                <BtnLink />
+                <BtnClearFormatting />
+                <HtmlButton />
+                <Separator />
+                <BtnStyles />
+              </Toolbar>
+            </Editor>
+          </EditorProvider>
           {errors[name] && <div className='error-icon'>!</div>}
           </div>
         )}

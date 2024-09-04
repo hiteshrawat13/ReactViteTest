@@ -59,7 +59,7 @@ class PublishHelper{
         //return JSON.stringify(this.thumbnailDataUrl)+" "+JSON.stringify(this.state)
     }
     getSendmailHtml({forPreview}){
-
+        let data=sendemail_html
         // for (const [key, value] of Object.entries(this.state)) {
         //     try {
         //         if(typeof value === 'string' || value instanceof String)
@@ -81,7 +81,7 @@ class PublishHelper{
         return sendemail_html
     }
     getThankyouHtml({forPreview}){
-        
+        let data=""
         for (const [key, value] of Object.entries(this.state)) {
             try {
                 if(typeof value === 'string' || value instanceof String)

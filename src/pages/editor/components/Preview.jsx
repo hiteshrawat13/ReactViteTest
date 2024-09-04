@@ -103,7 +103,15 @@ const Preview = forwardRef(({ }, ref) => {
         {
 
           buttons?.map((page, i) => {
-            return <button className='previewBtns' onClick={(e) => handlePreview(i, e)} key={i}>{page.name}</button>
+
+            try{
+              const tabName=page.name.substring(  page.name.lastIndexOf("-")+1  , page.name.length);
+              return <button className='previewBtns' onClick={(e) => handlePreview(i, e)} key={i}>{tabName}</button>
+            }catch(error){
+              return <button className='previewBtns' onClick={(e) => handlePreview(i, e)} key={i}>{page.name}</button>
+            }
+           
+           
           })
         }
 

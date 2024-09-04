@@ -62,13 +62,9 @@ const ARCFormRenderer = {
 
     CheckBox: (obj) => {
         return `								   
-      
        <div class="form-group">
 			<input type="checkbox" name="${obj.name}" id="${obj.id}" ${obj.isRequired ? "required" : ""} value="${obj.value}"   ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""} >  ${obj.label} <br>
         </div>
-
-
-
        `
     },
 

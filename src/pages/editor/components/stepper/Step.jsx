@@ -5,7 +5,7 @@ import { StepperContext } from './StepperContext';
 
 
 
-const Step =  ({ children ,onWatch=null}) => {
+const Step =  ({ children ,onWatch=null,onCurrentFormMethods=null }) => {
   const Stepper=useContext(StepperContext)
     const methods = useForm({mode: "onChange"})
 
@@ -15,9 +15,10 @@ const Step =  ({ children ,onWatch=null}) => {
     const watchedValue=useWatch(methods)
     
     useEffect(() => {
-      console.log(watchedValue);
+      //console.log(watchedValue);
       //This condition passes to top form value change
       if(onWatch)onWatch(watchedValue)
+      if(onCurrentFormMethods)onCurrentFormMethods(methods)
   
       return () => {
        

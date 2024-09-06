@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { useFormContext,Controller } from 'react-hook-form'
 import {   BtnBold,
@@ -26,9 +26,12 @@ const RichTextEditor = ({label,name,required=false,width=null}) => {
         unregister(name)
       }
     }, [])
+
+    const editorRef=useRef()
   return (
     <div className='form-group'>
         
+          
         <label>{label}{(required)&& <span style={{color:"red"}}>*</span>}</label>
         <Controller
         control={control}
@@ -40,9 +43,10 @@ const RichTextEditor = ({label,name,required=false,width=null}) => {
           // value={campaignDataState.data[name]}
         render={({ field: { onChange, onBlur, value, ref } }) => (
           <div className='input-holder'  {...((width!=null) && {style:{width}}) }>
-            <EditorProvider key={Math.random} >
+            <EditorProvider   key={Math.random} >
               
               <Editor 
+              
                 value={value} 
                 onChange={onChange} 
                 onBlur={onBlur} 

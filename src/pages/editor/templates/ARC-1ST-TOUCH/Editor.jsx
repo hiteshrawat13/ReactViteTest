@@ -25,10 +25,15 @@ import defaultFieldsJson from "../ARC-1ST-TOUCH/default-fields.json"
 const Editor = () => {
     const dispatch = useDispatch()
     //this is used to get current form value which is changes during key down events
-    const [watch,setWatch]=useState({})  
+    const [watch,setWatch]=useState({})
+    const [currentFormMethods,setCurrentFormMethods]=useState(null)  
     
     const setValue=(key,value)=>{
       dispatch(updateData({ prop: key, value:value }))
+    }
+
+    const setFormValue=(key,value)=>{
+      currentFormMethods.setValue(key,value)
     }
 
     useEffect(()=>{
@@ -38,7 +43,7 @@ const Editor = () => {
 
   return (<>
 
-    <Stepper publishHelper={new publishHelper()}   setCurrentFormValue={setWatch}>
+    <Stepper publishHelper={new publishHelper()}   setCurrentFormValue={setWatch}  setCurrentFormMethods={setCurrentFormMethods}>
         <Step title="Basic Info"  >
           <HiddenField name="BASE_URL" value="https://resource.itbusinessplus.com/whitepapers/"/>
           <TextBox label="Client Code" name="CLIENT_CODE" required={true} width="10%" />
@@ -48,13 +53,17 @@ const Editor = () => {
           <TextBox label="Link Name" name="LINK_NAME" required={true} width="50%"
             onChange={
               (e) => {
-                console.log(e.target.value);
+                //console.log(e.target.value);
                 e.target.value=e.target.value.replace(/\s+/g, '-');
 
                 const val = e.target.value
-                setValue("THUMBNAIL_NAME",`${val}.png`)
-                setValue("PDF_NAME",`${val}.pdf`)
-                setValue("MP4_NAME",`${val}.mp4`)
+                // setValue("THUMBNAIL_NAME",`${val}.png`)
+                // setValue("PDF_NAME",`${val}.pdf`)
+                // setValue("MP4_NAME",`${val}.mp4`)
+                setFormValue("THUMBNAIL_NAME",`${val}.png`)
+                setFormValue("PDF_NAME",`${val}.pdf`)
+                setFormValue("MP4_NAME",`${val}.mp4`)
+               
               }
 
             } />
@@ -92,10 +101,24 @@ const Editor = () => {
           <CheckBox label="Same As EDM title" name="SAME_AS_EDM_TITLE" />
           { (watch["SAME_AS_EDM_TITLE"] == true) && <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} /> }
           <CheckBox label="Same As EDM abstract" name="SAME_AS_EDM_ABSTRACT" />
-          { (watch["SAME_AS_EDM_ABSTRACT"] == true) && <RichTextEditor label="Landing Abstract" name="LANDING_ABSTRACT" required={true} /> }
-          <CheckBox label="New Landing Page Format" name="NEW_LANDING_PAGE_FORMAT" />
-          { (watch["NEW_LANDING_PAGE_FORMAT"] == true) && <TextBox label="BOX TEXT" name="NEW_LANDING_PAGE_FORMAT_BOX_TEXT" required={true} /> }
-
+          { (watch["SAME_AS_EDM_ABSTRACT"] == true) && <>
+          
+          <button onClick={(e)=>{
+            e.preventDefault();
+            const boxHtml=`                     <div class="sub" align="center" style="background-color: #e2ebf3;margin-top: 30px;margin-left: 13px;display: inline-flex;padding: 10px;width: 250px;align-items: center;">
+            <p style="text-align: left; margin-top: 10px;">Please fill this form to get immediate access to this exclusive resource.</p>
+            <p><img src="https://resource.itbusinesstoday.com/whitepapers/Arrow-pr.png" alt="Arrow" style="width: 50px;  " /></p>
+        </div> `
+            setFormValue("LANDING_ABSTRACT", boxHtml)
+            }
+            
+            }>Add new format</button>
+          
+          
+          <RichTextEditor label="Landing Abstract" name="LANDING_ABSTRACT" required={true} />
+          
+          </>  }
+ 
         </Step>
 
         <Step title="Form">

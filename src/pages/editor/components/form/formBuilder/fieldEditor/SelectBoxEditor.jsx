@@ -125,13 +125,7 @@ function stripHtml(html)
 <Modal 
 center
 open={isOptionsModalOpened} 
-classNames={{
-    overlayAnimationIn: 'customEnterOverlayAnimation',
-    overlayAnimationOut: 'customLeaveOverlayAnimation',
-    modalAnimationIn: 'customEnterModalAnimation',
-    modalAnimationOut: 'customLeaveModalAnimation',
-  }}
-  animationDuration={800}
+
 onClose={() => setOptionsModalOpened(false)}>
 <OptionList  setOptions={setOptions} options={options}/>
 </Modal>

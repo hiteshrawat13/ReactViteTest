@@ -35,7 +35,7 @@ const TGIFFormRenderer = {
         
         <select name="${obj.name}"   ${obj.isRequired ? "required" : ""} id="${obj.id}"  ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""}>
         
-        ${obj.options.map((option, index) => {
+        ${obj.options?.map((option, index) => {
                 if (index == 0) {
                     return `<option value="">${option}</option>
                 `
@@ -61,7 +61,7 @@ const TGIFFormRenderer = {
         <td>
         <select name="${obj.name}" ${obj.isRequired ? "required" : ""} id="${obj.id}"  ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""}>
      
-        ${obj.options.length>0  && obj.options.map((option, index) => {
+        ${ obj.options?.map((option, index) => {
                
                     return `<option value="${option.value}" ${(option.disabled)?'disabled':''}>${option.label}</option>`
            
@@ -84,15 +84,14 @@ const TGIFFormRenderer = {
 <tr>
    <style>
    .custom-radio{
-           display: flex;
+       display: flex;
        align-items: flex-start;
        gap: 5px;
    }
    </style>
-    <td colspan="2" align="center" valign="top" style="padding-top: 10px;">
+    <td colspan="2" align="center" valign="top" style="">
    <div   style="color: #FF0000; line-height:1%;
        padding: 5px;
-       margin-top:10px;
        text-align: left;
    
        font:  13px/18px 'Noto Sans', sans-serif;;">  
@@ -103,7 +102,7 @@ const TGIFFormRenderer = {
 
 
        
-       ${obj.options.map(option => `
+       ${obj.options?.map(option => `
        <div class="custom-control custom-radio" style="color:#000">
            <input type="checkbox"    name="${obj.name}[]" value="${option.value}" ${obj.isRequired ? "required" : ""}   ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""}>
            <label>${option.label}</label>

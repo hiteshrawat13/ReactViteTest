@@ -159,15 +159,15 @@ const OptionList = ({ setOptions, options }) => {
                         <Droppable droppableId="list-container"
                         
                         //this is used if the dragged item movies out of position if there is atransform animation to parent ex modal
-                        // renderClone={(provided, snapshot, rubric) => (
-                        //     <div
-                        //       {...provided.draggableProps}
-                        //       {...provided.dragHandleProps}
-                        //       ref={provided.innerRef}
-                        //     >
-                        //       Move
-                        //     </div>
-                        //   )}
+                        renderClone={(provided, snapshot, rubric) => (
+                            <div
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              ref={provided.innerRef}
+                            >
+                              Move
+                            </div>
+                          )}
                         
                         
                         >

@@ -4,6 +4,9 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
+
+import './OptionList.css'
+
 const OptionList = ({ setOptions, options }) => {
 
     const [data, setData] = useState(Array.isArray(options) ? [...Object.assign([], options)] : [])
@@ -120,8 +123,6 @@ const OptionList = ({ setOptions, options }) => {
         }
         
         setData(updatedList)
-
-
         setOptionAddModalOpened(false)
 
 
@@ -132,7 +133,7 @@ const OptionList = ({ setOptions, options }) => {
 
     return (
         <>
-            <div style={{ position: "relative" }}>
+            <div style={{  }}>
                 <Modal open={isOptionAddModalOpened} onClose={() => setOptionAddModalOpened(false)}>
 
                 <div style={{ padding: "10px", background: "#888888", maxHeight: "auto" }}>
@@ -155,13 +156,31 @@ const OptionList = ({ setOptions, options }) => {
                 <div style={{ position: "relative", maxHeight: "400px", overflowY: "scroll" }}>
 
                     <DragDropContext onDragEnd={handleDrop}>
-                        <Droppable droppableId="list-container">
+                        <Droppable droppableId="list-container"
+                        
+                        //this is used if the dragged item movies out of position if there is atransform animation to parent ex modal
+                        // renderClone={(provided, snapshot, rubric) => (
+                        //     <div
+                        //       {...provided.draggableProps}
+                        //       {...provided.dragHandleProps}
+                        //       ref={provided.innerRef}
+                        //     >
+                        //       Move
+                        //     </div>
+                        //   )}
+                        
+                        
+                        >
                             {(provided) => (
                                 <div
 
                                     className=" fieldList"
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
+                                    
+                               
+
+
                                 >
                                     {data.map((item, index) => {
                                         if (item == null) return null;
@@ -182,19 +201,12 @@ const OptionList = ({ setOptions, options }) => {
                                                             <div style={{display:"flex",alignItems:"center",fontSize:"12px",color:"#444"}}>{index}</div>
                                                             <div>
                                                                 <div style={{ display: "flex", gap: "18px", padding: "5px 10px 5px 20px" }} >
-
                                                                     <input type="text" value={item.label} data-index={index} onChange={handleLabelChange} />
                                                                     <input type="text" value={item.value} data-index={index} onChange={handleValueChange} />
-                                                        
                                                                     <input type="checkbox" checked={item.disabled || false} data-index={index} onChange={handleDisableCheckboxChange} />
-
                                                                     <button style={{ width: "18px" }} data-index={index} onClick={handleDeleteItem}>X</button>
                                                                 </div>
                                                             </div>
-
-
-
-
                                                         </div>
                                                     </div>
                                                 </div>

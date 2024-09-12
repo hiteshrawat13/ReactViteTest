@@ -1,0 +1,273 @@
+<html lang="en-us">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>##EDM_TITLE##</title>
+
+        
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
+			* {
+				text-decoration: none;
+				font-family: "Noto Sans", sans-serif;
+			}
+			a {
+				color: #0066b2;
+			}
+			body {
+				background-color: #e8ecee;
+			}
+			.box {
+				/*
+			  box-shadow:
+			  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+			  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+			  0 12.5px 10px rgba(0, 0, 0, 0.06),
+			  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+			  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+			  0 100px 80px rgba(0, 0, 0, 0.12)
+			;
+
+			  
+			  
+			  min-height: 10px;
+			  width: 50vw;
+			  margin: 30px auto;
+			  background: white;
+			  border-radius: 5px;
+			*/
+
+				box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
+
+				border-radius: 5px;
+				margin-bottom: 10px;
+			}
+
+			.font-style {
+			}
+			.body-title {
+				padding-left: 2px;
+			}
+			.border-style {
+				border-top: 10px solid#0066b2;
+
+				border-bottom: 10px solid#0066b2;
+				width: 700px;
+			}
+			p {
+				font-size: 14px;
+			}
+			.img {
+				padding-top: 0px;
+				width:260px;
+				border: 1px solid #e5e5e5;
+				border-radius:5px;
+				
+			}
+			.btn-primary-1 {
+				background-color: #0066b2;
+				width: 100%;
+				color: #ffffff;
+				border-radius: 8px;
+			}
+			.btn-primary-1:hover {
+				color: #ffffff;
+			}
+			/*
+				.button {
+			  border-radius: 4px;
+
+			  border: none;
+			  color: #FFFFFF;
+			  text-align: center;
+			  font-size: 20px;
+			  transition: all 0.5s;
+			  cursor: pointer;
+			 
+			}
+
+			.button span {
+			  cursor: pointer;
+			  display: inline-block;
+			  position: relative;
+			  transition: 0.5s;
+			}
+
+			.button span:after {
+			  content: '\00bb';
+			  position: absolute;
+			  opacity: 0;
+			  top: 0;
+			  right: -5px;
+			  transition: 0.5s;
+			}
+
+			.button:hover span {
+			  padding-right: 20px;
+			}
+
+			.button:hover span:after {
+			  opacity: 1;
+			  right: 0;
+			}
+			*/
+			.calltoaction {
+				align-items: center;
+				background-color: #0066b2;
+				width: auto;
+				height: auto;
+				color: #ffffff;
+				border-radius: 10px;
+				padding: 8px 15px;
+			}
+
+			p,
+			ul {
+				font-size: 14px;
+				line-height: 1.5;
+				color: #505050;
+			}
+
+			ul li {
+				padding-bottom: 12px;
+			}
+
+        </style>
+    </head>
+    <body>
+ 
+        <!--Body part Starts-->
+
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td align="center">
+                    <div class="container box border-style" style="background-color: #ffffff; margin: 3% auto;" align="center">
+                        <table width="100%" style="background-color: #ffffff; border-bottom: 1px solid rgb(192, 192, 192); padding: 0% 2%;" align="center" class="font-style">
+                            <tbody class="table table-borderless table-responsive">
+                                <tr scope="col">
+                                    <td width="454" style="padding-top: 20px; padding-bottom: 14px;">
+                                        <img src="##BASE_URL##IT-BUSINESS-TODAY-COLOUR-1.png" alt="It Business Today" width="150" style="" />
+                                    </td>
+
+                                    <td width="234" align="right">
+                                        <span style="font-size: 14px;">Sponsored By</span><br />
+                                        <img id="sponsorLogo" src="##BASE_URL####LOGO_NAME##" alt="Logo" style="width:##LOGO_WIDTH##;margin-top: 2px;" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- Full Width title start -->
+                        <table width="100%" style="background-color: #FFFFFF;padding: 10px 2%;" align="center" class="font-style">
+						<tbody class="table table-borderless table-responsive">
+							<tr scope="col">
+								<td>
+									<p style="font-size: 22px; color: #404040;" class="body-title">##EDM_TITLE##</p>
+								</td>
+							</tr>	
+						</tbody>
+						</table>  
+                        <!-- Full Width title end -->
+
+                        <table width="100%" style="background-color: #ffffff; padding: 1.2% 2%;" align="center" class="font-style">
+                            <tbody class="table table-borderless table-responsive">
+                                <tr scope="col">
+                                    <td style="padding-left: 8px; vertical-align: top; padding-right: 20px;">
+                                
+										<div class="edm_abstract">
+											##EDM_ABSTRACT##
+										</div>
+
+                                    </td>
+                                    <td style="display: flex; flex: start;">
+                                        <a href="##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#" target="_blank">
+                                            <img src="##BASE_URL####LINK_NAME##.png" alt="##EDM_TITLE##" class="img" />
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!--Body part Ends here-->
+                        <!--Privancy statement & call to action-->
+
+                        <table width="100%" align="center" style="background-color: #ffffff; border-bottom: 1px solid rgb(192, 192, 192); padding: 2% 2%;" class="font-style">
+                            <tbody class="table table-borderless table-responsive">
+                                <tr scope="col">
+                                    <td style="">
+                                        <p style="font-size: 11px; color: #666; margin-bottom: 18px;">
+											##EDM_OPTIN##
+                                        </p>
+                                     
+
+
+                                        <div align="left" style="padding-left: 30px;">
+                                            <a
+                                                href="##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#"
+                                                target="_self"
+                                                style="
+                                                    word-wrap: break-word;
+                                                    font-weight: normal;
+                                                    letter-spacing: -0.5px;
+                                                    line-height: 100%;
+                                                    text-align: center;
+                                                    color: #ffffff;
+                                                    font-weight: normal;
+                                                    font-size: 20px;
+                                                    font-family: Arial, Helvetica, sans-serif;
+                                                    padding-top: 0;
+                                                    padding-bottom: 0;
+                                                    text-decoration: none;
+                                                    background-color: #0066b2;
+                                                    border-radius: 6px;
+                                                    padding-bottom: 0;
+                                                    padding-right: 10px;
+                                                    padding: 10px 25px;
+                                                    margin-left: -33px;
+                                                "
+                                            >
+                                                <span style="margin-left: 10px;margin-right:8px; text-align: center;">##EDM_CTA##</span>
+												<img src="##BASE_URL##arrow-right-circle.png" width="16px" alt="" style="" />
+                                            </a>
+                                            <p style="padding-top: 10px;"></p>
+                                        </div>
+
+                                        <div style="padding-top: 15px; font-size: 14px; color: #505050;">
+                                            Best regards,<br />
+                                            The Editorial Team<br />
+                                            ITBusinessToday
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!--Privancy statement & call to action Ends-->
+                        <!--Footer section-->
+                        <table width="100%" style="background-color: #ffffff;" align="center" class="font-style">
+                            <tbody class="table table-borderless table-responsive">
+                                <tr scope="col">
+                                    <td>
+                                        <div align="center" style="padding-top: 1%; padding-bottom: 1%; font-size: 11px;">
+                                            <a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> |
+                                            <a href="https://itbusinesstoday.com/us-privacy-policy/">Privacy Policy</a> 
+											<!--| <a href="https://itbusinesstoday.com/casl-policy/">CASL Privacy Policy</a>-->
+            
+                                            <br />
+                                            Copyright &#169; ##YEAR## XDBS Corporation <br />
+                                            Hawthorne, CA 90250 USA<br />
+                                            3501, Jack Northorp Ave, Ste C3873<br />
+                                            
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!--Footer section Ends-->
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

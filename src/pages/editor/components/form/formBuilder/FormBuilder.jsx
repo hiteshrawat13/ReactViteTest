@@ -158,7 +158,7 @@ const FormBuilder = (defaultFieldsJson) => {
 
     console.log("DEFAULT FIELDS",defaultFieldsJson.defaultFieldsJson);
     
-    dispatch(loadFieldsFromJson(defaultFieldsJson.defaultFieldsJson))
+    //dispatch(loadFieldsFromJson(defaultFieldsJson.defaultFieldsJson))
 
   }, [])
 
@@ -196,6 +196,7 @@ const FormBuilder = (defaultFieldsJson) => {
       <button onClick={(e)=>{
       e.preventDefault()
       console.log(JSON.stringify(state.form));
+      navigator.clipboard.writeText(JSON.stringify(state.form))
       } }>Log From Json</button>
 
 

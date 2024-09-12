@@ -2,7 +2,7 @@ import React, { Suspense, useEffect, useRef, useState } from 'react'
 
 
 import ArcEditor from './templates/ARC-1ST-TOUCH/Editor';
-
+import TGIF_1ST_TOUCH_Editor from './templates/TGIF-1ST-TOUCH/Editor';
 const Editor = () => {
 
   const [editor, setEditor] = useState(null)
@@ -30,9 +30,10 @@ const Editor = () => {
       <LazyComponent />
       </Suspense> */}
 
-        <ArcEditor/>
+        {/* <ArcEditor/> */}
 
 
+        <TGIF_1ST_TOUCH_Editor/>
 
      
 

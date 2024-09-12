@@ -17,11 +17,11 @@ import {   BtnBold,
     
     Toolbar,EditorProvider,Editor } from 'react-simple-wysiwyg'
 
-const RichTextEditor = ({label,name,required=false,width=null}) => {
+const RichTextEditor = ({label,name,required=false,width=null,value=null}) => {
     const { register,unregister,setValue, formState: { errors },control } = useFormContext()
     const campaignDataState = useSelector(state => state.campaignData)
     useEffect(() => {
-      setValue( name, campaignDataState.data[name] ?? null)
+      setValue( name, campaignDataState.data[name] || value || null)
       return () => {
         unregister(name)
       }
@@ -40,7 +40,9 @@ const RichTextEditor = ({label,name,required=false,width=null}) => {
             required: required,
           }}
           //defaultValue={campaignDataState.data[name] }
-          // value={campaignDataState.data[name]}
+           //value={campaignDataState.data[name]}
+
+          // {...(value? {value:value} : {})} 
         render={({ field: { onChange, onBlur, value, ref } }) => (
           <div className='input-holder'  {...((width!=null) && {style:{width}}) }>
             <EditorProvider   key={Math.random} >

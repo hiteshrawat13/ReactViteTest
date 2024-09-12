@@ -1,0 +1,185 @@
+[
+    {
+      "type": "TextBox",
+      "inputType": "text",
+      "id": "firstname",
+      "label": "First Name",
+      "name": "firstname",
+      "placeholder": "",
+      "value": "",
+      "isRequired": true,
+      "isDisabled": false,
+      "isReadOnly": false
+    },
+    {
+      "type": "TextBox",
+      "inputType": "text",
+      "id": "lastname",
+      "label": "Last Name",
+      "name": "data[0]",
+      "placeholder": "",
+      "value": "",
+      "isRequired": true,
+      "isDisabled": false,
+      "isReadOnly": false
+    },
+    {
+      "type": "TextBox",
+      "inputType": "email",
+      "id": "email",
+      "label": "Business Email",
+      "name": "data[1]",
+      "placeholder": "",
+      "value": "",
+      "isRequired": true,
+      "isDisabled": false,
+      "isReadOnly": false
+    },
+    {
+      "type": "TextBox",
+      "inputType": "text",
+      "id": "phone",
+      "label": "Phone",
+      "name": "data[2]",
+      "placeholder": "",
+      "value": "",
+      "isRequired": true,
+      "isDisabled": false,
+      "isReadOnly": false
+    },
+    {
+      "type": "TextBox",
+      "inputType": "text",
+      "id": "company",
+      "label": "Company",
+      "name": "data[3]",
+      "placeholder": "",
+      "value": "",
+      "isRequired": true,
+      "isDisabled": false,
+      "isReadOnly": false
+    },
+    {
+      "type": "TextBox",
+      "inputType": "text",
+      "id": "address",
+      "label": "Address",
+      "name": "data[4]",
+      "placeholder": "",
+      "value": "",
+      "isRequired": true,
+      "isDisabled": false,
+      "isReadOnly": false
+    },
+    {
+      "type": "TextBox",
+      "inputType": "text",
+      "id": "city",
+      "label": "City",
+      "name": "data[5]",
+      "placeholder": "",
+      "value": "",
+      "isRequired": true,
+      "isDisabled": false,
+      "isReadOnly": false
+    },
+    {
+      "type": "TextBox",
+      "inputType": "text",
+      "id": "country",
+      "label": "Country",
+      "name": "data[6]",
+      "placeholder": "",
+      "value": "",
+      "isRequired": false,
+      "isDisabled": false,
+      "isReadOnly": true
+    },
+    {
+      "type": "TextBox",
+      "inputType": "text",
+      "id": "zip",
+      "label": "ZIP Code",
+      "name": "data[7]",
+      "placeholder": "",
+      "value": "",
+      "isRequired": true,
+      "isDisabled": false,
+      "isReadOnly": false
+    },
+    {
+      "type": "SelectBox",
+      "id": "company_size",
+      "label": "Company Size",
+      "name": "data[8]",
+      "isFullWidth": false,
+      "isRequired": true,
+      "isDisabled": false,
+      "isReadOnly": false
+    },
+    {
+      "type": "SelectBox",
+      "id": "revenue",
+      "label": "Revenue",
+      "name": "data[9]",
+      "isFullWidth": false,
+      "isRequired": true,
+      "isDisabled": false,
+      "isReadOnly": false
+    },
+    {
+      "type": "TextBox",
+      "inputType": "text",
+      "id": "job_title",
+      "label": "Job Title",
+      "name": "data[10]",
+      "placeholder": "",
+      "value": "",
+      "isRequired": true,
+      "isDisabled": false,
+      "isReadOnly": false
+    },
+    {
+      "type": "SelectBox",
+      "id": "industry",
+      "label": "Industry",
+      "name": "data[11]",
+      "isFullWidth": false,
+      "isRequired": true,
+      "isDisabled": false,
+      "isReadOnly": false
+    },
+    {
+      "type": "SelectBox",
+      "id": "job_function",
+      "label": "Job Function",
+      "name": "data[12]",
+      "isFullWidth": false,
+      "isRequired": true,
+      "isDisabled": false,
+      "isReadOnly": false
+    },
+    {
+      "type": "Text",
+      "label": "<a href=\"http://i.dell.com/sites/doccontent/legal/terms-conditions/en/Documents/Dell-Technologies-List-for-Privacy-Statement-May-2018.pdf\" target=\"_blank\"> Dell Technologies and its group of companies</a> (“Dell”) would like to stay in touch to hear about your needs and to keep you updated on products, services, solutions, exclusive offers, and special events. For more details on our information practices, see our <a href=\"https://www.dell.com/learn/us/en/uscorp1/policies-privacy-country-specific-privacy-policy\" target=\"_blank\"> Privacy Statement</a>. You can <a href=\"https://www.dell.com/preferences/listremoval\" target=\"_blank\"> unsubscribe</a> at any time."
+    },
+    {
+      "type": "CheckGroup",
+      "id": "optin",
+      "label": "",
+      "name": "data[13]",
+      "isRequired": true,
+      "isDisabled": false,
+      "isReadOnly": false,
+      "options": [
+        {
+          "label": "Yes, I would like Dell to contact me by email.",
+          "value": "Yes, I would like Dell to contact me by email."
+        },
+        {
+          "label": "Yes, I would like Dell to contact me by phone.",
+          "value": "Yes, I would like Dell to contact me by phone."
+        }
+      ]
+    }
+  ]

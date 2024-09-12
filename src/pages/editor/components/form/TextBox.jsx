@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 
-const TextBox = ({label,name,required,width=null,onChange=null,...rest}) => {
+const TextBox = ({label,name,required,width=null,onChange=null,value=null,...rest}) => {
   const campaignDataState = useSelector(state => state.campaignData)
   const {register,unregister,getValues,setValue,watch,formState: { errors }} = useFormContext() 
 
   useEffect(() => {
-    setValue(name,campaignDataState.data[name]||"") // used to call watch method for checkbox
+    setValue(name,campaignDataState.data[name]||value||"") // used to call watch method for checkbox
     return () => {
       unregister(name)
     }

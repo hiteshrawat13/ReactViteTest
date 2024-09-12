@@ -265,12 +265,16 @@ import React from 'react'
 import LogoInput from './form/LogoInput'
 import ThumbnailInput from './form/ThumbnailInput'
 import AssetInput from './form/AssetInput'
+import { TextBox } from './form'
 const AssetPicker = () => {
   return (
     <div>
       <LogoInput/>
       <ThumbnailInput/>
       <AssetInput/>
+
+
+      <TextBox label="Logo Width" name="LOGO_WIDTH" value="100px"/>
     </div>
   )
 }

@@ -249,9 +249,7 @@
                                 <tr scope="col">
                                     <td>
                                         <div align="center" style="padding-top: 1%; padding-bottom: 1%; font-size: 11px;">
-                                            <a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> |
-                                            <a href="https://itbusinesstoday.com/us-privacy-policy/">Privacy Policy</a> 
-											<!--| <a href="https://itbusinesstoday.com/casl-policy/">CASL Privacy Policy</a>-->
+                                            <a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> | ##PRIVACY_POLICY##
             
                                             <br />
                                             Copyright &#169; ##YEAR## XDBS Corporation <br />

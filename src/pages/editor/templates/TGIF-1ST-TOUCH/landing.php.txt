@@ -106,12 +106,25 @@
 			}
 
 
-                     <!--[if gte IE 9]>
-                     .header {
-                     filter: none;
-                     }
-                     <![endif]
-                     -->
+            .radio-option{
+            display:flex;
+            gap:4px;
+            align-items: flex-start;
+            }
+
+            .radio-option > span{
+            margin:0;
+            padding:0;
+            font-size:12px;
+            color:#444;
+            }
+
+
+            .cta{
+
+                background-color:#0066b2;    
+                width:250px; color: white;  border-radius:8px; padding-top: 08px;margin-left: 26px; margin-top:0px;
+            }
         </style>
 
         <script>
@@ -257,10 +270,7 @@
                 <tr>
                     <td height="50" align="center" style="border-top: 1px solid rgb(192, 192, 192); background-color: #ffff;">
                         <div align="center" style="padding-top: 1%; padding-bottom: 1%; font-size: 11px;">
-                        <a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> |
-                                            <a href="https://itbusinesstoday.com/us-privacy-policy/">Privacy Policy</a> 
-											<!--| <a href="https://itbusinesstoday.com/casl-policy/">CASL Privacy Policy</a>-->
-                
+                        <a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> | ##PRIVACY_POLICY##
                             <br />
                             Copyright &#169; ##YEAR## XDBS Corporation <br />
                             Hawthorne, CA 90250 USA <br />

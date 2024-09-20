@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useReducer, useRef, useState } from 'react'
 
 import {
     Stepper,
@@ -33,6 +33,10 @@ const Editor = () => {
       dispatch(updateData({ prop: key, value:value }))
     }
 
+    const setState=(data)=>{
+      dispatch(  setData( data )  )
+    }
+
     const setFormValue=(key,value)=>{
       currentFormMethods.setValue(key,value)
     }
@@ -40,7 +44,7 @@ const Editor = () => {
     useEffect(()=>{
       setValue("FTP_CONFIG_NAME","TGIF")
       setValue("form",defaultFields)
-      alert("TGIF")
+      //alert("TGIF")
     },[])
 
   return (<>
@@ -49,8 +53,26 @@ const Editor = () => {
         <Step title="Basic Info"  >
 
 
+
+        <button onClick={(e)=>{
+        e.preventDefault();
+        const data =JSON.parse(   localStorage.getItem("data") )
+        console.log(data);
+        
+        setState(data)
+        for (const [key, value] of Object.entries(data)) {
+          setFormValue(key,value)
+        }
+        alert("State Loaded")
+    
+
+      
+   
+        
+        }}    >Load State From Local Storage</button>
+
           <HiddenField name="BASE_URL" value="https://resource.itbusinesstoday.com/whitepapers/"/>
-          <HiddenField name="YEAR" value={new Date().getFullYear()}/>
+          <HiddenField name="YEAR" value={new Date().getFullYear()+""}/>
 
 
           <TextBox label="Client Code" name="CLIENT_CODE" required={true} width="10%" />
@@ -86,6 +108,8 @@ const Editor = () => {
             width="10%"
           />
 
+        <TextBox label="Pixel Link" name="PIXEL_LINK" required={true} />
+
           {/* <SelectBox label="Asset Type" name="ASSET_TYPE" required={true}
             options={[
               { label: "Select..", value: "" },
@@ -98,7 +122,8 @@ const Editor = () => {
               { label: "Infographic", value: "Infographic" }
             ]}
           /> */}
-          <TextBox label="Sponsored By Text" name="SPONSORED_BY_TEXT" required={true} />
+          <TextBox label="Text above the logo" name="SPONSORED_BY_TEXT" required={true} value="Sponsored by"/>
+          
         </Step>
         <Step title="Abstract & Title">
 
@@ -130,10 +155,19 @@ const Editor = () => {
 
 
           <RichTextEditor label="Thank You Page" name="THANK_YOU_PAGE" required={true} value={`
-          <h1>Thank you...</h1>
+          <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
+                            <tbody>
+                                <tr>
+                                    <td align="left" class="whitepaper" style="align-items: start; display: flex;">
+                                        <img   style=" height: auto !important;" alt="##EDM_TITLE##" src="##BASE_URL####LINK_NAME##.png" width="180" style="border: 1px solid #c4c5c600;" />
+                                    </td>
+
+                                    <td align="left" valign="top" class="style1 thankyou">
+                                        <h1>Thank you...</h1>
         <span>for downloading <strong>"##EDM_TITLE##"</strong><br><br>
         Your download will automatically start in <span id="countdown">10</span> seconds...<br>If your download doesn't start automatically, <a href="##BASE_URL####LINK_NAME##.pdf">click here</a> to start your download.</span>
-          <script>
+
+                                        <script>
                                             var timeleft = 5;
                                             var downloadTimer = setInterval(function () {
                                                 if (timeleft <= 0) {
@@ -145,6 +179,10 @@ const Editor = () => {
                                                 timeleft -= 1;
                                             }, 1000);
                                         </script>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
           `} />
 
 
@@ -168,15 +206,18 @@ const Editor = () => {
  
         </Step>
 
-        <Step title="Form">
-          Forms
-          <FormBuilder defaultFieldsJson={defaultFieldsJson}/>
-        </Step>
+      
 
 
         <Step title="Logo & Assets">
           Assets Logo
           <AssetPicker />
+        </Step>
+
+
+        <Step title="Form">
+          Forms
+          <FormBuilder defaultFieldsJson={defaultFieldsJson}/>
         </Step>
 
         <Step title="Preview">
@@ -187,6 +228,10 @@ const Editor = () => {
           Publish
           <FTPUpload />
           <ZIPDownload />
+
+
+          
+     
         </Step>
 
       </Stepper>

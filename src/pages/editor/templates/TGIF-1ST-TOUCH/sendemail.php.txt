@@ -4,25 +4,6 @@ require "DataCurlNodeApi/DataCurlNodeApiFunctions.php";
 
 $ENDURL = "##BASE_URL####LINK_NAME##-thanks.php";
 
-$fields = [
-    "firstname" => "firstname",
-    "lastname" => 0,
-    "email" => 1,
-	"phone" => 2,
-    "company" => 3,
-    "address" => 4,
-	"city" => 5,
-	"country" => 6,
-	"state" => 7,
-	"zip" => 8,
-	"company_size" => 9,
-	"revenue" => 10,
-    "job_title" => 11,
-	"industry" => 12,
-	"job_function" => 13,
-	"target_level" => 14,
-	"optin" => 15,
-];
 
 ##MAPPED_DATA##
 

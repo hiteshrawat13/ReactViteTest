@@ -4,6 +4,8 @@
  import landing_html from './landing.php.txt?raw'  //?raw is important to read text files
  import sendemail_html from './sendemail.php.txt?raw'  //?raw is important to read text files
  import thanks_html from './thanks.php.txt?raw'  //?raw is important to read text files
+
+ import { getSendmailSubject } from './Base64.js'
 class PublishHelper{
     constructor(state){
         this.state=state
@@ -23,22 +25,82 @@ class PublishHelper{
     }
 
 
+    /*
+convertToEntities()
+This is to convert Chinese characters to Unicode numbers
+*/
+
+convertToEntities=(input)=> {
+    var tstr = input;
+    var bstr = '';
+    for(let i=0; i<tstr.length; i++)
+    {
+      if(tstr.charCodeAt(i)>127)
+      {
+        bstr += '&#' + tstr.charCodeAt(i) + ';';
+      }
+      else
+      {
+        bstr += tstr.charAt(i);
+      }
+    }
+    return bstr;
+  }
+
     
     getFormCurlApiSendmailMappedData(fields){
       
+ 
         return `
         $fields = [
-        ${fields.map((field,index)=> { return (field.name)?`    "${field.id}" => "${field.name.replace(/data[\(d+)]/gi,"$1")}",`:''}) }
+        ${fields.filter((field)=>field.name!=undefined).map((field,index,{length})=> { 
+
+
+            if(!field.name)return ""
+
+            const hasDataName=/data\[(.+)\]/g.test(field.name)
+
+            const field_name= (hasDataName) ? field.name.replace(/data\[(.+)\]/g,"$1"): `"${field.name}"`
+
+            return  `"${field.id}"   =>  ${field_name}  ${(index+1==length)?'':','} `
+        }).join("\n\t\t") 
+    }
         ];
         `
     }
 
+
+    getPrivacyPolicy(data){
+        const eu_privacy=`<a href="https://itbusinesstoday.com/eu-data-protection">Privacy Policy</a>`
+        const non_eu_privacy=`<a href="https://itbusinesstoday.com/us-privacy-policy/">Privacy Policy</a>`
+        const casl_privacy=`<a href="https://itbusinesstoday.com/casl-policy/">CASL Privacy Policy</a>`
+        switch(this.state.REGION){
+            case "EU":
+                data=data.replaceAll(`##PRIVACY_POLICY##`, `${eu_privacy}` )
+            break;
+            case "NON-EU":
+                data=data.replaceAll(`##PRIVACY_POLICY##`, `${non_eu_privacy}` )
+            break;
+            case "CASL":
+                data=data.replaceAll(`##PRIVACY_POLICY##`, `${casl_privacy}` )
+            break;
+            case "BOTH":
+                data=data.replaceAll(`##PRIVACY_POLICY##`, `${non_eu_privacy} | ${casl_privacy}` )
+            break;
+        }
+
+        return data
+    }
+
     async getEdmHtml({forPreview}){
-        let data=edm_html;        
+        let data=edm_html;      
+        
+        data= this.convertToEntities( this.getPrivacyPolicy(data)  )
+        
         for (const [key, value] of Object.entries(this.state)) {
             try {
                 if(typeof value === 'string' || value instanceof String)
-                data=data.replaceAll(`##${key}##`,( value ) )
+                data=data.replaceAll(`##${key}##`,this.convertToEntities( value ) )
             } catch (error) {
                 console.log("Error while replaceAll in getLandingHtml() of publishHelper ",error,key,value);
             } 
@@ -53,12 +115,15 @@ class PublishHelper{
             if(this.logoDataUrl)data=data.replaceAll(`##BASE_URL####LOGO_NAME##`, this.logoDataUrl )
             if(this.thumbnailDataUrl)data=data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, this.thumbnailDataUrl )
         }
-        data=data.replaceAll(`##FORM##`, this.getFormHtml(this.state.form,TGIFFormRenderer) )
+
+        data=this.getPrivacyPolicy(data)
+
+        data=data.replaceAll(`##FORM##`, this.convertToEntities ( this.getFormHtml(this.state.form,TGIFFormRenderer) )  )
 
         for (const [key, value] of Object.entries(this.state)) {
             try {
                 if(typeof value === 'string' || value instanceof String)
-                data=data.replaceAll(`##${key}##`,( value ) )
+                data=data.replaceAll(`##${key}##`,this.convertToEntities( value ) )
             } catch (error) {
                 console.log("Error while replaceAll in getLandingHtml() of publishHelper ",error,key,value);
             } 
@@ -72,11 +137,14 @@ class PublishHelper{
         let data=sendemail_html
         data=data.replaceAll(`##MAPPED_DATA##`, this.getFormCurlApiSendmailMappedData(this.state.form) )
 
-        
+        const hasSpecialCharsInSubject=this.convertToEntities( this.state["SENDMAIL_SUBJECT"]) .includes("&#")
+        data=data.replaceAll(`##SENDMAIL_SUBJECT##`, (hasSpecialCharsInSubject)? getSendmailSubject( this.state["SENDMAIL_BODY"] )  : this.state["SENDMAIL_BODY"].replaceAll("\\'","'")  )
+        data=data.replaceAll(`##SENDMAIL_BODY##`, this.convertToEntities( this.state["SENDMAIL_BODY"]) )
+
         for (const [key, value] of Object.entries(this.state)) {
             try {
                 if(typeof value === 'string' || value instanceof String)
-                data=data.replaceAll(`##${key}##`,( value ) )
+                data=data.replaceAll(`##${key}##`,this.convertToEntities( value ) )
             } catch (error) {
                 console.log("Error while replaceAll in getSendmailHtml of publishHelper ",error,key,value);
             } 
@@ -85,10 +153,66 @@ class PublishHelper{
     }
     getThanksHtml({forPreview}){
         let data=thanks_html
+
+
+
+        data=this.getPrivacyPolicy(data)
+
+
+        const normal_thankyou=`\t${this.state["THANK_YOU_PAGE"]}\n`
+
+        const iframe_thankyou=`
+        <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
+                            <tbody>
+                                <tr>
+                                    <td align="left" valign="top" class="style1 thankyou">
+                                        <h3>##EDM_TITLE##</h3>
+	                                        ##IFRAME##
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+        `
+
+        const mp4_thankyou=`
+        <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
+                            <tbody>
+                                <tr>
+                                    <td align="left" valign="top" class="style1 thankyou">
+                                        <h3>##EDM_TITLE##</h3>
+	                                        ##MP4##
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+        `
+
+        switch(this.state["ASSET_FORMAT"]){
+            case "PDF":
+                data=data.replaceAll(`##THANK_YOU_CONTENT##`,  this.convertToEntities(  normal_thankyou ) )
+                break;
+            case "MP4":
+                data=data.replaceAll(`##THANK_YOU_CONTENT##`,  this.convertToEntities(  mp4_thankyou )  )
+                data=data.replaceAll(`header( "refresh:5;url=##BASE_URL####LINK_NAME##.pdf" ); `,  ""  )//remove redirect
+                break;
+            case "CLIENT_LINK":
+                data=data.replaceAll(`##THANK_YOU_CONTENT##`, this.convertToEntities(   normal_thankyou ) )
+                data=data.replaceAll(`##BASE_URL####LINK_NAME##.pdf`,   this.state['CLIENT_LINK']  )
+                break;
+            case "IFRAME":
+                data=data.replaceAll(`##THANK_YOU_CONTENT##`,  this.convertToEntities(  iframe_thankyou )  )
+                data=data.replaceAll(`header( "refresh:5;url=##BASE_URL####LINK_NAME##.pdf" ); `,  ""  )//remove redirect
+                
+                break;
+        }
+
+      
+
+
         for (const [key, value] of Object.entries(this.state)) {
             try {
                 if(typeof value === 'string' || value instanceof String)
-                data=data.replaceAll(`##${key}##`,( value ) )
+                data=data.replaceAll(`##${key}##`, this.convertToEntities( value ) )
             } catch (error) {
                 console.log("Error while replaceAll in getThankyou of publishHelper ",error,key,value);
             } 

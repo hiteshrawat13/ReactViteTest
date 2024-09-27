@@ -90,7 +90,7 @@
 
 
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { useFormContext,Controller } from 'react-hook-form'
 
@@ -108,10 +108,22 @@ const RichTextEditor = ({label,name,required=false,width=null,value=null}) => {
 	const editor = useRef(null);
  
 
-  const config ={
-    readonly: false, // all options from https://xdsoft.net/jodit/docs/,
-    placeholder:  'Start typings...'
-  }
+  const config = useMemo(
+    () => ({
+    readonly: false,
+    placeholder: '',
+    defaultActionOnPaste: 'insert_as_html',
+    defaultLineHeight: 1.5,
+    enter: 'div',
+
+    statusbar: false,
+    sizeLG: 900,
+    sizeMD: 700,
+    sizeSM: 400,
+    toolbarAdaptive: false,
+    }),
+    [],
+   );
 
 
 	return (
@@ -137,7 +149,7 @@ const RichTextEditor = ({label,name,required=false,width=null,value=null}) => {
             config={config}
             tabIndex={1} // tabIndex of textarea
             onBlur={onBlur} // preferred to use only this option to update the content for performance reasons
-            onChange={onChange}
+            onChange={onChange  }
           />
          )}
 

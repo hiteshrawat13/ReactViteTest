@@ -74,12 +74,9 @@ const Editor = () => {
           <HiddenField name="BASE_URL" value="https://resource.itbusinesstoday.com/whitepapers/"/>
           <HiddenField name="YEAR" value={new Date().getFullYear()+""}/>
 
-
-          <TextBox label="Client Code" name="CLIENT_CODE" required={true} width="10%" />
-          {(watch["CLIENT_CODE"]==="Hitesh") && <>IT WORKS</>}
-          <TextBox label="Campaign Name" name="CAMP_NAME" required={true}  placeholder="Campaign email subject line here" width="50%" />
-          <TextBox label="Campaign Id" name="CAMP_ID" required={true} width="10%" />
-          <TextBox label="Link Name" name="LINK_NAME" required={true} width="50%"
+          <div style={{display:"flex",width:"100%",gap:"3%"}}>
+          <TextBox label="Campaign Id" name="CAMP_ID" required={true}  />
+          <TextBox label="Link Name" name="LINK_NAME" required={true} 
             onChange={
               (e) => {
                 //console.log(e.target.value);
@@ -105,8 +102,20 @@ const Editor = () => {
               { label: "CASL", value: "CASL" },
               { label: "Both ( NON-EU & CASL )", value: "BOTH" }
             ]}
-            width="10%"
+             
           />
+          </div>
+
+
+          <div style={{display:"flex",width:"100%",gap:"3%"}}>
+          <TextBox label="Client Code" name="CLIENT_CODE" required={true}   />
+          
+          {(watch["CLIENT_CODE"]==="Hitesh") && <>IT WORKS</>}
+
+          <TextBox label="Campaign Name" name="CAMP_NAME" required={true}  placeholder="Campaign email subject line here"  />
+          </div>
+          
+          
 
         <TextBox label="Pixel Link" name="PIXEL_LINK" required={true} />
 
@@ -127,10 +136,10 @@ const Editor = () => {
         </Step>
         <Step title="Abstract & Title">
 
-          <TextBox label="EDM Title" name="EDM_TITLE" required={true} width="60%" />
+          <TextBox label="EDM Title" name="EDM_TITLE" required={true} />
           <RichTextEditor label="Edm Abstract" name="EDM_ABSTRACT" required={true} />
           <TextBox label="EDM Optin" name="EDM_OPTIN" required={true} value="By clicking/downloading the asset, you agree to allow the sponsor to have your contact information and for the sponsor to contact you." />
-          <TextBox label="EDM CTA" name="EDM_CTA" required={true} width="20%" value="Download Now" />
+          <TextBox label="EDM CTA" name="EDM_CTA" required={true}  value="Download Now" />
           <CheckBox label="Same As EDM title" name="SAME_AS_EDM_TITLE" />
           {/* { (watch["SAME_AS_EDM_TITLE"] == true) &&  */}
           <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} /> 
@@ -140,9 +149,11 @@ const Editor = () => {
           
           <button onClick={(e)=>{
             e.preventDefault();
-            const boxHtml=`<div class="sub" align="center" style="background-color: #e2ebf3;margin-top: 30px;margin-left: 13px;display: inline-flex;padding: 10px;width: 250px;align-items: center;">
-            <p style="text-align: left; margin-top: 10px;">Please fill this form to get immediate access to this exclusive resource.</p>
-            <p><img src="https://resource.itbusinesstoday.com/whitepapers/Arrow-pr.png" alt="Arrow" style="width: 50px;  " /></p></div> `
+
+            //using math random to update value otherwise gives blank result--
+           const boxHtml=`<div class="sub" data-key="${Math.random()}" align="center" style="background-color: #e2ebf3;margin-top: 30px;margin-left: 13px;display: inline-flex;padding: 10px;width: 250px;align-items: center;"> <p style="text-align: left; margin-top: 10px;">Please fill this form to get immediate access to this exclusive resource.</p> <p><img src="https://resource.itbusinesstoday.com/whitepapers/Arrow-pr.png" alt="Arrow" style="width: 50px;  " /></p></div>`
+         // const boxHtml=`<u>${Math.random()}</u>`
+            
             setFormValue("LANDING_ABSTRACT", boxHtml)
             }
             
@@ -189,7 +200,7 @@ const Editor = () => {
 
 
 
-          <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true} width="60%" value="Thank you for requesting Buyers Guide"/>
+          <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true}  value="Thank you for requesting Buyers Guide"/>
           <RichTextEditor label="Sendmail Body" name="SENDMAIL_BODY" required={true} value={`<table>
 				
 				 <tr><td>Dear&nbsp;<b>$firstname,</b></td></tr>

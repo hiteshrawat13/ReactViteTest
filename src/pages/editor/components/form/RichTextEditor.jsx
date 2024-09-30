@@ -110,7 +110,11 @@ const RichTextEditor = ({label,name,required=false,width=null,value=null}) => {
 
   const config ={
     readonly: false, // all options from https://xdsoft.net/jodit/docs/,
-    placeholder:  'Start typings...'
+    placeholder:  'Start typings...',
+    cleanHTML:false,
+     // Allow certain HTML tags and attributes
+    // You can customize this to fit your needs
+    allowedContent: true, // Allow all content (use with caution)
   }
 
 

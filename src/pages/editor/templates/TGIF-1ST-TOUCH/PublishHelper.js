@@ -95,7 +95,7 @@ convertToEntities=(input)=> {
     async getEdmHtml({forPreview}){
         let data=edm_html;      
         
-        data= this.convertToEntities( this.getPrivacyPolicy(data)  )
+        data= this.convertToEntities( this.getPrivacyPolicy(data)  ) //Privacy Policy
         
         for (const [key, value] of Object.entries(this.state)) {
             try {
@@ -116,7 +116,7 @@ convertToEntities=(input)=> {
             if(this.thumbnailDataUrl)data=data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, this.thumbnailDataUrl )
         }
 
-        data=this.getPrivacyPolicy(data)
+        data=this.getPrivacyPolicy(data) //Privacy Policy
 
         data=data.replaceAll(`##FORM##`, this.convertToEntities ( this.getFormHtml(this.state.form,TGIFFormRenderer) )  )
 
@@ -156,7 +156,7 @@ convertToEntities=(input)=> {
 
 
 
-        data=this.getPrivacyPolicy(data)
+        data=this.getPrivacyPolicy(data) //Privacy Policy
 
 
         const normal_thankyou=`\t${this.state["THANK_YOU_PAGE"]}\n`

@@ -5,8 +5,8 @@ import useSocket from '../useSocket'
 import axios from 'axios'
 import Config from '../../../../Config'
 
-const FTPUpload = () => {
-  const { publishHelper } = useContext(StepperContext)
+const FTPUpload = ({publishHelper}) => {
+  
 
   const campaignDataState = useSelector(state => state.campaignData)
   const { logoFileRef, thumbnailFileRef, pdfFileRef, mp4FileRef } = useContext(StepperContext)

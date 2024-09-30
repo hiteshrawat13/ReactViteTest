@@ -3,8 +3,8 @@ import { json } from 'react-router-dom';
 import { StepperContext } from './stepper/StepperContext';
 import { load } from 'cheerio/lib/slim';
 import { useSelector } from 'react-redux';
-const Preview = forwardRef(({ }, ref) => {
-  const { publishHelper ,logoFileRef,thumbnailFileRef} = useContext(StepperContext)
+const Preview = forwardRef(({publishHelper }, ref) => {
+  const {  logoFileRef,thumbnailFileRef} = useContext(StepperContext)
   const {data} = useSelector(state => state.campaignData)
   const [buttons, setButtons] = useState(null)
 
@@ -116,7 +116,7 @@ const Preview = forwardRef(({ }, ref) => {
         }
 
         <br></br>
-        <iframe ref={iframeRef}   style={{ 'margin-top': '2px', width: "calc(100% - 70px)", height: "calc(100% - 70px)", minHeight: "1000px" }}></iframe>
+        <iframe ref={iframeRef}   style={{ 'margin-top': '2px', width: "calc(100% - 70px)", height: "calc(100% - 70px)", minHeight: "500px" }}></iframe>
       </div>
 
 
@@ -126,7 +126,8 @@ const Preview = forwardRef(({ }, ref) => {
         'display': 'inline-block',
         'height': 'fit-content',
         'padding': '10px',
-        'marginTop': '25px'
+        'marginTop': '25px',
+        width:"20%"
       }}>
 
         <h4 style={{ 'marginBottom': '10px', 'marginTop': '0px' }}>Editor :</h4>

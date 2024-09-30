@@ -11,6 +11,7 @@ import Auth from '../Auth';
 import CampaignDetails from "../pages/campaign/CampaignDetails"
 import Test from "../Test/Test"
 import Editor from "../pages/editor/Editor"
+import CreateCampaignPage from "../pages/new/CreateCampaignPage"
 
 
 
@@ -96,6 +97,11 @@ const Router=[
     {
       path: "/test" ,
       element: <Test/> 
+    },
+
+    {
+      path: "/new" ,
+      element: <CreateCampaignPage/>
     },
 
  

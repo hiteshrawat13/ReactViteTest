@@ -7,7 +7,7 @@ import './Form.css'
 const Form = forwardRef( ({ next,children },ref) => {
     const methods = useForm()
     const onSubmit = (data) =>{
-        next()
+       if(next) next()
        // alert("EE"+data)
     }
 

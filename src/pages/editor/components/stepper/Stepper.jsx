@@ -7,16 +7,21 @@ import "./Stepper.css"
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { setData, addData, updateData } from '../../../../store/campaign/CampaignSlice'
 
-const Stepper = forwardRef(({ children, onStepChange = null, setCurrentFormValue = null, setCurrentFormMethods = null, publishHelper }, ref) => {
+const Stepper = forwardRef(({ children, onStepChange = null, setCurrentFormValue = null, setCurrentFormMethods = null }, ref) => {
 
 
+
+  
+
+
+    const stepsArray=React.Children.toArray(children[0].children)
+    const totalSteps=stepsArray.length
     const dispatch = useDispatch()
     const campaignDataState = useSelector(state => state.campaignData)
     const [step, setStep] = useState(0)
     const [currentStepFormTriggerMethod, setCurrentStepFormTriggerMethod] = useState(null)
     const [totalStepsExplored, setTotalStepsExplored] = useState(1)
-    //const publishHelper=useRef()
-    const [isPublishHelperLoaded, setIsPublishHelperLoaded] = useState(false)
+
 
     const logoFileRef = useRef()
     const thumbnailFileRef = useRef()
@@ -84,7 +89,7 @@ const Stepper = forwardRef(({ children, onStepChange = null, setCurrentFormValue
             return
         }
         await currentStepFormTriggerMethod.handleSubmit(handleSubmitOfCurrentForm)()
-        setStep((step) => { return (step + 1 < children.length - 1) ? step + 1 : children.length - 1 })
+        setStep((step) => { return (step + 1 < totalSteps - 1) ? step + 1 : totalSteps - 1 })
         setTotalStepsExplored(previousValue => ++previousValue)
         if (onStepChange) onStepChange(step)
     }
@@ -100,7 +105,7 @@ const Stepper = forwardRef(({ children, onStepChange = null, setCurrentFormValue
         if (onStepChange) onStepChange(step)
     }
 
-
+ 
     return <div className='steps'>
 
         {/* {JSON.stringify(campaignDataState.data)} */}
@@ -114,7 +119,7 @@ const Stepper = forwardRef(({ children, onStepChange = null, setCurrentFormValue
         {/* PROGRESS STEPS */}
         <div className='tabs wizard-progress'>
             {
-                children.map((child, i) => {
+                stepsArray.map((child, i) => {
                     return <label
                         className={
                             `step 
@@ -138,18 +143,18 @@ const Stepper = forwardRef(({ children, onStepChange = null, setCurrentFormValue
         <StepperContext.Provider value={{
             handleNext: handleNext,
             handlePrevious: handlePrevious,
-            totalSteps: children.length,
+            totalSteps: totalSteps,
             setCurrentStepFormTriggerMethod,
 
             logoFileRef,
             thumbnailFileRef,
             pdfFileRef,
             mp4FileRef,
-            publishHelper,
+           
 
         }}>
             {
-                children.map((child, i) => {
+                stepsArray.map((child, i) => {
                     return (i == step) && <div key={i}  >{React.cloneElement(child, { onWatch, onCurrentFormMethods })}</div>
                 })
             }
@@ -170,7 +175,9 @@ const Stepper = forwardRef(({ children, onStepChange = null, setCurrentFormValue
             padding: "10px"
         }}>
             {(step > 0) && <button onClick={handlePrevious}>Previous</button>}
-            {(step < children.length - 1) && <button onClick={handleNext}>Next</button>}
+            {(step < totalSteps - 1) && <button onClick={handleNext}>Next</button>}
+
+            {React.Children.count(children)} 
         </div>
 
     </div>

@@ -21,7 +21,7 @@ const Dashboard = () => {
             <SideBar/>
           
             <div className='outletHolder' >
-              <NavBar title={Router[0].children.filter(route=>route.path==path.pathname)[0].title}/>
+              <NavBar title={Router[0].children.filter(route=>route.path==path.pathname)[0]?.title}/>
               <div className='outlet'>
                 <Outlet/>
               </div>

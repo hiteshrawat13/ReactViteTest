@@ -110,6 +110,7 @@ const RichTextEditor = ({label,name,required=false,width=null,value=null}) => {
 
   const config = useMemo(
     () => ({
+      height: 300,
     readonly: false,
     placeholder: '',
     defaultActionOnPaste: 'insert_as_html',

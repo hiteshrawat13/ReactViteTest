@@ -1,4 +1,14 @@
 
+form{
+    background-color: transparent;
+}
+
+.section{
+    background-color: white;
+    padding: 2%;
+    margin: 1%;
+}
+
 .form-group{
 
 

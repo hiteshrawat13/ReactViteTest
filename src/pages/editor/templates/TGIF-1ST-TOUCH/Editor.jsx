@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef, useState } from 'react'
+import React, { useContext, useEffect, useReducer, useRef, useState } from 'react'
 
 import {
     Stepper,
@@ -16,30 +16,22 @@ import {
     ZIPDownload
 
 } from '../../components/form/index'
-import { setData, addData, updateData } from '../../../../store/campaign/CampaignSlice'
-import { useDispatch } from 'react-redux';
+
 import publishHelper from './PublishHelper'
 
 import  defaultFields from './default-fields.json'
 
 import defaultFieldsJson from "./default-fields.json"
-const Editor = () => {
-    const dispatch = useDispatch()
-    //this is used to get current form value which is changes during key down events
-    const [watch,setWatch]=useState({})
-    const [currentFormMethods,setCurrentFormMethods]=useState(null)  
-    
-    const setValue=(key,value)=>{
-      dispatch(updateData({ prop: key, value:value }))
-    }
 
-    const setState=(data)=>{
-      dispatch(  setData( data )  )
-    }
+import { EContext } from '../../Editor'
+import PublishHelper from './PublishHelper'
+const Editor = ({campData}) => {
 
-    const setFormValue=(key,value)=>{
-      currentFormMethods.setValue(key,value)
-    }
+
+  const publishHelperRef=useRef(new PublishHelper())
+  
+
+  const { setValue,watch,setFormValue } =useContext(EContext)
 
     useEffect(()=>{
       setValue("FTP_CONFIG_NAME","TGIF")
@@ -47,10 +39,9 @@ const Editor = () => {
       //alert("TGIF")
     },[])
 
-  return (<>
+  return (<Stepper    setCurrentFormValue={setWatch}  setCurrentFormMethods={setCurrentFormMethods}>
 
-    <Stepper publishHelper={new publishHelper()}   setCurrentFormValue={setWatch}  setCurrentFormMethods={setCurrentFormMethods}>
-        <Step title="Basic Info"  >
+    <Step title="Basic Info"  >
 
 
 
@@ -75,10 +66,23 @@ const Editor = () => {
           <HiddenField name="YEAR" value={new Date().getFullYear()+""}/>
 
 
-          <TextBox label="Client Code" name="CLIENT_CODE" required={true} width="10%" />
+        <div className='section'>
+
+          <TextBox label="Client Code" name="CLIENT_CODE" required={true} value={campData?.clientCode} width="10%" />
           {(watch["CLIENT_CODE"]==="Hitesh") && <>IT WORKS</>}
-          <TextBox label="Campaign Name" name="CAMP_NAME" required={true}  placeholder="Campaign email subject line here" width="50%" />
-          <TextBox label="Campaign Id" name="CAMP_ID" required={true} width="10%" />
+          <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" width="50%" />
+          <TextBox label="Campaign Id" name="CAMP_ID" required={true} value={campData?.campaignId} width="10%" />
+          <SelectBox label="Region" name="REGION" value={campData?.country} required={true}
+            options={[
+              { label: "Select..", value: "" },
+              { label: "EU", value: "EU" },
+              { label: "NON-EU", value: "NON-EU" },
+              { label: "CASL", value: "CASL" },
+              { label: "Both ( NON-EU & CASL )", value: "BOTH" }
+            ]}
+            width="10%"
+          />
+          
           <TextBox label="Link Name" name="LINK_NAME" required={true} width="50%"
             onChange={
               (e) => {
@@ -97,16 +101,13 @@ const Editor = () => {
               }
 
             } />
-          <SelectBox label="Region" name="REGION" required={true}
-            options={[
-              { label: "Select..", value: "" },
-              { label: "EU", value: "EU" },
-              { label: "NON-EU", value: "NON-EU" },
-              { label: "CASL", value: "CASL" },
-              { label: "Both ( NON-EU & CASL )", value: "BOTH" }
-            ]}
-            width="10%"
-          />
+
+</div>
+
+
+<div className='section'>
+
+      
 
         <TextBox label="Pixel Link" name="PIXEL_LINK" required={true} />
 
@@ -123,14 +124,20 @@ const Editor = () => {
             ]}
           /> */}
           <TextBox label="Text above the logo" name="SPONSORED_BY_TEXT" required={true} value="Sponsored by"/>
-          
+          </div>
         </Step>
         <Step title="Abstract & Title">
+
+          <div className='section'>
 
           <TextBox label="EDM Title" name="EDM_TITLE" required={true} width="60%" />
           <RichTextEditor label="Edm Abstract" name="EDM_ABSTRACT" required={true} />
           <TextBox label="EDM Optin" name="EDM_OPTIN" required={true} value="By clicking/downloading the asset, you agree to allow the sponsor to have your contact information and for the sponsor to contact you." />
           <TextBox label="EDM CTA" name="EDM_CTA" required={true} width="20%" value="Download Now" />
+          </div>
+          
+
+          <div className='section'>
           <CheckBox label="Same As EDM title" name="SAME_AS_EDM_TITLE" />
           {/* { (watch["SAME_AS_EDM_TITLE"] == true) &&  */}
           <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} /> 
@@ -151,9 +158,9 @@ const Editor = () => {
           
           <RichTextEditor label="Landing Abstract" name="LANDING_ABSTRACT" required={true} />
           
-          {/* </>  } */}
+          </div>
 
-
+          <div className='section'>
           <RichTextEditor label="Thank You Page" name="THANK_YOU_PAGE" required={true} value={`
           <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
                             <tbody>
@@ -187,8 +194,8 @@ const Editor = () => {
 
 
 
-
-
+</div>
+<div className='section'>
           <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true} width="60%" value="Thank you for requesting Buyers Guide"/>
           <RichTextEditor label="Sendmail Body" name="SENDMAIL_BODY" required={true} value={`<table>
 				
@@ -203,6 +210,7 @@ const Editor = () => {
 				 <tr><td>ITBusinessToday</td></tr>
 				 
 				</table>`} />
+        </div>
  
         </Step>
 
@@ -221,21 +229,21 @@ const Editor = () => {
         </Step>
 
         <Step title="Preview">
-          <Preview />
+          <Preview  publishHelper={publishHelperRef.current}/>
         </Step>
 
         <Step title="Publish">
           Publish
-          <FTPUpload />
-          <ZIPDownload />
+          <FTPUpload  publishHelper={publishHelperRef.current}/>
+          <ZIPDownload publishHelper={publishHelperRef.current}/>
 
 
           
      
         </Step>
 
-      </Stepper>
-      </>
+ 
+      </div>
   )
 }
 

@@ -5,8 +5,17 @@ form{
 
 .section{
     background-color: white;
-    padding: 2%;
     margin: 1%;
+
+    .title{
+        background-color: #666;
+        color:#fff;
+        padding:0.2% 1.5%;
+    }
+
+    .content{
+        padding:1% 1.5%;
+    }
 }
 
 .form-group{

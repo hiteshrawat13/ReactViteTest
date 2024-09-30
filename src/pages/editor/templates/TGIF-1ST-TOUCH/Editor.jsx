@@ -25,53 +25,61 @@ import defaultFieldsJson from "./default-fields.json"
 
 import { EContext } from '../../Editor'
 import PublishHelper from './PublishHelper'
+import Section from '../../components/form/Section'
+import Row from '../../components/form/Row'
+import Col from '../../components/form/Col'
 const Editor = ({campData}) => {
 
 
   const publishHelperRef=useRef(new PublishHelper())
   
 
-  const { setValue,watch,setFormValue } =useContext(EContext)
+  const { setValue, watch, setFormValue } = useContext(EContext)
 
     useEffect(()=>{
       setValue("FTP_CONFIG_NAME","TGIF")
-      setValue("form",defaultFields)
+      setValue("form", defaultFields )
       //alert("TGIF")
     },[])
 
-  return (<Stepper    setCurrentFormValue={setWatch}  setCurrentFormMethods={setCurrentFormMethods}>
+  return (<Stepper >
 
     <Step title="Basic Info"  >
 
 
+ 
 
         <button onClick={(e)=>{
         e.preventDefault();
         const data =JSON.parse(   localStorage.getItem("data") )
         console.log(data);
-        
-        setState(data)
+
         for (const [key, value] of Object.entries(data)) {
           setFormValue(key,value)
         }
         alert("State Loaded")
     
-
-      
-   
-        
-        }}    >Load State From Local Storage</button>
+        }} >Load State From Local Storage</button>
 
           <HiddenField name="BASE_URL" value="https://resource.itbusinesstoday.com/whitepapers/"/>
           <HiddenField name="YEAR" value={new Date().getFullYear()+""}/>
 
 
 
-        <div className='section'>
+        <Section title="Link Details">
 
-          <TextBox label="Client Code" name="CLIENT_CODE" required={true} value={campData?.clientCode} width="10%" />
-          {(watch["CLIENT_CODE"]==="Hitesh") && <>IT WORKS</>}
-          <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" width="50%" />
+        <Row>
+        <Col>
+        <TextBox label="Client Code" name="CLIENT_CODE" required={true} value={campData?.clientCode}  />
+        {(watch["CLIENT_CODE"]==="Hitesh") && <>IT WORKS</>}
+        </Col>
+        <Col>
+        <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" />
+        </Col>
+      </Row>
+
+         
+         
           <TextBox label="Campaign Id" name="CAMP_ID" required={true} value={campData?.campaignId} width="10%" />
           <SelectBox label="Region" name="REGION" value={campData?.country} required={true}
             options={[
@@ -104,10 +112,10 @@ const Editor = ({campData}) => {
 
             } />
 
-</div>
+</Section>
 
 
-<div className='section'>
+<Section title="Details">
 
       
 
@@ -127,7 +135,7 @@ const Editor = ({campData}) => {
             ]}
           /> */}
           <TextBox label="Text above the logo" name="SPONSORED_BY_TEXT" required={true} value="Sponsored by"/>
-          </div>
+          </Section>
         </Step>
         <Step title="Abstract & Title">
 
@@ -252,7 +260,7 @@ const Editor = ({campData}) => {
         </Step>
 
  
-     </div>
+     </Stepper>
   )
 }
 

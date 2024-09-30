@@ -50,6 +50,9 @@ const Editor = () => {
     }
 
     const setFormValue=(key,value)=>{
+
+      console.log(currentFormMethods);
+      
       currentFormMethods.setValue(key,value)
     }
 
@@ -66,14 +69,16 @@ const Editor = () => {
         <Context.Provider value={{
           campData,
           watch,
+          setWatch,
+          setCurrentFormMethods,
           setValue,
           setState,
           setFormValue
           }}>
-            <div>wwwwwwwwwwwwww</div>
-        <Stepper    setCurrentFormValue={setWatch}  setCurrentFormMethods={setCurrentFormMethods}>
+            
+        
    <TGIF_1ST_TOUCH_Editor  /> 
-          </Stepper>
+          
         </Context.Provider>
 
        

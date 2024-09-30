@@ -1,20 +1,24 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
+import React, { forwardRef, useContext, useEffect, useImperativeHandle, useRef, useState } from 'react'
 
 
 import { StepperContext } from './StepperContext';
 import "./Stepper.css"
 
+import { EContext } from '../../Editor';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { setData, addData, updateData } from '../../../../store/campaign/CampaignSlice'
 
-const Stepper = forwardRef(({ children, onStepChange = null, setCurrentFormValue = null, setCurrentFormMethods = null }, ref) => {
+const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
 
+
+    const {  setWatch,
+        setCurrentFormMethods }=useContext(EContext)
 
 
   
 
 
-    const stepsArray=React.Children.toArray(children[0].children)
+    const stepsArray=React.Children.toArray(children)
     const totalSteps=stepsArray.length
     const dispatch = useDispatch()
     const campaignDataState = useSelector(state => state.campaignData)
@@ -44,13 +48,13 @@ const Stepper = forwardRef(({ children, onStepChange = null, setCurrentFormValue
 
     const onWatch = (watchValue) => {
         //This function detected form value change
-        if (setCurrentFormValue) setCurrentFormValue(watchValue)
+       setWatch(watchValue)
     }
 
 
 
     const onCurrentFormMethods = (methods) => {
-        if (setCurrentFormMethods) setCurrentFormMethods(methods)
+        setCurrentFormMethods(methods)
     }
 
 

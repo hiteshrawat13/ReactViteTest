@@ -4,9 +4,9 @@ import { saveAs } from 'file-saver';
 import { StepperContext } from '../stepper/StepperContext';
 import { useSelector } from 'react-redux';
 
-const ZIPDownload = () => {
+const ZIPDownload = ({publishHelper}) => {
     const Stepper = useContext(StepperContext)
-    const { logoFileRef, thumbnailFileRef, pdfFileRef, mp4FileRef, publishHelper } = useContext(StepperContext)
+    const { logoFileRef, thumbnailFileRef, pdfFileRef, mp4FileRef } = useContext(StepperContext)
     const {data} = useSelector(state => state.campaignData)
     
     const zip = new JSZip(); // instance of JSZip

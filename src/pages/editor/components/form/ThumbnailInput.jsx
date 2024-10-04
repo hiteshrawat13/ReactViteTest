@@ -63,14 +63,14 @@ const ThumbnailPicker = () =>  {
                 <TextBox label="Thumbnail Name" name="THUMBNAIL_NAME" required={true} />
                 {/* <input type="text" {...register("THUMBNAIL_NAME", { required: true })} placeholder='Search Logo Here' />
                 {errors["THUMBNAIL_NAME"] && <p>Thumbnail file name is required</p>} */}
-                <div className="drop-zone" 
-                onClick={handleDropZoneClick}
-                onDrop={handleDropZoneDrop}
-                onDragOver={(event) => event.preventDefault()}
-                >
-                    Drop thumbnail here or click to select a thumbnail file.<br />
-                    <div className='selected-file-name'>{selectedThumbnailFileName}</div>
-                </div>
+                    <div className="drop-zone" 
+                        onClick={handleDropZoneClick}
+                        onDrop={handleDropZoneDrop}
+                        onDragOver={(event) => event.preventDefault()}
+                    >
+                        Drop thumbnail here or click to select a thumbnail file.<br />
+                        <div className='selected-file-name'>{selectedThumbnailFileName}</div>
+                    </div>
             </div>
           
         </div>

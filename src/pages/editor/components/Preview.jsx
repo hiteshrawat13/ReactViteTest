@@ -3,7 +3,8 @@ import { json } from 'react-router-dom';
 import { StepperContext } from './stepper/StepperContext';
 import { load } from 'cheerio/lib/slim';
 import { useSelector } from 'react-redux';
-const Preview = forwardRef(({publishHelper }, ref) => {
+import { TextBox } from './form';
+const Preview = forwardRef(({publishHelper}, ref) => {
   const {  logoFileRef,thumbnailFileRef} = useContext(StepperContext)
   const {data} = useSelector(state => state.campaignData)
   const [buttons, setButtons] = useState(null)
@@ -89,11 +90,11 @@ const Preview = forwardRef(({publishHelper }, ref) => {
 
 
   const changeWidthLiveLogo = (e) => {
-    iframeRef.current.contentDocument.getElementById('sponsorLogo').width = e.target.value;
+    iframeRef.current.contentDocument.getElementById('splogo').style.width = e.target.value;
   }
 
   const changeWidthLiveThumbnail = (e) => {
-    iframeRef.current.contentDocument.getElementById('edmThumbnail').width = e.target.value;
+    iframeRef.current.contentDocument.getElementById('thumbnail').style.width = e.target.value;
   }
 
   return (
@@ -101,7 +102,6 @@ const Preview = forwardRef(({publishHelper }, ref) => {
 
       <div className="iframOuter" style={{ width: '100%' }}>
         {
-
           buttons?.map((page, i) => {
 
             try{
@@ -110,17 +110,15 @@ const Preview = forwardRef(({publishHelper }, ref) => {
             }catch(error){
               return <button className='previewBtns' onClick={(e) => handlePreview(i, e)} key={i}>{page.name}</button>
             }
-           
-           
           })
         }
 
         <br></br>
-        <iframe ref={iframeRef}   style={{ 'margin-top': '2px', width: "calc(100% - 70px)", height: "calc(100% - 70px)", minHeight: "500px" }}></iframe>
+        <iframe ref={iframeRef}   style={{ 'margin-top': '2px', width: "calc(100%)", height: "calc(100%)", minHeight: "500px" }}></iframe>
       </div>
 
 
-
+{/* 
       <span style={{
         background: 'white',
         'display': 'inline-block',
@@ -133,14 +131,21 @@ const Preview = forwardRef(({publishHelper }, ref) => {
         <h4 style={{ 'marginBottom': '10px', 'marginTop': '0px' }}>Editor :</h4>
 
         <label htmlFor="" style={{ 'marginBottom': '10px' }}>Sponsor Logo Width</label>
-        <input type="number" style={{ 'padding': '5px' }} defaultValue={200} name="LOGO_WIDTH" onChange={changeWidthLiveLogo} />
 
+
+
+    <input type="number" style={{ 'padding': '5px' }} defaultValue={200} name="LOGO_WIDTH" onChange={changeWidthLiveLogo} />  
+
+      
         <label htmlFor="" style={{ 'marginBottom': '10px' }}>Thumbnail Width</label>
         <input type="number" style={{ 'padding': '5px' }} defaultValue={300} name="THUMBNAIL_WIDTH" onChange={changeWidthLiveThumbnail} />
 
-      </span>
+      </span> */}
+      <div>  
 
-
+      
+    
+      </div>
     </div>
   )
 })

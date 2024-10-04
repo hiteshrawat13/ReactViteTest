@@ -11,6 +11,12 @@ import CheckBox from './CheckBox';
 import FTPUpload from './FTPUpload';
 import ZIPDownload from './ZIPDownload';
 import HiddenField from './HiddenField';
+
+import LogoInput from './LogoInput';
+
+import AssetInput from './AssetInput';
+
+import ThumbnailInput from './ThumbnailInput';
 export {
     Stepper,
     Step,
@@ -24,5 +30,10 @@ export {
     AssetPicker,
     FTPUpload,
     Preview,
-    ZIPDownload
+    ZIPDownload,
+
+    LogoInput,
+    AssetInput,
+    ThumbnailInput
+    
 }

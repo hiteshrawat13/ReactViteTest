@@ -9,6 +9,7 @@ import { EditorContext } from 'react-simple-wysiwyg';
 import { Stepper ,Step} from './components/form/index';
 import { useDispatch } from 'react-redux';
 import { setData, addData, updateData } from '../../store/campaign/CampaignSlice'
+import { useSelector } from 'react-redux';
 const Context = React.createContext();
 const Editor = () => {
   
@@ -32,6 +33,13 @@ const Editor = () => {
 
 
 
+  
+  const {data} = useSelector(state => state.campaignData)
+
+
+  const getValue=(value)=>{
+    return data[value]
+  }
  
 
 
@@ -72,6 +80,7 @@ const Editor = () => {
           setWatch,
           setCurrentFormMethods,
           setValue,
+          getValue,
           setState,
           setFormValue
           }}>

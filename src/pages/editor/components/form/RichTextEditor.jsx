@@ -200,7 +200,7 @@ const RichTextEditor = ({label,name,required=false,width=null,value=null}) => {
     defaultActionOnPaste: 'insert_as_html',
     defaultLineHeight: 1.5,
     
-    enter: 'div',
+    enter: 'p',
 toolbarButtonSize: 'small',
     statusbar: false,
     sizeLG: 900,

@@ -29,6 +29,7 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
 
     const logoFileRef = useRef()
     const thumbnailFileRef = useRef()
+    const thumbnailFileLandingPageRef = useRef()
     const pdfFileRef = useRef()
     const mp4FileRef = useRef()
 
@@ -117,6 +118,8 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
             {/* THESE FILE INPUTS ARE USED FRO LOGO THUMBNAIL PDF MP4 TO KEEP IN STATE */}
             <input type="file" name="LOGO_FILE" accept="image/png" className="" ref={logoFileRef} />
             <input type="file" name="THUMBNAIL_FILE" accept="image/png" className="" ref={thumbnailFileRef} />
+            <input type="file" name="LANDING_THUMBNAIL_FILE" accept="image/png" className="" ref={thumbnailFileLandingPageRef} />
+            
             <input type="file" name="PDF_FILE" className="" ref={pdfFileRef} />
             <input type="file" name="MP4_FILE" className="" ref={mp4FileRef} />
         </div>
@@ -125,6 +128,8 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
             {
                 stepsArray.map((child, i) => {
                     return <label
+
+                        key={i}
                         className={
                             `step 
                         ${(i < step) ? 'complete' : ''}  
@@ -138,7 +143,7 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
                             checked={step == i}
                             {...(i + 1 > totalStepsExplored && { disabled: true })}
                         />
-                        <div class="node"></div>
+                        <div className="node"></div>
                         <span>{child.props.title}</span>
                     </label>
                 })
@@ -152,6 +157,7 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
 
             logoFileRef,
             thumbnailFileRef,
+            thumbnailFileLandingPageRef,
             pdfFileRef,
             mp4FileRef,
            
@@ -181,7 +187,7 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
             {(step > 0) && <button onClick={handlePrevious}>Previous</button>}
             {(step < totalSteps - 1) && <button onClick={handleNext}>Next</button>}
 
-            {React.Children.count(children)} 
+             
         </div>
 
     </div>

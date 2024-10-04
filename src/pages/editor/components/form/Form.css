@@ -30,9 +30,9 @@ form{
 
         display: inline-block;
 
-        font-size: 13px;
-        font-weight: bold;
-        color:rgb(51, 49, 49);
+        font-size: 14px;
+        font-weight: normal;
+        color:rgb(19, 12, 12);
         padding-bottom:6px;
     }
 
@@ -63,11 +63,11 @@ form{
         border-radius: 4px;
         border:1px solid rgba(97, 95, 95, 0.39);
         width: 100%;
-        box-shadow: inset 0px 0px 4px #c5c5c5b8;
-
+        box-shadow: inset 0px 0px 2px #c5c5c5b8;
+        color:#19043f;
         &:focus{
             outline:1px solid rgb(80, 145, 219);
-            box-shadow: 0px 0px 10px #4f7cdb;
+            box-shadow: 0px 0px 5px #485f91;
         }
     }
 

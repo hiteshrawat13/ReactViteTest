@@ -94,9 +94,78 @@ convertToEntities=(input)=> {
 
     async getEdmHtml({forPreview}){
         let data=edm_html;      
+
+
+    
+
+        const traditional_layout=`
+        <table width="100%" style="background-color: #ffffff; padding: 1.2% 2%;" align="center" class="font-style">
+                            <tbody class="table table-borderless table-responsive">
+                                <tr scope="col">
+                                    <td style="padding-left: 8px; vertical-align: top; padding-right: 20px;">
+                                
+										<div class="edm_abstract">
+											##EDM_ABSTRACT##
+										</div>
+
+                                    </td>
+                                    <td style="display: flex; flex: start;">
+                                        <a href="##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#" target="_blank">
+                                            <img src="##BASE_URL####LINK_NAME##.png" alt="##EDM_TITLE##" class="img" />
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+        `
+
+
+        const full_width_layout=`
+        <table width="100%" style="background-color: #ffffff; padding: 1.2% 2%;" align="center" class="font-style">
+                            <tbody class="table table-borderless table-responsive">
+                           
+								<tr>
+								 <td colspan="2">
+                                        <a href="##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#" target="_blank">
+                                            <img src="##BASE_URL####LINK_NAME##.png" alt="##EDM_TITLE##" class="img-full-width" />
+                                        </a>
+
+                                    </td>
+								</tr>
+
+								<tr>
+									<td colspan="2">
+										<div class="edm_abstract">
+											##EDM_ABSTRACT##
+										</div>
+									</td>
+								</tr>
+                            </tbody>
+                        </table>
+        `
+
+        if(this.state["EDM_LAYOUT"]=="Traditional"){
+            data=data.replaceAll(`##EDM_LAYOUT##`, this.convertToEntities ( traditional_layout  ) )
+        } else if(this.state["EDM_LAYOUT"]=="Full width thumbnail and abstract"){
+            data=data.replaceAll(`##EDM_LAYOUT##`, this.convertToEntities ( full_width_layout  ) )
+        }
+
+
         
         data= this.convertToEntities( this.getPrivacyPolicy(data)  ) //Privacy Policy
         
+
+
+        if(forPreview){
+            if(this.logoDataUrl){data=data.replaceAll(`##BASE_URL####LOGO_NAME##`, this.logoDataUrl )}
+            if(this.thumbnailDataUrl){data=data.replaceAll(`##BASE_URL####LINK_NAME##.png`, this.thumbnailDataUrl )}
+
+            console.log(this.thumbnailDataUrl,"------------------------thumbnail");
+            
+        }
+
+
         for (const [key, value] of Object.entries(this.state)) {
             try {
                 if(typeof value === 'string' || value instanceof String)
@@ -112,11 +181,20 @@ convertToEntities=(input)=> {
         let data=landing_html
 
         if(forPreview){
-            if(this.logoDataUrl)data=data.replaceAll(`##BASE_URL####LOGO_NAME##`, this.logoDataUrl )
-            if(this.thumbnailDataUrl)data=data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, this.thumbnailDataUrl )
+            if(this.logoDataUrl){data=data.replaceAll(`##BASE_URL####LOGO_NAME##`, this.logoDataUrl )}
+            if(this.thumbnailDataUrl){data=data.replaceAll(`##BASE_URL####LINK_NAME##.png`, this.thumbnailDataUrl )}
         }
 
         data=this.getPrivacyPolicy(data) //Privacy Policy
+
+        if(this.state["LANDING_TITLE_SAME_AS_EDM_TITLE"]==true){
+            data=data.replaceAll(`##LANDING_TITLE##`, this.convertToEntities ( this.state["EDM_TITLE"]  ) )
+        } 
+
+
+        if(this.state["LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT"]==true){
+            data=data.replaceAll(`##LANDING_ABSTRACT##`, this.convertToEntities ( this.state["EDM_ABSTRACT"]  ) )
+        } 
 
         data=data.replaceAll(`##FORM##`, this.convertToEntities ( this.getFormHtml(this.state.form,TGIFFormRenderer) )  )
 
@@ -154,12 +232,37 @@ convertToEntities=(input)=> {
     getThanksHtml({forPreview}){
         let data=thanks_html
 
-
-
         data=this.getPrivacyPolicy(data) //Privacy Policy
+        const normal_thankyou=`\t
+        <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
+                            <tbody>
+                                <tr>
+                                    <td align="left" class="whitepaper" style="align-items: start; display: flex;">
+                                        <img   style=" height: auto !important;" alt="##EDM_TITLE##" src="##BASE_URL####LINK_NAME##.png" width="180" style="border: 1px solid #c4c5c600;" />
+                                    </td>
 
+                                    <td align="left" valign="top" class="style1 thankyou">
 
-        const normal_thankyou=`\t${this.state["THANK_YOU_PAGE"]}\n`
+                                        ${this.state["NORMAL_THANK_YOU_PAGE_TEXT"]}
+
+                                        <script>
+                                            var timeleft = 5;
+                                            var downloadTimer = setInterval(function () {
+                                                if (timeleft <= 0) {
+                                                    clearInterval(downloadTimer);
+                                                    document.getElementById("countdown").innerHTML = "0";
+                                                } else {
+                                                    document.getElementById("countdown").innerHTML = timeleft + "";
+                                                }
+                                                timeleft -= 1;
+                                            }, 1000);
+                                        </script>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+        
+        \n`
 
         const iframe_thankyou=`
         <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
@@ -168,6 +271,15 @@ convertToEntities=(input)=> {
                                     <td align="left" valign="top" class="style1 thankyou">
                                         <h3>##EDM_TITLE##</h3>
 	                                        ##IFRAME##
+
+                                            <iframe 
+                                            width="##IFRAME_WIDTH##" 
+                                            height="##IFRAME_HEIGHT##" 
+                                            src="##IFRAME##" 
+                                            title="##EDM_TITLE##" 
+                                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                            allowfullscreen></iframe>
+
                                     </td>
                                 </tr>
                             </tbody>
@@ -181,6 +293,9 @@ convertToEntities=(input)=> {
                                     <td align="left" valign="top" class="style1 thankyou">
                                         <h3>##EDM_TITLE##</h3>
 	                                        ##MP4##
+                                            <video class="jw-video jw-reset" tabindex="-1" style="object-fit: fill; width:##MP4_WIDTH##;height:##MP4_HEIGHT##" controls>
+                                            <source src="##MP4##" type="video/mp4">
+                                        </video> 
                                     </td>
                                 </tr>
                             </tbody>
@@ -201,9 +316,8 @@ convertToEntities=(input)=> {
                 break;
             case "IFRAME":
                 data=data.replaceAll(`##THANK_YOU_CONTENT##`,  this.convertToEntities(  iframe_thankyou )  )
-                data=data.replaceAll(`header( "refresh:5;url=##BASE_URL####LINK_NAME##.pdf" ); `,  ""  )//remove redirect
-                
-                break;
+                data=data.replaceAll(`header( "refresh:5;url=##BASE_URL####LINK_NAME##.pdf" ); `,  ""  )//remove redirect    
+            break;
         }
 
       

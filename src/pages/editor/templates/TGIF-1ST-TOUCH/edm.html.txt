@@ -65,6 +65,14 @@
 				border-radius:5px;
 				
 			}
+
+			.img-full-width {
+				padding-top: 0px;
+				width:100%;
+				border: 1px solid #e5e5e5;
+				border-radius:5px;
+				
+			}
 			.btn-primary-1 {
 				background-color: #0066b2;
 				width: 100%;
@@ -152,7 +160,7 @@
 
                                     <td width="234" align="right">
                                         <span style="font-size: 14px;">Sponsored By</span><br />
-                                        <img id="sponsorLogo" src="##BASE_URL####LOGO_NAME##" alt="Logo" style="width:##LOGO_WIDTH##;margin-top: 2px;" />
+                                        <img id="splogo" src="##BASE_URL####LOGO_NAME##" alt="Logo" style="width:##LOGO_WIDTH##;margin-top: 2px;" />
                                     </td>
                                 </tr>
                             </tbody>
@@ -169,25 +177,9 @@
 						</table>  
                         <!-- Full Width title end -->
 
-                        <table width="100%" style="background-color: #ffffff; padding: 1.2% 2%;" align="center" class="font-style">
-                            <tbody class="table table-borderless table-responsive">
-                                <tr scope="col">
-                                    <td style="padding-left: 8px; vertical-align: top; padding-right: 20px;">
-                                
-										<div class="edm_abstract">
-											##EDM_ABSTRACT##
-										</div>
 
-                                    </td>
-                                    <td style="display: flex; flex: start;">
-                                        <a href="##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#" target="_blank">
-                                            <img src="##BASE_URL####LINK_NAME##.png" alt="##EDM_TITLE##" class="img" />
-                                        </a>
+                        ##EDM_LAYOUT##
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
 
                         <!--Body part Ends here-->
                         <!--Privancy statement & call to action-->

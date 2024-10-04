@@ -7,6 +7,8 @@ import { PiFrameCornersThin } from "react-icons/pi";
 import { useFormContext } from 'react-hook-form'
 import TextBox from './TextBox';
 import { StepperContext } from '../stepper/StepperContext';
+import Row from './Row';
+import Col from './Col';
 const AssetPicker = () => {
     
     const Stepper = useContext(StepperContext)
@@ -95,10 +97,35 @@ const AssetPicker = () => {
             </div>
 
 
+
+
             {(assetFormatValue == "PDF") && <TextBox label="PDF" required="true" name="PDF_NAME" />}
-            {(assetFormatValue == "MP4") && <TextBox label="MP4" required="true" name="MP4_NAME" />}
+            {(assetFormatValue == "MP4") && <>
+            <TextBox label="MP4" required="true" name="MP4_NAME" />
+            <Row>
+            <Col>
+            <TextBox label="MP4 Video Width" required="true" name="MP4_WIDTH" />
+            </Col>
+            <Col>
+            <TextBox label="MP4 Video Height" required="true" name="MP4_HEIGHT" />
+            </Col>
+            </Row>
+            </>}
             {(assetFormatValue == "CLIENT_LINK") && <TextBox label="Client Link" required="true" name="CLIENT_LINK" />}
-            {(assetFormatValue == "IFRAME") && <TextBox label="IFrame" required="true" name="IFRAME" />}
+            {(assetFormatValue == "IFRAME") && <>
+            <TextBox label="IFrame Url" required="true" name="IFRAME" />  
+            <Row>
+                <Col>
+                <TextBox label="IFrame Width" required="true" name="IFRAME_WIDTH" />
+                </Col>
+                <Col>
+                <TextBox label="IFrame Height" required="true" name="IFRAME_HEIGHT" />
+                </Col>
+            </Row>
+           
+       
+            
+            </> }
 
 
             {(assetFormatValue == "PDF") && <div>

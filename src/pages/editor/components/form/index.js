@@ -14,9 +14,12 @@ import HiddenField from './HiddenField';
 
 import LogoInput from './LogoInput';
 
-import AssetInput from './AssetInput';
+import RadioGroup from './RadioGroup';
 
 import ThumbnailInput from './ThumbnailInput';
+import ThumbnailLandingInput from './ThumbnailLandingInput';
+
+import FileInput from './FileInput';
 export {
     Stepper,
     Step,
@@ -33,7 +36,10 @@ export {
     ZIPDownload,
 
     LogoInput,
-    AssetInput,
-    ThumbnailInput
+    RadioGroup ,
+    ThumbnailInput,
+    ThumbnailLandingInput,
+
+    FileInput
     
 }

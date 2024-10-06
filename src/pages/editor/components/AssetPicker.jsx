@@ -264,7 +264,7 @@
 import React from 'react'
 import LogoInput from './form/LogoInput'
 import ThumbnailInput from './form/ThumbnailInput'
-import AssetInput from './form/AssetInput'
+import AssetInput from './form/RadioGroup'
 import { TextBox } from './form'
 const AssetPicker = () => {
   return (

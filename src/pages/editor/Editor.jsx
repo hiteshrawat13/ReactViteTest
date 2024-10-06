@@ -12,7 +12,7 @@ import { setData, addData, updateData } from '../../store/campaign/CampaignSlice
 import { useSelector } from 'react-redux';
 const Context = React.createContext();
 const Editor = () => {
-  
+  const filesRef = useRef({})
   const location =useLocation()
 
   const campData=location?.state;
@@ -67,6 +67,25 @@ const Editor = () => {
   return (
     <div>
 
+        <div style={{ display: "block" }}>
+            {/* THESE FILE INPUTS ARE USED FRO LOGO THUMBNAIL PDF MP4 TO KEEP IN STATE */}
+            <input type="file"  className="" ref={ref=>filesRef.current.fileInput1=ref} />
+            <input type="file"  className="" ref={ref=>filesRef.current.fileInput2=ref} />
+            <input type="file"  className="" ref={ref=>filesRef.current.fileInput3=ref} />
+            <input type="file"  className="" ref={ref=>filesRef.current.fileInput4=ref} />
+            <input type="file"  className="" ref={ref=>filesRef.current.fileInput5=ref} />
+            <input type="file"  className="" ref={ref=>filesRef.current.fileInput6=ref} />
+            <input type="file"  className="" ref={ref=>filesRef.current.fileInput7=ref} />
+            <input type="file"  className="" ref={ref=>filesRef.current.fileInput8=ref} />
+            <input type="file"  className="" ref={ref=>filesRef.current.fileInput9=ref} />
+            <input type="file"  className="" ref={ref=>filesRef.current.fileInput10=ref} />
+            <input type="file"  className="" ref={ref=>filesRef.current.fileInput11=ref} />
+            <input type="file"  className="" ref={ref=>filesRef.current.fileInput12=ref} />
+            <input type="file"  className="" ref={ref=>filesRef.current.fileInput13=ref} />
+            
+
+        </div>
+
       {/* <Suspense fallback={<div>Loading...</div>}>
       <LazyComponent />
       </Suspense> */}
@@ -82,7 +101,8 @@ const Editor = () => {
           setValue,
           getValue,
           setState,
-          setFormValue
+          setFormValue,
+          filesRef
           }}>
             
         

@@ -5,7 +5,7 @@ import useSocket from '../useSocket'
 import axios from 'axios'
 import Config from '../../../../Config'
 
-const FTPUpload = ({publishHelper}) => {
+const FTPUpload = ({publishHelper,filesRef}) => {
   
 
   const campaignDataState = useSelector(state => state.campaignData)
@@ -22,7 +22,7 @@ const FTPUpload = ({publishHelper}) => {
 
   const handleGetFiles = async () => {
     let uploadFiles = []
-    if (logoFileRef?.current?.files[0]) {
+    if (filesRef.fileInput1.files[0]) {
       uploadFiles.push({
         type: "logo",
         name: campaignDataState.data['LOGO_NAME'],

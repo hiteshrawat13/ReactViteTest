@@ -55,6 +55,7 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null}) =>  {
         if (fileRef)
             fileRef.addEventListener("change", onImageFileChange);
             fileRef.setAttribute("data-tag", tag);
+            fileRef.setAttribute("data-name", name);
         return function cleanup() {
             fileRef.removeEventListener("change", onImageFileChange);
         };

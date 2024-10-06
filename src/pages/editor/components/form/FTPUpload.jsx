@@ -22,41 +22,21 @@ const FTPUpload = ({publishHelper,filesRef}) => {
 
   const handleGetFiles = async () => {
     let uploadFiles = []
-    if (filesRef.fileInput1.files[0]) {
-      uploadFiles.push({
-        type: "logo",
-        name: campaignDataState.data['LOGO_NAME'],
-        file: logoFileRef.current.files[0],
-        progress: 0
-      })
-    }
 
-    if (thumbnailFileRef?.current?.files[0]) {
-      uploadFiles.push({
-        type: "file",
-        name: campaignDataState.data['THUMBNAIL_NAME'],
-        file: thumbnailFileRef.current.files[0],
-        progress: 0
-      })
-    }
+    for (const [key, value] of Object.entries(filesRef)) {
+      console.log(`${key}: ${value}`);
 
-    if (pdfFileRef?.current?.files[0]) {
-      uploadFiles.push({
-        type: "file",
-        name: campaignDataState.data['PDF_NAME'],
-        file: pdfFileRef.current.files[0],
-        progress: 0
-      })
-    }
+      if (filesRef[key].files[0]) {
+        uploadFiles.push({
+          type: filesRef[key].dataset.tag,
+          name: campaignDataState.data[filesRef[key].dataset.name],
+          file: filesRef[key].files[0],
+          progress: 0
+        })
+      }
 
-    if (mp4FileRef?.current?.files[0]) {
-      uploadFiles.push({
-        type: "file",
-        name: campaignDataState.data['MP4_NAME'],
-        file: mp4FileRef.current.files[0],
-        progress: 0
-      })
     }
+    
 
     const templatefiles = await publishHelper.getPageFiles({ state: campaignDataState.data })
     templatefiles.forEach((file) => {

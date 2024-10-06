@@ -39,10 +39,10 @@ const RadioGroup = ({title=null,name,options=null}) => {
             {title && <h4>{title}</h4> }
 
             <div  className='form-group'>
-                <div className='radio-switches'>
+                <div className='radio-group'>
 
                     {options.map((option,i)=>{
-                return <><input type="radio" {...register(name, { required: true })} className="radio-switch" id={option.value} value={option.value} />
+                return <><input type="radio" {...register(name, { required: true })} className="radio-button" id={option.value} value={option.value} />
                 <label htmlFor={option.value}>{option.label}</label></>
 
                     })}

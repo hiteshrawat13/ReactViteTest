@@ -262,11 +262,11 @@ const Editor = ({ campData }) => {
       <Section title="Logo & Thumbnail">
 
         <FileInput name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1} />
-        <FileInput name="THUMBNAIL_NAME" label="Thumbnail" tag="thumbnail" fileRef={filesRef.current.fileInput2} />
+        <FileInput name="THUMBNAIL_NAME" label="Thumbnail" tag="file" fileRef={filesRef.current.fileInput2} />
 
         <CheckBox label="Use different thumbnail for edm page" name="USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE" />
         {(watch["USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE"] == true) &&
-          <FileInput name="EDM_THUMBNAIL_NAME" label="EDM Thumbnail" tag="thumbnail" fileRef={filesRef.current.fileInput3} />
+          <FileInput name="EDM_THUMBNAIL_NAME" label="EDM Thumbnail" tag="file" fileRef={filesRef.current.fileInput3} />
         }
 
 
@@ -282,11 +282,11 @@ const Editor = ({ campData }) => {
           { label: "IFrame", value: "IFRAME" }
         ]} />
         {(watch["ASSET_FORMAT"] == "PDF") &&
-          <FileInput name="PDF_NAME" label="PDF" tag="pdf" fileRef={filesRef.current.fileInput11} />
+          <FileInput name="PDF_NAME" label="PDF" tag="file" fileRef={filesRef.current.fileInput11} />
         }
 
         {(watch["ASSET_FORMAT"] == "MP4") &&
-          <FileInput name="MP4_NAME" label="MP4" tag="mp4" fileRef={filesRef.current.fileInput12} />
+          <FileInput name="MP4_NAME" label="MP4" tag="file" fileRef={filesRef.current.fileInput12} />
         }
 
         {(watch["ASSET_FORMAT"] == "CLIENT_LINK") &&
@@ -320,7 +320,7 @@ const Editor = ({ campData }) => {
 
     <Step title="Publish" key={1106}>
       Publish
-      <FTPUpload publishHelper={publishHelperRef.current} />
+      <FTPUpload publishHelper={publishHelperRef.current}  filesRef={filesRef.current}/>
       <ZIPDownload publishHelper={publishHelperRef.current} />
 
 

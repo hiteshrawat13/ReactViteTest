@@ -96,6 +96,23 @@ form{
 
 }
 
+
+.radio-group{
+
+    .radio-button{
+        appearance: none;
+
+        + label{
+            display: inline;
+            border:1px solid red;
+        }
+
+        ::checked + label{
+            border: #47bb47;
+        }
+    }
+}
+
 .file-preview{
     
     img{ width: 150px; }

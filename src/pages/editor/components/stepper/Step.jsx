@@ -7,7 +7,11 @@ import { StepperContext } from './StepperContext';
 
 const Step =  ({ children ,onWatch=null,onCurrentFormMethods=null }) => {
   const Stepper=useContext(StepperContext)
-    const methods = useForm({mode: "onChange"})
+    const methods = useForm({
+      mode: "onChange",
+      
+
+    })
 
 
     

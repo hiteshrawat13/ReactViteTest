@@ -4,9 +4,9 @@ import { saveAs } from 'file-saver';
 import { StepperContext } from '../stepper/StepperContext';
 import { useSelector } from 'react-redux';
 
-const ZIPDownload = ({publishHelper}) => {
-    const Stepper = useContext(StepperContext)
-    const { logoFileRef, thumbnailFileRef, pdfFileRef, mp4FileRef } = useContext(StepperContext)
+const ZIPDownload = ({publishHelper,filesRef}) => {
+    
+     
     const {data} = useSelector(state => state.campaignData)
     
     const zip = new JSZip(); // instance of JSZip
@@ -23,35 +23,20 @@ const ZIPDownload = ({publishHelper}) => {
         })
 
        
-        if(logoFileRef?.current?.files[0]){
-            zip.file(`${data["LOGO_NAME"]}`, logoFileRef?.current?.files[0] );
-        }else{
-            console.log("Logo file not attached.");
-        }
-
-       
-        if(thumbnailFileRef?.current?.files[0]){
-            zip.file(`${data["THUMBNAIL_NAME"]}`, thumbnailFileRef?.current?.files[0]  );
-        }else{
-            console.log("Thumbnail file not attached.");
-            
-        }
 
 
-        if(data["ASSET_FORMAT"]=="PDF" ){
-            try{
-                zip.file(`${data['PDF_NAME']}`, pdfFileRef?.current?.files[0] );
-            }catch(error){
-                console.log(error);
-            }
+
+        for (const [key, value] of Object.entries(filesRef)) {
            
-        }else if(data["ASSET_FORMAT"]=="MP4"){
-            try{
-                zip.file(`${data['MP4_NAME']}`, mp4FileRef?.current?.files[0] );
-            }catch(error){
-                console.log(error);
+      
+            if (filesRef[key].files[0]) {
+
+              zip.file(`${data[  filesRef[key].dataset.name  ]}`, filesRef[key].files[0] );
             }
+      
         }
+
+
 
         zip.generateAsync({ type: "blob" }).then( (blob) =>{ // 1) generate the zip file
             saveAs(blob, `${data['LINK_NAME']}.zip`);                          // 2) trigger the download

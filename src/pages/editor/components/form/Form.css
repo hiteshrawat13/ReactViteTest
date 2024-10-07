@@ -98,18 +98,58 @@ form{
 
 
 .radio-group{
+    display: flex;
+    flex-direction: row;
+    gap:5px;
 
     .radio-button{
         appearance: none;
+        height: 0px;width: 0px;
+        position: relative;
 
         + label{
+            position: relative;
             display: inline;
-            border:1px solid red;
+            
+            padding: 10px;
+            padding-left: 20px;
+            border-radius: 5px;
+             color:#0a0a0a;
+            cursor: pointer;
+    
         }
 
-        ::checked + label{
-            border: #47bb47;
+        + label:before{
+            content: '';
+            display: block;
+            position: absolute;
+            top: 10px;
+            left:0px;
+            height: 16px;
+            width: 16px;
+            background-color: #888888;
+            border:1px solid #818181;
+            border-radius: 18px;
         }
+
+        &:checked + label{
+           
+          font-weight: bold;
+          color: #19043f;
+        }
+
+        &:checked + label:after{
+            content: '';
+            display: block;
+            position: absolute;
+            top: 13px;
+            left: 3px;
+            height: 12px;
+            width: 12px;
+            background-color: #274b74;
+            border-radius: 18px;
+        }
+
     }
 }
 

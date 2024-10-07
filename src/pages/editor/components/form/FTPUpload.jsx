@@ -24,7 +24,7 @@ const FTPUpload = ({publishHelper,filesRef}) => {
     let uploadFiles = []
 
     for (const [key, value] of Object.entries(filesRef)) {
-      console.log(`${key}: ${value}`);
+       
 
       if (filesRef[key].files[0]) {
         uploadFiles.push({

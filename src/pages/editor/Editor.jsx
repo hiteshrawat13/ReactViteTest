@@ -61,13 +61,13 @@ const Editor = () => {
 
       console.log(currentFormMethods);
       
-      currentFormMethods.setValue(key,value)
+      currentFormMethods.setValue(key,value,{ shouldValidate: true }) //{shouldValidate:true} removes errors
     }
 
   return (
     <div>
 
-        <div style={{ display: "block" }}>
+        <div style={{ display: "none" }}>
             {/* THESE FILE INPUTS ARE USED FRO LOGO THUMBNAIL PDF MP4 TO KEEP IN STATE */}
             <input type="file"  className="" ref={ref=>filesRef.current.fileInput1=ref} />
             <input type="file"  className="" ref={ref=>filesRef.current.fileInput2=ref} />

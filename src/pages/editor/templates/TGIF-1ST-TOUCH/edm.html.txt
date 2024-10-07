@@ -160,7 +160,7 @@
 
                                     <td width="234" align="right">
                                         <span style="font-size: 14px;">Sponsored By</span><br />
-                                        <img id="splogo" src="##BASE_URL####LOGO_NAME##" alt="Logo" style="width:##LOGO_WIDTH##;margin-top: 2px;" />
+                                        <img id="splogo" src="##BASE_URL####LOGO_NAME##" alt="Logo" style="width:##LOGO_WIDTH##px;margin-top: 2px;" />
                                     </td>
                                 </tr>
                             </tbody>

@@ -315,13 +315,13 @@ const Editor = ({ campData }) => {
     </Step>
 
     <Step title="Preview" key={1105}>
-      <Preview publishHelper={publishHelperRef.current} />
+      <Preview publishHelper={publishHelperRef.current}   filesRef={filesRef.current}/>
     </Step>
 
     <Step title="Publish" key={1106}>
       Publish
       <FTPUpload publishHelper={publishHelperRef.current}  filesRef={filesRef.current}/>
-      <ZIPDownload publishHelper={publishHelperRef.current} />
+      <ZIPDownload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />
 
 
 

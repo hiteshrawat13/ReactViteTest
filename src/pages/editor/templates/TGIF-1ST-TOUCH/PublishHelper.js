@@ -137,7 +137,7 @@ convertToEntities=(input)=> {
                                     </td>
                                     <td style="display: flex; flex: start;">
                                         <a href="##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#" target="_blank">
-                                            <img src="##BASE_URL####LINK_NAME##.png" alt="##EDM_TITLE##" class="img" />
+                                            <img src="##BASE_URL####THUMBNAIL_NAME##" alt="##EDM_TITLE##" class="img" />
                                         </a>
 
                                     </td>
@@ -154,7 +154,7 @@ convertToEntities=(input)=> {
 								<tr>
 								 <td colspan="2">
                                         <a href="##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#" target="_blank">
-                                            <img src="##BASE_URL####LINK_NAME##.png" alt="##EDM_TITLE##" class="img-full-width" />
+                                            <img src="##BASE_URL####THUMBNAIL_NAME##" alt="##EDM_TITLE##" class="img-full-width" />
                                         </a>
 
                                     </td>
@@ -185,7 +185,14 @@ convertToEntities=(input)=> {
 
         if(forPreview==true){
             if(this.filesRef.fileInput1.files[0]){data=data.replaceAll(`##BASE_URL####LOGO_NAME##`, await this.getBase64Image( this.filesRef.fileInput1.files[0])  )}
-            if(this.filesRef.fileInput2.files[0]){data=data.replaceAll(`##BASE_URL####LINK_NAME##.png`, await this.getBase64Image( this.filesRef.fileInput2.files[0]) )}
+           
+       
+       if(this.state["USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE"]==true){
+        if(this.filesRef.fileInput3.files[0]){data=data.replaceAll(`##BASE_URL####EDM_THUMBNAIL_NAME##`, await this.getBase64Image( this.filesRef.fileInput3.files[0]) )}
+       
+       }else{
+        if(this.filesRef.fileInput2.files[0]){data=data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, await this.getBase64Image( this.filesRef.fileInput2.files[0]) )}
+       }
         }
 
 
@@ -205,7 +212,7 @@ convertToEntities=(input)=> {
 
         if(forPreview==true){
             if(this.filesRef.fileInput1.files[0]){data=data.replaceAll(`##BASE_URL####LOGO_NAME##`, await this.getBase64Image( this.filesRef.fileInput1.files[0])  )}
-            if(this.filesRef.fileInput2.files[0]){data=data.replaceAll(`##BASE_URL####LINK_NAME##.png`, await this.getBase64Image( this.filesRef.fileInput2.files[0]) )}
+            if(this.filesRef.fileInput2.files[0]){data=data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, await this.getBase64Image( this.filesRef.fileInput2.files[0]) )}
         }
 
         data=this.getPrivacyPolicy(data) //Privacy Policy
@@ -240,7 +247,7 @@ convertToEntities=(input)=> {
 
         const hasSpecialCharsInSubject=this.convertToEntities( this.state["SENDMAIL_SUBJECT"]) .includes("&#")
         data=data.replaceAll(`##SENDMAIL_SUBJECT##`, (hasSpecialCharsInSubject)? getSendmailSubject( this.state["SENDMAIL_BODY"] )  : this.state["SENDMAIL_BODY"].replaceAll("\\'","'")  )
-        data=data.replaceAll(`##SENDMAIL_BODY##`, this.convertToEntities( this.state["SENDMAIL_BODY"]) )
+        data=data.replaceAll(`##SENDMAIL_BODY##`, this.convertToEntities( this.state["SENDMAIL_BODY"]).replaceAll('"','\\"') )
 
         for (const [key, value] of Object.entries(this.state)) {
             try {
@@ -252,8 +259,12 @@ convertToEntities=(input)=> {
         }
         return  data
     }
-    getThanksHtml({forPreview}){
+    async getThanksHtml({forPreview}){
         let data=thanks_html
+
+
+     
+
 
         data=this.getPrivacyPolicy(data) //Privacy Policy
         const normal_thankyou=`\t
@@ -261,7 +272,7 @@ convertToEntities=(input)=> {
                             <tbody>
                                 <tr>
                                     <td align="left" class="whitepaper" style="align-items: start; display: flex;">
-                                        <img   style=" height: auto !important;" alt="##EDM_TITLE##" src="##BASE_URL####LINK_NAME##.png" width="180" style="border: 1px solid #c4c5c600;" />
+                                        <img   style=" height: auto !important;" alt="##EDM_TITLE##" src="##BASE_URL####THUMBNAIL_NAME##" width="180" style="border: 1px solid #c4c5c600;" />
                                     </td>
 
                                     <td align="left" valign="top" class="style1 thankyou">
@@ -341,6 +352,11 @@ convertToEntities=(input)=> {
                 data=data.replaceAll(`##THANK_YOU_CONTENT##`,  this.convertToEntities(  iframe_thankyou )  )
                 data=data.replaceAll(`header( "refresh:5;url=##BASE_URL####LINK_NAME##.pdf" ); `,  ""  )//remove redirect    
             break;
+        }
+
+        if(forPreview==true){
+            if(this.filesRef.fileInput1.files[0]){data=data.replaceAll(`##BASE_URL####LOGO_NAME##`, await this.getBase64Image( this.filesRef.fileInput1.files[0])  )}
+            if(this.filesRef.fileInput2.files[0]){data=data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, await this.getBase64Image( this.filesRef.fileInput2.files[0]) )}
         }
 
       

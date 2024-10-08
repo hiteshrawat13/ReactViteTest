@@ -112,7 +112,7 @@ const Editor = ({ campData }) => {
               // setValue("PDF_NAME",`${val}.pdf`)
               // setValue("MP4_NAME",`${val}.mp4`)
               setFormValue("THUMBNAIL_NAME", `${val}.png`)
-              setFormValue("THUMBNAIL_LANDING_NAME", `${val}-landing.png`)
+              setFormValue("EDM_THUMBNAIL_NAME", `${val}-edm.png`)
               setFormValue("PDF_NAME", `${val}.pdf`)
               setFormValue("MP4_NAME", `${val}.mp4`)
 

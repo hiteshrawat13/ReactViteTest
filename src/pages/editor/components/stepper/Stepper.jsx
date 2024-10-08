@@ -4,7 +4,7 @@ import React, { forwardRef, useContext, useEffect, useImperativeHandle, useRef, 
 import { StepperContext } from './StepperContext';
 import "./Stepper.css"
 
-import { EContext } from '../../Editor';
+import { EContext } from '../../EditorMain';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { setData, addData, updateData } from '../../../../store/campaign/CampaignSlice'
 

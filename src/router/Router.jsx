@@ -10,8 +10,10 @@ import AlphaEditor from "../pages/ALPHA-editor/AlphaEditor"
 import Auth from '../Auth';
 import CampaignDetails from "../pages/campaign/CampaignDetails"
 import Test from "../Test/Test"
-import Editor from "../pages/editor/Editor"
+ 
 import CreateCampaignPage from "../pages/new/CreateCampaignPage"
+import EditorMain from "../pages/editor/EditorMain"
+
 
 
 
@@ -74,7 +76,7 @@ const Router=[
         },
         {
           path: '/editor',
-          element: <Editor/>,
+          element: <EditorMain/>,
           title:"Editor"
         },
         {
@@ -101,6 +103,16 @@ const Router=[
 
     {
       path: "/new" ,
+      element: <CreateCampaignPage/>
+    },
+
+    {
+      path: "/campaignlist" ,
+      element: <CreateCampaignPage/>
+    },
+
+    {
+      path: "/linklist" ,
       element: <CreateCampaignPage/>
     },
 

@@ -29,18 +29,18 @@ import defaultFields from './default-fields.json'
 
 import defaultFieldsJson from "./default-fields.json"
 
-import { EContext } from '../../Editor'
+import { EContext } from '../../EditorMain'
 import PublishHelper from './PublishHelper'
 import Section from '../../components/form/Section'
 import Row from '../../components/form/Row'
 import Col from '../../components/form/Col'
-const Editor = ({ campData }) => {
+const Editor = ({   }) => {
 
 
   const publishHelperRef = useRef(new PublishHelper())
 
 
-  const { setValue, getValue, watch, setFormValue, filesRef } = useContext(EContext)
+  const { setValue, getValue, watch, setFormValue, filesRef ,campData} = useContext(EContext)
 
   useEffect(() => {
     setValue("FTP_CONFIG_NAME", "TGIF")
@@ -78,7 +78,7 @@ const Editor = ({ campData }) => {
         <Row>
           <Col>
             <TextBox label="Client Code" name="CLIENT_CODE" required={true} value={campData?.clientCode} />
-            {(watch["CLIENT_CODE"] === "Hitesh") && <>IT WORKS</>}
+            {(watch["CLIENT_CODE"] === "TEST") && <>IT WORKS</>}
           </Col>
           <Col>
             <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" />
@@ -213,9 +213,7 @@ const Editor = ({ campData }) => {
       {(getValue("ASSET_TYPE") != "Webinar") &&
         <>
           <Section title="Thankyou Page Details">
-
-
-
+ 
             <RichTextEditor label="Thank You Page" name="NORMAL_THANK_YOU_PAGE_TEXT" required={true} value={`
            <h1>Thank you...</h1>
         <span>for downloading <strong>"##EDM_TITLE##"</strong><br><br>
@@ -223,12 +221,7 @@ const Editor = ({ campData }) => {
 
           `} />
 
-
-
-
-
-
-
+ 
           </Section>
 
         </>
@@ -241,7 +234,7 @@ const Editor = ({ campData }) => {
 				
 				 <tr><td>Dear&nbsp;<b>$firstname,</b></td></tr>
 				 <tr><td>&nbsp;</td></tr>
-				 <tr><td>Thank you for requesting <b>\"##EDM_TITLE##\"</b>. You can view it immediately by clicking <a href='##BASE_URL####LINK_NAME##.pdf'>HERE</a>!</td></tr>
+				 <tr><td>Thank you for requesting <b>"##EDM_TITLE##"</b>. You can view it immediately by clicking <a href='##BASE_URL####LINK_NAME##.pdf'>HERE</a>!</td></tr>
 				 <tr><td>&nbsp;</td></tr>
 
 				 <tr><td>&nbsp;</td></tr>
@@ -274,11 +267,11 @@ const Editor = ({ campData }) => {
 
       </Section>
 
-      <Section title="Logo & Thumbnail">
+      <Section title="Asset">
         <RadioGroup name="ASSET_FORMAT" options={[
           { label: "PDF", value: "PDF" },
           { label: "MP4", value: "MP4" },
-          { label: "Client Label", value: "CLIENT_LINK" },
+          { label: "Client Link", value: "CLIENT_LINK" },
           { label: "IFrame", value: "IFRAME" }
         ]} />
         {(watch["ASSET_FORMAT"] == "PDF") &&
@@ -310,7 +303,7 @@ const Editor = ({ campData }) => {
 
 
     <Step title="Form" key={1104}>
-      Forms
+      
       <FormBuilder defaultFieldsJson={defaultFieldsJson} />
     </Step>
 
@@ -319,8 +312,15 @@ const Editor = ({ campData }) => {
     </Step>
 
     <Step title="Publish" key={1106}>
-      Publish
+    
+
+      <Section title="FTP Upload">
+
       <FTPUpload publishHelper={publishHelperRef.current}  filesRef={filesRef.current}/>
+      </Section>
+
+    
+      
       <ZIPDownload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />
 
 

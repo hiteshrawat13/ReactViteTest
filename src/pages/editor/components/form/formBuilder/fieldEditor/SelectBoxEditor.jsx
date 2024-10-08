@@ -16,8 +16,6 @@ import OptionList from '../../OptionList'
 const SelectBoxEditor = ({ id,data,toast,handleFieldDataUpdate}) => {
     const [isLabelModalOpened, setLabelModalOpened] = useState(false)
     const [isOptionsModalOpened, setOptionsModalOpened] = useState(false)
-
-
     const [label, setLabel] = useState(data.label)
     const [options, setOptions] = useState(data.options)
 

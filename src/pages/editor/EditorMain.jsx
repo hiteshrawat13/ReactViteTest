@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { setData, addData, updateData } from '../../store/campaign/CampaignSlice'
 import { useSelector } from 'react-redux';
 const Context = React.createContext();
-const Editor = () => {
+const EditorMain = () => {
   const filesRef = useRef({})
   const location =useLocation()
 
@@ -104,10 +104,11 @@ const Editor = () => {
           setFormValue,
           filesRef
           }}>
-            
-        
-   <TGIF_1ST_TOUCH_Editor  /> 
-          
+
+
+         {/* {   (campData.clientCode=="TGIF")   && <TGIF_1ST_TOUCH_Editor  /> } */}
+
+         <TGIF_1ST_TOUCH_Editor  />  
         </Context.Provider>
 
        
@@ -118,6 +119,6 @@ const Editor = () => {
   )
 }
 
-export default Editor
+export default EditorMain
 
 export const EContext =Context

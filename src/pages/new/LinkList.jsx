@@ -143,8 +143,8 @@ const LinkList = ({ campData, setCampData }) => {
         <div>
 
             {/* ******************** This is popup window for campaign only links update ***************** */}
-            <div className="popupOuter">
-                <div className="popup">
+            <div className="">
+                <div className="">
                     <ul className="nav nav-tabs" id="myTab" >
                         <li  >
                             <a id="show-links-tab" onClick={() => setMiniSwitch(false)} >Show Links</a>

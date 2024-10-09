@@ -53,6 +53,46 @@ const FTPUpload = ({publishHelper,filesRef}) => {
 
   }
 
+  const handleSaveLink=()=>{
+    let bodyFormData = new FormData();
+    let tempdata = {
+      campid: campaignDataState.data["CAMP_ID"],
+      campname: campaignDataState.data["CAMP_NAME"],
+      category: 'CS',
+      clientcode: campaignDataState.data["CLIENT_CODE"],
+      country: campaignDataState.data["REGION"],
+      editedby: userName,
+      linktitle: campaignDataState.data["EDM_TITLE"],
+      link: campaignDataState.data["BASE_URL"] + firstPageName,
+      linkcreatedby: userName,
+      language: campaignDataState.data["LANGUAGE"],
+      json_data: JSON.stringify(campaignDataState.data)
+    }
+
+    bodyFormData.append('campdata', JSON.stringify(tempdata));
+
+    axios({
+      method: "post",
+      url: Config.API_BASE_URL + `/link/save`,
+      data: bodyFormData,
+      headers: { "Content-Type": "application/json" }, 
+    })
+      .then(function (response) {
+        //handle success
+        console.log(response, "Complete");
+
+        alert("Complete")
+ 
+      })
+      .catch(function (err) {
+        console.log(err, "ERROR");
+        alert(err.response.data.message)
+         
+      });
+
+
+  }
+
 
   const handleUploadFiles = () => {
     let bodyFormData = new FormData();
@@ -204,6 +244,8 @@ const FTPUpload = ({publishHelper,filesRef}) => {
 
 
       <button onClick={(e) => { e.preventDefault(); handleUploadFiles() }}>Upload to ftp</button>
+
+      <button onClick={(e) => { e.preventDefault(); handleSaveLink() }}>Save Link</button>
     </div>
   )
 }

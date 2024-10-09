@@ -2,10 +2,10 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import DataTable from "react-data-table-component";
-import LinksModal from "./LinksPopupModal.jsx";
+ 
 import Config from "../../Config.js";
 
-const AdvancedDataTable = () => {
+const CampaignList = () => {
    
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -100,7 +100,7 @@ const AdvancedDataTable = () => {
   function openLinksPopup(data){
 
    
-    setCampData(data);
+    console.log(data);
   }
 
   return (
@@ -122,20 +122,15 @@ const AdvancedDataTable = () => {
       // onSelectedRowsChange={({ selectedRows }) => console.log(selectedRows)}
     />
 
-    {campData !== "" && (<LinksModal campData={campData} setCampData={setCampData} />)}
+    
      </>
   );
 }
 
-export default AdvancedDataTable
+export default CampaignList
 
 
 
-const removeItem = (array, item) => {
-    const newArray = array.slice();
-    newArray.splice(newArray.findIndex(a => a === item), 1);
-  
-    return newArray;
-  };
+ 
   
  

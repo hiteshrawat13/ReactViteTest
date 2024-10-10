@@ -2,20 +2,23 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import DataTable from "react-data-table-component";
 import Config from '../../Config';
-import { useNavigate } from 'react-router-dom';
- 
+import { useLocation, useNavigate } from 'react-router-dom';
+ import TemplateManager from '../editor/templates/TemplateManager';
 
 
 const LinkList = ({ campData, setCampData }) => {
+
+    
     const navigate=useNavigate()
+    const location = useLocation()
     const [miniSwitch, setMiniSwitch] = useState(false);
     const [links, setLinks] = useState('');
-
+    const templates=TemplateManager.find(client=>client.clientCode==location?.state?.clientCode)
 
     useEffect(() => {
         (async () => {
             const response = await axios.get(
-                Config.API_BASE_URL+`/camplist/getLinks?camp_name=${campData.camp_name}`
+                Config.API_BASE_URL+`/camplist/getLinks?camp_name=${location?.state?.camp_name}`
             );
 
             setLinks(response.data)
@@ -24,7 +27,7 @@ const LinkList = ({ campData, setCampData }) => {
     }, [])
 
 
-    const handleCreateLink=(campData)=>{
+    const handleCreateLink=(campData,templateId)=>{
 
         const { 
             Client_Code:clientCode,
@@ -34,20 +37,16 @@ const LinkList = ({ campData, setCampData }) => {
             camp_Created_By:campCreatedBy,
             last_edited_By:lastEditedBy,
             comment:comment,
-            Country:country
+            Country:country,
+            
   
-          }=campData
+          }=location?.state
 
 
-        navigate(`/editor/${clientCode}`,{state: { 
-            clientCode,
-            category,
-            campaignId,
-            campaignName,
-            campCreatedBy,
-            lastEditedBy,
-            comment,
-            country
+        navigate(`/editor`,{state: { 
+           ...location?.state,
+            
+            templateId
   
           }})
     }
@@ -142,6 +141,11 @@ const LinkList = ({ campData, setCampData }) => {
 
         <div>
 
+{JSON.stringify(location?.state) }
+
+{templates.templates.map( (template,i) => { 
+return <><button key={i}  onClick={()=>{  handleCreateLink(location?.state,template.id) } }>{template.title}</button></>
+})}
             {/* ******************** This is popup window for campaign only links update ***************** */}
             <div className="">
                 <div className="">
@@ -153,7 +157,7 @@ const LinkList = ({ campData, setCampData }) => {
                             <a id="add-links-tab" onClick={() => setMiniSwitch(true)} >Camp Details</a>
                         </li>
                         <li  >
-                            <a   onClick={() => handleCreateLink(campData)} >Create Link</a>
+                            <a onClick={() => handleCreateLink(campData)} >Create Link</a>
                         </li>
                     </ul>
                     <button type="button" className="btn closeBtn" id="cancelBtn" onClick={() => setCampData("")}>

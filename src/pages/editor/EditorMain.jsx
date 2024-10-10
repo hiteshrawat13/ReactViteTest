@@ -10,12 +10,17 @@ import { Stepper ,Step} from './components/form/index';
 import { useDispatch } from 'react-redux';
 import { setData, addData, updateData } from '../../store/campaign/CampaignSlice'
 import { useSelector } from 'react-redux';
+import TemplateManager from './templates/TemplateManager';
+
+
 const Context = React.createContext();
 const EditorMain = () => {
   const filesRef = useRef({})
   const location =useLocation()
 
   const campData=location?.state;
+
+   const Editor11=TemplateManager.find(client=>client.clientCode==campData.clientCode).templates.find(template=>template.id==campData.templateId).editor
 
   const [editor, setEditor] = useState(null)
 
@@ -108,7 +113,13 @@ const EditorMain = () => {
 
          {/* {   (campData.clientCode=="TGIF")   && <TGIF_1ST_TOUCH_Editor  /> } */}
 
-         <TGIF_1ST_TOUCH_Editor  />  
+         {/* <TGIF_1ST_TOUCH_Editor  />   */}
+      
+<Suspense>
+
+  
+          <Editor11/>
+          </Suspense>
         </Context.Provider>
 
        

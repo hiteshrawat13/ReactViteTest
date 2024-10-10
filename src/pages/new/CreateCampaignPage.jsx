@@ -7,6 +7,7 @@ import instance from './ApiService'
 import { useNavigate } from 'react-router-dom'
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
+import TemplateManager from '../editor/templates/TemplateManager'
 
 const CreateCampaignPage = () => {
 
@@ -30,9 +31,9 @@ const CreateCampaignPage = () => {
 
 
 
-  const openModal=()=>{
+  const openModal=(cliendCode)=>{
    
-    setClientCode("TGIF")
+    setClientCode(cliendCode)
     setCategory("CS")
     setCampCreatedBy("ADMIN")
     setLastEditedBy("ADMIN")
@@ -74,7 +75,7 @@ const CreateCampaignPage = () => {
 
     if (response.data.status == 200) {
       //  navigate(`/editor/${clientCode}`,{state: { 
-      navigate(`/editor/`, {
+      navigate(`/linklist`, {
         state: {
           clientCode,
           category,
@@ -97,7 +98,17 @@ const CreateCampaignPage = () => {
   }
   return (
     <div>
-      <button onClick={()=>openModal()}>TGIF</button>
+
+      {
+        TemplateManager.map((client,i)=>{
+         return <div key={i}>
+            {client.title} 
+            <button onClick={()=>openModal(client.clientCode)}>Create Campaign</button> 
+          </div>
+        })
+      }
+
+      
       <Modal
         center
         open={isCreateCampaignModalOpened}

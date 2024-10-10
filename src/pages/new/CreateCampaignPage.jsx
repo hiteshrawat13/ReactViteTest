@@ -31,9 +31,9 @@ const CreateCampaignPage = () => {
 
 
 
-  const openModal=(cliendCode)=>{
+  const openModal=(clientCode)=>{
    
-    setClientCode(cliendCode)
+    setClientCode(clientCode)
     setCategory("CS")
     setCampCreatedBy("ADMIN")
     setLastEditedBy("ADMIN")

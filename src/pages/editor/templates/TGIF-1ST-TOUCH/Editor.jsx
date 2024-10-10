@@ -25,7 +25,7 @@ import {
 
 
 
-import defaultFields from './default-fields.json'
+ 
 
 import defaultFieldsJson from "./default-fields.json"
 
@@ -44,7 +44,7 @@ const Editor = ({   }) => {
 
   useEffect(() => {
     setValue("FTP_CONFIG_NAME", "TGIF")
-    setValue("form", defaultFields)
+     
     //alert("TGIF")
   }, [])
 
@@ -83,6 +83,11 @@ const Editor = ({   }) => {
           <Col>
             <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" />
           </Col>
+        </Row>
+
+        <Row>
+          <Col><TextBox label="Link Type" name="LINK_TYPE" required={true} value={campData?.templateType} readOnly/></Col>
+          <Col><TextBox label="Template Id" name="TEMPLATE_ID" required={true} value={campData?.templateId} readOnly/></Col>
         </Row>
 
 

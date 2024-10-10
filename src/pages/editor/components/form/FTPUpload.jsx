@@ -53,9 +53,9 @@ const FTPUpload = ({publishHelper,filesRef}) => {
 
   }
 
-  const handleSaveLink=()=>{
-    let bodyFormData = new FormData();
-    let tempdata = {
+
+  const getTempData=()=>{
+    return {
       campid: campaignDataState.data["CAMP_ID"],
       campname: campaignDataState.data["CAMP_NAME"],
       category: 'CS',
@@ -66,8 +66,14 @@ const FTPUpload = ({publishHelper,filesRef}) => {
       link: campaignDataState.data["BASE_URL"] + firstPageName,
       linkcreatedby: userName,
       language: campaignDataState.data["LANGUAGE"],
-      json_data: JSON.stringify(campaignDataState.data)
+      json_data: JSON.stringify(campaignDataState.data),
+      link_type:campaignDataState.data["LINK_TYPE"]
     }
+  }
+
+  const handleSaveLink=()=>{
+    let bodyFormData = new FormData();
+    let tempdata = getTempData()
 
     bodyFormData.append('campdata', JSON.stringify(tempdata));
 
@@ -99,20 +105,7 @@ const FTPUpload = ({publishHelper,filesRef}) => {
     bodyFormData.append('sessionId', socketSessionId);
     bodyFormData.append('socketId', socketId);
     bodyFormData.append('ftpConfigName', campaignDataState.data["FTP_CONFIG_NAME"]);
-    let tempdata = {
-      campid: campaignDataState.data["CAMP_ID"],
-      campname: campaignDataState.data["CAMP_NAME"],
-      category: 'CS',
-      clientcode: campaignDataState.data["CLIENT_CODE"],
-      country: campaignDataState.data["REGION"],
-      editedby: userName,
-      linktitle: campaignDataState.data["EDM_TITLE"],
-      link: campaignDataState.data["BASE_URL"] + firstPageName,
-      linkcreatedby: userName,
-      language: campaignDataState.data["LANGUAGE"],
-      json_data: JSON.stringify(campaignDataState.data)
-    }
-
+    let tempdata = getTempData()
     bodyFormData.append('campdata', JSON.stringify(tempdata));
 
     let templateFiles = []

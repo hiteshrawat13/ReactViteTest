@@ -4,7 +4,7 @@
 const TGIFFormRenderer = {
     TextBox: (obj) => {
         return `
-           <tr>
+           <tr class="form-group">
                <th width="47%">
                <label for="${obj.id}">
                    <span title="Required Field">${obj.label}</span>
@@ -26,7 +26,7 @@ const TGIFFormRenderer = {
 
         if (obj.isFullWidth) {
             return `
-        <tr>
+        <tr class="form-group">
         <td colspan="2">
         <label for="${obj.id}">
             <span title="Required Field">${obj.label}</span>
@@ -44,7 +44,7 @@ const TGIFFormRenderer = {
         `
         } else {
             return `
-        <tr>
+        <tr class="form-group">
         <th>
         <label for="${obj.id}">
             <span title="Required Field">${obj.label}</span>
@@ -70,7 +70,7 @@ const TGIFFormRenderer = {
     CheckGroup: (obj) => {
         return `
                                           
-<tr>
+<tr class="form-group">
     <td colspan="2" >
         <div>${obj.label} ${(obj.label &&  obj.isRequired) ? `<span style="color: red;">*</span>` : ""}</div>
         <div class="check-group">
@@ -90,7 +90,7 @@ const TGIFFormRenderer = {
     RadioGroup: (obj) => {
         return `
                                           
-<tr>
+<tr class="form-group">
 <td colspan="2">
        <div>${obj.label} ${(obj.label && obj.isRequired) ? `<span style="color: red;">*</span>` : ""}</div>
        <div class="check-group">
@@ -117,7 +117,7 @@ const TGIFFormRenderer = {
 
     CheckBox: (obj) => {
         return `								   
-       <tr>
+       <tr class="form-group">
        <th colspan="2">
        <div class="check-group">
         <label class="radio-option">
@@ -134,7 +134,7 @@ const TGIFFormRenderer = {
 
     Text: (obj) => {
         return `								   
-       <tr>
+       <tr class="form-group">
         <th colspan="2">
             <div class="radio-option">
                 <span>${obj.label}</span>

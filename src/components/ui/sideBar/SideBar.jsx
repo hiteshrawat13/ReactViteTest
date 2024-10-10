@@ -85,14 +85,16 @@ const SideBar = () => {
                             id:51,
                             type:"menuItem",
                             label:"My Campaigns",
-                            href:"/campaigns",
+                           // href:"/campaigns",
+                            href:"/campaignlist",
                             icon:<GoDot size={"1.5em"}/>
                         },
                         {
                             id:52,
                             type:"menuItem",
                             label:"Create Campaign",
-                            href:"/campaigns/create",
+                            // href:"/campaigns/create",
+                            href:"/new",
                             icon:<GoDot size={"1.5em"} />
                         }
                     ]

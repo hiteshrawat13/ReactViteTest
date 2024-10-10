@@ -60,6 +60,8 @@ const EditorMain = () => {
 
     const setState=(data)=>{
       dispatch(  setData( data )  )
+
+      alert("DATA SEt CALLED")
     }
 
     const setFormValue=(key,value)=>{
@@ -69,6 +71,13 @@ const EditorMain = () => {
       currentFormMethods.setValue(key,value,{ shouldValidate: true }) //{shouldValidate:true} removes errors
     }
 
+    useEffect(() => {
+      if(campData.jsonObject) setState(campData.jsonObject)
+      return () => {
+        
+      }
+    }, [])
+    
   return (
     <div>
 
@@ -110,8 +119,6 @@ const EditorMain = () => {
           filesRef
           }}>
 
-
-         {/* {   (campData.clientCode=="TGIF")   && <TGIF_1ST_TOUCH_Editor  /> } */}
 
          {/* <TGIF_1ST_TOUCH_Editor  />   */}
       

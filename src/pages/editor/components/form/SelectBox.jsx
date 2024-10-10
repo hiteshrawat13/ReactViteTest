@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 
-const SelectBox = ({label,name,required,options,width=null,...rest}) => {
+const SelectBox = ({label,name,value=null,required,options,width=null,...rest}) => {
     const campaignDataState = useSelector(state => state.campaignData)
     const { register,unregister,setValue, formState: { errors } } = useFormContext()
 
     useEffect(() => {
-        setValue(name,campaignDataState.data[name]||"")
+        setValue(name,campaignDataState.data[name] ||value || "")
         return () => {
           unregister(name)
         }

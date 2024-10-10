@@ -99,7 +99,34 @@ const CampaignList = () => {
   };
 
   function openLinksPopup(data){
-    navigate(`/linklist`,{state:data})
+
+    const { 
+        Client_Code:clientCode,
+        Category:category,
+        camp_id:campaignId,
+        camp_name:campaignName,
+        camp_Created_By:campCreatedBy,
+        last_edited_By:lastEditedBy,
+        comment:comment,
+        Country:country,
+        
+
+      }=data
+
+    navigate(`/linklist`,{state:
+        {
+           clientCode,
+           category,
+            campaignId,
+            campaignName,
+            campCreatedBy,
+            lastEditedBy,
+            comment,
+            country,
+
+        }
+
+    })
    
     console.log(data);
   }

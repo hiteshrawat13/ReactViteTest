@@ -200,12 +200,22 @@ const FormBuilder = (defaultFieldsJson) => {
       } }>Log From Json</button>
 
 
+<button onClick={(e)=>{
+      e.preventDefault()
+      try{
+        dispatch(loadFieldsFromJson(defaultFieldsJson.defaultFieldsJson))
+        alert("Default form fields loaded.")
+      }catch(error){
+        alert("Error loading form fields.")
+      }
+      
+      } }>Load Default Fields</button>
+
+
 <button onClick={handleNameDataRecalculate }>Recalculate name="data[]"</button>
       <div className='formBuilder'>
 
         <FieldList getIcon={getIcon} setSelectedField={setSelectedField} selectedField={selectedField} />
-
-
 
         <div className="fieldEditor">
           <div className='fieldEditorHolder'>

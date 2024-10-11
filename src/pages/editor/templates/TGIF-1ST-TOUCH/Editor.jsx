@@ -55,7 +55,7 @@ const Editor = ({   }) => {
 
 
 
-      <button onClick={(e) => {
+      {/* <button onClick={(e) => {
         e.preventDefault();
         const data = JSON.parse(localStorage.getItem("data"))
         console.log(data);
@@ -66,7 +66,7 @@ const Editor = ({   }) => {
         setValue("form", data.form)
         alert("State Loaded")
 
-      }} >Load State From Local Storage</button>
+      }} >Load State From Local Storage</button> */}
 
       <HiddenField name="BASE_URL" value="https://resource.itbusinesstoday.com/whitepapers/" />
       <HiddenField name="YEAR" value={new Date().getFullYear() + ""} />
@@ -313,7 +313,24 @@ const Editor = ({   }) => {
     </Step>
 
     <Step title="Preview" key={1105}>
-      <Preview publishHelper={publishHelperRef.current}   filesRef={filesRef.current}/>
+      <Preview publishHelper={publishHelperRef.current}   filesRef={filesRef.current}  controls={
+        ({iframe})=>{
+          return <>
+          <div>
+          <TextBox type="number" label="Logo Width" name="LOGO_WIDTH" value={180}  onChange={(e)=>{
+              
+              iframe.contentDocument.querySelector('.splogo').style.width = e.target.value +"px"
+
+              console.log(iframe.contentDocument.querySelector('.splogo'));
+              
+              setValue("LOGO_WIDTH",e.target.value)
+
+            } } />
+            
+          </div>
+          </>
+        }
+      } />
     </Step>
 
     <Step title="Publish" key={1106}>

@@ -4,7 +4,7 @@ import { StepperContext } from './stepper/StepperContext';
 import { load } from 'cheerio/lib/slim';
 import { useSelector } from 'react-redux';
 import { TextBox } from './form';
-const Preview = forwardRef(({publishHelper,filesRef}, ref) => {
+const Preview = forwardRef(({publishHelper,filesRef,controls}, ref) => {
  // const {  logoFileRef,thumbnailFileRef} = useContext(StepperContext)
   const {data} = useSelector(state => state.campaignData)
   const [buttons, setButtons] = useState(null)
@@ -122,6 +122,7 @@ const Preview = forwardRef(({publishHelper,filesRef}, ref) => {
       </span> */}
       <div>  
 
+        {controls({iframe:iframeRef.current})}
       
     
       </div>

@@ -193,6 +193,26 @@ const RichTextEditor = ({label,name,required=false,width=null,value=null}) => {
 
   const config = useMemo(
     () => ({
+
+
+      events: {
+        paste: e => {
+            const newContent = e.target.innerHTML.replace(/a/g,"--------"); // remove font-family...
+            e.value = newContent;
+            e.target.value = newContent;
+            e.target.innerHTML = newContent;
+            alert("ON Paste")
+            console.log(e)
+            return e;
+        }
+
+        ,afterPaste:e=>{
+          console.log("onPaser",e)
+          e.value="EEEEEEEEEEEEE"
+         return e;
+        }
+    },
+
       style: { font: "14px Arial", },
       height: 210,
     readonly: false,

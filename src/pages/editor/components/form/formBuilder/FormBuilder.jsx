@@ -60,19 +60,19 @@ const FormBuilder = (defaultFieldsJson) => {
 
     switch (value) {
       case fields.TextBox:
-        dispatch(addField({ field: { label: "Text Box", type: fields.TextBox } }))
+        dispatch(addField({ field: { label: "Text Box", type: fields.TextBox, isRequired:true } }))
         break
       case fields.SelectBox:
-        dispatch(addField({ field: { label: "Select Box", type: fields.SelectBox } }))
+        dispatch(addField({ field: { label: "Select Box", type: fields.SelectBox, isRequired:true } }))
         break;
       case fields.CheckGroup:
-        dispatch(addField({ field: { label: "Check Group", type: fields.CheckGroup } }))
+        dispatch(addField({ field: { label: "Check Group", type: fields.CheckGroup, isRequired:true } }))
         break;
       case fields.RadioGroup:
-        dispatch(addField({ field: { label: "Radio Group", type: fields.RadioGroup } }))
+        dispatch(addField({ field: { label: "Radio Group", type: fields.RadioGroup, isRequired:true } }))
         break;
       case fields.CheckBox:
-        dispatch(addField({ field: { label: "Checkbox", type: fields.CheckBox } }))
+        dispatch(addField({ field: { label: "Checkbox", type: fields.CheckBox, isRequired:true } }))
         break;
       case fields.Text:
         dispatch(addField({ field: { label: "Text", type: fields.Text } }))

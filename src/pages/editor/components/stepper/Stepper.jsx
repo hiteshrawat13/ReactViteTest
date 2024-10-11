@@ -100,12 +100,14 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
     }
     const handlePrevious = async (e) => {
         e?.preventDefault()
+
         // const isCurrentStepValid= await currentStepFormTriggerMethod.trigger()
         // if(!isCurrentStepValid){
         //     //alert("form not valid");
         //     return
         // }
         // await currentStepFormTriggerMethod.handleSubmit(handleSubmitOfCurrentForm)()
+
         setStep((step) => { return (step - 1 > 0) ? step - 1 : 0 })
         if (onStepChange) onStepChange(step)
     }
@@ -184,8 +186,8 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
             background: "#fff",
             padding: "10px"
         }}>
-            {(step > 0) && <button onClick={handlePrevious}>Previous</button>}
-            {(step < totalSteps - 1) && <button onClick={handleNext}>Next</button>}
+            <div>{(step > 0) && <button onClick={handlePrevious} className='btn--primary'>Previous</button>}</div>
+            <div>{(step < totalSteps - 1) && <button onClick={handleNext} className='btn--primary'>Next</button>}</div>
 
              
         </div>

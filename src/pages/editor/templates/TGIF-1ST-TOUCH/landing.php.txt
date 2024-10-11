@@ -215,7 +215,9 @@
                                     </td>
                                     <td width="234" align="right">
                                         <div style="font-size: 14px; margin-top: 0px;">Sponsored By</div>
-                                        <img id="splogo" src="##BASE_URL####LOGO_NAME##" alt="Logo"  style="width:##LOGO_WIDTH##px; margin-top: 1px; margin-bottom: 1px;" />
+                                        <img class="splogo land" src="##BASE_URL####LOGO_NAME##" alt="Logo"  style="width:##LOGO_WIDTH##px; margin-top: 1px; margin-bottom: 1px;" />
+                                  
+                                   
                                     </td>
 
                                     <!-- LOGO -->
@@ -233,10 +235,15 @@
                                 </tr>
 
                                 <tr>
-                                    <td width="53%" height="200" align="left" valign="top" style="">
+                                    <td width="53%" height="auto" align="left" valign="top" style="">
                                         <!-- PDF IMAGE -->
                                         <div style="">
                                             <img   src="##BASE_URL####LINK_NAME##.png" width="300" style=" border: 1px solid #e5e5e5; border-radius: 5px;" alt="thumbnail" />
+                                        
+                                            <div class="landing_abstract" style="padding-right: 2%;">
+                                            ##LANDING_ABSTRACT##
+                                            </div>
+                                        
                                         </div>
                                     </td>
                                     <td rowspan="2" width="47%" valign="top" align="left">
@@ -263,18 +270,16 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
+                                <!--<tr>
                                     <td valign="top" align="left" style="padding-right: 2%;">
                                     
-									<div class="landing_abstract">
-									##LANDING_ABSTRACT##
-									</div>
+									
 									
 									
 
                     
                                     </td>
-                                </tr>
+                                </tr>-->
                             </tbody>
                         </table>
                     </td>

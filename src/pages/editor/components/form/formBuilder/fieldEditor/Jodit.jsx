@@ -35,7 +35,7 @@ const Jodit = ({value="",onChange}) => {
     defaultActionOnPaste: 'insert_as_html',
     defaultLineHeight: 1.5,
     
-    enter: '',
+    enter: 'p',
 toolbarButtonSize: 'small',
     statusbar: false,
     sizeLG: 900,

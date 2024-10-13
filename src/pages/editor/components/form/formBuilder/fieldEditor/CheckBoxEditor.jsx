@@ -2,16 +2,18 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateField } from '../../../../../../store/campaign/CampaignSlice'
 
-import Modal from '../../../../../../components/ui/Modal'
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 
-import './Editor.scss'
+
 import { fields } from './Fields'
 
 import { FaPencilAlt } from "react-icons/fa";
+import Jodit from './Jodit'
 
 
 const CheckBoxEditor = ({ id, data ,toast,handleFieldDataUpdate}) => {
-    const [isModalOpened, setModalOpened] = useState(false)
+    const [isModalOpened,setModalOpened]=useState(false)
     const [isLabelModalOpened, setLabelModalOpened] = useState(false)
     const [label, setLabel] = useState(data.label)
    
@@ -58,15 +60,18 @@ const CheckBoxEditor = ({ id, data ,toast,handleFieldDataUpdate}) => {
                 <textarea name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} />
             </label>
 
-            {<Modal setOpened={setLabelModalOpened} isOpened={isLabelModalOpened} title={"My Modal"} style={{ width: "90%", height: "90%" }}>
+            <Modal 
+center
+open={isModalOpened} 
+onClose={() =>setModalOpened(false)}>
+ <label style={{width:"90%",height:"90%"}}>
+                 <Jodit value={label} onChange={(e)=>{setLabel(e)}}/>
+                    {/* <textarea type="text" name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} style={{ width: "90%", height: "90%" }} />
+                 */}
 
-                <label style={{ width: "90%", height: "90%" }}>
-                    <span>Label</span>
-                    <textarea type="text" name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} style={{ width: "90%", height: "90%" }} />
-                </label>
-
-            </Modal>}
-            <button className='openModal' onClick={(e) => { e.preventDefault(); setLabelModalOpened(true) }}><FaPencilAlt /></button>
+</label>
+            </Modal>
+            <button className='openModal' onClick={(e) => { e.preventDefault(); setModalOpened(true) }}><FaPencilAlt /></button>
 
             <label>
                 <span>Name</span>

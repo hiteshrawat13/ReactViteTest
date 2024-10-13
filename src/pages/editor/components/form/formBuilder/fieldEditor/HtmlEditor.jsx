@@ -72,7 +72,7 @@ open={isModalOpened}
 onClose={() =>setModalOpened(false)}>
     <label style={{width:"90%",height:"90%"}}>
                     
-                    <textarea  name="html" value={html} onChange={(e)=>{setHtml(e.target.value)}} style={{width:"90%",height:"90%"}}></textarea>
+                    <textarea  name="html" value={html} onChange={(e)=>{setHtml(e.target.value)}} style={{width:"500px",height:"500px",padding:"10px"}}></textarea>
                   
                 </label>
 </Modal>

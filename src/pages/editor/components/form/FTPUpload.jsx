@@ -4,10 +4,11 @@ import { StepperContext } from '../stepper/StepperContext'
 import useSocket from '../useSocket'
 import axios from 'axios'
 import Config from '../../../../Config'
+import Modal from 'react-responsive-modal'
 
 const FTPUpload = ({publishHelper,filesRef}) => {
   
-
+  const [isFTPUploadModalOpened,setFTPUploadModalOpened] =useState(false)
   const campaignDataState = useSelector(state => state.campaignData)
   const { logoFileRef, thumbnailFileRef, pdfFileRef, mp4FileRef } = useContext(StepperContext)
   const [filesToUpload, setFilesToUpload] = useState([])
@@ -225,7 +226,23 @@ const FTPUpload = ({publishHelper,filesRef}) => {
     <div>
 
 
-      <div>Display File List</div>
+<div>Display File List</div>
+      <div>Upload Button</div>
+      {(socketConnected) ? "<b>Socket Connected</b>" : "Socket Not Connected"}
+      {filesToUpload.map((file, i) => {
+        return <div className="fileToUpload" key={i}>
+          <div className='fileName'>{file.name} </div> <div className='fileProgress'>{file.progress}</div>
+        </div>
+      })} 
+
+
+
+<button onClick={ ()=>setFTPUploadModalOpened(true) }>Upload Files</button>
+<Modal
+center
+open={isFTPUploadModalOpened}
+onClose={()=>setFTPUploadModalOpened(false)}>
+  <div>Display File List</div>
       <div>Upload Button</div>
       {(socketConnected) ? "<b>Socket Connected</b>" : "Socket Not Connected"}
       {filesToUpload.map((file, i) => {
@@ -233,10 +250,13 @@ const FTPUpload = ({publishHelper,filesRef}) => {
           <div className='fileName'>{file.name} </div> <div className='fileProgress'>{file.progress}</div>
         </div>
       })}
+<button onClick={(e) => { e.preventDefault(); handleUploadFiles() }}>Upload to ftp</button>
+
+  </Modal> 
 
 
 
-      <button onClick={(e) => { e.preventDefault(); handleUploadFiles() }}>Upload to ftp</button>
+   
 
       <button onClick={(e) => { e.preventDefault(); handleSaveLink() }}>Save Link</button>
     </div>

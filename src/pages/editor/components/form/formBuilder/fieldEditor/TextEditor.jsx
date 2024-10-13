@@ -8,6 +8,7 @@ import { fields } from './Fields'
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { FaPencilAlt } from "react-icons/fa";
+import Jodit from './Jodit'
 const TextEditor = ({ id,data,toast,handleFieldDataUpdate}) => {
 const dispatch=useDispatch()
 const [isModalOpened,setModalOpened]=useState(false)
@@ -52,8 +53,10 @@ open={isModalOpened}
 onClose={() =>setModalOpened(false)}>
     <label style={{width:"90%",height:"90%"}}>
                     
-                    <textarea  name="label" value={textContent} onChange={(e)=>{setTextContent(e.target.value)}} style={{width:"90%",height:"90%"}}></textarea>
-                  
+
+                    <Jodit value={textContent} onChange={(e)=>{setTextContent(e)}}/>
+                    {/* <textarea  name="label" value={textContent} onChange={(e)=>{setTextContent(e.target.value)}} style={{width:"90%",height:"90%"}}></textarea>
+                   */}
                 </label>
 </Modal>
     

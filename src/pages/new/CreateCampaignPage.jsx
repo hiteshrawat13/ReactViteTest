@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 
-import { Form, useForm, FormProvider } from 'react-hook-form'
-import { SelectBox, TextBox } from '../editor/components/form'
 
+import CampaignDetails from './CampaignDetails';
 import instance from './ApiService'
 import { useNavigate } from 'react-router-dom'
 import 'react-responsive-modal/styles.css';
@@ -21,7 +20,7 @@ const CreateCampaignPage = () => {
   const [lastEditedBy,setLastEditedBy]=useState("")
 
   const navigate = useNavigate()
-  const methods = useForm({ mode: "onChange" })
+ 
   const onSubmit = (d) => {
     
     
@@ -113,27 +112,7 @@ const CreateCampaignPage = () => {
         center
         open={isCreateCampaignModalOpened}
         onClose={()=>closeModal()}>
-         <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onSubmit)}  style={{width:"500px"}}>
-            <TextBox name="clientCode" label="Client Code" value={clientCode} required={true} readOnly />
-            <TextBox name="category" label="Category" value={category} required={true} readOnly />
-            <TextBox name="campaignId" label="Campaign Id" required={true} />
-            <SelectBox name="country" label="Country" options={[
-              { label: "Select..", value: "" },
-              { label: "EU", value: "EU" },
-              { label: "NON-EU", value: "NON-EU" },
-              { label: "CASL", value: "CASL" },
-              { label: "Both ( NON-EU & CASL )", value: "BOTH" }
-            ]}  required={true} />
-            <TextBox name="campaignName" label="Campaign Name" required={true} />
-            <TextBox name="comment" label="Comment" required={true} />
-            <TextBox name="campCreatedBy" label="campCreatedBy" value={campCreatedBy} required={true} readOnly />
-            <TextBox name="lastEditedBy" label="lastEditedBy" value={lastEditedBy} required={true} readOnly />
-            
-            <button  onClick={(e)=>{e.preventDefault();closeModal()} } >Cancel</button>
-            <input type="submit" value="Create Campaign" />
-          </form>
-        </FormProvider>
+         <CampaignDetails campaignData={{clientCode,category,lastEditedBy,campCreatedBy}} onCancel={closeModal} onSubmit={onSubmit}/>
 
        
       </Modal>

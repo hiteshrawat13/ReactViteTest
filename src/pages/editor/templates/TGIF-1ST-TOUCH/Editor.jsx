@@ -43,8 +43,10 @@ const Editor = ({   }) => {
   const { setValue, getValue, watch, setFormValue, filesRef ,campData} = useContext(EContext)
 
   useEffect(() => {
-    setValue("FTP_CONFIG_NAME", "TGIF")
-     
+   // setValue("FTP_CONFIG_NAME", "TGIF")
+   setValue("FTP_CONFIG_NAME", "TEST")
+
+   setValue("LOGO_FOLDER", "logo/")
     //alert("TGIF")
   }, [])
 
@@ -77,11 +79,11 @@ const Editor = ({   }) => {
 
         <Row>
           <Col>
-            <TextBox label="Client Code" name="CLIENT_CODE" required={true} value={campData?.clientCode} />
+            <TextBox label="Client Code" name="CLIENT_CODE" required={true} value={campData?.clientCode} readOnly/>
             {(watch["CLIENT_CODE"] === "TEST") && <>IT WORKS</>}
           </Col>
           <Col>
-            <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" />
+            <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" readOnly/>
           </Col>
         </Row>
 
@@ -92,8 +94,8 @@ const Editor = ({   }) => {
 
 
 
-        <TextBox label="Campaign Id" name="CAMP_ID" required={true} value={campData?.campaignId} width="10%" />
-        <SelectBox label="Region" name="REGION" value={campData?.country} required={true}
+        <TextBox label="Campaign Id" name="CAMP_ID" required={true} value={campData?.campaignId} width="10%"  readOnly/>
+        <SelectBox label="Region" name="REGION" value={campData?.country} required={true} readOnly
           options={[
             { label: "Select..", value: "" },
             { label: "EU", value: "EU" },

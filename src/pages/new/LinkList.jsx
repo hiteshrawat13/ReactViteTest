@@ -6,12 +6,17 @@ import { useLocation, useNavigate } from 'react-router-dom';
  import TemplateManager from '../editor/templates/TemplateManager';
 
  import "./LinkList.css"
+import CampaignDetails from './CampaignDetails';
+import instance from './ApiService';
+import Modal from 'react-responsive-modal';
 
-const LinkList = ({ campData, setCampData }) => {
+const LinkList = ({ campData={}, setCampData=null }) => {
 
     
     const navigate=useNavigate()
     const location = useLocation()
+
+    const [isUpdateCampaignModalOpened,setUpdateCampaignModalOpened]=useState(false)
     const [miniSwitch, setMiniSwitch] = useState(false);
     const [links, setLinks] = useState('');
     const templates=TemplateManager.find(client=>client.clientCode==location?.state?.clientCode)
@@ -27,6 +32,28 @@ const LinkList = ({ campData, setCampData }) => {
         //   return () => {  }
     }, [])
 
+
+
+    
+    const updateCampaign = async (campaignData) => {
+        const response = await instance({
+          url: `/camplist/editCampList`, method: "post",
+    
+          data: campaignData
+    
+        })
+    
+        if (response.data.status == 200) {
+          //  navigate(`/editor/${clientCode}`,{state: { 
+          
+          alert("campaign updated")
+    
+    
+    
+        } else {
+          alert(response.data.message)
+        }
+      }
 
     const handleCreateLink=(campData,templateId,templateType)=>{
 
@@ -180,58 +207,25 @@ const LinkList = ({ campData, setCampData }) => {
                             <a id="show-links-tab" onClick={() => setMiniSwitch(false)} >Show Links</a>
                         </li>
                         <li>
-                            <a id="add-links-tab" onClick={() => setMiniSwitch(true)} >Camp Details</a>
+                            <a id="add-links-tab" onClick={() => setUpdateCampaignModalOpened(true)} >Camp Details</a>
                         </li>
         
                     </ul>
                     <button type="button" className="btn closeBtn" id="cancelBtn" onClick={() => setCampData("")}>
                     </button>
+
+
+                    <Modal
+center
+open={isUpdateCampaignModalOpened}
+onClose={()=>setUpdateCampaignModalOpened(false)}>
+
+                        <CampaignDetails campaignData={location?.state} onSubmit={(data)=>{updateCampaign(data)}} onCancel={()=>setUpdateCampaignModalOpened(false)}/>
+                     </Modal> 
                     {miniSwitch ?
-                        <form id="popupForm" >
-                            <div className="editDetails">
-                                <p>Last Updated By : <b id="UpdatedBy" /></p>
-                            </div>
-                            <div>
-                                <div>
-                                        <label htmlFor="campaign-name-column">Campaign Name</label>
-                                        <input type="text" id="campaign-name-column"  placeholder="Campaign Name" readOnly value={campData.camp_name}/>
-                                </div>
-                                <div>
-                                        <label htmlFor="campaign-id-column">Campaign ID</label>
-                                        <input type="text" id="campaign-id-column"  placeholder="Campaign ID" readOnly value={campData.camp_id}/>
-                                </div>
-                                <div >
-                                        <label htmlFor="client-code-select">Client Code</label>
-                                            <input type="text" id="client-code-select"  placeholder="Client Code" readOnly value={campData.Client_Code}/>
-                                </div>
-                                <div >
-                                        <label htmlFor="category-select">Category</label>
-                                            <input type="text" id="category-select"  placeholder="category" readOnly value={campData.Category}/>
-                                </div>
-                                <div >
-                                        <label htmlFor="country-floating">Country</label>
-                                            <input type="text" id="country-select"  placeholder="country" readOnly value={campData.Country} />
-                                </div>
-                                <div>
-                                        <label htmlFor="campaign-name-column">Created By</label>
-                                        <input type="text" id="created-by-column"  placeholder="name" name="fname-column" readOnly value={campData.camp_Created_By}/>
-                                </div>
-                                <div >
-                                <label htmlFor="comment">
-                                        Comment
-                                    </label>
-                                    <textarea  placeholder="If any" id="comment" rows={2} defaultValue={campData.comment} />
-                                </div>
-                              
-                                <div >
-                                    <button type="submit"  id="editBtn">Update</button>
-                                    <button type="button"  id="cancelBtn">Cancel</button>
-                                </div>
-                              
-                                {/* ******************************* */}
-                            </div>
-                        </form>
-                        :
+
+
+<></>  :
                         <div id="linksTable">
                          
                             <DataTable

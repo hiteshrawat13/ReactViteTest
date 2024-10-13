@@ -32,5 +32,19 @@ html ,body{
     }
 }
 
+.btn--secondary{
+    padding: 5px 6px;
+    background-color: #9ea5ac;
+    color:#242323;
+    border:1px solid #414141;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover{
+        background-color: #286090;
+        border-color: #204d74;
+    }
+}
+
 
 

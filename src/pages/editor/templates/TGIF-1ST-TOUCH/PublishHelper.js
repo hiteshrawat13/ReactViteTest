@@ -228,6 +228,8 @@ convertToEntities=(input)=> {
 
         data=data.replaceAll(`##FORM##`, this.convertToEntities ( this.getFormHtml(this.state.form,TGIFFormRenderer) )  )
 
+
+      
         for (const [key, value] of Object.entries(this.state)) {
             try {
                 if(typeof value === 'string' || value instanceof String)
@@ -304,13 +306,10 @@ convertToEntities=(input)=> {
                                 <tr>
                                     <td align="left" valign="top" class="style1 thankyou">
                                         <h3>##EDM_TITLE##</h3>
-	                                        ##IFRAME##
-
                                             <iframe 
-                                            width="##IFRAME_WIDTH##" 
-                                            height="##IFRAME_HEIGHT##" 
                                             src="##IFRAME##" 
                                             title="##EDM_TITLE##" 
+                                            style="width:100%;aspect-ratio:16/9;"
                                             frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                             allowfullscreen></iframe>
 
@@ -326,9 +325,9 @@ convertToEntities=(input)=> {
                                 <tr>
                                     <td align="left" valign="top" class="style1 thankyou">
                                         <h3>##EDM_TITLE##</h3>
-	                                        ##MP4##
-                                            <video class="jw-video jw-reset" tabindex="-1" style="object-fit: fill; width:##MP4_WIDTH##;height:##MP4_HEIGHT##" controls>
-                                            <source src="##MP4##" type="video/mp4">
+	                                     
+                                        <video class="jw-video jw-reset" tabindex="-1" style="width:100%;aspect-ratio:16/9;" controls>
+                                            <source src="##BASE_URL####MP4##" type="video/mp4">
                                         </video> 
                                     </td>
                                 </tr>

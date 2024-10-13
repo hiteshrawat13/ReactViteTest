@@ -138,8 +138,8 @@ const OptionList = ({ setOptions, options }) => {
 
                 <div style={{ padding: "10px", background: "#888888", maxHeight: "auto" }}>
                             <div style={{ display: "flex", gap: "10px" }}>
-                                <textarea  ref={labelsTextareaRef} style={{ width: "100%", minHeight: "300px", height: "auto", resize: "none" }} defaultValue={data.map(item=>item.label+"\r\n").join("")}></textarea>
-                                <textarea  ref={valuesTextareaRef} style={{ width: "100%", minHeight: "300px", height: "auto", resize: "none" }} defaultValue={data.map(item=>item.value+"\r\n").join("")}></textarea>
+                                <textarea  ref={labelsTextareaRef} style={{ width: "100%", minHeight: "300px", height: "auto", resize: "none" ,padding:"10px"}} defaultValue={data.map(item=>item.label+"\r\n").join("").trim()}></textarea>
+                                <textarea  ref={valuesTextareaRef} style={{ width: "100%", minHeight: "300px", height: "auto", resize: "none" ,padding:"10px"}} defaultValue={data.map(item=>item.value+"\r\n").join("").trim()}></textarea>
                             </div>
 
                             <button style={{ marginTop: "5px" }} onClick={handleOptionTextData}>Add Options</button>
@@ -151,9 +151,9 @@ const OptionList = ({ setOptions, options }) => {
                     setOptionAddModalOpened(true);
                     labelsTextareaRef.current.value=data.join("")
                     valuesTextareaRef.current.value=data.join("")
-                    }}>+</button>
+                    }}>Option Generate</button>
 
-                <div style={{ position: "relative", maxHeight: "400px", overflowY: "scroll" }}>
+                <div style={{ position: "relative",width:"700px", maxHeight: "400px", overflowY: "scroll" }}>
 
                     <DragDropContext onDragEnd={handleDrop}>
                         <Droppable droppableId="list-container"
@@ -182,45 +182,65 @@ const OptionList = ({ setOptions, options }) => {
 
 
                                 >
+                                    <table>
+                                        <tr>
+                                        <td>No.</td>
+                                                    <td>Label</td>
+                                                    <td>Value</td>
+                                                    <td>Disabled</td>
+                                                    <td>Remove</td>
+                                                
+                                        </tr>
                                     {data.map((item, index) => {
                                         if (item == null) return null;
                                         return <Draggable key={index} draggableId={index + ""} index={index}>
                                             {(provided) => (
-                                                <div
-                                                    className={`field`}
+                                                // <div
+                                                //     className={`field`}
 
-                                                    ref={provided.innerRef}
-                                                    {...provided.dragHandleProps}
-                                                    {...provided.draggableProps}
+                                                //     ref={provided.innerRef}
+                                                //     {...provided.dragHandleProps}
+                                                //     {...provided.draggableProps}
 
 
-                                                >
-                                                    <div className='display' >
+                                                // >
+                                                //     <div className='display' >
 
-                                                        <div style={{ display: "grid", gridTemplateColumns: "5px 1fr", gap: "10px" }}>
-                                                            <div style={{display:"flex",alignItems:"center",fontSize:"12px",color:"#444"}}>{index}</div>
-                                                            <div>
-                                                                <div style={{ display: "flex", gap: "18px", padding: "5px 10px 5px 20px" }} >
-                                                                    <input type="text" value={item.label} data-index={index} onChange={handleLabelChange} />
-                                                                    <input type="text" value={item.value} data-index={index} onChange={handleValueChange} />
-                                                                    <input type="checkbox" checked={item.disabled || false} data-index={index} onChange={handleDisableCheckboxChange} />
-                                                                    <button style={{ width: "18px" }} data-index={index} onClick={handleDeleteItem}>X</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                //         <div style={{ display: "grid", gridTemplateColumns: "5px 1fr", gap: "10px" }}>
+                                                //             <div style={{display:"flex",alignItems:"center",fontSize:"12px",color:"#444"}}>{index}</div>
+                                                //             <div>
+                                                //                 <div style={{ display: "flex", gap: "18px", padding: "5px 10px 5px 20px" }} >
+                                                //                     <input type="text" value={item.label} data-index={index} onChange={handleLabelChange} />
+                                                //                     <input type="text" value={item.value} data-index={index} onChange={handleValueChange} />
+                                                //                     <input type="checkbox" checked={item.disabled || false} data-index={index} onChange={handleDisableCheckboxChange} />
+                                                //                     <button style={{ width: "18px" }} data-index={index} onClick={handleDeleteItem}>X</button>
+                                                //                 </div>
+                                                //             </div>
+                                                //         </div>
+                                                //     </div>
+                                                // </div>
+
+                                                <tr ref={provided.innerRef}
+                                                  {...provided.dragHandleProps}
+                                                  {...provided.draggableProps}>
+                                                    <td>{index}</td>
+                                                    <td><input type="text" value={item.label} data-index={index} onChange={handleLabelChange} /></td>
+                                                    <td><input type="text" value={item.value} data-index={index} onChange={handleValueChange} /></td>
+                                                    <td align="center"> <input type="checkbox" checked={item.disabled || false} data-index={index} onChange={handleDisableCheckboxChange} /></td>
+                                                    <td align="center"><button style={{ width: "18px" }} data-index={index} onClick={handleDeleteItem}>X</button></td>
+                                                </tr>
                                             )}
                                         </Draggable>
                                     }
                                     )}
+                                    </table>
                                     {provided.placeholder}
 
                                 </div>
                             )}
                         </Droppable>
                     </DragDropContext>
-                    <button onClick={handleAddItem}>Add</button>
+                    <button onClick={handleAddItem}>+</button>
                 </div>
             </div>
 

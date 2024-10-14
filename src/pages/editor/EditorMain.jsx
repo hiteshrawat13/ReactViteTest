@@ -42,7 +42,7 @@ const EditorMain = () => {
   const {data} = useSelector(state => state.campaignData)
 
 
-  const getValue=(value)=>{
+  const getStateValue=(value)=>{
     return data[value]
   }
  
@@ -54,7 +54,7 @@ const EditorMain = () => {
     const [watch,setWatch]=useState({})
     const [currentFormMethods,setCurrentFormMethods]=useState(null)  
     
-    const setValue=(key,value)=>{
+    const setStateValue=(key,value)=>{
       dispatch(updateData({ prop: key, value:value }))
     }
 
@@ -112,8 +112,8 @@ const EditorMain = () => {
           watch,
           setWatch,
           setCurrentFormMethods,
-          setValue,
-          getValue,
+          setStateValue,
+          getStateValue,
           setState,
           setFormValue,
           filesRef

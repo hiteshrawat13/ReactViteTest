@@ -4,7 +4,7 @@ import { StepperContext } from '../stepper/StepperContext'
 import { useFormContext } from 'react-hook-form'
 import TextBox from './TextBox'
 
-const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null}) =>  {
+const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onChange=null}) =>  {
 
     if(name==null)return <>Please provide name attribute for file input.</>
     if(fileRef==null)return <>Please provide fileRef attribute for file input.</>
@@ -51,6 +51,8 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null}) =>  {
             setSelectedImageFileName(fileRef.files[0].name || null)
             //setValue("THUMBNAIL_NAME",fileRef.files[0].name)
             setImagePreview()
+
+            if(onChange)onChange(fileRef.files[0].name || null);
         }
         if (fileRef)
             fileRef.addEventListener("change", onImageFileChange);

@@ -62,13 +62,13 @@ const SideBar = () => {
                     href:"/roles",
                     icon:<MdOutlineSecurity size={"1.5em"} />
                 },
-                {
-                    id:3,
-                    type:"menuItem",
-                    label:"Masters",
-                    href:"/masters",
-                    icon:<FaDatabase size={"1.5em"} />
-                },
+                // {
+                //     id:3,
+                //     type:"menuItem",
+                //     label:"Masters",
+                //     href:"/masters",
+                //     icon:<FaDatabase size={"1.5em"} />
+                // },
                 {
                     id:2121,
                     type:"divider",

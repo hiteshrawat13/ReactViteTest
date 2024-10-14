@@ -14,49 +14,33 @@ import {
   FTPUpload,
   Preview,
   ZIPDownload,
-
   ThumbnailInput,
   LogoInput,
   RadioGroup,
   ThumbnailLandingInput,
   FileInput
-
 } from '../../components/form/index'
 
-
-
- 
-
 import defaultFieldsJson from "./default-fields.json"
-
 import { EContext } from '../../EditorMain'
 import PublishHelper from './PublishHelper'
 import Section from '../../components/form/Section'
 import Row from '../../components/form/Row'
 import Col from '../../components/form/Col'
-const Editor = ({   }) => {
+const Editor = ({ }) => {
 
 
   const publishHelperRef = useRef(new PublishHelper())
-
-
-  const { setValue, getValue, watch, setFormValue, filesRef ,campData} = useContext(EContext)
-
+  const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData } = useContext(EContext)
   useEffect(() => {
-   // setValue("FTP_CONFIG_NAME", "TGIF")
-   setValue("FTP_CONFIG_NAME", "TEST")
-
-   setValue("LOGO_FOLDER", "logo/")
+    // setStateValue("FTP_CONFIG_NAME", "TGIF")
+    setStateValue("FTP_CONFIG_NAME", "TEST")
+    setStateValue("LOGO_FOLDER", "logo/")
     //alert("TGIF")
   }, [])
 
   return (<Stepper >
-
     <Step title="Basic Info" key={1101}>
-
-
-
-
       {/* <button onClick={(e) => {
         e.preventDefault();
         const data = JSON.parse(localStorage.getItem("data"))
@@ -65,36 +49,29 @@ const Editor = ({   }) => {
         for (const [key, value] of Object.entries(data)) {
           setFormValue(key, value)
         }
-        setValue("form", data.form)
+        setStateValue("form", data.form)
         alert("State Loaded")
 
       }} >Load State From Local Storage</button> */}
 
       <HiddenField name="BASE_URL" value="https://resource.itbusinesstoday.com/whitepapers/" />
       <HiddenField name="YEAR" value={new Date().getFullYear() + ""} />
-
-
-
       <Section title="Link Details">
-
         <Row>
           <Col>
-            <TextBox label="Client Code" name="CLIENT_CODE" required={true} value={campData?.clientCode} readOnly/>
+            <TextBox label="Client Code" name="CLIENT_CODE" required={true} value={campData?.clientCode} readOnly />
             {(watch["CLIENT_CODE"] === "TEST") && <>IT WORKS</>}
           </Col>
           <Col>
-            <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" readOnly/>
+            <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" readOnly />
           </Col>
         </Row>
-
         <Row>
-          <Col><TextBox label="Link Type" name="LINK_TYPE" required={true} value={campData?.templateType} readOnly/></Col>
-          <Col><TextBox label="Template Id" name="TEMPLATE_ID" required={true} value={campData?.templateId} readOnly/></Col>
+          <Col><TextBox label="Link Type" name="LINK_TYPE" required={true} value={campData?.templateType} readOnly /></Col>
+          <Col><TextBox label="Template Id" name="TEMPLATE_ID" required={true} value={campData?.templateId} readOnly /></Col>
         </Row>
 
-
-
-        <TextBox label="Campaign Id" name="CAMP_ID" required={true} value={campData?.campaignId} width="10%"  readOnly/>
+        <TextBox label="Campaign Id" name="CAMP_ID" required={true} value={campData?.campaignId} width="10%" readOnly />
         <SelectBox label="Region" name="REGION" value={campData?.country} required={true} readOnly
           options={[
             { label: "Select..", value: "" },
@@ -105,7 +82,6 @@ const Editor = ({   }) => {
           ]}
           width="10%"
         />
-
         <TextBox label="Link Name" name="LINK_NAME" required={true} width="50%"
 
           onChange={
@@ -115,28 +91,22 @@ const Editor = ({   }) => {
               e.target.value = e.target.value.replace(/[^a-zA-Z0-9-\.]/g, '');
 
               const val = e.target.value
-              // setValue("THUMBNAIL_NAME",`${val}.png`)
-              // setValue("PDF_NAME",`${val}.pdf`)
-              // setValue("MP4_NAME",`${val}.mp4`)
+              // setStateValue("THUMBNAIL_NAME",`${val}.png`)
+              // setStateValue("PDF_NAME",`${val}.pdf`)
+              // setStateValue("MP4_NAME",`${val}.mp4`)
               setFormValue("THUMBNAIL_NAME", `${val}.png`)
               setFormValue("EDM_THUMBNAIL_NAME", `${val}-edm.png`)
               setFormValue("PDF_NAME", `${val}.pdf`)
               setFormValue("MP4_NAME", `${val}.mp4`)
-
+              setFormValue("EXTRA_FILE_1", `${val}.png`)
+              
             }
-
           } />
-
       </Section>
 
 
       <Section title="Details" >
-
-
-
-
         <TextBox label="Pixel Link" name="PIXEL_LINK" required={true} />
-
         <SelectBox label="Asset Type" name="ASSET_TYPE" required={true}
           options={[
             { label: "Select..", value: "" },
@@ -151,7 +121,6 @@ const Editor = ({   }) => {
         />
         <TextBox label="Text above the logo" name="SPONSORED_BY_TEXT" required={true} value="Sponsored by" />
 
-
         <SelectBox label="EDM Layout" name="EDM_LAYOUT" required={true}
           options={[
             { label: "Select..", value: "" },
@@ -160,8 +129,6 @@ const Editor = ({   }) => {
 
           ]}
         />
-
-
         <SelectBox label="Landing Layout" name="LANDING_LAYOUT" required={true}
           options={[
             { label: "Select..", value: "" },
@@ -170,8 +137,6 @@ const Editor = ({   }) => {
 
           ]}
         />
-
-
       </Section>
 
 
@@ -217,10 +182,10 @@ const Editor = ({   }) => {
 
 
       </Section>
-      {(getValue("ASSET_TYPE") != "Webinar") &&
+      {(getStateValue("ASSET_TYPE") != "Webinar") &&
         <>
           <Section title="Thankyou Page Details">
- 
+
             <RichTextEditor label="Thank You Page" name="NORMAL_THANK_YOU_PAGE_TEXT" required={true} value={`
            <h1>Thank you...</h1>
         <span>for downloading <strong>"##EDM_TITLE##"</strong><br><br>
@@ -228,7 +193,7 @@ const Editor = ({   }) => {
 
           `} />
 
- 
+
           </Section>
 
         </>
@@ -270,6 +235,16 @@ const Editor = ({   }) => {
         }
 
 
+        <CheckBox label="Upload Extra Image" name="ADD_EXTRA_FILE_1" />
+        {(watch["ADD_EXTRA_FILE_1"] == true) &&
+          <FileInput name="EXTRA_FILE_1" label="Extra Image" tag="file" fileRef={filesRef.current.fileInput4} onChange={(filename)=>{
+
+              setFormValue("EXTRA_FILE_1",filename)
+
+          } } />
+        }
+
+
 
 
       </Section>
@@ -295,56 +270,55 @@ const Editor = ({   }) => {
 
         {(watch["ASSET_FORMAT"] == "IFRAME") &&
           <TextBox label="IFrame Url" required="true" name="IFRAME" />
+          
         }
 
 
       </Section>
 
 
-      <Section title="Logo Dimensions">
-        <TextBox type="number" label="Logo Width" name="LOGO_WIDTH" value={180} />
-      </Section>
 
- 
+
+
     </Step>
 
 
     <Step title="Form" key={1104}>
-      
+
       <FormBuilder defaultFieldsJson={defaultFieldsJson} />
     </Step>
 
     <Step title="Preview" key={1105}>
-      <Preview publishHelper={publishHelperRef.current}   filesRef={filesRef.current}  controls={
-        ({iframe})=>{
+      <Preview publishHelper={publishHelperRef.current} filesRef={filesRef.current} controls={
+        ({ iframe }) => {
           return <>
-          <div>
-          <TextBox type="number" label="Logo Width" name="LOGO_WIDTH" value={180}  onChange={(e)=>{
-              
-              iframe.contentDocument.querySelector('.splogo').style.width = e.target.value +"px"
+            <div>
+              <TextBox type="number" label="Logo Width" name="LOGO_WIDTH" value={180} onChange={(e) => {
 
-              console.log(iframe.contentDocument.querySelector('.splogo'));
-              
-              setValue("LOGO_WIDTH",e.target.value)
+                iframe.contentDocument.querySelector('.splogo').style.width = e.target.value + "px"
 
-            } } />
-            
-          </div>
+                console.log(iframe.contentDocument.querySelector('.splogo'));
+
+                setStateValue("LOGO_WIDTH", e.target.value)
+
+              }} />
+
+            </div>
           </>
         }
       } />
     </Step>
 
     <Step title="Publish" key={1106}>
-    
+
 
       <Section title="FTP Upload">
 
-      <FTPUpload publishHelper={publishHelperRef.current}  filesRef={filesRef.current}/>
+        <FTPUpload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />
       </Section>
 
-    
-      
+
+
       <ZIPDownload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />
 
 

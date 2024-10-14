@@ -96,13 +96,13 @@ const CreateCampaignPage = () => {
     }
   }
   return (
-    <div>
+    <div style={{display:"flex",gap:"10px"}}>
 
       {
         TemplateManager.map((client,i)=>{
-         return <div key={i}>
-            {client.title} 
-            <button onClick={()=>openModal(client.clientCode)}>Create Campaign</button> 
+         return <div key={i} className='card'>
+            <div>{client.title} </div>
+            <div><button className='btn--primary' onClick={()=>openModal(client.clientCode)}>Create Campaign</button> </div>
           </div>
         })
       }

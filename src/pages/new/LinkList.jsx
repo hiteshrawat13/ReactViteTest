@@ -183,11 +183,13 @@ const LinkList = ({ campData={}, setCampData=null }) => {
 
         <div>
 
-{JSON.stringify(location?.state) }
+{/* {JSON.stringify(location?.state) }
+
+ */}
 
 
 
-
+<div style={{display:"flex",justifyContent:"space-between"}}>
 
 <div className="dropdown">
   <button className="dropbtn">Create Link</button>
@@ -199,22 +201,14 @@ const LinkList = ({ campData={}, setCampData=null }) => {
   </div>
 </div>
 
+<div>
+    <button  className="btn--primary" onClick={() => setUpdateCampaignModalOpened(true)} >Camp Details</button>
+</div>
+</div>
+
             {/* ******************** This is popup window for campaign only links update ***************** */}
             <div className="">
                 <div className="">
-                    <ul className="nav nav-tabs" id="myTab" >
-                        <li  >
-                            <a id="show-links-tab" onClick={() => setMiniSwitch(false)} >Show Links</a>
-                        </li>
-                        <li>
-                            <a id="add-links-tab" onClick={() => setUpdateCampaignModalOpened(true)} >Camp Details</a>
-                        </li>
-        
-                    </ul>
-                    <button type="button" className="btn closeBtn" id="cancelBtn" onClick={() => setCampData("")}>
-                    </button>
-
-
                     <Modal
 center
 open={isUpdateCampaignModalOpened}

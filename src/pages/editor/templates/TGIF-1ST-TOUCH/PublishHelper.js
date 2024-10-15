@@ -210,10 +210,17 @@ convertToEntities=(input)=> {
         
         let data=landing_html
 
+       
+
+
         if(forPreview==true){
             if(this.filesRef.fileInput1.files[0]){data=data.replaceAll(`##BASE_URL####LOGO_NAME##`, await this.getBase64Image( this.filesRef.fileInput1.files[0])  )}
-            if(this.filesRef.fileInput2.files[0]){data=data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, await this.getBase64Image( this.filesRef.fileInput2.files[0]) )}
+         
+        if(this.filesRef.fileInput2.files[0]){data=data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, await this.getBase64Image( this.filesRef.fileInput2.files[0]) )}
+      
         }
+
+
 
         data=this.getPrivacyPolicy(data) //Privacy Policy
 
@@ -259,6 +266,14 @@ convertToEntities=(input)=> {
                 console.log("Error while replaceAll in getSendmailHtml of publishHelper ",error,key,value);
             } 
         }
+
+
+        if(forPreview==true){
+
+            //Escape html for preview to prevent redirects
+            data=`<pre>${new Option(data).innerHTML}</pre>`
+        }
+
         return  data
     }
     async getThanksHtml({forPreview}){

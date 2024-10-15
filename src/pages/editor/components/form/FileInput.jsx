@@ -4,7 +4,7 @@ import { StepperContext } from '../stepper/StepperContext'
 import { useFormContext } from 'react-hook-form'
 import TextBox from './TextBox'
 
-const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onChange=null}) =>  {
+const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onChange=null,onTextChange=null}) =>  {
 
     if(name==null)return <>Please provide name attribute for file input.</>
     if(fileRef==null)return <>Please provide fileRef attribute for file input.</>
@@ -75,7 +75,7 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onChang
 
 
                 
-                <TextBox label={label} name={name} required={true} />
+                <TextBox label={label} name={name} required={true} onChange={onTextChange}/>
                 {/* <input type="text" {...register("THUMBNAIL_NAME", { required: true })} placeholder='Search Logo Here' />
                 {errors["THUMBNAIL_NAME"] && <p>Thumbnail file name is required</p>} */}
                     <div className="drop-zone" 

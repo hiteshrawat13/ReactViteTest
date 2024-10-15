@@ -33,8 +33,8 @@ const Editor = ({ }) => {
   const publishHelperRef = useRef(new PublishHelper())
   const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData } = useContext(EContext)
   useEffect(() => {
-    // setStateValue("FTP_CONFIG_NAME", "TGIF")
-    setStateValue("FTP_CONFIG_NAME", "TEST")
+     setStateValue("FTP_CONFIG_NAME", "TGIF")
+   // setStateValue("FTP_CONFIG_NAME", "TEST")
     setStateValue("LOGO_FOLDER", "logo/")
     //alert("TGIF")
   }, [])
@@ -226,7 +226,17 @@ const Editor = ({ }) => {
 
       <Section title="Logo & Thumbnail">
 
-        <FileInput name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1} />
+        <FileInput name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1} onTextChange={(e)=>{
+          console.log(e.target.value);
+          
+        }} />
+ 
+
+
+
+          <a target="_BLANK" href={getStateValue("BASE_URL")+watch["LOGO_NAME"]} style={{fontSize:"12px"}}>{getStateValue("BASE_URL")+watch["LOGO_NAME"]}</a>
+
+          <br></br>
         <FileInput name="THUMBNAIL_NAME" label="Thumbnail" tag="file" fileRef={filesRef.current.fileInput2} />
 
         <CheckBox label="Use different thumbnail for edm page" name="USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE" />

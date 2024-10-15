@@ -23,8 +23,8 @@ import LinkList from "../pages/new/LinkList"
 const Router=[
     {
     
-      //element: Auth()?<App/> : <Login/>,
-      element: <App/>  ,
+     element: Auth()?<App/> : <Login/>,
+     // element: <App/>  ,
       children: [
         {
           path: "/",

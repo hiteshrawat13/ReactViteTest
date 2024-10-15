@@ -59,9 +59,11 @@ const EditorMain = () => {
     }
 
     const setState=(data)=>{
+
+
       dispatch(  setData( data )  )
 
-      alert("DATA SEt CALLED")
+    //  alert("DATA SEt CALLED")
     }
 
     const setFormValue=(key,value)=>{
@@ -72,6 +74,8 @@ const EditorMain = () => {
     }
 
     useEffect(() => {
+
+      //update state
       if(campData.jsonObject) setState(campData.jsonObject)
       return () => {
         

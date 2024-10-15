@@ -150,29 +150,55 @@ const LinkList = ({ campData={}, setCampData=null }) => {
             name: 'Link Title',
             selector: row => row.link_title,
             sortable: true,
+             maxWidth: "250px",
+             wrap: true,
+             style:{fontWeight:"bold"}
         },
         {
             name: 'Links',
             selector: row => <a href={row.link}>{row.link}</a>,
             sortable: true,
+             maxWidth: "350px"
         },
         {
             name: 'Language',
             selector: row => row.language,
             sortable: true,
+            width: "100px"  ,                     // added line here
+            headerStyle: (selector, id) => {
+                return { textAlign: "center" };   // removed partial line here
+            },
         },
         {
             name: 'Created By',
             selector: row => row.Link_Created_By,
             sortable: true,
+            width: "100px"  ,                     // added line here
+            headerStyle: (selector, id) => {
+                return { textAlign: "center" };   // removed partial line here
+            },
         },
         {
             name: 'Link Type',
             selector: row => row.link_type,
             sortable: true,
+            width: "100px"  ,                     // added line here
+            headerStyle: (selector, id) => {
+                return { textAlign: "center" };   // removed partial line here
+            },
         },
         {
-            cell:(row) => <button onClick={(e)=>handleEditLink(e,row.id)} id={row.ID}>Action</button>,
+            name: 'Published',
+            selector: row => row.is_published,
+            sortable: true,
+            width: "100px"  ,                     // added line here
+            headerStyle: (selector, id) => {
+                return { textAlign: "center" };   // removed partial line here
+            },
+        },
+        {
+            name: "Actions" ,
+            cell:(row) => <button onClick={(e)=>handleEditLink(e,row.id)} id={row.ID}>Edit</button>,
             ignoreRowClick: true,
             allowOverflow: true,
             button: true,
@@ -189,7 +215,7 @@ const LinkList = ({ campData={}, setCampData=null }) => {
 
 
 
-<div style={{display:"flex",justifyContent:"space-between"}}>
+<div style={{display:"flex",justifyContent:"space-between",marginBottom:"10px"}}>
 
 <div className="dropdown">
   <button className="dropbtn">Create Link</button>
@@ -202,7 +228,7 @@ const LinkList = ({ campData={}, setCampData=null }) => {
 </div>
 
 <div>
-    <button  className="btn--primary" onClick={() => setUpdateCampaignModalOpened(true)} >Camp Details</button>
+    <button  className="btn--primary" onClick={() => setUpdateCampaignModalOpened(true)} >Campaign Details</button>
 </div>
 </div>
 
@@ -223,7 +249,7 @@ onClose={()=>setUpdateCampaignModalOpened(false)}>
                         <div id="linksTable">
                          
                             <DataTable
-                                title="Links Table"
+                                title={location?.state.campaignName}
                                 columns={columns}
                                 data={links}
                                 onRowClicked={parsePage}

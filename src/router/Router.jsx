@@ -3,11 +3,11 @@ import CreateCampaign from "../pages/campaign/CreateCampaign"
 
 import MyCampaigns from "../pages/campaign/MyCampaigns"
 import TGIF1STTouchEditor from "../pages/TGIF-editor/TGIF1STTouchEditor"
-import Login from "../pages/login/Login"
+ 
 import UserList from "../pages/user-management/UserList"
 import RoleList from "../pages/user-management/RoleList"
 import AlphaEditor from "../pages/ALPHA-editor/AlphaEditor"
-import Auth from '../Auth';
+import AuthProvider from '../Auth';
 import CampaignDetails from "../pages/campaign/CampaignDetails"
 import Test from "../Test/Test"
  
@@ -17,13 +17,13 @@ import CampaignList from "../pages/new/CampaignList"
 import LinkList from "../pages/new/LinkList"
 
 
-
+import Login from "../pages/login/Login"
 
 
 const Router=[
     {
     
-     element: Auth()?<App/> : <Login/>,
+     element: <AuthProvider> <App/> </AuthProvider> ,
      // element: <App/>  ,
       children: [
         {

@@ -10,15 +10,16 @@ import {
   CheckBox,
   HiddenField,
   FormBuilder,
-  AssetPicker,
+ 
   FTPUpload,
   Preview,
   ZIPDownload,
-  ThumbnailInput,
+  
   LogoInput,
   RadioGroup,
-  ThumbnailLandingInput,
+ 
   FileInput
+  
 } from '../../components/form/index'
 
 import defaultFieldsJson from "./default-fields.json"
@@ -54,7 +55,9 @@ const Editor = ({ }) => {
 
       }} >Load State From Local Storage</button> */}
 
-      <HiddenField name="BASE_URL" value="https://resource.itbusinesstoday.com/whitepapers/" />
+ 
+
+      <HiddenField name="BASE_URL" value="https://resource.itbusinesstoday.com/whitepapers/cbtool_test/" />
       <HiddenField name="YEAR" value={new Date().getFullYear() + ""} />
       <Section title="Link Details">
         <Row>
@@ -226,15 +229,8 @@ const Editor = ({ }) => {
 
       <Section title="Logo & Thumbnail">
 
-        <FileInput name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1} onTextChange={(e)=>{
-          console.log(e.target.value);
-          
-        }} />
- 
 
-
-
-          <a target="_BLANK" href={getStateValue("BASE_URL")+watch["LOGO_NAME"]} style={{fontSize:"12px"}}>{getStateValue("BASE_URL")+watch["LOGO_NAME"]}</a>
+          <LogoInput  name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1} setFormValue={setFormValue} />
 
           <br></br>
         <FileInput name="THUMBNAIL_NAME" label="Thumbnail" tag="file" fileRef={filesRef.current.fileInput2} />
@@ -325,11 +321,12 @@ const Editor = ({ }) => {
       <Section title="FTP Upload">
 
         <FTPUpload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />
+        <ZIPDownload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />
       </Section>
 
 
 
-      <ZIPDownload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />
+    
 
 
 

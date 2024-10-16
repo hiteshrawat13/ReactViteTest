@@ -1,7 +1,7 @@
 import Stepper from '../stepper/Stepper';
 import Step from '../stepper/Step';
 import FormBuilder from './formBuilder/FormBuilder';
-import AssetPicker from '../AssetPicker'
+ 
 import Preview from '../Preview';
 import TextBox from './TextBox';
 import Form from './Form';
@@ -16,10 +16,11 @@ import LogoInput from './LogoInput';
 
 import RadioGroup from './RadioGroup';
 
-import ThumbnailInput from './ThumbnailInput';
-import ThumbnailLandingInput from './ThumbnailLandingInput';
+ 
 
 import FileInput from './FileInput';
+
+import Modal from 'react-responsive-modal';
 export {
     Stepper,
     Step,
@@ -30,16 +31,16 @@ export {
     CheckBox,
     HiddenField,
     FormBuilder,
-    AssetPicker,
+  
     FTPUpload,
     Preview,
     ZIPDownload,
 
     LogoInput,
     RadioGroup ,
-    ThumbnailInput,
-    ThumbnailLandingInput,
+  
 
-    FileInput
+    FileInput,
+    Modal
     
 }

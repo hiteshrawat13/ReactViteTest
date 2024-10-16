@@ -166,7 +166,8 @@ const FormBuilder = (defaultFieldsJson) => {
     <>
       <Toaster position="center" reverseOrder={false} />
 
-      <span>Click to add filed to the form</span>
+      <span>Click to add field to the form</span>
+      <br /><br />
       <div style={{ display: "flex", gap: "6px" }}>
 
 
@@ -191,16 +192,18 @@ const FormBuilder = (defaultFieldsJson) => {
 
       </div>
 
-      <div>Form Builder {selectedField + 1}</div>
+      {/* <div>Form Builder {selectedField + 1}</div> */}
 
-      <button onClick={(e)=>{
+      {/* <button onClick={(e)=>{
       e.preventDefault()
       console.log(JSON.stringify(state.form));
       navigator.clipboard.writeText(JSON.stringify(state.form))
-      } }>Log From Json</button>
+      } }>Log From Json</button> */}
+<br />
+<hr />
+<br />
 
-
-<button onClick={(e)=>{
+<button id='loadFieldsBtn' onClick={(e)=>{
       e.preventDefault()
       try{
         dispatch(loadFieldsFromJson(defaultFieldsJson.defaultFieldsJson))
@@ -212,7 +215,8 @@ const FormBuilder = (defaultFieldsJson) => {
       } }>Load Default Fields</button>
 
 
-<button onClick={handleNameDataRecalculate }>Recalculate name="data[]"</button>
+<button id='recalculateBtn' onClick={handleNameDataRecalculate }>Rearange "data[]"</button>
+<br /><br />
       <div className='formBuilder'>
 
         <FieldList getIcon={getIcon} setSelectedField={setSelectedField} selectedField={selectedField} />

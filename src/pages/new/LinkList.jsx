@@ -45,11 +45,7 @@ const LinkList = ({ campData={}, setCampData=null }) => {
     
         if (response.data.status == 200) {
           //  navigate(`/editor/${clientCode}`,{state: { 
-          
           alert("campaign updated")
-    
-    
-    
         } else {
           alert(response.data.message)
         }
@@ -105,6 +101,38 @@ const LinkList = ({ campData={}, setCampData=null }) => {
                 templateType:jobject.LINK_TYPE
       
             }})
+        } catch (error) {
+            alert(error)
+            console.log(error);
+        }
+    
+    }
+
+
+
+
+    const handleCopyJsonData=async (e,linkId)=>{
+
+        e.preventDefault()
+
+
+        
+
+        try {
+            const response = await axios.post(
+                Config.API_BASE_URL+`/camplist/getLinkJsonData?id=${linkId}`
+            );
+            const json=response.data.json_data
+            //alert( response.data.json_data )
+
+            navigator.clipboard.writeText(json).then(function() {
+                alert('Copying to clipboard was successful!')
+                 
+              }, function(err) {
+                alert(' Could not copy text: ', err)
+                
+            });
+           
         } catch (error) {
             alert(error)
             console.log(error);
@@ -198,7 +226,10 @@ const LinkList = ({ campData={}, setCampData=null }) => {
         },
         {
             name: "Actions" ,
-            cell:(row) => <button onClick={(e)=>handleEditLink(e,row.id)} id={row.ID}>Edit</button>,
+            cell:(row) => <>
+            <button onClick={(e)=>handleEditLink(e,row.id)} id={row.ID}>Edit</button>
+            <button onClick={(e)=>handleCopyJsonData(e,row.id)} id={row.ID}>Copy Data</button>
+            </>,
             ignoreRowClick: true,
             allowOverflow: true,
             button: true,

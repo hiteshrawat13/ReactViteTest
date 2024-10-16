@@ -40,3 +40,38 @@
     background: #5a93f6;
     color: white;
 }
+#loadFieldsBtn{
+    padding: 4px 10px;
+    border: 1px solid gray;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgb(200, 214, 229);
+    margin: 5px;
+}
+#recalculateBtn{
+    padding: 4px 10px;
+    border: 1px solid gray;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgb(200, 214, 229);
+    margin: 5px;
+}
+.previewBtns{
+    padding: 4px 10px;
+    border: 1px solid gray;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgb(200, 214, 229);
+    margin: 5px;
+}
+.greenBtn{
+    padding: 6px 10px;
+    margin: 20px 10px 10px 0px;
+    background-color: transparent;
+    color: #21702b;
+    border: 1px solid #21702b;
+}
+.fileToUpload{
+    margin-bottom: 15px !important;
+    padding: 8px;
+}

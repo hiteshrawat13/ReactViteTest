@@ -5,6 +5,7 @@ import useSocket from '../useSocket'
 import axios from 'axios'
 import Config from '../../../../Config'
 import Modal from 'react-responsive-modal'
+import { useAuth } from '../../../../Auth'
 
 const FTPUpload = ({publishHelper,filesRef}) => {
   
@@ -19,7 +20,9 @@ const FTPUpload = ({publishHelper,filesRef}) => {
   const { socketConnected, socketId, socketSessionId,socketUploadProgress } = useSocket()
 
 
-  const userName = "HARDCODEDUSERNAME";
+  const {userName}=useAuth();
+
+   
 
   const handleGetFiles = async () => {
     let uploadFiles = []
@@ -223,12 +226,13 @@ const FTPUpload = ({publishHelper,filesRef}) => {
 
 
   return (
-    <div>
+    < >
 
 
-<div>Display File List</div>
-      <div>Upload Button</div>
-      {(socketConnected) ? "<b>Socket Connected</b>" : "Socket Not Connected"}
+{/* <div>Display File List</div>
+      <div>Upload Button</div> */}
+      {(socketConnected) ? <b style={{color:"green"}}>Upload Server Connected</b> : <b style={{color:"red"}}>Upload Server Disconnected</b>}
+      <br /><br />
       {filesToUpload.map((file, i) => {
         return <div className="fileToUpload" key={i}>
           <div className='fileName'>{file.name} </div> <div className='fileProgress'>{file.progress}</div>
@@ -237,14 +241,14 @@ const FTPUpload = ({publishHelper,filesRef}) => {
 
 
 
-<button onClick={ ()=>setFTPUploadModalOpened(true) }>Upload Files</button>
+<button className='greenBtn' onClick={ ()=>setFTPUploadModalOpened(true) }>Upload Files</button>
 <Modal
 center
 open={isFTPUploadModalOpened}
 onClose={()=>setFTPUploadModalOpened(false)}>
-  <div>Display File List</div>
-      <div>Upload Button</div>
-      {(socketConnected) ? "<b>Socket Connected</b>" : "Socket Not Connected"}
+   
+      <div>Upload Files to FTP.</div>
+      <div>{(socketConnected) ? "Socket Connected" : "Socket Not Connected"}</div>
       {filesToUpload.map((file, i) => {
         return <div className="fileToUpload" key={i}>
           <div className='fileName'>{file.name} </div> <div className='fileProgress'>{file.progress}</div>
@@ -258,8 +262,8 @@ onClose={()=>setFTPUploadModalOpened(false)}>
 
    
 
-      <button onClick={(e) => { e.preventDefault(); handleSaveLink() }}>Save Link</button>
-    </div>
+      <button className='greenBtn' onClick={(e) => { e.preventDefault(); handleSaveLink() }}>Save Link</button>
+    </ >
   )
 }
 

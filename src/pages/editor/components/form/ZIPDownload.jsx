@@ -48,16 +48,11 @@ const ZIPDownload = ({publishHelper,filesRef}) => {
 
     return (
         
-        <div className='form-group'>
-            <button onClick={handleZip} className='btn-primary'>Download Zip</button>
-
-            <button onClick={(e)=>{
-        e.preventDefault();
-        localStorage.setItem("data",JSON.stringify(data) );
       
-        alert("State Saved")
-        }}    >Save State to Local Storage</button>
-        </div>
+            <button onClick={handleZip} className='greenBtn'>Download Zip</button>
+
+           
+       
     )
 }
 

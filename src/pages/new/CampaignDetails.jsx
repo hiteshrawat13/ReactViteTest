@@ -2,7 +2,10 @@ import React from 'react'
 import { Form, useForm, FormProvider } from 'react-hook-form'
 
 import { SelectBox, TextBox } from '../editor/components/form'
+import { useAuth } from '../../Auth'
 const CampaignDetails = ({onSubmit,onCancel,campaignData,buttonValue="Submit"}) => {
+  const {userName}=useAuth()
+  
     const methods = useForm({ mode: "onChange" })
     const {clientCode,category,campaignId="",campaignName="",country="",comment="",lastEditedBy,campCreatedBy}=campaignData
   return (

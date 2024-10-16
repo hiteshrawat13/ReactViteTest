@@ -10,7 +10,7 @@ import {
     CheckBox,
     HiddenField,
     FormBuilder,
-    AssetPicker,
+    
     FTPUpload,
     Preview,
     ZIPDownload
@@ -129,7 +129,7 @@ const Editor = () => {
 
         <Step title="Logo & Assets">
           Assets Logo
-          <AssetPicker />
+           
         </Step>
 
         <Step title="Preview">

@@ -4,7 +4,7 @@ import { StepperContext } from '../stepper/StepperContext'
 import { useFormContext } from 'react-hook-form'
 import TextBox from './TextBox'
 
-const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onChange=null,onTextChange=null}) =>  {
+const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileChange=null,onTextChange=null}) =>  {
 
     if(name==null)return <>Please provide name attribute for file input.</>
     if(fileRef==null)return <>Please provide fileRef attribute for file input.</>
@@ -23,7 +23,9 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onChang
         if (droppedFiles.length > 0) {
         fileRef.files=droppedFiles
         //setValue("THUMBNAIL_NAME",fileRef.files[0].name)
+        onImageFileChange()
         setImagePreview()
+        
         }
     }
 
@@ -41,19 +43,23 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onChang
         }
          
     }
+
+
+    function onImageFileChange(e) {
+        e?.preventDefault()
+        // update the scroll position
+        setSelectedImageFileName(fileRef.files[0].name || null)
+        //setValue("THUMBNAIL_NAME",fileRef.files[0].name)
+        setImagePreview()
+
+        if(onFileChange)onFileChange(fileRef.files[0].name || null);
+    }
+
     useEffect(() => {
 
         setValue(name,campaignDataState.data[name])
         setImagePreview()
-        function onImageFileChange(e) {
-            e.preventDefault()
-            // update the scroll position
-            setSelectedImageFileName(fileRef.files[0].name || null)
-            //setValue("THUMBNAIL_NAME",fileRef.files[0].name)
-            setImagePreview()
-
-            if(onChange)onChange(fileRef.files[0].name || null);
-        }
+        
         if (fileRef)
             fileRef.addEventListener("change", onImageFileChange);
             fileRef.setAttribute("data-tag", tag);

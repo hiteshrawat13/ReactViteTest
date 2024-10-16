@@ -26,20 +26,20 @@ const TemplateManager=[
     },
 
 
-    {
-        clientCode:"ARC",
-        title:"ARC",
-        description:"",
-        templates:[
-            {
-                id:"ARC-1ST-TOUCH",
-                type:"1st_touch",
-                title:"ARC 1st Touch",
+    // {
+    //     clientCode:"ARC",
+    //     title:"ARC",
+    //     description:"",
+    //     templates:[
+    //         {
+    //             id:"ARC-1ST-TOUCH",
+    //             type:"1st_touch",
+    //             title:"ARC 1st Touch",
                
-                editor:lazy(() => import('./ARC-1ST-TOUCH/Editor'))
-            }
-        ]
-    }
+    //             editor:lazy(() => import('./ARC-1ST-TOUCH/Editor'))
+    //         }
+    //     ]
+    // }
 
 
 ]

@@ -7,8 +7,11 @@ import { useNavigate } from 'react-router-dom'
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import TemplateManager from '../editor/templates/TemplateManager'
+import { useAuth } from '../../Auth';
 
 const CreateCampaignPage = () => {
+
+  const {userName}=useAuth()
 
   const [isCreateCampaignModalOpened, setCreateCampaignModalOpened] = useState(false)
 
@@ -16,8 +19,8 @@ const CreateCampaignPage = () => {
 
   const [clientCode,setClientCode]=useState("")
   const [category,setCategory]=useState("")
-  const [campCreatedBy,setCampCreatedBy]=useState("")
-  const [lastEditedBy,setLastEditedBy]=useState("")
+  const [campCreatedBy,setCampCreatedBy]=useState('')
+  const [lastEditedBy,setLastEditedBy]=useState('')
 
   const navigate = useNavigate()
  
@@ -34,8 +37,8 @@ const CreateCampaignPage = () => {
    
     setClientCode(clientCode)
     setCategory("CS")
-    setCampCreatedBy("ADMIN")
-    setLastEditedBy("ADMIN")
+    setCampCreatedBy(userName)
+    setLastEditedBy(userName)
     setCreateCampaignModalOpened(true)
   }
 

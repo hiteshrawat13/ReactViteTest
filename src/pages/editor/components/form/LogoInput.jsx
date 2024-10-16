@@ -2,72 +2,124 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { useFormContext } from 'react-hook-form'
 import { StepperContext } from '../stepper/StepperContext'
-import TextBox from './TextBox'
-const LogoPicker = () => {
-    const campaignDataState = useSelector(state => state.campaignData)
-    const logoPreviewRef=useRef()
-    const Stepper = useContext(StepperContext)
-    const [selectedLogoFileName, setSelectedlogoFileName] = useState(Stepper.logoFileRef?.current?.files[0]?.name || null)
-    const { register, formState: { errors } ,setValue} = useFormContext()
-    const handleDropZoneClick = () => {
-        Stepper.logoFileRef.current.click()
-    }
-    const handleDropZoneDrop=(e)=>{
-        e.preventDefault();
-        const droppedFiles = e.dataTransfer.files;
-        if (droppedFiles.length > 0) {
-        Stepper.logoFileRef.current.files=droppedFiles
-        setValue("LOGO_NAME",Stepper.logoFileRef.current.files[0].name)
-        setLogoPreview()
-        }
-    }
+ 
 
-    const setLogoPreview=(e)=>{
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          logoPreviewRef.current.src=e.target.result
-        }
-        reader.readAsDataURL(Stepper.logoFileRef.current.files[0]);
-    }
-    useEffect(() => {
+import { FileInput } from '.'
+import { EContext } from '../../EditorMain'
 
-        setValue("LOGO_NAME",campaignDataState.data["LOGO_NAME"])
+import axios from 'axios'
 
-        function onLogoFileChange(e) {
-            e.preventDefault()
-            // update the scroll position
-            setSelectedlogoFileName(Stepper.logoFileRef.current.files[0].name || null)
-            setValue("LOGO_NAME",Stepper.logoFileRef.current.files[0].name)
-            setLogoPreview()
+import "./LogoInput.css"
+const LogoPicker = ({fileRef,name,label="",tag=""}) => {
+
+    
+
+    const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData } = useContext(EContext)
+
+    const [foundLogos,setFoundLogos]=useState([])
+
+ 
+
+
+    const handleLogoSearch=(e)=>{
+
+        console.log(e);
+        
+        if(e.target.value.length==0){
+          document.querySelector(".logoList").style.display="none";
+           
+          return;
         }
-        if (Stepper.logoFileRef && Stepper.logoFileRef.current)
-            Stepper.logoFileRef.current.addEventListener("change", onLogoFileChange);
-        return function cleanup() {
-            Stepper.logoFileRef?.current?.removeEventListener("change", onLogoFileChange);
+        try {
+    
+          const search_query=e.target.value;
+          const formData = new FormData();
+          formData.append("query", search_query);
+        
+          axios.post(getStateValue("BASE_URL")+'logo/searchlogotest.php', formData )
+          .then(result=>{
+    
+            setFoundLogos(result.data.results)
+            document.querySelector(".logoList").style.display="block";
+            console.log(result,"Complete");
+          }).catch(err=>{
+            console.log(err,"ERROR");
+          })
+    
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+
+      function debounce(func, wait, immediate) {
+        var timeout;
+        return function() {
+          var context = this, args = arguments;
+          var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+          };
+          var callNow = immediate && !timeout;
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+          if (callNow) func.apply(context, args);
         };
+      };
 
-    }, [])
+
+     
+
+ 
     return (
         <div style={{display:"flex"}}>
-            <div className='file-preview'>
-                <p>Logo Preview</p>
-                <img id='LOGO_PREVIEW' ref={logoPreviewRef} />
-            </div>
-            <div>
 
-                <TextBox label="Logo Name" name="LOGO_NAME" required={true} />
 
-                {/* <input type="text" {...register("LOGO_NAME", { required: true })} placeholder='Search Logo Here' />
-                {errors["LOGO_NAME"] && <p>Logo file name is required</p>} */}
-                <div className="drop-zone" 
-                onClick={handleDropZoneClick}
-                onDrop={handleDropZoneDrop}
-                onDragOver={(event) => event.preventDefault()}
-                >
-                    Drop logo here or click to select a logo.<br />
-                    <div className='selected-file-name'>{selectedLogoFileName}</div>
-                </div>
+
+            <div style={{position:"relative"}}>
+         
+            <FileInput name={name} label={label} tag={tag} fileRef={fileRef} 
+             onTextChange={(e)=>{
+                console.log(e.target.value);
+                
+                handleLogoSearch(e)
+                
+              }} 
+              
+              onFileChange={(filename)=>{
+                filename = filename.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-\.]/g, '');
+               
+                setFormValue("LOGO_NAME",filename)
+                alert(filename)
+              }} 
+
+            />
+
+           
+         <ul className='logoList' style={{display:"none",background:"red"}}>{
+        (foundLogos==null)? <div>Logo Not Found</div> :        foundLogos.map((logo,i)=>{
+
+          return <li key={i} onClick={()=>{
+            document.querySelector("[name='LOGO_NAME']").value=logo;
+            document.querySelector(`[name="LOGO_FILE"]`).value=""
+            document.querySelector(".logoList").style.display="none";
+            document.querySelector("#LOGO_PREVIEW").src=publishHelper.current.BASE_URL+"logo/"+logo
+         
+         
+          }}><img src={getStateValue("BASE_URL")+"logo/"+logo} /> <p> {logo}</p></li>
+
+        })
+        }
+        
+        
+            </ul>
+
             </div>
+
+
+
+
+ 
          
         </div>
     )

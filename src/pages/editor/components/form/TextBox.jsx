@@ -19,7 +19,7 @@ const TextBox = ({type=null,label,name,required,width=null,onChange=null,value=n
       <div className='form-group'>
         <label>{label}{(required)&& <span style={{color:"red"}}>*</span>}</label>
         <div className='input-holder' {...((width!=null) && {style:{width}}) }>
-        <input type={ `${(type)?type:'text'}`  }
+        <input autoComplete="off" type={ `${(type)?type:'text'}`  }
         //defaultValue={campaignDataState.data[name]||""}
          {...rest} 
          {...register(name, { required: required ,onChange: (e) => { onChange && onChange(e) }})}    />

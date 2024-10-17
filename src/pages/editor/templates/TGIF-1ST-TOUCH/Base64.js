@@ -128,6 +128,7 @@ var Base64 = {
 
 const getSendmailSubject=(input_txt)=>{
     const encoded_text = `=?UTF-8?B?${Base64.encode(input_txt)}?=`;
+    return encoded_text
 }
 
 export {getSendmailSubject}

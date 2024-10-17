@@ -22,7 +22,7 @@ const CampaignDetails = ({onSubmit,onCancel,campaignData,buttonValue="Submit"}) 
               { label: "Both ( NON-EU & CASL )", value: "BOTH" }
             ]}  required={true} />
             <TextBox name="campaignName" label="Campaign Name" value={campaignName} required={true} />
-            <TextBox name="comment" label="Comment" value={comment} required={true} />
+            <TextBox name="comment" label="Comment" value={comment} required={false} />
             <TextBox name="campCreatedBy" label="campCreatedBy" value={campCreatedBy} required={true} readOnly />
             <TextBox name="lastEditedBy" label="lastEditedBy" value={lastEditedBy} required={true} readOnly />
             

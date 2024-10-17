@@ -9,6 +9,7 @@ const Preview = forwardRef(({publishHelper,filesRef,controls}, ref) => {
   const {data} = useSelector(state => state.campaignData)
   const [buttons, setButtons] = useState(null)
 
+  const [activeTab, setActiveTab] = useState(0)
   useEffect(() => {
 
     
@@ -23,13 +24,27 @@ const Preview = forwardRef(({publishHelper,filesRef,controls}, ref) => {
         filesRef:filesRef,
         state:data
       }))
+
+    
     }
 
    
     
     loadButtons()
 
+   
+
   }, [])
+
+
+  useEffect(() => {
+    
+    handlePreview(0,null)
+    return () => {
+       
+    }
+  }, [buttons])
+  
 
 
 
@@ -47,9 +62,16 @@ const Preview = forwardRef(({publishHelper,filesRef,controls}, ref) => {
   const handlePreview = async (page, e = null) => {
     e?.preventDefault()
 
+  try{
     const html = buttons[page].data
     //console.log(html,"WWWWWWWWWWWWWWWWWWWWW");
     loadHtml(html)
+
+    setActiveTab(page)
+  }catch(error){
+
+  }
+  
 
   }
 
@@ -63,18 +85,11 @@ const Preview = forwardRef(({publishHelper,filesRef,controls}, ref) => {
 
     setButtons(publishHelper.current.getPreviewPages())
 
-    const page1 = buttons[0]
-    handlePreview(page1)
+    
   }
 
 
-  const changeWidthLiveLogo = (e) => {
-    iframeRef.current.contentDocument.getElementById('splogo').style.width = e.target.value;
-  }
-
-  const changeWidthLiveThumbnail = (e) => {
-    iframeRef.current.contentDocument.getElementById('thumbnail').style.width = e.target.value;
-  }
+ 
 
   return (
     <div style={{ display: 'flex' }}>
@@ -85,9 +100,9 @@ const Preview = forwardRef(({publishHelper,filesRef,controls}, ref) => {
 
             try{
               const tabName=page.name.substring(  page.name.lastIndexOf("-")+1  , page.name.length);
-              return <button className='previewBtns' onClick={(e) => handlePreview(i, e)} key={i}>{tabName}</button>
+              return <button className={`previewBtns ${activeTab==i?'active':''}`} onClick={(e) => handlePreview(i, e)} key={i}>{tabName}</button>
             }catch(error){
-              return <button className='previewBtns' onClick={(e) => handlePreview(i, e)} key={i}>{page.name}</button>
+              return <button className={`previewBtns ${activeTab==i?'active':''}`} onClick={(e) => handlePreview(i, e)} key={i}>{page.name}</button>
             }
           })
         }

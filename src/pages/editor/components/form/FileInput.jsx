@@ -4,7 +4,7 @@ import { StepperContext } from '../stepper/StepperContext'
 import { useFormContext } from 'react-hook-form'
 import TextBox from './TextBox'
 
-const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileChange=null,onTextChange=null}) =>  {
+const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileChange=null,onTextChange=null,...rest}) =>  {
 
     if(name==null)return <>Please provide name attribute for file input.</>
     if(fileRef==null)return <>Please provide fileRef attribute for file input.</>
@@ -30,6 +30,12 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
     }
 
     const setImagePreview=(e)=>{
+
+        if(fileRef.files[0]?.type.includes("image") ){
+            imagePreviewRef.current.style.display="block"
+        }else{
+            imagePreviewRef.current.style.display="none"
+        } 
         var reader = new FileReader();
         reader.onload = function (e) {
             imagePreviewRef.current.src=e.target.result
@@ -81,7 +87,7 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
 
 
                 
-                <TextBox label={label} name={name} required={true} onChange={onTextChange}/>
+                <TextBox label={label} name={name} required={true} onChange={onTextChange} {...rest}/>
                 {/* <input type="text" {...register("THUMBNAIL_NAME", { required: true })} placeholder='Search Logo Here' />
                 {errors["THUMBNAIL_NAME"] && <p>Thumbnail file name is required</p>} */}
                     <div className="drop-zone" 
@@ -89,7 +95,7 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
                         onDrop={handleDropZoneDrop}
                         onDragOver={(event) => event.preventDefault()}
                     >
-                        Drop thumbnail here or click to select a thumbnail file.<br />
+                        Drop Image here or click to select an Image file.<br />
                         <div className='selected-file-name'>{selectedImageFileName}</div>
                     </div>
             </div>

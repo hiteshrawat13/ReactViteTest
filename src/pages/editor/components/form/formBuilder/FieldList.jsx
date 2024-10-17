@@ -51,9 +51,11 @@ const state= useSelector(state => state.campaignData.data)
   };
 
 
+ 
 
   return (
     <>
+    
      
       <DragDropContext onDragEnd={handleDrop}>
         <Droppable droppableId="list-container">
@@ -118,7 +120,7 @@ const state= useSelector(state => state.campaignData.data)
 
                           <div>
                             <div style={{fontSize:"12px",color:"#8f8f8f"}}>
-                              <div className='fieldLabel' style={{color:"#000" }}>{item.label}</div> 
+                              <div className='fieldLabel' style={{color:"#000" }} dangerouslySetInnerHTML={{__html: item.label}}/> 
                             </div>
                             {/* <div className='fieldLabel' style={{fontSize:"14px",fontWeight:"bold",color:"#2f3542"}}>{item.label}</div> */}
                           </div>

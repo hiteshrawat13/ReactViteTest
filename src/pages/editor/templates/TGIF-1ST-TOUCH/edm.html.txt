@@ -159,8 +159,8 @@
                                     </td>
 
                                     <td width="234" align="right">
-                                        <span style="font-size: 14px;">Sponsored By</span><br />
-                                        <img class="splogo" src="##BASE_URL####LOGO_NAME##" alt="Logo" style="width:##LOGO_WIDTH##px;margin-top: 2px;" />
+                                        <span style="font-size: 14px;">##SPONSORED_BY_TEXT##</span><br />
+                                        <img class="splogo" src="##BASE_URL##logo/##LOGO_NAME##" alt="Logo" style="width:##LOGO_WIDTH##px;margin-top: 2px;" />
                                     </td>
                                 </tr>
                             </tbody>

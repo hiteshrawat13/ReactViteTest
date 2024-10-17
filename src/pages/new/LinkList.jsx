@@ -184,7 +184,7 @@ const LinkList = ({ campData={}, setCampData=null }) => {
         },
         {
             name: 'Links',
-            selector: row => <a href={row.link}>{row.link}</a>,
+            selector: row => <a href={row.link} target='_blank'>{row.link}</a>,
             sortable: true,
              maxWidth: "350px"
         },
@@ -228,7 +228,7 @@ const LinkList = ({ campData={}, setCampData=null }) => {
             name: "Actions" ,
             cell:(row) => <>
             <button onClick={(e)=>handleEditLink(e,row.id)} id={row.ID}>Edit</button>
-            <button onClick={(e)=>handleCopyJsonData(e,row.id)} id={row.ID}>Copy Data</button>
+            {/* <button onClick={(e)=>handleCopyJsonData(e,row.id)} id={row.ID}>Copy Data</button> */}
             </>,
             ignoreRowClick: true,
             allowOverflow: true,
@@ -283,7 +283,7 @@ onClose={()=>setUpdateCampaignModalOpened(false)}>
                                 title={location?.state.campaignName}
                                 columns={columns}
                                 data={links}
-                                onRowClicked={parsePage}
+                                onRowClicked={ ()=>{}}
                                 // progressPending={'loading'}
                                 pagination
                             />

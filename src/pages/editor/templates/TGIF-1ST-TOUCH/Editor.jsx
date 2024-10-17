@@ -28,6 +28,7 @@ import PublishHelper from './PublishHelper'
 import Section from '../../components/form/Section'
 import Row from '../../components/form/Row'
 import Col from '../../components/form/Col'
+import LanguageInput from '../../components/form/LanguageInput'
 const Editor = ({ }) => {
 
 
@@ -37,6 +38,7 @@ const Editor = ({ }) => {
      setStateValue("FTP_CONFIG_NAME", "TGIF")
    // setStateValue("FTP_CONFIG_NAME", "TEST")
     setStateValue("LOGO_FOLDER", "logo/")
+    setStateValue("LOGO_WIDTH", "180")
     //alert("TGIF")
   }, [])
 
@@ -68,12 +70,15 @@ const Editor = ({ }) => {
           <Col>
             <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" readOnly />
           </Col>
+
+          
         </Row>
         <Row>
           <Col><TextBox label="Link Type" name="LINK_TYPE" required={true} value={campData?.templateType} readOnly /></Col>
           <Col><TextBox label="Template Id" name="TEMPLATE_ID" required={true} value={campData?.templateId} readOnly /></Col>
         </Row>
 
+      
         <TextBox label="Campaign Id" name="CAMP_ID" required={true} value={campData?.campaignId} width="10%" readOnly />
         <SelectBox label="Region" name="REGION" value={campData?.country} required={true} readOnly
           options={[
@@ -109,6 +114,13 @@ const Editor = ({ }) => {
 
 
       <Section title="Details" >
+
+      <Row>
+        <Col>
+            <LanguageInput/>
+          </Col>
+        </Row>
+
         <TextBox label="Pixel Link" name="PIXEL_LINK" required={true} />
         <SelectBox label="Asset Type" name="ASSET_TYPE" required={true}
           options={[
@@ -165,7 +177,7 @@ const Editor = ({ }) => {
         }
 
 
-        <CheckBox label="Same As EDM abstract" name="LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT" defaultChecked={true} />
+        <CheckBox label="Same As EDM abstract" name="LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT" checked={true}  />
         {(watch["LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT"] == false) && <>
 
           <button onClick={(e) => {
@@ -230,7 +242,7 @@ const Editor = ({ }) => {
       <Section title="Logo & Thumbnail">
 
 
-          <LogoInput  name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1} setFormValue={setFormValue} />
+          <LogoInput  name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1}   />
 
           <br></br>
         <FileInput name="THUMBNAIL_NAME" label="Thumbnail" tag="file" fileRef={filesRef.current.fileInput2} />
@@ -241,7 +253,7 @@ const Editor = ({ }) => {
         }
 
 
-        <CheckBox label="Upload Extra Image" name="ADD_EXTRA_FILE_1" />
+        <CheckBox label="Upload Extra Image [EXTRA_FILE_1]" name="ADD_EXTRA_FILE_1" />
         {(watch["ADD_EXTRA_FILE_1"] == true) &&
           <FileInput name="EXTRA_FILE_1" label="Extra Image" tag="file" fileRef={filesRef.current.fileInput4} onChange={(filename)=>{
 
@@ -298,7 +310,13 @@ const Editor = ({ }) => {
       <Preview publishHelper={publishHelperRef.current} filesRef={filesRef.current} controls={
         ({ iframe }) => {
           return <>
-            <div>
+            <div style={{
+    background: 'white',
+    height: 'fit-content',
+    margin: '30px 10px',
+    padding: '10px',
+    paddingTop: '3px'
+}}>
               <TextBox type="number" label="Logo Width" name="LOGO_WIDTH" value={180} onChange={(e) => {
 
                 iframe.contentDocument.querySelector('.splogo').style.width = e.target.value + "px"

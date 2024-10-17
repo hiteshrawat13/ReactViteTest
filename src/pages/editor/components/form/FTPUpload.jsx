@@ -19,6 +19,8 @@ const FTPUpload = ({publishHelper,filesRef}) => {
 
   const { socketConnected, socketId, socketSessionId,socketUploadProgress } = useSocket()
 
+  const [FTPProgress,setFTPProgress]=useState("")
+
 
   const {userName}=useAuth();
 
@@ -140,7 +142,29 @@ const FTPUpload = ({publishHelper,filesRef}) => {
   
   const startUpload = (bodyFormData) => {
     try {
+
+
+
+      filesToUpload.forEach(item=>{
+
+        // 1. Find the todo with the provided id
+        const currentTodoIndex = filesToUpload.findIndex((file) => file.name === item.name);
+ 
+        // 2. Mark the todo as complete
+        if (currentTodoIndex != -1) {
+          const updatedTodo = { ...filesToUpload[currentTodoIndex], progress: ".." };
+          // 3. Update the todo list with the updated todo
+          setFilesToUpload((previous) => [
+            ...previous.slice(0, currentTodoIndex),
+            updatedTodo,
+            ...previous.slice(currentTodoIndex + 1)])
+          }
+    
+           })
+
+
       setUploading(true)
+      setFTPProgress("Uploading..")
       axios({
         method: "post",
         url: Config.API_BASE_URL + `/upload_file/${campaignDataState.data["FTP_CONFIG_NAME"]}/${socketId}`,
@@ -175,12 +199,41 @@ const FTPUpload = ({publishHelper,filesRef}) => {
           //   links: `${publishHelper.current.BASE_URL}${document.querySelector("[name='LINK_NAME']").value}-edm.html`,
           // }])
 
+           
+
+
+
+
+          response.data.forEach(item=>{
+
+       // 1. Find the todo with the provided id
+       const currentTodoIndex = filesToUpload.findIndex((file) => file.name === item.name);
+
+       // 2. Mark the todo as complete
+       if (currentTodoIndex != -1) {
+         const updatedTodo = { ...filesToUpload[currentTodoIndex], progress: item.status };
+         // 3. Update the todo list with the updated todo
+         setFilesToUpload((previous) => [
+           ...previous.slice(0, currentTodoIndex),
+           updatedTodo,
+           ...previous.slice(currentTodoIndex + 1)])
+         }
+   
+          })
+
+          setFTPProgress("Upload Completed.")
+      
+     
+
+
+
           setUploading(false)
         })
         .catch(function (err) {
           console.log(err, "ERROR");
           alert(err.response.data.message)
           setUploading(false)
+          setFTPProgress(err.message)
         });
 
 
@@ -202,9 +255,15 @@ const FTPUpload = ({publishHelper,filesRef}) => {
 
   useEffect(() => {
 
+
+
     // console.log("IN on progress filesupload:",filesToUpload);
 
     if (socketUploadProgress == null) return;
+
+
+    (socketUploadProgress.name=="UPLOAD_PROGRESS") && setFTPProgress(socketUploadProgress.progress)
+
     // 1. Find the todo with the provided id
     const currentTodoIndex = filesToUpload.findIndex((file) => file.name === socketUploadProgress.name);
 
@@ -216,6 +275,9 @@ const FTPUpload = ({publishHelper,filesRef}) => {
         ...previous.slice(0, currentTodoIndex),
         updatedTodo,
         ...previous.slice(currentTodoIndex + 1)])
+
+     
+
     } else {
       console.log("NOTFOUND", currentTodoIndex, filesToUpload, socketUploadProgress.name);
     }
@@ -231,11 +293,12 @@ const FTPUpload = ({publishHelper,filesRef}) => {
 
 {/* <div>Display File List</div>
       <div>Upload Button</div> */}
-      {(socketConnected) ? <b style={{color:"green"}}>Upload Server Connected</b> : <b style={{color:"red"}}>Upload Server Disconnected</b>}
+      {/* {(socketConnected) ? <b style={{color:"green"}}>Upload Server Connected</b> : <b style={{color:"red"}}>Upload Server Disconnected</b>} */}
       <br /><br />
       {filesToUpload.map((file, i) => {
         return <div className="fileToUpload" key={i}>
-          <div className='fileName'>{file.name} </div> <div className='fileProgress'>{file.progress}</div>
+          <div className='fileName'>{file.name} </div>
+           <div className='fileProgress'>{file.progress}</div>
         </div>
       })} 
 
@@ -247,15 +310,24 @@ center
 open={isFTPUploadModalOpened}
 onClose={()=>setFTPUploadModalOpened(false)}>
    
-      <div>Upload Files to FTP.</div>
-      <div>{(socketConnected) ? "Socket Connected" : "Socket Not Connected"}</div>
+      
+      <div style={{width:"400px"}}>
+
+      <div> {(socketConnected) ? <b style={{color:"green"}}>Upload Server Connected</b> : <b style={{color:"red"}}>Upload Server Disconnected</b>}</div>
+     <br />
       {filesToUpload.map((file, i) => {
         return <div className="fileToUpload" key={i}>
           <div className='fileName'>{file.name} </div> <div className='fileProgress'>{file.progress}</div>
         </div>
       })}
-<button onClick={(e) => { e.preventDefault(); handleUploadFiles() }}>Upload to ftp</button>
 
+      <div>{JSON.stringify(FTPProgress)}</div>
+
+      <button className='greenBtn' onClick={(e) => { e.preventDefault(); handleUploadFiles() }}>Upload to Server</button>
+
+
+      </div>
+      
   </Modal> 
 
 

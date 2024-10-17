@@ -43,8 +43,8 @@ const Login = () => {
     }catch(e){
      
       console.log(e);
-      console.log(e.response.data.messsage);
-      toast.error(e.response.data.messsage)
+      console.log(e.response.data);
+      toast.error(e.response.data)
     }
    
 

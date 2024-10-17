@@ -19,24 +19,33 @@ const useSocket = () => {
         function onDisconnect(e) {
             console.log("onDisconnected", e);
             setsocketConnected(false);
+            
         }
 
         function onFooEvent(value) {
             console.log("ON FOO", value);
             setSocketId(value.id)
+            console.log("Socket ON Foo",value);
         }
 
         function onUploadProgress(value) {
             setSocketUploadProgress(value)
-            console.log(value);
+            console.log("Socket OnUploadProgress",value);
             
         }
+        function onError(){
+            socket.socket.reconnect();
+        }
+
+
+        
 
 
         if (socketConnected == false) {
             socket.connect();
             socket.on('connect', onConnect);
             socket.on('disconnect', onDisconnect);
+            socket.on('error',onError);
             socket.on('foo', onFooEvent);
             socket.on("uploadProgress", (value) => onUploadProgress(value))
             socket.emit('connectInit', socketSessionId);

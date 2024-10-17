@@ -178,6 +178,8 @@ convertToEntities=(input)=> {
         }
 
 
+       
+
         
         data= this.convertToEntities( this.getPrivacyPolicy(data)  ) //Privacy Policy
         
@@ -219,6 +221,31 @@ convertToEntities=(input)=> {
         if(this.filesRef.fileInput2.files[0]){data=data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, await this.getBase64Image( this.filesRef.fileInput2.files[0]) )}
       
         }
+
+
+
+
+        const traditional_landing_layout=`
+        <img   src="##BASE_URL####THUMBNAIL_NAME##" width="300" style=" border: 1px solid #e5e5e5; border-radius: 5px;" alt="thumbnail" />                          
+        <div class="landing_abstract" style="padding-right: 2%;">
+           ##LANDING_ABSTRACT##
+        </div>
+       `
+
+       const landing_layout_logo_below_abstract=`
+      <div class="landing_abstract" style="padding-right: 2%;">
+          ##LANDING_ABSTRACT##
+       </div>
+        <img   src="##BASE_URL####THUMBNAIL_NAME##" width="300" style=" border: 1px solid #e5e5e5; border-radius: 5px;" alt="thumbnail" />                          
+       
+      `
+
+
+       if(this.state["LANDING_LAYOUT"]=="Traditional"){
+           data=data.replaceAll(`##LANDING_LAYOUT##`, this.convertToEntities ( traditional_landing_layout  ) )
+       } else if(this.state["LANDING_LAYOUT"]=="Thumbnail below abstract"){
+           data=data.replaceAll(`##LANDING_LAYOUT##`, this.convertToEntities ( landing_layout_logo_below_abstract  ) )
+       }
 
 
 

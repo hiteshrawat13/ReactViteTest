@@ -3,8 +3,12 @@ import { Form, useForm, FormProvider } from 'react-hook-form'
 
 import { SelectBox, TextBox } from '../editor/components/form'
 import { useAuth } from '../../Auth'
+
+import Cookies from 'js-cookie'
 const CampaignDetails = ({onSubmit,onCancel,campaignData,buttonValue="Submit"}) => {
-  const {userName}=useAuth()
+
+  const token = Cookies.get('access_token');
+  const userName = Cookies.get('user_id');
   
     const methods = useForm({ mode: "onChange" })
     const {clientCode,category,campaignId="",campaignName="",country="",comment="",lastEditedBy,campCreatedBy}=campaignData

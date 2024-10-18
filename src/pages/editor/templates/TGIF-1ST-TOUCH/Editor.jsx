@@ -10,16 +10,16 @@ import {
   CheckBox,
   HiddenField,
   FormBuilder,
- 
+
   FTPUpload,
   Preview,
   ZIPDownload,
-  
+
   LogoInput,
   RadioGroup,
- 
+
   FileInput
-  
+
 } from '../../components/form/index'
 
 import defaultFieldsJson from "./default-fields.json"
@@ -35,8 +35,8 @@ const Editor = ({ }) => {
   const publishHelperRef = useRef(new PublishHelper())
   const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData } = useContext(EContext)
   useEffect(() => {
-     setStateValue("FTP_CONFIG_NAME", "TGIF")
-   // setStateValue("FTP_CONFIG_NAME", "TEST")
+    setStateValue("FTP_CONFIG_NAME", "TGIF")
+    // setStateValue("FTP_CONFIG_NAME", "TEST")
     setStateValue("LOGO_FOLDER", "logo/")
     setStateValue("LOGO_WIDTH", "180")
     //alert("TGIF")
@@ -57,7 +57,7 @@ const Editor = ({ }) => {
 
       }} >Load State From Local Storage</button> */}
 
- 
+
 
       <HiddenField name="BASE_URL" value="https://resource.itbusinesstoday.com/whitepapers/cbtool_test/" />
       <HiddenField name="YEAR" value={new Date().getFullYear() + ""} />
@@ -71,14 +71,14 @@ const Editor = ({ }) => {
             <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" readOnly />
           </Col>
 
-          
+
         </Row>
         <Row>
           <Col><TextBox label="Link Type" name="LINK_TYPE" required={true} value={campData?.templateType} readOnly /></Col>
           <Col><TextBox label="Template Id" name="TEMPLATE_ID" required={true} value={campData?.templateId} readOnly /></Col>
         </Row>
 
-      
+
         <TextBox label="Campaign Id" name="CAMP_ID" required={true} value={campData?.campaignId} width="10%" readOnly />
         <SelectBox label="Region" name="REGION" value={campData?.country} required={true} readOnly
           options={[
@@ -107,7 +107,7 @@ const Editor = ({ }) => {
               setFormValue("PDF_NAME", `${val}.pdf`)
               setFormValue("MP4_NAME", `${val}.mp4`)
               setFormValue("EXTRA_FILE_1", `${val}.png`)
-              
+
             }
           } />
       </Section>
@@ -115,9 +115,9 @@ const Editor = ({ }) => {
 
       <Section title="Details" >
 
-      <Row>
-        <Col>
-            <LanguageInput/>
+        <Row>
+          <Col>
+            <LanguageInput />
           </Col>
         </Row>
 
@@ -177,7 +177,7 @@ const Editor = ({ }) => {
         }
 
 
-        <CheckBox label="Same As EDM abstract" name="LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT" checked={true}  />
+        <CheckBox label="Same As EDM abstract" name="LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT" checked={true} />
         {(watch["LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT"] == false) && <>
 
           <button onClick={(e) => {
@@ -242,9 +242,9 @@ const Editor = ({ }) => {
       <Section title="Logo & Thumbnail">
 
 
-          <LogoInput  name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1}   />
+        <LogoInput name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1} />
 
-          <br></br>
+        <br></br>
         <FileInput name="THUMBNAIL_NAME" label="Thumbnail" tag="file" fileRef={filesRef.current.fileInput2} />
 
         <CheckBox label="Use different thumbnail for edm page" name="USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE" />
@@ -255,15 +255,12 @@ const Editor = ({ }) => {
 
         <CheckBox label="Upload Extra Image [EXTRA_FILE_1]" name="ADD_EXTRA_FILE_1" />
         {(watch["ADD_EXTRA_FILE_1"] == true) &&
-          <FileInput name="EXTRA_FILE_1" label="Extra Image" tag="file" fileRef={filesRef.current.fileInput4} onChange={(filename)=>{
+          <FileInput name="EXTRA_FILE_1" label="Extra Image" tag="file" fileRef={filesRef.current.fileInput4} onChange={(filename) => {
 
-              setFormValue("EXTRA_FILE_1",filename)
+            setFormValue("EXTRA_FILE_1", filename)
 
-          } } />
+          }} />
         }
-
-
-
 
       </Section>
 
@@ -288,21 +285,15 @@ const Editor = ({ }) => {
 
         {(watch["ASSET_FORMAT"] == "IFRAME") &&
           <TextBox label="IFrame Url" required="true" name="IFRAME" />
-          
+
         }
 
 
       </Section>
-
-
-
-
-
     </Step>
 
 
     <Step title="Form" key={1104}>
-
       <FormBuilder defaultFieldsJson={defaultFieldsJson} />
     </Step>
 
@@ -311,12 +302,12 @@ const Editor = ({ }) => {
         ({ iframe }) => {
           return <>
             <div style={{
-    background: 'white',
-    height: 'fit-content',
-    margin: '30px 10px',
-    padding: '10px',
-    paddingTop: '3px'
-}}>
+              background: 'white',
+              height: 'fit-content',
+              margin: '30px 10px',
+              padding: '10px',
+              paddingTop: '3px'
+            }}>
               <TextBox type="number" label="Logo Width" name="LOGO_WIDTH" value={180} onChange={(e) => {
 
                 iframe.contentDocument.querySelector('.splogo').style.width = e.target.value + "px"
@@ -334,23 +325,11 @@ const Editor = ({ }) => {
     </Step>
 
     <Step title="Publish" key={1106}>
-
-
       <Section title="FTP Upload">
-
         <FTPUpload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />
         <ZIPDownload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />
       </Section>
-
-
-
-    
-
-
-
-
     </Step>
-
 
   </Stepper>
   )

@@ -6,7 +6,7 @@ import axios from 'axios'
 import Config from '../../../../Config'
 import Modal from 'react-responsive-modal'
 import { useAuth } from '../../../../Auth'
-
+import Cookies from 'js-cookie'
 const FTPUpload = ({publishHelper,filesRef}) => {
   
   const [isFTPUploadModalOpened,setFTPUploadModalOpened] =useState(false)
@@ -22,7 +22,8 @@ const FTPUpload = ({publishHelper,filesRef}) => {
   const [FTPProgress,setFTPProgress]=useState("")
 
 
-  const {userName}=useAuth();
+  const token = Cookies.get('access_token');
+  const userName = Cookies.get('user_id');
 
    
 
@@ -312,7 +313,7 @@ onClose={()=>setFTPUploadModalOpened(false)}>
    
       
       <div style={{width:"400px"}}>
-
+      <div>Socket Id: {socketId}</div>
       <div> {(socketConnected) ? <b style={{color:"green"}}>Upload Server Connected</b> : <b style={{color:"red"}}>Upload Server Disconnected</b>}</div>
      <br />
       {filesToUpload.map((file, i) => {

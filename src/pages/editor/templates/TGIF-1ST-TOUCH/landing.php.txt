@@ -223,7 +223,7 @@
                                     </td>
                                     <td width="234" align="right">
                                         <div style="font-size: 14px; margin-top: 0px;">##SPONSORED_BY_TEXT##</div>
-                                        <img class="splogo land" src="##BASE_URL##logo/##LOGO_NAME##" alt="Logo"  style="width:##LOGO_WIDTH##px; margin-top: 1px; margin-bottom: 1px;" />
+                                        <img class="splogo land" src="##BASE_URL####LOGO_FOLDER####LOGO_NAME##" alt="Logo"  style="width:##LOGO_WIDTH##px; margin-top: 1px; margin-bottom: 1px;" />
                                   
                                    
                                     </td>

@@ -23,8 +23,8 @@ import Login from "../pages/login/Login"
 const Router=[
     {
     
-     element: <AuthProvider> <App/> </AuthProvider> ,
-     // element: <App/>  ,
+    // element: <AuthProvider> <App/> </AuthProvider> ,
+   element: <App/>  ,
       children: [
         {
           path: "/",

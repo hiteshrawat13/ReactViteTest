@@ -186,7 +186,7 @@ convertToEntities=(input)=> {
 
 
         if(forPreview==true){
-            if(this.filesRef.fileInput1.files[0]){data=data.replaceAll(`##BASE_URL####LOGO_NAME##`, await this.getBase64Image( this.filesRef.fileInput1.files[0])  )}
+            if(this.filesRef.fileInput1.files[0]){data=data.replaceAll(`##BASE_URL####LOGO_FOLDER####LOGO_NAME##`, await this.getBase64Image( this.filesRef.fileInput1.files[0])  )}
            
        
        if(this.state["USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE"]==true){
@@ -215,12 +215,7 @@ convertToEntities=(input)=> {
        
 
 
-        if(forPreview==true){
-            if(this.filesRef.fileInput1.files[0]){data=data.replaceAll(`##BASE_URL####LOGO_NAME##`, await this.getBase64Image( this.filesRef.fileInput1.files[0])  )}
-         
-        if(this.filesRef.fileInput2.files[0]){data=data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, await this.getBase64Image( this.filesRef.fileInput2.files[0]) )}
-      
-        }
+     
 
 
 
@@ -246,6 +241,14 @@ convertToEntities=(input)=> {
        } else if(this.state["LANDING_LAYOUT"]=="Thumbnail below abstract"){
            data=data.replaceAll(`##LANDING_LAYOUT##`, this.convertToEntities ( landing_layout_logo_below_abstract  ) )
        }
+
+
+       if(forPreview==true){
+        if(this.filesRef.fileInput1.files[0]){data=data.replaceAll(`##BASE_URL####LOGO_FOLDER####LOGO_NAME##`, await this.getBase64Image( this.filesRef.fileInput1.files[0])  )}
+     
+    if(this.filesRef.fileInput2.files[0]){data=data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, await this.getBase64Image( this.filesRef.fileInput2.files[0]) )}
+  
+    }
 
 
 
@@ -396,7 +399,7 @@ convertToEntities=(input)=> {
         }
 
         if(forPreview==true){
-            if(this.filesRef.fileInput1.files[0]){data=data.replaceAll(`##BASE_URL####LOGO_NAME##`, await this.getBase64Image( this.filesRef.fileInput1.files[0])  )}
+            if(this.filesRef.fileInput1.files[0]){data=data.replaceAll(`##BASE_URL####LOGO_FOLDER####LOGO_NAME##`, await this.getBase64Image( this.filesRef.fileInput1.files[0])  )}
             if(this.filesRef.fileInput2.files[0]){data=data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, await this.getBase64Image( this.filesRef.fileInput2.files[0]) )}
         }
 

@@ -9,9 +9,15 @@ import { Modal } from 'react-responsive-modal';
 import TemplateManager from '../editor/templates/TemplateManager'
 import { useAuth } from '../../Auth';
 
+
+import Cookies from 'js-cookie';
 const CreateCampaignPage = () => {
 
-  const {userName}=useAuth()
+
+  const token = Cookies.get('access_token');
+  const userName = Cookies.get('user_id');
+
+  
 
   const [isCreateCampaignModalOpened, setCreateCampaignModalOpened] = useState(false)
 

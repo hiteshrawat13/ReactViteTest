@@ -8,7 +8,7 @@ import { EditorContext } from 'react-simple-wysiwyg';
 
 import { Stepper ,Step} from './components/form/index';
 import { useDispatch } from 'react-redux';
-import { setData, addData, updateData } from '../../store/campaign/CampaignSlice'
+import { setData, clearData,addData, updateData } from '../../store/campaign/CampaignSlice'
 import { useSelector } from 'react-redux';
 import TemplateManager from './templates/TemplateManager';
 
@@ -78,7 +78,7 @@ const EditorMain = () => {
       //update state
       if(campData.jsonObject) setState(campData.jsonObject)
       return () => {
-        
+        dispatch(clearData())
       }
     }, [])
     

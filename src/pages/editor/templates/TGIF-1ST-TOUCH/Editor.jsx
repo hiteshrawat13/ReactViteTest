@@ -29,6 +29,7 @@ import Section from '../../components/form/Section'
 import Row from '../../components/form/Row'
 import Col from '../../components/form/Col'
 import LanguageInput from '../../components/form/LanguageInput'
+
 const Editor = ({ }) => {
 
 
@@ -177,7 +178,7 @@ const Editor = ({ }) => {
         }
 
 
-        <CheckBox label="Same As EDM abstract" name="LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT" checked={true} />
+        <CheckBox label="Same As EDM abstract" name="LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT" defaultChecked={true} />
         {(watch["LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT"] == false) && <>
 
           <button onClick={(e) => {
@@ -217,8 +218,9 @@ const Editor = ({ }) => {
       <Section title="Sendmail Details">
         <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true} width="60%" value="Thank you for requesting a ##ASSET_TYPE##" />
 
+
+       
         <RichTextEditor label="Sendmail Body" name="SENDMAIL_BODY" required={true} value={`<table>
-				
 				 <tr><td>Dear&nbsp;<b>$firstname,</b></td></tr>
 				 <tr><td>&nbsp;</td></tr>
 				 <tr><td>Thank you for requesting <b>"##EDM_TITLE##"</b>. You can view it immediately by clicking <a href='##BASE_URL####LINK_NAME##.pdf'>HERE</a>!</td></tr>

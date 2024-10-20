@@ -20,6 +20,13 @@ export const CampaignSlice = createSlice({
       
       
     },
+
+    clearData:(state,payload)=>{
+      const newObj = {}; //making a new array
+      newObj.data = {form:[]}
+      return newObj;
+    },
+
     addData: (state,payload) => {
      
       const newObj = {...state}; //making a new array
@@ -98,6 +105,7 @@ export const CampaignSlice = createSlice({
 
 export const {
   setData,
+  clearData,
   addData,
   updateData,
 

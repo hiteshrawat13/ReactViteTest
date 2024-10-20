@@ -38,13 +38,13 @@ const Login = () => {
 
       
       navigate('/');
-      window.location.reload();
+     alert("Logged In")
       
     }catch(e){
      
-      console.log(e);
-      console.log(e.response.data);
-      toast.error(e.response.data)
+     
+      console.log(e.response.data.message);
+      toast.error(""+e.response.data.message)
     }
    
 

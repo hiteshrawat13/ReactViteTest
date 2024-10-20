@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { useFormContext } from 'react-hook-form'
 import { StepperContext } from '../stepper/StepperContext'
@@ -51,23 +51,22 @@ const LogoPicker = ({ fileRef, name, label = "", tag = "" }) => {
     }
   }
 
+ 
 
-  function debounce(func, wait, immediate) {
-    var timeout;
-    return function () {
-      var context = this, args = arguments;
-      var later = function () {
-        timeout = null;
-        if (!immediate) func.apply(context, args);
-      };
-      var callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) func.apply(context, args);
+
+  const debounce = (func) => {
+    let timer;
+    return function (...args) {
+      const context = this;
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        timer = null;
+        func.apply(context, args);
+      }, 1000);
     };
   };
 
-
+  const optimizedFn = useCallback((e)=>debounce(handleLogoSearch(e)), []);
 
 
 
@@ -82,7 +81,7 @@ const LogoPicker = ({ fileRef, name, label = "", tag = "" }) => {
           onTextChange={(e) => {
             console.log(e.target.value);
 
-            debounce( handleLogoSearch(e) , 500 )
+            optimizedFn(e) 
 
           }}
 

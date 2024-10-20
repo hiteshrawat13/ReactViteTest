@@ -73,6 +73,10 @@ form{
         }
     }
 
+    input:read-only{
+        background-color: #d4d4d4;
+    }
+
     span.error{
         color:red;
         font-size: 12px;

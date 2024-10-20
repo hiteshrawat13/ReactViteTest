@@ -78,10 +78,7 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
     return (
         <div style={{display:"flex"}}>
 
-            <div className='file-preview'>
-                <p>Preview</p>
-                <img ref={imagePreviewRef} />
-            </div>
+            
 
             <div>
 
@@ -98,6 +95,11 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
                         Drop Image here or click to select an Image file.<br />
                         <div className='selected-file-name'>{selectedImageFileName}</div>
                     </div>
+            </div>
+
+            <div className='file-preview'>
+                <p>Preview</p>
+                <img ref={imagePreviewRef} />
             </div>
           
         </div>

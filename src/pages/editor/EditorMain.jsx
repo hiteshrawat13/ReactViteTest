@@ -45,6 +45,9 @@ const EditorMain = () => {
   const getStateValue=(value)=>{
     return data[value]
   }
+
+
+
  
 
 
@@ -56,6 +59,13 @@ const EditorMain = () => {
     
     const setStateValue=(key,value)=>{
       dispatch(updateData({ prop: key, value:value }))
+    }
+
+
+    const setError=(field,error)=>{
+      console.log(currentFormMethods);
+      currentFormMethods.setValue("LINK_NAME","WWWWWWWWWWWWWWWWWWWWWWWWWWWW")
+    // currentFormMethods.setError(field,error)
     }
 
     const setState=(data)=>{
@@ -116,11 +126,13 @@ const EditorMain = () => {
           watch,
           setWatch,
           setCurrentFormMethods,
+         
           setStateValue,
           getStateValue,
           setState,
           setFormValue,
-          filesRef
+          filesRef,
+          setError
           }}>
 
 

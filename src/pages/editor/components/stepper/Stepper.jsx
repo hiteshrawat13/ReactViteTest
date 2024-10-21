@@ -56,6 +56,7 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
 
     const onCurrentFormMethods = (methods) => {
         setCurrentFormMethods(methods)
+       
     }
 
 

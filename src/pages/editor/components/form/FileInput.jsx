@@ -3,9 +3,10 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { StepperContext } from '../stepper/StepperContext'
 import { useFormContext } from 'react-hook-form'
 import TextBox from './TextBox'
+import { EContext } from '../../EditorMain'
 
 const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileChange=null,onTextChange=null,...rest}) =>  {
-
+ 
     if(name==null)return <>Please provide name attribute for file input.</>
     if(fileRef==null)return <>Please provide fileRef attribute for file input.</>
     if(tag==null)return <>Please provide tag attribute for file input.</>
@@ -14,6 +15,8 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
 
     const [selectedImageFileName, setSelectedImageFileName] = useState(fileRef.files[0]?.name || null)
     const { register, formState: { errors } ,setValue} = useFormContext()
+    const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData } = useContext(EContext)
+
     const handleDropZoneClick = () => {
         fileRef.click()
     }

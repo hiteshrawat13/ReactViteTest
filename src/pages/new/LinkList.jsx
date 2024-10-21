@@ -109,9 +109,7 @@ const LinkList = ({ campData={}, setCampData=null }) => {
     }
 
 
-
-
-    const handleCopyJsonData=async (e,linkId)=>{
+    const handleCreateNewFromExistingLink=async (e,linkId)=>{
 
         e.preventDefault()
 
@@ -122,21 +120,74 @@ const LinkList = ({ campData={}, setCampData=null }) => {
             const response = await axios.post(
                 Config.API_BASE_URL+`/camplist/getLinkJsonData?id=${linkId}`
             );
-            const json=response.data.json_data
+
+            alert(response )
+            console.log(response.data);
+            const jobject=JSON.parse(response.data.json_data)
+            navigate(`/editor/`,{state: { 
+                ...location?.state,
+                mode:"new",
+                linkId:linkId,
+                jsonObject:jobject,
+                 
+                templateId:jobject.TEMPLATE_ID,
+                templateType:jobject.LINK_TYPE
+      
+            }})
+        } catch (error) {
+            alert(error)
+            console.log(error);
+        }
+    
+    }
+
+
+
+
+    const handleCopyJsonData=async (e,linkId)=>{
+
+        e.preventDefault()
+
+
+        
+
+        // try {
+        //     const response = await axios.post(
+        //         Config.API_BASE_URL+`/camplist/getLinkJsonData?id=${linkId}`
+        //     );
+        //     const json=response.data.json_data
+        //     //alert( response.data.json_data )
+
+        //     navigator.clipboard.writeText(json).then(function() {
+        //         alert('Copying to clipboard was successful!')
+                 
+        //       }, function(err) {
+        //         alert(' Could not copy text: ', err)
+                
+        //     });
+           
+        // } catch (error) {
+        //     alert(error)
+        //     console.log(error);
+        // }
+
+        try {
+            const response = await axios.post(
+                Config.API_BASE_URL+`/camplist/getLinkJsonData?id=${linkId}`
+            );
+            const state=JSON.parse(response.data.json_data)
+
+
             //alert( response.data.json_data )
 
-            navigator.clipboard.writeText(json).then(function() {
-                alert('Copying to clipboard was successful!')
-                 
-              }, function(err) {
-                alert(' Could not copy text: ', err)
-                
-            });
+            
+            handleCreateLink(state,state['LINK_ID'],['LINK_TYPE'])
            
         } catch (error) {
             alert(error)
             console.log(error);
         }
+      
     
     }
 
@@ -229,6 +280,9 @@ const LinkList = ({ campData={}, setCampData=null }) => {
             cell:(row) => <>
             <button onClick={(e)=>handleEditLink(e,row.id)} id={row.ID}>Edit</button>
             {/* <button onClick={(e)=>handleCopyJsonData(e,row.id)} id={row.ID}>Copy Data</button> */}
+            <button onClick={(e)=>handleCreateNewFromExistingLink(e,row.id)} id={row.ID}>Create new Link using this link</button> 
+            
+            
             </>,
             ignoreRowClick: true,
             allowOverflow: true,

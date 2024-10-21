@@ -8,7 +8,7 @@ import { FileInput } from '.'
 import { EContext } from '../../EditorMain'
 
 import axios from 'axios'
-
+import { debounce } from "lodash";
 import "./LogoInput.css"
 const LogoPicker = ({ fileRef, name, label = "", tag = "" }) => {
 
@@ -36,7 +36,7 @@ const LogoPicker = ({ fileRef, name, label = "", tag = "" }) => {
       const formData = new FormData();
       formData.append("query", search_query);
 
-      axios.post(getStateValue("BASE_URL") + 'logo/searchlogotest.php', formData)
+      axios.post(getStateValue("BASE_URL") +getStateValue("LOGO_FOLDER")+ 'searchlogotest.php', formData)
         .then(result => {
 
           setFoundLogos(result.data.results)
@@ -62,12 +62,16 @@ const LogoPicker = ({ fileRef, name, label = "", tag = "" }) => {
       timer = setTimeout(() => {
         timer = null;
         func.apply(context, args);
-      }, 1000);
+      }, 800);
     };
   };
 
-  const optimizedFn = useCallback((e)=>debounce(handleLogoSearch(e)), []);
+  const optimizedFn = useCallback(debounce((e)=> handleLogoSearch(e) ), []);
 
+
+  //const handleChangeWithLib = useCallback(debounce((value) => {handleLogoSearch(value)}, 800), []);
+ 
+  
 
 
   return (
@@ -94,6 +98,8 @@ const LogoPicker = ({ fileRef, name, label = "", tag = "" }) => {
 
         />
 
+       
+
 
         <ul className='logoList' style={{ display: "none" }} >{
           (foundLogos == null) ? <div style={{ fontSize: "10px" }} >Logo Not Found</div> : foundLogos.map((logo, i) => {
@@ -104,7 +110,7 @@ const LogoPicker = ({ fileRef, name, label = "", tag = "" }) => {
 
               setFormValue("LOGO_NAME", logo)
 
-            }}><img src={getStateValue("BASE_URL") + "logo/" + logo} /> <p> {logo}</p></li>
+            }}><img src={getStateValue("BASE_URL") + getStateValue("LOGO_FOLDER") + logo} /> <p> {logo}</p></li>
 
           })
         }

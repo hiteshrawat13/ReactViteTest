@@ -14,6 +14,12 @@ const Step =  ({ children ,onWatch=null,onCurrentFormMethods=null }) => {
     })
 
 
+    useEffect(()=>{
+      if(onCurrentFormMethods)onCurrentFormMethods(methods)
+
+    },[methods])
+
+
     
   
     const watchedValue=useWatch(methods)
@@ -22,8 +28,9 @@ const Step =  ({ children ,onWatch=null,onCurrentFormMethods=null }) => {
       //console.log(watchedValue);
       //This condition passes to top form value change
       if(onWatch)onWatch(watchedValue)
-      if(onCurrentFormMethods)onCurrentFormMethods(methods)
-  
+     
+       
+        
       return () => {
        
       }

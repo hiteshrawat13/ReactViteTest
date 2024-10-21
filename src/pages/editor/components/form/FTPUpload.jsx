@@ -7,6 +7,7 @@ import Config from '../../../../Config'
 import Modal from 'react-responsive-modal'
 import { useAuth } from '../../../../Auth'
 import Cookies from 'js-cookie'
+import CheckLink from '../CheckLink'
 const FTPUpload = ({publishHelper,filesRef}) => {
   
   const [isFTPUploadModalOpened,setFTPUploadModalOpened] =useState(false)
@@ -119,7 +120,7 @@ const FTPUpload = ({publishHelper,filesRef}) => {
     filesToUpload.forEach(file => {
       if (file.type === "logo") {
         bodyFormData.append('logoFile', file.name);//order important here  first logoFile then files[]
-        bodyFormData.append('files[]', file.file, file.name);
+        bodyFormData.append('files[]', file.file, "logo/"+file.name);
       } else if (file.type === "file") {
         bodyFormData.append('files[]', file.file, file.name);
       } else if (file.type === "templateFile") {
@@ -298,7 +299,7 @@ const FTPUpload = ({publishHelper,filesRef}) => {
       <br /><br />
       {filesToUpload.map((file, i) => {
         return <div className="fileToUpload" key={i}>
-          <div className='fileName'>{file.name} </div>
+          <div className='fileName'>{file.name} <CheckLink link={campaignDataState.data["BASE_URL"]+ file.name  }/></div>
            <div className='fileProgress'>{file.progress}</div>
         </div>
       })} 
@@ -307,6 +308,7 @@ const FTPUpload = ({publishHelper,filesRef}) => {
 
 <button className='greenBtn' onClick={ ()=>setFTPUploadModalOpened(true) }>Upload Files</button>
 <Modal
+closeOnOverlayClick={false}
 center
 open={isFTPUploadModalOpened}
 onClose={()=>setFTPUploadModalOpened(false)}>
@@ -324,8 +326,8 @@ onClose={()=>setFTPUploadModalOpened(false)}>
 
       <div>{JSON.stringify(FTPProgress)}</div>
 
-      <button className='greenBtn' onClick={(e) => { e.preventDefault(); handleUploadFiles() }}>Upload to Server</button>
-
+    {(uploading) ? <div >Uploading</div> : <button className='greenBtn'  onClick={(e) => { e.preventDefault(); handleUploadFiles() }}>Upload to Server</button>
+} 
 
       </div>
       

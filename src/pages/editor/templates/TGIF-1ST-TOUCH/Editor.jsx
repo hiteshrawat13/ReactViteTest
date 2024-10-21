@@ -10,16 +10,12 @@ import {
   CheckBox,
   HiddenField,
   FormBuilder,
-
   FTPUpload,
   Preview,
   ZIPDownload,
-
   LogoInput,
   RadioGroup,
-
   FileInput
-
 } from '../../components/form/index'
 
 import defaultFieldsJson from "./default-fields.json"
@@ -29,19 +25,28 @@ import Section from '../../components/form/Section'
 import Row from '../../components/form/Row'
 import Col from '../../components/form/Col'
 import LanguageInput from '../../components/form/LanguageInput'
+import CheckLink from '../../components/CheckLink'
 
 const Editor = ({ }) => {
 
 
   const publishHelperRef = useRef(new PublishHelper())
-  const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData } = useContext(EContext)
+  const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData,setError } = useContext(EContext)
   useEffect(() => {
     setStateValue("FTP_CONFIG_NAME", "TGIF")
     // setStateValue("FTP_CONFIG_NAME", "TEST")
     setStateValue("LOGO_FOLDER", "logo/")
     setStateValue("LOGO_WIDTH", "180")
+
+   
+    
+    
     //alert("TGIF")
   }, [])
+
+
+
+
 
   return (<Stepper >
     <Step title="Basic Info" key={1101}>
@@ -58,6 +63,9 @@ const Editor = ({ }) => {
 
       }} >Load State From Local Storage</button> */}
 
+
+
+ 
 
 
       <HiddenField name="BASE_URL" value="https://resource.itbusinesstoday.com/whitepapers/cbtool_test/" />
@@ -91,7 +99,7 @@ const Editor = ({ }) => {
           ]}
           width="10%"
         />
-        <TextBox label="Link Name" name="LINK_NAME" required={true} width="50%"
+        <TextBox label="Link Name" name="LINK_NAME" required={true} width="50%"  readOnly={campData.mode === 'edit'} 
 
           onChange={
             (e) => {
@@ -111,6 +119,13 @@ const Editor = ({ }) => {
 
             }
           } />
+
+        { (watch['LINK_NAME']!="") && <CheckLink link={watch["BASE_URL"]+(watch['LINK_NAME'] )+"-edm.html"}  onExists={()=>{ 
+          setTimeout(() => {
+ 
+          }, 500); 
+          
+          } }/>  }
       </Section>
 
 
@@ -171,14 +186,14 @@ const Editor = ({ }) => {
 
       <Section title="Landing Page Details">
 
-        <CheckBox label="Same As EDM title" name="LANDING_TITLE_SAME_AS_EDM_TITLE" />
+        <CheckBox label="Landing title is same as EDM title" name="LANDING_TITLE_SAME_AS_EDM_TITLE" />
 
         {(watch["LANDING_TITLE_SAME_AS_EDM_TITLE"] == false) &&
           <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} />
         }
 
 
-        <CheckBox label="Same As EDM abstract" name="LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT" defaultChecked={true} />
+        <CheckBox label="Landing abstract is same as EDM abstract" name="LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT" defaultChecked={true} />
         {(watch["LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT"] == false) && <>
 
           <button onClick={(e) => {
@@ -216,7 +231,7 @@ const Editor = ({ }) => {
 
       }
       <Section title="Sendmail Details">
-        <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true} width="60%" value="Thank you for requesting a ##ASSET_TYPE##" />
+        <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true} width="60%" value={`Thank you for requesting a ${getStateValue("ASSET_TYPE")}`} />
 
 
        
@@ -258,9 +273,7 @@ const Editor = ({ }) => {
         <CheckBox label="Upload Extra Image [EXTRA_FILE_1]" name="ADD_EXTRA_FILE_1" />
         {(watch["ADD_EXTRA_FILE_1"] == true) &&
           <FileInput name="EXTRA_FILE_1" label="Extra Image" tag="file" fileRef={filesRef.current.fileInput4} onChange={(filename) => {
-
             setFormValue("EXTRA_FILE_1", filename)
-
           }} />
         }
 
@@ -287,7 +300,6 @@ const Editor = ({ }) => {
 
         {(watch["ASSET_FORMAT"] == "IFRAME") &&
           <TextBox label="IFrame Url" required="true" name="IFRAME" />
-
         }
 
 

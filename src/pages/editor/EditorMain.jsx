@@ -86,11 +86,18 @@ const EditorMain = () => {
     useEffect(() => {
 
       //update state
-      if(campData.jsonObject) setState(campData.jsonObject)
-      return () => {
-        dispatch(clearData())
+      if(campData.jsonObject){
+        
+        setState(campData.jsonObject)
+      }else{
+        console.log("ERROR" );
       }
-    }, [])
+       
+        
+      return () => {
+        //dispatch(clearData())
+      }
+    }, [ ])
     
   return (
     <div>

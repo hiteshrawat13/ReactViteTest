@@ -9,23 +9,23 @@ import { useAuth } from '../../../../Auth'
 import Cookies from 'js-cookie'
 import CheckLink from '../CheckLink'
 const FTPUpload = ({publishHelper,filesRef}) => {
+
+
   
   const [isFTPUploadModalOpened,setFTPUploadModalOpened] =useState(false)
   const campaignDataState = useSelector(state => state.campaignData)
   const { logoFileRef, thumbnailFileRef, pdfFileRef, mp4FileRef } = useContext(StepperContext)
   const [filesToUpload, setFilesToUpload] = useState([])
   const [uploading, setUploading] = useState(false);
-
   const [firstPageName, setFirstPageName] = useState(null)
-
   const { socketConnected, socketId, socketSessionId,socketUploadProgress } = useSocket()
-
   const [FTPProgress,setFTPProgress]=useState("")
-
-
   const token = Cookies.get('access_token');
   const userName = Cookies.get('user_id');
 
+
+  
+ 
    
 
   const handleGetFiles = async () => {
@@ -120,6 +120,7 @@ const FTPUpload = ({publishHelper,filesRef}) => {
     filesToUpload.forEach(file => {
       if (file.type === "logo") {
         bodyFormData.append('logoFile', file.name);//order important here  first logoFile then files[]
+        bodyFormData.append('logoFolder',campaignDataState.data["LOGO_FOLDER"]);//order important here  first logoFile then files[]
         bodyFormData.append('files[]', file.file, "logo/"+file.name);
       } else if (file.type === "file") {
         bodyFormData.append('files[]', file.file, file.name);

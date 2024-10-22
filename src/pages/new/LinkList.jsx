@@ -9,9 +9,21 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import CampaignDetails from './CampaignDetails';
 import instance from './ApiService';
 import Modal from 'react-responsive-modal';
-
+import { useDispatch } from 'react-redux';
+import { setData, clearData,addData, updateData } from '../../store/campaign/CampaignSlice'
 const LinkList = ({ campData={}, setCampData=null }) => {
 
+    const dispatch=useDispatch()
+
+    useEffect(() => {
+
+        dispatch(clearData())
+      }, [])
+
+    const [openNewLinkModal, setOpenNewLinkModal] = useState(false);
+
+    const onOpenModal = () => setOpen(true);
+    const onCloseModal = () => setOpen(false);
     
     const navigate=useNavigate()
     const location = useLocation()
@@ -277,10 +289,11 @@ const LinkList = ({ campData={}, setCampData=null }) => {
         },
         {
             name: "Actions" ,
+            minWidth: "180px",
             cell:(row) => <>
-            <button onClick={(e)=>handleEditLink(e,row.id)} id={row.ID}>Edit</button>
+            <button className='dropbtn' style={{marginRight:'10px',marginTop:'10px'}} onClick={(e)=>handleEditLink(e,row.id)} id={row.ID}>Edit</button>
             {/* <button onClick={(e)=>handleCopyJsonData(e,row.id)} id={row.ID}>Copy Data</button> */}
-            <button onClick={(e)=>handleCreateNewFromExistingLink(e,row.id)} id={row.ID}>Create new Link using this link</button> 
+            <button className='greenBtn'  onClick={(e)=>handleCreateNewFromExistingLink(e,row.id)} id={row.ID}>Duplicate Link</button> 
             
             
             </>,

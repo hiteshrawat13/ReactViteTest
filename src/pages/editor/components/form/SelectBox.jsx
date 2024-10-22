@@ -7,11 +7,15 @@ const SelectBox = ({label,name,value=null,required,options,width=null,...rest}) 
     const { register,unregister,setValue, formState: { errors } } = useFormContext()
 
     useEffect(() => {
-        setValue(name,campaignDataState.data[name] ||value || "")
+
+     
+            setValue(name, campaignDataState.data[name] || value || "")
+       
+        
         return () => {
           unregister(name)
         }
-      }, [])
+      }, [campaignDataState.data[name],value])
     return (
         <div className='form-group'>
             <label>{label}{(required)&& <span style={{color:"red"}}>*</span>}</label>

@@ -28,9 +28,12 @@ const CheckLink = ({link,onExists=null}) => {
            
             const status_code= result.data.message
             if(status_code!=404){
+                setLinkExists("Link already exist on server :")
                 if(onExists)onExists(link);
+            }else{
+                setLinkExists(false)
             }
-                setLinkExists( result.data.message)
+                // setLinkExists( result.data.message)
                 setChecking(false)
         }).catch(err => {
             console.log(err, "ERROR");
@@ -58,7 +61,7 @@ const CheckLink = ({link,onExists=null}) => {
 
 
   return (
-    <div>{ !checking ?  <div style={{fontSize:"12px"}}>{linkExists}   <a href={ `${link}`}  target="_BLANK">Link</a> </div> : <>Checking...</> }</div>
+<div>{!checking ? <div style={{fontSize: "12px"}}>{linkExists ? <p style={{fontSize: "12px", color: "red"}}>{linkExists} <a href={`${link}`} target="_BLANK" rel="noopener noreferrer">click here to view</a></p> : <p style={{fontSize: "12px", color: "green"}}> Valid Link </p>}</div> : <>Checking...</>}</div>
   )
 }
 

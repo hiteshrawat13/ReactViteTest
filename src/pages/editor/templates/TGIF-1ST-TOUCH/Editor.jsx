@@ -36,7 +36,7 @@ const Editor = ({ }) => {
     setStateValue("FTP_CONFIG_NAME", "TGIF")
     // setStateValue("FTP_CONFIG_NAME", "TEST")
     setStateValue("LOGO_FOLDER", "logo/")
-    setStateValue("LOGO_WIDTH", "180")
+    if(!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
 
    
     

@@ -17,7 +17,7 @@ const CheckBox = ({label,name="1",required=false,defaultChecked=false,...rest}) 
       return () => {
         unregister(name)
       }
-    }, [])
+    }, [campaignDataState.data[name],defaultChecked])
   return (
     <div className='form-group'>
     <label>

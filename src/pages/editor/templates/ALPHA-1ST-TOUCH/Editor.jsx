@@ -33,8 +33,18 @@ const Editor = ({ }) => {
   const publishHelperRef = useRef(new PublishHelper())
   const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData,setError } = useContext(EContext)
   useEffect(() => {
-    setStateValue("FTP_CONFIG_NAME", "TGIF")
-    // setStateValue("FTP_CONFIG_NAME", "TEST")
+
+    if( campData?.country =='EU'){
+      setStateValue("FTP_CONFIG_NAME", "EU-ITBP")
+      setStateValue("BASE_URL", "https://eu.itbusinessplus.com/whitepaper/test/")
+      
+    }else{
+      setStateValue("FTP_CONFIG_NAME", "NEW-ITBP")
+      setStateValue("BASE_URL", "https://resource.itbusinessplus.com/whitepapers/cbtooltest/")
+       
+    }
+
+
     setStateValue("LOGO_FOLDER", "logo/")
     if(!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
     //alert("TGIF")
@@ -64,7 +74,7 @@ const Editor = ({ }) => {
  
 
 
-      <HiddenField name="BASE_URL" value="https://resource.itbusinesstoday.com/whitepapers/cbtool_test/" />
+<TextBox label="BASE URL" name="BASE_URL" required={true}   readOnly />
       <HiddenField name="YEAR" value={new Date().getFullYear() + ""} />
       <Section title="Link Details">
         <Row>
@@ -133,37 +143,6 @@ const Editor = ({ }) => {
           </Col>
         </Row>
 
-        <TextBox label="Pixel Link" name="PIXEL_LINK" required={true} />
-        <SelectBox label="Asset Type" name="ASSET_TYPE" required={true}
-          options={[
-            { label: "Select..", value: "" },
-            { label: "White Paper", value: "White Paper" },
-            { label: "Buyers/Comparision Guide", value: "Buyers Guide" },
-            { label: "E Book", value: "E Book" },
-            { label: "Case Study", value: "Case Study" },
-            { label: "Report", value: "Report" },
-            { label: "Webinar OnDemand", value: "Webinar" },
-            { label: "Infographic", value: "Infographic" }
-          ]}
-        />
-        <TextBox label="Text above the logo" name="SPONSORED_BY_TEXT" required={true} value="Sponsored by" />
-
-        <SelectBox label="EDM Layout" name="EDM_LAYOUT" required={true}
-          options={[
-            { label: "Select..", value: "" },
-            { label: "Traditional", value: "Traditional" },
-            { label: "Full width thumbnail and abstract", value: "Full width thumbnail and abstract" },
-
-          ]}
-        />
-        <SelectBox label="Landing Layout" name="LANDING_LAYOUT" required={true}
-          options={[
-            { label: "Select..", value: "" },
-            { label: "Traditional", value: "Traditional" },
-            { label: "Thumbnail below abstract", value: "Thumbnail below abstract" },
-
-          ]}
-        />
       </Section>
 
 
@@ -174,9 +153,9 @@ const Editor = ({ }) => {
       <Section title="EDM Details">
 
         <TextBox label="EDM Title" name="EDM_TITLE" required={true} width="60%" />
+        <TextBox label="EDM Heading" name="EDM_HEADING" required={true} width="60%" />
         <RichTextEditor label="Edm Abstract" name="EDM_ABSTRACT" required={true} />
-        <TextBox label="EDM Optin" name="EDM_OPTIN" required={true} value="By clicking/downloading the asset, you agree to allow the sponsor to have your contact information and for the sponsor to contact you." />
-        <TextBox label="EDM CTA" name="EDM_CTA" required={true} width="20%" value="Download Now" />
+       <TextBox label="EDM CTA" name="EDM_CTA" required={true} width="20%" value="Download Now" />
       </Section>
 
 
@@ -188,44 +167,14 @@ const Editor = ({ }) => {
           <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} />
         }
 
+        <CheckBox label="Landing Heading" name="LANDING_HEADING_SAME_AS_EDM_HEADING" />
 
-        <CheckBox label="Landing abstract is same as EDM abstract" name="LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT" defaultChecked={true} />
-        {(watch["LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT"] == false) && <>
-
-          <button onClick={(e) => {
-            e.preventDefault();
-            //using math random to update value otherwise gives blank result--
-            const boxHtml = `<div class="sub" data-key="${Math.random()}" align="center" style="background-color: #e2ebf3;margin-top: 30px;margin-left: 13px;display: inline-flex;padding: 10px;width: 250px;align-items: center;"> <p style="text-align: left; margin-top: 10px;">Please fill this form to get immediate access to this exclusive resource.</p> <p><img src="https://resource.itbusinesstoday.com/whitepapers/Arrow-pr.png" alt="Arrow" style="width: 50px;  " /></p></div>`
-            setFormValue("LANDING_ABSTRACT", boxHtml)
-          }
-
-          }>Add new format</button>
-
-
-          <RichTextEditor label="Landing Abstract" name="LANDING_ABSTRACT" required={true} />
-
-        </>}
-
-
+        {(watch["LANDING_HEADING_SAME_AS_EDM_HEADING"] == false) &&
+          <TextBox label="Landing Page Heading" name="LANDING_HEADING" required={true} />
+        }
 
       </Section>
-      {(getStateValue("ASSET_TYPE") != "Webinar") &&
-        <>
-          <Section title="Thankyou Page Details">
-
-            <RichTextEditor label="Thank You Page" name="NORMAL_THANK_YOU_PAGE_TEXT" required={true} value={`
-           <h1>Thank you...</h1>
-        <span>for downloading <strong>"##EDM_TITLE##"</strong><br><br>
-        Your download will automatically start in <span id="countdown">10</span> seconds...<br>If your download doesn't start automatically, <a href="##BASE_URL####LINK_NAME##.pdf">click here</a> to start your download.</span>
-
-          `} />
-
-
-          </Section>
-
-        </>
-
-      }
+       
       <Section title="Sendmail Details">
         <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true} width="60%" value={`Thank you for requesting a ${getStateValue("ASSET_TYPE")}`} />
 
@@ -336,6 +285,8 @@ const Editor = ({ }) => {
 
     <Step title="Publish" key={1106}>
       <Section title="FTP Upload">
+        <TextBox label="Client Code" name="FTP_CONFIG_NAME" required={true} readOnly />
+
         <FTPUpload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />
         <ZIPDownload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />
       </Section>

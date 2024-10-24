@@ -31,7 +31,13 @@ const LinkList = ({ campData={}, setCampData=null }) => {
     const [isUpdateCampaignModalOpened,setUpdateCampaignModalOpened]=useState(false)
     const [miniSwitch, setMiniSwitch] = useState(false);
     const [links, setLinks] = useState('');
+    console.log("STATE",TemplateManager);
+    console.log("STATE",location?.state?.clientCode);
     const templates=TemplateManager.find(client=>client.clientCode==location?.state?.clientCode)
+
+
+
+    
 
     useEffect(() => {
         (async () => {

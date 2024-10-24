@@ -1,0 +1,280 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "https://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml" 
+  xmlns:v="urn:schemas-microsoft-com:vml"
+  xmlns:o="urn:schemas-microsoft-com:office:office" lang="##LANGUAGE##">
+  <head>
+    <meta https-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- So that mobile will display zoomed in -->
+    <meta https-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- enable media queries for windows phone 8 -->
+    <meta name="format-detection" content="date=no">
+    <!-- disable auto date linking in iOS 7-9 -->
+    <meta name="format-detection" content="telephone=no">
+    <!-- disable auto telephone linking in iOS 7-9 -->
+    <title>##LANDING_TITLE##</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400italic,700italic,400,700" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap Core CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="##BASE_URL##/css/bootstrap.min.css" type="text/css">
+    <!-- Start Bootstrap Custom CSS -->
+    <link href="##BASE_URL##/css/startbootstrap.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="##BASE_URL##/css/font-awesome.css">
+    <link rel="stylesheet" href="##BASE_URL##/css/sky-forms.css">
+    <style type="text/css">
+      body{margin:0;padding:0;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;font-family:Sans-Serif}.modal{padding:25px 30px;background:rgba(253,247,247,0);font:13px/1.55 'Open Sans',Helvetica,Arial,sans-serif;color:#666}table{border-spacing:0;mso-table-lspace:0;mso-table-rspace:0}table td{border-collapse:collapse}.ExternalClass{width:100%}p{text-align:justify;font-size:12px}.ExternalClass,.ExternalClass div,.ExternalClass font,.ExternalClass p,.ExternalClass span,.ExternalClass td{line-height:100%}.ReadMsgBody{width:100%;background-color:#ebebeb}img{-ms-interpolation-mode:bicubic}.yshortcuts a{border-bottom:none!important}.ios-footer a{color:#aaa!important;text-decoration:underline}@media screen and (max-width:599px){.container,.force-row{width:100%!important;max-width:100%!important}.col{width:100%!important;border-top:1px solid #eee;padding-bottom:0!important}.cols-wrapper{padding-top:18px}.img-wrapper{float:right;max-width:40%!important;height:auto!important;margin-left:12px}.subtitle{margin-top:0!important}}@media screen and (max-width:400px){.container-padding{padding-left:12px!important;padding-right:12px!important}.cols-wrapper{padding-left:0!important;padding-right:0!important}.content-wrapper{padding-left:12px!important;padding-right:12px!important}}a[href^="x-apple-data-detectors:"],a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important;font-size:inherit!important;font-family:inherit!important;font-weight:inherit!important;line-height:inherit!important}.w3-btn{margin-bottom:10px;font-weight:700;font-size:16px;width:150px;height:45px;background-color:#1F70C1;cursor:pointer}.w3-border{border:1px solid #ccc!important}.w3-round-xlarge{border-radius:16px!important}ul{
+text-align: left;font-size: 12px;}span.error {color: #e02f2f;}h3 {justify-content: left;}
+    </style>
+	<script src="https://jqueryvalidation.org/files/lib/jquery.js"></script>
+	<script src="https://jqueryvalidation.org/files/dist/jquery.validate.js"></script>
+	<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() { 
+	$.validator.addMethod('nofreeemail', function (value) { 
+		return /^([\w-.]+@(?!gmail\.com)(?!yahoo\.com)(?!hotmail\.com)(?!facebook\.com)(?!gmail\.com)(?!gmx\.com)(?!googlemail\.com)(?!hotmail\.com)(?!mac\.com)(?!me\.com)(?!mail\.com)(?!msn\.com)(?!yahoo\.com)(?!aol\.com)(?!google\.com)(?!live\.com)(?!att\.net)(?!comcast\.net)(?!sbcglobal\.net)(?!verizon\.net)([\w-]+.)+[\w-]{2,4})?$/.test(value);
+	}, 'Free email addresses are not allowed.');
+	
+	// validate signup form on keyup and submit
+			<!-- $("#sky-form").validate({ -->
+			<!-- errorElement: 'span', -->
+				<!-- rules: { -->
+					<!-- firstname: { -->
+						<!-- required: true, -->
+					<!-- }, -->
+					<!-- lastname: { -->
+						<!-- required: true, -->
+					<!-- }, -->
+					<!-- title: { -->
+						<!-- required: true, -->
+					<!-- }, -->
+					<!-- email: { -->
+						<!-- required: true, -->
+						<!-- nofreeemail: true, -->
+						<!-- email: true -->
+					<!-- }, -->
+					<!-- buss_phone: { -->
+						<!-- required: true, -->
+						<!-- number: true -->
+					<!-- }, -->
+					<!-- company: { -->
+						<!-- required: true, -->
+					<!-- }, -->
+					<!-- address: { -->
+						<!-- required: true, -->
+					<!-- }, -->
+					<!-- city: { -->
+						<!-- required: true, -->
+					<!-- }, -->
+					<!-- state: { -->
+						<!-- required: true, -->
+					<!-- }, -->
+					<!-- country: { -->
+						<!-- required: true, -->
+					<!-- }, -->
+					<!-- zip: { -->
+						<!-- required: true, -->
+					<!-- }, -->
+					<!-- compsize: { -->
+						<!-- required: true, -->
+					<!-- }, -->
+					<!-- Industry: { -->
+						<!-- required: true, -->
+					<!-- }, -->
+					<!-- opt_in: { -->
+						<!-- required: true, -->
+					<!-- }, -->
+					<!-- quest1: { -->
+						<!-- required: true, -->
+					<!-- }, -->
+					<!-- quest2: { -->
+						<!-- required: true, -->
+					<!-- }, -->
+					<!-- quest3: { -->
+						<!-- required: true, -->
+					<!-- }, -->
+					<!-- job_level: { -->
+						<!-- required: true, -->
+					<!-- }, -->
+					<!-- job_function: { -->
+						<!-- required: true, -->
+					<!-- } -->
+					
+				<!-- }, -->
+				<!-- message: { -->
+					<!-- firstname: { -->
+						<!-- required: "The details are incorrect/incomplete" -->
+					<!-- }, -->
+					<!-- lastname: { -->
+						<!-- required: "The details are incorrect/incomplete" -->
+					<!-- }, -->
+					<!-- title: { -->
+						<!-- required: "The details are incorrect/incomplete" -->
+					<!-- }, -->
+					<!-- email: { -->
+						<!-- required: "Please enter an email address", -->
+						<!-- nofreeemail: "Please enter your business email, generic email not allowed", -->
+						<!-- email: "Please enter a valid email address" -->
+					<!-- }, -->
+					<!-- buss_phone: { -->
+						<!-- required: "The details are incorrect/incomplete", -->
+						<!-- number : "Phone number must contain digits only" -->
+					<!-- }, -->
+					<!-- company: { -->
+						<!-- required: "The details are incorrect/incomplete" -->
+					<!-- }, -->
+					<!-- address: { -->
+						<!-- required: "The details are incorrect/incomplete" -->
+					<!-- }, -->
+					<!-- city: { -->
+						<!-- required: "The details are incorrect/incomplete" -->
+					<!-- }, -->
+					<!-- state: { -->
+						<!-- required: "The details are incorrect/incomplete" -->
+					<!-- }, -->
+					<!-- country: { -->
+						<!-- required: "The details are incorrect/incomplete" -->
+					<!-- }, -->
+					<!-- zip: { -->
+						<!-- required: "The details are incorrect/incomplete" -->
+					<!-- }, -->
+					<!-- compsize: { -->
+						<!-- required: "The details are incorrect/incomplete" -->
+					<!-- }, -->
+					<!-- Industry: { -->
+						<!-- required: "The details are incorrect/incomplete" -->
+					<!-- }, -->
+					<!-- opt_in: { -->
+						<!-- required: "The details are incorrect/incomplete" -->
+					<!-- }, -->
+					<!-- quest1: { -->
+						<!-- required: "The details are incorrect/incomplete" -->
+					<!-- }, -->
+					<!-- quest2: { -->
+						<!-- required: "The details are incorrect/incomplete" -->
+					<!-- }, -->
+					<!-- quest3: { -->
+						<!-- required: "The details are incorrect/incomplete" -->
+					<!-- }, -->
+					<!-- job_function: { -->
+						<!-- required: "The details are incorrect/incomplete" -->
+					<!-- }, -->
+					<!-- job_level: { -->
+						<!-- required: "The details are incorrect/incomplete" -->
+					<!-- } -->
+				<!-- } -->
+			<!-- }); -->
+	});
+	</script> 
+	<script>
+		$( document ).ready(function() {
+			$.ajax({
+			type: "POST",  
+			url: "download/processdata.php",
+			data: {sturl : "##BASE_URL####LINK_NAME##-landing.html"},
+			beforeSend : function () {
+			},
+			success: function(JSONObject){
+
+			},
+			error: function(e){
+			 $('#result').php(e);
+			}
+		   });
+		});
+	</script>
+  </head>
+  <body style="margin:0; padding:0;" bgcolor="#F0F0F0" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+    <!-- 100% background wrapper (grey background) -->
+    <table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" bgcolor="#F0F0F0">
+      <tr>
+        <td align="center" valign="top" bgcolor="#F0F0F0" style="background-color: #F0F0F0;">
+          <br>
+          <!-- 900px container (white background) -->
+          <table border="0" width="900" cellpadding="0" cellspacing="0" class="container" style="width:900px;max-width:900px">
+            <tr>
+              <td class="container-padding header" style="font-family:Helvetica, Arial, sans-serif;font-size:24px;font-weight:bold;padding-bottom:12px;color:#DF4726;padding-left:24px;padding-right:24px;background-color: #ffffff;">
+				<div class="col-md-12">
+						<img src="##BASE_URL##/itbp_logo_2019.png" id="clientLogo" alt="Logo" style="width: 40%;margin-top:25px;">
+				</div>
+				<div class="col-md-12">
+					<br/><img src="##BASE_URL##/New-Featured-Content-logo.png" id="clientLogo2" alt="Logo" style="width: 40%;"> 
+				</div>
+              </td>
+            </tr>
+            <tr>
+              <td class="content" align="left" style="padding-top:12px;padding-bottom:12px;background-color:#ffffff">
+                <div class=" text-left">
+                  <div class="row" style="margin-right: 15px;margin-left: 15px;">
+                    <div class="">
+					
+						
+						<!-- <p style="text-align: left;font-size: 16px;"><b>HR Leaders can Get New Hires on the Job Faster and Improve Employee Engagement</b></p> -->
+						
+					</div>
+                    <div class="col-md-12 well" style="background-color:white;">
+                      
+                        <img src="##THUMBNAIL_URL##" id="landingThumbnail" width=100% style="border: 1px solid #cccccc;"/>
+						<br />
+                      
+                        <form action="##LINK_NAME##-sendmail.php" method="POST" id="sky-form" class="sky-form" autocomplete="off">
+                          <header>
+								<h3 style="font-size: 24px; text-align: left;" id="landingTitle">##LANDING_TITLE##</h3><br>
+						     <p style="text-align: left;font-size: 16px;" id="LandingHeading">
+							 ##LANDING_HEADING## 
+							 </p>
+						  <p style="text-align: left;font-size: 16px;" id="sponsorbyText">##SPONSORED_BY_TEXT##:  ##SPONSOR_NAME##   </p>
+                          </header>
+						  
+						  
+						   <!--XXX ... DON'T CHANGE THIS CODE ... XXX-->
+                         <input type="hidden" name="action" id="action" value="insert" />                       
+                         <input type="hidden" name="camp_id" id="camp_id" value="##LINK_NAME##" />
+
+                          <fieldset>
+						
+							##FORM##
+			
+							
+                          </fieldset>
+                          
+                        </form>
+                     
+                    </div>
+                    <small>You are agreeing to receive communication from the Sponsor and consent to the processing, and storage of your contact details in accordance with the Sponsor&#8217;s privacy policy.</small> 
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="container-padding footer-text" align="left" style="font-family:Helvetica, Arial, sans-serif;font-size:12px;line-height:16px;color:#aaaaaa;padding-left:24px;padding-right:24px">
+                <center><br>
+                  <a href="https://www.itbusinessplus.com/unsubscribe/">Click here to unsubscribe</a> | ##PRIVACY_POLICY##
+                  <br>
+                  Copyright &#169; 2024 XDBS Corporation<br>3501, Jack Northorp Ave, Ste C3873
+				  <br>Hawthorne, CA 90250 USA 
+                </center>
+                <br><br><br><br><br><br><br>
+              </td>
+            </tr>
+          </table>
+          <!--/900px container -->
+        </td>
+      </tr>
+    </table>
+    <!--/100% background wrapper-->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="##BASE_URL##/js/startbootstrap.js"></script>
+    <!-- <script src="js/jquery.validate.min.js"></script> -->
+    <!-- <script src="js/form-validation.js"></script> -->
+  </body>
+</html>
+<!-- NOTE
+For validation use name as it is as given for fields,
+for CQ's use name= 'quest1 to quest16' (For DropDown And Radio)
+for CQ's use name= 'questcheck1[] to questcheck5[]' (For CheckBox)
+-->

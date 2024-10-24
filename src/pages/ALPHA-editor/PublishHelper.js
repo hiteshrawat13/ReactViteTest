@@ -69,9 +69,9 @@ export default class PublishHelper{
           }
           
         }else{
-        data=data.replaceAll(`##THUMBNAIL_URL##`,this["BASE_URL"]+this["THUMBNAIL_NAME"])
+            data=data.replaceAll(`##THUMBNAIL_URL##`,this["BASE_URL"]+this["THUMBNAIL_NAME"])
 
-        data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+'/logo/'+this["LOGO_NAME"])
+            data=data.replaceAll(`##LOGO_URL##`,this["BASE_URL"]+'/logo/'+this["LOGO_NAME"])
         }
 
         for (const [key, value] of Object.entries(this)) {

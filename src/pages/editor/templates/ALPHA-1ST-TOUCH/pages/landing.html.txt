@@ -29,6 +29,29 @@
     <style type="text/css">
       body{margin:0;padding:0;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;font-family:Sans-Serif}.modal{padding:25px 30px;background:rgba(253,247,247,0);font:13px/1.55 'Open Sans',Helvetica,Arial,sans-serif;color:#666}table{border-spacing:0;mso-table-lspace:0;mso-table-rspace:0}table td{border-collapse:collapse}.ExternalClass{width:100%}p{text-align:justify;font-size:12px}.ExternalClass,.ExternalClass div,.ExternalClass font,.ExternalClass p,.ExternalClass span,.ExternalClass td{line-height:100%}.ReadMsgBody{width:100%;background-color:#ebebeb}img{-ms-interpolation-mode:bicubic}.yshortcuts a{border-bottom:none!important}.ios-footer a{color:#aaa!important;text-decoration:underline}@media screen and (max-width:599px){.container,.force-row{width:100%!important;max-width:100%!important}.col{width:100%!important;border-top:1px solid #eee;padding-bottom:0!important}.cols-wrapper{padding-top:18px}.img-wrapper{float:right;max-width:40%!important;height:auto!important;margin-left:12px}.subtitle{margin-top:0!important}}@media screen and (max-width:400px){.container-padding{padding-left:12px!important;padding-right:12px!important}.cols-wrapper{padding-left:0!important;padding-right:0!important}.content-wrapper{padding-left:12px!important;padding-right:12px!important}}a[href^="x-apple-data-detectors:"],a[x-apple-data-detectors]{color:inherit!important;text-decoration:none!important;font-size:inherit!important;font-family:inherit!important;font-weight:inherit!important;line-height:inherit!important}.w3-btn{margin-bottom:10px;font-weight:700;font-size:16px;width:150px;height:45px;background-color:#1F70C1;cursor:pointer}.w3-border{border:1px solid #ccc!important}.w3-round-xlarge{border-radius:16px!important}ul{
 text-align: left;font-size: 12px;}span.error {color: #e02f2f;}h3 {justify-content: left;}
+
+input[type="radio"], input[type="checkbox"] {
+    margin: 1px 0 0;
+    
+    line-height: normal;
+}
+
+
+.flex-label{
+	display:flex;
+	align-items: flex-start;
+	gap:8px;
+	font-weight:normal;
+
+}
+
+.bold{
+	font-weight:bold;
+}
+
+input[readonly] {
+    background-color: #e5e5e5 !important; 
+}
     </style>
 	<script src="https://jqueryvalidation.org/files/lib/jquery.js"></script>
 	<script src="https://jqueryvalidation.org/files/dist/jquery.validate.js"></script>
@@ -235,9 +258,8 @@ text-align: left;font-size: 12px;}span.error {color: #e02f2f;}h3 {justify-conten
                          <input type="hidden" name="camp_id" id="camp_id" value="##LINK_NAME##" />
 
                           <fieldset>
-						
+
 							##FORM##
-			
 							
                           </fieldset>
                           

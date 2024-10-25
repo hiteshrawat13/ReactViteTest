@@ -174,6 +174,25 @@ const Editor = ({ }) => {
         }
 
       </Section>
+
+
+      <Section title="Thankyou Page Details">
+
+      <CheckBox label="Thankyou page title is same as EDM title" name="THANKYOU_TITLE_SAME_AS_EDM_TITLE" defaultChecked/>
+
+        {(watch["THANKYOU_TITLE_SAME_AS_EDM_TITLE"] == false) &&
+          <TextBox label="Thankyou Page Title" name="THANKYOU_TITLE" required={true}  />
+        }
+
+        <CheckBox label="Thankyou page heading is same as EDM heading" name="THANKYOU_HEADING_SAME_AS_EDM_HEADING" defaultChecked/>
+
+        {(watch["THANKYOU_HEADING_SAME_AS_EDM_HEADING"] == false) &&
+          <TextBox label="Thankyou Page Title" name="THANKYOU_HEADING" required={true} />
+        }
+ 
+
+        </Section>
+
        
       <Section title="Sendmail Details">
         <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true} width="60%" value={`Thank you for requesting a ${getStateValue("ASSET_TYPE")}`} />

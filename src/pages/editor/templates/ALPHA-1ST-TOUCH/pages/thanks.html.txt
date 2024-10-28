@@ -59,7 +59,7 @@ text-align: left;font-size: 12px;}span.error {color: #e02f2f;}.button {border: n
                         <p style="text-align: left;font-size: 16px;" id="thanksHeading">
                         ##THANKYOU_HEADING##  
                         </p>  
-                      <p style="text-align: left;font-size: 16px;" id="sponsorbyText" >##SPONSORED_BY_TEXT##:  ##SPONSOR_NAME##      </p>
+                      <p style="text-align: left;font-size: 16px;" id="sponsorbyText" >##SPONSORED_BY_TEXT##</p>
                       </div>
                     <div class="col-md-12 well">
                       <div class="col-sm-12">

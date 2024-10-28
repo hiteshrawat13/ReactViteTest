@@ -40,7 +40,7 @@ const ALPHAFormRenderer = {
     CheckGroup: (obj) => {
         return `
                                           
-<section>
+<section >
     <div class="bold">${obj.label} ${obj.isRequired ? `<span style="color: red;">*</span>` : ""}</div>
        <div class="check-group">
        ${obj.options?.map((option, index) => {
@@ -61,9 +61,9 @@ const ALPHAFormRenderer = {
     RadioGroup: (obj) => {
         return `
                                           
-<section class="check-group">
+<section >
  
-   <div>  
+   <div class="check-group">  
 
        <div class="bold">${obj.label} ${obj.isRequired ? `<span style="color: red;">*</span>` : ""}</div>
        <div >
@@ -91,7 +91,7 @@ const ALPHAFormRenderer = {
 
     CheckBox: (obj) => {
         return `
-       <section>
+       <section class="check-group">
        <label for="${obj.id}" class="flex-label">
        <input type="checkbox" name="${obj.name}" id="${obj.id}" ${obj.isRequired ? "required" : ""} value="${obj.value}"   ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""} />
        <p>${obj.label}</p>

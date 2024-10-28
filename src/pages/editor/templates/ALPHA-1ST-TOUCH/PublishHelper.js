@@ -67,6 +67,93 @@ convertToEntities=(input)=> {
     return bstr;
   }
 
+
+
+  getEUFormCurlApiLandingMappedData(fields){
+      
+      
+       
+   return  fields.filter((field)=>field.name!=undefined).map((field,index,{length})=> { 
+
+
+        if(!field.name)return ""
+
+        if(field.type=="CheckGroup"){
+            return `mappedData['${field.id}']  = new FormData(form).getAll("${field.name}[]") || null;`
+        }else{
+            return `mappedData['${field.id}'] = data["${field.name}"] || null; `
+        }
+    }).join("\n\t\t") 
+}
+
+EUScript=()=>{
+
+    const EU_MAPPED_DATA=this.getEUFormCurlApiLandingMappedData(this.state.form)
+
+    return ` submitHandler: function(form, event) {
+                    event.preventDefault(); // Prevent default form submission
+                    console.log(form);
+                    const data = Object.fromEntries(new FormData(form).entries());
+                    // Map data
+					var mappedData = {};  
+
+                    ${EU_MAPPED_DATA}
+
+                      var camp_id = "##LINK_NAME##"; // CAMPID
+                      var endUrl = "##BASE_URL####LINK_NAME##-thankyou.html"; // END URL
+						/*var endUrl= {
+						   "URL" : window.location.href, 
+						   "END_URL" : "##BASE_URL####LINK_NAME##-thankyou.html",
+						   "EDM_DETAILS":{  
+								"EDM_URL":"##BASE_URL####LINK_NAME##-edm.html",
+								"ASSET_TITLE": "ASSET TITLE HERE"
+								}
+					   }*/
+                       
+
+						const firstname=mappedData['firstname']
+						const email_address=mappedData['email']
+						const subject="##SENDMAIL_SUBJECT##";
+						let body=\`
+							<table>
+                            <tr><td>Dear&nbsp;<b>\${firstname},<b></td></tr>
+                            <tr><td>&nbsp;</td></tr>
+                            <tr><td>Thank you for registering for content provided by Trustpilot. Please share it with your colleagues (no registration required).</td></tr>
+                            <tr><td>&nbsp;</td></tr>
+                            <tr><td>&nbsp;</td></tr>
+                            <tr><td><a href='##BASE_URL####LINK_NAME##.pdf'><img src='##BASE_URL####LINK_NAME##.png' width='40%' /></td></tr>
+                            <tr><td>&nbsp;</td></tr>
+                            <tr><td>You can learn more by visiting <a href ='https://www.trustpilot.com/'>https://www.trustpilot.com/</a></td></tr>
+                            <tr><td>&nbsp;</td></tr>
+                            <tr><td><a href='https://www.trustpilot.com/'><img  src='##BASE_URL####LOGO_NAME##' width='25%'/></a></td></tr>
+                            <tr><td>&nbsp;</td></tr>
+                            <tr><td>&nbsp;</td></tr>
+                            <tr><td>Sincerely,</td></tr>
+                            <tr><td>The IT Business Plus Fulfillment Team </td></tr>
+				            </table>
+						\`;
+						body = body.replace(/(\\r\\n|\\n|\\r|\\t)/gm, "");
+						
+						post_form_data(camp_id, mappedData, endUrl,function onComplete(res,error){
+							console.log("DATA",mappedData)
+							console.log("Data Uploaded",res)
+							sendmail(email_address,subject,body,function onMailComplete(mailRes,mailError){
+                                console.log("Mail Sent",mailRes)
+                                // Proceed with the form submission
+                                //Redirect
+                                window.location.href =	"##BASE_URL####LINK_NAME##-thankyou.html"	
+						    })//Send mail
+							
+			            }); // Call API     
+        },
+    `
+}
+
+
+
+
+
+
     
 
   //This function used to  map data as per new CURL api
@@ -91,6 +178,11 @@ convertToEntities=(input)=> {
         `
     }
 
+
+
+    
+       
+  
 
 
 
@@ -167,9 +259,9 @@ convertToEntities=(input)=> {
        if(forPreview==true){
         if(this.filesRef.fileInput1.files[0]){data=data.replaceAll(`##BASE_URL####LOGO_FOLDER####LOGO_NAME##`, await this.getBase64Image( this.filesRef.fileInput1.files[0])  )}
      
-    if(this.filesRef.fileInput2.files[0]){data=data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, await this.getBase64Image( this.filesRef.fileInput2.files[0]) )}
+        if(this.filesRef.fileInput2.files[0]){data=data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, await this.getBase64Image( this.filesRef.fileInput2.files[0]) )}
   
-    }
+        }
 
 
 
@@ -186,9 +278,13 @@ convertToEntities=(input)=> {
 
         data=data.replaceAll(`##FORM##`, this.convertToEntities ( this.getFormHtml(this.state.form,ALPHAFormRenderer) )  )
 
+        if(this.state.REGION=="EU"){
+            data=data.replaceAll(`##EU_SCRIPT##`, this.convertToEntities ( this.EUScript() )  )
+        }else{
+            data=data.replaceAll(`##EU_SCRIPT##`, ''  )
+        }
+        
 
-      
-     
 
         return this.replaceHashVariables(data)
         //return JSON.stringify(this.thumbnailDataUrl)+" "+JSON.stringify(this.state)
@@ -337,7 +433,12 @@ convertToEntities=(input)=> {
 
         files.push({ name:`${ this.state["LINK_NAME"] }-edm.html`, data: await this.getEdmHtml({forPreview}) })
         files.push({ name:`${ this.state["LINK_NAME"] }-landing.html`, data: await this.getLandingHtml({forPreview}) })
-        files.push({ name:`${ this.state["LINK_NAME"] }-sendemail.php`, data: await this.getSendmailHtml({forPreview}) })
+
+        if(this.state.REGION!="EU"){
+            //Sendmail not required for EU data is passed from landing page
+            files.push({ name:`${ this.state["LINK_NAME"] }-sendemail.php`, data: await this.getSendmailHtml({forPreview}) })
+        }
+        
         files.push({ name:`${ this.state["LINK_NAME"] }-thanks.html`, data: await this.getThanksHtml({forPreview}) })
         
         if(this.state["ASSET_FORMAT"]=='MP4' || this.state["ASSET_FORMAT"]=='IFrame'){

@@ -193,7 +193,7 @@
                                             <p style="text-align: left; font-size: 16px;" id="edmHeading">
                                                 ##EDM_HEADING##
                                             </p>
-                                            <p style="text-align: left; font-size: 16px;" id="sponsorbyText">##SPONSORED_BY_TEXT## : ##SPONSOR_NAME##</p>
+                                            <p style="text-align: left; font-size: 16px;" id="sponsorbyText">##SPONSORED_BY_TEXT##</p>
                                         </div>
                                         <div class="col-md-12 well" style="background-color: white;">
                                             <div class="col-sm-6" style="border-right: 2px #e0e0e0 solid;">
@@ -203,10 +203,10 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <center>
-                                                    <img id="sponsorLogo" width="##LOGO_WIDTH##" ; style="margin-left: 6px; margin-bottom: 10px; margin-top: 8px;" src="##LOGO_URL##" />
+                                                    <img id="sponsorLogo" width="##LOGO_WIDTH##" ; style="margin-left: 6px; margin-bottom: 10px; margin-top: 8px;" src="##BASE_URL####LOGO_FOLDER####LOGO_NAME##" />
                                                 </center>
 
-                                                <img src="##THUMBNAIL_URL##" width="##THUMBNAIL_WIDTH##" id="edmThumbnail" style="padding-top: 0px; border: 1px solid #cccccc;" />
+                                                <img src="##BASE_URL####THUMBNAIL_NAME##" width="##THUMBNAIL_WIDTH##" id="edmThumbnail" style="padding-top: 0px; border: 1px solid #cccccc;" />
                                             </div>
                                             <div class="sky-form">
                                                 <a href="##BASE_URL####LINK_NAME##-landing.html" target="_BLANK">

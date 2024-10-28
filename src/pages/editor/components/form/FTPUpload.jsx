@@ -8,43 +8,44 @@ import Modal from 'react-responsive-modal'
 import { useAuth } from '../../../../Auth'
 import Cookies from 'js-cookie'
 import CheckLink from '../CheckLink'
-const FTPUpload = ({publishHelper,filesRef}) => {
+const FTPUpload = ({ publishHelper, filesRef }) => {
 
 
-  
-  const [isFTPUploadModalOpened,setFTPUploadModalOpened] =useState(false)
+
+  const [isFTPUploadModalOpened, setFTPUploadModalOpened] = useState(false)
   const campaignDataState = useSelector(state => state.campaignData)
   const { logoFileRef, thumbnailFileRef, pdfFileRef, mp4FileRef } = useContext(StepperContext)
   const [filesToUpload, setFilesToUpload] = useState([])
   const [uploading, setUploading] = useState(false);
   const [firstPageName, setFirstPageName] = useState(null)
-  const { socketConnected, socketId, socketSessionId,socketUploadProgress } = useSocket()
-  const [FTPProgress,setFTPProgress]=useState("")
+  const { socketConnected, socketId, socketSessionId, socketUploadProgress } = useSocket()
+  const [FTPProgress, setFTPProgress] = useState("")
   const token = Cookies.get('access_token');
   const userName = Cookies.get('user_id');
 
 
-  
- 
-   
+
+
+
 
   const handleGetFiles = async () => {
     let uploadFiles = []
 
     for (const [key, value] of Object.entries(filesRef)) {
-       
+
 
       if (filesRef[key].files[0]) {
         uploadFiles.push({
           type: filesRef[key].dataset.tag,
           name: campaignDataState.data[filesRef[key].dataset.name],
           file: filesRef[key].files[0],
-          progress: 0
+          progress: 0,
+          selected:true
         })
       }
 
     }
-    
+
 
     const templatefiles = await publishHelper.getPageFiles({ state: campaignDataState.data })
     templatefiles.forEach((file) => {
@@ -52,7 +53,8 @@ const FTPUpload = ({publishHelper,filesRef}) => {
         type: "templateFile",
         name: file.name,
         data: file.data,
-        progress: 0
+        progress: 0,
+        selected:true
       })
     })
 
@@ -62,7 +64,7 @@ const FTPUpload = ({publishHelper,filesRef}) => {
   }
 
 
-  const getTempData=()=>{
+  const getTempData = () => {
     return {
       campid: campaignDataState.data["CAMP_ID"],
       campname: campaignDataState.data["CAMP_NAME"],
@@ -75,11 +77,11 @@ const FTPUpload = ({publishHelper,filesRef}) => {
       linkcreatedby: userName,
       language: campaignDataState.data["LANGUAGE"],
       json_data: JSON.stringify(campaignDataState.data),
-      link_type:campaignDataState.data["LINK_TYPE"]
+      link_type: campaignDataState.data["LINK_TYPE"]
     }
   }
 
-  const handleSaveLink=()=>{
+  const handleSaveLink = () => {
     let bodyFormData = new FormData();
     let tempdata = getTempData()
 
@@ -89,19 +91,19 @@ const FTPUpload = ({publishHelper,filesRef}) => {
       method: "post",
       url: Config.API_BASE_URL + `/link/save`,
       data: bodyFormData,
-      headers: { "Content-Type": "application/json" }, 
+      headers: { "Content-Type": "application/json" },
     })
       .then(function (response) {
         //handle success
         console.log(response, "Complete");
 
         alert("Complete")
- 
+
       })
       .catch(function (err) {
         console.log(err, "ERROR");
         alert(err.response.data.message)
-         
+
       });
 
 
@@ -118,10 +120,13 @@ const FTPUpload = ({publishHelper,filesRef}) => {
 
     let templateFiles = []
     filesToUpload.forEach(file => {
+      if (file.selected==false)
+        return; 
+
       if (file.type === "logo") {
         bodyFormData.append('logoFile', file.name);//order important here  first logoFile then files[]
-        bodyFormData.append('logoFolder',campaignDataState.data["LOGO_FOLDER"]);//order important here  first logoFile then files[]
-        bodyFormData.append('files[]', file.file, "logo/"+file.name);
+        bodyFormData.append('logoFolder', campaignDataState.data["LOGO_FOLDER"]);//order important here  first logoFile then files[]
+        bodyFormData.append('files[]', file.file, "logo/" + file.name);
       } else if (file.type === "file") {
         bodyFormData.append('files[]', file.file, file.name);
       } else if (file.type === "templateFile") {
@@ -133,26 +138,50 @@ const FTPUpload = ({publishHelper,filesRef}) => {
 
     startUpload(bodyFormData)
 
-    
+
 
     console.log(filesToUpload);
 
   }
 
 
-  
 
-  
+  const handleFileCheckbox=(e,i)=>{
+    //e?.preventDefault() Dont use e.prevent default on checkbox it will not update on single click
+    e.stopPropagation()
+    
+
+
+
+        // 1. Find the todo with the provided id
+        const currentTodoIndex = i;
+
+        // 2. Mark the todo as complete
+        if (currentTodoIndex != -1) {
+          const updatedTodo = { ...filesToUpload[currentTodoIndex], selected: e.target.checked };
+          // 3. Update the todo list with the updated todo
+          setFilesToUpload((previous) => [
+            ...previous.slice(0, currentTodoIndex),
+            updatedTodo,
+            ...previous.slice(currentTodoIndex + 1)])
+        }
+        console.log(filesToUpload );
+  }
+
+
+
+
+
   const startUpload = (bodyFormData) => {
     try {
 
 
 
-      filesToUpload.forEach(item=>{
+      filesToUpload.forEach(item => {
 
         // 1. Find the todo with the provided id
         const currentTodoIndex = filesToUpload.findIndex((file) => file.name === item.name);
- 
+
         // 2. Mark the todo as complete
         if (currentTodoIndex != -1) {
           const updatedTodo = { ...filesToUpload[currentTodoIndex], progress: ".." };
@@ -161,9 +190,9 @@ const FTPUpload = ({publishHelper,filesRef}) => {
             ...previous.slice(0, currentTodoIndex),
             updatedTodo,
             ...previous.slice(currentTodoIndex + 1)])
-          }
-    
-           })
+        }
+
+      })
 
 
       setUploading(true)
@@ -202,31 +231,31 @@ const FTPUpload = ({publishHelper,filesRef}) => {
           //   links: `${publishHelper.current.BASE_URL}${document.querySelector("[name='LINK_NAME']").value}-edm.html`,
           // }])
 
-           
 
 
 
 
-          response.data.forEach(item=>{
 
-       // 1. Find the todo with the provided id
-       const currentTodoIndex = filesToUpload.findIndex((file) => file.name === item.name);
+          response.data.forEach(item => {
 
-       // 2. Mark the todo as complete
-       if (currentTodoIndex != -1) {
-         const updatedTodo = { ...filesToUpload[currentTodoIndex], progress: item.status };
-         // 3. Update the todo list with the updated todo
-         setFilesToUpload((previous) => [
-           ...previous.slice(0, currentTodoIndex),
-           updatedTodo,
-           ...previous.slice(currentTodoIndex + 1)])
-         }
-   
+            // 1. Find the todo with the provided id
+            const currentTodoIndex = filesToUpload.findIndex((file) => file.name === item.name);
+
+            // 2. Mark the todo as complete
+            if (currentTodoIndex != -1) {
+              const updatedTodo = { ...filesToUpload[currentTodoIndex], progress: item.status };
+              // 3. Update the todo list with the updated todo
+              setFilesToUpload((previous) => [
+                ...previous.slice(0, currentTodoIndex),
+                updatedTodo,
+                ...previous.slice(currentTodoIndex + 1)])
+            }
+
           })
 
           setFTPProgress("Upload Completed.")
-      
-     
+
+
 
 
 
@@ -265,7 +294,7 @@ const FTPUpload = ({publishHelper,filesRef}) => {
     if (socketUploadProgress == null) return;
 
 
-    (socketUploadProgress.name=="UPLOAD_PROGRESS") && setFTPProgress(socketUploadProgress.progress)
+    (socketUploadProgress.name == "UPLOAD_PROGRESS") && setFTPProgress(socketUploadProgress.progress)
 
     // 1. Find the todo with the provided id
     const currentTodoIndex = filesToUpload.findIndex((file) => file.name === socketUploadProgress.name);
@@ -279,7 +308,7 @@ const FTPUpload = ({publishHelper,filesRef}) => {
         updatedTodo,
         ...previous.slice(currentTodoIndex + 1)])
 
-     
+
 
     } else {
       console.log("NOTFOUND", currentTodoIndex, filesToUpload, socketUploadProgress.name);
@@ -287,56 +316,55 @@ const FTPUpload = ({publishHelper,filesRef}) => {
 
   }, [socketUploadProgress])
 
-
-
-
   return (
     < >
-
-
-{/* <div>Display File List</div>
+      {/* <div>Display File List</div>
       <div>Upload Button</div> */}
       {/* {(socketConnected) ? <b style={{color:"green"}}>Upload Server Connected</b> : <b style={{color:"red"}}>Upload Server Disconnected</b>} */}
       <br /><br />
       {filesToUpload.map((file, i) => {
         return <div className="fileToUpload" key={i}>
-          <div className='fileName'>{file.name} <CheckLink link={campaignDataState.data["BASE_URL"]+ file.name  }/></div>
-           <div className='fileProgress'>{file.progress}</div>
-        </div>
-      })} 
-
-
-
-<button className='greenBtn' onClick={ ()=>setFTPUploadModalOpened(true) }>Upload Files</button>
-<Modal
-closeOnOverlayClick={false}
-center
-open={isFTPUploadModalOpened}
-onClose={()=>setFTPUploadModalOpened(false)}>
-   
-      
-      <div style={{width:"400px"}}>
-      <div>Socket Id: {socketId}</div>
-      <div> {(socketConnected) ? <b style={{color:"green"}}>Upload Server Connected</b> : <b style={{color:"red"}}>Upload Server Disconnected</b>}</div>
-     <br />
-      {filesToUpload.map((file, i) => {
-        return <div className="fileToUpload" key={i}>
-          <div className='fileName'>{file.name} </div> <div className='fileProgress'>{file.progress}</div>
+          <div className='fileName'>{file.name} <CheckLink link={campaignDataState.data["BASE_URL"] + file.name} /></div>
+          <div className='fileProgress'>{file.progress}</div>
+          <div><input type="checkbox" onChange={(e)=>handleFileCheckbox(e,i)} checked={file.selected} value={file.selected}/></div>
         </div>
       })}
 
-      <div>{JSON.stringify(FTPProgress)}</div>
-
-    {(uploading) ? <div >Uploading</div> : <button className='greenBtn'  onClick={(e) => { e.preventDefault(); handleUploadFiles() }}>Upload to Server</button>
-} 
-
-      </div>
-      
-  </Modal> 
 
 
+      <button className='greenBtn' onClick={() => setFTPUploadModalOpened(true)}>Upload Files</button>
+      <Modal
+        closeOnOverlayClick={false}
+        center
+        open={isFTPUploadModalOpened}
+        onClose={() => setFTPUploadModalOpened(false)}>
 
-   
+
+        <div style={{ width: "400px" }}>
+          <div>Socket Id: {socketId}</div>
+          <div> {(socketConnected) ? <b style={{ color: "green" }}>Upload Server Connected</b> : <b style={{ color: "red" }}>Upload Server Disconnected</b>}</div>
+          <br />
+          <div style={{display:"table",width:"100%",borderCollapse: "collapse" }}>
+          {filesToUpload.map((file, i) => {
+            return <div className="fileToUpload" key={i}  style={ {display:"table-row",width:"100%",backgroundColor:`${file.selected==true?'#209fcd':'transparent' }`} }>
+              <div className='fileName' style={{display:"table-cell",padding:"10px"}}>{file.name} </div>
+              <div className='fileProgress' style={{display:"table-cell",padding:"10px"}}>{file.progress}</div>
+              <div><input type="checkbox"  style={{display:"table-cell",padding:"10px"}} onChange={(e)=>handleFileCheckbox(e,i)} checked={file.selected} value={file.selected}/></div>
+            </div>
+          })}
+        </div>
+          <div>{JSON.stringify(FTPProgress)}</div>
+
+          {(uploading) ? <div >Uploading</div> : <button className='greenBtn' onClick={(e) => { e.preventDefault(); handleUploadFiles() }}>Upload to Server</button>
+          }
+
+        </div>
+
+      </Modal>
+
+
+
+
 
       <button className='greenBtn' onClick={(e) => { e.preventDefault(); handleSaveLink() }}>Save Link</button>
     </ >

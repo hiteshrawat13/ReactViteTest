@@ -143,6 +143,9 @@ const Editor = ({ }) => {
           </Col>
         </Row>
 
+
+        <TextBox label="Sponsored By Text" name="SPONSORED_BY_TEXT" required={true} value="Sponsored By : "/>  
+ 
       </Section>
 
 
@@ -163,14 +166,14 @@ const Editor = ({ }) => {
 
         <CheckBox label="Landing title is same as EDM title" name="LANDING_TITLE_SAME_AS_EDM_TITLE" />
 
-        {(watch["LANDING_TITLE_SAME_AS_EDM_TITLE"] == false) &&
-          <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} />
+        {(watch["LANDING_TITLE_SAME_AS_EDM_TITLE"] == false) ?
+          <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} /> : setStateValue("LANDING_TITLE",getStateValue("EDM_TITLE"))
         }
 
-        <CheckBox label="Landing Heading" name="LANDING_HEADING_SAME_AS_EDM_HEADING" />
+        <CheckBox label="Landing Heading same as EDM Heading" name="LANDING_HEADING_SAME_AS_EDM_HEADING" />
 
-        {(watch["LANDING_HEADING_SAME_AS_EDM_HEADING"] == false) &&
-          <TextBox label="Landing Page Heading" name="LANDING_HEADING" required={true} />
+        {(watch["LANDING_HEADING_SAME_AS_EDM_HEADING"] == false) ?
+          <TextBox label="Landing Page Heading" name="LANDING_HEADING" required={true} /> : setStateValue("LANDING_HEADING",getStateValue("EDM_HEADING"))
         }
 
       </Section>
@@ -180,15 +183,17 @@ const Editor = ({ }) => {
 
       <CheckBox label="Thankyou page title is same as EDM title" name="THANKYOU_TITLE_SAME_AS_EDM_TITLE" defaultChecked/>
 
-        {(watch["THANKYOU_TITLE_SAME_AS_EDM_TITLE"] == false) &&
-          <TextBox label="Thankyou Page Title" name="THANKYOU_TITLE" required={true}  />
+        {(watch["THANKYOU_TITLE_SAME_AS_EDM_TITLE"] == false) ?
+          <TextBox label="Thankyou Page Title" name="THANKYOU_TITLE" required={true}  /> : setStateValue("THANKYOU_TITLE",getStateValue("EDM_TITLE"))
         }
 
         <CheckBox label="Thankyou page heading is same as EDM heading" name="THANKYOU_HEADING_SAME_AS_EDM_HEADING" defaultChecked/>
 
-        {(watch["THANKYOU_HEADING_SAME_AS_EDM_HEADING"] == false) &&
-          <TextBox label="Thankyou Page Title" name="THANKYOU_HEADING" required={true} />
+        {(watch["THANKYOU_HEADING_SAME_AS_EDM_HEADING"] == false) ?
+          <TextBox label="Thankyou Page Title" name="THANKYOU_HEADING" required={true} /> : setStateValue("THANKYOU_HEADING",getStateValue("EDM_HEADING"))
         }
+
+        <TextBox label="Thankyou Page CTA" name="THANKYOU_CTA" required={true} value="View & Download"/>  
  
 
         </Section>
@@ -199,18 +204,33 @@ const Editor = ({ }) => {
 
 
        
-        <RichTextEditor label="Sendmail Body" name="SENDMAIL_BODY" required={true} value={`<table>
-				 <tr><td>Dear&nbsp;<b>$firstname,</b></td></tr>
+<button onClick={(e)=>{
+e.preventDefault()
+  const default_body=`
+    <table>
+				 <tr><td>Dear&nbsp;<b>$firstname,<b></td></tr>
 				 <tr><td>&nbsp;</td></tr>
-				 <tr><td>Thank you for requesting <b>"##EDM_TITLE##"</b>. You can view it immediately by clicking <a href='##BASE_URL####LINK_NAME##.pdf'>HERE</a>!</td></tr>
+				 <tr><td>Thank you for registering for content provided by ##SPONSOR_NAME##. Please share it with your colleagues by forwarding the link below (no registration required).</td></tr>
 				 <tr><td>&nbsp;</td></tr>
-
+				 <tr><td><a href='##ASSET_URL##'><img src='##BASE_URL####THUMBNAIL_NAME##' width='40%' /></a></td></tr>
+				 <tr><td>&nbsp;</td></tr>
+				 <tr><td>&nbsp;</td></tr>
+				 <tr><td>You can learn more by visiting  <a href = '##SPONSOR_WEBSITE##'>##SPONSOR_WEBSITE##.</a></td></tr>
+				 <tr><td>&nbsp;</td></tr>
+				 <tr><td><a href='##SPONSOR_WEBSITE##'><img style = 'width: 25%;' src='##BASE_URL####LOGO_NAME##' width='25%'/></a></td></tr>
+				 <tr><td>&nbsp;</td></tr>
 				 <tr><td>&nbsp;</td></tr>
 				 <tr><td>Sincerely,</td></tr>
-				 <tr><td>Nina Ridgeway</td></tr>
-				 <tr><td>ITBusinessToday</td></tr>
+				 <tr><td>The IT Business Plus fulfillment team</td></tr>
+
 				 
-				</table>`} />
+		</table>
+  `
+
+  setFormValue("SENDMAIL_BODY",default_body)
+}}>Load Default Sendmail Body</button>
+
+<RichTextEditor label="Sendmail Body" name="SENDMAIL_BODY" required={true} />
       </Section>
 
     </Step>

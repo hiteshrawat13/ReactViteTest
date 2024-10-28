@@ -52,163 +52,49 @@ input[type="radio"], input[type="checkbox"] {
 input[readonly] {
     background-color: #e5e5e5 !important; 
 }
+
+span.error ,label.error{
+	font-weight:bold;
+    color: #e02f2f !important;
+}
     </style>
-	<script src="https://jqueryvalidation.org/files/lib/jquery.js"></script>
-	<script src="https://jqueryvalidation.org/files/dist/jquery.validate.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://jqueryvalidation.org/files/dist/jquery.validate.js"></script>
+	
+	
+	
+	<script src="DataCurlNodeApi/post_form_data.js"></script>
+	
 	<script type="text/javascript" charset="utf-8">
 	$(document).ready(function() { 
-	$.validator.addMethod('nofreeemail', function (value) { 
-		return /^([\w-.]+@(?!gmail\.com)(?!yahoo\.com)(?!hotmail\.com)(?!facebook\.com)(?!gmail\.com)(?!gmx\.com)(?!googlemail\.com)(?!hotmail\.com)(?!mac\.com)(?!me\.com)(?!mail\.com)(?!msn\.com)(?!yahoo\.com)(?!aol\.com)(?!google\.com)(?!live\.com)(?!att\.net)(?!comcast\.net)(?!sbcglobal\.net)(?!verizon\.net)([\w-]+.)+[\w-]{2,4})?$/.test(value);
-	}, 'Free email addresses are not allowed.');
+	jQuery.validator.addMethod(
+    "email",
+    function(value, element) {
+        // Regular expression for email validation
+        return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value);
+    },
+    "Please enter a valid email address."
+);
 	
 	// validate signup form on keyup and submit
-			<!-- $("#sky-form").validate({ -->
-			<!-- errorElement: 'span', -->
-				<!-- rules: { -->
-					<!-- firstname: { -->
-						<!-- required: true, -->
-					<!-- }, -->
-					<!-- lastname: { -->
-						<!-- required: true, -->
-					<!-- }, -->
-					<!-- title: { -->
-						<!-- required: true, -->
-					<!-- }, -->
-					<!-- email: { -->
-						<!-- required: true, -->
-						<!-- nofreeemail: true, -->
-						<!-- email: true -->
-					<!-- }, -->
-					<!-- buss_phone: { -->
-						<!-- required: true, -->
-						<!-- number: true -->
-					<!-- }, -->
-					<!-- company: { -->
-						<!-- required: true, -->
-					<!-- }, -->
-					<!-- address: { -->
-						<!-- required: true, -->
-					<!-- }, -->
-					<!-- city: { -->
-						<!-- required: true, -->
-					<!-- }, -->
-					<!-- state: { -->
-						<!-- required: true, -->
-					<!-- }, -->
-					<!-- country: { -->
-						<!-- required: true, -->
-					<!-- }, -->
-					<!-- zip: { -->
-						<!-- required: true, -->
-					<!-- }, -->
-					<!-- compsize: { -->
-						<!-- required: true, -->
-					<!-- }, -->
-					<!-- Industry: { -->
-						<!-- required: true, -->
-					<!-- }, -->
-					<!-- opt_in: { -->
-						<!-- required: true, -->
-					<!-- }, -->
-					<!-- quest1: { -->
-						<!-- required: true, -->
-					<!-- }, -->
-					<!-- quest2: { -->
-						<!-- required: true, -->
-					<!-- }, -->
-					<!-- quest3: { -->
-						<!-- required: true, -->
-					<!-- }, -->
-					<!-- job_level: { -->
-						<!-- required: true, -->
-					<!-- }, -->
-					<!-- job_function: { -->
-						<!-- required: true, -->
-					<!-- } -->
-					
-				<!-- }, -->
-				<!-- message: { -->
-					<!-- firstname: { -->
-						<!-- required: "The details are incorrect/incomplete" -->
-					<!-- }, -->
-					<!-- lastname: { -->
-						<!-- required: "The details are incorrect/incomplete" -->
-					<!-- }, -->
-					<!-- title: { -->
-						<!-- required: "The details are incorrect/incomplete" -->
-					<!-- }, -->
-					<!-- email: { -->
-						<!-- required: "Please enter an email address", -->
-						<!-- nofreeemail: "Please enter your business email, generic email not allowed", -->
-						<!-- email: "Please enter a valid email address" -->
-					<!-- }, -->
-					<!-- buss_phone: { -->
-						<!-- required: "The details are incorrect/incomplete", -->
-						<!-- number : "Phone number must contain digits only" -->
-					<!-- }, -->
-					<!-- company: { -->
-						<!-- required: "The details are incorrect/incomplete" -->
-					<!-- }, -->
-					<!-- address: { -->
-						<!-- required: "The details are incorrect/incomplete" -->
-					<!-- }, -->
-					<!-- city: { -->
-						<!-- required: "The details are incorrect/incomplete" -->
-					<!-- }, -->
-					<!-- state: { -->
-						<!-- required: "The details are incorrect/incomplete" -->
-					<!-- }, -->
-					<!-- country: { -->
-						<!-- required: "The details are incorrect/incomplete" -->
-					<!-- }, -->
-					<!-- zip: { -->
-						<!-- required: "The details are incorrect/incomplete" -->
-					<!-- }, -->
-					<!-- compsize: { -->
-						<!-- required: "The details are incorrect/incomplete" -->
-					<!-- }, -->
-					<!-- Industry: { -->
-						<!-- required: "The details are incorrect/incomplete" -->
-					<!-- }, -->
-					<!-- opt_in: { -->
-						<!-- required: "The details are incorrect/incomplete" -->
-					<!-- }, -->
-					<!-- quest1: { -->
-						<!-- required: "The details are incorrect/incomplete" -->
-					<!-- }, -->
-					<!-- quest2: { -->
-						<!-- required: "The details are incorrect/incomplete" -->
-					<!-- }, -->
-					<!-- quest3: { -->
-						<!-- required: "The details are incorrect/incomplete" -->
-					<!-- }, -->
-					<!-- job_function: { -->
-						<!-- required: "The details are incorrect/incomplete" -->
-					<!-- }, -->
-					<!-- job_level: { -->
-						<!-- required: "The details are incorrect/incomplete" -->
-					<!-- } -->
-				<!-- } -->
-			<!-- }); -->
+			$("#sky-form").validate({
+			
+			
+			##EU_SCRIPT##
+				
+				errorPlacement: function(error, element) {
+					if (element.attr("type") == "checkbox" || element.attr("type") == "radio") {
+						error.insertAfter(element.closest(".check-group"));
+					} else {
+						error.insertAfter(element);
+					}
+				}
+			
+			
+			});
 	});
 	</script> 
-	<script>
-		$( document ).ready(function() {
-			$.ajax({
-			type: "POST",  
-			url: "download/processdata.php",
-			data: {sturl : "##BASE_URL####LINK_NAME##-landing.html"},
-			beforeSend : function () {
-			},
-			success: function(JSONObject){
-
-			},
-			error: function(e){
-			 $('#result').php(e);
-			}
-		   });
-		});
-	</script>
+	 
   </head>
   <body style="margin:0; padding:0;" bgcolor="#F0F0F0" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
     <!-- 100% background wrapper (grey background) -->
@@ -249,7 +135,7 @@ input[readonly] {
 						     <p style="text-align: left;font-size: 16px;" id="LandingHeading">
 							 ##LANDING_HEADING## 
 							 </p>
-						  <p style="text-align: left;font-size: 16px;" id="sponsorbyText">##SPONSORED_BY_TEXT##:  ##SPONSOR_NAME##   </p>
+						  <p style="text-align: left;font-size: 16px;" id="sponsorbyText">##SPONSORED_BY_TEXT##</p>
                           </header>
 						  
 						  

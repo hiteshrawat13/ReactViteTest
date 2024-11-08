@@ -47,8 +47,8 @@ const Editor = ({ }) => {
 
 
     setStateValue("LOGO_FOLDER", "logo/")
-    if(!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
-      if(!campData?.jsonObject?.THUMBNAIL_WIDTH) setStateValue("THUMBNAIL_WIDTH", "200")
+     if(!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
+     if(!campData?.jsonObject?.THUMBNAIL_WIDTH) setStateValue("THUMBNAIL_WIDTH", "200")
     //alert("TGIF")
   }, [])
 
@@ -124,7 +124,6 @@ const Editor = ({ }) => {
               setFormValue("PDF_NAME", `${val}.pdf`)
               setFormValue("MP4_NAME", `${val}.mp4`)
               setFormValue("EXTRA_FILE_1", `${val}.png`)
-
             }
           } />
 

@@ -1,9 +1,9 @@
  //Dont forget to add extension while importing module
  import {TGIFFormRenderer} from './FormRenderer.js'
- import edm_html from './edm.html.txt?raw'  //?raw is important to read text files
- import landing_html from './landing.php.txt?raw'  //?raw is important to read text files
- import sendemail_html from './sendemail.php.txt?raw'  //?raw is important to read text files
- import thanks_html from './thanks.php.txt?raw'  //?raw is important to read text files
+ import edm_html from './pages/edm.html.txt?raw'  //?raw is important to read text files
+ import landing_html from './pages/landing.php.txt?raw'  //?raw is important to read text files
+ import sendemail_html from './pages/sendemail.php.txt?raw'  //?raw is important to read text files
+ import thanks_html from './pages/thanks.php.txt?raw'  //?raw is important to read text files
 
  import { getSendmailSubject } from './Base64.js'
 class PublishHelper{

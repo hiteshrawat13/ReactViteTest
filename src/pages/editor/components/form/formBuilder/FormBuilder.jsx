@@ -239,7 +239,6 @@ const FormBuilder = (defaultFieldsJson) => {
               {(state.form[selectedField]?.type == "HiddenInput") && <HiddenInputEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
               {(state.form[selectedField]?.type == "CTA") && <CTAEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
             </Suspense>
-
             }
           </div>
         </div>

@@ -240,7 +240,7 @@ const OptionList = ({ setOptions, options }) => {
                             )}
                         </Droppable>
                     </DragDropContext>
-                    <button onClick={handleAddItem}>+</button>
+                    <button onClick={handleAddItem} style={{padding:"5px",color:"green",border:"1px solid green"}}>+ Add Option</button>
                 </div>
             </div>
 

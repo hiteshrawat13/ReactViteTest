@@ -30,7 +30,7 @@
                 padding: 0;
                 -ms-text-size-adjust: 100%;
                 -webkit-text-size-adjust: 100%;
-                font-family: Sans-Serif;
+                 
             }
 
             table {

@@ -126,7 +126,7 @@ span.error ,label.error{
 					</div>
                     <div class="col-md-12 well" style="background-color:white;">
                       
-                        <img src="##THUMBNAIL_URL##" id="landingThumbnail" width=100% style="border: 1px solid #cccccc;"/>
+                        <img src="##BASE_URL####THUMBNAIL_NAME##" id="landingThumbnail" width=100% style="border: 1px solid #cccccc;"/>
 						<br />
                       
                         <form action="##LINK_NAME##-sendmail.php" method="POST" id="sky-form" class="sky-form" autocomplete="off">

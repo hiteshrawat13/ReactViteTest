@@ -114,24 +114,7 @@ EUScript=()=>{
 						const firstname=mappedData['firstname']
 						const email_address=mappedData['email']
 						const subject="##SENDMAIL_SUBJECT##";
-						let body=\`
-							<table>
-                            <tr><td>Dear&nbsp;<b>\${firstname},<b></td></tr>
-                            <tr><td>&nbsp;</td></tr>
-                            <tr><td>Thank you for registering for content provided by Trustpilot. Please share it with your colleagues (no registration required).</td></tr>
-                            <tr><td>&nbsp;</td></tr>
-                            <tr><td>&nbsp;</td></tr>
-                            <tr><td><a href='##BASE_URL####LINK_NAME##.pdf'><img src='##BASE_URL####LINK_NAME##.png' width='40%' /></td></tr>
-                            <tr><td>&nbsp;</td></tr>
-                            <tr><td>You can learn more by visiting <a href ='https://www.trustpilot.com/'>https://www.trustpilot.com/</a></td></tr>
-                            <tr><td>&nbsp;</td></tr>
-                            <tr><td><a href='https://www.trustpilot.com/'><img  src='##BASE_URL####LOGO_NAME##' width='25%'/></a></td></tr>
-                            <tr><td>&nbsp;</td></tr>
-                            <tr><td>&nbsp;</td></tr>
-                            <tr><td>Sincerely,</td></tr>
-                            <tr><td>The IT Business Plus Fulfillment Team </td></tr>
-				            </table>
-						\`;
+						let body=\`##SENDMAIL_BODY##\`;
 						body = body.replace(/(\\r\\n|\\n|\\r|\\t)/gm, "");
 						
 						post_form_data(camp_id, mappedData, endUrl,function onComplete(res,error){
@@ -280,9 +263,14 @@ EUScript=()=>{
 
         if(this.state.REGION=="EU"){
             data=data.replaceAll(`##EU_SCRIPT##`, this.convertToEntities ( this.EUScript() )  )
+            data=data.replaceAll(`$firstname`, "${firstname}"  )
+        
+        
         }else{
             data=data.replaceAll(`##EU_SCRIPT##`, ''  )
         }
+
+        
         
 
 
@@ -296,6 +284,24 @@ EUScript=()=>{
         const hasSpecialCharsInSubject=this.convertToEntities( this.state["SENDMAIL_SUBJECT"]) .includes("&#")
         data=data.replaceAll(`##SENDMAIL_SUBJECT##`, (hasSpecialCharsInSubject)? getSendmailSubject( this.state["SENDMAIL_SUBJECT"] )  : this.state["SENDMAIL_SUBJECT"].replaceAll("\\'","'")  )
         data=data.replaceAll(`##SENDMAIL_BODY##`, this.convertToEntities( this.state["SENDMAIL_BODY"]).replaceAll('"','\\"') )
+
+
+        switch(this.state["ASSET_FORMAT"]){
+            case "PDF":
+                data=data.replaceAll(`##ASSET_URL##`,  this.state["BASE_URL"]+this.state["PDF_NAME"] )
+                break;
+            case "MP4":
+                data=data.replaceAll(`##ASSET_URL##`,  this.state["BASE_URL"]+this.state["MP4_NAME"] )
+                 break;
+            case "CLIENT_LINK":
+                data=data.replaceAll(`##ASSET_URL##`,  this.state["CLIENT_LINK"] )
+                
+                break;
+            case "IFRAME":
+                data=data.replaceAll(`##ASSET_URL##`,  this.state["IFRAME"] )
+             break;
+        }
+
 
     
         data=this.replaceHashVariables(data)
@@ -316,89 +322,23 @@ EUScript=()=>{
 
 
         data=this.getPrivacyPolicy(data) //Privacy Policy
-        const normal_thankyou=`\t
-        <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
-                            <tbody>
-                                <tr>
-                                    <td align="left" class="whitepaper" style="align-items: start; display: flex;">
-                                        <img   style=" height: auto !important;" alt="##EDM_TITLE##" src="##BASE_URL####THUMBNAIL_NAME##" width="180" style="border: 1px solid #c4c5c600;" />
-                                    </td>
-
-                                    <td align="left" valign="top" class="style1 thankyou">
-
-                                        ${this.state["NORMAL_THANK_YOU_PAGE_TEXT"]}
-
-                                        <script>
-                                            var timeleft = 5;
-                                            var downloadTimer = setInterval(function () {
-                                                if (timeleft <= 0) {
-                                                    clearInterval(downloadTimer);
-                                                    document.getElementById("countdown").innerHTML = "0";
-                                                } else {
-                                                    document.getElementById("countdown").innerHTML = timeleft + "";
-                                                }
-                                                timeleft -= 1;
-                                            }, 1000);
-                                        </script>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
         
-        \n`
-
-        const iframe_thankyou=`
-        <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
-                            <tbody>
-                                <tr>
-                                    <td align="left" valign="top" class="style1 thankyou">
-                                        <h3>##EDM_TITLE##</h3>
-                                            <iframe 
-                                            src="##IFRAME##" 
-                                            title="##EDM_TITLE##" 
-                                            style="width:100%;aspect-ratio:16/9;"
-                                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                            allowfullscreen></iframe>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-        `
-
-        const mp4_thankyou=`
-        <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
-                            <tbody>
-                                <tr>
-                                    <td align="left" valign="top" class="style1 thankyou">
-                                        <h3>##EDM_TITLE##</h3>
-	                                     
-                                        <video class="jw-video jw-reset" tabindex="-1" style="width:100%;aspect-ratio:16/9;" controls>
-                                            <source src="##BASE_URL####MP4##" type="video/mp4">
-                                        </video> 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-        `
-
         switch(this.state["ASSET_FORMAT"]){
             case "PDF":
-                data=data.replaceAll(`##THANK_YOU_CONTENT##`,  this.convertToEntities(  normal_thankyou ) )
+                data=data.replaceAll(`##ASSET_URL##`,  this.state["BASE_URL"]+this.state["PDF_NAME"] )
                 break;
             case "MP4":
-                data=data.replaceAll(`##THANK_YOU_CONTENT##`,  this.convertToEntities(  mp4_thankyou )  )
-                data=data.replaceAll(`header( "refresh:5;url=##BASE_URL####LINK_NAME##.pdf" ); `,  ""  )//remove redirect
-                break;
+                data=data.replaceAll(`##ASSET_URL##`,  this.state["BASE_URL"]+this.state["MP4_NAME"] )
+                 break;
             case "CLIENT_LINK":
-                data=data.replaceAll(`##THANK_YOU_CONTENT##`, this.convertToEntities(   normal_thankyou ) )
-                data=data.replaceAll(`##BASE_URL####LINK_NAME##.pdf`,   this.state['CLIENT_LINK']  )
+                data=data.replaceAll(`##ASSET_URL##`,  this.state["CLIENT_LINK"] )
+                
                 break;
             case "IFRAME":
-                data=data.replaceAll(`##THANK_YOU_CONTENT##`,  this.convertToEntities(  iframe_thankyou )  )
-                data=data.replaceAll(`header( "refresh:5;url=##BASE_URL####LINK_NAME##.pdf" ); `,  ""  )//remove redirect    
-            break;
+                data=data.replaceAll(`##ASSET_URL##`,  this.state["IFRAME"] )
+             break;
         }
+
 
         if(forPreview==true){
             if(this.filesRef.fileInput1.files[0]){data=data.replaceAll(`##BASE_URL####LOGO_FOLDER####LOGO_NAME##`, await this.getBase64Image( this.filesRef.fileInput1.files[0])  )}
@@ -417,6 +357,30 @@ EUScript=()=>{
 
     async getThanksVideoHtml({forPreview}){
         let data=thanks_video_html
+        data=this.getPrivacyPolicy(data) //Privacy Policy
+
+        const iframe=`
+        <div>
+		 <iframe style="width:100%;aspect-ratio:16/9;" src="${this.state["IFRAME"]}" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"  allowfullscreen=""></iframe>
+		 </div>
+        `
+
+        const video=`
+        <div>
+		 <iframe style="width:100%;aspect-ratio:16/9;" src="${this.state["BASE_URL"]+this.state["MP4_NAME"]}" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"  allowfullscreen=""></iframe>
+		 </div>
+        `
+
+        if(this.state["ASSET_FORMAT"]=='MP4' ){
+            data=data.replaceAll(`##BODY##`, video)
+        }else if(this.state["ASSET_FORMAT"]=='IFRAME'){
+            data=data.replaceAll(`##BODY##`,  iframe )
+        }else{
+            data=data.replaceAll(`##BODY##`,  '' )
+        }
+
+       
+
 
         return this.replaceHashVariables(data)
     }
@@ -441,7 +405,7 @@ EUScript=()=>{
         
         files.push({ name:`${ this.state["LINK_NAME"] }-thanks.html`, data: await this.getThanksHtml({forPreview}) })
         
-        if(this.state["ASSET_FORMAT"]=='MP4' || this.state["ASSET_FORMAT"]=='IFrame'){
+        if(this.state["ASSET_FORMAT"]=='MP4' || this.state["ASSET_FORMAT"]=='IFRAME'){
         files.push({ name:`${ this.state["LINK_NAME"] }-thanks-vid.html`, data: await this.getThanksVideoHtml({forPreview}) })
         } 
         return files;

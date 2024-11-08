@@ -34,6 +34,7 @@ const Editor = ({ }) => {
   const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData,setError } = useContext(EContext)
   useEffect(() => {
 
+    alert(campData?.country)
     if( campData?.country =='EU'){
       setStateValue("FTP_CONFIG_NAME", "EU-ITBP")
       setStateValue("BASE_URL", "https://eu.itbusinessplus.com/whitepaper/test/")
@@ -47,6 +48,7 @@ const Editor = ({ }) => {
 
     setStateValue("LOGO_FOLDER", "logo/")
     if(!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
+      if(!campData?.jsonObject?.THUMBNAIL_WIDTH) setStateValue("THUMBNAIL_WIDTH", "200")
     //alert("TGIF")
   }, [])
 
@@ -95,7 +97,7 @@ const Editor = ({ }) => {
 
 
         <TextBox label="Campaign Id" name="CAMP_ID" required={true} value={campData?.campaignId} width="10%" readOnly />
-        <SelectBox label="Region" name="REGION" value={campData?.country} required={true} readOnly
+        <SelectBox label="Region" name="REGION" value={campData?.country} required={true} disabled
           options={[
             { label: "Select..", value: "" },
             { label: "EU", value: "EU" },
@@ -145,6 +147,8 @@ const Editor = ({ }) => {
 
 
         <TextBox label="Sponsored By Text" name="SPONSORED_BY_TEXT" required={true} value="Sponsored By : "/>  
+        <TextBox label="Sponsored Name" name="SPONSOR_NAME" required={true} />  
+        <TextBox label="Sponsored WebSite" name="SPONSOR_WEBSITE" required={true} />  
  
       </Section>
 
@@ -308,11 +312,21 @@ e.preventDefault()
             }}>
               <TextBox type="number" label="Logo Width" name="LOGO_WIDTH" value={180} onChange={(e) => {
 
-                iframe.contentDocument.querySelector('.splogo').style.width = e.target.value + "px"
+                iframe.contentDocument.querySelector('#sponsorLogo').style.width = e.target.value + "px"
 
-                console.log(iframe.contentDocument.querySelector('.splogo'));
+                
 
                 setStateValue("LOGO_WIDTH", e.target.value)
+
+              }} />
+
+              <TextBox type="number" label="EDM Thumbnail Width" name="THUMBNAIL_WIDTH" value={180} onChange={(e) => {
+
+              iframe.contentDocument.querySelector('#edmThumbnail').style.width = e.target.value + "px"
+
+              
+
+              setStateValue("THUMBNAIL_WIDTH", e.target.value)
 
               }} />
 

@@ -1,62 +1,54 @@
 import React, { forwardRef, useContext, useEffect, useImperativeHandle } from 'react'
 import { useForm ,FormProvider, useWatch} from 'react-hook-form';
- 
 import { StepperContext } from './StepperContext';
+import { EContext } from '../../EditorMain';
 
+const Step =  ({ children}) => {
+ 
+  const {  setWatch, setCurrentFormMethods }=useContext(EContext)
 
-
-const Step =  ({ children ,onWatch=null,onCurrentFormMethods=null }) => {
   const Stepper=useContext(StepperContext)
     const methods = useForm({
-      mode: "onChange",
-      
-
+      mode: "onChange"
     })
 
-
     useEffect(()=>{
-      if(onCurrentFormMethods)onCurrentFormMethods(methods)
-
+      Stepper.setCurrentStepFormTriggerMethod({trigger:methods.trigger,handleSubmit:methods.handleSubmit,methods})
+       
+        setCurrentFormMethods(methods)
     },[methods])
 
-
-    
-  
     const watchedValue=useWatch(methods)
     
     useEffect(() => {
       //console.log(watchedValue);
       //This condition passes to top form value change
-      if(onWatch)onWatch(watchedValue)
-     
-       
-        
+      
+        setWatch(watchedValue)
       return () => {
        
       }
     }, [watchedValue])
     
+    const onSubmit = (data) =>{ 
 
-    const onSubmit = (data) =>{
-     // Stepper.setIsStepValid(true)
-       // alert("EE"+data)
-        console.log(data);
-        Stepper.handleNext()
+
+      console.log(methods);
+      alert("EEE")
+       // console.log(data);
+
+
+       // Stepper.handleNext()
     }
 
-    useEffect(()=>{
-     Stepper.setCurrentStepFormTriggerMethod({trigger:methods.trigger,handleSubmit:methods.handleSubmit,methods})
-    },[])
+ 
 
     return (
         <FormProvider {...methods}>
-            <form   onSubmit={methods.handleSubmit(onSubmit) } >
+            <form  onSubmit={methods.handleSubmit(onSubmit) } >
                 {children}
-               
-                {/* <input type="submit" value="Save" /> */}
             </form>
         </FormProvider>
     )
 } 
-
 export default Step

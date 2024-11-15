@@ -7,12 +7,10 @@ export const ROLES={
 }
 
 const initialState = {
-
-  isLoggedIn: false, // to make sidebar Mini by default
+  isLoggedIn: false,  
   empId:null,
   role: ROLES.USER,
   token:null
-
 };
 
 export const UserSlice = createSlice({

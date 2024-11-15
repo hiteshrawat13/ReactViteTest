@@ -14,7 +14,7 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
 
   const [isFTPUploadModalOpened, setFTPUploadModalOpened] = useState(false)
   const campaignDataState = useSelector(state => state.campaignData)
-  const { logoFileRef, thumbnailFileRef, pdfFileRef, mp4FileRef } = useContext(StepperContext)
+ 
   const [filesToUpload, setFilesToUpload] = useState([])
   const [uploading, setUploading] = useState(false);
   const [firstPageName, setFirstPageName] = useState(null)

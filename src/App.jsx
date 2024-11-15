@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 
-import MyComponent from './MyComponent'
+ 
 
 import './App.css'
 import Dashboard from './pages/dashboard/Dashboard'
@@ -34,7 +34,7 @@ function App() {
       
     <Dashboard/> 
 
-      {/* <MyComponent/>    */}
+  
       
     </>
   )

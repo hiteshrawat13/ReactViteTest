@@ -4,8 +4,8 @@ import TextBox from './TextBox';
 import './Form.css'
 
 
-const Form = forwardRef( ({ next,children },ref) => {
-    const methods = useForm()
+const Form = forwardRef( ({ children },ref) => {
+    const methods = useForm({mode: "onChange"})
     const onSubmit = (data) =>{
        if(next) next()
        // alert("EE"+data)
@@ -22,7 +22,6 @@ const Form = forwardRef( ({ next,children },ref) => {
         <FormProvider {...methods}>
             <form ref={ref} onSubmit={methods.handleSubmit(onSubmit) }>
                 {children}
-                <input type="submit" value="Save" />
             </form>
         </FormProvider>
     )

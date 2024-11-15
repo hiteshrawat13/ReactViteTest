@@ -1,0 +1,68 @@
+.dropdown{
+    position: relative;
+
+    .menu{
+        position: absolute;
+        right: 0;
+        min-width: 150px;
+        max-width: 300px;
+        display: block;
+        transition: all 0.22s ease-in;
+        overflow: visible;
+        padding: 10px;
+        background-color: #fff;
+        border:1px solid #c9c6c6;
+        z-index: 100;
+        border-radius: 3px;
+
+
+        animation-name: slidein;
+        animation-timing-function: ease-in-out;
+        animation-duration: 0.2s;
+        animation-iteration-count: 1;
+        box-shadow: -2px 2px 3px 0 rgba(178, 178, 178, 0.4);
+
+        &::after{
+            content: "\00a0";
+            display: block;
+            background-color: #fff;
+            position: absolute;
+            top: -6px;
+            right:5px;
+            height: 10px;
+            width:  10px;
+            transform: rotate( 45deg );
+            border-top:1px solid #969494;
+            border-left:1px solid #969494;
+            box-shadow: -2px -1px 3px 0 rgba(178, 178, 178, 0.4);
+        }
+
+        @keyframes slidein {
+            from {
+              transform: translateY(-50%);
+            }
+            to {
+                transform: translateY(0%);
+            }
+        }
+
+        // &.collapsed{
+        //    // display: none;
+        //    visibility: none;
+        //    opacity: 0;
+        //    transform: translateY(-20%);
+        // }
+
+
+      
+
+
+    }
+
+    
+    
+   
+    
+
+
+}

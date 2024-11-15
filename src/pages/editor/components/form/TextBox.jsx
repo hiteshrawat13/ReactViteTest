@@ -26,7 +26,8 @@ const TextBox = ({type=null,label,name,required,width=null,onChange=null,value=n
         {errors[name] && <div className='error-icon'>!</div>}
         </div>
       
-        {errors[name] && <span className='error'>{label || "This"} field is required</span>}
+        {errors[name] && errors[name].type!="custom" && <span className='error'>{label || "This"} field is required</span>}
+        {errors[name] && errors[name].type=="custom" && <span className='error'>{errors[name].message}</span>}
        
     </div>
   )

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import DataTable from "react-data-table-component";
-import '../campaign/LinksPopupModal.scss'
 import Config from '../../Config';
 
 const UserPopup = ({ userData, setUserData }) => {
@@ -50,10 +49,10 @@ try {
     return (
 
 
-        <div className="popupOuter">
-            <div className="popup">
+        <div >
+            <div >
 
-                <form id="popupForm" >
+                <form >
                     <div >
                         <label htmlFor="userName">Name</label>
                         <input type="text" id="userName" placeholder=" Name" onChange={handleChange} defaultValue={userData.name} />

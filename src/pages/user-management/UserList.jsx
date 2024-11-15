@@ -5,6 +5,7 @@ import DataTable from "react-data-table-component";
 import UserPopup from "./UserPopup.jsx";
 import AddUser from "./AddUser.jsx";
 import Config from "../../Config.js";
+import Modal from "react-responsive-modal";
 
 const UserList = () => {
    
@@ -71,7 +72,7 @@ const UserList = () => {
 
     {
       name: 'Action',
-      cell: row => <button onClick={()=>openPopup(row)}>Edit</button>
+      cell: row => <button onClick={()=>openEditUserPopup(row)}>Edit</button>
     }
   ];
   
@@ -88,7 +89,7 @@ const UserList = () => {
   };
 
 
-function openPopup(rowData) {
+function openEditUserPopup(rowData) {
   setUserData(rowData);
 }
 
@@ -98,7 +99,10 @@ function openPopup(rowData) {
 
 <button onClick={()=>setAddUserPopup(true)}>Add User </button>
 
-{addUserPopup && (<AddUser setAddUserPopup={setAddUserPopup}/>)}
+ 
+<Modal open={addUserPopup} onClose={()=>{setAddUserPopup(false)}} center>
+  <AddUser setAddUserPopup={setAddUserPopup}/>
+</Modal>
 
     <DataTable
       title="Users"
@@ -115,7 +119,13 @@ function openPopup(rowData) {
       // selectableRows
       // onSelectedRowsChange={({ selectedRows }) => console.log(selectedRows)}
     />
-    {userData !== "" && (<UserPopup userData={userData} setUserData={setUserData} />)}
+
+
+    <Modal open={userData?true:false} onClose={()=>{setUserData('')}} center>
+    <UserPopup userData={userData} setUserData={setUserData} />
+    </Modal>
+
+    
     </>
   );
 }

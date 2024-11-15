@@ -11,12 +11,6 @@ import { setData, addData, updateData } from '../../../../store/campaign/Campaig
 const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
 
 
-    const {  setWatch,
-        setCurrentFormMethods }=useContext(EContext)
-
-
-  
-
 
     const stepsArray=React.Children.toArray(children)
     const totalSteps=stepsArray.length
@@ -27,11 +21,13 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
     const [totalStepsExplored, setTotalStepsExplored] = useState(1)
 
 
-    const logoFileRef = useRef()
-    const thumbnailFileRef = useRef()
-    const thumbnailFileLandingPageRef = useRef()
-    const pdfFileRef = useRef()
-    const mp4FileRef = useRef()
+
+    const [formState, setFormState] = useState(null)
+
+    useEffect(()=>{
+
+    },[formState])
+   
 
     // useEffect(()=>{
     //     const importComponent = async () => {
@@ -47,17 +43,9 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
 
 
 
-    const onWatch = (watchValue) => {
-        //This function detected form value change
-       setWatch(watchValue)
-    }
 
 
-
-    const onCurrentFormMethods = (methods) => {
-        setCurrentFormMethods(methods)
-       
-    }
+ 
 
 
     useImperativeHandle(ref, () => {
@@ -69,10 +57,10 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
 
     const handleSubmitOfCurrentForm = (data) => {
         //alert(data)
-        console.log(data, "SUBMIT DATA");
+        console.log("Form Submitted.Saved to state.");
         dispatch(addData(data))
 
-        console.log("REDUX-STATE:-", campaignDataState.data);
+       // console.log("REDUX-STATE:-", campaignDataState.data);
     }
 
 
@@ -94,7 +82,14 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
             // alert("form not valid");
             return
         }
+
+        console.log("FormState:",currentStepFormTriggerMethod.methods.formState.isValid);
         await currentStepFormTriggerMethod.handleSubmit(handleSubmitOfCurrentForm)()
+        console.log("Step Valid",isCurrentStepValid);
+
+        
+
+
         setStep((step) => { return (step + 1 < totalSteps - 1) ? step + 1 : totalSteps - 1 })
         setTotalStepsExplored(previousValue => ++previousValue)
         if (onStepChange) onStepChange(step)
@@ -117,15 +112,7 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
     return <div className='steps'>
 
         {/* {JSON.stringify(campaignDataState.data)} */}
-        <div style={{ display: "none" }}>
-            {/* THESE FILE INPUTS ARE USED FRO LOGO THUMBNAIL PDF MP4 TO KEEP IN STATE */}
-            <input type="file" name="LOGO_FILE" accept="image/png" className="" ref={logoFileRef} />
-            <input type="file" name="THUMBNAIL_FILE" accept="image/png" className="" ref={thumbnailFileRef} />
-            <input type="file" name="LANDING_THUMBNAIL_FILE" accept="image/png" className="" ref={thumbnailFileLandingPageRef} />
-            
-            <input type="file" name="PDF_FILE" className="" ref={pdfFileRef} />
-            <input type="file" name="MP4_FILE" className="" ref={mp4FileRef} />
-        </div>
+     
         {/* PROGRESS STEPS */}
         <div className='tabs wizard-progress'>
             {
@@ -158,17 +145,13 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
             totalSteps: totalSteps,
             setCurrentStepFormTriggerMethod,
 
-            logoFileRef,
-            thumbnailFileRef,
-            thumbnailFileLandingPageRef,
-            pdfFileRef,
-            mp4FileRef,
+          
            
 
         }}>
             {
                 stepsArray.map((child, i) => {
-                    return (i == step) && <div key={i}  >{React.cloneElement(child, { onWatch, onCurrentFormMethods })}</div>
+                    return (i == step) && <div key={i}  >{React.cloneElement(child, {  })}</div>
                 })
             }
         </StepperContext.Provider>

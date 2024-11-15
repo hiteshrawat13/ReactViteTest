@@ -134,7 +134,7 @@ const CampaignList = () => {
   return (
     <>
     <DataTable
-      title="Users"
+      title="My Campaigns"
       columns={columns}
       data={data}
       progressPending={loading}

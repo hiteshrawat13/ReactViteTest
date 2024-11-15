@@ -1,128 +1,84 @@
 import App from "../App"
-import CreateCampaign from "../pages/campaign/CreateCampaign"
-
-import MyCampaigns from "../pages/campaign/MyCampaigns"
-import TGIF1STTouchEditor from "../pages/TGIF-editor/TGIF1STTouchEditor"
- 
 import UserList from "../pages/user-management/UserList"
 import RoleList from "../pages/user-management/RoleList"
-import AlphaEditor from "../pages/ALPHA-editor/AlphaEditor"
 import AuthProvider from '../Auth';
-import CampaignDetails from "../pages/campaign/CampaignDetails"
-import Test from "../Test/Test"
- 
 import CreateCampaignPage from "../pages/new/CreateCampaignPage"
 import EditorMain from "../pages/editor/EditorMain"
 import CampaignList from "../pages/new/CampaignList"
 import LinkList from "../pages/new/LinkList"
-
-
 import Login from "../pages/login/Login"
 
+const Router = [
+  {
 
-const Router=[
-    {
-    
     // element: <AuthProvider> <App/> </AuthProvider> ,
-   element: <App/>  ,
-      children: [
-        {
-          path: "/",
-          element: <div>Dashboard</div>,
-          title:"Dashboard"
-        },
-        {
-          path: '/users',
-          element: <UserList/>,
-          title:"User Management"
-        },
-        {
-          path: '/roles',
-          element: <RoleList/>,
-          title:"Role Management"
-        },
-        {
-          path: '/modules',
-          element: <div>Module Management</div>,
-          title:"Module Management"
-        },
-        {
-          path: '/masters',
-          element: <div>Masters</div>,
-          title:"Masters"
-        },
-        {
-          path: '/ip',
-          element: <div>Ip</div>,
-          title:"IP"
-        },
-        {
-          path: '/campaigns',
-          element: <MyCampaigns/>,
-          title:"My Campaigns"
-        },
-        {
-          path: '/campaigns/create',
-          element: <CreateCampaign/>,
-          title:"Create Campaign"
-        },
-        {
-          path: '/campaigns/details',
-          element: <CampaignDetails/>,
-          title:"Campaign Details"
-        },
-        {
-          path: '/exit',
-          element: <div>exit</div>,
-          title:"Exit"
-        },
-        {
-          path: '/editor',
-          element: <EditorMain/>,
-          title:"Editor"
-        },
-        {
-          path: '/editor/TGIF',
-          element: <TGIF1STTouchEditor/>,
-          title:"TGIF Editor"
-        },
-        {
-          path: '/editor/ALPHA',
-          element: <AlphaEditor/>,
-          title:"Alpha Editor"
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <div>Dashboard</div>,
+        title: "Dashboard"
+      },
+      {
+        path: '/users',
+        element: <UserList />,
+        title: "User Management"
+      },
+      {
+        path: '/roles',
+        element: <RoleList />,
+        title: "Role Management"
+      },
+      {
+        path: '/modules',
+        element: <div>Module Management</div>,
+        title: "Module Management"
+      },
+      {
+        path: '/masters',
+        element: <div>Masters</div>,
+        title: "Masters"
+      },
+      {
+        path: '/exit',
+        element: <div>exit</div>,
+        title: "Exit"
+      },
+      {
+        path: '/editor',
+        element: <EditorMain />,
+        title: "Editor"
+      },
+
+      {
+        path: "/new",
+        element: <CreateCampaignPage />
+      },
+
+      {
+        path: "/campaignlist",
+        element: <CampaignList />,
+        handle: {
+          crumb: () => <div>CampaignListCrumb</div>,
+        }
+      },
+
+      {
+        path: "/linklist",
+        element: <LinkList />,
+        handle: {
+          crumb: (data) => <div>{JSON.stringify(data)}</div>,
+          data: { dd: "WW" }
         },
 
-        {
-          path: "/new" ,
-          element: <CreateCampaignPage/>
-        },
-    
-        {
-          path: "/campaignlist" ,
-          element: <CampaignList/>
-        },
-    
-        {
-          path: "/linklist" ,
-          element: <LinkList/>
-        },
-      ]
-    },
-    {
-      path: "/login" ,
-      element: <Login/> 
-    },
+      },
+    ]
+  },
+  {
+    path: "/login",
+    element: <Login />
+  }
 
-    {
-      path: "/test" ,
-      element: <Test/> 
-    },
+]
 
-
-
- 
-
-  
-  ]
-
-  export default Router
+export default Router

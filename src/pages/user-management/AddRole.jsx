@@ -1,56 +1,52 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
-import '../campaign/LinksPopupModal.scss'
+
 import Config from '../../Config';
 
-const AddRole = ({setAddRolePopup }) => {
+const AddRole = ({ setAddRolePopup }) => {
 
     const [formValue, setFormValue] = useState({});
 
 
     const handleChange = (event) => {
         setFormValue({
-          ...formValue,
-          [event.target.id]: event.target.value
+            ...formValue,
+            [event.target.id]: event.target.value
         });
-      }
+    }
 
 
 
-async function submitForm(e){
-e.preventDefault();
-try {
-    // make axios post request
-    const response = await axios.post(Config.API_BASE_URL+"/user/roleCreate",formValue);
+    async function submitForm(e) {
+        e.preventDefault();
+        try {
+            // make axios post request
+            const response = await axios.post(Config.API_BASE_URL + "/user/roleCreate", formValue);
 
-    alert(response.data.message)
-    location.reload();
-  } catch(error) {
-    console.log(error)
-    alert(error)
-    
-  }
+            alert(response.data.message)
+            location.reload();
+        } catch (error) {
+            console.log(error)
+            alert(error)
+
+        }
 
 
-}
+    }
 
     return (
 
 
-        <div className="popupOuter">
-            <div className="popup">
+        <div>
+            <div>
 
-                <form  onSubmit={submitForm}>
+                <form onSubmit={submitForm}>
                     <div >
                         <label htmlFor="roleName">Name</label>
-                        <input type="text" id="roleName" placeholder="" required onChange={handleChange}  />
+                        <input type="text" id="roleName" placeholder="" required onChange={handleChange} />
                     </div>
-
-
-                    <button  type='submit'>Save </button>
-
+                    <button type='submit'>Save </button>
                 </form>
-
                 <button onClick={() => setAddRolePopup(false)} >Close</button>
 
             </div>

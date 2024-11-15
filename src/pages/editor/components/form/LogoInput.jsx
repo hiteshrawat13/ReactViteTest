@@ -38,7 +38,6 @@ const LogoPicker = ({ fileRef, name, label = "", tag = "" }) => {
 
       axios.post(getStateValue("BASE_URL") +getStateValue("LOGO_FOLDER")+ 'searchlogotest.php', formData)
         .then(result => {
-
           setFoundLogos(result.data.results)
           if(e.target.value!="")  document.querySelector(".logoList").style.display = "block";
           console.log(result, "Complete");

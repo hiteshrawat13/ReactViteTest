@@ -34,7 +34,7 @@ const Editor = ({ }) => {
   const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData,setError } = useContext(EContext)
   useEffect(() => {
 
-    alert(campData?.country)
+     
     if( campData?.country =='EU'){
       setStateValue("FTP_CONFIG_NAME", "EU-ITBP")
       setStateValue("BASE_URL", "https://eu.itbusinessplus.com/whitepaper/test/")
@@ -47,6 +47,8 @@ const Editor = ({ }) => {
 
 
     setStateValue("LOGO_FOLDER", "logo/")
+
+    //setError("LINK_NAME","WWWWWWWWWWW")
      if(!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
      if(!campData?.jsonObject?.THUMBNAIL_WIDTH) setStateValue("THUMBNAIL_WIDTH", "200")
     //alert("TGIF")
@@ -83,6 +85,8 @@ const Editor = ({ }) => {
           <Col>
             <TextBox label="Client Code" name="CLIENT_CODE" required={true} value={campData?.clientCode} readOnly />
             {(watch["CLIENT_CODE"] === "TEST") && <>IT WORKS</>}
+            {(watch["CLIENT_CODE"] === "TEST") ? setError("CLIENT_CODE","WWWWWWWWWWW"):""}
+           
           </Col>
           <Col>
             <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" readOnly />

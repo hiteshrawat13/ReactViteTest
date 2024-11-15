@@ -20,18 +20,7 @@ const RadioGroup = ({title=null,name,options=null}) => {
 
     useEffect(()=>{
         setValue(name,campaignDataState.data[name])
-
-
-         
-
-
     },[])
-
-
-
- 
-
-
 
 
     return (
@@ -45,9 +34,7 @@ const RadioGroup = ({title=null,name,options=null}) => {
                 return <><input type="radio" {...register(name, { required: true })} className="radio-button" id={option.value} value={option.value} />
                 <label htmlFor={option.value}>{option.label}</label></>
 
-                    })}
-    
-                    
+                    })}   
                 </div>
                 {errors[name] && <span className='error'>This field is required</span>}
             </div>

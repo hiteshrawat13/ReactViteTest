@@ -5,6 +5,7 @@ import DataTable from "react-data-table-component";
 import RolePopup from "./RolePopup.jsx";
 import AddRole from "./AddRole.jsx";
 import Config from "../../Config.js";
+import Modal from "react-responsive-modal";
 const RoleList = () => {
    
   const [data, setData] = useState([]);
@@ -44,7 +45,7 @@ const RoleList = () => {
 
     {
       name: 'Action',
-      cell: row => <button onClick={()=>openPopup(row)}>Edit</button>
+      cell: row => <button onClick={()=>openEditRolePopup(row)}>Edit</button>
     }
   ];
   
@@ -52,7 +53,7 @@ const RoleList = () => {
 
 
 
-function openPopup(rowData) {
+function openEditRolePopup(rowData) {
   setRoleData(rowData);
 }
 
@@ -62,21 +63,28 @@ function openPopup(rowData) {
 
 <button onClick={()=>setAddRolePopup(true)}>Add Role </button>
 
+<Modal open={addRolePopup} onClose={()=>{setAddRolePopup(false)}} center>
+        
+        <AddRole setAddRolePopup={setAddRolePopup}/>
+</Modal>
 
-{addRolePopup && (<AddRole setAddRolePopup={setAddRolePopup}/>)}
-
-
+ 
     <DataTable
       title="Roles"
       columns={columns}
       data={data}
       progressPending={loading}
       pagination
-      
       // selectableRows
       // onSelectedRowsChange={({ selectedRows }) => console.log(selectedRows)}
     />
-    {roleData !== "" && (<RolePopup roleData={roleData} setRoleData={setRoleData} />)}
+
+
+    
+    <Modal open={roleData?true:false} onClose={()=>{setRoleData('')}} center>
+      <RolePopup roleData={roleData} setRoleData={setRoleData} />
+    </Modal>
+
     </>
   );
 }

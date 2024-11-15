@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
-import '../campaign/LinksPopupModal.scss'
 import Config from '../../Config';
 
 const AddUser = ({setAddUserPopup }) => {
@@ -43,8 +42,8 @@ try {
     return (
 
 
-        <div className="popupOuter">
-            <div className="popup">
+        <div>
+            <div>
 
                 <form  onSubmit={ submitForm}>
                     <div >

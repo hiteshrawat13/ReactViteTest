@@ -3,14 +3,14 @@ import axios from "axios";
 import DataTable from "react-data-table-component";
 import Config from '../../Config';
 import { useLocation, useNavigate } from 'react-router-dom';
- import TemplateManager from '../editor/templates/TemplateManager';
-
- import "./LinkList.css"
+import TemplateManager from '../editor/templates/TemplateManager';
+import "./LinkList.css"
 import CampaignDetails from './CampaignDetails';
 import instance from './ApiService';
 import Modal from 'react-responsive-modal';
 import { useDispatch } from 'react-redux';
 import { setData, clearData,addData, updateData } from '../../store/campaign/CampaignSlice'
+import Breadcrumbs from '../editor/components/BreadCrumbs';
 const LinkList = ({ campData={}, setCampData=null }) => {
 
     const dispatch=useDispatch()
@@ -106,7 +106,7 @@ const LinkList = ({ campData={}, setCampData=null }) => {
                 Config.API_BASE_URL+`/camplist/getLinkJsonData?id=${linkId}`
             );
 
-            alert(response )
+    
             console.log(response.data);
             const jobject=JSON.parse(response.data.json_data)
             navigate(`/editor/`,{state: { 
@@ -139,7 +139,7 @@ const LinkList = ({ campData={}, setCampData=null }) => {
                 Config.API_BASE_URL+`/camplist/getLinkJsonData?id=${linkId}`
             );
 
-            alert(response )
+            //alert(response )
             console.log(response.data);
             const jobject=JSON.parse(response.data.json_data)
             navigate(`/editor/`,{state: { 
@@ -247,15 +247,16 @@ const LinkList = ({ campData={}, setCampData=null }) => {
             name: 'Link Title',
             selector: row => row.link_title,
             sortable: true,
-             maxWidth: "250px",
+           
              wrap: true,
-             style:{fontWeight:"bold"}
+             style:{fontWeight:"bold",maxWidth: "250px"}
         },
         {
             name: 'Links',
             selector: row => <a href={row.link} target='_blank'>{row.link}</a>,
             sortable: true,
-             maxWidth: "350px"
+          
+            style:{fontWeight:"bold",maxWidth: "350px"}
         },
         {
             name: 'Language',
@@ -312,11 +313,7 @@ const LinkList = ({ campData={}, setCampData=null }) => {
     return (
 
         <div>
-
-{/* {JSON.stringify(location?.state) }
-
- */}
-
+<Breadcrumbs/>
 
 
 <div style={{display:"flex",justifyContent:"space-between",marginBottom:"10px"}}>

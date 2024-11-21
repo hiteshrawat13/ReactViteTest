@@ -25,8 +25,8 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
     const [formState, setFormState] = useState(null)
 
     useEffect(()=>{
-
-    },[formState])
+        setFormState(currentStepFormTriggerMethod?.methods?.formState)
+    },[currentStepFormTriggerMethod])
    
 
     // useEffect(()=>{
@@ -68,24 +68,44 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
     const handleTabChange = async (e, i) => {
         e?.preventDefault()
 
-        const isCurrentStepValid = await currentStepFormTriggerMethod.trigger()
-        console.log(isCurrentStepValid);
-        if (!isCurrentStepValid) return
+        // const isCurrentStepValid = await currentStepFormTriggerMethod.trigger()
+        // console.log(isCurrentStepValid);
+        // if (!isCurrentStepValid) return
+
+        if (Object.keys(formState.errors).length != 0) {
+            // alert("form not valid");
+            console.log("Form State have some errors.",formState.errors);
+            
+            return
+        }
         await currentStepFormTriggerMethod.handleSubmit(handleSubmitOfCurrentForm)()
         setStep(i)
         // if (onStepChange) onStepChange(i)
     }
     const handleNext = async (e) => {
         e?.preventDefault()
-        const isCurrentStepValid = await currentStepFormTriggerMethod.trigger()
-        if (!isCurrentStepValid) {
+
+     
+        
+        if (Object.keys(formState.errors).length != 0) {
             // alert("form not valid");
+            console.log("Form State have some errors.",formState.errors);
+            
             return
         }
 
-        console.log("FormState:",currentStepFormTriggerMethod.methods.formState.isValid);
+       
+
+        // const isCurrentStepValid = await currentStepFormTriggerMethod.trigger()
+        // if (!isCurrentStepValid) {
+        //     // alert("form not valid");
+        //     return
+        // }
+      
+
+       
         await currentStepFormTriggerMethod.handleSubmit(handleSubmitOfCurrentForm)()
-        console.log("Step Valid",isCurrentStepValid);
+        
 
         
 

@@ -103,6 +103,7 @@ const RichTextEditor = ({ label, name, required = false, width = null, value = n
       events: {
       },
 
+      iframe:true,
       style: { font: "14px Arial", },
       height: 210,
       readonly: false,
@@ -140,6 +141,25 @@ const RichTextEditor = ({ label, name, required = false, width = null, value = n
         'copyformat', '|',
         'symbol',
         'fullsize',
+
+        {
+          name: 'Remove Attributes',
+          tooltip: 'Remove attributes from html tags.',
+          exec: (editor) => {
+            //console.log(editor.value);
+            
+           
+            const editorValue=editor.value
+
+            const parsed = new DOMParser().parseFromString(editorValue, 'text/html')
+            parsed.body.querySelectorAll('*').forEach(elem => [...elem.attributes].forEach(attr => elem.removeAttribute(attr.name)))
+            const strippedHtml= parsed.body.innerHTML;
+
+            //editor.s.insertHTML(strippedHtml);
+            editor.value=strippedHtml
+
+          }
+        }
 
       ]
 

@@ -30,7 +30,6 @@
                 padding: 0;
                 -ms-text-size-adjust: 100%;
                 -webkit-text-size-adjust: 100%;
-                 
             }
 
             table {
@@ -44,10 +43,7 @@
             .ExternalClass {
                 width: 100%;
             }
-            p {
-                text-align: justify;
-                font-size: 12px;
-            }
+
             .ExternalClass,
             .ExternalClass p,
             .ExternalClass span,
@@ -150,13 +146,14 @@
             .w3-round-xlarge {
                 border-radius: 16px !important;
             }
-            ul {
+            p, ul {
                 text-align: left;
-                font-size: 12px;
+                font-size: 14px;
                 color: Black;
             }
             ul li {
                 color: Black;
+                margin-bottom: 8px;
             }
         </style>
     </head>
@@ -197,9 +194,7 @@
                                         </div>
                                         <div class="col-md-12 well" style="background-color: white;">
                                             <div class="col-sm-6" style="border-right: 2px #e0e0e0 solid;">
-                                                <p style="text-align: left; font-size: 14px; color: black; line-height: 160%;" id="edmAbstract">
-                                                    ##EDM_ABSTRACT##
-                                                </p>
+                                                ##EDM_ABSTRACT##
                                             </div>
                                             <div class="col-sm-6">
                                                 <center>

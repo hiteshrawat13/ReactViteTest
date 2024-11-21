@@ -108,9 +108,7 @@ const CampaignList = () => {
         camp_Created_By:campCreatedBy,
         last_edited_By:lastEditedBy,
         comment:comment,
-        Country:country,
-        
-
+        Country:country
       }=data
 
     navigate(`/linklist`,{state:

@@ -30,22 +30,13 @@ const Step =  ({ children}) => {
       }
     }, [watchedValue])
     
-    const onSubmit = (data) =>{ 
-
-
-      console.log(methods);
-      alert("EEE")
-       // console.log(data);
-
-
-       // Stepper.handleNext()
-    }
+  
 
  
 
     return (
         <FormProvider {...methods}>
-            <form  onSubmit={methods.handleSubmit(onSubmit) } >
+            <form    >
                 {children}
             </form>
         </FormProvider>

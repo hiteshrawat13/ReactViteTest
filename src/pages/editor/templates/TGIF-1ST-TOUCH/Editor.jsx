@@ -33,14 +33,14 @@ const Editor = ({ }) => {
 
 
   const publishHelperRef = useRef(new PublishHelper())
-  const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData,setError } = useContext(EContext)
+  const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData, setError } = useContext(EContext)
   useEffect(() => {
     setStateValue("FTP_CONFIG_NAME", "TGIF")
     // setStateValue("FTP_CONFIG_NAME", "TEST")
     setStateValue("LOGO_FOLDER", "logo/")
-    if(!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
+    if (!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
     //alert("TGIF")
-  }, [])
+  }, [setStateValue])
 
 
 
@@ -63,7 +63,7 @@ const Editor = ({ }) => {
 
 
 
- 
+
 
 
       <HiddenField name="BASE_URL" value="https://resource.itbusinesstoday.com/whitepapers/cbtool_test/" />
@@ -73,6 +73,9 @@ const Editor = ({ }) => {
           <Col>
             <TextBox label="Client Code" name="CLIENT_CODE" required={true} value={campData?.clientCode} readOnly />
             {(watch["CLIENT_CODE"] === "TEST") && <>IT WORKS</>}
+            {/* {(watch["CLIENT_CODE"] === "TEST2") && setError("CLIENT_CODE","LINK ALREADY EXISTS")} */}
+
+
           </Col>
           <Col>
             <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" readOnly />
@@ -97,7 +100,7 @@ const Editor = ({ }) => {
           ]}
           width="10%"
         />
-        <TextBox label="Link Name" name="LINK_NAME" required={true} width="50%"  readOnly={campData.mode === 'edit'} 
+        <TextBox label="Link Name" name="LINK_NAME" required={true} width="50%" readOnly={campData.mode === 'edit'}
 
           onChange={
             (e) => {
@@ -118,12 +121,10 @@ const Editor = ({ }) => {
             }
           } />
 
-        { (watch['LINK_NAME']!="") && <CheckLink link={watch["BASE_URL"]+(watch['LINK_NAME'] )+"-edm.html"}  onExists={()=>{ 
-          setTimeout(() => {
- 
-          }, 500); 
-          
-          } }/>  }
+        {(watch['LINK_NAME'] != "") && <CheckLink link={watch["BASE_URL"] + (watch['LINK_NAME']) + "-edm.html"} onExists={() => {
+
+
+        }} />}
       </Section>
 
 
@@ -176,6 +177,7 @@ const Editor = ({ }) => {
       <Section title="EDM Details">
 
         <TextBox label="EDM Title" name="EDM_TITLE" required={true} width="60%" />
+        <TextBox label="EDM Sub Title" name="EDM_SUB_TITLE" required={false} width="60%" />
         <RichTextEditor label="Edm Abstract" name="EDM_ABSTRACT" required={true} />
         <TextBox label="EDM Optin" name="EDM_OPTIN" required={true} value="By clicking/downloading the asset, you agree to allow the sponsor to have your contact information and for the sponsor to contact you." />
         <TextBox label="EDM CTA" name="EDM_CTA" required={true} width="20%" value="Download Now" />
@@ -232,7 +234,7 @@ const Editor = ({ }) => {
         <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true} width="60%" value={`Thank you for requesting a ${getStateValue("ASSET_TYPE")}`} />
 
 
-       
+
         <RichTextEditor label="Sendmail Body" name="SENDMAIL_BODY" required={true} value={`<table>
 				 <tr><td>Dear&nbsp;<b>$firstname,</b></td></tr>
 				 <tr><td>&nbsp;</td></tr>
@@ -342,7 +344,7 @@ const Editor = ({ }) => {
         <ZIPDownload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />
       </Section>
 
- 
+
     </Step>
 
   </Stepper>

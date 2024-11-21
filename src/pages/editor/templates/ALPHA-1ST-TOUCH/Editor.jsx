@@ -341,7 +341,7 @@ e.preventDefault()
 
     <Step title="Publish" key={1106}>
       <Section title="FTP Upload">
-        <TextBox label="Client Code" name="FTP_CONFIG_NAME" required={true} readOnly />
+         
 
         <FTPUpload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />
         <ZIPDownload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />

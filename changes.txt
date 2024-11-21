@@ -18,3 +18,20 @@ issue
 cors error for edm landing page get ==>heroku app link raj OR  create php file to fetch all files
 sendmail data get => create php file to fetch sendmail
 XXXXmetadata of files pdf client link path path
+
+
+
+
+Form Changes:
+
+Button Add Dependency
+
+State Hide
+
+id on Change=
+
+if  field  == <= >= ""  show id
+
+if  323  == <= >= ""  show id
+
+Province Show

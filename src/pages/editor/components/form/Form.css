@@ -39,6 +39,7 @@ form{
     }
 
     .input-holder{
+        display: flex;
         position: relative;
 
         .error-icon{

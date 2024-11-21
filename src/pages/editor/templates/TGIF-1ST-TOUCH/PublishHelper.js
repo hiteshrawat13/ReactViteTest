@@ -198,6 +198,16 @@ convertToEntities=(input)=> {
         }
 
 
+
+        if(this.state["EDM_SUB_TITLE"] && (this.state["EDM_SUB_TITLE"].trim().length>0) ){
+            data=data.replaceAll(`##EDM_SUB_TITLE##`,  `<p style="font-size: 18px; color: #333333;" class="body-sub-title">${this.convertToEntities( this.state["EDM_SUB_TITLE"] )}</p>` )
+        }else{
+            data=data.replaceAll(`##EDM_SUB_TITLE##`,"" )
+        }
+
+     
+
+
         for (const [key, value] of Object.entries(this.state)) {
             try {
                 if(typeof value === 'string' || value instanceof String)

@@ -332,7 +332,7 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
 
 
 
-      <button className='greenBtn' onClick={() => setFTPUploadModalOpened(true)}>Upload Files</button>
+      <button className='greenBtn' onClick={(e) =>{e.preventDefault(); setFTPUploadModalOpened(true)} }>Upload Files</button>
       <Modal
         closeOnOverlayClick={false}
         center

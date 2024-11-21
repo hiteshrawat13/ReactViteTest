@@ -9,40 +9,36 @@ import CampaignDetails from './CampaignDetails';
 import instance from './ApiService';
 import Modal from 'react-responsive-modal';
 import { useDispatch } from 'react-redux';
-import { setData, clearData,addData, updateData } from '../../store/campaign/CampaignSlice'
+import { setData, clearData, addData, updateData } from '../../store/campaign/CampaignSlice'
 import Breadcrumbs from '../editor/components/BreadCrumbs';
-const LinkList = ({ campData={}, setCampData=null }) => {
+const LinkList = ({ campData = {}, setCampData = null }) => {
 
-    const dispatch=useDispatch()
+    const dispatch = useDispatch()
 
     useEffect(() => {
-
+ 
         dispatch(clearData())
-      }, [])
+    }, [])
 
     const [openNewLinkModal, setOpenNewLinkModal] = useState(false);
 
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
-    
-    const navigate=useNavigate()
+
+    const navigate = useNavigate()
     const location = useLocation()
 
-    const [isUpdateCampaignModalOpened,setUpdateCampaignModalOpened]=useState(false)
+    const [isUpdateCampaignModalOpened, setUpdateCampaignModalOpened] = useState(false)
     const [miniSwitch, setMiniSwitch] = useState(false);
     const [links, setLinks] = useState('');
-    console.log("STATE",TemplateManager);
-    console.log("STATE",location?.state?.clientCode);
-    const templates=TemplateManager.find(client=>client.clientCode==location?.state?.clientCode)
-
-
-
-    
-
+    console.log("STATE", TemplateManager);
+    console.log("STATE", location?.state?.clientCode);
+    const templates = TemplateManager.find(client => client.clientCode == location?.state?.clientCode)
+ 
     useEffect(() => {
         (async () => {
             const response = await axios.get(
-                Config.API_BASE_URL+`/camplist/getLinks?camp_name=${location?.state?.campaignName}`
+                Config.API_BASE_URL + `/camplist/getLinks?camp_name=${location?.state?.campaignName}`
             );
 
             setLinks(response.data)
@@ -52,122 +48,128 @@ const LinkList = ({ campData={}, setCampData=null }) => {
 
 
 
-    
+
     const updateCampaign = async (campaignData) => {
         const response = await instance({
-          url: `/camplist/editCampList`, method: "post",
-    
-          data: campaignData
-    
+            url: `/camplist/editCampList`, method: "post",
+
+            data: campaignData
+
         })
-    
+
         if (response.data.status == 200) {
-          //  navigate(`/editor/${clientCode}`,{state: { 
-          alert("campaign updated")
+            //  navigate(`/editor/${clientCode}`,{state: { 
+            alert("campaign updated")
         } else {
-          alert(response.data.message)
+            alert(response.data.message)
         }
-      }
+    }
 
-    const handleCreateLink=(campData,templateId,templateType)=>{
+    const handleCreateLink = (campData, templateId, templateType) => {
 
-        const { 
-            Client_Code:clientCode,
-            Category:category,
-            camp_id:campaignId,
-            camp_name:campaignName,
-            camp_Created_By:campCreatedBy,
-            last_edited_By:lastEditedBy,
-            comment:comment,
-            Country:country,
-          }=location?.state
+        const {
+            Client_Code: clientCode,
+            Category: category,
+            camp_id: campaignId,
+            camp_name: campaignName,
+            camp_Created_By: campCreatedBy,
+            last_edited_By: lastEditedBy,
+            comment: comment,
+            Country: country,
+        } = location?.state
 
 
-        navigate(`/editor`,{state: { 
-           ...location?.state,
-            
-            templateId,
-            templateType
-  
-          }})
+        navigate(`/editor`, {
+            state: {
+                ...location?.state,
+
+                templateId,
+                templateType
+
+            }
+        })
     }
 
 
 
-    const handleEditLink=async (e,linkId)=>{
+    const handleEditLink = async (e, linkId) => {
 
         e.preventDefault()
 
 
-        
+
 
         try {
             const response = await axios.post(
-                Config.API_BASE_URL+`/camplist/getLinkJsonData?id=${linkId}`
+                Config.API_BASE_URL + `/camplist/getLinkJsonData?id=${linkId}`
             );
 
-    
+
             console.log(response.data);
-            const jobject=JSON.parse(response.data.json_data)
-            navigate(`/editor/`,{state: { 
-                ...location?.state,
-                mode:"edit",
-                linkId:linkId,
-                jsonObject:jobject,
-                 
-                templateId:jobject.TEMPLATE_ID,
-                templateType:jobject.LINK_TYPE
-      
-            }})
+            const jobject = JSON.parse(response.data.json_data)
+            navigate(`/editor/`, {
+                state: {
+                    ...location?.state,
+                    mode: "edit",
+                    linkId: linkId,
+                    jsonObject: jobject,
+
+                    templateId: jobject.TEMPLATE_ID,
+                    templateType: jobject.LINK_TYPE
+
+                }
+            })
         } catch (error) {
             alert(error)
             console.log(error);
         }
-    
+
     }
 
 
-    const handleCreateNewFromExistingLink=async (e,linkId)=>{
+    const handleCreateNewFromExistingLink = async (e, linkId) => {
 
         e.preventDefault()
 
 
-        
+
 
         try {
             const response = await axios.post(
-                Config.API_BASE_URL+`/camplist/getLinkJsonData?id=${linkId}`
+                Config.API_BASE_URL + `/camplist/getLinkJsonData?id=${linkId}`
             );
 
             //alert(response )
             console.log(response.data);
-            const jobject=JSON.parse(response.data.json_data)
-            navigate(`/editor/`,{state: { 
-                ...location?.state,
-                mode:"new",
-                linkId:linkId,
-                jsonObject:jobject,
-                 
-                templateId:jobject.TEMPLATE_ID,
-                templateType:jobject.LINK_TYPE
-      
-            }})
+            const jobject = JSON.parse(response.data.json_data)
+            navigate(`/editor/`, {
+                state: {
+                    ...location?.state,
+                    mode: "new",
+                    linkId: linkId,
+                    jsonObject: jobject,
+
+                    templateId: jobject.TEMPLATE_ID,
+                    templateType: jobject.LINK_TYPE
+
+                }
+            })
         } catch (error) {
             alert(error)
             console.log(error);
         }
-    
+
     }
 
 
 
 
-    const handleCopyJsonData=async (e,linkId)=>{
+    const handleCopyJsonData = async (e, linkId) => {
 
         e.preventDefault()
 
 
-        
+
 
         // try {
         //     const response = await axios.post(
@@ -178,12 +180,12 @@ const LinkList = ({ campData={}, setCampData=null }) => {
 
         //     navigator.clipboard.writeText(json).then(function() {
         //         alert('Copying to clipboard was successful!')
-                 
+
         //       }, function(err) {
         //         alert(' Could not copy text: ', err)
-                
+
         //     });
-           
+
         // } catch (error) {
         //     alert(error)
         //     console.log(error);
@@ -191,45 +193,45 @@ const LinkList = ({ campData={}, setCampData=null }) => {
 
         try {
             const response = await axios.post(
-                Config.API_BASE_URL+`/camplist/getLinkJsonData?id=${linkId}`
+                Config.API_BASE_URL + `/camplist/getLinkJsonData?id=${linkId}`
             );
-            const state=JSON.parse(response.data.json_data)
+            const state = JSON.parse(response.data.json_data)
 
 
             //alert( response.data.json_data )
 
-            
-            handleCreateLink(state,state['LINK_ID'],['LINK_TYPE'])
-           
+
+            handleCreateLink(state, state['LINK_ID'], ['LINK_TYPE'])
+
         } catch (error) {
             alert(error)
             console.log(error);
         }
-      
-    
+
+
     }
 
 
-    const parsePage=(d)=>{
+    const parsePage = (d) => {
         console.log(d.link);
-        axios.defaults.headers.post['Content-Type'] ='application/x-www-form-urlencoded';
-        
+        axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
         axios(d.link, {
             method: 'GET',
             mode: 'no-cors',
             headers: {
-              'Access-Control-Allow-Origin': '*',
-              'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
             },
             withCredentials: true,
             credentials: 'same-origin',
-          }).then(response => {
+        }).then(response => {
             alert(response)
-          }).catch(function (error){
+        }).catch(function (error) {
             alert("ERROR")
         });
-        
-        
+
+
         // axios
         //     .get(d.link)
         //     .then(function (response) {
@@ -239,7 +241,7 @@ const LinkList = ({ campData={}, setCampData=null }) => {
         //     .catch(function (error){
         //         console.log(error);
         //     });
-       
+
     }
 
     const columns = [
@@ -247,22 +249,22 @@ const LinkList = ({ campData={}, setCampData=null }) => {
             name: 'Link Title',
             selector: row => row.link_title,
             sortable: true,
-           
-             wrap: true,
-             style:{fontWeight:"bold",maxWidth: "250px"}
+
+            wrap: true,
+            style: { fontWeight: "bold", maxWidth: "250px" }
         },
         {
             name: 'Links',
             selector: row => <a href={row.link} target='_blank'>{row.link}</a>,
             sortable: true,
-          
-            style:{fontWeight:"bold",maxWidth: "350px"}
+
+            style: { fontWeight: "bold", maxWidth: "350px" }
         },
         {
             name: 'Language',
             selector: row => row.language,
             sortable: true,
-            width: "100px"  ,                     // added line here
+            width: "100px",                     // added line here
             headerStyle: (selector, id) => {
                 return { textAlign: "center" };   // removed partial line here
             },
@@ -271,7 +273,7 @@ const LinkList = ({ campData={}, setCampData=null }) => {
             name: 'Created By',
             selector: row => row.Link_Created_By,
             sortable: true,
-            width: "100px"  ,                     // added line here
+            width: "100px",                     // added line here
             headerStyle: (selector, id) => {
                 return { textAlign: "center" };   // removed partial line here
             },
@@ -280,7 +282,7 @@ const LinkList = ({ campData={}, setCampData=null }) => {
             name: 'Link Type',
             selector: row => row.link_type,
             sortable: true,
-            width: "100px"  ,                     // added line here
+            width: "100px",                     // added line here
             headerStyle: (selector, id) => {
                 return { textAlign: "center" };   // removed partial line here
             },
@@ -289,20 +291,20 @@ const LinkList = ({ campData={}, setCampData=null }) => {
             name: 'Published',
             selector: row => row.is_published,
             sortable: true,
-            width: "100px"  ,                     // added line here
+            width: "100px",                     // added line here
             headerStyle: (selector, id) => {
                 return { textAlign: "center" };   // removed partial line here
             },
         },
         {
-            name: "Actions" ,
+            name: "Actions",
             minWidth: "180px",
-            cell:(row) => <>
-            <button className='dropbtn' style={{marginRight:'10px',marginTop:'10px'}} onClick={(e)=>handleEditLink(e,row.id)} id={row.ID}>Edit</button>
-            {/* <button onClick={(e)=>handleCopyJsonData(e,row.id)} id={row.ID}>Copy Data</button> */}
-            <button className='greenBtn'  onClick={(e)=>handleCreateNewFromExistingLink(e,row.id)} id={row.ID}>Duplicate Link</button> 
-            
-            
+            cell: (row) => <>
+                <button className='dropbtn' style={{ marginRight: '10px', marginTop: '10px' }} onClick={(e) => handleEditLink(e, row.id)} id={row.ID}>Edit</button>
+                {/* <button onClick={(e)=>handleCopyJsonData(e,row.id)} id={row.ID}>Copy Data</button> */}
+                <button className='greenBtn' onClick={(e) => handleCreateNewFromExistingLink(e, row.id)} id={row.ID}>Duplicate Link</button>
+
+
             </>,
             ignoreRowClick: true,
             allowOverflow: true,
@@ -313,47 +315,45 @@ const LinkList = ({ campData={}, setCampData=null }) => {
     return (
 
         <div>
-<Breadcrumbs/>
+            <Breadcrumbs />
 
 
-<div style={{display:"flex",justifyContent:"space-between",marginBottom:"10px"}}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
 
-<div className="dropdown">
-  <button className="dropbtn">Create Link</button>
-  <div className="dropdown-content">
+                <div className="dropdown">
+                    <button className="dropbtn">Create Link</button>
+                    <div className="dropdown-content">
 
-  {templates?.templates.map( (template,i) => { 
-    return <button key={i}  onClick={()=>{  handleCreateLink(location?.state,template.id,template.type) } }>{template.title}</button>
-    })}
-  </div>
-</div>
+                        {templates?.templates.map((template, i) => {
+                            return <button key={i} onClick={() => { handleCreateLink(location?.state, template.id, template.type) }}>{template.title}</button>
+                        })}
+                    </div>
+                </div>
 
-<div>
-    <button  className="btn--primary" onClick={() => setUpdateCampaignModalOpened(true)} >Campaign Details</button>
-</div>
-</div>
+                <div>
+                    <button className="btn--primary" onClick={() => setUpdateCampaignModalOpened(true)} >Campaign Details</button>
+                </div>
+            </div>
 
             {/* ******************** This is popup window for campaign only links update ***************** */}
             <div className="">
                 <div className="">
                     <Modal
-center
-open={isUpdateCampaignModalOpened}
-onClose={()=>setUpdateCampaignModalOpened(false)}>
+                        center
+                        open={isUpdateCampaignModalOpened}
+                        onClose={() => setUpdateCampaignModalOpened(false)}>
 
-                        <CampaignDetails campaignData={location?.state} onSubmit={(data)=>{updateCampaign(data)}} onCancel={()=>setUpdateCampaignModalOpened(false)}/>
-                     </Modal> 
+                        <CampaignDetails campaignData={location?.state} onSubmit={(data) => { updateCampaign(data) }} onCancel={() => setUpdateCampaignModalOpened(false)} />
+                    </Modal>
                     {miniSwitch ?
-
-
-<></>  :
+                        <></> :
                         <div id="linksTable">
-                         
+
                             <DataTable
                                 title={location?.state.campaignName}
                                 columns={columns}
                                 data={links}
-                                onRowClicked={ ()=>{}}
+                                onRowClicked={() => { }}
                                 // progressPending={'loading'}
                                 pagination
                             />

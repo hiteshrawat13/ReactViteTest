@@ -31,6 +31,10 @@ import { ImDownload2 } from "react-icons/im";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { MdNumbers } from "react-icons/md";
 import toast, { Toaster } from 'react-hot-toast';
+import Modal from 'react-responsive-modal'
+
+
+
 
 
 const FormBuilder = (defaultFieldsJson) => {
@@ -54,6 +58,7 @@ const FormBuilder = (defaultFieldsJson) => {
   const state = useSelector(state => state.campaignData.data)
 
   const [selectedField, setSelectedField] = useState(-1)
+  const [addScriptModalShow,setAddScriptModalShow]=useState(false)
   const dispatch = useDispatch()
 
   const handleAdd = (value) => {
@@ -216,6 +221,30 @@ const FormBuilder = (defaultFieldsJson) => {
 
 
 <button id='recalculateBtn' onClick={handleNameDataRecalculate }>Rearange "data[]"</button>
+
+
+<button id=' ' onClick={(e)=>{e.preventDefault();setAddScriptModalShow(true)}}>Add Script</button>
+
+      <Modal
+        closeOnOverlayClick={false}
+        center
+        open={addScriptModalShow}
+        onClose={() => setAddScriptModalShow(false)}>
+        <div style={{ width: "400px" }}>
+
+
+          <select>
+            <option>Equal To</option>
+            <option>Not Equal To</option>
+          </select>
+
+          <button onClick={(e)=>{
+            e.preventDefault();
+          }}>Add Script</button>
+        </div>
+      </Modal>
+
+
 <br /><br />
       <div className='formBuilder'>
 

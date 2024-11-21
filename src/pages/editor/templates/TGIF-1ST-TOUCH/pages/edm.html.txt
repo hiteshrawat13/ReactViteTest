@@ -162,6 +162,7 @@
                                 <tr scope="col">
                                     <td>
                                         <p style="font-size: 22px; color: #404040;" class="body-title">##EDM_TITLE##</p>
+                                        ##EDM_SUB_TITLE##
                                     </td>
                                 </tr>
                             </tbody>

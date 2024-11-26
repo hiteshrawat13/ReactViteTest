@@ -68,9 +68,7 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
     const handleTabChange = async (e, i) => {
         e?.preventDefault()
 
-        // const isCurrentStepValid = await currentStepFormTriggerMethod.trigger()
-        // console.log(isCurrentStepValid);
-        // if (!isCurrentStepValid) return
+        
 
         if (Object.keys(formState.errors).length != 0) {
             // alert("form not valid");
@@ -78,6 +76,11 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
             
             return
         }
+
+        const isCurrentStepValid = await currentStepFormTriggerMethod.trigger()
+        console.log(isCurrentStepValid);
+        if (!isCurrentStepValid) return
+
         await currentStepFormTriggerMethod.handleSubmit(handleSubmitOfCurrentForm)()
         setStep(i)
         // if (onStepChange) onStepChange(i)
@@ -96,20 +99,14 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
 
        
 
-        // const isCurrentStepValid = await currentStepFormTriggerMethod.trigger()
-        // if (!isCurrentStepValid) {
-        //     // alert("form not valid");
-        //     return
-        // }
+        const isCurrentStepValid = await currentStepFormTriggerMethod.trigger()
+        if (!isCurrentStepValid) {
+            // alert("form not valid");
+            return
+        }
       
-
-       
         await currentStepFormTriggerMethod.handleSubmit(handleSubmitOfCurrentForm)()
         
-
-        
-
-
         setStep((step) => { return (step + 1 < totalSteps - 1) ? step + 1 : totalSteps - 1 })
         setTotalStepsExplored(previousValue => ++previousValue)
         if (onStepChange) onStepChange(step)

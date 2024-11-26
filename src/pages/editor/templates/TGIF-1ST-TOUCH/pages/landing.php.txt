@@ -145,6 +145,18 @@
                 background-color:#0066b2;    
                 width:250px; color: white;  border-radius:8px; padding-top: 08px;margin-left: 26px; margin-top:0px;
             }
+
+            /* Chrome, Safari, Edge, Opera */
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+            }
+
+            /* Firefox */
+            input[type=number] {
+            -moz-appearance: textfield;
+            }
         </style>
 
         <script>

@@ -31,26 +31,26 @@ const Editor = ({ }) => {
 
 
   const publishHelperRef = useRef(new PublishHelper())
-  const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData,setError } = useContext(EContext)
+  const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData, setError } = useContext(EContext)
   useEffect(() => {
 
-     
-    if( campData?.country =='EU'){
+
+    if (campData?.country == 'EU') {
       setStateValue("FTP_CONFIG_NAME", "EU-ITBP")
       setStateValue("BASE_URL", "https://eu.itbusinessplus.com/whitepaper/test/")
-      
-    }else{
+
+    } else {
       setStateValue("FTP_CONFIG_NAME", "NEW-ITBP")
       setStateValue("BASE_URL", "https://resource.itbusinessplus.com/whitepapers/cbtooltest/")
-       
+
     }
 
 
     setStateValue("LOGO_FOLDER", "logo/")
 
     //setError("LINK_NAME","WWWWWWWWWWW")
-     if(!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
-     if(!campData?.jsonObject?.THUMBNAIL_WIDTH) setStateValue("THUMBNAIL_WIDTH", "200")
+    if (!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
+    if (!campData?.jsonObject?.THUMBNAIL_WIDTH) setStateValue("THUMBNAIL_WIDTH", "200")
     //alert("TGIF")
   }, [])
 
@@ -75,18 +75,18 @@ const Editor = ({ }) => {
 
 
 
- 
 
 
-<TextBox label="BASE URL" name="BASE_URL" required={true}   readOnly />
+
+      <TextBox label="BASE URL" name="BASE_URL" required={true} readOnly />
       <HiddenField name="YEAR" value={new Date().getFullYear() + ""} />
       <Section title="Link Details">
         <Row>
           <Col>
             <TextBox label="Client Code" name="CLIENT_CODE" required={true} value={campData?.clientCode} readOnly />
             {(watch["CLIENT_CODE"] === "TEST") && <>IT WORKS</>}
-            {(watch["CLIENT_CODE"] === "TEST") ? setError("CLIENT_CODE","WWWWWWWWWWW"):""}
-           
+            {(watch["CLIENT_CODE"] === "TEST") ? setError("CLIENT_CODE", "WWWWWWWWWWW") : ""}
+
           </Col>
           <Col>
             <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" readOnly />
@@ -111,7 +111,7 @@ const Editor = ({ }) => {
           ]}
           width="10%"
         />
-        <TextBox label="Link Name" name="LINK_NAME" required={true} width="50%"  readOnly={campData.mode === 'edit'} 
+        <TextBox label="Link Name" name="LINK_NAME" required={true} width="50%" readOnly={campData.mode === 'edit'}
 
           onChange={
             (e) => {
@@ -131,12 +131,12 @@ const Editor = ({ }) => {
             }
           } />
 
-        { (watch['LINK_NAME']!="") && <CheckLink link={watch["BASE_URL"]+(watch['LINK_NAME'] )+"-edm.html"}  onExists={()=>{ 
+        {(watch['LINK_NAME'] != "") && <CheckLink link={watch["BASE_URL"] + (watch['LINK_NAME']) + "-edm.html"} onExists={() => {
           setTimeout(() => {
- 
-          }, 500); 
-          
-          } }/>  }
+
+          }, 500);
+
+        }} />}
       </Section>
 
 
@@ -149,10 +149,10 @@ const Editor = ({ }) => {
         </Row>
 
 
-        <TextBox label="Sponsored By Text" name="SPONSORED_BY_TEXT" required={true} value="Sponsored By : "/>  
-        <TextBox label="Sponsored Name" name="SPONSOR_NAME" required={true} />  
-        <TextBox label="Sponsored WebSite" name="SPONSOR_WEBSITE" required={true} />  
- 
+        <TextBox label="Sponsored By Text" name="SPONSORED_BY_TEXT" required={true} value="Sponsored By : " />
+        <TextBox label="Sponsored Name" name="SPONSOR_NAME" required={true} />
+        <TextBox label="Sponsored WebSite" name="SPONSOR_WEBSITE" required={true} />
+
       </Section>
 
 
@@ -160,61 +160,45 @@ const Editor = ({ }) => {
     <Step title="Abstract & Title" key={1102}>
 
 
+      {/* EDM Page details */}
       <Section title="EDM Details">
-
         <TextBox label="EDM Title" name="EDM_TITLE" required={true} width="60%" />
         <TextBox label="EDM Heading" name="EDM_HEADING" required={true} width="60%" />
         <RichTextEditor label="Edm Abstract" name="EDM_ABSTRACT" required={true} />
-       <TextBox label="EDM CTA" name="EDM_CTA" required={true} width="20%" value="Download Now" />
+        <TextBox label="EDM CTA" name="EDM_CTA" required={true} width="20%" value="Download Now" />
       </Section>
 
-
+      {/* Landing Page Details */}
       <Section title="Landing Page Details">
-
         <CheckBox label="Landing title is same as EDM title" name="LANDING_TITLE_SAME_AS_EDM_TITLE" />
-
-        {(watch["LANDING_TITLE_SAME_AS_EDM_TITLE"] == false) ?
-          <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} /> : setStateValue("LANDING_TITLE",getStateValue("EDM_TITLE"))
-        }
+        {(watch["LANDING_TITLE_SAME_AS_EDM_TITLE"] == false) && <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} />}
 
         <CheckBox label="Landing Heading same as EDM Heading" name="LANDING_HEADING_SAME_AS_EDM_HEADING" />
+        {(watch["LANDING_HEADING_SAME_AS_EDM_HEADING"] == false) && <TextBox label="Landing Page Heading" name="LANDING_HEADING" required={true} />}
+      </Section>
 
-        {(watch["LANDING_HEADING_SAME_AS_EDM_HEADING"] == false) ?
-          <TextBox label="Landing Page Heading" name="LANDING_HEADING" required={true} /> : setStateValue("LANDING_HEADING",getStateValue("EDM_HEADING"))
+      {/* Thankyou Page Details */}
+      <Section title="Thankyou Page Details">
+
+        <CheckBox label="Thankyou page title is same as EDM title" name="THANKYOU_TITLE_SAME_AS_EDM_TITLE" defaultChecked />
+        {(watch["THANKYOU_TITLE_SAME_AS_EDM_TITLE"] == false) && <TextBox label="Thankyou Page Title" name="THANKYOU_TITLE" required={true} /> 
         }
 
+        <CheckBox label="Thankyou page heading is same as EDM heading" name="THANKYOU_HEADING_SAME_AS_EDM_HEADING" defaultChecked />
+        {(watch["THANKYOU_HEADING_SAME_AS_EDM_HEADING"] == false) && <TextBox label="Thankyou Page Title" name="THANKYOU_HEADING" required={true} /> 
+        }
+
+        <TextBox label="Thankyou Page CTA" name="THANKYOU_CTA" required={true} value="View & Download" />
       </Section>
 
 
-      <Section title="Thankyou Page Details">
-
-      <CheckBox label="Thankyou page title is same as EDM title" name="THANKYOU_TITLE_SAME_AS_EDM_TITLE" defaultChecked/>
-
-        {(watch["THANKYOU_TITLE_SAME_AS_EDM_TITLE"] == false) ?
-          <TextBox label="Thankyou Page Title" name="THANKYOU_TITLE" required={true}  /> : setStateValue("THANKYOU_TITLE",getStateValue("EDM_TITLE"))
-        }
-
-        <CheckBox label="Thankyou page heading is same as EDM heading" name="THANKYOU_HEADING_SAME_AS_EDM_HEADING" defaultChecked/>
-
-        {(watch["THANKYOU_HEADING_SAME_AS_EDM_HEADING"] == false) ?
-          <TextBox label="Thankyou Page Title" name="THANKYOU_HEADING" required={true} /> : setStateValue("THANKYOU_HEADING",getStateValue("EDM_HEADING"))
-        }
-
-        <TextBox label="Thankyou Page CTA" name="THANKYOU_CTA" required={true} value="View & Download"/>  
- 
-
-        </Section>
-
-       
+      {/* Sendmail Details */}
       <Section title="Sendmail Details">
-        <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true} width="60%" value={`Thank you for requesting a ${getStateValue("ASSET_TYPE")}`} />
+        <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true} width="60%" />
 
-
-       
-<button onClick={(e)=>{
-e.preventDefault()
-  const default_body=`
-    <table>
+        <button onClick={(e) => {
+          e.preventDefault()
+          const default_body = `<table>
 				 <tr><td>Dear&nbsp;<b>$firstname,<b></td></tr>
 				 <tr><td>&nbsp;</td></tr>
 				 <tr><td>Thank you for registering for content provided by ##SPONSOR_NAME##. Please share it with your colleagues by forwarding the link below (no registration required).</td></tr>
@@ -228,16 +212,12 @@ e.preventDefault()
 				 <tr><td>&nbsp;</td></tr>
 				 <tr><td>&nbsp;</td></tr>
 				 <tr><td>Sincerely,</td></tr>
-				 <tr><td>The IT Business Plus fulfillment team</td></tr>
+				 <tr><td>The IT Business Plus fulfillment team</td></tr></table>`
 
-				 
-		</table>
-  `
+          setFormValue("SENDMAIL_BODY", default_body)
+        }}>Load Default Sendmail Body</button>
 
-  setFormValue("SENDMAIL_BODY",default_body)
-}}>Load Default Sendmail Body</button>
-
-<RichTextEditor label="Sendmail Body" name="SENDMAIL_BODY" required={true} />
+        <RichTextEditor label="Sendmail Body" name="SENDMAIL_BODY" required={true} />
       </Section>
 
     </Step>
@@ -246,28 +226,20 @@ e.preventDefault()
 
 
     <Step title="Logo & Assets" key={1103}>
-
       <Section title="Logo & Thumbnail">
-
-
         <LogoInput name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1} />
-
         <br></br>
         <FileInput name="THUMBNAIL_NAME" label="Thumbnail" tag="file" fileRef={filesRef.current.fileInput2} />
-
         <CheckBox label="Use different thumbnail for edm page" name="USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE" />
         {(watch["USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE"] == true) &&
           <FileInput name="EDM_THUMBNAIL_NAME" label="EDM Thumbnail" tag="file" fileRef={filesRef.current.fileInput3} />
         }
-
-
         <CheckBox label="Upload Extra Image [EXTRA_FILE_1]" name="ADD_EXTRA_FILE_1" />
         {(watch["ADD_EXTRA_FILE_1"] == true) &&
           <FileInput name="EXTRA_FILE_1" label="Extra Image" tag="file" fileRef={filesRef.current.fileInput4} onChange={(filename) => {
             setFormValue("EXTRA_FILE_1", filename)
           }} />
         }
-
       </Section>
 
       <Section title="Asset">
@@ -317,7 +289,7 @@ e.preventDefault()
 
                 iframe.contentDocument.querySelector('#sponsorLogo').style.width = e.target.value + "px"
 
-                
+
 
                 setStateValue("LOGO_WIDTH", e.target.value)
 
@@ -325,11 +297,11 @@ e.preventDefault()
 
               <TextBox type="number" label="EDM Thumbnail Width" name="THUMBNAIL_WIDTH" value={180} onChange={(e) => {
 
-              iframe.contentDocument.querySelector('#edmThumbnail').style.width = e.target.value + "px"
+                iframe.contentDocument.querySelector('#edmThumbnail').style.width = e.target.value + "px"
 
-              
 
-              setStateValue("THUMBNAIL_WIDTH", e.target.value)
+
+                setStateValue("THUMBNAIL_WIDTH", e.target.value)
 
               }} />
 
@@ -341,7 +313,7 @@ e.preventDefault()
 
     <Step title="Publish" key={1106}>
       <Section title="FTP Upload">
-         
+
 
         <FTPUpload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />
         <ZIPDownload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />

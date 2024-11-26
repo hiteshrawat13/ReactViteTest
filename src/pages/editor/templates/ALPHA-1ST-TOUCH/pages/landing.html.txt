@@ -15,12 +15,14 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400italic,700italic,400,700" rel="stylesheet" type="text/css" />
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <!-- Bootstrap Core CSS -->
+
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="##BASE_URL##/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="##BASE_URL##css/bootstrap.min.css" type="text/css" />
         <!-- Start Bootstrap Custom CSS -->
-        <link href="##BASE_URL##/css/startbootstrap.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="##BASE_URL##/css/font-awesome.css" />
-        <link rel="stylesheet" href="##BASE_URL##/css/sky-forms.css" />
+        <link rel="stylesheet" href="##BASE_URL##css/startbootstrap.css"  type="text/css" />
+        <link rel="stylesheet" href="##BASE_URL##css/font-awesome.css" />
+        <link rel="stylesheet" href="##BASE_URL##css/sky-forms.css" />
+
         <style type="text/css">
             body {
                 margin: 0;
@@ -147,7 +149,7 @@
 
             input[type="radio"],
             input[type="checkbox"] {
-                margin: 1px 0 0;
+                margin: 3px 0 0;
 
                 line-height: normal;
             }
@@ -157,6 +159,7 @@
                 align-items: flex-start;
                 gap: 8px;
                 font-weight: normal;
+                margin-bottom:5px;
             }
 
             .bold {
@@ -172,11 +175,24 @@
                 font-weight: bold;
                 color: #e02f2f !important;
             }
+
+            /* Chrome, Safari, Edge, Opera */
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+            }
+
+            /* Firefox */
+            input[type=number] {
+            -moz-appearance: textfield;
+            }
         </style>
+
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="https://jqueryvalidation.org/files/dist/jquery.validate.js"></script>
 
-        <script src="DataCurlNodeApi/post_form_data.js"></script>
+        ##EU_API_SCRIPT##
 
         <script type="text/javascript" charset="utf-8">
             	$(document).ready(function() {
@@ -188,13 +204,10 @@
                 },
                 "Please enter a valid email address."
             );
-
             	// validate signup form on keyup and submit
             			$("#sky-form").validate({
 
-
             			##EU_SCRIPT##
-
             				errorPlacement: function(error, element) {
             					if (element.attr("type") == "checkbox" || element.attr("type") == "radio") {
             						error.insertAfter(element.closest(".check-group"));
@@ -202,12 +215,12 @@
             						error.insertAfter(element);
             					}
             				}
-
-
             			});
             	});
         </script>
     </head>
+
+    
     <body style="margin: 0; padding: 0;" bgcolor="#F0F0F0" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
         <!-- 100% background wrapper (grey background) -->
         <table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" bgcolor="#F0F0F0">
@@ -219,14 +232,14 @@
                         <tr>
                             <td
                                 class="container-padding header"
-                                style="font-family: Helvetica, Arial, sans-serif; font-size: 24px; font-weight: bold; padding-bottom: 12px; color: #df4726; padding-left: 24px; padding-right: 24px; background-color: #ffffff;"
+                                style="font-family: Helvetica, Arial, sans-serif; font-size: 18px; font-weight: bold; padding-bottom: 12px; color: #df4726; padding-left: 24px; padding-right: 24px; background-color: #ffffff;"
                             >
                                 <div class="col-md-12">
-                                    <img src="##BASE_URL##/itbp_logo_2019.png" id="clientLogo" alt="Logo" style="width: 40%; margin-top: 25px;" />
+                                    <img src="##BASE_URL##/itbp_logo_2019.png" id="clientLogo" alt="ITBP Logo" style="width: 40%; margin-top: 25px;" />
                                 </div>
                                 <div class="col-md-12">
                                     <br />
-                                    <img src="##BASE_URL##/New-Featured-Content-logo.png" id="clientLogo2" alt="Logo" style="width: 40%;" />
+                                    <img src="##BASE_URL##/New-Featured-Content-logo.png" id="clientLogo2" alt="Featured Content" style="width: 40%;" />
                                 </div>
                             </td>
                         </tr>
@@ -244,9 +257,8 @@
                                             <form action="##LINK_NAME##-sendmail.php" method="POST" id="sky-form" class="sky-form" autocomplete="off">
                                                 <header>
                                                     <h3 style="font-size: 24px; text-align: left;" id="landingTitle">##LANDING_TITLE##</h3>
-                                                    <br />
                                                     <p style="text-align: left; font-size: 16px;" id="LandingHeading">
-                                                        ##LANDING_HEADING##
+                                                        <b>##LANDING_HEADING##</b>
                                                     </p>
                                                     <p style="text-align: left; font-size: 16px;" id="sponsorbyText">##SPONSORED_BY_TEXT##</p>
                                                 </header>

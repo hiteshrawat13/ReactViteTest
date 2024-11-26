@@ -143,8 +143,8 @@ const RichTextEditor = ({ label, name, required = false, width = null, value = n
         'fullsize',
 
         {
-          name: 'Remove Attributes',
-          tooltip: 'Remove attributes from html tags.',
+          name: 'Remove Styles',
+          tooltip: 'Remove style attributes from html tags.',
           exec: (editor) => {
             //console.log(editor.value);
             
@@ -152,7 +152,7 @@ const RichTextEditor = ({ label, name, required = false, width = null, value = n
             const editorValue=editor.value
 
             const parsed = new DOMParser().parseFromString(editorValue, 'text/html')
-            parsed.body.querySelectorAll('*').forEach(elem => [...elem.attributes].forEach(attr => elem.removeAttribute(attr.name)))
+            parsed.body.querySelectorAll('*').forEach(elem => [...elem.attributes].forEach(attr => (attr.name=="style")?elem.removeAttribute(attr.name):null  ))
             const strippedHtml= parsed.body.innerHTML;
 
             //editor.s.insertHTML(strippedHtml);

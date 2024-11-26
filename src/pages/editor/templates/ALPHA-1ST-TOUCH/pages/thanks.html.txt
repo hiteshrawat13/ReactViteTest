@@ -10,17 +10,19 @@
         <!-- disable auto date linking in iOS 7-9 -->
         <meta name="format-detection" content="telephone=no" />
         <!-- disable auto telephone linking in iOS 7-9 -->
-        <title>##EDM_TITLE##</title>
+        <title>##THANKYOU_TITLE##</title>
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400italic,700italic,400,700" rel="stylesheet" type="text/css" />
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <!-- Bootstrap Core CSS -->
+       
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="##BASE_URL##css/bootstrap.min.css" type="text/css" />
         <!-- Start Bootstrap Custom CSS -->
-        <link href="css/startbootstrap.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="css/font-awesome.css" />
-        <link rel="stylesheet" href="css/sky-forms.css" />
+        <link rel="stylesheet" href="##BASE_URL##css/startbootstrap.css" type="text/css" />
+        <link rel="stylesheet" href="##BASE_URL##css/font-awesome.css" />
+        <link rel="stylesheet" href="##BASE_URL##css/sky-forms.css" />
+        
         <style type="text/css">
             body {
                 margin: 0;
@@ -172,11 +174,11 @@
                                 style="font-family: Helvetica, Arial, sans-serif; font-size: 24px; font-weight: bold; padding-bottom: 12px; color: #df4726; padding-left: 24px; padding-right: 24px; background-color: #ffffff;"
                             >
                                 <div class="col-md-12">
-                                    <img src="##BASE_URL##/itbp_logo_2019.png" alt="" id="clientLogo" style="width: 40%; padding-top: 20px;" />
+                                    <img src="##BASE_URL##/itbp_logo_2019.png" alt="ITBP Logo" id="clientLogo" style="width: 40%; padding-top: 20px;" />
                                 </div>
                                 <div class="col-md-12">
                                     <br />
-                                    <img src="##BASE_URL##/New-Featured-Content-logo.png" id="clientLogo2" alt="Logo" style="width: 40%;" />
+                                    <img src="##BASE_URL##/New-Featured-Content-logo.png" id="clientLogo2" alt="Featured Content" style="width: 40%;" />
                                 </div>
                             </td>
                         </tr>
@@ -189,7 +191,7 @@
                                             <!--Heading-->
                                             <p style="text-align: left; font-size: 16px;"><b></b></p>
                                             <p style="text-align: left; font-size: 16px;" id="thanksHeading">
-                                                ##THANKYOU_HEADING##
+                                                <b>##THANKYOU_HEADING##</b>
                                             </p>
                                             <p style="text-align: left; font-size: 16px;" id="sponsorbyText">##SPONSORED_BY_TEXT##</p>
                                         </div>

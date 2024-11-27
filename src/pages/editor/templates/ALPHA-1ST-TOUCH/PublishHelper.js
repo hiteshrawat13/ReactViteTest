@@ -164,13 +164,15 @@ class PublishHelper {
                 data = data.replaceAll(`##ASSET_URL##`, this.state["BASE_URL"] + this.state["PDF_NAME"])
                 break;
             case "MP4":
-                data = data.replaceAll(`##ASSET_URL##`, this.state["BASE_URL"] + this.state["MP4_NAME"])
+                data = data.replaceAll(`##ASSET_URL##`, this.state["BASE_URL"] + this.state["LINK_NAME"] + "-thanks-vid.html" );
+               // data = data.replaceAll(`##ASSET_URL##`, this.state["BASE_URL"] + this.state["MP4_NAME"])
                 break;
             case "CLIENT_LINK":
                 data = data.replaceAll(`##ASSET_URL##`, this.state["CLIENT_LINK"])
                 break;
             case "IFRAME":
-                data = data.replaceAll(`##ASSET_URL##`, this.state["IFRAME"])
+                data = data.replaceAll(`##ASSET_URL##`, this.state["BASE_URL"] + this.state["LINK_NAME"] + "-thanks-vid.html" );
+                //data = data.replaceAll(`##ASSET_URL##`, this.state["IFRAME"])
                 break;
         }
         return data
@@ -250,6 +252,11 @@ class PublishHelper {
             //Escape html for preview to prevent redirects
             data = `<pre>${new Option(data).innerHTML}</pre>`
         }
+
+
+
+        
+
         return data
     }
 
@@ -306,7 +313,7 @@ class PublishHelper {
         return this.replaceHashVariables(data)
     }
 
-    //6. Double Optin thankyou page
+    //6. Double Optin thankyou page NOT Yet Implemented
     getThankyouDoubleOptinHtml({ forPreview }) {
 
     }

@@ -322,7 +322,7 @@ const Editor = ({ }) => {
               padding: '10px',
               paddingTop: '3px'
             }}>
-              <TextBox type="number" label="Logo Width" name="LOGO_WIDTH" value={180} onChange={(e) => {
+              <TextBox type="number" label="Logo Width" name="LOGO_WIDTH"  onChange={(e) => {
 
                 iframe.contentDocument.querySelector('.splogo').style.width = e.target.value + "px"
 

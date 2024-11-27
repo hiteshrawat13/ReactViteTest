@@ -7,6 +7,8 @@ const ALPHAFormRenderer = {
 
         <section>	
         <label class="input" for="${obj.id}">
+         ${(obj.inputType=="number") ?  '<i class="icon-append fa fa-phone"></i>' :""}
+        ${(obj.inputType=="email") ?  '<i class="icon-append fa fa-envelope-o"></i>' :""}
         <input type="${(obj.inputType) ? obj.inputType : 'text'}" name="${obj.name}" placeholder="${obj.label}" ${obj.isRequired ? "required" : ""}  id="${obj.id}" value="${obj.value || ''}"  ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""} />
         <b class="tooltip tooltip-bottom-right">${obj.label}</b>
         </label>
@@ -22,6 +24,7 @@ const ALPHAFormRenderer = {
         return `
 
         <section>
+        ${(obj.label)? `<p style="text-align: left;font-size: 13px;"><b>${obj.label}</b></p>` :''}
         <label class="select" for="${obj.id}" >
         <select name="${obj.name}" ${obj.isRequired ? "required" : ""} id="${obj.id}"  ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""} >
             ${obj.options?.map((option, index) => {

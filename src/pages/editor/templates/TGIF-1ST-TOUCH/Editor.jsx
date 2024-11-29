@@ -181,6 +181,15 @@ const Editor = ({ }) => {
         <RichTextEditor label="Edm Abstract" name="EDM_ABSTRACT" required={true} />
         <TextBox label="EDM Optin" name="EDM_OPTIN" required={true} value="By clicking/downloading the asset, you agree to allow the sponsor to have your contact information and for the sponsor to contact you." />
         <TextBox label="EDM CTA" name="EDM_CTA" required={true} width="20%" value="Download Now" />
+        <RadioGroup name="EDM_CTA_ALIGNMENT" label="CTA Alignment" options={[
+          { label: "Left", value: "left" },
+          { label: "Center", value: "center" },
+          { label: "Right", value: "right" },
+         
+        ]} />
+
+        <TextBox label="EDM TEXT BELOW CTA Button" name="EDM_TEXT_BELOW_CTA" required={true} width="20%" value="Download Now" html/>
+        
       </Section>
 
 

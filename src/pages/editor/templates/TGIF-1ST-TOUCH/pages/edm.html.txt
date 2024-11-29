@@ -178,15 +178,16 @@
                             <tbody class="table table-borderless table-responsive">
                                 <tr scope="col">
                                     <td style="">
-                                        <p style="font-size: 11px; color: #666; margin-bottom: 18px;">
+                                        <div style="font-size: 11px; color: #666; margin-bottom: 18px;">
                                             ##EDM_OPTIN##
-                                        </p>
+                                        </div>
 
-                                        <div align="left" style="padding-left: 30px;">
+                                        <div align="##EDM_CTA_ALIGNMENT##" >
                                             <a
                                                 href="##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#"
                                                 target="_self"
                                                 style="
+                                                    display:inline-block;
                                                     word-wrap: break-word;
                                                     font-weight: normal;
                                                     letter-spacing: -0.5px;
@@ -204,13 +205,17 @@
                                                     padding-bottom: 0;
                                                     padding-right: 10px;
                                                     padding: 10px 25px;
-                                                    margin-left: -33px;
+                                                    
                                                 "
                                             >
                                                 <span style="margin-left: 10px; margin-right: 8px; text-align: center;">##EDM_CTA##</span>
                                                 <img src="##BASE_URL##arrow-right-circle.png" width="16px" alt="" style="" />
                                             </a>
-                                            <p style="padding-top: 10px;"></p>
+                                           
+                                        </div>
+
+                                        <div style="margin-top:10px;font-size: 11px; color: #666; margin-bottom: 18px;">
+                                            ##EDM_TEXT_BELOW_CTA##
                                         </div>
 
                                         <div style="padding-top: 15px; font-size: 14px; color: #505050;">

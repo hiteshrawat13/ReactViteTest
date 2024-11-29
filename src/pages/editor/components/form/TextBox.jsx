@@ -25,7 +25,8 @@ const TextBox = ({type=null,label,name,required,width=null,onChange=null,value=n
 
 
 <Modal open={editHtmlModalOpened} onClose={() => setEditHtmlModalOpened(false)}     center>
-                <RichTextEditor value={ getValues(name) } label="" name="ee"/>
+                <RichTextEditor  label="" name={name}  onTextChange={(val)=>{setValue(name,val);console.log(val);
+                }}/>
 </Modal>
 
         <label>{label}{(required)&& <span style={{color:"red"}}>*</span>}</label>

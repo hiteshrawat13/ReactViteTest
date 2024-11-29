@@ -74,6 +74,7 @@ const SelectBoxEditor = ({ id, data, toast, handleFieldDataUpdate }) => {
             <label>
                 <span>Label</span>
                 <textarea name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} />
+
             </label>
 
             {/* {<Modal setOpened={setLabelModalOpened} isOpened={isLabelModalOpened} title={"My Modal"} style={{ width: "90%", height: "90%" }}>
@@ -102,6 +103,13 @@ const SelectBoxEditor = ({ id, data, toast, handleFieldDataUpdate }) => {
             </label>
 
 
+            <label>
+                <span>Placeholder</span>
+                <input type="text" name="placeholder" defaultValue={data.placeholder} />
+                <p style={{fontSize:"12px"}}>
+                        First dropdown value which is disabled by default and selected.<br/>You can also use option list to do the same.
+                    </p><br></br>
+            </label>
 
             <label>
                 <span>Options</span>

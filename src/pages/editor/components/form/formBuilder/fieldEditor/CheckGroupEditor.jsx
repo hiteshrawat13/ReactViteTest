@@ -107,6 +107,7 @@ const handleSubmit=(e)=>{
             open={isOptionsModalOpened} 
             onClose={() => setOptionsModalOpened(false)}>
             <OptionList  setOptions={setOptions} options={options}/>
+            <div style={{display:"flex",justifyContent:"center",padding:"3px 20px"}}><button className='btn--primary' style={{width:"100%"}} onClick={()=>setOptionsModalOpened(false)}>Save</button></div>
             </Modal>
             <button className='openModal' onClick={(e) => { e.preventDefault(); setOptionsModalOpened(true) }}> {options?.length} options <FaPencilAlt /></button>
 

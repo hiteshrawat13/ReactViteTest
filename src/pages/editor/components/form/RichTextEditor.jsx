@@ -3,7 +3,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { useFormContext, Controller } from 'react-hook-form'
 import JoditEditor from 'jodit-react';
 
-const RichTextEditor = ({ label, name, required = false, width = null, value = null }) => {
+const RichTextEditor = ({ label, name, required = false, width = null, value = null,onTextChange=null }) => {
   const { register, unregister, setValue, formState: { errors }, control } = useFormContext()
   const campaignDataState = useSelector(state => state.campaignData)
   useEffect(() => {
@@ -189,7 +189,7 @@ const RichTextEditor = ({ label, name, required = false, width = null, value = n
             config={config}
             tabIndex={1} // tabIndex of textarea
             onBlur={onBlur} // preferred to use only this option to update the content for performance reasons
-            onChange={onChange}
+            onChange={(e)=>{onChange(e);if(onTextChange)onTextChange(e)}}
           />
         )} />
 

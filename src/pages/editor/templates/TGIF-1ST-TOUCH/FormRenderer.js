@@ -12,7 +12,7 @@ const TGIFFormRenderer = {
                </label>
                </th>
                <td width="53%">
-               <input type="${(obj.inputType)?obj.inputType:'text'}" name="${obj.name}" ${obj.isRequired ? "required" : ""} ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""}  id="${obj.id}" value="${obj.value || ''}" >
+               <input type="${(obj.inputType) ? obj.inputType : 'text'}" name="${obj.name}" ${obj.isRequired ? "required" : ""} ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""}  id="${obj.id}" value="${obj.value || ''}" >
                </td>
            </tr>
            `
@@ -23,43 +23,48 @@ const TGIFFormRenderer = {
     SelectBox: (obj) => {
 
 
+        const selectbox_label_html=`
+                        <label for="${obj.id}">
+                            <span title="Required Field">${obj.label}</span>
+                            ${obj.isRequired ? `<span class="mandatory" style="color:red">*</span>` : ""}
+                
+                        </label>
+        `
+        const select_box_html=` <select name="${obj.name}" ${obj.isRequired ? "required" : ""} id="${obj.id}"  ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""}>
+        
+          ${(obj.placeholder && (obj.placeholder.length > 0)) ? `<option value=""  disabled selected>${obj.placeholder}</option>` : ""}
+        
+          ${obj.options?.map((option, index) => {
+                return `<option value="${option.value}" ${(option.disabled) ? 'disabled' : ''}>${option.label}</option>`
+            }).join("")}
+
+        </select>`
+
+
 
         if (obj.isFullWidth) {
+            //Full Width
             return `
-        <tr class="form-group">
-        <td colspan="2">
-        <label for="${obj.id}">
-            <span title="Required Field">${obj.label}</span>
-            ${obj.isRequired ? `<span class="mandatory" style="color:red">*</span>` : ""}
-        </label>
-        
-          <select name="${obj.name}" ${obj.isRequired ? "required" : ""} id="${obj.id}"  ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""}>
-        ${ obj.options?.map((option, index) => {
-            return `<option value="${option.value}" ${(option.disabled)?'disabled':''}>${option.label}</option>`
-            }).join("")}
+                <tr class="form-group">
+                    <td colspan="2">
+                        
+                        ${selectbox_label_html}
+                        ${select_box_html}
 
-        </select>
-        </td>
-        </tr>
+                    </td>
+                </tr>
         `
         } else {
+            //Not full Width
             return `
-        <tr class="form-group">
-        <th>
-        <label for="${obj.id}">
-            <span title="Required Field">${obj.label}</span>
-            ${obj.isRequired ? `<span class="mandatory" style="color:red">*</span>` : ""}
-        </label>
-        </th>
-        <td>
-        <select name="${obj.name}" ${obj.isRequired ? "required" : ""} id="${obj.id}"  ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""}>
-        ${ obj.options?.map((option, index) => {
-            return `<option value="${option.value}" ${(option.disabled)?'disabled':''}>${option.label}</option>`
-            }).join("")}
-
-        </select>
-        </td>
-        </tr>
+                <tr class="form-group">
+                    <th>
+                        ${selectbox_label_html}
+                    </th>
+                    <td>
+                        ${select_box_html}
+                    </td>
+                </tr>
         `
         }
 
@@ -72,7 +77,7 @@ const TGIFFormRenderer = {
                                           
 <tr class="form-group">
     <td colspan="2" >
-        <div>${obj.label} ${(obj.label &&  obj.isRequired) ? `<span style="color: red;">*</span>` : ""}</div>
+        <div>${obj.label} ${(obj.label && obj.isRequired) ? `<span style="color: red;">*</span>` : ""}</div>
         <div class="check-group">
         ${obj.options?.map(option => `
             <label class="radio-option">
@@ -153,7 +158,7 @@ const TGIFFormRenderer = {
     </td>
     </tr>`
     }
-,
+    ,
     HiddenInput: (obj) => {
         return `<input type="hidden" id="${obj.id}" name="${obj.name}" value="${obj.value}" />
         `
@@ -161,4 +166,4 @@ const TGIFFormRenderer = {
 
 }
 
-export {TGIFFormRenderer}
+export { TGIFFormRenderer }

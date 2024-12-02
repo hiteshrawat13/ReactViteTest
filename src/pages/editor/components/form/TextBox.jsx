@@ -11,6 +11,8 @@ const TextBox = ({type=null,label,name,required,width=null,onChange=null,value=n
 
   const [editHtmlModalOpened,setEditHtmlModalOpened]=useState(false)
 
+  const [modalText,setModalText]=useState("")
+
   useEffect(() => {
     setValue(name,campaignDataState.data[name]||value||"") // used to call watch method for checkbox
     return () => {
@@ -25,8 +27,10 @@ const TextBox = ({type=null,label,name,required,width=null,onChange=null,value=n
 
 
 <Modal open={editHtmlModalOpened} onClose={() => setEditHtmlModalOpened(false)}     center>
-                <RichTextEditor  label="" name={name}  onTextChange={(val)=>{setValue(name,val);console.log(val);
-                }}/>
+                <RichTextEditor  label="" name={name}  onTextChange={(val)=>{setModalText(val);console.log(val);
+                }}   />
+
+                <button onClick={()=>{setValue(name,modalText);setEditHtmlModalOpened(false)} }>Save</button>
 </Modal>
 
         <label>{label}{(required)&& <span style={{color:"red"}}>*</span>}</label>

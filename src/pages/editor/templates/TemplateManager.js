@@ -13,7 +13,7 @@ const TemplateManager=[
                 type:"1st_touch",
                 title:"TGIF 1st Touch",
                
-                editor:lazy(() => import('./TGIF-1ST-TOUCH/Editor'))
+                editor:lazy(() => import('./TGIF/TGIF-1ST-TOUCH/Editor'))
             },
             // {
             //     id:"TGIF-2ND-TOUCH",

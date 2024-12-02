@@ -1,0 +1,262 @@
+[
+  {
+    "type": "TextBox",
+    "inputType": "text",
+    "id": "firstname",
+    "label": "First Name",
+    "name": "firstname",
+    "placeholder": "",
+    "value": "",
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadOnly": false
+  },
+  {
+    "type": "TextBox",
+    "inputType": "text",
+    "id": "lastname",
+    "label": "Last Name",
+    "name": "data[0]",
+    "placeholder": "",
+    "value": "",
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadOnly": false
+  },
+  {
+    "type": "TextBox",
+    "inputType": "email",
+    "id": "email",
+    "label": "Business Email",
+    "name": "data[1]",
+    "placeholder": "",
+    "value": "",
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadOnly": false
+  },
+  {
+    "type": "TextBox",
+    "inputType": "text",
+    "id": "phone",
+    "label": "Phone",
+    "name": "data[2]",
+    "placeholder": "",
+    "value": "",
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadOnly": false
+  },
+  {
+    "type": "TextBox",
+    "inputType": "text",
+    "id": "company",
+    "label": "Company",
+    "name": "data[3]",
+    "placeholder": "",
+    "value": "",
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadOnly": false
+  },
+  {
+    "type": "TextBox",
+    "inputType": "text",
+    "id": "address",
+    "label": "Address",
+    "name": "data[4]",
+    "placeholder": "",
+    "value": "",
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadOnly": false
+  },
+  {
+    "type": "TextBox",
+    "inputType": "text",
+    "id": "city",
+    "label": "City",
+    "name": "data[5]",
+    "placeholder": "",
+    "value": "",
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadOnly": false
+  },
+  {
+    "type": "TextBox",
+    "inputType": "text",
+    "id": "country",
+    "label": "Country",
+    "name": "data[6]",
+    "placeholder": "",
+    "value": "",
+    "isRequired": false,
+    "isDisabled": false,
+    "isReadOnly": true
+  },
+  {
+    "type": "SelectBox",
+    "id": "country",
+    "label": "Country",
+    "name": "data[7]",
+    "isFullWidth": false,
+    "isRequired": false,
+    "isDisabled": false,
+    "isReadOnly": false,
+    "options": [
+      {
+        "label": "Choose One",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "type": "TextBox",
+    "inputType": "text",
+    "id": "zip",
+    "label": "ZIP Code",
+    "name": "data[8]",
+    "placeholder": "",
+    "value": "",
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadOnly": false
+  },
+  {
+    "type": "SelectBox",
+    "id": "company_size",
+    "label": "Company Size",
+    "name": "data[9]",
+    "isFullWidth": false,
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadOnly": false
+  },
+  {
+    "type": "SelectBox",
+    "id": "revenue",
+    "label": "Revenue",
+    "name": "data[10]",
+    "isFullWidth": false,
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadOnly": false
+  },
+  {
+    "type": "TextBox",
+    "inputType": "text",
+    "id": "job_title",
+    "label": "Job Title",
+    "name": "data[11]",
+    "placeholder": "",
+    "value": "",
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadOnly": false
+  },
+  {
+    "type": "SelectBox",
+    "id": "industry",
+    "label": "Industry",
+    "name": "data[12]",
+    "options": [
+      {
+        "label": "Choose One",
+        "value": ""
+      }
+    ],
+    "isFullWidth": false,
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadOnly": false
+  },
+  {
+    "type": "SelectBox",
+    "id": "job_function",
+    "label": "Job Function",
+    "name": "data[13]",
+    "options": [
+      {
+        "label": "Choose One",
+        "value": ""
+      }
+    ],
+    "isFullWidth": false,
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadOnly": false
+  },
+  {
+    "type": "Text",
+    "label": "I would like to receive information from suppliers sponsoring this content and willing to share the information above with Sponsor."
+  },
+  {
+    "type": "CheckGroup",
+    "id": "cq1",
+    "label": "Custom question 1",
+    "name": "data[14]",
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadOnly": false,
+    "options": [
+      {
+        "label": "Option 1",
+        "value": "Option 1"
+      },
+      {
+        "label": "Option 2",
+        "value": "Option 2"
+      }
+    ]
+  },
+  {
+    "type": "RadioGroup",
+    "id": "cq2",
+    "label": "Custom question 2",
+    "name": "data[15]",
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadOnly": false,
+    "options": [
+      {
+        "label": "Option 1",
+        "value": "Option 1"
+      },
+      {
+        "label": "Option 2",
+        "value": "Option 2"
+      }
+    ]
+  },
+  {
+    "type": "SelectBox",
+    "id": "cq3",
+    "label": "Custom question 3",
+    "name": "data[16]",
+    "isFullWidth": true,
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadOnly": false,
+    "options": [
+      {
+        "label": "Choose One",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "type": "CheckBox",
+    "id": "optin",
+    "label": "I would like to receive information from suppliers sponsoring this content and willing to share the information above with Sponsor.",
+    "name": "data[17]",
+    "value": "optin-yes",
+    "isRequired": false,
+    "isDisabled": false,
+    "isReadOnly": false
+  },
+  {
+    "type": "CTA",
+    "label": "Download Now"
+  }
+]

@@ -333,7 +333,7 @@ This is to convert Chinese characters to Unicode numbers
                             <tbody>
                                 <tr>
                                     <td align="left" class="whitepaper" style="align-items: start; display: flex;">
-                                        <img   style=" height: auto !important;" alt="##EDM_TITLE##" src="##BASE_URL####THUMBNAIL_NAME##" width="180" style="border: 1px solid #c4c5c600;" />
+                                        <img  style=" height: auto !important;border: 1px solid #c4c5c6;    border-radius: 5px;" alt="##EDM_TITLE##" src="##BASE_URL####THUMBNAIL_NAME##" width="180"   />
                                     </td>
 
                                     <td align="left" valign="top" class="style1 thankyou">
@@ -386,7 +386,7 @@ This is to convert Chinese characters to Unicode numbers
                                         <h1 style="font-size: 22px;font-weight:normal; color: #0066b2;margin-top:10px;margin-bottom:15px;padding-left:0px;">##EDM_TITLE##</h1> 
 	                                     
                                         <video class="jw-video jw-reset" tabindex="-1" style="width:100%;aspect-ratio:16/9;" controls>
-                                            <source src="##BASE_URL####MP4##" type="video/mp4">
+                                            <source src="##BASE_URL####MP4_NAME##" type="video/mp4">
                                         </video> 
                                     </td>
                                 </tr>

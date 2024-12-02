@@ -133,6 +133,10 @@
             ul li {
                 padding-bottom: 12px;
             }
+
+            .extra_text *{
+                font-size: 12px; color: #666;  
+            }
         </style>
     </head>
     <body>
@@ -178,7 +182,7 @@
                             <tbody class="table table-borderless table-responsive">
                                 <tr scope="col">
                                     <td style="">
-                                        <div style="font-size: 11px; color: #666; margin-bottom: 18px;">
+                                        <div style="font-size: 12px; color: #666; margin-bottom: 18px;">
                                             ##EDM_OPTIN##
                                         </div>
 
@@ -214,7 +218,9 @@
                                            
                                         </div>
 
-                                        <div style="margin-top:10px;font-size: 11px; color: #666; margin-bottom: 18px;">
+                                        
+
+                                        <div style="margin-top:10px;font-size: 12px; color: #666; margin-bottom: 18px;" class="extra_text">
                                             ##EDM_TEXT_BELOW_CTA##
                                         </div>
 

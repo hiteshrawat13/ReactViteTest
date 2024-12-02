@@ -21,10 +21,10 @@ import {
   LanguageInput,
   CheckLink,
   Section
-} from '../../components/form/index'
+} from '../../../components/form/index'
 
-import defaultFieldsJson from "./default-fields.json"
-import { EContext } from '../../EditorMain'
+ 
+import { EContext } from '../../../EditorMain'
 import PublishHelper from './PublishHelper'
  
 
@@ -322,9 +322,7 @@ const Editor = ({ }) => {
     </Step>
 
 
-    <Step title="Form" key={1104}>
-      <FormBuilder defaultFieldsJson={defaultFieldsJson} />
-    </Step>
+ 
 
     <Step title="Preview" key={1105}>
       <Preview publishHelper={publishHelperRef.current} filesRef={filesRef.current} controls={

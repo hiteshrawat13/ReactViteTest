@@ -247,7 +247,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="background: #fff; padding: 0.8% 2%;">
+                    <td style="background: #fff; padding: 0.8% 3%;">
                         <table width="100%">
                             <tbody>
                                 <tr>

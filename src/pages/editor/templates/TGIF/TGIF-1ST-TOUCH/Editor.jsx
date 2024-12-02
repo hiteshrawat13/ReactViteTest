@@ -21,10 +21,10 @@ import {
   LanguageInput,
   CheckLink,
   Section
-} from '../../components/form/index'
+} from '../../../components/form/index'
 
 import defaultFieldsJson from "./default-fields.json"
-import { EContext } from '../../EditorMain'
+import { EContext } from '../../../EditorMain'
 import PublishHelper from './PublishHelper'
  
 

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import TemplateManager from './templates/TemplateManager';
 
 const Context = React.createContext();
+
 const EditorMain = () => {
   const filesRef = useRef({})
   const location = useLocation()
@@ -140,7 +141,6 @@ const EditorMain = () => {
         <Suspense fallback={<div>Loading...</div>}>
           <Editor11 />
         </Suspense>
-
       </Context.Provider>
     </div>
   )

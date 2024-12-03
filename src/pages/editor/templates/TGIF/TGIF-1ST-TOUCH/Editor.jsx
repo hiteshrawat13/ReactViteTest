@@ -36,10 +36,10 @@ const Editor = ({ }) => {
   const publishHelperRef = useRef(new PublishHelper())
   const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData, setError } = useContext(EContext)
   useEffect(() => {
-    setStateValue("FTP_CONFIG_NAME", "TGIF")
+    //setStateValue("FTP_CONFIG_NAME", "TGIF")
     // setStateValue("FTP_CONFIG_NAME", "TEST")
-    setStateValue("LOGO_FOLDER", "logo/")
-    if (!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
+    //setStateValue("LOGO_FOLDER", "logo/")
+    //if (!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
     //alert("TGIF")
   }, [setStateValue])
 
@@ -66,7 +66,9 @@ const Editor = ({ }) => {
 
 
 
-
+      <HiddenField name="FTP_CONFIG_NAME" value="TGIF" />
+      <HiddenField name="LOGO_FOLDER" value="logo/" />
+      <HiddenField name="LOGO_WIDTH" value="180" />
       <HiddenField name="BASE_URL" value="https://resource.itbusinesstoday.com/whitepapers/cbtool_test/" />
       <HiddenField name="YEAR" value={new Date().getFullYear() + ""} />
       <Section title="Link Details">
@@ -203,7 +205,7 @@ const Editor = ({ }) => {
 
       <Section title="Landing Page Details">
 
-        <CheckBox label="Landing title is same as EDM title" name="LANDING_TITLE_SAME_AS_EDM_TITLE" />
+        <CheckBox label="Landing title is same as EDM title" name="LANDING_TITLE_SAME_AS_EDM_TITLE" defaultChecked={true}/>
 
         {(watch["LANDING_TITLE_SAME_AS_EDM_TITLE"] == false) &&
           <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} />
@@ -216,7 +218,11 @@ const Editor = ({ }) => {
           <button onClick={(e) => {
             e.preventDefault();
             //using math random to update value otherwise gives blank result--
-            const boxHtml = `<div class="sub" data-key="${Math.random()}" align="center" style="background-color: #e2ebf3;margin-top: 30px;margin-left: 13px;display: inline-flex;padding: 10px;width: 250px;align-items: center;"> <p style="text-align: left; margin-top: 10px;">Please fill this form to get immediate access to this exclusive resource.</p> <p><img src="https://resource.itbusinesstoday.com/whitepapers/Arrow-pr.png" alt="Arrow" style="width: 50px;  " /></p></div>`
+            const boxHtml = `<div align="center"><div class="sub" data-key="${Math.random()}" align="center" style="background-color: #e2ebf3;margin-top: 30px; display: flex;padding: 10px;width: 250px;align-items: center;">
+            <p style="text-align: left; margin-top: 10px;">Please fill this form to get immediate access to this exclusive resource.</p>
+            <div><img src="https://resource.itbusinesstoday.com/whitepapers/Arrow-pr.png" alt="Arrow" style="width: 50px;  " /></div>
+            </div>
+            </div>`
             setFormValue("LANDING_ABSTRACT", boxHtml)
           }
 
@@ -278,6 +284,7 @@ const Editor = ({ }) => {
 
         <br></br>
         <FileInput name="THUMBNAIL_NAME" label="Thumbnail" tag="file" fileRef={filesRef.current.fileInput2} />
+        <CheckBox label="Add border to thumbnail" name="THUMBNAIL_BORDER" defaultChecked={true} />
 
         <CheckBox label="Use different thumbnail for edm page" name="USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE" />
         {(watch["USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE"] == true) &&
@@ -338,6 +345,9 @@ const Editor = ({ }) => {
               paddingTop: '3px'
             }}>
               <TextBox type="number" label="Logo Width" name="LOGO_WIDTH"  onChange={(e) => {
+
+                console.log(e);
+                
 
                 iframe.contentDocument.querySelector('.splogo').style.width = e.target.value + "px"
 

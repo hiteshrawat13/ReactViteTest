@@ -45,6 +45,11 @@ const TextEditor = ({ id, data, toast, handleFieldDataUpdate }) => {
           <input type="text" name="label" onChange={(e) => { setTextContent(e.target.value) }} value={textContent} />
         </label>
 
+        <label>
+                <span>Id</span>
+                <input type="text" name="id" defaultValue={data.id} />
+        </label>
+
         <Modal
           center
           open={isModalOpened}

@@ -47,6 +47,12 @@ const CampaignList = () => {
 
   const columns = [
     {
+      name: 'Client Code',
+      selector: row => row.Client_Code,
+      sortable: true,
+    },
+    
+    {
       name: 'Campaign ID',
       selector: row => row.camp_id,
       sortable: true,
@@ -63,11 +69,7 @@ const CampaignList = () => {
       sortable: true,
     },
 
-    {
-      name: 'Client Code',
-      selector: row => row.Client_Code,
-      sortable: true,
-    },
+   
 
     {
       name: 'Country',

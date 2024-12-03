@@ -23,10 +23,10 @@ import {
   Section
 } from '../../../components/form/index'
 
- 
+
 import { EContext } from '../../../EditorMain'
 import PublishHelper from './PublishHelper'
- 
+
 
 
 
@@ -36,10 +36,10 @@ const Editor = ({ }) => {
   const publishHelperRef = useRef(new PublishHelper())
   const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData, setError } = useContext(EContext)
   useEffect(() => {
-    setStateValue("FTP_CONFIG_NAME", "TGIF")
+    //setStateValue("FTP_CONFIG_NAME", "TGIF")
     // setStateValue("FTP_CONFIG_NAME", "TEST")
-    setStateValue("LOGO_FOLDER", "logo/")
-    if (!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
+    //setStateValue("LOGO_FOLDER", "logo/")
+    //if (!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
     //alert("TGIF")
   }, [setStateValue])
 
@@ -66,7 +66,9 @@ const Editor = ({ }) => {
 
 
 
-
+      <HiddenField name="FTP_CONFIG_NAME" value="TGIF" />
+      <HiddenField name="LOGO_FOLDER" value="logo/" />
+      <HiddenField name="LOGO_WIDTH" value="180" />
       <HiddenField name="BASE_URL" value="https://resource.itbusinesstoday.com/whitepapers/cbtool_test/" />
       <HiddenField name="YEAR" value={new Date().getFullYear() + ""} />
       <Section title="Link Details">
@@ -176,60 +178,30 @@ const Editor = ({ }) => {
 
 
       <Section title="EDM Details">
-
+        <TextBox label="EDM Thanks Text" name="EDM_THANKS_TEXT_FOR_2ND_TOUCH" required={false} width="60%" />
         <TextBox label="EDM Title" name="EDM_TITLE" required={true} width="60%" />
         <TextBox label="EDM Sub Title" name="EDM_SUB_TITLE" required={false} width="60%" />
         <RichTextEditor label="Edm Abstract" name="EDM_ABSTRACT" required={true} />
         <TextBox label="EDM Optin" name="EDM_OPTIN" required={true} value="By clicking/downloading the asset, you agree to allow the sponsor to have your contact information and for the sponsor to contact you." />
-        
+
         <Row>
-          <Col> <TextBox label="EDM CTA" name="EDM_CTA" required={true}   value="Download Now" /></Col>
-          <Col> 
+          <Col> <TextBox label="EDM CTA" name="EDM_CTA" required={true} value="Download Now" /></Col>
+          <Col>
             <RadioGroup name="EDM_CTA_ALIGNMENT" label="CTA Alignment" options={[
-            { label: "Left", value: "left" },
-            { label: "Center", value: "center" },
-            { label: "Right", value: "right" },
-          
-          ]} />
+              { label: "Left", value: "left" },
+              { label: "Center", value: "center" },
+              { label: "Right", value: "right" },
+
+            ]} />
           </Col>
         </Row>
+
+        <TextBox label="EDM TEXT BELOW CTA Button" name="EDM_TEXT_BELOW_CTA" value="" html />
+
+      </Section>
+
+
        
-   
-
-        <TextBox label="EDM TEXT BELOW CTA Button" name="EDM_TEXT_BELOW_CTA"    value="Download Now" html/>
-        
-      </Section>
-
-
-      <Section title="Landing Page Details">
-
-        <CheckBox label="Landing title is same as EDM title" name="LANDING_TITLE_SAME_AS_EDM_TITLE" />
-
-        {(watch["LANDING_TITLE_SAME_AS_EDM_TITLE"] == false) &&
-          <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} />
-        }
-
-
-        <CheckBox label="Landing abstract is same as EDM abstract" name="LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT" defaultChecked={true} />
-        {(watch["LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT"] == false) && <>
-
-          <button onClick={(e) => {
-            e.preventDefault();
-            //using math random to update value otherwise gives blank result--
-            const boxHtml = `<div class="sub" data-key="${Math.random()}" align="center" style="background-color: #e2ebf3;margin-top: 30px;margin-left: 13px;display: inline-flex;padding: 10px;width: 250px;align-items: center;"> <p style="text-align: left; margin-top: 10px;">Please fill this form to get immediate access to this exclusive resource.</p> <p><img src="https://resource.itbusinesstoday.com/whitepapers/Arrow-pr.png" alt="Arrow" style="width: 50px;  " /></p></div>`
-            setFormValue("LANDING_ABSTRACT", boxHtml)
-          }
-
-          }>Add new format</button>
-
-
-          <RichTextEditor label="Landing Abstract" name="LANDING_ABSTRACT" required={true} />
-
-        </>}
-
-
-
-      </Section>
       {(getStateValue("ASSET_TYPE") != "Webinar") &&
         <>
           <Section title="Thankyou Page Details">
@@ -247,22 +219,7 @@ const Editor = ({ }) => {
         </>
 
       }
-      <Section title="Sendmail Details">
-        <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true} width="60%" value={`Thank you for requesting a ${getStateValue("ASSET_TYPE")}`} />
 
-
-
-        <RichTextEditor label="Sendmail Body" name="SENDMAIL_BODY" required={true} value={`<table>
-<tr><td>Dear&nbsp;<b>$firstname,</b></td></tr>
-<tr><td>&nbsp;</td></tr>
-<tr><td>Thank you for requesting <b>"##EDM_TITLE##"</b>. You can view it immediately by clicking <a href='##BASE_URL####LINK_NAME##.pdf'>HERE</a>!</td></tr>
-<tr><td>&nbsp;</td></tr>
-<tr><td>&nbsp;</td></tr>
-<tr><td>Sincerely,</td></tr>
-<tr><td>Nina Ridgeway</td></tr>
-<tr><td>ITBusinessToday</td></tr>
-</table>`} />
-      </Section>
 
     </Step>
 
@@ -322,7 +279,7 @@ const Editor = ({ }) => {
     </Step>
 
 
- 
+
 
     <Step title="Preview" key={1105}>
       <Preview publishHelper={publishHelperRef.current} filesRef={filesRef.current} controls={
@@ -335,7 +292,7 @@ const Editor = ({ }) => {
               padding: '10px',
               paddingTop: '3px'
             }}>
-              <TextBox type="number" label="Logo Width" name="LOGO_WIDTH"  onChange={(e) => {
+              <TextBox type="number" label="Logo Width" name="LOGO_WIDTH" onChange={(e) => {
 
                 iframe.contentDocument.querySelector('.splogo').style.width = e.target.value + "px"
 

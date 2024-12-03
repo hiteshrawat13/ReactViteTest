@@ -91,7 +91,7 @@
     "name": "data[6]",
     "placeholder": "",
     "value": "",
-    "isRequired": false,
+    "isRequired": true,
     "isDisabled": false,
     "isReadOnly": true
   },
@@ -101,7 +101,7 @@
     "label": "Country",
     "name": "data[7]",
     "isFullWidth": false,
-    "isRequired": false,
+    "isRequired": true,
     "isDisabled": false,
     "isReadOnly": false,
     "options": [
@@ -189,6 +189,7 @@
   },
   {
     "type": "Text",
+    "id":"text_only",
     "label": "I would like to receive information from suppliers sponsoring this content and willing to share the information above with Sponsor."
   },
   {
@@ -257,6 +258,7 @@
   },
   {
     "type": "CTA",
+    "id":"cta_button",
     "label": "Download Now"
   }
 ]

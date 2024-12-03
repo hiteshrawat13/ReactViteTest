@@ -47,6 +47,11 @@ const handleSubmit=(e)=>{
                 <input type="text" name="label" defaultValue={data.label}/>
             </label>
 
+            <label>
+                <span>Id</span>
+                <input type="text" name="id" defaultValue={data.id} />
+            </label>
+
             <button onClick={handleSubmit}>Submit</button>
     </div>
   

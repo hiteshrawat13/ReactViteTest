@@ -117,7 +117,7 @@ This is to convert Chinese characters to Unicode numbers
 
     async getEdmHtml({ forPreview }) {
         let data = edm_html;
-
+        data = data.replaceAll(`##EDM_THANKS_TEXT_FOR_2ND_TOUCH##`, '') //Remove this .it is for 2nd touch
 
 
 
@@ -125,7 +125,7 @@ This is to convert Chinese characters to Unicode numbers
         <table width="100%" style="background-color: #ffffff; padding: 0% 2%;" align="center" class="font-style">
                             <tbody class="table table-borderless table-responsive">
                                 <tr scope="col">
-                                    <td style="padding-left: 8px; vertical-align: top; padding-right: 20px;">
+                                    <td style="vertical-align: top;padding-right: 18px;">
                                 
 										<div class="edm_abstract">
 											##EDM_ABSTRACT##
@@ -176,6 +176,13 @@ This is to convert Chinese characters to Unicode numbers
 
 
 
+        if (this.state["THUMBNAIL_BORDER"] == true) {
+            data = data.replaceAll(`##THUMBNAIL_BORDER##`,  'border: 1px solid #e5e5e5;'  )
+        } else   {
+            data = data.replaceAll(`##THUMBNAIL_BORDER##`, '')
+        }
+        
+        
 
 
         data = this.convertToEntities(this.getPrivacyPolicy(data)) //Privacy Policy
@@ -218,18 +225,21 @@ This is to convert Chinese characters to Unicode numbers
         let data = landing_html
 
         const traditional_landing_layout = `
-        <img   src="##BASE_URL####THUMBNAIL_NAME##" width="300" style=" border: 1px solid #e5e5e5; border-radius: 5px;" alt="thumbnail" />                          
-        <div class="landing_abstract" style="padding-right: 2%;">
+        <div class="img" align="center">
+            <img   src="##BASE_URL####THUMBNAIL_NAME##"  class="thumbnail"  alt="thumbnail" />                          
+        </div>
+        <div class="landing_abstract" >
            ##LANDING_ABSTRACT##
         </div>
        `
 
         const landing_layout_logo_below_abstract = `
-        <div class="landing_abstract" style="padding-right: 2%;">
+        <div class="landing_abstract">
           ##LANDING_ABSTRACT##
         </div>
-        <img   src="##BASE_URL####THUMBNAIL_NAME##" width="300" style=" border: 1px solid #e5e5e5; border-radius: 5px;" alt="thumbnail" />                          
-       
+        <div class="img" align="center">
+            <img   src="##BASE_URL####THUMBNAIL_NAME##"   class="thumbnail"   alt="thumbnail" />                          
+        </div>
       `
 
 
@@ -245,6 +255,13 @@ This is to convert Chinese characters to Unicode numbers
 
             if (this.filesRef.fileInput2.files[0]) { data = data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, await this.getBase64Image(this.filesRef.fileInput2.files[0])) }
 
+        }
+
+
+        if (this.state["THUMBNAIL_BORDER"] == true) {
+            data = data.replaceAll(`##THUMBNAIL_BORDER##`,  'border: 1px solid #e5e5e5;'  )
+        } else   {
+            data = data.replaceAll(`##THUMBNAIL_BORDER##`, '')
         }
 
 
@@ -333,7 +350,7 @@ This is to convert Chinese characters to Unicode numbers
                             <tbody>
                                 <tr>
                                     <td align="left" class="whitepaper" style="align-items: start; display: flex;">
-                                        <img  style=" height: auto !important;border: 1px solid #c4c5c6;    border-radius: 5px;" alt="##EDM_TITLE##" src="##BASE_URL####THUMBNAIL_NAME##" width="180"   />
+                                        <img  style=" height: auto !important; ##THUMBNAIL_BORDER##    border-radius: 5px;" alt="##EDM_TITLE##" src="##BASE_URL####THUMBNAIL_NAME##" width="180"   />
                                     </td>
 
                                     <td align="left" valign="top" class="style1 thankyou">
@@ -415,6 +432,12 @@ This is to convert Chinese characters to Unicode numbers
         if (forPreview == true) {
             if (this.filesRef.fileInput1.files[0]) { data = data.replaceAll(`##BASE_URL####LOGO_FOLDER####LOGO_NAME##`, await this.getBase64Image(this.filesRef.fileInput1.files[0])) }
             if (this.filesRef.fileInput2.files[0]) { data = data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, await this.getBase64Image(this.filesRef.fileInput2.files[0])) }
+        }
+
+        if (this.state["THUMBNAIL_BORDER"] == true) {
+            data = data.replaceAll(`##THUMBNAIL_BORDER##`,  'border: 1px solid #e5e5e5;'  )
+        } else   {
+            data = data.replaceAll(`##THUMBNAIL_BORDER##`, '')
         }
 
 

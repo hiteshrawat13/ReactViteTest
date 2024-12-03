@@ -14,7 +14,14 @@ const TextBox = ({type=null,label,name,required,width=null,onChange=null,value=n
   const [modalText,setModalText]=useState("")
 
   useEffect(() => {
-    setValue(name,campaignDataState.data[name]||value||"") // used to call watch method for checkbox
+
+    if (campaignDataState.data[name] != undefined) {
+      setValue(name, campaignDataState.data[name])
+    } else {
+      setValue(name, value || "")
+    }
+
+   // setValue(name,campaignDataState.data[name]||value||"") // used to call watch method for checkbox
     return () => {
       unregister(name)
     }

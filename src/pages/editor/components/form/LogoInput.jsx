@@ -89,10 +89,12 @@ const LogoPicker = ({ fileRef, name, label = "", tag = "" }) => {
           }}
 
           onFileChange={(filename) => {
+         
             filename = filename.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-\.]/g, '');
-            setFormValue("LOGO_NAME", filename)
-
-            alert(filename)
+           
+           // setFormValue("LOGO_NAME", filename)  NOT WORKING HERE so used querySelector
+            document.querySelector("[name=LOGO_NAME]").value = filename;
+           // alert(filename)
           }}
 
         />

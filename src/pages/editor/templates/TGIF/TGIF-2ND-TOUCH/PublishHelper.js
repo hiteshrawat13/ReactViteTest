@@ -1,11 +1,8 @@
 //Dont forget to add extension while importing module
-import { TGIFFormRenderer } from './FormRenderer.js'
-import edm_html from './pages/edm.html.txt?raw'  //?raw is important to read text files
-import landing_html from './pages/landing.php.txt?raw'  //?raw is important to read text files
-import sendemail_html from './pages/sendemail.php.txt?raw'  //?raw is important to read text files
-import thanks_html from './pages/thanks.php.txt?raw'  //?raw is important to read text files
+import edm_html from '../TGIF-1ST-TOUCH/pages/edm.html.txt?raw'  //?raw is important to read text files
+import thanks_html from '../TGIF-1ST-TOUCH/pages/thanks.php.txt?raw'  //?raw is important to read text files
 
-import { getSendmailSubject } from './Base64.js'
+import { getSendmailSubject } from '../TGIF-1ST-TOUCH/Base64.js'
 class PublishHelper {
     constructor(state) {
         this.state = state
@@ -118,9 +115,15 @@ This is to convert Chinese characters to Unicode numbers
     async getEdmHtml({ forPreview }) {
         let data = edm_html;
 
+        if (this.state["EDM_THANKS_TEXT_FOR_2ND_TOUCH"] && (this.state["EDM_THANKS_TEXT_FOR_2ND_TOUCH"].trim().length > 0)) {
+            data = data.replaceAll(`##EDM_THANKS_TEXT_FOR_2ND_TOUCH##`, `<p style="font-size: 14px;color: #6F6F6F;margin-bottom:5px;" class="body-sub-title">${this.convertToEntities(this.state["EDM_THANKS_TEXT_FOR_2ND_TOUCH"])}</p>`)
+        } else {
+            data = data.replaceAll(`##EDM_THANKS_TEXT_FOR_2ND_TOUCHE##`, "")
+        }
 
 
-
+        data = data.replaceAll(`##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#`, "##BASE_URL####LINK_NAME##-thanks.php")
+ 
         const traditional_layout = `
         <table width="100%" style="background-color: #ffffff; padding: 0% 2%;" align="center" class="font-style">
                             <tbody class="table table-borderless table-responsive">
@@ -175,6 +178,12 @@ This is to convert Chinese characters to Unicode numbers
         }
 
 
+        if (this.state["THUMBNAIL_BORDER"] == true) {
+            data = data.replaceAll(`##THUMBNAIL_BORDER##`,  'border: 1px solid #e5e5e5;'  )
+        } else   {
+            data = data.replaceAll(`##THUMBNAIL_BORDER##`, '')
+        }
+
 
 
 
@@ -213,117 +222,8 @@ This is to convert Chinese characters to Unicode numbers
         return data
     }
 
-    async getLandingHtml({ forPreview }) {
-
-        let data = landing_html
-
-        const traditional_landing_layout = `
-        <img   src="##BASE_URL####THUMBNAIL_NAME##" width="300" style=" border: 1px solid #e5e5e5; border-radius: 5px;" alt="thumbnail" />                          
-        <div class="landing_abstract" style="padding-right: 2%;">
-           ##LANDING_ABSTRACT##
-        </div>
-       `
-
-        const landing_layout_logo_below_abstract = `
-        <div class="landing_abstract" style="padding-right: 2%;">
-          ##LANDING_ABSTRACT##
-        </div>
-        <img   src="##BASE_URL####THUMBNAIL_NAME##" width="300" style=" border: 1px solid #e5e5e5; border-radius: 5px;" alt="thumbnail" />                          
-       
-      `
-
-
-        if (this.state["LANDING_LAYOUT"] == "Traditional") {
-            data = data.replaceAll(`##LANDING_LAYOUT##`, this.convertToEntities(traditional_landing_layout))
-        } else if (this.state["LANDING_LAYOUT"] == "Thumbnail below abstract") {
-            data = data.replaceAll(`##LANDING_LAYOUT##`, this.convertToEntities(landing_layout_logo_below_abstract))
-        }
-
-
-        if (forPreview == true) {
-            if (this.filesRef.fileInput1.files[0]) { data = data.replaceAll(`##BASE_URL####LOGO_FOLDER####LOGO_NAME##`, await this.getBase64Image(this.filesRef.fileInput1.files[0])) }
-
-            if (this.filesRef.fileInput2.files[0]) { data = data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, await this.getBase64Image(this.filesRef.fileInput2.files[0])) }
-
-        }
-
-
-        data = this.getPrivacyPolicy(data) //Privacy Policy
-
-        if (this.state["LANDING_TITLE_SAME_AS_EDM_TITLE"] == true) {
-            data = data.replaceAll(`##LANDING_TITLE##`, this.convertToEntities(this.state["EDM_TITLE"]))
-        }
-
-
-        if (this.state["LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT"] == true) {
-            data = data.replaceAll(`##LANDING_ABSTRACT##`, this.convertToEntities(this.state["EDM_ABSTRACT"]))
-        }
-
-        data = data.replaceAll(`##FORM##`, this.convertToEntities(this.getFormHtml(this.state.form, TGIFFormRenderer)))
-
-        for (const [key, value] of Object.entries(this.state)) {
-            try {
-                if (typeof value === 'string' || value instanceof String)
-                    data = data.replaceAll(`##${key}##`, this.convertToEntities(value))
-            } catch (error) {
-                console.log("Error while replaceAll in getLandingHtml() of publishHelper ", error, key, value);
-            }
-        }
-
-
-        return data
-        //return JSON.stringify(this.thumbnailDataUrl)+" "+JSON.stringify(this.state)
-    }
-    getSendmailHtml({ forPreview }) {
-        let data = sendemail_html
-        data = data.replaceAll(`##MAPPED_DATA##`, this.getFormCurlApiSendmailMappedData(this.state.form))
-
-        const hasSpecialCharsInSubject = this.convertToEntities(this.state["SENDMAIL_SUBJECT"]).includes("&#")
-        data = data.replaceAll(`##SENDMAIL_SUBJECT##`, (hasSpecialCharsInSubject) ? getSendmailSubject(this.state["SENDMAIL_SUBJECT"]) : this.state["SENDMAIL_SUBJECT"].replaceAll("\\'", "'"))
-        data = data.replaceAll(`##SENDMAIL_BODY##`, this.convertToEntities(this.state["SENDMAIL_BODY"]).replaceAll('"', '\\"'))
-
-
-
-        switch (this.state["ASSET_FORMAT"]) {
-            case "PDF":
-                
-                break;
-            case "MP4":
-                
-                data = data.replaceAll(`##BASE_URL####LINK_NAME##.pdf`, '##BASE_URL####LINK_NAME##-thanks.php')
-                break;
-            case "CLIENT_LINK":
-                data = data.replaceAll(`##BASE_URL####LINK_NAME##.pdf`, this.state['CLIENT_LINK'])
-                break;
-            case "IFRAME":
-                data = data.replaceAll(`##BASE_URL####LINK_NAME##.pdf`, '##BASE_URL####LINK_NAME##-thanks.php')  
-                break;
-        }
-
-
-        for (const [key, value] of Object.entries(this.state)) {
-            try {
-                if (typeof value === 'string' || value instanceof String)
-                    data = data.replaceAll(`##${key}##`, this.convertToEntities(value))
-            } catch (error) {
-                console.log("Error while replaceAll in getSendmailHtml of publishHelper ", error, key, value);
-            }
-        }
-
-
-
-        
-
-
-
-
-        if (forPreview == true) {
-            //Escape html for preview to prevent redirects
-            data = `<pre>${new Option(data).innerHTML}</pre>`
-        }
-
-        return data
-    }
+     
+     
     async getThanksHtml({ forPreview }) {
         let data = thanks_html
 
@@ -333,7 +233,7 @@ This is to convert Chinese characters to Unicode numbers
                             <tbody>
                                 <tr>
                                     <td align="left" class="whitepaper" style="align-items: start; display: flex;">
-                                        <img   style=" height: auto !important;" alt="##EDM_TITLE##" src="##BASE_URL####THUMBNAIL_NAME##" width="180" style="border: 1px solid #c4c5c600;" />
+                                        <img  style=" height: auto !important;border: 1px solid #c4c5c6;    border-radius: 5px;" alt="##EDM_TITLE##" src="##BASE_URL####THUMBNAIL_NAME##" width="180"   />
                                     </td>
 
                                     <td align="left" valign="top" class="style1 thankyou">
@@ -386,7 +286,7 @@ This is to convert Chinese characters to Unicode numbers
                                         <h1 style="font-size: 22px;font-weight:normal; color: #0066b2;margin-top:10px;margin-bottom:15px;padding-left:0px;">##EDM_TITLE##</h1> 
 	                                     
                                         <video class="jw-video jw-reset" tabindex="-1" style="width:100%;aspect-ratio:16/9;" controls>
-                                            <source src="##BASE_URL####MP4##" type="video/mp4">
+                                            <source src="##BASE_URL####MP4_NAME##" type="video/mp4">
                                         </video> 
                                     </td>
                                 </tr>
@@ -418,6 +318,13 @@ This is to convert Chinese characters to Unicode numbers
         }
 
 
+        if (this.state["THUMBNAIL_BORDER"] == true) {
+            data = data.replaceAll(`##THUMBNAIL_BORDER##`,  'border: 1px solid #e5e5e5;'  )
+        } else   {
+            data = data.replaceAll(`##THUMBNAIL_BORDER##`, '')
+        }
+
+
         for (const [key, value] of Object.entries(this.state)) {
             try {
                 if (typeof value === 'string' || value instanceof String)
@@ -442,8 +349,6 @@ This is to convert Chinese characters to Unicode numbers
         let files = []
 
         files.push({ name: `${this.state["LINK_NAME"]}-edm.html`, data: await this.getEdmHtml({ forPreview }) })
-        files.push({ name: `${this.state["LINK_NAME"]}-landing.php`, data: await this.getLandingHtml({ forPreview }) })
-        files.push({ name: `${this.state["LINK_NAME"]}-sendemail.php`, data: await this.getSendmailHtml({ forPreview }) })
         files.push({ name: `${this.state["LINK_NAME"]}-thanks.php`, data: await this.getThanksHtml({ forPreview }) })
         // if(this.state["ASSET_FORMAT"]=='MP4' || this.state["ASSET_FORMAT"]=='IFrame'){
 

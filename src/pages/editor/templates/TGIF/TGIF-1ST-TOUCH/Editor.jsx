@@ -124,7 +124,7 @@ const Editor = ({ }) => {
             }
           } />
 
-        {(watch['LINK_NAME'] != "") && <CheckLink link={watch["BASE_URL"] + (watch['LINK_NAME']) + "-edm.html"} onExists={() => {
+        {(watch['LINK_NAME'] != "" ) && <CheckLink link={watch["BASE_URL"] + (watch['LINK_NAME']) + "-edm.html"} onExists={() => {
 
 
         }} />}

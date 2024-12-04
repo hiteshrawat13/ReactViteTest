@@ -6,6 +6,8 @@ import DataTable from "react-data-table-component";
 import Config from "../../Config.js";
 import { useNavigate } from "react-router-dom";
 
+import Cookies from "js-cookie";
+
 const CampaignList = () => {
    const navigate=useNavigate()
   const [data, setData] = useState([]);
@@ -19,7 +21,7 @@ const CampaignList = () => {
   const fetchUsers = async (page, size = perPage) => {
     setLoading(true);
     const response = await axios.get(
-      Config.API_BASE_URL+`/camplist/getCampList?page=${page}&per_page=${size}`
+      Config.API_BASE_URL+`/camplist/getCampList?page=${page}&per_page=${size}&user_id=${Cookies.get("user_id")}`
     );
 
   setData(response.data.data)
@@ -50,12 +52,14 @@ const CampaignList = () => {
       name: 'Client Code',
       selector: row => row.Client_Code,
       sortable: true,
+      width: "100px"  
     },
     
     {
       name: 'Campaign ID',
       selector: row => row.camp_id,
       sortable: true,
+      width: "100px"  
     },
     {
       name: 'Campaign Name',
@@ -67,6 +71,7 @@ const CampaignList = () => {
       name: 'Category',
       selector: row => row.Category,
       sortable: true,
+      width: "100px"  
     },
 
    
@@ -75,12 +80,14 @@ const CampaignList = () => {
       name: 'Country',
       selector: row => row.Country,
       sortable: true,
+      width: "100px"  
     },
 
     { 
       name: 'Created By',
       selector: row => row.camp_Created_By,
       sortable: true,
+      width: "180px"  
     }
    
     // {

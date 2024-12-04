@@ -35,6 +35,8 @@ const Login = () => {
       Cookies.set("user_id", response.data.id, { expires: 7, path: "/" });
       Cookies.set("access_token", response.data.accessToken, { expires: 7, path: "/" });
       Cookies.set("user_permissions",JSON.stringify(response.data.permissions), { expires: 7, path: "/" });
+      Cookies.set("role",response.data.role, { expires: 7, path: "/" });
+      Cookies.set("status",response.data.status, { expires: 7, path: "/" });
 
       
       navigate('/');

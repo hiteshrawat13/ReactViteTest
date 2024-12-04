@@ -340,7 +340,11 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
         onClose={() => setFTPUploadModalOpened(false)}>
 
 
-        <div style={{ width: "400px" }}>
+        <div style={{ width: "600px" }}>
+
+        <p style={{fontSize:"13px"}}><strong>Important Message:</strong><br/><strong>Do NOT upload duplicate content!</strong> Before submitting any files (including links, abstract titles, logos, or thumbnails), <strong>immediately verify</strong> that they are unique. Uploading duplicates may cause critical errors, data conflicts, and severe system issues. Our system actively checks for duplicate entries, and <strong>repeated uploads could result in serious consequences</strong>. <strong>After uploading, you MUST check all content</strong> to ensure it has been correctly submitted and is free from duplication. <strong>Double-check your files and verify the content after upload</strong> to prevent unnecessary disruption and redundancy.<br/><br/></p>
+
+
           <div>Socket Id: {socketId}</div>
           <div> {(socketConnected) ? <b style={{ color: "green" }}>Upload Server Connected</b> : <b style={{ color: "red" }}>Upload Server Disconnected</b>}</div>
           <br />

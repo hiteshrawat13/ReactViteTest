@@ -5,7 +5,7 @@ import Config from '../../../Config'
  
 const CheckLink = ({link,onExists=null}) => {
 
-    if(!link) return
+    if(link.length==0) return null;
 
     const [linkExists,setLinkExists]=useState("")
     const [checking,setChecking]=useState(false)

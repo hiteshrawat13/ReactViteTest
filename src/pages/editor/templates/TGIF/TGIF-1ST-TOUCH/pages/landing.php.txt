@@ -151,11 +151,18 @@
             margin-top: 6px;
             }
 
+                .radio-option{
+            display:flex;
+            gap:4px;
+            align-items: flex-start;
+            margin-top: 6px;
+            }
+
             .radio-option > span{
             margin:0;
             padding:0;
             font-size:12px;
-            color:#444;
+            color:#000;
             }
 
             .form-group p{

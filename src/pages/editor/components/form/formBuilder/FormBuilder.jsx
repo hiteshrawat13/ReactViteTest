@@ -32,6 +32,10 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { MdNumbers } from "react-icons/md";
 import toast, { Toaster } from 'react-hot-toast';
 import Modal from 'react-responsive-modal'
+import FormScripts from './formScripts/index'
+
+
+ 
 
 
 
@@ -232,10 +236,16 @@ const FormBuilder = (defaultFieldsJson) => {
         onClose={() => setAddScriptModalShow(false)}>
         <div style={{ width: "400px" }}>
 
-
+        
           <select>
-            <option>Equal To</option>
-            <option>Not Equal To</option>
+           
+            {
+           
+            FormScripts.list?.map((script,i)=>{
+              return <option >{script.title}</option>
+            })
+            
+            }
           </select>
 
           <button onClick={(e)=>{

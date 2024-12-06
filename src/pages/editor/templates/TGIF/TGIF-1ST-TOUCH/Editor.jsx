@@ -196,10 +196,7 @@ const Editor = ({ }) => {
           </Col>
         </Row>
        
-   
-
-        <TextBox label="EDM TEXT BELOW CTA Button" name="EDM_TEXT_BELOW_CTA"    value="Download Now" html/>
-        
+        <TextBox label="EDM TEXT BELOW CTA Button" name="EDM_TEXT_BELOW_CTA"  html/>
       </Section>
 
 
@@ -241,7 +238,7 @@ const Editor = ({ }) => {
           <Section title="Thankyou Page Details">
 
             <RichTextEditor label="Thank You Page" name="NORMAL_THANK_YOU_PAGE_TEXT" required={true} value={`
-           <h1>Thank you...</h1>
+        <h1>Thank you...</h1>
         <span>for downloading <strong>"##EDM_TITLE##"</strong><br><br>
         Your download will automatically start in <span id="countdown">10</span> seconds...<br>If your download doesn't start automatically, <a href="##BASE_URL####LINK_NAME##.pdf">click here</a> to start your download.</span>
 

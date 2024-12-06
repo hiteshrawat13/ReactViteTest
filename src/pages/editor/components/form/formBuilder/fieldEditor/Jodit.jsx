@@ -52,6 +52,28 @@ toolbarButtonSize: 'small',
               'symbol',
               'fullsize',
              
+
+
+              {
+                name: 'Remove Styles',
+                tooltip: 'Remove style attributes from html tags.',
+                exec: (editor) => {
+                  //console.log(editor.value);
+                  
+                 
+                  const editorValue=editor.value
+      
+                  const parsed = new DOMParser().parseFromString(editorValue, 'text/html')
+                  parsed.body.querySelectorAll('*').forEach(elem => [...elem.attributes].forEach(attr => (attr.name=="style")?elem.removeAttribute(attr.name):null  ))
+                  const strippedHtml= parsed.body.innerHTML;
+      
+                  //editor.s.insertHTML(strippedHtml);
+                  editor.value=strippedHtml
+      
+                }
+              }
+
+
           ]
 
 

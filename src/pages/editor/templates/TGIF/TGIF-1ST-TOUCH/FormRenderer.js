@@ -58,10 +58,10 @@ const TGIFFormRenderer = {
             //Not full Width
             return `
                 <tr class="form-group ${obj.id}-holder">
-                    <th>
+                    <th width="47%">
                         ${selectbox_label_html}
                     </th>
-                    <td>
+                    <td width="53%">
                         ${select_box_html}
                     </td>
                 </tr>

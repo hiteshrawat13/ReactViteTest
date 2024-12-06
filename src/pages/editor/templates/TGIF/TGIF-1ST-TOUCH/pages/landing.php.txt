@@ -162,7 +162,7 @@
             margin:0;
             padding:0;
             font-size:12px;
-            color:#000;
+            color:#1a1a1a;
             }
 
             .form-group p{
@@ -194,6 +194,8 @@
             input[type=number] {
             -moz-appearance: textfield;
             }
+
+           .hide{display:none;} 
         </style>
 
         <script>

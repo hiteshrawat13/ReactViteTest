@@ -57,13 +57,33 @@ const FormBuilder = (defaultFieldsJson) => {
 
   // ********************************************************************************************
 
+
+
   const addFieldSelectBoxRef = useRef()
 
   const state = useSelector(state => state.campaignData.data)
 
+  const formScriptsDropdownRef=useRef()
+
   const [selectedField, setSelectedField] = useState(-1)
   const [addScriptModalShow,setAddScriptModalShow]=useState(false)
   const dispatch = useDispatch()
+
+
+  //API For FormScripts
+  const API = { addField, updateField, loadFieldsFromJson ,setFields ,dispatch, state , fields}
+
+  const applyFormScript=(ScriptTitle)=>{
+   const script= FormScripts(API).list.find((item)=>{ return item.title == ScriptTitle})
+
+   if(script){
+   // script.script.run()
+    console.log(script.script.run());
+    
+   }else{
+    alert("No Script Found")
+   }
+ }
 
   const handleAdd = (value) => {
 
@@ -153,8 +173,7 @@ const FormBuilder = (defaultFieldsJson) => {
       }else{
         updatedForm[i]={...field}
       }
-       
-      
+        
     })
 
     console.log(updatedForm);
@@ -165,7 +184,7 @@ const FormBuilder = (defaultFieldsJson) => {
 
   useEffect(() => {
 
-    console.log("DEFAULT FIELDS",defaultFieldsJson.defaultFieldsJson);
+    console.log("DEFAULT FIELDS", defaultFieldsJson.defaultFieldsJson );
     
     //dispatch(loadFieldsFromJson(defaultFieldsJson.defaultFieldsJson))
 
@@ -225,37 +244,23 @@ const FormBuilder = (defaultFieldsJson) => {
 
 
 <button id='recalculateBtn' onClick={handleNameDataRecalculate }>Rearange "data[]"</button>
-
-
-<button id=' ' onClick={(e)=>{e.preventDefault();setAddScriptModalShow(true)}}>Add Script</button>
-
+      <button id=' ' onClick={(e)=>{e.preventDefault();setAddScriptModalShow(true)}}>Add Script</button>
       <Modal
         closeOnOverlayClick={false}
         center
         open={addScriptModalShow}
         onClose={() => setAddScriptModalShow(false)}>
         <div style={{ width: "400px" }}>
-
-        
-          <select>
-           
+          <select ref={formScriptsDropdownRef}>
             {
-           
-            FormScripts.list?.map((script,i)=>{
-              return <option >{script.title}</option>
-            })
-            
+              
+              FormScripts(null).list?.map((script,i)=>{ return <option key={i}>{script.title}</option> })
             }
           </select>
-
-          <button onClick={(e)=>{
-            e.preventDefault();
-          }}>Add Script</button>
+          <button onClick={(e)=>{  e.preventDefault();applyFormScript(formScriptsDropdownRef.current.value)  }}>Add Script</button>
         </div>
       </Modal>
-
-
-<br /><br />
+      <br /><br />
       <div className='formBuilder'>
 
         <FieldList getIcon={getIcon} setSelectedField={setSelectedField} selectedField={selectedField} />

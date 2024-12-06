@@ -64,12 +64,13 @@ const CheckBoxEditor = ({ id, data ,toast,handleFieldDataUpdate}) => {
 center
 open={isModalOpened} 
 onClose={() =>setModalOpened(false)}>
- <label style={{width:"90%",height:"90%"}}>
+ <div style={{width:"100%"}}>
                  <Jodit value={label} onChange={(e)=>{setLabel(e)}}/>
                     {/* <textarea type="text" name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} style={{ width: "90%", height: "90%" }} />
                  */}
 
-</label>
+</div>
+<button className='btn--primary' onClick={(e) =>{e.preventDefault(); setModalOpened(false) }}>Save</button>
             </Modal>
             <button className='openModal' onClick={(e) => { e.preventDefault(); setModalOpened(true) }}><FaPencilAlt /></button>
 

@@ -52,7 +52,7 @@ const Editor = ({ }) => {
     if (!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
     if (!campData?.jsonObject?.THUMBNAIL_WIDTH) setStateValue("THUMBNAIL_WIDTH", "200")
     //alert("TGIF")
-  }, [])
+  }, [campData])
 
 
 

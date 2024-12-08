@@ -181,7 +181,7 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
 
         <div style={{
             width: "100%",
-            height: "30px"
+           
         }}></div>
         <div style={{
             width: "auto",
@@ -189,8 +189,8 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
             bottom: "0px",
             display: "flex",
             justifyContent: "space-between",
-            background: "#fff",
-            padding: "10px"
+         
+             
         }}>
             <div>{(step > 0) && <button onClick={handlePrevious} className='btn--primary'>Previous</button>}</div>
             <div>{(step < totalSteps - 1) && <button onClick={handleNext} className='btn--primary'>Next</button>}</div>

@@ -215,7 +215,17 @@ const Editor = ({ }) => {
       <Section title="EDM Details">
 
         <Row>
-          <Col><TextBox label="EDM Title" name="EDM_TITLE" required={true} width="100%" /></Col>
+          <Col><TextBox label="EDM Title" name="EDM_TITLE" required={true} width="100%"
+           onChange={
+            (e) => {
+           
+              const val = e.target.value
+           
+              setFormValue("ASSET_TITLE", `${val}`)
+
+            }
+          }
+          /></Col>
           <Col><TextBox label="EDM Sub Title" name="EDM_SUB_TITLE" required={false} width="100%" /></Col>
         </Row>
 
@@ -279,7 +289,7 @@ const Editor = ({ }) => {
 
             <RichTextEditor label="Thank You Page" name="NORMAL_THANK_YOU_PAGE_TEXT" required={true} value={`
         <h1>Thank you...</h1>
-        <span>for downloading <strong>"##EDM_TITLE##"</strong><br><br>
+        <span>for downloading <strong>"##ASSET_TITLE##"</strong><br><br>
         Your download will automatically start in <span id="countdown">10</span> seconds...<br>If your download doesn't start automatically, <a href="##BASE_URL####LINK_NAME##.pdf">click here</a> to start your download.</span>
 
           `} />
@@ -298,7 +308,7 @@ const Editor = ({ }) => {
         <RichTextEditor label="Sendmail Body" name="SENDMAIL_BODY" required={true} value={`<table>
 <tr><td>Dear&nbsp;<b>$firstname,</b></td></tr>
 <tr><td>&nbsp;</td></tr>
-<tr><td>Thank you for requesting <b>"##EDM_TITLE##"</b>. You can view it immediately by clicking <a href='##BASE_URL####LINK_NAME##.pdf'>HERE</a>!</td></tr>
+<tr><td>Thank you for requesting <b>"##ASSET_TITLE##"</b>. You can view it immediately by clicking <a href='##BASE_URL####LINK_NAME##.pdf'>HERE</a>!</td></tr>
 <tr><td>&nbsp;</td></tr>
 <tr><td>&nbsp;</td></tr>
 <tr><td>Sincerely,</td></tr>
@@ -321,16 +331,13 @@ const Editor = ({ }) => {
           <Col>
           <FileInput name="THUMBNAIL_NAME" label="Thumbnail" tag="file" fileRef={filesRef.current.fileInput2} />
         <CheckBox label="Add border to thumbnail" name="THUMBNAIL_BORDER" defaultChecked={true} />
-        <CheckBox label="Use different thumbnail for edm page" name="USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE" />
-          </Col>
+        </Col>
         </Row>
 
 
-        
-
-        <br></br>
-     
-       
+      
+        <CheckBox label="Use different thumbnail for edm page" name="USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE" />
+         
         {(watch["USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE"] == true) &&
           <FileInput name="EDM_THUMBNAIL_NAME" label="EDM Thumbnail" tag="file" fileRef={filesRef.current.fileInput3} />
         }
@@ -346,7 +353,11 @@ const Editor = ({ }) => {
       </Section>
 
       <Section title="Asset">
-        <RadioGroup name="ASSET_FORMAT" options={[
+
+      <TextBox label="Asset Title" name="ASSET_TITLE" required={true} />
+
+
+        <RadioGroup name="ASSET_FORMAT" label="Asset Format" required={true} options={[
           { label: "PDF", value: "PDF" },
           { label: "MP4", value: "MP4" },
           { label: "Client Link", value: "CLIENT_LINK" },
@@ -369,15 +380,21 @@ const Editor = ({ }) => {
         }
 
 
+
+
+
       </Section>
     </Step>
 
 
     <Step title="Form" key={1104}>
+      <Section>
       <FormBuilder defaultFieldsJson={defaultFieldsJson} />
+      </Section>
     </Step>
 
     <Step title="Preview" key={1105}>
+      <Section>
       <Preview publishHelper={publishHelperRef.current} filesRef={filesRef.current} controls={
         ({ iframe }) => {
           return <>
@@ -405,6 +422,7 @@ const Editor = ({ }) => {
           </>
         }
       } />
+      </Section>
     </Step>
 
     <Step title="Publish" key={1106}>

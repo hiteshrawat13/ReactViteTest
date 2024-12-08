@@ -10,7 +10,7 @@ import { StepperContext } from '../stepper/StepperContext';
 import Row from './Row';
 import Col from './Col';
 import ImageInput from './FileInput';
-const RadioGroup = ({title=null,label=null,name,options=null}) => {
+const RadioGroup = ({title=null,label=null,name,options=null,required=false}) => {
     
    
     const campaignDataState = useSelector(state => state.campaignData)
@@ -29,11 +29,11 @@ const RadioGroup = ({title=null,label=null,name,options=null}) => {
            
 
             <div  className='form-group'>
-                <div> {label && <h5>{label}</h5> } </div>
+            {label &&    <div> <label>{label} {(required) && <span style={{ color: "red" }}>*</span>} </label> </div>  }
                 <div className='radio-group'>
-
+               
                     {options.map((option,i)=>{
-                return <><input type="radio" {...register(name, { required: true })} className="radio-button" id={option.value} value={option.value} />
+                return <><input type="radio" {...register(name, { required: required })} className="radio-button" id={option.value} value={option.value} />
                 <label htmlFor={option.value}>{option.label}</label></>
 
                     })}   

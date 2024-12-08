@@ -79,7 +79,7 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
 
     }, [fileRef])
     return (
-        <div style={{display:"flex"}}>
+        <div style={{display:"flex",gap:"6px"}}>
 
             
 

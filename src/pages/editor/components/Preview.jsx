@@ -108,7 +108,7 @@ const Preview = forwardRef(({publishHelper,filesRef,controls}, ref) => {
         }
 
         <br></br>
-        <iframe ref={iframeRef}   style={{ 'margin-top': '2px', width: "calc(100%)", height: "calc(100%)", minHeight: "500px" }}></iframe>
+        <iframe ref={iframeRef}   style={{ 'margin-top': '2px', width: "calc(100%)", height: "auto", minHeight: "500px" }}></iframe>
       </div>
 
 

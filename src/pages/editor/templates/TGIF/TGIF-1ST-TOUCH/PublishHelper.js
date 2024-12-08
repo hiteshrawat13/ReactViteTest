@@ -381,7 +381,7 @@ This is to convert Chinese characters to Unicode numbers
                             <tbody>
                                 <tr>
                                     <td align="left" valign="top" class="style1 thankyou">
-                                        <h1 style="font-size: 22px;font-weight:normal; color: #0066b2;margin-top:10px;margin-bottom:15px;padding-left:0px;">##EDM_TITLE##</h1> 
+                                        <h1 style="font-size: 22px;font-weight:normal; color: #0066b2;margin-top:10px;margin-bottom:15px;padding-left:0px;">##ASSET_TITLE##</h1> 
                                             <iframe 
                                             src="##IFRAME##" 
                                             title="##EDM_TITLE##" 

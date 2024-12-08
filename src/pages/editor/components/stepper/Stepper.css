@@ -123,7 +123,7 @@
 
         &.complete {
             label {
-                background-color: #0a3d62;
+                background-color: #273c75;
             }
 
             .node {
@@ -156,85 +156,6 @@
         }
 
 
-        /*          
-
-        input[type="radio"] {
-            appearance: none;
-        }
-
-        &:not(:last-child):before {
-            content: '';
-            display: block;
-            position: absolute;
-            left: 50%;
-            top: -12px;
-            background-color: green;
-            height: 1px;
-            width: 100%;
-
-
-        }
-
-        span{
-            font-weight: bold;
-        }
-
-
-
-        .node {
-            display: inline-block;
-            border: 6px solid green;
-            background-color: rgb(84, 133, 240);
-            border-radius: 18px;
-            height: 18px;
-            width: 18px;
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            margin-left: -10px;
-        }
-
-        &.disabled{
-            &:before {
-                background-color:rgb(139, 139, 131);
-            }
-            .node{
-                border: 6px solid rgb(116, 116, 116);
-                background-color: rgb(129, 125, 125);
-            }
-        }
-
-     
-
-        &.complete {
-            &:before {
-                background-color: rgb(36, 168, 47);
-            }
-
-            .node {
-                border-color: rgb(90, 194, 107);
-                background-color: rgb(54, 206, 112);
-
-                &:before {
-                    content: "✓";
-                    color: #fff;
-                    display: block;
-                    position: absolute;
-                    top: -7px;
-                    left: -2px;
-                }
-            }
-        }
-
-        &.in-progress {
-            &:before {
-                background: #444;
-                
-            }
-
-            .node {
-                border-color: rgb(39, 153, 168);
-            }
-        } */
+        
     }
 }

@@ -30,7 +30,7 @@ form{
 
 
     width: 100%;
-    margin-top:10px;
+
     margin-bottom: 10px;
 
     label{
@@ -41,7 +41,7 @@ form{
         font-size: 14px;
         font-weight: bold;
         
-        color:#353b48;
+        color:#1e2127;
         margin-bottom:5px;
     }
 
@@ -101,15 +101,79 @@ form{
 
     }
 
+    .btn{
+        
+    }
+
     .btn-primary{
         padding: 10px;
         color:#fff;
         color: #4f7cdb;
         border:1px solid #385cac;
     }
+    .btn-secondary{
+        padding: 10px;
+        color:#fff;
+        color: #1e418d;
+        border:1px solid #385cac;
+    }
 
 }
 
+
+
+.checkbox{
+    appearance: none;
+    height: 0px;width: 0px;
+    position: relative;
+
+    + label{
+        position: relative;
+        display: inline;
+        
+        padding: 10px;
+        padding-left: 20px;
+        border-radius: 5px;
+         color:#0a0a0a;
+        cursor: pointer;
+
+    }
+
+    + label:before{
+        content: '';
+        display: block;
+        position: absolute;
+        top: 10px;
+        left:0px;
+        height: 16px;
+        width: 16px;
+        background-color: #ecf0f1;
+        border:1px solid #2c3e50;
+        border-radius: 0px;
+    }
+
+    &:checked + label{
+       
+      font-weight: bold;
+      color: #19043f;
+    }
+
+    &:checked +  label:before{ background-color: #3498db; }
+    &:checked + label:after{
+        content: '✓';
+        display: block;
+        position: absolute;
+        top: 9px;
+        left: 4px;
+        height: 12px;
+        width: 12px;
+        font-weight: bold;
+        color: #ffffff;
+        /* background-color: #3498db; */
+        border-radius: 0px;
+    }
+
+}
 
 .radio-group{
     display: flex;
@@ -141,8 +205,8 @@ form{
             left:0px;
             height: 16px;
             width: 16px;
-            background-color: #888888;
-            border:1px solid #818181;
+            background-color: #ecf0f1;
+            border:1px solid #2c3e50;
             border-radius: 18px;
         }
 
@@ -160,7 +224,7 @@ form{
             left: 3px;
             height: 12px;
             width: 12px;
-            background-color: #274b74;
+            background-color: #3498db;
             border-radius: 18px;
         }
 
@@ -168,8 +232,15 @@ form{
 }
 
 .file-preview{
-    
-    img{ width: 150px; }
+    width: 150px; 
+    height: 150px;
+    background-color: #95a5a6;
+    img{ 
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+        background-size: cover;
+    }
 }
 
 .drop-zone{

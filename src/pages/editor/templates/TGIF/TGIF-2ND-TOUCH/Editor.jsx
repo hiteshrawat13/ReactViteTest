@@ -41,7 +41,7 @@ const Editor = ({ }) => {
     //setStateValue("LOGO_FOLDER", "logo/")
     //if (!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
     //alert("TGIF")
-  }, [setStateValue])
+  }, [campData])
 
 
 

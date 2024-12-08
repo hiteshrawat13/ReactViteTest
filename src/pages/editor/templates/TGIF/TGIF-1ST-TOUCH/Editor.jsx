@@ -41,7 +41,7 @@ const Editor = ({ }) => {
     //setStateValue("LOGO_FOLDER", "logo/")
     //if (!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
     //alert("TGIF")
-  }, [setStateValue])
+  }, [campData])
 
 
 
@@ -72,28 +72,30 @@ const Editor = ({ }) => {
       <HiddenField name="BASE_URL" value="https://resource.itbusinesstoday.com/whitepapers/cbtool_test/" />
       <HiddenField name="YEAR" value={new Date().getFullYear() + ""} />
       <Section title="Link Details">
-        <Row>
-          <Col>
+
+
+      <Row>
+      <Col>
+          <LanguageInput />
+          </Col>
+        <Col>
             <TextBox label="Client Code" name="CLIENT_CODE" required={true} value={campData?.clientCode} readOnly />
             {(watch["CLIENT_CODE"] === "TEST") && <>IT WORKS</>}
             {/* {(watch["CLIENT_CODE"] === "TEST2") && setError("CLIENT_CODE","LINK ALREADY EXISTS")} */}
 
 
           </Col>
-          <Col>
-            <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" readOnly />
-          </Col>
-
-
-        </Row>
-        <Row>
           <Col><TextBox label="Link Type" name="LINK_TYPE" required={true} value={campData?.templateType} readOnly /></Col>
           <Col><TextBox label="Template Id" name="TEMPLATE_ID" required={true} value={campData?.templateId} readOnly /></Col>
         </Row>
 
+        <Row>
 
-        <TextBox label="Campaign Id" name="CAMP_ID" required={true} value={campData?.campaignId} width="10%" readOnly />
-        <SelectBox label="Region" name="REGION" value={campData?.country} required={true} readOnly
+          <Col>
+          
+
+        <Row>
+          <Col><SelectBox label="Region" name="REGION" value={campData?.country} required={true} readOnly
           options={[
             { label: "Select..", value: "" },
             { label: "EU", value: "EU" },
@@ -101,9 +103,28 @@ const Editor = ({ }) => {
             { label: "CASL", value: "CASL" },
             { label: "Both ( NON-EU & CASL )", value: "BOTH" }
           ]}
-          width="10%"
-        />
-        <TextBox label="Link Name" name="LINK_NAME" required={true} width="50%" readOnly={campData.mode === 'edit'}
+          width="100%"
+        /></Col>
+        <Col>
+          <TextBox label="Campaign Id" name="CAMP_ID" required={true} value={campData?.campaignId}   readOnly />
+          </Col>
+
+        </Row>
+          </Col>
+         
+       
+          <Col>
+            <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" readOnly />
+          </Col>
+
+
+        </Row>
+
+
+        <Row>
+        
+          <Col>
+          <TextBox label="Link Name" name="LINK_NAME" required={true} width="100%" readOnly={campData.mode === 'edit'}
 
           onChange={
             (e) => {
@@ -128,19 +149,26 @@ const Editor = ({ }) => {
 
 
         }} />}
+          </Col>
+        </Row>
+   
+
+
+       
+       
+        
       </Section>
 
 
       <Section title="Details" >
 
-        <Row>
-          <Col>
-            <LanguageInput />
-          </Col>
-        </Row>
+      
 
         <TextBox label="Pixel Link" name="PIXEL_LINK" required={true} />
-        <SelectBox label="Asset Type" name="ASSET_TYPE" required={true}
+
+        <Row>
+          <Col>
+          <SelectBox label="Asset Type" name="ASSET_TYPE" required={true}
           options={[
             { label: "Select..", value: "" },
             { label: "White Paper", value: "White Paper" },
@@ -152,24 +180,31 @@ const Editor = ({ }) => {
             { label: "Infographic", value: "Infographic" }
           ]}
         />
-        <TextBox label="Text above the logo" name="SPONSORED_BY_TEXT" required={true} value="Sponsored by" />
-
-        <SelectBox label="EDM Layout" name="EDM_LAYOUT" required={true}
+          </Col>
+          <Col>
+          <TextBox label="Text above the logo" name="SPONSORED_BY_TEXT" required={true} value="Sponsored by" />
+          </Col>
+    
+<Col>
+<SelectBox label="EDM Layout" name="EDM_LAYOUT" required={true}
           options={[
             { label: "Select..", value: "" },
             { label: "Traditional", value: "Traditional" },
             { label: "Full width thumbnail and abstract", value: "Full width thumbnail and abstract" },
 
           ]}
-        />
-        <SelectBox label="Landing Layout" name="LANDING_LAYOUT" required={true}
+        /></Col>
+<Col><SelectBox label="Landing Layout" name="LANDING_LAYOUT" required={true}
           options={[
             { label: "Select..", value: "" },
             { label: "Traditional", value: "Traditional" },
             { label: "Thumbnail below abstract", value: "Thumbnail below abstract" },
 
           ]}
-        />
+        /></Col>
+</Row>
+        
+        
       </Section>
 
 
@@ -179,8 +214,13 @@ const Editor = ({ }) => {
 
       <Section title="EDM Details">
 
-        <TextBox label="EDM Title" name="EDM_TITLE" required={true} width="60%" />
-        <TextBox label="EDM Sub Title" name="EDM_SUB_TITLE" required={false} width="60%" />
+        <Row>
+          <Col><TextBox label="EDM Title" name="EDM_TITLE" required={true} width="100%" /></Col>
+          <Col><TextBox label="EDM Sub Title" name="EDM_SUB_TITLE" required={false} width="100%" /></Col>
+        </Row>
+
+        
+        
         <RichTextEditor label="Edm Abstract" name="EDM_ABSTRACT" required={true} />
         <TextBox label="EDM Optin" name="EDM_OPTIN" required={true} value="By clicking/downloading the asset, you agree to allow the sponsor to have your contact information and for the sponsor to contact you." />
         
@@ -276,14 +316,21 @@ const Editor = ({ }) => {
 
       <Section title="Logo & Thumbnail">
 
+        <Row>
+          <Col><LogoInput name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1} /></Col>
+          <Col>
+          <FileInput name="THUMBNAIL_NAME" label="Thumbnail" tag="file" fileRef={filesRef.current.fileInput2} />
+        <CheckBox label="Add border to thumbnail" name="THUMBNAIL_BORDER" defaultChecked={true} />
+        <CheckBox label="Use different thumbnail for edm page" name="USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE" />
+          </Col>
+        </Row>
 
-        <LogoInput name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1} />
+
+        
 
         <br></br>
-        <FileInput name="THUMBNAIL_NAME" label="Thumbnail" tag="file" fileRef={filesRef.current.fileInput2} />
-        <CheckBox label="Add border to thumbnail" name="THUMBNAIL_BORDER" defaultChecked={true} />
-
-        <CheckBox label="Use different thumbnail for edm page" name="USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE" />
+     
+       
         {(watch["USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE"] == true) &&
           <FileInput name="EDM_THUMBNAIL_NAME" label="EDM Thumbnail" tag="file" fileRef={filesRef.current.fileInput3} />
         }

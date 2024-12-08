@@ -18,7 +18,7 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
     const campaignDataState = useSelector(state => state.campaignData)
     const [step, setStep] = useState(0)
     const [currentStepFormTriggerMethod, setCurrentStepFormTriggerMethod] = useState(null)
-    const [totalStepsExplored, setTotalStepsExplored] = useState(1)
+    const [totalStepsExplored, setTotalStepsExplored] = useState([0])
 
 
 
@@ -83,6 +83,7 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
 
         await currentStepFormTriggerMethod.handleSubmit(handleSubmitOfCurrentForm)()
         setStep(i)
+        setTotalStepsExplored(previousValue => [...new Set([...previousValue,step]) ])
         // if (onStepChange) onStepChange(i)
     }
     const handleNext = async (e) => {
@@ -108,7 +109,8 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
         await currentStepFormTriggerMethod.handleSubmit(handleSubmitOfCurrentForm)()
         
         setStep((step) => { return (step + 1 < totalSteps - 1) ? step + 1 : totalSteps - 1 })
-        setTotalStepsExplored(previousValue => ++previousValue)
+        //setTotalStepsExplored(previousValue => ++previousValue)
+        setTotalStepsExplored(previousValue => [...new Set([...previousValue,step]) ])
         if (onStepChange) onStepChange(step)
     }
     const handlePrevious = async (e) => {
@@ -134,25 +136,28 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
         <div className='tabs wizard-progress'>
             {
                 stepsArray.map((child, i) => {
-                    return <label
+                    return <div
 
                         key={i}
                         className={
                             `step 
-                        ${(i < step) ? 'complete' : ''}  
-                        ${(step == i) ? 'in-progress' : ''}  
-                        ${(i + 1 > totalStepsExplored) ? 'disabled' : ''}`
-                        }>
+                        ${(totalStepsExplored.includes(i) ) ? 'complete' : ''}  
+                       
+                          ${(!totalStepsExplored.includes(i) ) ? 'disabled' : ''}  
+                           ${(step == i) ? 'in-progress' : ''}  
+                          `
+                        }>  <label>
                         <input
                             type="radio"
                             name="stepper-progress"
                             onChange={(e) => handleTabChange(e, i)}
                             checked={step == i}
-                            {...(i + 1 > totalStepsExplored && { disabled: true })}
+                            {...(!totalStepsExplored.includes(i) && { disabled: true })}
                         />
-                        <div className="node"></div>
-                        <span>{child.props.title}</span>
-                    </label>
+                        
+                        <span><div className="node"></div>{child.props.title}</span>
+                        </label>
+                    </div>
                 })
             }
         </div>

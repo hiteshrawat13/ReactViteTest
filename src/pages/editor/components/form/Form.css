@@ -8,15 +8,21 @@ form{
     margin: 0%  ;
     margin-top: 1%;
     margin-bottom: 2%;
+    border: 1px solid #bebebe;
+    border-radius: 4px;
+    overflow: hidden;
 
     .title{
-        background-color: #666;
-        color:#fff;
-        padding:0.2% 1.5%;
+        background-color: #dfe6e9;
+        border-bottom: 1px solid #bebebe;
+        color:#2d3436;
+        font-size: 16px;
+        font-weight: bold;
+        padding:8px 10px;
     }
 
     .content{
-        padding:1% 1.5%;
+        padding:8px 10px;
     }
 }
 
@@ -33,9 +39,10 @@ form{
         display: inline-block;
 
         font-size: 14px;
-        font-weight: normal;
-        color:rgb(19, 12, 12);
-        padding-bottom:6px;
+        font-weight: bold;
+        
+        color:#353b48;
+        margin-bottom:5px;
     }
 
     .input-holder{
@@ -63,10 +70,10 @@ form{
 
         display: block;
         padding: 6px 6px;
-        border-radius: 4px;
+        border-radius: 1px;
         border:1px solid rgba(97, 95, 95, 0.39);
         width: 100%;
-        box-shadow: inset 0px 0px 2px #c5c5c5b8;
+        box-shadow: inset 0px 0px 1px #c5c5c5b8;
         color:#19043f;
         &:focus{
             outline:1px solid rgb(80, 145, 219);
@@ -75,7 +82,7 @@ form{
     }
 
     input:read-only{
-        background-color: #d4d4d4;
+        background-color: #dcdde1;
     }
 
     span.error{

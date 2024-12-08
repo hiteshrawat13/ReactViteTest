@@ -32,8 +32,8 @@
 
 
 
-   
- 
+
+
 
     .step {
         display: table-cell;
@@ -46,8 +46,117 @@
         font-weight: normal;
 
 
-      
-         
+
+
+
+
+        background-color: transparent;
+        color: #fff;
+
+
+        label {
+            cursor: pointer;
+            display: inline-flex;
+
+            gap: 3px;
+            background-color: #2d3436;
+            padding: 6px;
+            align-content: center;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background-color: #2d3436;
+            padding:6px 12px;
+
+            .node {
+                display: inline-block;
+
+                border-radius: 18px;
+                height: 14px;
+                width: 14px;
+                margin-right: 5px;
+
+            }
+        }
+
+        input[type="radio"] {
+            appearance: none;
+            height: 1px;
+            width: 1px;
+            display: none;
+        }
+
+        &.disabled {
+
+            label {
+                cursor: not-allowed;
+                background-color: #b2bec3;
+            }
+
+            .node {
+
+
+                &:before {
+                    content: "🔒";
+                    color: #fff;
+                    display: block;
+
+                }
+            }
+
+
+        }
+
+        &:not(:last-child):before {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 50%;
+            top: 15px;
+            background-color: #b2bec3;
+            height: 2px;
+            width: 100%;
+            z-index: -99;
+
+
+        }
+
+        &.complete {
+            label {
+                background-color: #0a3d62;
+            }
+
+            .node {
+
+                &:before {
+                    content: "✅";
+                    color: #fff;
+                    display: block;
+
+                }
+            }
+        }
+
+        &.in-progress {
+            label {
+                background-color: #0984e3;
+            }
+
+            .node {
+                border-color: rgb(39, 153, 168);
+
+                &:before {
+                    content: "⏳";
+                    color: #fff;
+                    display: block;
+
+                }
+            }
+
+        }
+
+
+        /*          
 
         input[type="radio"] {
             appearance: none;
@@ -64,6 +173,10 @@
             width: 100%;
 
 
+        }
+
+        span{
+            font-weight: bold;
         }
 
 
@@ -122,6 +235,6 @@
             .node {
                 border-color: rgb(39, 153, 168);
             }
-        }
+        } */
     }
 }

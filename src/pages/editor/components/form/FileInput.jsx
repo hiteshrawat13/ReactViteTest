@@ -101,7 +101,6 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
             </div>
 
             <div className='file-preview'>
-                <p>Preview</p>
                 <img ref={imagePreviewRef} />
             </div>
           

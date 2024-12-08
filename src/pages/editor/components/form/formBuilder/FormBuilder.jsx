@@ -113,7 +113,7 @@ const FormBuilder = (defaultFieldsJson) => {
         dispatch(addField({ field: { label: "Hidden Input", type: fields.HiddenInput } }))
         break;
       case fields.CTA:
-        dispatch(addField({ field: { label: "Call To Action", type: fields.CTA } }))
+        dispatch(addField({ field: { label: "Download Now", type: fields.CTA,id:"cta_button" } }))
         break;
       default:
         alert("Not Supported")
@@ -193,8 +193,30 @@ const FormBuilder = (defaultFieldsJson) => {
   return (
     <>
       <Toaster position="center" reverseOrder={false} />
+      <div className="dropdown">
+                    <button className="dropbtn">+ Add Field</button>
+                    <div className="dropdown-content">
+                    {
 
-      <span>Click to add field to the form</span>
+                    Object.keys(fields).map((field, i) => {
+                      return <div style={{
+                        padding: "5px",
+                        
+                        cursor: "pointer",
+                        display: "flex",
+                        gap:"7px",
+                        borderBottom:"1px solid #ededed",
+
+                        
+                        padding: "4px 10px"
+                      }} onClick={(e) => {  handleAdd(field); toast.success(`${field} Field Inserted.`) }} 
+                      > {getIcon(field)} {field} </div>
+                       
+                    })
+                    }
+                    </div>
+                </div>
+      {/* <span>Click to add field to the form</span>
       <br /><br />
       <div style={{ display: "flex", gap: "6px" }}>
 
@@ -218,7 +240,7 @@ const FormBuilder = (defaultFieldsJson) => {
           })
         }
 
-      </div>
+      </div> */}
 
       {/* <div>Form Builder {selectedField + 1}</div> */}
 
@@ -227,9 +249,7 @@ const FormBuilder = (defaultFieldsJson) => {
       console.log(JSON.stringify(state.form));
       navigator.clipboard.writeText(JSON.stringify(state.form))
       } }>Log From Json</button> */}
-<br />
-<hr />
-<br />
+
 
 <button id='loadFieldsBtn' onClick={(e)=>{
       e.preventDefault()

@@ -41,56 +41,59 @@ const handleSubmit=(e)=>{
    
     <div ref={divRef} className='editorForm'>
        
-            <label>
+             <div className='field-holder'>
                 <span>Input Type</span>
                 <select name="inputType" defaultValue={data.inputType}>
                     <option value="text">Text</option>
                     <option value="email">Email</option>
                     <option value="number">Number</option>
                 </select>
-            </label>
+            </div>
 
-            <label>
+             <div className='field-holder'>
                 <span>Id</span>
                 <input type="text" name="id" defaultValue={data.id} />
-            </label>
+            </div>
 
-            <label>
+             <div className='field-holder'>
                 <span>Label</span>
                 <input type="text" name="label" defaultValue={data.label}/>
-            </label>
+            </div>
 
-            <label>
+             <div className='field-holder'>
                 <span>Name</span>
                 <input type="text" name="name" defaultValue={data.name} />
-            </label>
+            </div>
 
-            <label>
+             <div className='field-holder'>
                 <span>Placeholder</span>
                 <input type="text" name="placeholder" defaultValue={data.placeholder} />
-            </label>
+            </div>
 
-            <label>
+             <div className='field-holder'>
                 <span>Value</span>
                 <input type="text" name="value" defaultValue={data.value} />
-            </label>
+            </div>
 
-         
+            <div className='field-holder'>
+                <span>Full Width?</span>
+                <input type="checkbox" name="isFullWidth" defaultChecked={data.isFullWidth} />
+            </div>
 
-            <label>
+             <div className='field-holder'>
                 <span>Required?</span>
                 <input type="checkbox" name="isRequired" defaultChecked={data.isRequired} />
-            </label>
+            </div>
 
-            <label>
+             <div className='field-holder'>
                 <span>Disabled?</span>
                 <input type="checkbox" name="isDisabled" defaultChecked={data.isDisabled} />
-            </label>
+            </div>
 
-            <label>
+             <div className='field-holder'>
                 <span>ReadOnly?</span>
                 <input type="checkbox" name="isReadOnly" defaultChecked={data.isReadOnly} />
-            </label>
+            </div>
 
             <button onClick={handleSubmit}>Submit</button>
     </div>

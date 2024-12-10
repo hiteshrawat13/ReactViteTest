@@ -50,7 +50,7 @@ toolbarButtonSize: 'small',
               'eraser',
               'copyformat', '|',
               'symbol',
-              'fullsize',
+              // 'fullsize',//Crashed in responsive modal
              
 
 

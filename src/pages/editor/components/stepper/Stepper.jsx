@@ -192,8 +192,8 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
          
              
         }}>
-            <div>{(step > 0) && <button onClick={handlePrevious} className='btn--primary'>Previous</button>}</div>
-            <div>{(step < totalSteps - 1) && <button onClick={handleNext} className='btn--primary'>Next</button>}</div>
+            <div>{(step > 0) && <button onClick={handlePrevious} className='btn--primary'>⇦ Previous</button>}</div>
+            <div>{(step < totalSteps - 1) && <button onClick={handleNext} className='btn--primary'>Next ⇨</button>}</div>
 
              
         </div>

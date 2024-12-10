@@ -1,16 +1,28 @@
 .editorForm{
     padding: 10px;
     background-color: #fff;
-    border-radius:0px ;
-    // box-shadow: 1px 1px 5px #adadad;
+    border-radius:0px;
     border: 1px solid #dfe6e9;
     display: flex;
     flex-direction: column;
-    // gap:10px;
+    
 
     label{
         display: block;
+    }
 
+    .field-holder{
+        margin-bottom: 8px;
+    }
+
+    .field{
+        display: flex;
+    }
+
+    .pencil-button{
+        width: 25px;
+        cursor: pointer;
+    }
 
         span{
             font-weight: 500;
@@ -19,11 +31,12 @@
         }
 
 
-        input[type="text"],textarea{
+        input[type="text"],
+        textarea{
             width: 100%;
             padding: 5px;
             border:1px solid #d6d6d6;
-            border-radius: 3px;
+            
             background-color: #F0F0EF;
             resize: vertical;
 
@@ -31,7 +44,7 @@
                 outline: 1px solid #cccccc;
             }
         }
-    }
+   
 
 
     input[type="submit"],button{
@@ -40,7 +53,7 @@
         background-color: #005c9d;
         color:#fff;
         border:none;
-        border-radius: 5px;
+        
 
         &:hover{
             background-color: #045188;

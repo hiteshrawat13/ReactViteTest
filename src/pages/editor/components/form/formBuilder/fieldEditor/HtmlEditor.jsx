@@ -51,16 +51,25 @@ const handleSubmit=(e)=>{
 
      <div ref={divRef} className='editorForm'>
         
-            <label>
+        <div className='field-holder'>
                 <span>Label</span>
                 <input type="text" name="label" defaultValue={data.label}/>
-            </label>
+            </div>
 
-            <label>
+            {/* <label>
                 <span>Html</span>
                 <textarea name="html" onChange={(e)=>{setHtml(e.target.value)}} value={html}></textarea>
               
-            </label>
+            </label> */}
+
+
+            <div className='field-holder'>
+          <span>Html</span>
+          <div className='field'>
+          <input type="text" name="html" onChange={(e) => { setHtml(e.target.value) }} value={html} />
+          <button className='pencil-button' onClick={(e) => { e.preventDefault(); setModalOpened(true) }}><FaPencilAlt /></button>
+          </div>
+        </div>
 
 
          
@@ -77,9 +86,9 @@ onClose={() =>setModalOpened(false)}>
                 </label>
 </Modal>
     
-    <button className='openModal' onClick={(e)=>{e.preventDefault();setModalOpened(true)} }><FaPencilAlt /></button>
+    {/* <button className='openModal' onClick={(e)=>{e.preventDefault();setModalOpened(true)} }><FaPencilAlt /></button>
     
-    
+     */}
 
         
             <button onClick={handleSubmit}>Submit</button>

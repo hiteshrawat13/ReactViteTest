@@ -55,10 +55,18 @@ const CheckBoxEditor = ({ id, data ,toast,handleFieldDataUpdate}) => {
             </label>
 
 
-            <label>
+            {/* <label>
                 <span>Label</span>
                 <textarea name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} />
-            </label>
+            </label> */}
+            
+            <div className='field-holder'>
+          <span>Label</span>
+          <div className='field'>
+          <textarea name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} />
+          <button className='pencil-button' onClick={(e) => { e.preventDefault(); setModalOpened(true) }}><FaPencilAlt /></button>
+          </div>
+        </div>
 
             <Modal 
 center

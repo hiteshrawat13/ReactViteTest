@@ -10,7 +10,7 @@ form{
     margin-bottom: 2%;
     border: 1px solid #bebebe;
     border-radius: 4px;
-    overflow: hidden;
+     
 
     .title{
         background-color: #dfe6e9;
@@ -66,7 +66,7 @@ form{
         }
     }
 
-    input[type="text"] , select{
+    input[type="text"],input[type="number"],input[type="email"] , select{
 
         display: block;
         padding: 6px 6px;
@@ -275,7 +275,6 @@ form{
     padding: 8px;
     font-size: 13px;
     border: none;
-    pointer-events: none;
     user-select: none;
   }
   /* The container <div> - needed to position the dropdown content */

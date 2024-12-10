@@ -40,15 +40,25 @@ const TextEditor = ({ id, data, toast, handleFieldDataUpdate }) => {
   return (
     <>
       <div ref={divRef} className='editorForm'>
-        <label>
-          <span>Label</span>
-          <input type="text" name="label" onChange={(e) => { setTextContent(e.target.value) }} value={textContent} />
-        </label>
 
-        <label>
+         
+      <div className='field-holder'>
                 <span>Id</span>
                 <input type="text" name="id" defaultValue={data.id} />
-        </label>
+      </div>
+         
+     
+         
+       
+        <div className='field-holder'>
+          <span>Label</span>
+          <div className='field'>
+          <input type="text" name="label" onChange={(e) => { setTextContent(e.target.value) }} value={textContent} />
+          <button className='pencil-button' onClick={(e) => { e.preventDefault(); setModalOpened(true) }}><FaPencilAlt /></button>
+          </div>
+        </div>
+         
+      
 
         <Modal
           center
@@ -60,7 +70,7 @@ const TextEditor = ({ id, data, toast, handleFieldDataUpdate }) => {
           <div style={{ display: "flex", justifyContent: "center", padding: "3px 20px" }}><button className='btn--primary' style={{ width: "100%" }} onClick={() => setModalOpened(false)}>Save</button></div>
         </Modal>
 
-        <button className='openModal' onClick={(e) => { e.preventDefault(); setModalOpened(true) }}><FaPencilAlt /></button>
+        
         <button onClick={handleSubmit}>Submit</button>
       </div>
     </>

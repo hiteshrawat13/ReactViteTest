@@ -35,12 +35,12 @@ const SideBar = () => {
 
     const items=[
         
-        {
-            id:7854,
-            type:"heading",
-            label:"Dashboard",
+        // {
+        //     id:7854,
+        //     type:"heading",
+        //     label:"Dashboard",
             
-        },
+        // },
                 {
                     id:457,
                     type:"menuItem",
@@ -48,20 +48,36 @@ const SideBar = () => {
                     href:"/",
                     icon:<MdSpaceDashboard  size={"1.5em"} />
                 },
-                {
+                // {
+                //     id:1758432,
+                //     type:"menuItem",
+                //     label:"User Management",
+                //     href:"/users",
+                //     icon:<FaUser size={"1.5em"} />
+                // },
+                // {
+                //     id:212445,
+                //     type:"menuItem",
+                //     label:"Role Management",
+                //     href:"/roles",
+                //     icon:<MdOutlineSecurity size={"1.5em"} />
+                // },
+
+                (Cookies.get('role')==2 /* role 2 is for admin*/)?{
                     id:1758432,
                     type:"menuItem",
                     label:"User Management",
                     href:"/users",
                     icon:<FaUser size={"1.5em"} />
-                },
-                {
+                }:null,
+                
+               (Cookies.get('role')==2 /* role 2 is for admin*/)?{
                     id:212445,
                     type:"menuItem",
                     label:"Role Management",
                     href:"/roles",
                     icon:<MdOutlineSecurity size={"1.5em"} />
-                },
+                }:null,
                 // {
                 //     id:3,
                 //     type:"menuItem",
@@ -141,6 +157,11 @@ const SideBar = () => {
 
 </div> */}
     <div className={`sideBar ${(customizer.isCollapse)?'collapsed':'opened'}`} >
+        <div style={{marginBottom:"10px"}}>
+        <div className='logo' style={{marginRight:"auto"}}>
+            <img src={logo} alt="logo" style={{width:"100%"}} />
+        </div>
+        </div>
     <SimpleBar style={{ maxHeight: "100%" }} forceVisible={ 'y' }>
         <div className='sideBarHolder' >
         {/*  */}
@@ -150,6 +171,7 @@ const SideBar = () => {
         <div className='menu'>
             {
                 items.map((item,i)=>{
+                    if(item==null)return null
                     if(item.type=="menuItem"){
                         return <MenuItem  key={item.id} item={item} activeItem={active} handleActiveChange={handleActiveChange}/>
 
@@ -159,6 +181,8 @@ const SideBar = () => {
                         return <Divider key={item.id}/>
                     }else if(item.type=="heading"){
                         return <Heading key={item.id} label={item.label} />
+                    }else{
+                        return null
                     }
                 })
             }

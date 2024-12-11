@@ -168,7 +168,7 @@
                                 <tr scope="col">
                                     <td style="  vertical-align: top;  ">
                                         ##EDM_THANKS_TEXT_FOR_2ND_TOUCH##
-                                        <h1 style="font-size: 22px;font-weight:normal; color: #0066b2;margin-top:0px;margin-bottom:0px;padding-left:0px;" class="body-title">##EDM_TITLE##</h1>
+                                        <h1 style="font-size: 20px;font-weight:normal; color: #0066b2;margin-top:0px;margin-bottom:0px;padding-left:0px;" class="body-title">##EDM_TITLE##</h1>
                                         ##EDM_SUB_TITLE##
                                     </td>
                                 </tr>

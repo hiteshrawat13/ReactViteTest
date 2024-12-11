@@ -38,7 +38,7 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
     useEffect(() => {
         (async () => {
             const response = await axios.get(
-                Config.API_BASE_URL + `/camplist/getLinks?camp_name=${location?.state?.campaignName}`
+                Config.API_BASE_URL + `/camplist/getLinks?camp_name=${encodeURIComponent(location?.state?.campaignName)}`
             );
 
             setLinks(response.data)
@@ -101,7 +101,7 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
 
         try {
             const response = await axios.post(
-                Config.API_BASE_URL + `/camplist/getLinkJsonData?id=${linkId}`
+                Config.API_BASE_URL + `/camplist/getLinkJsonData?link=${encodeURIComponent(linkId)}`
             );
 
 
@@ -136,12 +136,15 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
 
         try {
             const response = await axios.post(
-                Config.API_BASE_URL + `/camplist/getLinkJsonData?id=${linkId}`
+                Config.API_BASE_URL + `/camplist/getLinkJsonData?link=${encodeURIComponent(linkId)}`
             );
 
             //alert(response )
             console.log(response.data);
             const jobject = JSON.parse(response.data.json_data)
+            if(jobject.files){
+                jobject.files=[]
+            }
             navigate(`/editor/`, {
                 state: {
                     ...location?.state,
@@ -300,9 +303,9 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
             name: "Actions",
             minWidth: "180px",
             cell: (row) => <>
-                <button className='dropbtn' style={{ marginRight: '10px', marginTop: '10px' }} onClick={(e) => handleEditLink(e, row.id)} id={row.ID}>Edit</button>
+                <button className='dropbtn' style={{ marginRight: '10px', marginTop: '10px' }} onClick={(e) => handleEditLink(e, row.link)} id={row.ID}>Edit</button>
                 {/* <button onClick={(e)=>handleCopyJsonData(e,row.id)} id={row.ID}>Copy Data</button> */}
-                <button className='greenBtn' onClick={(e) => handleCreateNewFromExistingLink(e, row.id)} id={row.ID}>Duplicate Link</button>
+                <button className='greenBtn' onClick={(e) => handleCreateNewFromExistingLink(e, row.link)} id={row.ID}>Duplicate Link</button>
 
 
             </>,

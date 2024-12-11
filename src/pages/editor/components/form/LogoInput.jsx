@@ -36,7 +36,7 @@ const LogoPicker = ({ fileRef, name, label = "", tag = "" }) => {
       const formData = new FormData();
       formData.append("query", search_query);
 
-      axios.post(getStateValue("BASE_URL") +getStateValue("LOGO_FOLDER")+ 'searchlogotest.php', formData)
+      axios.post(getStateValue("BASE_URL") + getStateValue("LOGO_FOLDER") + 'searchlogotest.php', formData)
         .then(result => {
           setFoundLogos(result.data.results)
           if(e.target.value!="")  document.querySelector(".logoList").style.display = "block";
@@ -86,14 +86,18 @@ const LogoPicker = ({ fileRef, name, label = "", tag = "" }) => {
 
             optimizedFn(e) 
 
+
+
           }}
 
           onFileChange={(filename) => {
+            alert("WWW")
          
             filename = filename.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-\.]/g, '');
            
            // setFormValue("LOGO_NAME", filename)  NOT WORKING HERE so used querySelector
             document.querySelector("[name=LOGO_NAME]").value = filename;
+            setFormValue("LOGO_NAME", filename)
            // alert(filename)
           }}
 

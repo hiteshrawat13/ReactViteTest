@@ -7,6 +7,7 @@ import EditorMain from "../pages/editor/EditorMain"
 import CampaignList from "../pages/new/CampaignList"
 import LinkList from "../pages/new/LinkList"
 import Login from "../pages/login/Login"
+import UserHome from "../pages/dashboard/UserHome";
 
 const Router = [
   {
@@ -16,8 +17,8 @@ const Router = [
     children: [
       {
         path: "/",
-        element: <div>Dashboard</div>,
-        title: "Dashboard"
+        element: <UserHome/>,
+        title: "Campaign Builder Tool"
       },
       {
         path: '/users',
@@ -52,7 +53,8 @@ const Router = [
 
       {
         path: "/new",
-        element: <CreateCampaignPage />
+        element: <CreateCampaignPage />,
+        title: "New Campaign"
       },
 
       {

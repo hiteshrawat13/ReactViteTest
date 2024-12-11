@@ -24,11 +24,10 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
         e.preventDefault();
         const droppedFiles = e.dataTransfer.files;
         if (droppedFiles.length > 0) {
-        fileRef.files=droppedFiles
-        //setValue("THUMBNAIL_NAME",fileRef.files[0].name)
-        onImageFileChange()
-        setImagePreview()
-        
+            fileRef.files=droppedFiles
+            //setValue("THUMBNAIL_NAME",fileRef.files[0].name)
+            onImageFileChange()
+            setImagePreview()
         }
     }
 
@@ -64,9 +63,21 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
         if(onFileChange)onFileChange(fileRef.files[0].name || null);
     }
 
+
+    useEffect(()=>{
+
+        if( [".png",".jpeg",".jpg"].includes(getStateValue(name))    ){
+            console.log(getStateValue(name));
+            
+            imagePreviewRef.current.src= getStateValue("BASE_URL")+getStateValue(name)
+        }
+   
+    },[campData])
+
     useEffect(() => {
 
         setValue(name,campaignDataState.data[name])
+        
         setImagePreview()
         
         if (fileRef)
@@ -93,8 +104,7 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
                     <div className="drop-zone" 
                         onClick={handleDropZoneClick}
                         onDrop={handleDropZoneDrop}
-                        onDragOver={(event) => event.preventDefault()}
-                    >
+                        onDragOver={(event) => event.preventDefault()} >
                         Drop Image here or click to select an Image file.<br />
                         <div className='selected-file-name'>{selectedImageFileName}</div>
                     </div>

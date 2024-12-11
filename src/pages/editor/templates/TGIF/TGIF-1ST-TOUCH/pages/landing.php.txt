@@ -290,7 +290,7 @@
                         <table width="100%">
                             <tbody>
                                 <tr>
-                                    <td colspan="2"><h1 style="font-size: 22px;font-weight:normal; color: #0066b2;margin-top:10px;margin-bottom:15px;padding-left:0px;">##LANDING_TITLE##</h1></td>
+                                    <td colspan="2"><h1 style="font-size: 20px;font-weight:normal; color: #0066b2;margin-top:10px;margin-bottom:15px;padding-left:0px;">##LANDING_TITLE##</h1></td>
                                 </tr>
 
                                 <tr>

@@ -9,7 +9,7 @@ import {toggleSidebar} from '../../../store/customizer/CustomizerSlice';
 import DropdownMenu from './DropdownMenu';
 import logo from "../../../ondirect-logo.png"
 
-const NavBar = ({title="CB Tool"}) => {
+const NavBar = ({title="Campaign Builder Tool"}) => {
 
 
   
@@ -25,9 +25,9 @@ const NavBar = ({title="CB Tool"}) => {
 
       <RxHamburgerMenu />
       </button>
-      <div className='logo' style={{marginRight:"auto"}}>
+      {/* <div className='logo' style={{marginRight:"auto"}}>
             <img src={logo} alt="logo" style={{width:"150px"}} />
-        </div>
+        </div> */}
       <div style={{marginRight:"auto"}}>
         <b>{title}</b>
       </div>

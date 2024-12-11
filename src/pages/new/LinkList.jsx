@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import TemplateManager from '../editor/templates/TemplateManager';
 import "./LinkList.css"
 import CampaignDetails from './CampaignDetails';
-import instance from './ApiService';
+// import instance from './ApiService';
 import Modal from 'react-responsive-modal';
 import { useDispatch } from 'react-redux';
 import { setData, clearData, addData, updateData } from '../../store/campaign/CampaignSlice'
@@ -50,12 +50,19 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
 
 
     const updateCampaign = async (campaignData) => {
-        const response = await instance({
-            url: `/camplist/editCampList`, method: "post",
 
-            data: campaignData
 
-        })
+        const response = await axios.post(
+            Config.API_BASE_URL + `/camplist/editCampList`,
+            campaignData
+        );
+
+        // const response = await instance({
+        //     url: `/camplist/editCampList`, method: "post",
+
+        //     data: campaignData
+
+        // })
 
         if (response.data.status == 200) {
             //  navigate(`/editor/${clientCode}`,{state: { 
@@ -154,7 +161,6 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
 
                     templateId: jobject.TEMPLATE_ID,
                     templateType: jobject.LINK_TYPE
-
                 }
             })
         } catch (error) {

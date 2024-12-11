@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 
 import CampaignDetails from './CampaignDetails';
-import instance from './ApiService'
+// import instance from './ApiService'
 import { useNavigate } from 'react-router-dom'
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
@@ -11,6 +11,8 @@ import { useAuth } from '../../Auth';
 
 
 import Cookies from 'js-cookie';
+import axios from 'axios';
+import Config from '../../Config';
 const CreateCampaignPage = () => {
 
 
@@ -65,21 +67,39 @@ const CreateCampaignPage = () => {
     comment,
     country
   }) => {
-    const response = await instance({
-      url: `/camplist/createCampaign`, method: "post",
+    // const response = await instance({
+    //   url: `/camplist/createCampaign`, method: "post",
 
-      data: {
-        clientCode,
-        category,
-        campaignId,
-        campaignName,
-        campCreatedBy,
-        lastEditedBy,
-        comment,
-        country
-      }
+    //   data: {
+    //     clientCode,
+    //     category,
+    //     campaignId,
+    //     campaignName,
+    //     campCreatedBy,
+    //     lastEditedBy,
+    //     comment,
+    //     country
+    //   }
 
-    })
+    // })
+
+
+    
+    const response = await axios.post(
+      Config.API_BASE_URL +`/camplist/createCampaign`,
+        {
+            clientCode,
+            category,
+            campaignId,
+            campaignName,
+            campCreatedBy,
+            lastEditedBy,
+            comment,
+            country
+        }
+  );
+
+
 
     if (response.data.status == 200) {
       //  navigate(`/editor/${clientCode}`,{state: { 
@@ -122,8 +142,6 @@ const CreateCampaignPage = () => {
         open={isCreateCampaignModalOpened}
         onClose={()=>closeModal()}>
          <CampaignDetails campaignData={{clientCode,category,lastEditedBy,campCreatedBy}} onCancel={closeModal} onSubmit={onSubmit}/>
-
-       
       </Modal>
 
 

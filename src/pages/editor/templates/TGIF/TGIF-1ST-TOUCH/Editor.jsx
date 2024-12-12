@@ -26,7 +26,7 @@ import {
 import defaultFieldsJson from "./default-fields.json"
 import { EContext } from '../../../EditorMain'
 import PublishHelper from './PublishHelper'
- 
+
 
 
 
@@ -68,17 +68,17 @@ const Editor = ({ }) => {
 
       <HiddenField name="FTP_CONFIG_NAME" value="TGIF" />
       <HiddenField name="LOGO_FOLDER" value="logo/" />
-      <HiddenField name="LOGO_WIDTH" value={ `${(campData?.jsonObject?.LOGO_WIDTH)?campData?.jsonObject?.LOGO_WIDTH:"180"}` } />
+      <HiddenField name="LOGO_WIDTH" value={`${(campData?.jsonObject?.LOGO_WIDTH) ? campData?.jsonObject?.LOGO_WIDTH : "180"}`} />
       <HiddenField name="BASE_URL" value="https://resource.itbusinesstoday.com/whitepapers/cbtool_test/" />
       <HiddenField name="YEAR" value={new Date().getFullYear() + ""} />
       <Section title="Link Details">
 
 
-      <Row>
-      <Col>
-          <LanguageInput />
+        <Row>
+          <Col>
+            <LanguageInput />
           </Col>
-        <Col>
+          <Col>
             <TextBox label="Client Code" name="CLIENT_CODE" required={true} value={campData?.clientCode} readOnly />
             {(watch["CLIENT_CODE"] === "TEST") && <>IT WORKS</>}
             {/* {(watch["CLIENT_CODE"] === "TEST2") && setError("CLIENT_CODE","LINK ALREADY EXISTS")} */}
@@ -92,27 +92,27 @@ const Editor = ({ }) => {
         <Row>
 
           <Col>
-          
 
-        <Row>
-          <Col><SelectBox label="Region" name="REGION" value={campData?.country} required={true} readOnly
-          options={[
-            { label: "Select..", value: "" },
-            { label: "EU", value: "EU" },
-            { label: "NON-EU", value: "NON-EU" },
-            { label: "CASL", value: "CASL" },
-            { label: "Both ( NON-EU & CASL )", value: "BOTH" }
-          ]}
-          width="100%"
-        /></Col>
-        <Col>
-          <TextBox label="Campaign Id" name="CAMP_ID" required={true} value={campData?.campaignId}   readOnly />
+
+            <Row>
+              <Col><SelectBox label="Region" name="REGION" value={campData?.country} required={true} readOnly
+                options={[
+                  { label: "Select..", value: "" },
+                  { label: "EU", value: "EU" },
+                  { label: "NON-EU", value: "NON-EU" },
+                  { label: "CASL", value: "CASL" },
+                  { label: "Both ( NON-EU & CASL )", value: "BOTH" }
+                ]}
+                width="100%"
+              /></Col>
+              <Col>
+                <TextBox label="Campaign Id" name="CAMP_ID" required={true} value={campData?.campaignId} readOnly />
+              </Col>
+
+            </Row>
           </Col>
 
-        </Row>
-          </Col>
-         
-       
+
           <Col>
             <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" readOnly />
           </Col>
@@ -122,89 +122,106 @@ const Editor = ({ }) => {
 
 
         <Row>
-        
+
           <Col>
-          <TextBox label="Link Name" name="LINK_NAME" required={true} width="100%" readOnly={campData.mode === 'edit'}
+            <TextBox label="Link Name" name="LINK_NAME" required={true} width="100%" readOnly={campData.mode === 'edit'}
 
-          onChange={
-            (e) => {
-              //console.log(e.target.value);
-              e.target.value = e.target.value.replace(/\s+/g, '-');
-              e.target.value = e.target.value.replace(/[^a-zA-Z0-9-\.]/g, '');
+              onChange={
+                (e) => {
+                  //console.log(e.target.value);
+                  e.target.value = e.target.value.replace(/\s+/g, '-');
+                  e.target.value = e.target.value.replace(/[^a-zA-Z0-9-\.]/g, '');
 
-              const val = e.target.value
-              // setStateValue("THUMBNAIL_NAME",`${val}.png`)
-              // setStateValue("PDF_NAME",`${val}.pdf`)
-              // setStateValue("MP4_NAME",`${val}.mp4`)
-              setFormValue("THUMBNAIL_NAME", `${val}.png`)
-              setFormValue("EDM_THUMBNAIL_NAME", `${val}-edm.png`)
-              setFormValue("PDF_NAME", `${val}.pdf`)
-              setFormValue("MP4_NAME", `${val}.mp4`)
-              setFormValue("EXTRA_FILE_1", `${val}.png`)
+                  const val = e.target.value
+                  // setStateValue("THUMBNAIL_NAME",`${val}.png`)
+                  // setStateValue("PDF_NAME",`${val}.pdf`)
+                  // setStateValue("MP4_NAME",`${val}.mp4`)
+                  setFormValue("THUMBNAIL_NAME", `${val}.png`)
+                  setFormValue("EDM_THUMBNAIL_NAME", `${val}-edm.png`)
+                  setFormValue("PDF_NAME", `${val}.pdf`)
+                  setFormValue("MP4_NAME", `${val}.mp4`)
+                  setFormValue("EXTRA_FILE_1", `${val}.png`)
 
-            }
-          } />
+                }
+              } />
 
-        {(watch['LINK_NAME'] != "" ) && <CheckLink link={watch["BASE_URL"] + (watch['LINK_NAME']) + "-edm.html"} onExists={() => {
+            {(watch['LINK_NAME'] != "") && <CheckLink link={watch["BASE_URL"] + (watch['LINK_NAME']) + "-edm.html"} onExists={() => {
 
 
-        }} />}
+            }} />}
           </Col>
         </Row>
-   
 
 
-       
-       
-        
+
+
+
+
       </Section>
 
 
       <Section title="Details" >
 
-      
+
 
         <TextBox label="Pixel Link" name="PIXEL_LINK" required={true} />
 
         <Row>
           <Col>
-          <SelectBox label="Asset Type" name="ASSET_TYPE" required={true}
-          options={[
-            { label: "Select..", value: "" },
-            { label: "White Paper", value: "White Paper" },
-            { label: "Buyers/Comparision Guide", value: "Buyers Guide" },
-            { label: "E Book", value: "E Book" },
-            { label: "Case Study", value: "Case Study" },
-            { label: "Report", value: "Report" },
-            { label: "Webinar OnDemand", value: "Webinar" },
-            { label: "Infographic", value: "Infographic" }
-          ]}
-        />
+            <SelectBox label="Asset Type" name="ASSET_TYPE" required={true}
+              options={[
+                { label: "Select..", value: "" },
+                { label: "White Paper", value: "White Paper" },
+                { label: "Buyers/Comparision Guide", value: "Buyers Guide" },
+                { label: "E Book", value: "E Book" },
+                { label: "Case Study", value: "Case Study" },
+                { label: "Report", value: "Report" },
+                { label: "Webinar OnDemand", value: "Webinar" },
+                { label: "Infographic", value: "Infographic" }
+              ]}
+            />
           </Col>
           <Col>
-          <TextBox label="Text above the logo" name="SPONSORED_BY_TEXT" required={true} value="Sponsored by" />
+            <TextBox label="Text above the logo" name="SPONSORED_BY_TEXT" required={true} value="Sponsored by" />
           </Col>
-    
-<Col>
-<SelectBox label="EDM Layout" name="EDM_LAYOUT" required={true}
-          options={[
-            { label: "Select..", value: "" },
-            { label: "Traditional", value: "Traditional" },
-            { label: "Full width thumbnail and abstract", value: "Full width thumbnail and abstract" },
 
-          ]}
-        /></Col>
-<Col><SelectBox label="Landing Layout" name="LANDING_LAYOUT" required={true}
-          options={[
-            { label: "Select..", value: "" },
-            { label: "Traditional", value: "Traditional" },
-            { label: "Thumbnail below abstract", value: "Thumbnail below abstract" },
+          <Col>
+            <SelectBox label="EDM Layout" name="EDM_LAYOUT" required={true}
+              options={[
+                { label: "Select..", value: "" },
+                { label: "Traditional", value: "Traditional" },
+                { label: "Full width thumbnail and abstract", value: "Full width thumbnail and abstract" },
 
-          ]}
-        /></Col>
-</Row>
-        
-        
+              ]}
+            /></Col>
+          <Col><SelectBox label="Landing Layout" name="LANDING_LAYOUT" required={true}
+            options={[
+              { label: "Select..", value: "" },
+              { label: "Traditional", value: "Traditional" },
+              { label: "Thumbnail below abstract", value: "Thumbnail below abstract" },
+
+            ]}
+          /></Col>
+        </Row>
+
+
+        <Row>
+          <Col>
+            <CheckBox label="Use Custom Footer" name="USE_CUSTOM_FOOTER" defaultChecked={false} />
+            {(watch["USE_CUSTOM_FOOTER"] == true || getStateValue("USE_CUSTOM_FOOTER") == true) &&
+
+              <RichTextEditor label="Custom Footer" name="FOOTER" required={true} value={`<p><a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> | ##PRIVACY_POLICY##<br /> Copyright &#169; ##YEAR## XDBS Corporation <br /> Hawthorne, CA 90250 USA<br /> 3501, Jack Northorp Ave, Ste C3873<br /></p>`} />
+            }
+            {(watch["USE_CUSTOM_FOOTER"] == false || getStateValue("USE_CUSTOM_FOOTER") == false) && [
+              setStateValue("USE_CUSTOM_FOOTER", false),
+
+              setStateValue("FOOTER", `<p><a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> | ##PRIVACY_POLICY##<br /> Copyright &#169; ##YEAR## XDBS Corporation <br /> Hawthorne, CA 90250 USA<br /> 3501, Jack Northorp Ave, Ste C3873<br /></p>`)
+            ]}
+            {/* {(getStateValue("FOOTER") == null)&& setFormValue( "FOOTER" , `<p><a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> | ##PRIVACY_POLICY##<br /> Copyright &#169; ##YEAR## XDBS Corporation <br /> Hawthorne, CA 90250 USA<br /> 3501, Jack Northorp Ave, Ste C3873</p>`)} */}
+          </Col>
+        </Row>
+
+
       </Section>
 
 
@@ -216,43 +233,43 @@ const Editor = ({ }) => {
 
         <Row>
           <Col><TextBox label="EDM Title" name="EDM_TITLE" required={true} width="100%"
-           onChange={
-            (e) => {
-           
-              const val = e.target.value
-           
-              setFormValue("ASSET_TITLE", `${val}`)
+            onChange={
+              (e) => {
 
+                const val = e.target.value
+
+                setFormValue("ASSET_TITLE", `${val}`)
+
+              }
             }
-          }
           /></Col>
           <Col><TextBox label="EDM Sub Title" name="EDM_SUB_TITLE" required={false} width="100%" /></Col>
         </Row>
 
-        
-        
+
+
         <RichTextEditor label="Edm Abstract" name="EDM_ABSTRACT" required={true} />
         <TextBox label="EDM Optin" name="EDM_OPTIN" required={true} value="By clicking/downloading the asset, you agree to allow the sponsor to have your contact information and for the sponsor to contact you." />
-        
+
         <Row>
-          <Col> <TextBox label="EDM CTA" name="EDM_CTA" required={true}   value="Download Now" /></Col>
-          <Col> 
+          <Col> <TextBox label="EDM CTA" name="EDM_CTA" required={true} value="Download Now" /></Col>
+          <Col>
             <RadioGroup name="EDM_CTA_ALIGNMENT" label="CTA Alignment" options={[
-            { label: "Left", value: "left" },
-            { label: "Center", value: "center" },
-            { label: "Right", value: "right" },
-          
-          ]} />
+              { label: "Left", value: "left" },
+              { label: "Center", value: "center" },
+              { label: "Right", value: "right" },
+
+            ]} />
           </Col>
         </Row>
-       
-        <TextBox label="EDM TEXT BELOW CTA Button" name="EDM_TEXT_BELOW_CTA"  html/>
+
+        <TextBox label="EDM TEXT BELOW CTA Button" name="EDM_TEXT_BELOW_CTA" html />
       </Section>
 
 
       <Section title="Landing Page Details">
 
-        <CheckBox label="Landing title is same as EDM title" name="LANDING_TITLE_SAME_AS_EDM_TITLE" defaultChecked={true}/>
+        <CheckBox label="Landing title is same as EDM title" name="LANDING_TITLE_SAME_AS_EDM_TITLE" defaultChecked={true} />
 
         {(watch["LANDING_TITLE_SAME_AS_EDM_TITLE"] == false) &&
           <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} />
@@ -329,15 +346,15 @@ const Editor = ({ }) => {
         <Row>
           <Col><LogoInput name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1} /></Col>
           <Col>
-          <FileInput name="THUMBNAIL_NAME" label="Thumbnail" tag="file" fileRef={filesRef.current.fileInput2} />
-        <CheckBox label="Add border to thumbnail" name="THUMBNAIL_BORDER" defaultChecked={true} />
-        </Col>
+            <FileInput name="THUMBNAIL_NAME" label="Thumbnail" tag="file" fileRef={filesRef.current.fileInput2} />
+            <CheckBox label="Add border to thumbnail" name="THUMBNAIL_BORDER" defaultChecked={true} />
+          </Col>
         </Row>
 
 
-      
+
         <CheckBox label="Use different thumbnail for edm page" name="USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE" />
-         
+
         {(watch["USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE"] == true) &&
           <FileInput name="EDM_THUMBNAIL_NAME" label="EDM Thumbnail" tag="file" fileRef={filesRef.current.fileInput3} />
         }
@@ -345,8 +362,11 @@ const Editor = ({ }) => {
 
         <CheckBox label="Upload Extra Image [EXTRA_FILE_1]" name="ADD_EXTRA_FILE_1" />
         {(watch["ADD_EXTRA_FILE_1"] == true) &&
-          <FileInput name="EXTRA_FILE_1" label="Extra Image" tag="file" fileRef={filesRef.current.fileInput4} onChange={(filename) => {
-            setFormValue("EXTRA_FILE_1", filename)
+          <FileInput name="EXTRA_FILE_1" label="Extra Image" tag="file" fileRef={filesRef.current.fileInput4} onChange={(e) => {
+        setFormValue("EXTRA_FILE_1",e.target.value)
+
+            
+            
           }} />
         }
 
@@ -354,7 +374,7 @@ const Editor = ({ }) => {
 
       <Section title="Asset">
 
-      <TextBox label="Asset Title" name="ASSET_TITLE" required={true} />
+        <TextBox label="Asset Title" name="ASSET_TITLE" required={true} />
 
 
         <RadioGroup name="ASSET_FORMAT" label="Asset Format" required={true} options={[
@@ -389,39 +409,39 @@ const Editor = ({ }) => {
 
     <Step title="Form" key={1104}>
       <Section>
-      <FormBuilder defaultFieldsJson={defaultFieldsJson} />
+        <FormBuilder defaultFieldsJson={defaultFieldsJson} />
       </Section>
     </Step>
 
     <Step title="Preview" key={1105}>
       <Section>
-      <Preview publishHelper={publishHelperRef.current} filesRef={filesRef.current} controls={
-        ({ iframe }) => {
-          return <>
-            <div style={{
-              background: 'white',
-              height: 'fit-content',
-              margin: '30px 10px',
-              padding: '10px',
-              paddingTop: '3px'
-            }}>
-              <TextBox type="number" label="Logo Width" name="LOGO_WIDTH"  onChange={(e) => {
+        <Preview publishHelper={publishHelperRef.current} filesRef={filesRef.current} controls={
+          ({ iframe }) => {
+            return <>
+              <div style={{
+                background: 'white',
+                height: 'fit-content',
+                margin: '30px 10px',
+                padding: '10px',
+                paddingTop: '3px'
+              }}>
+                <TextBox type="number" label="Logo Width" name="LOGO_WIDTH" onChange={(e) => {
 
-                console.log(e);
-                
+                  console.log(e);
 
-                iframe.contentDocument.querySelector('.splogo').style.width = e.target.value + "px"
 
-                console.log(iframe.contentDocument.querySelector('.splogo'));
+                  iframe.contentDocument.querySelector('.splogo').style.width = e.target.value + "px"
 
-                setStateValue("LOGO_WIDTH", e.target.value)
+                  console.log(iframe.contentDocument.querySelector('.splogo'));
 
-              }} />
+                  setStateValue("LOGO_WIDTH", e.target.value)
 
-            </div>
-          </>
-        }
-      } />
+                }} />
+
+              </div>
+            </>
+          }
+        } />
       </Section>
     </Step>
 

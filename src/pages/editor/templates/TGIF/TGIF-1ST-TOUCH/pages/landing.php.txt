@@ -116,8 +116,8 @@
             
             }
 
-			p,
-			ul {
+			.abstract p,
+			.abstract ul {
 				font-size: 14px;
 				line-height: 1.5;
 				color: #505050;
@@ -196,6 +196,18 @@
             }
 
            .hide{display:none;} 
+
+
+               .abstract p , .abstract ul{
+                 font-size: 14px;
+                line-height: 1.5;
+                color: #505050;
+            }
+
+
+            .footer p{
+                            font-size: 11px;
+            }
         </style>
 
         <script>
@@ -345,12 +357,8 @@
                 </tr>
                 <tr>
                     <td height="50" align="center" style="border-top: 1px solid rgb(192, 192, 192); background-color: #ffff;">
-                        <div align="center" style="padding-top: 1%; padding-bottom: 1%; font-size: 11px;">
-                        <a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> | ##PRIVACY_POLICY##
-                            <br />
-                            Copyright &#169; ##YEAR## XDBS Corporation <br />
-                            Hawthorne, CA 90250 USA <br />
-                            3501, Jack Northorp Ave, Ste C3873
+                        <div align="center" class="footer"  style="padding-top: 1%; padding-bottom: 1%; font-size: 11px;">
+                          ##FOOTER##
                         </div>
                     </td>
                 </tr>

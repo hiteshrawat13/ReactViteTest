@@ -20,10 +20,31 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
   const [firstPageName, setFirstPageName] = useState(null)
   const { socketConnected, socketId, socketSessionId, socketUploadProgress } = useSocket()
   const [FTPProgress, setFTPProgress] = useState("")
+  const [uploadedFiles,setUploadedFiles]=useState([])
   const token = Cookies.get('access_token');
   const userName = Cookies.get('user_id');
 
 
+
+  const getUploadedFilesList=async (link)=>{
+    try {
+      const response = await axios.post(
+          Config.API_BASE_URL + `/camplist/getLinkJsonData?link=${encodeURIComponent(link)}`
+      );
+
+
+      console.log(response.data);
+      const jobject = JSON.parse(response.data.json_data)
+
+      if(jobject.files){
+        setUploadedFiles((uploadedFiles)=>[...new Set([...uploadedFiles,...jobject.files]) ] )
+      }
+       
+  } catch (error) {
+      alert(error)
+      console.log(error);
+  }
+  }
 
 
 
@@ -60,6 +81,7 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
 
     setFirstPageName(templatefiles[0].name)
     setFilesToUpload(uploadFiles)
+    getUploadedFilesList(campaignDataState.data["BASE_URL"] + templatefiles[0].name)
 
   }
 
@@ -279,9 +301,15 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
   }
 
 
+ 
+
   useEffect(() => {
     handleGetFiles()
+
+   
   }, [publishHelper.current])
+
+
 
 
 
@@ -371,6 +399,18 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
 
 
       <button className='greenBtn' onClick={(e) => { e.preventDefault(); handleSaveLink() }}>Save Link</button>
+
+      <br/>
+      <ul>
+      {
+      uploadedFiles.map((uploadedFile,i)=>{
+        return <li key={i}><a href={campaignDataState.data["BASE_URL"] + uploadedFile }>{uploadedFile}</a></li>
+        
+      })
+      }
+      </ul>
+      
+      <br/>
     </ >
   )
 }

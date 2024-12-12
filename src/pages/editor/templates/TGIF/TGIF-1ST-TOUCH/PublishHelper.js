@@ -71,6 +71,29 @@ This is to convert Chinese characters to Unicode numbers
     }
 
 
+    replaceHashVariables(data_in) {
+        let data = data_in
+    
+
+        for (const [key, value] of Object.entries(this.state)) {
+            try {
+                if (typeof value === 'string' || value instanceof String)
+                    data = data.replaceAll(`##${key}##`, this.convertToEntities(value))
+            } catch (error) {
+                console.log("Error while replaceAll in of publishHelper ", error, key, value);
+            }
+        }
+
+
+        const regex = /##.+##/g;
+        let matches=data.match(regex)
+
+      
+
+        return data;
+    }
+
+ 
     getFormCurlApiSendmailMappedData(fields) {
 
 
@@ -90,6 +113,11 @@ This is to convert Chinese characters to Unicode numbers
             }
         ];
         `
+    }
+
+
+    getFooter(){
+        //const this.state.FOOTER = `<a href="https://itbusinesstoday.com/eu-data-protection">Privacy Policy</a>`
     }
 
 
@@ -127,7 +155,7 @@ This is to convert Chinese characters to Unicode numbers
                                 <tr scope="col">
                                     <td style="vertical-align: top;padding-right: 18px;">
                                 
-										<div class="edm_abstract">
+										<div class="abstract edm_abstract">
 											##EDM_ABSTRACT##
 										</div>
 
@@ -159,7 +187,7 @@ This is to convert Chinese characters to Unicode numbers
 
 								<tr>
 									<td colspan="2">
-										<div class="edm_abstract">
+										<div class="abstract edm_abstract">
 											##EDM_ABSTRACT##
 										</div>
 									</td>
@@ -185,8 +213,7 @@ This is to convert Chinese characters to Unicode numbers
         
 
 
-        data = this.convertToEntities(this.getPrivacyPolicy(data)) //Privacy Policy
-
+      
 
 
         if (forPreview == true) {
@@ -209,14 +236,15 @@ This is to convert Chinese characters to Unicode numbers
             data = data.replaceAll(`##EDM_SUB_TITLE##`, "")
         }
 
-        for (const [key, value] of Object.entries(this.state)) {
-            try {
-                if (typeof value === 'string' || value instanceof String)
-                    data = data.replaceAll(`##${key}##`, this.convertToEntities(value))
-            } catch (error) {
-                console.log("Error while replaceAll in getLandingHtml() of publishHelper ", error, key, value);
-            }
-        }
+  
+
+        data=this.replaceHashVariables(data)
+        data=this.replaceHashVariables(data)
+        data=this.replaceHashVariables(data)
+        data=this.replaceHashVariables(data)
+
+        data = this.convertToEntities(this.getPrivacyPolicy(data)) //Privacy Policy
+
         return data
     }
 
@@ -278,15 +306,12 @@ This is to convert Chinese characters to Unicode numbers
 
         data = data.replaceAll(`##FORM##`, this.convertToEntities(this.getFormHtml(this.state.form, TGIFFormRenderer)))
 
-        for (const [key, value] of Object.entries(this.state)) {
-            try {
-                if (typeof value === 'string' || value instanceof String)
-                    data = data.replaceAll(`##${key}##`, this.convertToEntities(value))
-            } catch (error) {
-                console.log("Error while replaceAll in getLandingHtml() of publishHelper ", error, key, value);
-            }
-        }
+        data=this.replaceHashVariables(data)
+        data=this.replaceHashVariables(data)
+        data=this.replaceHashVariables(data)
+        data=this.replaceHashVariables(data)
 
+        data = this.convertToEntities(this.getPrivacyPolicy(data)) //Privacy Policy
 
         return data
         //return JSON.stringify(this.thumbnailDataUrl)+" "+JSON.stringify(this.state)
@@ -318,21 +343,9 @@ This is to convert Chinese characters to Unicode numbers
         }
 
 
-        for (const [key, value] of Object.entries(this.state)) {
-            try {
-                if (typeof value === 'string' || value instanceof String)
-                    data = data.replaceAll(`##${key}##`, this.convertToEntities(value))
-            } catch (error) {
-                console.log("Error while replaceAll in getSendmailHtml of publishHelper ", error, key, value);
-            }
-        }
+        data=this.replaceHashVariables(data)
 
-
-
-        
-
-
-
+ 
 
         if (forPreview == true) {
             //Escape html for preview to prevent redirects
@@ -441,14 +454,12 @@ This is to convert Chinese characters to Unicode numbers
         }
 
 
-        for (const [key, value] of Object.entries(this.state)) {
-            try {
-                if (typeof value === 'string' || value instanceof String)
-                    data = data.replaceAll(`##${key}##`, this.convertToEntities(value))
-            } catch (error) {
-                console.log("Error while replaceAll in getThankyou of publishHelper ", error, key, value);
-            }
-        }
+        data=this.replaceHashVariables(data)
+        data=this.replaceHashVariables(data)
+        data=this.replaceHashVariables(data)
+        data=this.replaceHashVariables(data)
+
+        data = this.convertToEntities(this.getPrivacyPolicy(data)) //Privacy Policy
         return data
     }
     getThankyouDoubleOptinHtml({ forPreview }) {

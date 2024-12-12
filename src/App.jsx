@@ -31,11 +31,7 @@ function App() {
 
   return (
     <>
-      
     <Dashboard/> 
-
-  
-      
     </>
   )
 }

@@ -5,7 +5,7 @@ import { MdEdit } from "react-icons/md";
 import RichTextEditor from './RichTextEditor';
 import Modal from 'react-responsive-modal';
 
-const TextBox = ({type=null,label,name,required,width=null,onChange=null,value=null,html=null,...rest}) => {
+const TextBox = ({type=null,label,name,required,width=null,onChange=null,value=null,html=null,helpText=null,...rest}) => {
   const campaignDataState = useSelector(state => state.campaignData)
   const {register,unregister,getValues,setValue,watch,formState: { errors }} = useFormContext() 
 
@@ -53,6 +53,7 @@ const TextBox = ({type=null,label,name,required,width=null,onChange=null,value=n
       
         {errors[name] && errors[name].type!="custom" && <span className='error'>{label || "This"} field is required</span>}
         {errors[name] && errors[name].type=="custom" && <span className='error'>{errors[name].message}</span>}
+        {helpText && <div className='help-text'>{htmlText}</div>}
        
     </div>
   )

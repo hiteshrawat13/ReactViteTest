@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 
-const SelectBox = ({label,name,value=null,required,options,width=null,...rest}) => {
+const SelectBox = ({label,name,value=null,required,options,width=null,helpText=null,...rest}) => {
     const campaignDataState = useSelector(state => state.campaignData)
     const { register,unregister,setValue, formState: { errors } } = useFormContext()
 
@@ -31,7 +31,8 @@ const SelectBox = ({label,name,value=null,required,options,width=null,...rest}) 
             {errors[name] && <div className='error-icon'>!</div>}
             </div>
             {errors[name] && <span className='error'>This field is required</span>}
-
+            {errors[name] && errors[name].type=="custom" && <span className='error'>{errors[name].message}</span>}
+            {helpText && <div className='help-text'>{htmlText}</div>}
         </div>
     )
 }

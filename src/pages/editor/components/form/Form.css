@@ -90,6 +90,11 @@ form{
         font-size: 12px;
     }
 
+    .help-text{
+        font-size: 13px;
+        color:#383838;
+    }
+
 
     
 
@@ -313,3 +318,28 @@ form{
   .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
 
+
+
+
+
+  /* Uploaded File List */
+  .uploadedFileList {
+
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap:5px;
+        li{
+        background-color: #fff;
+
+        padding: 5px;
+        border:1px solid #b6b6b6;
+        border-radius: 5px;
+        font-size: 12px;
+        align-self: flex-start;
+
+            a{
+                text-decoration: none;
+            }
+        }
+  }

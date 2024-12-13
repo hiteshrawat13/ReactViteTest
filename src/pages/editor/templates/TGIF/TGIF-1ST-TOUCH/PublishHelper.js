@@ -363,10 +363,10 @@ This is to convert Chinese characters to Unicode numbers
                             <tbody>
                                 <tr>
                                     <td align="left" class="whitepaper" style="align-items: start; display: flex;">
-                                        <img  style=" height: auto !important; ##THUMBNAIL_BORDER##    border-radius: 5px;" alt="##EDM_TITLE##" src="##BASE_URL####THUMBNAIL_NAME##" width="180"   />
+                                        <img  class="thumbnail"  alt="##EDM_TITLE##" src="##BASE_URL####THUMBNAIL_NAME##"    />
                                     </td>
 
-                                    <td align="left" valign="top" class="style1 thankyou">
+                                    <td align="left" valign="top" class="style1 thankyou abstract">
 
                                         ${this.state["NORMAL_THANK_YOU_PAGE_TEXT"]}
 

@@ -53,7 +53,7 @@ const TextBox = ({type=null,label,name,required,width=null,onChange=null,value=n
       
         {errors[name] && errors[name].type!="custom" && <span className='error'>{label || "This"} field is required</span>}
         {errors[name] && errors[name].type=="custom" && <span className='error'>{errors[name].message}</span>}
-        {helpText && <div className='help-text'>{htmlText}</div>}
+        {helpText && <div className='help-text'>{helpText}</div>}
        
     </div>
   )

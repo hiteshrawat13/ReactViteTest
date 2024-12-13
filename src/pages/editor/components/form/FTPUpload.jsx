@@ -14,36 +14,36 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
 
   const [isFTPUploadModalOpened, setFTPUploadModalOpened] = useState(false)
   const campaignDataState = useSelector(state => state.campaignData)
- 
+
   const [filesToUpload, setFilesToUpload] = useState([])
   const [uploading, setUploading] = useState(false);
   const [firstPageName, setFirstPageName] = useState(null)
   const { socketConnected, socketId, socketSessionId, socketUploadProgress } = useSocket()
   const [FTPProgress, setFTPProgress] = useState("")
-  const [uploadedFiles,setUploadedFiles]=useState([])
+  const [uploadedFiles, setUploadedFiles] = useState([])
   const token = Cookies.get('access_token');
   const userName = Cookies.get('user_id');
 
 
 
-  const getUploadedFilesList=async (link)=>{
+  const getUploadedFilesList = async (link) => {
     try {
       const response = await axios.post(
-          Config.API_BASE_URL + `/camplist/getLinkJsonData?link=${encodeURIComponent(link)}`
+        Config.API_BASE_URL + `/camplist/getLinkJsonData?link=${encodeURIComponent(link)}`
       );
 
 
       console.log(response.data);
       const jobject = JSON.parse(response.data.json_data)
 
-      if(jobject.files){
-        setUploadedFiles((uploadedFiles)=>[...new Set([...uploadedFiles,...jobject.files]) ] )
+      if (jobject.files) {
+        setUploadedFiles((uploadedFiles) => [...new Set([...uploadedFiles, ...jobject.files])])
       }
-       
-  } catch (error) {
+
+    } catch (error) {
       alert(error)
       console.log(error);
-  }
+    }
   }
 
 
@@ -61,7 +61,7 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
           name: campaignDataState.data[filesRef[key].dataset.name],
           file: filesRef[key].files[0],
           progress: 0,
-          selected:true
+          selected: true
         })
       }
 
@@ -75,7 +75,7 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
         name: file.name,
         data: file.data,
         progress: 0,
-        selected:true
+        selected: true
       })
     })
 
@@ -142,8 +142,8 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
 
     let templateFiles = []
     filesToUpload.forEach(file => {
-      if (file.selected==false)
-        return; 
+      if (file.selected == false)
+        return;
 
       if (file.type === "logo") {
         bodyFormData.append('logoFile', file.name);//order important here  first logoFile then files[]
@@ -168,26 +168,26 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
 
 
 
-  const handleFileCheckbox=(e,i)=>{
+  const handleFileCheckbox = (e, i) => {
     //e?.preventDefault() Dont use e.prevent default on checkbox it will not update on single click
     e.stopPropagation()
-    
 
 
 
-        // 1. Find the todo with the provided id
-        const currentTodoIndex = i;
 
-        // 2. Mark the todo as complete
-        if (currentTodoIndex != -1) {
-          const updatedTodo = { ...filesToUpload[currentTodoIndex], selected: e.target.checked };
-          // 3. Update the todo list with the updated todo
-          setFilesToUpload((previous) => [
-            ...previous.slice(0, currentTodoIndex),
-            updatedTodo,
-            ...previous.slice(currentTodoIndex + 1)])
-        }
-        console.log(filesToUpload );
+    // 1. Find the todo with the provided id
+    const currentTodoIndex = i;
+
+    // 2. Mark the todo as complete
+    if (currentTodoIndex != -1) {
+      const updatedTodo = { ...filesToUpload[currentTodoIndex], selected: e.target.checked };
+      // 3. Update the todo list with the updated todo
+      setFilesToUpload((previous) => [
+        ...previous.slice(0, currentTodoIndex),
+        updatedTodo,
+        ...previous.slice(currentTodoIndex + 1)])
+    }
+    console.log(filesToUpload);
   }
 
 
@@ -282,12 +282,14 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
 
 
           setUploading(false)
+          getUploadedFilesList(campaignDataState.data["BASE_URL"] + firstPageName)
         })
         .catch(function (err) {
           console.log(err, "ERROR");
-          alert(err.response.data.message)
+
           setUploading(false)
           setFTPProgress(err.message)
+          getUploadedFilesList(campaignDataState.data["BASE_URL"] + firstPageName)
         });
 
 
@@ -297,16 +299,17 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
     } catch (error) {
       console.log(error);
       setUploading(false)
+      getUploadedFilesList(campaignDataState.data["BASE_URL"] + firstPageName)
     }
   }
 
 
- 
+
 
   useEffect(() => {
     handleGetFiles()
 
-   
+
   }, [publishHelper.current])
 
 
@@ -354,13 +357,13 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
         return <div className="fileToUpload" key={i}>
           <div className='fileName'>{file.name} <CheckLink link={campaignDataState.data["BASE_URL"] + file.name} /></div>
           <div className='fileProgress'>{file.progress}</div>
-          <div><input type="checkbox" onChange={(e)=>handleFileCheckbox(e,i)} checked={file.selected} value={file.selected}/></div>
+          <div><input type="checkbox" onChange={(e) => handleFileCheckbox(e, i)} checked={file.selected} value={file.selected} /></div>
         </div>
       })}
 
 
 
-      <button className='greenBtn' onClick={(e) =>{e.preventDefault(); setFTPUploadModalOpened(true)} }>Upload Files</button>
+      <button className='greenBtn' onClick={(e) => { e.preventDefault(); setFTPUploadModalOpened(true) }}>Upload Files</button>
       <Modal
         closeOnOverlayClick={false}
         center
@@ -370,21 +373,21 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
 
         <div style={{ width: "600px" }}>
 
-        <p style={{fontSize:"13px"}}><strong>Important Message:</strong><br/><strong>Do NOT upload duplicate content!</strong> Before submitting any files (including links, abstract titles, logos, or thumbnails), <strong>immediately verify</strong> that they are unique. Uploading duplicates may cause critical errors, data conflicts, and severe system issues. Our system actively checks for duplicate entries, and <strong>repeated uploads could result in serious consequences</strong>. <strong>After uploading, you MUST check all content</strong> to ensure it has been correctly submitted and is free from duplication. <strong>Double-check your files and verify the content after upload</strong> to prevent unnecessary disruption and redundancy.<br/><br/></p>
+          <p style={{ fontSize: "13px" }}><strong>Important Message:</strong><br /><strong>Do NOT upload duplicate content!</strong> Before submitting any files (including links, abstract titles, logos, or thumbnails), <strong>immediately verify</strong> that they are unique. Uploading duplicates may cause critical errors, data conflicts, and severe system issues. Our system actively checks for duplicate entries, and <strong>repeated uploads could result in serious consequences</strong>. <strong>After uploading, you MUST check all content</strong> to ensure it has been correctly submitted and is free from duplication. <strong>Double-check your files and verify the content after upload</strong> to prevent unnecessary disruption and redundancy.<br /><br /></p>
 
 
           <div>Socket Id: {socketId}</div>
           <div> {(socketConnected) ? <b style={{ color: "green" }}>Upload Server Connected</b> : <b style={{ color: "red" }}>Upload Server Disconnected</b>}</div>
           <br />
-          <div style={{display:"table",width:"100%",borderCollapse: "collapse" }}>
-          {filesToUpload.map((file, i) => {
-            return <div className="fileToUpload" key={i}  style={ {display:"table-row",width:"100%",backgroundColor:`${file.selected==true?'#209fcd':'transparent' }`} }>
-              <div className='fileName' style={{display:"table-cell",padding:"10px"}}>{file.name} </div>
-              <div className='fileProgress' style={{display:"table-cell",padding:"10px"}}>{file.progress}</div>
-              <div><input type="checkbox"  style={{display:"table-cell",padding:"10px"}} onChange={(e)=>handleFileCheckbox(e,i)} checked={file.selected} value={file.selected}/></div>
-            </div>
-          })}
-        </div>
+          <table style={{ display: "table", width: "100%", borderCollapse: "collapse" }}>
+            {filesToUpload.map((file, i) => {
+              return <tr className="fileToUpload" key={i} style={{ display: "table-row", width: "100%", backgroundColor: `${file.selected == true ? '#209fcd' : 'transparent'}` }}>
+                <td className='fileName' style={{ display: "table-cell", padding: "10px" }}>{file.name} </td>
+                <td className='fileProgress' style={{ display: "table-cell", padding: "10px" }}>{file.progress}</td>
+                <td><input type="checkbox" style={{ display: "table-cell", padding: "10px" }} onChange={(e) => handleFileCheckbox(e, i)} checked={file.selected} value={file.selected} /></td>
+              </tr>
+            })}
+          </table>
           <div>{JSON.stringify(FTPProgress)}</div>
 
           {(uploading) ? <div >Uploading</div> : <button className='greenBtn' onClick={(e) => { e.preventDefault(); handleUploadFiles() }}>Upload to Server</button>
@@ -400,17 +403,18 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
 
       <button className='greenBtn' onClick={(e) => { e.preventDefault(); handleSaveLink() }}>Save Link</button>
 
-      <br/>
-      <ul>
-      {
-      uploadedFiles.map((uploadedFile,i)=>{
-        return <li key={i}><a href={campaignDataState.data["BASE_URL"] + uploadedFile }>{uploadedFile}</a></li>
-        
-      })
-      }
+      <br />
+      <h4>Uploaded files to server ({uploadedFiles.length}): </h4>
+      <ul className='uploadedFileList'>
+        {
+          uploadedFiles.map((uploadedFile, i) => {
+            return <li key={i}><a href={campaignDataState.data["BASE_URL"] + uploadedFile} target="_BLANK">{uploadedFile}</a></li>
+
+          })
+        }
       </ul>
-      
-      <br/>
+
+      <br />
     </ >
   )
 }

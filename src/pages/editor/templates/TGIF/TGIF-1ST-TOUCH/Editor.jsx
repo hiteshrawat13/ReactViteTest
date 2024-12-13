@@ -26,6 +26,7 @@ import {
 import defaultFieldsJson from "./default-fields.json"
 import { EContext } from '../../../EditorMain'
 import PublishHelper from './PublishHelper'
+import Speakers from '../../../components/form/Speakers'
 
 
 
@@ -160,6 +161,10 @@ const Editor = ({ }) => {
       </Section>
 
 
+      <Section>
+        <Speakers filesRef={filesRef}/>
+      </Section>
+
       <Section title="Details" >
 
 
@@ -205,7 +210,14 @@ const Editor = ({ }) => {
         </Row>
 
 
-        <Row>
+       
+
+
+      </Section>
+
+
+      <Section title="Advanced Options" >
+      <Row>
           <Col>
             <CheckBox label="Use Custom Footer" name="USE_CUSTOM_FOOTER" defaultChecked={false} />
             {(watch["USE_CUSTOM_FOOTER"] == true || getStateValue("USE_CUSTOM_FOOTER") == true) &&
@@ -220,8 +232,6 @@ const Editor = ({ }) => {
             {/* {(getStateValue("FOOTER") == null)&& setFormValue( "FOOTER" , `<p><a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> | ##PRIVACY_POLICY##<br /> Copyright &#169; ##YEAR## XDBS Corporation <br /> Hawthorne, CA 90250 USA<br /> 3501, Jack Northorp Ave, Ste C3873</p>`)} */}
           </Col>
         </Row>
-
-
       </Section>
 
 
@@ -249,7 +259,7 @@ const Editor = ({ }) => {
 
 
         <RichTextEditor label="Edm Abstract" name="EDM_ABSTRACT" required={true} />
-        <TextBox label="EDM Optin" name="EDM_OPTIN" required={true} value="By clicking/downloading the asset, you agree to allow the sponsor to have your contact information and for the sponsor to contact you." />
+        <TextBox label="EDM Optin" name="EDM_OPTIN" required={true} value="By clicking/downloading the asset, you agree to allow the sponsor to have your contact information and for the sponsor to contact you." html/>
 
         <Row>
           <Col> <TextBox label="EDM CTA" name="EDM_CTA" required={true} value="Download Now" /></Col>
@@ -263,7 +273,7 @@ const Editor = ({ }) => {
           </Col>
         </Row>
 
-        <TextBox label="EDM TEXT BELOW CTA Button" name="EDM_TEXT_BELOW_CTA" html />
+        <TextBox label="Add Text Below the CTA Button" name="EDM_TEXT_BELOW_CTA" html />
       </Section>
 
 
@@ -360,21 +370,17 @@ const Editor = ({ }) => {
         }
 
 
-        <CheckBox label="Upload Extra Image [EXTRA_FILE_1]" name="ADD_EXTRA_FILE_1" />
-        {(watch["ADD_EXTRA_FILE_1"] == true) &&
-          <FileInput name="EXTRA_FILE_1" label="Extra Image" tag="file" fileRef={filesRef.current.fileInput4} onChange={(e) => {
-        setFormValue("EXTRA_FILE_1",e.target.value)
-
-            
-            
-          }} />
-        }
+     
 
       </Section>
 
+
+  
+
+
       <Section title="Asset">
 
-        <TextBox label="Asset Title" name="ASSET_TITLE" required={true} />
+        <TextBox label="Asset Title" name="ASSET_TITLE" required={true} helpText={`Asset title will be displayed in thanks.php and sendmail.php file.`}/>
 
 
         <RadioGroup name="ASSET_FORMAT" label="Asset Format" required={true} options={[
@@ -404,6 +410,122 @@ const Editor = ({ }) => {
 
 
       </Section>
+
+
+
+
+
+ {/* Extra Files Upload Section Start*/}
+ <Section title="Extra files to upload">
+   
+   <Row>
+     <Col>
+       <CheckBox label="Upload Extra File [EXTRA_FILE_1]" name="ADD_EXTRA_FILE_1" defaultChecked={false} />
+       {(watch["ADD_EXTRA_FILE_1"] == true) &&
+         <FileInput name="EXTRA_FILE_1" label="Extra File 1" tag="file" fileRef={filesRef.current.fileInput4} onChange={(e) => { setFormValue("EXTRA_FILE_1",e.target.value) }} />
+       }
+     </Col>
+   </Row>
+
+
+
+   <Row>
+     <Col>
+       <CheckBox label="Upload Extra File [EXTRA_FILE_2]" name="ADD_EXTRA_FILE_2" defaultChecked={false}/>
+       {(watch["ADD_EXTRA_FILE_2"] == true) &&
+         <FileInput name="EXTRA_FILE_2" label="Extra File 2" tag="file" fileRef={filesRef.current.fileInput5} onChange={(e) => { setFormValue("EXTRA_FILE_2",e.target.value) }} />
+       }
+     </Col>
+   </Row>
+
+
+   <Row>
+     <Col>
+       <CheckBox label="Upload Extra File [EXTRA_FILE_3]" name="ADD_EXTRA_FILE_3" defaultChecked={false}/>
+       {(watch["ADD_EXTRA_FILE_3"] == true) &&
+         <FileInput name="EXTRA_FILE_3" label="Extra File 3" tag="file" fileRef={filesRef.current.fileInput6} onChange={(e) => {  setFormValue("EXTRA_FILE_3",e.target.value) }} />
+       }
+     </Col>
+   </Row>
+
+
+   <Row>
+     <Col>
+       <CheckBox label="Upload Extra File [EXTRA_FILE_4]" name="ADD_EXTRA_FILE_4" defaultChecked={false}/>
+       {(watch["ADD_EXTRA_FILE_4"] == true) &&
+         <FileInput name="EXTRA_FILE_4" label="Extra File 4" tag="file" fileRef={filesRef.current.fileInput7} onChange={(e) => { setFormValue("EXTRA_FILE_4",e.target.value) }} />
+       }
+     </Col>
+   </Row>
+
+
+   
+   <Row>
+     <Col>
+       <CheckBox label="Upload Extra File [EXTRA_FILE_5]" name="ADD_EXTRA_FILE_5" defaultChecked={false} />
+       {(watch["ADD_EXTRA_FILE_5"] == true) &&
+         <FileInput name="EXTRA_FILE_5" label="Extra File 5" tag="file" fileRef={filesRef.current.fileInput8} onChange={(e) => { setFormValue("EXTRA_FILE_5",e.target.value) }} />
+       }
+     </Col>
+   </Row>
+
+
+       
+   <Row>
+     <Col>
+       <CheckBox label="Upload Extra File [EXTRA_FILE_6]" name="ADD_EXTRA_FILE_6" defaultChecked={false} />
+       {(watch["ADD_EXTRA_FILE_6"] == true) &&
+         <FileInput name="EXTRA_FILE_6" label="Extra File 6" tag="file" fileRef={filesRef.current.fileInput9} onChange={(e) => { setFormValue("EXTRA_FILE_6",e.target.value) }} />
+       }
+     </Col>
+   </Row>
+
+
+       
+   <Row>
+     <Col>
+       <CheckBox label="Upload Extra File [EXTRA_FILE_7]" name="ADD_EXTRA_FILE_7" defaultChecked={false}/>
+       {(watch["ADD_EXTRA_FILE_7"] == true) &&
+         <FileInput name="EXTRA_FILE_7" label="Extra File 7" tag="file" fileRef={filesRef.current.fileInput10} onChange={(e) => { setFormValue("EXTRA_FILE_7",e.target.value) }} />
+       }
+     </Col>
+   </Row>
+
+
+   <Row>
+     <Col>
+       <CheckBox label="Upload Extra File [EXTRA_FILE_8]" name="ADD_EXTRA_FILE_8" defaultChecked={false}/>
+       {(watch["ADD_EXTRA_FILE_8"] == true) &&
+         <FileInput name="EXTRA_FILE_8" label="Extra File 8" tag="file" fileRef={filesRef.current.fileInput11} onChange={(e) => { setFormValue("EXTRA_FILE_8",e.target.value) }} />
+       }
+     </Col>
+   </Row>
+
+
+   <Row>
+     <Col>
+       <CheckBox label="Upload Extra File [EXTRA_FILE_9]" name="ADD_EXTRA_FILE_9" defaultChecked={false}/>
+       {(watch["ADD_EXTRA_FILE_9"] == true) &&
+         <FileInput name="EXTRA_FILE_9" label="Extra File 9" tag="file" fileRef={filesRef.current.fileInput12} onChange={(e) => { setFormValue("EXTRA_FILE_9",e.target.value) }} />
+       }
+     </Col>
+   </Row>
+
+
+   <Row>
+     <Col>
+       <CheckBox label="Upload Extra File [EXTRA_FILE_10]" name="ADD_EXTRA_FILE_10" defaultChecked={false}/>
+       {(watch["ADD_EXTRA_FILE_10"] == true) &&
+         <FileInput name="EXTRA_FILE_10" label="Extra File 10" tag="file" fileRef={filesRef.current.fileInput13} onChange={(e) => {  setFormValue("EXTRA_FILE_10",e.target.value)  }} />
+       }
+     </Col>
+   </Row>
+
+ </Section>
+ {/* Extra Files Upload Section End */}
+
+
+
     </Step>
 
 

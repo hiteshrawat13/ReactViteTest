@@ -110,7 +110,7 @@
                 border-radius: 5px;
             }
             .landing_abstract{
-                font-size: 14px;
+                font-size: 13px;
 				line-height: 1.5;
 				color: #505050;
             

@@ -23,8 +23,7 @@ const Step =  ({ children}) => {
     useEffect(() => {
       //console.log(watchedValue);
       //This condition passes to top form value change
-      
-        setWatch(watchedValue)
+      setWatch(watchedValue)
       return () => {
        
       }

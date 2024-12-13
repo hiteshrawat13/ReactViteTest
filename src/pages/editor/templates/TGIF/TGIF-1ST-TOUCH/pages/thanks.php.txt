@@ -69,10 +69,7 @@
 				margin-top: 0px;
 			}
 		 
-			.whitepaper img {
-				height: 140px;
-				border: 1px solid #ccc;
-			}
+	 
 
             .style1 {font: 12px 'Noto Sans',sans-serif line-height:18px; }
             
@@ -80,6 +77,13 @@
                  font-size: 14px;
                 line-height: 1.5;
                 color: #505050;
+            }
+
+             .thumbnail{
+               height: auto !important; 
+               ##THUMBNAIL_BORDER##   
+                border-radius: 5px;
+                width:180px;
             }
 
 			.footer p{

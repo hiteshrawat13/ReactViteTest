@@ -161,9 +161,13 @@ const Editor = ({ }) => {
       </Section>
 
 
-      <Section>
-        <Speakers filesRef={filesRef}/>
+      <Section title="Speakers">
+        <Speakers name="SPEAKERS" filesRef={filesRef}/>
       </Section>
+
+
+
+
 
       <Section title="Details" >
 

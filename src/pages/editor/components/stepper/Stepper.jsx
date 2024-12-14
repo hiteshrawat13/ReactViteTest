@@ -57,7 +57,7 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
 
     const handleSubmitOfCurrentForm = (data) => {
         //alert(data)
-        console.log("Form Submitted.Saved to state.");
+        console.log("Form Submitted.Saved to state.",data);
         dispatch(addData(data))
 
        // console.log("REDUX-STATE:-", campaignDataState.data);

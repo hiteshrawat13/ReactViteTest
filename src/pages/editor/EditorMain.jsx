@@ -120,6 +120,7 @@ const EditorMain = () => {
         <input type="file" className="" ref={ref => filesRef.current.fileInput12 = ref} />
         <input type="file" className="" ref={ref => filesRef.current.fileInput13 = ref} />
 
+        <input type="file" className="" ref={ref => filesRef.current.speaker0 = ref} />
         <input type="file" className="" ref={ref => filesRef.current.speaker1 = ref} />
         <input type="file" className="" ref={ref => filesRef.current.speaker2 = ref} />
         <input type="file" className="" ref={ref => filesRef.current.speaker3 = ref} />
@@ -128,6 +129,7 @@ const EditorMain = () => {
         <input type="file" className="" ref={ref => filesRef.current.speaker6 = ref} />
         <input type="file" className="" ref={ref => filesRef.current.speaker7 = ref} />
         <input type="file" className="" ref={ref => filesRef.current.speaker8 = ref} />
+        <input type="file" className="" ref={ref => filesRef.current.speaker9 = ref} />
 
       </div>
 

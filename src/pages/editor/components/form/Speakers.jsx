@@ -25,7 +25,24 @@ const Speakers = ({ filesRef ,name="SPEAKERS"}) => {
 
   useEffect(()=>{
     setValue(name,JSON.stringify(speakers))
+
+    speakers.forEach((speaker, index) => {
+      if (previewRef.current[index]) {
+        try{
+          setImagePreview(filesRef.current[`speaker${index}`],previewRef.current[index])
+        }catch(error){
+          console.log("ERROR setting preview speaker",error);
+          
+        }
+       
+         
+      }
+    });
+
   },[speakers])
+
+
+
   const addSpeaker = () => {
  
 
@@ -77,6 +94,7 @@ const Speakers = ({ filesRef ,name="SPEAKERS"}) => {
   }
 
 
+ 
 
   
   return (
@@ -94,9 +112,12 @@ const Speakers = ({ filesRef ,name="SPEAKERS"}) => {
           <span>Name</span>
           <input ref={ref => inputRef.current.speakerName = ref} /><br></br>
           <textarea ref={ref => inputRef.current.speakerDetails = ref} /><br/>
- 
+          <input ref={ref => inputRef.current.speakerFile = ref} /><br></br>
 
- <SpeakerImageInput fileRef={filesRef.current[`speaker${speakers.length}`]}/>
+ <SpeakerImageInput fileRef={filesRef.current[`speaker${speakers.length}`]} onFileChange={(filename)=>{
+  inputRef.current.speakerFile=filename
+  alert(filename)
+ }}/>
           
      
            
@@ -120,7 +141,7 @@ const Speakers = ({ filesRef ,name="SPEAKERS"}) => {
 
       {speakers.map((speaker, i) => {
         return <div key={i}>
-          <img style={{width:"20px"}} ref={ref => previewRef.current[i] = ref} />
+          <img style={{width:"20px"}} ref={ref => previewRef.current[i] = ref}   />
           {speaker.speakerName} {speaker.speakerDetails}  
           <div onClick={(e)=>deleteSpeaker(e,i)}>XX</div>
           </div>

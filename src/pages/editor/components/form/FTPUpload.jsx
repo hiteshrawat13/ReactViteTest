@@ -56,13 +56,20 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
 
 
       if (filesRef[key].files[0]) {
-        uploadFiles.push({
-          type: filesRef[key].dataset.tag,
-          name: campaignDataState.data[filesRef[key].dataset.name],
-          file: filesRef[key].files[0],
-          progress: 0,
-          selected: true
-        })
+        //Speaker file
+        if(filesRef[key].dataset.tag == "speaker"){
+
+        }else{
+          //Files 
+          uploadFiles.push({
+            type: filesRef[key].dataset.tag,
+            name: campaignDataState.data[filesRef[key].dataset.name],
+            file: filesRef[key].files[0],
+            progress: 0,
+            selected: true
+          })
+        }
+    
       }
 
     }

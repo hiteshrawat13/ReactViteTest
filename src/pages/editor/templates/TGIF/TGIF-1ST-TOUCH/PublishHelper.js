@@ -5,6 +5,8 @@ import landing_html from './pages/landing.php.txt?raw'  //?raw is important to r
 import sendemail_html from './pages/sendemail.php.txt?raw'  //?raw is important to read text files
 import thanks_html from './pages/thanks.php.txt?raw'  //?raw is important to read text files
 
+import SpeakerRender from './SpeakerRender.js'
+
 import { getSendmailSubject } from './Base64.js'
 class PublishHelper {
     constructor(state) {
@@ -157,6 +159,8 @@ This is to convert Chinese characters to Unicode numbers
                                 
 										<div class="abstract edm_abstract">
 											##EDM_ABSTRACT##
+
+                                            ##SPEAKERS##
 										</div>
 
                                     </td>
@@ -189,6 +193,8 @@ This is to convert Chinese characters to Unicode numbers
 									<td colspan="2">
 										<div class="abstract edm_abstract">
 											##EDM_ABSTRACT##
+
+                                            ##SPEAKERS##
 										</div>
 									</td>
 								</tr>
@@ -201,6 +207,29 @@ This is to convert Chinese characters to Unicode numbers
         } else if (this.state["EDM_LAYOUT"] == "Full width thumbnail and abstract") {
             data = data.replaceAll(`##EDM_LAYOUT##`, this.convertToEntities(full_width_layout))
         }
+
+        
+        try {
+            const SPEAKERS=JSON.parse(this.state["SPEAKERS"])
+            if(SPEAKERS.length>0){
+                console.log("SPEAKERS FOUND",SPEAKERS.length);
+
+            
+
+               data=data.replaceAll(`##SPEAKERS##`, SPEAKERS.map(speaker=>{
+                    return `<div><div>${speaker.name}</div><div>${Sneaker.details}</div></div>`
+                }).join(""))
+            }else{
+                console.log("SPEAKERS NOT FOUND",SPEAKERS.length);
+                data=data.replaceAll(`##SPEAKERS##`, "")
+            }
+         
+        } catch (error) {
+            console.log("Error while parsing speakers in publishhelper",error);
+            
+        }
+
+
 
 
 
@@ -237,6 +266,8 @@ This is to convert Chinese characters to Unicode numbers
         }
 
   
+   
+        
 
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)

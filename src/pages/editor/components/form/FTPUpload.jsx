@@ -59,6 +59,36 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
         //Speaker file
         if(filesRef[key].dataset.tag == "speaker"){
 
+          try{
+            const speaker=JSON.parse(campaignDataState.data["SPEAKERS"]).find(speaker=>speaker.id==filesRef[key].dataset.id)
+
+            if(speaker && !speaker.speakerImage.startsWith("http")){
+              console.log(speaker,"@@@@@@@@@@@@@@@@@@",filesRef[key]);
+              uploadFiles.push({
+                type: "file",
+                name: speaker.speakerImage,
+                file: filesRef[key].files[0],
+                progress: 0,
+                selected: true
+              })
+              
+            }else{
+              console.log( "@@@@@@@@@@@@@@@@@@---NO---",filesRef[key]);
+            }
+          }catch(error){
+            console.log( "@@@@@@@@@@@@@@@@@@---ERROR Getting file inputs for speaker---",error);
+          }
+
+      
+          // uploadFiles.push({
+          //   type: filesRef[key].dataset.tag,
+          //   name: campaignDataState.data["SPEAKERS"],
+          //   file: filesRef[key].files[0],
+          //   progress: 0,
+          //   selected: true
+          // })
+
+
         }else{
           //Files 
           uploadFiles.push({

@@ -162,7 +162,16 @@ const Editor = ({ }) => {
 
 
       <Section title="Speakers">
-        <Speakers name="SPEAKERS" filesRef={filesRef}/>
+      <CheckBox label="Show Speakers" name="SHOW_SPEAKERS" defaultChecked={false} />
+
+       
+    
+       { (watch["SHOW_SPEAKERS"] === true  || getStateValue("SHOW_SPEAKERS") ==true )   &&
+        [<TextBox label="Speaker Heading" name="SPEAKER_HEADING" required={true}    />,
+        <Speakers name="SPEAKERS" filesRef={filesRef}/>]
+       }
+      { watch["SHOW_SPEAKERS"] === false && [setStateValue("SHOW_SPEAKERS",false)]}
+        
       </Section>
 
 
@@ -224,6 +233,8 @@ const Editor = ({ }) => {
       <Row>
           <Col>
             <CheckBox label="Use Custom Footer" name="USE_CUSTOM_FOOTER" defaultChecked={false} />
+            {console.log(watch["USE_CUSTOM_FOOTER"] ,"USE_CUSTOM_FOOTER=================")
+      }
             {(watch["USE_CUSTOM_FOOTER"] == true || getStateValue("USE_CUSTOM_FOOTER") == true) &&
 
               <RichTextEditor label="Custom Footer" name="FOOTER" required={true} value={`<p><a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> | ##PRIVACY_POLICY##<br /> Copyright &#169; ##YEAR## XDBS Corporation <br /> Hawthorne, CA 90250 USA<br /> 3501, Jack Northorp Ave, Ste C3873<br /></p>`} />

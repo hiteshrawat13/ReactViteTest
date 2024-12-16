@@ -343,3 +343,41 @@ form{
             }
         }
   }
+
+
+
+  .speaker-holder{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+  }
+  .speaker{
+    display: flex;
+    width: 100%;
+    border:1px solid #555;
+
+
+    img{
+        display: block;
+        width:60px;
+        height:60px;
+        object-fit: contain;
+    }
+
+    .details{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        padding: 0px 10px;
+        font-size: 14px;
+
+        .speaker-name{
+            font-weight: bold;
+            color:rgb(38, 63, 100);
+        }
+        .speaker-details{
+            font-weight: normal;
+        }
+    }
+  }
+

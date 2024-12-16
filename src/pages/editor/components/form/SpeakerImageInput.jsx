@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-const SpeakerImageInput = ({fileRef=null,onFileChange=null}) => {
+const SpeakerImageInput = ({fileRef=null,onFileChange=null,index=-1}) => {
     if(fileRef==null)return <>Please provide fileRef attribute for Speaker Image input.</>
     const imagePreviewRef=useRef()
     
@@ -64,6 +64,7 @@ const SpeakerImageInput = ({fileRef=null,onFileChange=null}) => {
         fileRef.setAttribute("data-tag", tag);
         const name=fileRef.files[0]?.name || "null name"
         fileRef.setAttribute("data-name", name);
+       
       
         return function cleanup() {
             fileRef.removeEventListener("change", onImageFileChange);

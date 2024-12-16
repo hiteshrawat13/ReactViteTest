@@ -104,7 +104,7 @@ const EditorMain = () => {
   return (
     <div>
 
-      <div style={{ display: "none" }}>
+      <div style={{ display: "block" }}>
         {/* THESE FILE INPUTS ARE USED FRO LOGO THUMBNAIL PDF MP4 TO KEEP IN STATE */}
         <input type="file" className="" ref={ref => filesRef.current.fileInput1 = ref} />
         <input type="file" className="" ref={ref => filesRef.current.fileInput2 = ref} />
@@ -119,17 +119,17 @@ const EditorMain = () => {
         <input type="file" className="" ref={ref => filesRef.current.fileInput11 = ref} />
         <input type="file" className="" ref={ref => filesRef.current.fileInput12 = ref} />
         <input type="file" className="" ref={ref => filesRef.current.fileInput13 = ref} />
-
-        <input type="file" className="" ref={ref => filesRef.current.speaker0 = ref} />
-        <input type="file" className="" ref={ref => filesRef.current.speaker1 = ref} />
-        <input type="file" className="" ref={ref => filesRef.current.speaker2 = ref} />
-        <input type="file" className="" ref={ref => filesRef.current.speaker3 = ref} />
-        <input type="file" className="" ref={ref => filesRef.current.speaker4 = ref} />
-        <input type="file" className="" ref={ref => filesRef.current.speaker5 = ref} />
-        <input type="file" className="" ref={ref => filesRef.current.speaker6 = ref} />
-        <input type="file" className="" ref={ref => filesRef.current.speaker7 = ref} />
-        <input type="file" className="" ref={ref => filesRef.current.speaker8 = ref} />
-        <input type="file" className="" ref={ref => filesRef.current.speaker9 = ref} />
+        <br/><br/>
+        <input type="file" className="" ref={ref => filesRef.current.speaker0 = ref} data-id={0} />
+        <input type="file" className="" ref={ref => filesRef.current.speaker1 = ref} data-id={1}/>
+        <input type="file" className="" ref={ref => filesRef.current.speaker2 = ref} data-id={2}/>
+        <input type="file" className="" ref={ref => filesRef.current.speaker3 = ref} data-id={3}/>
+        <input type="file" className="" ref={ref => filesRef.current.speaker4 = ref} data-id={4}/>
+        <input type="file" className="" ref={ref => filesRef.current.speaker5 = ref} data-id={5}/>
+        <input type="file" className="" ref={ref => filesRef.current.speaker6 = ref} data-id={6}/>
+        <input type="file" className="" ref={ref => filesRef.current.speaker7 = ref} data-id={7}/>
+        <input type="file" className="" ref={ref => filesRef.current.speaker8 = ref} data-id={8}/>
+        <input type="file" className="" ref={ref => filesRef.current.speaker9 = ref} data-id={9}/>
 
       </div>
 

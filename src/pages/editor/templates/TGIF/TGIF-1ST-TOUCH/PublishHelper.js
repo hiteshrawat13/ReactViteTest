@@ -209,23 +209,57 @@ This is to convert Chinese characters to Unicode numbers
         }
 
         
-        try {
-            const SPEAKERS=JSON.parse(this.state["SPEAKERS"])
-            if(SPEAKERS.length>0){
-                console.log("SPEAKERS FOUND",SPEAKERS.length);
+        // try {
+        //     const SPEAKERS=JSON.parse(this.state["SPEAKERS"])
+        //     if(SPEAKERS.length>0){
+        //         console.log("SPEAKERS FOUND",SPEAKERS.length);
 
+
+               
             
+        //         const speakersDiv=`
+               
+        //                 ${SPEAKERS.map(speaker=>{
+        //                     const speakerImage=speaker.speakerImage.startsWith("http")? speaker.speakerImage : this.state["BASE_URL"]+speaker.speakerImage
+        //                     const speakerImageTag=`<img src='${speakerImage}'/>`
+        //                     const speakerTD=(speaker.speakerImage.lenght>0)?`<td class="speaker-image">${speakerImageTag}</td>`: ''
 
-               data=data.replaceAll(`##SPEAKERS##`, SPEAKERS.map(speaker=>{
-                    return `<div><div>${speaker.name}</div><div>${Sneaker.details}</div></div>`
-                }).join(""))
-            }else{
-                console.log("SPEAKERS NOT FOUND",SPEAKERS.length);
-                data=data.replaceAll(`##SPEAKERS##`, "")
-            }
+
+        //                     return `
+        //                     <table cellspacing="0" cellpadding="0" border="0" width="100%" class="speaker">
+        //                     <tr><td class="speaker-heading">${this.state["SPEAKER_HEADING"]}</td></tr>
+        //                         <tr>
+        //                             ${speakerTD}
+        //                             <td width="auto">
+        //                                 <div class="speaker-name">${speaker.speakerName}</div>
+        //                                 <div>${speaker.speakerDetails}</div>
+        //                             </td>
+        //                         </tr>
+        //                     </table>
+        //                     `
+
+ 
+        //                 }).join("")}
+        //         `
+
+        //        data=data.replaceAll(`##SPEAKERS##`,speakersDiv )
+        //     }else{
+        //         console.log("SPEAKERS NOT FOUND",SPEAKERS.length);
+        //         data=data.replaceAll(`##SPEAKERS##`, "")
+        //     }
          
-        } catch (error) {
-            console.log("Error while parsing speakers in publishhelper",error);
+        // } catch (error) {
+        //     console.log("Error while parsing speakers in publishhelper",error);
+        //     data=data.replaceAll(`##SPEAKERS##`, "")
+            
+        // }
+
+
+        try{
+            data = SpeakerRender({datas:data,STATE:this.state,filesRef:this.filesRef,forPreview,getBase64Image:this.getBase64Image})
+
+        }catch(error){
+            console.log(error);
             
         }
 
@@ -235,7 +269,7 @@ This is to convert Chinese characters to Unicode numbers
 
         if (this.state["THUMBNAIL_BORDER"] == true) {
             data = data.replaceAll(`##THUMBNAIL_BORDER##`,  'border: 1px solid #e5e5e5;'  )
-        } else   {
+        } else {
             data = data.replaceAll(`##THUMBNAIL_BORDER##`, '')
         }
         
@@ -289,12 +323,16 @@ This is to convert Chinese characters to Unicode numbers
         </div>
         <div class="landing_abstract" >
            ##LANDING_ABSTRACT##
+
+            ##SPEAKERS##
         </div>
        `
 
         const landing_layout_logo_below_abstract = `
         <div class="landing_abstract">
           ##LANDING_ABSTRACT##
+
+           ##SPEAKERS##
         </div>
         <div class="img" align="center">
             <img   src="##BASE_URL####THUMBNAIL_NAME##"   class="thumbnail"   alt="thumbnail" />                          

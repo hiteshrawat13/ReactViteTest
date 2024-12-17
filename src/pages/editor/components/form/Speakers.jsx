@@ -162,7 +162,7 @@ const Speakers = ({ filesRef, name = "SPEAKERS" }) => {
 
   return (
     <div>Speakers
-      <input type="text" readOnly
+      <input type="text"  style={{display:"none"}} readOnly
         value={JSON.stringify(speakers)}
 
         {...register(name, { required: false, onChange: (e) => { onChange && onChange(e) } })} />
@@ -219,7 +219,7 @@ const Speakers = ({ filesRef, name = "SPEAKERS" }) => {
       </Modal>
 
 
-      <button onClick={(e) => {
+      <button className="btn--primary" onClick={(e) => {
         e.preventDefault()
         if (speakers.length >= MAX_SPEAKERS) {
           alert(`Only ${MAX_SPEAKERS} can be added.`)

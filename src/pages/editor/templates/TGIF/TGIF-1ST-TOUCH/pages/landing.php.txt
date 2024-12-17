@@ -174,6 +174,38 @@
             }
 
 
+
+
+
+             .speaker-heading{
+                font-size: 15px;
+                color: #505050;
+                font-weight:bold;
+                padding-bottom:9px;
+            }
+
+            .speaker-image{
+
+                width:40px;
+                height:40px;
+                padding-right:12px;
+
+            }
+            .speaker-image img{
+                width:100%;
+            }
+
+            .speaker{
+                font-size: 14px;
+                color: #505050;
+                margin-bottom:7px;
+            }
+
+            .speaker-name{
+                font-weight:bold;
+            }
+
+
           
 
 

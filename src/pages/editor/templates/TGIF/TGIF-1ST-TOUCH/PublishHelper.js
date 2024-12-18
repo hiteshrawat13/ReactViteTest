@@ -160,7 +160,7 @@ This is to convert Chinese characters to Unicode numbers
 										<div class="abstract edm_abstract">
 											##EDM_ABSTRACT##
 
-                                            ##SPEAKERS##
+                                           
 										</div>
 
                                     </td>
@@ -171,6 +171,8 @@ This is to convert Chinese characters to Unicode numbers
 
                                     </td>
                                 </tr>
+
+                                <tr><td colspan='2'>##SPEAKERS##</td></tr>
                             </tbody>
                         </table>
         `
@@ -194,10 +196,12 @@ This is to convert Chinese characters to Unicode numbers
 										<div class="abstract edm_abstract">
 											##EDM_ABSTRACT##
 
-                                            ##SPEAKERS##
+                                            
 										</div>
 									</td>
 								</tr>
+
+                                <tr><td colspan='2'>##SPEAKERS##</td></tr>
                             </tbody>
                         </table>
         `
@@ -256,7 +260,7 @@ This is to convert Chinese characters to Unicode numbers
 
 
         try{
-            data = SpeakerRender({datas:data,STATE:this.state,filesRef:this.filesRef,forPreview,getBase64Image:this.getBase64Image})
+            data = await SpeakerRender({datas:data,STATE:this.state,filesRef:this.filesRef,forPreview,getBase64Image:this.getBase64Image})
 
         }catch(error){
             console.log(error);
@@ -344,6 +348,21 @@ This is to convert Chinese characters to Unicode numbers
             data = data.replaceAll(`##LANDING_LAYOUT##`, this.convertToEntities(traditional_landing_layout))
         } else if (this.state["LANDING_LAYOUT"] == "Thumbnail below abstract") {
             data = data.replaceAll(`##LANDING_LAYOUT##`, this.convertToEntities(landing_layout_logo_below_abstract))
+        }
+
+
+
+        try{
+            if(this.state['SHOW_SPEAKERS_ON_LANDING_PAGE']==true){
+
+                data = await SpeakerRender({datas:data,STATE:this.state,filesRef:this.filesRef,forPreview,getBase64Image:this.getBase64Image})
+            }else{
+                data=data.replaceAll(`##SPEAKERS##`, "")
+            }
+
+        }catch(error){
+            console.log(error);
+            
         }
 
 
@@ -531,6 +550,8 @@ This is to convert Chinese characters to Unicode numbers
         data = this.convertToEntities(this.getPrivacyPolicy(data)) //Privacy Policy
         return data
     }
+
+
     getThankyouDoubleOptinHtml({ forPreview }) {
 
     }

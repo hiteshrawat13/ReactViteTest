@@ -350,11 +350,14 @@ form{
     display: flex;
     flex-direction: column;
     gap:10px;
+    padding:8px 0px;
   }
   .speaker{
     display: flex;
     width: 100%;
-    border:1px solid #555;
+    border:1px solid #858585;
+    border-radius: 4px;
+    padding: 5px 5px;
 
 
     img{
@@ -378,6 +381,13 @@ form{
         .speaker-details{
             font-weight: normal;
         }
+    }
+
+    .edit{
+        margin-bottom:auto;
+    }
+    .delete{
+        margin-bottom: auto;
     }
   }
 

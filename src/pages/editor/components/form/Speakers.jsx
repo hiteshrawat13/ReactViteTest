@@ -161,7 +161,7 @@ const Speakers = ({ filesRef, name = "SPEAKERS" }) => {
 
 
   return (
-    <div>Speakers
+    <div>
       <input type="text"  style={{display:"none"}} readOnly
         value={JSON.stringify(speakers)}
 
@@ -233,7 +233,7 @@ const Speakers = ({ filesRef, name = "SPEAKERS" }) => {
         })
         setShowAddSpeakerModal(true)
 
-      }}>Add Speaker</button>
+      }}>+ Add Speaker</button>
 
 
 <div className='speaker-holder'>
@@ -245,9 +245,9 @@ const Speakers = ({ filesRef, name = "SPEAKERS" }) => {
               <div className="speaker-name">{speaker.id} {speaker.speakerName}</div> 
               <div className='speaker-details'>{speaker.speakerDetails}</div>
             </div>
-            <div style={{display:"flex",gap:"10px"}}>
-              <div className="edit btn--secondary" onClick={(e) => openEditSpeakerModal(e, speaker.id)}>Edit</div>
-              <div className="delete btn--secondary" onClick={(e) => deleteSpeaker(e, speaker.id)}>Delete</div>
+            <div style={{display:"flex",gap:"30px"}}>
+              <div className="edit btn--secondary" onClick={(e) => openEditSpeakerModal(e, speaker.id)}>✎ Edit</div>
+              <div className="delete btn--secondary" onClick={(e) => deleteSpeaker(e, speaker.id)}>✖ Delete</div>
             </div>
           </div>
 

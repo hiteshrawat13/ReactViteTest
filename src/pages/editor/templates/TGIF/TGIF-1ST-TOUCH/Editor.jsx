@@ -84,7 +84,6 @@ const Editor = ({ }) => {
             {(watch["CLIENT_CODE"] === "TEST") && <>IT WORKS</>}
             {/* {(watch["CLIENT_CODE"] === "TEST2") && setError("CLIENT_CODE","LINK ALREADY EXISTS")} */}
 
-
           </Col>
           <Col><TextBox label="Link Type" name="LINK_TYPE" required={true} value={campData?.templateType} readOnly /></Col>
           <Col><TextBox label="Template Id" name="TEMPLATE_ID" required={true} value={campData?.templateId} readOnly /></Col>
@@ -152,12 +151,7 @@ const Editor = ({ }) => {
             }} />}
           </Col>
         </Row>
-
-
-
-
-
-
+ 
       </Section>
 
 
@@ -168,7 +162,9 @@ const Editor = ({ }) => {
     
        { (watch["SHOW_SPEAKERS"] === true  || getStateValue("SHOW_SPEAKERS") ==true )   &&
         [<TextBox label="Speaker Heading" name="SPEAKER_HEADING" required={true}    />,
-        <Speakers name="SPEAKERS" filesRef={filesRef}/>]
+        <Speakers name="SPEAKERS" filesRef={filesRef}/>,
+        <CheckBox label="Show Speakers on Landing Page" name="SHOW_SPEAKERS_ON_LANDING_PAGE" defaultChecked={false} />
+      ]
        }
       { watch["SHOW_SPEAKERS"] === false && [setStateValue("SHOW_SPEAKERS",false)]}
         
@@ -442,8 +438,6 @@ const Editor = ({ }) => {
      </Col>
    </Row>
 
-
-
    <Row>
      <Col>
        <CheckBox label="Upload Extra File [EXTRA_FILE_2]" name="ADD_EXTRA_FILE_2" defaultChecked={false}/>
@@ -452,7 +446,6 @@ const Editor = ({ }) => {
        }
      </Col>
    </Row>
-
 
    <Row>
      <Col>
@@ -463,7 +456,6 @@ const Editor = ({ }) => {
      </Col>
    </Row>
 
-
    <Row>
      <Col>
        <CheckBox label="Upload Extra File [EXTRA_FILE_4]" name="ADD_EXTRA_FILE_4" defaultChecked={false}/>
@@ -473,8 +465,6 @@ const Editor = ({ }) => {
      </Col>
    </Row>
 
-
-   
    <Row>
      <Col>
        <CheckBox label="Upload Extra File [EXTRA_FILE_5]" name="ADD_EXTRA_FILE_5" defaultChecked={false} />
@@ -483,9 +473,7 @@ const Editor = ({ }) => {
        }
      </Col>
    </Row>
-
-
-       
+{/*  
    <Row>
      <Col>
        <CheckBox label="Upload Extra File [EXTRA_FILE_6]" name="ADD_EXTRA_FILE_6" defaultChecked={false} />
@@ -494,9 +482,7 @@ const Editor = ({ }) => {
        }
      </Col>
    </Row>
-
-
-       
+ 
    <Row>
      <Col>
        <CheckBox label="Upload Extra File [EXTRA_FILE_7]" name="ADD_EXTRA_FILE_7" defaultChecked={false}/>
@@ -505,7 +491,6 @@ const Editor = ({ }) => {
        }
      </Col>
    </Row>
-
 
    <Row>
      <Col>
@@ -516,7 +501,6 @@ const Editor = ({ }) => {
      </Col>
    </Row>
 
-
    <Row>
      <Col>
        <CheckBox label="Upload Extra File [EXTRA_FILE_9]" name="ADD_EXTRA_FILE_9" defaultChecked={false}/>
@@ -526,7 +510,6 @@ const Editor = ({ }) => {
      </Col>
    </Row>
 
-
    <Row>
      <Col>
        <CheckBox label="Upload Extra File [EXTRA_FILE_10]" name="ADD_EXTRA_FILE_10" defaultChecked={false}/>
@@ -534,7 +517,7 @@ const Editor = ({ }) => {
          <FileInput name="EXTRA_FILE_10" label="Extra File 10" tag="file" fileRef={filesRef.current.fileInput13} onChange={(e) => {  setFormValue("EXTRA_FILE_10",e.target.value)  }} />
        }
      </Col>
-   </Row>
+   </Row> */}
 
  </Section>
  {/* Extra Files Upload Section End */}

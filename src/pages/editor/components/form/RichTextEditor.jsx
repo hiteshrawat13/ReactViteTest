@@ -2,6 +2,8 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { useFormContext, Controller } from 'react-hook-form'
 import JoditEditor from 'jodit-react';
+import axios from 'axios';
+import Config from '../../../../Config';
 
 const RichTextEditor = ({ label, name, required = false, width = null, value = null,onTextChange=null }) => {
   const { register, unregister, setValue, formState: { errors }, control } = useFormContext()
@@ -12,6 +14,35 @@ const RichTextEditor = ({ label, name, required = false, width = null, value = n
       unregister(name)
     }
   }, [])
+
+
+  
+
+  const translate=async ({to,text})=>{
+     // Example API endpoint (replace with your actual translation API endpoint)
+     const apiUrl = `${Config.API_BASE_URL}/translate`; 
+
+     
+    
+     try{
+        to=to.replaceAll("en-US","en")
+        // Axios POST request using await
+        const response = await axios.post(apiUrl, { text:text ,  to:to ,  from:'en' });
+
+        // Assuming the API returns the translated text in the response
+        const data = response.data;
+
+        return data
+
+     }catch(error){
+      console.log("TranslateApi error",error);
+      
+        return null
+     }
+     
+ 
+  }
+
   const editor = useRef(null);
 
 
@@ -159,7 +190,23 @@ const RichTextEditor = ({ label, name, required = false, width = null, value = n
             editor.value=strippedHtml
 
           }
-        }
+        },
+      //   {
+      //     name: 'translateButton',
+      //     icon: 'fa fa-language',
+      //     tooltip: 'Translate',
+      //     exec: async function (editor) {
+      //        alert("D-"+campaignDataState.data["LANGUAGE"])
+      //       const to=campaignDataState.data["LANGUAGE"]
+      //       const text=editor.value
+            
+      //       //const tt=await translate({to,text})
+      //       var strWindowFeatures = "location=yes,height=570,width=520,scrollbars=yes,status=yes";
+      //       window.open(`https://translate.google.co.in/?sl=${'en'}&tl=${to}&text=${text}&op=translate`, "_blank",strWindowFeatures) //to open new page
+          
+           
+      //     }
+      // }
 
       ]
 

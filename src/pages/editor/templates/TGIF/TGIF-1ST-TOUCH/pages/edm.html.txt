@@ -127,7 +127,7 @@
 
             p,
             ul {
-                font-size: 14px;
+                font-size: inherit;
                 line-height: 1.5;
                  
             }
@@ -151,6 +151,18 @@
             }
 
 
+            
+
+          
+
+            .speaker{
+                font-size: 14px;
+                color: #505050;
+                margin-bottom:7px;
+                 border-collapse: separate; /* allow spacing between cell borders */
+                border-spacing: 0 5px; /* NOTE: syntax is <horizontal value> <vertical value> */
+            }
+
             .speaker-heading{
                 font-size: 15px;
                 color: #505050;
@@ -169,14 +181,12 @@
                 width:100%;
             }
 
-            .speaker{
-                font-size: 14px;
-                color: #505050;
-                margin-bottom:7px;
-            }
-
             .speaker-name{
                 font-weight:bold;
+            }
+
+            .speaker-details{
+                font-size:13px;
             }
         </style>
     </head>

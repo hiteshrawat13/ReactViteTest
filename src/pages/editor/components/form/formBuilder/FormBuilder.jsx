@@ -67,6 +67,9 @@ const FormBuilder = (defaultFieldsJson) => {
 
   const [selectedField, setSelectedField] = useState(-1)
   const [addScriptModalShow,setAddScriptModalShow]=useState(false)
+  const [loadJSONModalShow,setLoadJSONModalShow]=useState(false)
+  const JSONTextareaRef=useRef()
+
   const dispatch = useDispatch()
 
 
@@ -151,6 +154,22 @@ const FormBuilder = (defaultFieldsJson) => {
 
 
     }
+  }
+
+  const handleLoadFromJson=( )=>{
+
+    
+     
+    try{
+      const json=JSONTextareaRef.current?.value
+      dispatch(loadFieldsFromJson(JSON.parse(json)))
+      alert(" form fields loaded.")
+    }catch(error){
+      console.log(error);
+      
+      alert("Error loading form fields.")
+    }
+   
   }
 
 
@@ -278,6 +297,24 @@ const FormBuilder = (defaultFieldsJson) => {
             }
           </select>
           <button onClick={(e)=>{  e.preventDefault();applyFormScript(formScriptsDropdownRef.current.value)  }}>Add Script</button>
+        </div>
+      </Modal>
+
+
+
+
+      <button id=' ' onClick={(e)=>{e.preventDefault();setLoadJSONModalShow(true)}}>Load JSON</button>
+      <Modal
+        closeOnOverlayClick={false}
+        center
+        open={loadJSONModalShow}
+        onClose={() => setLoadJSONModalShow(false)}>
+        <div style={{ width: "700px" }}>
+          <textarea ref={JSONTextareaRef} style={{width:"600px",height:"400px",display:"block"}}>
+
+          </textarea>
+          
+          <button onClick={(e)=>{  e.preventDefault();handleLoadFromJson()}}>Load JSON</button>
         </div>
       </Modal>
       <br /><br />

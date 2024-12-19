@@ -155,20 +155,8 @@ const Editor = ({ }) => {
       </Section>
 
 
-      <Section title="Speakers">
-      <CheckBox label="Show Speakers" name="SHOW_SPEAKERS" defaultChecked={false} />
 
-       
-    
-       { (watch["SHOW_SPEAKERS"] === true  || getStateValue("SHOW_SPEAKERS") ==true )   &&
-        [<TextBox label="Speaker Heading" name="SPEAKER_HEADING" required={true}    />,
-        <Speakers name="SPEAKERS" filesRef={filesRef}/>,
-        <CheckBox label="Show Speakers on Landing Page" name="SHOW_SPEAKERS_ON_LANDING_PAGE" defaultChecked={false} />
-      ]
-       }
-      { watch["SHOW_SPEAKERS"] === false && [setStateValue("SHOW_SPEAKERS",false)]}
-        
-      </Section>
+  
 
 
 
@@ -247,9 +235,10 @@ const Editor = ({ }) => {
 
 
     </Step>
+
+
+
     <Step title="Abstract & Title" key={1102}>
-
-
       <Section title="EDM Details">
 
         <Row>
@@ -289,17 +278,13 @@ const Editor = ({ }) => {
 
 
       <Section title="Landing Page Details">
-
         <CheckBox label="Landing title is same as EDM title" name="LANDING_TITLE_SAME_AS_EDM_TITLE" defaultChecked={true} />
-
         {(watch["LANDING_TITLE_SAME_AS_EDM_TITLE"] == false) &&
           <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} />
         }
 
-
         <CheckBox label="Landing abstract is same as EDM abstract" name="LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT" defaultChecked={true} />
         {(watch["LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT"] == false) && <>
-
           <button onClick={(e) => {
             e.preventDefault();
             //using math random to update value otherwise gives blank result--
@@ -310,21 +295,37 @@ const Editor = ({ }) => {
             </div>`
             setFormValue("LANDING_ABSTRACT", boxHtml)
           }
-
           }>Add new format</button>
-
-
           <RichTextEditor label="Landing Abstract" name="LANDING_ABSTRACT" required={true} />
-
         </>}
 
 
 
       </Section>
+
+
+
+    {/* Speakers Section */}
+    <Section title="Speakers">
+      <CheckBox label="Show Speakers" name="SHOW_SPEAKERS" defaultChecked={false} />
+
+       
+    
+       { (watch["SHOW_SPEAKERS"] === true  || getStateValue("SHOW_SPEAKERS") ==true )   &&
+        [<TextBox label="Speaker Heading" name="SPEAKER_HEADING" required={true}    />,
+        <Speakers name="SPEAKERS" filesRef={filesRef}/>,
+        <CheckBox label="Show Speakers on Landing Page" name="SHOW_SPEAKERS_ON_LANDING_PAGE" defaultChecked={false} />
+      ]
+       }
+      { watch["SHOW_SPEAKERS"] === false && [setStateValue("SHOW_SPEAKERS",false)]}
+        
+      </Section>
+
+
+
       {(getStateValue("ASSET_TYPE") != "Webinar") &&
         <>
           <Section title="Thankyou Page Details">
-
             <RichTextEditor label="Thank You Page" name="NORMAL_THANK_YOU_PAGE_TEXT" required={true} value={`
         <h1>Thank you...</h1>
         <span>for downloading <strong>"##ASSET_TITLE##"</strong><br><br>
@@ -340,9 +341,6 @@ const Editor = ({ }) => {
       }
       <Section title="Sendmail Details">
         <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true} width="60%" value={`Thank you for requesting a ${getStateValue("ASSET_TYPE")}`} />
-
-
-
         <RichTextEditor label="Sendmail Body" name="SENDMAIL_BODY" required={true} value={`<table>
 <tr><td>Dear&nbsp;<b>$firstname,</b></td></tr>
 <tr><td>&nbsp;</td></tr>
@@ -354,7 +352,6 @@ const Editor = ({ }) => {
 <tr><td>ITBusinessToday</td></tr>
 </table>`} />
       </Section>
-
     </Step>
 
 
@@ -422,6 +419,22 @@ const Editor = ({ }) => {
 
       </Section>
 
+
+
+
+      <Section title="Image Below Abstract">
+      <Row>
+        <Col>
+          <CheckBox label="Show Image Below Abstract" name="SHOW_IMAGE_BELOW_ABSTRACT" defaultChecked={false}/>
+          {(watch["SHOW_IMAGE_BELOW_ABSTRACT"] == true) &&
+          
+          [<FileInput name="IMAGE_BELOW_ABSTRACT" label="Image Below Abstract" tag="file" fileRef={filesRef.current.fileInput9} onFileChange={(filename) => { setFormValue("IMAGE_BELOW_ABSTRACT",filename) }} />
+          ,<TextBox label="IMAGE_BELOW_ABSTRACT_WIDTH" required="true" name="IMAGE_BELOW_ABSTRACT_WIDTH" value={'20%'} />
+          ,<CheckBox label="Show on Landing Page" name="SHOW_IMAGE_BELOW_ABSTRACT_ON_LANDING_PAGE" defaultChecked={false} />]
+          }
+        </Col>
+      </Row>
+      </Section>
 
 
 
@@ -546,17 +559,31 @@ const Editor = ({ }) => {
                 paddingTop: '3px'
               }}>
                 <TextBox type="number" label="Logo Width" name="LOGO_WIDTH" onChange={(e) => {
-
                   console.log(e);
-
-
                   iframe.contentDocument.querySelector('.splogo').style.width = e.target.value + "px"
-
                   console.log(iframe.contentDocument.querySelector('.splogo'));
-
                   setStateValue("LOGO_WIDTH", e.target.value)
-
                 }} />
+
+
+                
+
+
+                  {(getStateValue( "SHOW_IMAGE_BELOW_ABSTRACT" ) == true) &&
+          
+                <TextBox type="text" label="Logo Width" name="IMAGE_BELOW_ABSTRACT_WIDTH" onChange={(e) => {
+                  console.log(e);
+                  if(!e.target.value.endsWith("%")){
+                    alert("Please add percentage sign.")
+                    return
+                  }
+                  iframe.contentDocument.querySelector('.image_below_abstract').style.width = e.target.value + ""
+               
+                  setStateValue("IMAGE_BELOW_ABSTRACT_WIDTH", e.target.value)
+                }} /> }
+
+
+                {}
 
               </div>
             </>

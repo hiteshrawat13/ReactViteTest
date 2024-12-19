@@ -160,6 +160,8 @@ This is to convert Chinese characters to Unicode numbers
 										<div class="abstract edm_abstract">
 											##EDM_ABSTRACT##
 
+                                            ##IMAGE_BELOW_ABSTRACT##
+
                                            
 										</div>
 
@@ -196,7 +198,7 @@ This is to convert Chinese characters to Unicode numbers
 										<div class="abstract edm_abstract">
 											##EDM_ABSTRACT##
 
-                                            
+                                            ##IMAGE_BELOW_ABSTRACT##
 										</div>
 									</td>
 								</tr>
@@ -212,52 +214,24 @@ This is to convert Chinese characters to Unicode numbers
             data = data.replaceAll(`##EDM_LAYOUT##`, this.convertToEntities(full_width_layout))
         }
 
+
+        // EDM IMAGE_BELOW_ABSTRACT 
+
+        if(this.state['SHOW_IMAGE_BELOW_ABSTRACT'] ==true){
+            if (forPreview == true) {
+                const image_below_abstract_img_tag=`<img src="${await this.getBase64Image(this.filesRef.fileInput9.files[0])}"   class="image_below_abstract" style="width:${this.state['IMAGE_BELOW_ABSTRACT_WIDTH']};"  alt="Image" /> `
+                if (this.filesRef.fileInput9.files[0]) { data = data.replaceAll(`##IMAGE_BELOW_ABSTRACT##`, image_below_abstract_img_tag) }
+            }else{
+                const image_below_abstract_img_tag=`<img src="${ this.state['BASE_URL'] + this.state['IMAGE_BELOW_ABSTRACT']}"   class="image_below_abstract" style="width:${this.state['IMAGE_BELOW_ABSTRACT_WIDTH']};"  alt="Image" /> `
+                data = data.replaceAll(`##IMAGE_BELOW_ABSTRACT##`, image_below_abstract_img_tag)
+            }
+        }else{
+            data = data.replaceAll(`##IMAGE_BELOW_ABSTRACT##`, '')
+        }
+         // IMAGE_BELOW_ABSTRACT  END
+
         
-        // try {
-        //     const SPEAKERS=JSON.parse(this.state["SPEAKERS"])
-        //     if(SPEAKERS.length>0){
-        //         console.log("SPEAKERS FOUND",SPEAKERS.length);
-
-
-               
-            
-        //         const speakersDiv=`
-               
-        //                 ${SPEAKERS.map(speaker=>{
-        //                     const speakerImage=speaker.speakerImage.startsWith("http")? speaker.speakerImage : this.state["BASE_URL"]+speaker.speakerImage
-        //                     const speakerImageTag=`<img src='${speakerImage}'/>`
-        //                     const speakerTD=(speaker.speakerImage.lenght>0)?`<td class="speaker-image">${speakerImageTag}</td>`: ''
-
-
-        //                     return `
-        //                     <table cellspacing="0" cellpadding="0" border="0" width="100%" class="speaker">
-        //                     <tr><td class="speaker-heading">${this.state["SPEAKER_HEADING"]}</td></tr>
-        //                         <tr>
-        //                             ${speakerTD}
-        //                             <td width="auto">
-        //                                 <div class="speaker-name">${speaker.speakerName}</div>
-        //                                 <div>${speaker.speakerDetails}</div>
-        //                             </td>
-        //                         </tr>
-        //                     </table>
-        //                     `
-
- 
-        //                 }).join("")}
-        //         `
-
-        //        data=data.replaceAll(`##SPEAKERS##`,speakersDiv )
-        //     }else{
-        //         console.log("SPEAKERS NOT FOUND",SPEAKERS.length);
-        //         data=data.replaceAll(`##SPEAKERS##`, "")
-        //     }
-         
-        // } catch (error) {
-        //     console.log("Error while parsing speakers in publishhelper",error);
-        //     data=data.replaceAll(`##SPEAKERS##`, "")
-            
-        // }
-
+        
 
         try{
             data = await SpeakerRender({datas:data,STATE:this.state,filesRef:this.filesRef,forPreview,getBase64Image:this.getBase64Image})
@@ -328,6 +302,8 @@ This is to convert Chinese characters to Unicode numbers
         <div class="landing_abstract" >
            ##LANDING_ABSTRACT##
 
+           ##IMAGE_BELOW_ABSTRACT##
+
             ##SPEAKERS##
         </div>
        `
@@ -335,6 +311,8 @@ This is to convert Chinese characters to Unicode numbers
         const landing_layout_logo_below_abstract = `
         <div class="landing_abstract">
           ##LANDING_ABSTRACT##
+
+          ##IMAGE_BELOW_ABSTRACT##
 
            ##SPEAKERS##
         </div>
@@ -351,28 +329,38 @@ This is to convert Chinese characters to Unicode numbers
         }
 
 
+        //LP IMAGE_BELOW_ABSTRACT
+        if(this.state['SHOW_IMAGE_BELOW_ABSTRACT'] ==true && this.state['SHOW_IMAGE_BELOW_ABSTRACT_ON_LANDING_PAGE'] == true){
+            if (forPreview == true) {
+                const image_below_abstract_img_tag=`<img src="${await this.getBase64Image(this.filesRef.fileInput9.files[0])}"   class="image_below_abstract" style="width:${this.state['IMAGE_BELOW_ABSTRACT_WIDTH']};"  alt="Image" /> `
+                if (this.filesRef.fileInput9.files[0]) { data = data.replaceAll(`##IMAGE_BELOW_ABSTRACT##`, image_below_abstract_img_tag) }
+            }else{
+                const image_below_abstract_img_tag=`<img src="${ this.state['BASE_URL'] + this.state['IMAGE_BELOW_ABSTRACT']}"   class="image_below_abstract" style="width:${this.state['IMAGE_BELOW_ABSTRACT_WIDTH']};"  alt="Image" /> `
+                data = data.replaceAll(`##IMAGE_BELOW_ABSTRACT##`, image_below_abstract_img_tag)
+            }
+        }else{
+            data = data.replaceAll(`##IMAGE_BELOW_ABSTRACT##`, '')
+        }
+   
 
+
+        //LP SPEAKERS
         try{
             if(this.state['SHOW_SPEAKERS_ON_LANDING_PAGE']==true){
-
                 data = await SpeakerRender({datas:data,STATE:this.state,filesRef:this.filesRef,forPreview,getBase64Image:this.getBase64Image})
             }else{
                 data=data.replaceAll(`##SPEAKERS##`, "")
             }
 
         }catch(error){
-            console.log(error);
-            
+            console.log(error); 
         }
 
-
+        //LP LOGO THUMBNAIL
         if (forPreview == true) {
             if (this.filesRef.fileInput1.files[0]) { data = data.replaceAll(`##BASE_URL####LOGO_FOLDER####LOGO_NAME##`, await this.getBase64Image(this.filesRef.fileInput1.files[0])) }
-
             if (this.filesRef.fileInput2.files[0]) { data = data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, await this.getBase64Image(this.filesRef.fileInput2.files[0])) }
-
         }
-
 
         if (this.state["THUMBNAIL_BORDER"] == true) {
             data = data.replaceAll(`##THUMBNAIL_BORDER##`,  'border: 1px solid #e5e5e5;'  )
@@ -404,6 +392,8 @@ This is to convert Chinese characters to Unicode numbers
         return data
         //return JSON.stringify(this.thumbnailDataUrl)+" "+JSON.stringify(this.state)
     }
+
+    //Sendmail
     getSendmailHtml({ forPreview }) {
         let data = sendemail_html
         data = data.replaceAll(`##MAPPED_DATA##`, this.getFormCurlApiSendmailMappedData(this.state.form))

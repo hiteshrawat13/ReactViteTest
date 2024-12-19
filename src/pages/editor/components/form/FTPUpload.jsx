@@ -41,7 +41,7 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
       }
 
     } catch (error) {
-      alert(error)
+      //alert(error)
       console.log(error);
     }
   }

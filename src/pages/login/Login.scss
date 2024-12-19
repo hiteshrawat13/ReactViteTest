@@ -6,22 +6,34 @@
     flex-direction: column;
     height: 100vh;
 
+
+    
+
     form{
        
-        max-width: 350px;
-        padding: 10px;
+        width: 370px;
+        padding: 0px;
         background: #fff;
-        border:1px solid #d8d0d0;
-        border-radius: 4px;
-
+        border: 1px solid #cbcbcb;
+        border-radius: 7px;
+        overflow: hidden;
+         
 
 
         .logoHolder{
+            width: 370px;
+            background-color: #353b48;
             text-align: center;
+             
             img{
                 width: 60%;
                 
             }
+        }
+        
+
+        .fields{
+            padding: 10px;
         }
      
 
@@ -29,15 +41,17 @@
             padding: 0px;
             margin: 0px;
             text-align: center;
-            font-size: 0.8rem;
-            color: #777474;
-            text-transform: uppercase;
+            font-size: 1rem;
+            color: #0e0e0e;
+            text-transform: none;
         }
         label{
+            display: block;
             margin-bottom: 10px;
-            color: #524e4e;
+            color: #000000;
             span{
                 font-size: 0.8em;
+                font-weight: bold;
             }
         }
 
@@ -60,7 +74,11 @@
             color: #fff;
             font-weight: 700;
             font-size: 0.9rem;
-            background-color: #ff4756;
+            background-color: #2c3e50;
+
+            &:hover{
+                background-color: #0c1927;
+            }
         }
     }
 }

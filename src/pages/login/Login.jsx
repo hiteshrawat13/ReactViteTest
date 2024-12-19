@@ -61,10 +61,12 @@ const Login = () => {
     <div className='logoHolder'>
     <img src={logo}/>
     </div>
-     
+
+    
+    <div className='fields'>
     <h1>Login to your account</h1>
       <label >
-        <span>Emp Id:</span>
+        <span>Employee Id:</span>
         <input type="text"  onChange={(e)=>setEmpId(e.target.value)} value={empId} />
       </label>
       <label >
@@ -73,6 +75,7 @@ const Login = () => {
       </label>
 
       <input type="submit" defaultValue="Login" style={{'marginTop':'15px'}}/>
+      </div>
     </form>
     </div>
     </>

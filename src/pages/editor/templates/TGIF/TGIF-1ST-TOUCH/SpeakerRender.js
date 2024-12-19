@@ -79,6 +79,9 @@ if(STATE["SHOW_SPEAKERS"]==false){
             }
 
 
+            
+
+
             const speakersDiv=`
             <table cellspacing="0" cellpadding="0" border="0" width="100%" class="speaker">
                     <tr><td class="speaker-heading" colspan="2" align="left">${STATE["SPEAKER_HEADING"]}</td></tr>

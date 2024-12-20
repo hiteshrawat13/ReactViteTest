@@ -79,15 +79,7 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
             console.log( "@@@@@@@@@@@@@@@@@@---ERROR Getting file inputs for speaker---",error);
           }
 
-      
-          // uploadFiles.push({
-          //   type: filesRef[key].dataset.tag,
-          //   name: campaignDataState.data["SPEAKERS"],
-          //   file: filesRef[key].files[0],
-          //   progress: 0,
-          //   selected: true
-          // })
-
+ 
 
         }else{
           //Files 
@@ -108,13 +100,20 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
     const templatefiles = await publishHelper.getPageFiles({ state: campaignDataState.data })
     templatefiles.forEach((file) => {
       uploadFiles.push({
-        type: "templateFile",
+        //type: "templateFile",
+        type: "file",
         name: file.name,
-        data: file.data,
+        // data: file.data,Hitesh
+        file:new Blob([file.data], {type: "text/plain"}),
         progress: 0,
         selected: true
       })
     })
+
+
+
+  
+
 
     setFirstPageName(templatefiles[0].name)
     setFilesToUpload(uploadFiles)
@@ -178,6 +177,10 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
     bodyFormData.append('campdata', JSON.stringify(tempdata));
 
     let templateFiles = []
+
+
+     
+
     filesToUpload.forEach(file => {
       if (file.selected == false)
         return;
@@ -193,12 +196,11 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
       }
     })
 
+    // DUMMY FILE TO UPLOAD to prevent upload error add it to last.
+    bodyFormData.append('files[]', new Blob([], {type: "text/plain"}), "DUMMY");
+    
     bodyFormData.append(`templateFiles`, JSON.stringify(templateFiles));
-
     startUpload(bodyFormData)
-
-
-
     console.log(filesToUpload);
 
   }
@@ -266,35 +268,7 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
           //handle success
           console.log(response, "Complete");
 
-
-
-          // response.data.forEach((file) => {
-          //   const currentTodoIndex = filesToUpload.findIndex((file1) => file1.name === file.name);
-
-          //   // 2. Mark the todo as complete
-          //   if (currentTodoIndex != -1) {
-          //     const updatedTodo = { ...filesToUpload[currentTodoIndex], progress: file.status };
-          //     // 3. Update the todo list with the updated todo
-          //     setFilesToUpload((previous) => [
-          //       ...previous.slice(0, currentTodoIndex),
-          //       updatedTodo,
-          //       ...previous.slice(currentTodoIndex + 1)])
-          //   } else {
-          //     console.log("NOTFOUND", currentTodoIndex, filesToUpload, file.name);
-          //   }
-          // })
-
-
-          // setUploadedLinks([...uploadedLinks, {
-          //   title: document.querySelector("[name='EDM_TITLE']").value,
-          //   links: `${publishHelper.current.BASE_URL}${document.querySelector("[name='LINK_NAME']").value}-edm.html`,
-          // }])
-
-
-
-
-
-
+  
           response.data.forEach(item => {
 
             // 1. Find the todo with the provided id

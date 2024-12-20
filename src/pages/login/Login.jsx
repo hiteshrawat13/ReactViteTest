@@ -73,7 +73,6 @@ const Login = () => {
         <span>Password:</span>
         <input type="password"  onChange={(e)=>setPassword(e.target.value)} value={password}/>
       </label>
-
       <input type="submit" defaultValue="Login" style={{'marginTop':'15px'}}/>
       </div>
     </form>

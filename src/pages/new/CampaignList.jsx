@@ -120,20 +120,21 @@ const CampaignList = () => {
         Country:country
       }=data
 
-    navigate(`/linklist`,{state:
-        {
-           clientCode,
-           category,
-            campaignId,
-            campaignName,
-            campCreatedBy,
-            lastEditedBy,
-            comment,
-            country,
+    // navigate(`/linklist?campaignName=${encodeURIComponent(campaignName)}`,{state:
+    //     {
+    //        clientCode,
+    //        category,
+    //         campaignId,
+    //         campaignName,
+    //         campCreatedBy,
+    //         lastEditedBy,
+    //         comment,
+    //         country,
 
-        }
+    //     }
 
-    })
+    // })
+    navigate(`/linklist?campaignName=${encodeURIComponent(campaignName)}`)
    
     console.log(data);
   }

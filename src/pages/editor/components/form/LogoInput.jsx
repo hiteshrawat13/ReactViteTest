@@ -105,7 +105,7 @@ const LogoPicker = ({ fileRef, name, label = "", tag = "",onFileChange=null,onTe
            // alert(filename)
           }}
 
-        />
+        readOnly={false}/>
 
        
 

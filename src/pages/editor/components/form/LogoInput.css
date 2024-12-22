@@ -1,23 +1,30 @@
 .logoList{
-    display: block;
-    list-style-type: none;
-    background: #ffffff;
-    width: 68%;
-    position: absolute;
-    margin-top: 2px;
-    top: 47%;
-    left: 32%;
-    padding: 5px;
+  display: block;
+  list-style-type: none;
+  background: #ffffff;
+  width: 118%;
+  position: absolute;
+  margin-top: 0px;
+  top: 26%;
+  left: 0%;
+  padding: 5px;
     z-index: 1;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     border: 1px solid #5a93f6;
   }
 
     .logoList>li{
-    padding: 0px 10px;
-    border-bottom: 1px solid #5a93f6;
-    display: flex;
-    align-items: center;
+      padding: 5px 6px;
+      border-bottom: 1px solid #5a93f6;
+      display: flex
+  ;
+      align-items: center;
+      justify-content: flex-start;
+
+      &:hover{
+        background-color: #ffeaa7;
+        cursor: pointer;
+      }
   }
   
   .logoList>li:nth-last-child(1){
@@ -25,8 +32,10 @@
   }
   .logoList>li>img{
     width: auto;
-    max-width: 100px;
-      max-height: 70px;
+    width: 55px;
+    object-fit: contain;
+    max-width: 55px;
+    max-height: 55px;
   }
   .logoList>li>p{
     display: inline;

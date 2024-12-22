@@ -27,24 +27,54 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
 
     const navigate = useNavigate()
     const location = useLocation()
+    const queryParams = new URLSearchParams(location.search);
 
     const [isUpdateCampaignModalOpened, setUpdateCampaignModalOpened] = useState(false)
+    const [campaignDetails,setCampaignDetails]=useState(null)
+    const [templates,setTemplates]=useState(null)
     const [miniSwitch, setMiniSwitch] = useState(false);
     const [links, setLinks] = useState('');
     console.log("STATE", TemplateManager);
     console.log("STATE", location?.state?.clientCode);
-    const templates = TemplateManager.find(client => client.clientCode == location?.state?.clientCode)
+  
  
     useEffect(() => {
         (async () => {
             const response = await axios.get(
-                Config.API_BASE_URL + `/camplist/getLinks?camp_name=${encodeURIComponent(location?.state?.campaignName)}`
+                //Config.API_BASE_URL + `/camplist/getLinks?camp_name=${encodeURIComponent(location?.state?.campaignName)}`
+                Config.API_BASE_URL + `/camplist/getLinks?camp_name=${encodeURIComponent(queryParams.get("campaignName"))}`
             );
 
-            setLinks(response.data)
+            const { 
+                Client_Code:clientCode,
+                Category:category,
+                camp_id:campaignId,
+                camp_name:campaignName,
+                camp_Created_By:campCreatedBy,
+                last_edited_By:lastEditedBy,
+                comment:comment,
+                Country:country
+              }=response.data?.campaign
+
+            setCampaignDetails({
+                clientCode,
+                category,
+                 campaignId,
+                 campaignName,
+                 campCreatedBy,
+                 lastEditedBy,
+                 comment,
+                 country,
+     
+             })
+            setLinks(response.data?.links)
+           
+            setTemplates( TemplateManager.find(client => client.clientCode == clientCode) )
         })()
         //   return () => {  }
     }, [])
+
+
 
 
 
@@ -74,21 +104,21 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
 
     const handleCreateLink = (campData, templateId, templateType) => {
 
-        const {
-            Client_Code: clientCode,
-            Category: category,
-            camp_id: campaignId,
-            camp_name: campaignName,
-            camp_Created_By: campCreatedBy,
-            last_edited_By: lastEditedBy,
-            comment: comment,
-            Country: country,
-        } = location?.state
+        // const {
+        //     Client_Code: clientCode,
+        //     Category: category,
+        //     camp_id: campaignId,
+        //     camp_name: campaignName,
+        //     camp_Created_By: campCreatedBy,
+        //     last_edited_By: lastEditedBy,
+        //     comment: comment,
+        //     Country: country,
+        // } = campaignDetails
 
 
         navigate(`/editor`, {
             state: {
-                ...location?.state,
+                ...campaignDetails,
 
                 templateId,
                 templateType
@@ -116,7 +146,7 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
             const jobject = JSON.parse(response.data.json_data)
             navigate(`/editor/`, {
                 state: {
-                    ...location?.state,
+                    ...campaignDetails,
                     mode: "edit",
                     linkId: linkId,
                     jsonObject: jobject,
@@ -154,7 +184,7 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
             }
             navigate(`/editor/`, {
                 state: {
-                    ...location?.state,
+                    ...campaignDetails,
                     mode: "new",
                     linkId: linkId,
                     jsonObject: jobject,
@@ -328,13 +358,16 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
 
 
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
-
+ 
                 <div className="dropdown">
                     <button className="dropbtn">Create Link</button>
                     <div className="dropdown-content">
 
                         {templates?.templates.map((template, i) => {
-                            return <button key={i} onClick={() => { handleCreateLink(location?.state, template.id, template.type) }}>{template.title}</button>
+                            return <button key={i} onClick={() => { handleCreateLink(campaignDetails, template.id, template.type) }}>
+                                {/* {JSON.stringify(template)}  */}
+                                {template.title}
+                                </button>
                         })}
                     </div>
                 </div>
@@ -352,14 +385,14 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
                         open={isUpdateCampaignModalOpened}
                         onClose={() => setUpdateCampaignModalOpened(false)}>
 
-                        <CampaignDetails campaignData={location?.state} onSubmit={(data) => { updateCampaign(data) }} onCancel={() => setUpdateCampaignModalOpened(false)} />
+                        <CampaignDetails campaignData={campaignDetails} onSubmit={(data) => { updateCampaign(data) }} onCancel={() => setUpdateCampaignModalOpened(false)} />
                     </Modal>
                     {miniSwitch ?
                         <></> :
                         <div id="linksTable">
 
                             <DataTable
-                                title={location?.state.campaignName}
+                                title={campaignDetails?.campaignName}
                                 columns={columns}
                                 data={links}
                                 onRowClicked={() => { }}

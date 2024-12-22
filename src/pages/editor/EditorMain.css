@@ -1,0 +1,23 @@
+.campaignInfo{
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 15px;
+    a{
+        text-decoration: underline;
+        color:#4a69bd;
+    }
+
+
+    span{
+        background-color: #ced6e0;
+        padding: 3px 4px;
+        border-radius: 3px;
+        color:#747d8c;
+    }
+
+    .campaignInfoRight{
+        display: flex;
+        gap:4px;
+    }
+}

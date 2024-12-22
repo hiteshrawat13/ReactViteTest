@@ -1,9 +1,11 @@
 import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { setData, clearData, addData, updateData } from '../../store/campaign/CampaignSlice'
 import { useSelector } from 'react-redux';
 import TemplateManager from './templates/TemplateManager';
+
+import './EditorMain.css'
 
 const Context = React.createContext();
 
@@ -13,9 +15,18 @@ const EditorMain = () => {
 
   const campData = location?.state;
 
-  const Editor11 = useMemo(
-    () => TemplateManager.find(client => client.clientCode == campData.clientCode).templates.find(template => template.id == campData.templateId).editor,
-    [])
+  console.log(campData);
+  
+
+  // const Editor11 = useMemo(
+  //   () => TemplateManager.find(client => client.clientCode == campData.clientCode).templates.find(template => template.id == campData.templateId).editor,
+  //   [])
+
+    const Editor11 =   TemplateManager
+    .find(client => client.clientCode == campData.clientCode)
+    .templates.find(template => template.id == campData.templateId)
+    .editor
+    
 
   const [editor, setEditor] = useState(null)
 
@@ -135,6 +146,27 @@ const EditorMain = () => {
 
       </div>
 
+      <div className='campaignInfo'>
+      <span >Campaign: <Link
+  to={{
+    pathname: "/linklist",
+    search: `?campaignName=${encodeURIComponent(campData.campaignName)}`,
+   // hash: "#hash",
+  }}
+><b>{campData.campaignName}</b></Link></span>
+ 
+        <div className='campaignInfoRight'>
+       
+        <span>Client Code :  <b>{campData.clientCode}</b></span>
+        <span>Region: <b> {campData.country}</b></span>
+        <span>Type :<b> {campData.templateType}</b></span>
+       
+        </div>
+        
+       
+       
+      </div>
+
       
 
       <Context.Provider value={{
@@ -151,7 +183,10 @@ const EditorMain = () => {
       }}>
 
         <Suspense fallback={<div>Loading...</div>}>
-          <Editor11 />
+          {/* <Editor11 /> */}
+          {React.cloneElement(
+             <Editor11/>, {  })}
+ 
         </Suspense>
       </Context.Provider>
     </div>

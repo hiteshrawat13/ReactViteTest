@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form'
 import TextBox from './TextBox'
 import { EContext } from '../../EditorMain'
 
-const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileChange=null,onTextChange=null,...rest}) =>  {
+const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileChange=null,onTextChange=null,readOnly=null,...rest}) =>  {
  
     if(name==null)return <>Please provide name attribute for file input.</>
     if(fileRef==null)return <>Please provide fileRef attribute for file input.</>
@@ -16,7 +16,7 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
     const fileInputRefDummy=useRef()
 
     const [selectedImageFileName, setSelectedImageFileName] = useState(fileRef.files[0]?.name || null)
-    const [readOnlyText,setReadOnlyText]=useState(true)
+    const [readOnlyText,setReadOnlyText]=useState((readOnly==false)?false:true)
     const { register, formState: { errors } ,setValue} = useFormContext()
     const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData } = useContext(EContext)
 

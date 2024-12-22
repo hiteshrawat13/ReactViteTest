@@ -27,6 +27,9 @@ import defaultFieldsJson from "./default-fields.json"
 import { EContext } from '../../../EditorMain'
 import PublishHelper from './PublishHelper'
 import Speakers from '../../../components/form/Speakers'
+import LinkDetails from './LinkDetails'
+import BasicDetails from './BasicDetails'
+import EDMDetails from './EDMDetails'
 
 
 
@@ -76,87 +79,9 @@ const Editor = ({ }) => {
       <HiddenField name="LOGO_WIDTH" value={`${(campData?.jsonObject?.LOGO_WIDTH) ? campData?.jsonObject?.LOGO_WIDTH : "180"}`} />
       <HiddenField name="BASE_URL" value="https://resource.itbusinesstoday.com/whitepapers/cbtool_test/" />
       <HiddenField name="YEAR" value={new Date().getFullYear() + ""} />
-      <Section title="Link Details">
+   
 
-
-        <Row>
-          <Col>
-            <LanguageInput />
-          </Col>
-          <Col>
-            <TextBox label="Client Code" name="CLIENT_CODE" required={true} value={campData?.clientCode} readOnly />
-            {(watch["CLIENT_CODE"] === "TEST") && <>IT WORKS</>}
-            {/* {(watch["CLIENT_CODE"] === "TEST2") && setError("CLIENT_CODE","LINK ALREADY EXISTS")} */}
-
-          </Col>
-          <Col><TextBox label="Link Type" name="LINK_TYPE" required={true} value={campData?.templateType} readOnly /></Col>
-          <Col><TextBox label="Template Id" name="TEMPLATE_ID" required={true} value={campData?.templateId} readOnly /></Col>
-        </Row>
-
-        <Row>
-
-          <Col>
-
-
-            <Row>
-              <Col><SelectBox label="Region" name="REGION" value={campData?.country} required={true} readOnly
-                options={[
-                  { label: "Select..", value: "" },
-                  { label: "EU", value: "EU" },
-                  { label: "NON-EU", value: "NON-EU" },
-                  { label: "CASL", value: "CASL" },
-                  { label: "Both ( NON-EU & CASL )", value: "BOTH" }
-                ]}
-                width="100%"
-              /></Col>
-              <Col>
-                <TextBox label="Campaign Id" name="CAMP_ID" required={true} value={campData?.campaignId} readOnly />
-              </Col>
-
-            </Row>
-          </Col>
-
-
-          <Col>
-            <TextBox label="Campaign Name" name="CAMP_NAME" required={true} value={campData?.campaignName} placeholder="Campaign email subject line here" readOnly />
-          </Col>
-
-
-        </Row>
-
-
-        <Row>
-
-          <Col>
-            <TextBox label="Link Name" name="LINK_NAME" required={true} width="100%" readOnly={campData.mode === 'edit'}
-
-              onChange={
-                (e) => {
-                  //console.log(e.target.value);
-                  e.target.value = e.target.value.replace(/\s+/g, '-');
-                  e.target.value = e.target.value.replace(/[^a-zA-Z0-9-\.]/g, '');
-
-                  const val = e.target.value
-                  // setStateValue("THUMBNAIL_NAME",`${val}.png`)
-                  // setStateValue("PDF_NAME",`${val}.pdf`)
-                  // setStateValue("MP4_NAME",`${val}.mp4`)
-                  setFormValue("THUMBNAIL_NAME", `${val}.png`)
-                  setFormValue("EDM_THUMBNAIL_NAME", `${val}-edm.png`)
-                  setFormValue("PDF_NAME", `${val}.pdf`)
-                  setFormValue("MP4_NAME", `${val}.mp4`)
-                  setFormValue("EXTRA_FILE_1", `${val}.png`)
-
-                }
-              } />
-
-            {(watch['LINK_NAME'] != "") && <CheckLink link={watch["BASE_URL"] + (watch['LINK_NAME']) + "-edm.html"} onExists={() => {
-
-
-            }} />}
-          </Col>
-        </Row>
- 
-      </Section>
+   <LinkDetails />
 
 
 
@@ -166,75 +91,7 @@ const Editor = ({ }) => {
 
 
 
-      <Section title="Details" >
-
-    
-        <TextBox label="Pixel Link" name="PIXEL_LINK" required={true} />
-
-        <Row>
-          <Col>
-            <SelectBox label="Asset Type" name="ASSET_TYPE" required={true}
-              options={[
-                { label: "Select..", value: "" },
-                { label: "White Paper", value: "White Paper" },
-                { label: "Buyers/Comparision Guide", value: "Buyers Guide" },
-                { label: "E Book", value: "E Book" },
-                { label: "Case Study", value: "Case Study" },
-                { label: "Report", value: "Report" },
-                { label: "Webinar OnDemand", value: "Webinar" },
-                { label: "Infographic", value: "Infographic" }
-              ]}
-            />
-          </Col>
-          <Col>
-            <TextBox label="Text above the logo" name="SPONSORED_BY_TEXT" required={true} value="Sponsored by" />
-          </Col>
-
-          <Col>
-            <SelectBox label="EDM Layout" name="EDM_LAYOUT" required={true}
-              options={[
-                { label: "Select..", value: "" },
-                { label: "Traditional", value: "Traditional" },
-                { label: "Full width thumbnail and abstract", value: "Full width thumbnail and abstract" },
-
-              ]}
-            /></Col>
-          <Col><SelectBox label="Landing Layout" name="LANDING_LAYOUT" required={true}
-            options={[
-              { label: "Select..", value: "" },
-              { label: "Traditional", value: "Traditional" },
-              { label: "Thumbnail below abstract", value: "Thumbnail below abstract" },
-
-            ]}
-          /></Col>
-        </Row>
-
-
-       
-
-
-      </Section>
-
-
-      <Section title="Advanced Options" >
-      <Row>
-          <Col>
-            <CheckBox label="Use Custom Footer" name="USE_CUSTOM_FOOTER" defaultChecked={false} />
-            {console.log(watch["USE_CUSTOM_FOOTER"] ,"USE_CUSTOM_FOOTER=================")
-      }
-            {(watch["USE_CUSTOM_FOOTER"] == true || getStateValue("USE_CUSTOM_FOOTER") == true) &&
-
-              <RichTextEditor label="Custom Footer" name="FOOTER" required={true} value={`<p><a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> | ##PRIVACY_POLICY##<br /> Copyright &#169; ##YEAR## XDBS Corporation <br /> Hawthorne, CA 90250 USA<br /> 3501, Jack Northorp Ave, Ste C3873<br /></p>`} />
-            }
-            {(watch["USE_CUSTOM_FOOTER"] == false || getStateValue("USE_CUSTOM_FOOTER") == false) && [
-              setStateValue("USE_CUSTOM_FOOTER", false),
-
-              setStateValue("FOOTER", `<p><a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> | ##PRIVACY_POLICY##<br /> Copyright &#169; ##YEAR## XDBS Corporation <br /> Hawthorne, CA 90250 USA<br /> 3501, Jack Northorp Ave, Ste C3873<br /></p>`)
-            ]}
-            {/* {(getStateValue("FOOTER") == null)&& setFormValue( "FOOTER" , `<p><a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> | ##PRIVACY_POLICY##<br /> Copyright &#169; ##YEAR## XDBS Corporation <br /> Hawthorne, CA 90250 USA<br /> 3501, Jack Northorp Ave, Ste C3873</p>`)} */}
-          </Col>
-        </Row>
-      </Section>
+      <BasicDetails/>
 
 
     </Step>
@@ -244,39 +101,7 @@ const Editor = ({ }) => {
     <Step title="Abstract & Title" key={1102}>
       <Section title="EDM Details">
 
-        <Row>
-          <Col><TextBox label="EDM Title" name="EDM_TITLE" required={true} width="100%"
-            onChange={
-              (e) => {
-
-                const val = e.target.value
-
-                setFormValue("ASSET_TITLE", `${val}`)
-
-              }
-            }
-          /></Col>
-          <Col><TextBox label="EDM Sub Title" name="EDM_SUB_TITLE" required={false} width="100%" /></Col>
-        </Row>
-
-
-
-        <RichTextEditor label="Edm Abstract" name="EDM_ABSTRACT" required={true} />
-        <TextBox label="EDM Optin" name="EDM_OPTIN" required={true} value="By clicking/downloading the asset, you agree to allow the sponsor to have your contact information and for the sponsor to contact you." html/>
-
-        <Row>
-          <Col> <TextBox label="EDM CTA" name="EDM_CTA" required={true} value="Download Now" /></Col>
-          <Col>
-            <RadioGroup name="EDM_CTA_ALIGNMENT" label="CTA Alignment" options={[
-              { label: "Left", value: "left" },
-              { label: "Center", value: "center" },
-              { label: "Right", value: "right" },
-
-            ]} />
-          </Col>
-        </Row>
-
-        <TextBox label="Add Text Below the CTA Button" name="EDM_TEXT_BELOW_CTA" html />
+        <EDMDetails/>
       </Section>
 
 

@@ -25,7 +25,7 @@ const TextBox = ({type=null,label,name,required,width=null,onChange=null,value=n
     return () => {
       unregister(name)
     }
-  }, [campaignDataState.data[name],value])
+  }, [campaignDataState.data[name],value,setValue])
 
 
  

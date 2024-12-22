@@ -43,6 +43,9 @@ const useSocket = () => {
 
 
         if(!socket.connected){
+            socket.io.opts.query = {
+                sessionId: socketSessionId,
+            };
             socket.connect();
             socket.on('connect', onConnect);
             socket.on('disconnect', onDisconnect);

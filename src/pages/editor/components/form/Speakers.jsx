@@ -239,7 +239,7 @@ const Speakers = ({ filesRef, name = "SPEAKERS" }) => {
 <div className='speaker-holder'>
       {speakers.map((speaker, i) => {
         return <div key={i} className='speaker'  >
-          <img ref={ref => previewRef.current[speaker.id] = ref} />
+          {speaker.speakerImage && <img ref={ref => previewRef.current[speaker.id] = ref} /> }
           <div className='details'>
             <div>
               <div className="speaker-name">{speaker.id} {speaker.speakerName}</div> 

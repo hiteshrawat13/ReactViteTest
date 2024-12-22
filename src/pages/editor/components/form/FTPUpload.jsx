@@ -8,6 +8,9 @@ import Modal from 'react-responsive-modal'
 import { useAuth } from '../../../../Auth'
 import Cookies from 'js-cookie'
 import CheckLink from '../CheckLink'
+
+import { FileIcon, defaultStyles } from "react-file-icon";
+
 const FTPUpload = ({ publishHelper, filesRef }) => {
 
 
@@ -55,7 +58,9 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
     for (const [key, value] of Object.entries(filesRef)) {
 
 
-      if (filesRef[key].files[0]) {
+      console.log("--------------",filesRef[key]);
+      
+      if (filesRef[key] && filesRef[key].files[0] !=undefined) {
         //Speaker file
         if(filesRef[key].dataset.tag == "speaker"){
 
@@ -197,7 +202,7 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
     })
 
     // DUMMY FILE TO UPLOAD to prevent upload error add it to last.
-    bodyFormData.append('files[]', new Blob([], {type: "text/plain"}), "DUMMY");
+   // bodyFormData.append('files[]', new Blob([], {type: "text/plain"}), "DUMMY");
     
     bodyFormData.append(`templateFiles`, JSON.stringify(templateFiles));
     startUpload(bodyFormData)
@@ -226,7 +231,18 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
         updatedTodo,
         ...previous.slice(currentTodoIndex + 1)])
     }
-    console.log(filesToUpload);
+   // console.log(filesToUpload);
+  }
+
+  const handleFileCheckboxSelectAll= (e) => {
+    //e?.preventDefault() Dont use e.prevent default on checkbox it will not update on single click
+    e.stopPropagation()
+ 
+      setFilesToUpload((previous) => [
+        ...previous.map(prev=>{return {...prev,selected: e.target.checked} }) 
+      ])
+ 
+  
   }
 
 
@@ -260,7 +276,7 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
       setFTPProgress("Uploading..")
       axios({
         method: "post",
-        url: Config.API_BASE_URL + `/upload_file/${campaignDataState.data["FTP_CONFIG_NAME"]}/${socketId}`,
+        url: Config.API_BASE_URL + `/upload_file/${campaignDataState.data["FTP_CONFIG_NAME"]}/${socketSessionId}`,
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" },
       })
@@ -366,7 +382,12 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
       <br /><br />
       {filesToUpload.map((file, i) => {
         return <div className="fileToUpload" key={i}>
-          <div className='fileName'>{file.name} <CheckLink link={campaignDataState.data["BASE_URL"] + file.name} /></div>
+          <div className='fileName'>
+          <span style={{display:"inline-block",width:"22px",height:"auto"}}>
+                <FileIcon extension={file.name.split('.').pop()} {...defaultStyles[file.name.split('.').pop()]} />
+                 
+                  </span>
+            {file.name} <CheckLink link={campaignDataState.data["BASE_URL"] + file.name} /></div>
           <div className='fileProgress'>{file.progress}</div>
           <div><input type="checkbox" onChange={(e) => handleFileCheckbox(e, i)} checked={file.selected} value={file.selected} /></div>
         </div>
@@ -391,10 +412,26 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
           <div> {(socketConnected) ? <b style={{ color: "green" }}>Upload Server Connected</b> : <b style={{ color: "red" }}>Upload Server Disconnected</b>}</div>
           <br />
           <table style={{ display: "table", width: "100%", borderCollapse: "collapse" }}>
+              <tr className="fileToUpload"  style={{ display: "table-row", width: "100%", backgroundColor: 'transparent' }}>
+              <td className='fileName' style={{ display: "table-cell", padding: "10px" }}>  </td>
+
+                <td className='fileName' style={{ display: "table-cell", padding: "10px" }}>Filename </td>
+                <td className='fileProgress' style={{ display: "table-cell", padding: "10px" }}>Progress</td>
+                <td><input type="checkbox" style={{ display: "table-cell", padding: "10px" }} onChange={(e) => handleFileCheckboxSelectAll(e)} checked={filesToUpload.some(ftu=>ftu.selected==true)}  /></td>
+              </tr>
             {filesToUpload.map((file, i) => {
               return <tr className="fileToUpload" key={i} style={{ display: "table-row", width: "100%", backgroundColor: `${file.selected == true ? '#209fcd' : 'transparent'}` }}>
-                <td className='fileName' style={{ display: "table-cell", padding: "10px" }}>{file.name} </td>
-                <td className='fileProgress' style={{ display: "table-cell", padding: "10px" }}>{file.progress}</td>
+                <td className='fileName' style={{ display: "table-cell", padding: "10px",width:"22px" }}> 
+                <span style={{display:"inline-block",width:"22px",height:"auto"}}>
+                <FileIcon extension={file.name.split('.').pop()} {...defaultStyles[file.name.split('.').pop()]} />
+                 
+                  </span>
+                </td>
+                <td className='fileName' style={{ display: "table-cell", padding: "10px" }}>
+                 {file.name} 
+                  
+                  </td>
+                <td className='fileProgress' style={{ display: "table-cell", padding: "10px",width:"100px" }}>{file.progress}</td>
                 <td><input type="checkbox" style={{ display: "table-cell", padding: "10px" }} onChange={(e) => handleFileCheckbox(e, i)} checked={file.selected} value={file.selected} /></td>
               </tr>
             })}

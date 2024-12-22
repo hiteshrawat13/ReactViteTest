@@ -13,12 +13,16 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
     const campaignDataState = useSelector(state => state.campaignData)
     const imagePreviewRef=useRef()
 
+    const fileInputRefDummy=useRef()
+
     const [selectedImageFileName, setSelectedImageFileName] = useState(fileRef.files[0]?.name || null)
+    const [readOnlyText,setReadOnlyText]=useState(true)
     const { register, formState: { errors } ,setValue} = useFormContext()
     const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData } = useContext(EContext)
 
-    const handleDropZoneClick = () => {
-        fileRef.click()
+    const handleDropZoneClick = (e) => {
+        e.preventDefault()
+        fileInputRefDummy.current.click()
     }
     const handleDropZoneDrop=(e)=>{
         e.preventDefault();
@@ -30,6 +34,26 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
             setImagePreview()
         }
     }
+
+    const handleFileChange = () => {
+        const fileInput1 = fileInputRefDummy.current;
+       
+    
+        if (fileInput1 && fileRef) {
+          const files = fileInput1.files;
+          if (files.length > 0) {
+            // Create a DataTransfer object to hold the files
+            const dataTransfer = new DataTransfer();
+            for (let i = 0; i < files.length; i++) {
+              dataTransfer.items.add(files[i]);
+            }
+    
+            // Assign the cloned files to the second input
+            fileRef.files = dataTransfer.files;
+            alert(`Files copied: ${Array.from(dataTransfer.files).map((f) => f.name).join(", ")}`);
+          }
+        }
+      }
 
     const setImagePreview=(e)=>{
 
@@ -55,12 +79,15 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
 
     function onImageFileChange(e) {
         e?.preventDefault()
+
+        handleFileChange()
         // update the scroll position
-        setSelectedImageFileName(fileRef.files[0].name || null)
+        setSelectedImageFileName(fileRef.files[0]?.name || null)
         //setValue("THUMBNAIL_NAME",fileRef.files[0].name)
         setImagePreview()
-
-        if(onFileChange)onFileChange(fileRef.files[0].name || null);
+     
+        if(onFileChange)onFileChange(fileRef.files[0]?.name || null);
+        
     }
 
 
@@ -80,39 +107,101 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
         
         setImagePreview()
         
-        if (fileRef)
-            fileRef.addEventListener("change", onImageFileChange);
+        if (fileRef ){
+           // fileInputRefDummy.current.addEventListener("change", onImageFileChange);
             fileRef.setAttribute("data-tag", tag);
             fileRef.setAttribute("data-name", name);
+        }
+            
         return function cleanup() {
-            fileRef.removeEventListener("change", onImageFileChange);
+             
+           // fileInputRefDummy.current.removeEventListener("change", onImageFileChange);
         };
 
-    }, [fileRef])
+    }, [])
     return (
         <div style={{display:"flex",gap:"6px"}}>
 
             
 
-            <div>
+            <div style={{width:"100%"}}>
 
 
                 
-                <TextBox label={label} name={name} required={true} onChange={onTextChange} {...rest}/>
+                <TextBox label={label} name={name} required={true} onChange={onTextChange}  readOnly={readOnlyText} {...rest}/>
                 {/* <input type="text" {...register("THUMBNAIL_NAME", { required: true })} placeholder='Search Logo Here' />
                 {errors["THUMBNAIL_NAME"] && <p>Thumbnail file name is required</p>} */}
-                    <div className="drop-zone" 
+                    
+                    <button onClick={(e)=>{e.preventDefault();setReadOnlyText(prev=>!prev)} }>Edit</button>
+
+
+                    <button onClick={async (e)=>{e.preventDefault();
+
+// Check if the Clipboard API is available
+if (navigator.clipboard) {
+  try {
+    // Read clipboard items
+    const clipboardItems = await navigator.clipboard.read();
+    
+    // Filter the clipboard items to find files
+    const files = [];
+    for (let item of clipboardItems) {
+      // Check if the item is a file
+      if (item.types.includes('image/png') || item.types.includes('image/jpeg') || item.types.includes('application/pdf')) {
+        const file = await item.getType(item.types[0]); // Get the file as Blob
+        files.push(file);
+      }
+    }
+
+    // If there are files in the clipboard
+    if (files.length > 0) {
+      // Create a new DataTransfer object to simulate adding files to the file input
+      const dataTransfer = new DataTransfer();
+      files.forEach(file => {
+        // Add the file to the DataTransfer object
+        const filename=file.name || "speaker_"+Math.random().toString(36).slice(2, 7)+".png"
+        const fileItem = new File([file], filename, { type: file.type });
+        dataTransfer.items.add(fileItem);
+      });
+
+      // Set the files of the file input
+      fileRef.files = dataTransfer.files;
+
+      // Trigger the change event (if necessary, for further processing)
+      fileRef.dispatchEvent(new Event('change'));
+
+      
+    } else {
+      alert("No files found in the clipboard.");
+    }
+  } catch (error) {
+    console.error('Error accessing clipboard', error);
+    alert('Failed to access clipboard.');
+  }
+} else {
+  alert('Clipboard API is not supported in this browser.');
+}
+
+  }}>Paste Image</button>
+
+
+
+                    <button className="drop-zone" 
                         onClick={handleDropZoneClick}
                         onDrop={handleDropZoneDrop}
                         onDragOver={(event) => event.preventDefault()} >
+                        
+                        <div className='file-preview'>
+                            <img ref={imagePreviewRef} />
+                        </div>
                         Drop Image here or click to select an Image file.<br />
                         <div className='selected-file-name'>{selectedImageFileName}</div>
-                    </div>
+                    </button>
+
+                    <input type="file" ref={fileInputRefDummy} onChange={onImageFileChange} style={{display:"none"}} />
             </div>
 
-            <div className='file-preview'>
-                <img ref={imagePreviewRef} />
-            </div>
+           
           
         </div>
     )

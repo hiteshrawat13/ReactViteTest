@@ -74,9 +74,9 @@ const EditorMain = () => {
 
   const setFormValue = (key, value) => {
 
-    console.log(currentFormMethods);
+  //  console.log(currentFormMethods);
 
-    currentFormMethods.setValue(key, value, { shouldValidate: true }) //{shouldValidate:true} removes errors
+   currentFormMethods.setValue(key, value, { shouldValidate: true })   //{shouldValidate:true} removes errors
   }
 
   useEffect(() => {
@@ -131,9 +131,11 @@ const EditorMain = () => {
         <input type="file" className="" ref={ref => filesRef.current.speaker8 = ref} data-id={8}/>
         <input type="file" className="" ref={ref => filesRef.current.speaker9 = ref} data-id={9}/>
 
+        
+
       </div>
 
-
+      
 
       <Context.Provider value={{
         campData,

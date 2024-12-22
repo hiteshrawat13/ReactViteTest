@@ -10,7 +10,7 @@ import { EContext } from '../../EditorMain'
 import axios from 'axios'
 import { debounce } from "lodash";
 import "./LogoInput.css"
-const LogoPicker = ({ fileRef, name, label = "", tag = "" }) => {
+const LogoPicker = ({ fileRef, name, label = "", tag = "",onFileChange=null,onTextChange=null }) => {
 
 
 
@@ -86,18 +86,22 @@ const LogoPicker = ({ fileRef, name, label = "", tag = "" }) => {
 
             optimizedFn(e) 
 
+            if(onTextChange)onTextChange(e)
+
 
 
           }}
 
           onFileChange={(filename) => {
-            alert("WWW")
+           
          
-            filename = filename.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-\.]/g, '');
+           // filename = filename.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-\.]/g, '');
            
            // setFormValue("LOGO_NAME", filename)  NOT WORKING HERE so used querySelector
-            document.querySelector("[name=LOGO_NAME]").value = filename;
-            setFormValue("LOGO_NAME", filename)
+            //document.querySelector("[name=LOGO_NAME]").value = filename;
+          //  setFormValue("ASSET_TITLE", filename)
+ 
+            if(onFileChange)onFileChange(filename)
            // alert(filename)
           }}
 

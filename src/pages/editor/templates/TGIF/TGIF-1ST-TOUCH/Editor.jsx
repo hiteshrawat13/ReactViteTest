@@ -42,6 +42,10 @@ const Editor = ({ }) => {
     //setStateValue("LOGO_FOLDER", "logo/")
     //if (!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
     //alert("TGIF")
+
+ 
+    // setInterval(()=>{console.log("SETTING");
+    //  setFormValue("LINK_NAME",Math.random())},1000)
   }, [campData])
 
 
@@ -164,8 +168,7 @@ const Editor = ({ }) => {
 
       <Section title="Details" >
 
-
-
+    
         <TextBox label="Pixel Link" name="PIXEL_LINK" required={true} />
 
         <Row>
@@ -361,10 +364,35 @@ const Editor = ({ }) => {
 
       <Section title="Logo & Thumbnail">
 
+
+
         <Row>
-          <Col><LogoInput name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1} /></Col>
+          <Col><LogoInput name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1} 
+          onFileChange={(filename)=>{alert(filename);setFormValue("LOGO_NAME",Math.random()+"---")} }/></Col>
           <Col>
-            <FileInput name="THUMBNAIL_NAME" label="Thumbnail" tag="file" fileRef={filesRef.current.fileInput2} />
+            <FileInput name="THUMBNAIL_NAME" label="Thumbnail" tag="file" fileRef={filesRef.current.fileInput2}
+             onTextChange={(filename)=>{ 
+              
+            } 
+            } 
+
+             onFileChange={(filename)=>{
+
+              if(filename.includes(".")){
+                let fn=filename.split('.')
+                fn.pop()
+                 
+                
+                alert(fn.join("."));
+              }
+              
+              //setFormValue("LOGO_NAME",Math.random()+"---")
+              
+             }
+            }
+             />
+
+             
             <CheckBox label="Add border to thumbnail" name="THUMBNAIL_BORDER" defaultChecked={true} />
           </Col>
         </Row>

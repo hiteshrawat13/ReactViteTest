@@ -213,7 +213,7 @@ const FormBuilder = (defaultFieldsJson) => {
     <>
       <Toaster position="center" reverseOrder={false} />
       <div className="dropdown">
-                    <button className="dropbtn">+ Add Field</button>
+                    <button className="dropbtn" onClick={(e)=>e.preventDefault()}>+ Add Field</button>
                     <div className="dropdown-content">
                     {
 

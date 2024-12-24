@@ -4,6 +4,8 @@ import { StepperContext } from '../stepper/StepperContext'
 import { useFormContext } from 'react-hook-form'
 import TextBox from './TextBox'
 import { EContext } from '../../EditorMain'
+import ClipboardImagePaste from './ClipboardImagePaste'
+import Modal from 'react-responsive-modal'
 
 const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileChange=null,onTextChange=null,readOnly=null,...rest}) =>  {
  
@@ -19,6 +21,8 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
     const [readOnlyText,setReadOnlyText]=useState((readOnly==false)?false:true)
     const { register, formState: { errors } ,setValue} = useFormContext()
     const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData } = useContext(EContext)
+
+    const [showClipboardImagePasteModal,setShowClipboardImagePasteModal]=useState(false)
 
     const handleDropZoneClick = (e) => {
         e.preventDefault()
@@ -108,14 +112,14 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
         setImagePreview()
         
         if (fileRef ){
-           // fileInputRefDummy.current.addEventListener("change", onImageFileChange);
+          
             fileRef.setAttribute("data-tag", tag);
             fileRef.setAttribute("data-name", name);
         }
-            
+              fileInputRefDummy?.current?.addEventListener("change", onImageFileChange);
         return function cleanup() {
              
-           // fileInputRefDummy.current.removeEventListener("change", onImageFileChange);
+           fileInputRefDummy?.current?.removeEventListener("change", onImageFileChange);
         };
 
     }, [])
@@ -132,57 +136,35 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
                 {/* <input type="text" {...register("THUMBNAIL_NAME", { required: true })} placeholder='Search Logo Here' />
                 {errors["THUMBNAIL_NAME"] && <p>Thumbnail file name is required</p>} */}
                     
-                    <button onClick={(e)=>{e.preventDefault();setReadOnlyText(prev=>!prev)} }>Edit</button>
+
+                    <div className='contextOptions' style={{display:"flex",gap:"6px"}}>
+                    <button className="" onClick={(e)=>{e.preventDefault();setReadOnlyText(prev=>!prev)} } title="Edit Filename">✎</button>
 
 
-                    <button onClick={async (e)=>{e.preventDefault();
+<button onClick={async (e)=>{e.preventDefault();
+setShowClipboardImagePasteModal(true)
+}}  title="Paste copied image.">📋</button>
 
-// Check if the Clipboard API is available
-if (navigator.clipboard) {
-  try {
-    // Read clipboard items
-    const clipboardItems = await navigator.clipboard.read();
-    
-    // Filter the clipboard items to find files
-    const files = [];
-    for (let item of clipboardItems) {
-      // Check if the item is a file
-      if (item.types.includes('image/png') || item.types.includes('image/jpeg') || item.types.includes('application/pdf')) {
-        const file = await item.getType(item.types[0]); // Get the file as Blob
-        files.push(file);
-      }
-    }
+                    </div>
+                 
 
-    // If there are files in the clipboard
-    if (files.length > 0) {
-      // Create a new DataTransfer object to simulate adding files to the file input
-      const dataTransfer = new DataTransfer();
-      files.forEach(file => {
-        // Add the file to the DataTransfer object
-        const filename=file.name || "speaker_"+Math.random().toString(36).slice(2, 7)+".png"
-        const fileItem = new File([file], filename, { type: file.type });
-        dataTransfer.items.add(fileItem);
-      });
 
-      // Set the files of the file input
-      fileRef.files = dataTransfer.files;
+     <Modal
+        closeOnOverlayClick={false}
+        center
+        open={showClipboardImagePasteModal}
+        onClose={() => setShowClipboardImagePasteModal(false)}>
+        <div style={{ width: "700px" }}>
+          <ClipboardImagePaste fileInputRefDummy={fileInputRefDummy}/>
+          <button onClick={(e)=>{  
+            e.preventDefault(); 
+            setShowClipboardImagePasteModal(false)
 
-      // Trigger the change event (if necessary, for further processing)
-      fileRef.dispatchEvent(new Event('change'));
+            }  }>Set Image</button>
+        </div>
+      </Modal>
 
-      
-    } else {
-      alert("No files found in the clipboard.");
-    }
-  } catch (error) {
-    console.error('Error accessing clipboard', error);
-    alert('Failed to access clipboard.');
-  }
-} else {
-  alert('Clipboard API is not supported in this browser.');
-}
 
-  }}>Paste Image</button>
 
 
 

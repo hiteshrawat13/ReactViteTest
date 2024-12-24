@@ -12,6 +12,7 @@ const CampaignList = () => {
    const navigate=useNavigate()
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [totalRows, setTotalRows] = useState(0);
   const [perPage, setPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,14 +21,23 @@ const CampaignList = () => {
 
   const fetchUsers = async (page, size = perPage) => {
     setLoading(true);
-    const response = await axios.get(
-      Config.API_BASE_URL+`/camplist/getCampList?page=${page}&per_page=${size}&user_id=${Cookies.get("user_id")}`
-    );
+    setError(null)
+    try{
 
-  setData(response.data.data)
+      const response = await axios.get(
+        Config.API_BASE_URL+`/camplist/getCampList?page=${page}&per_page=${size}&user_id=${Cookies.get("user_id")}`
+      );
+  
+      setData(response.data.data)
+  
+      setTotalRows(response.data.totalItems);
+      setLoading(false);
 
-    setTotalRows(response.data.totalItems);
-    setLoading(false);
+    }catch(error){
+      setLoading(false);
+      setError(error.message)
+    }
+
   };
 
   useEffect(() => {
@@ -141,7 +151,10 @@ const CampaignList = () => {
 
   return (
     <>
-    <DataTable
+
+    {loading && <>Loading...</>}
+    {error!=null && <>{error}</>}
+    {!error && <><DataTable
       title="My Campaigns"
       columns={columns}
       data={data}
@@ -154,9 +167,11 @@ const CampaignList = () => {
       onChangePage={handlePageChange}
       highlightOnHover={true}
       onRowClicked={(e)=>{openLinksPopup(e)}}
+      
       // selectableRows
       // onSelectedRowsChange={({ selectedRows }) => console.log(selectedRows)}
-    />
+    /></>}
+    
 
     
      </>

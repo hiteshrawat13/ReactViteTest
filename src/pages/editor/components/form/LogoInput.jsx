@@ -18,7 +18,31 @@ const LogoPicker = ({ fileRef, name, label = "", tag = "",onFileChange=null,onTe
 
   const [foundLogos, setFoundLogos] = useState([])
 
+  const logoPreviewRef=useRef()
 
+
+
+  const loadLogoPreview=(filename)=>{
+
+    // axios.get(getStateValue("BASE_URL") + getStateValue("LOGO_FOLDER") + filename)
+    //     .then(result => {
+    //       logoPreviewRef.src=result
+    //     }).catch(err => {
+           
+    //     })
+
+        logoPreviewRef.current.src=  getStateValue("BASE_URL") + getStateValue("LOGO_FOLDER") + filename
+
+  }
+
+  useEffect(() => {
+    loadLogoPreview(getStateValue(name))
+  
+    return () => {
+     
+    }
+  }, [ ])
+  
 
 
   const handleLogoSearch = (e) => {
@@ -80,6 +104,8 @@ const LogoPicker = ({ fileRef, name, label = "", tag = "",onFileChange=null,onTe
 
       <div style={{ position: "relative" }}>
 
+
+
         <FileInput name={name} label={label} tag={tag} fileRef={fileRef} placeholder="Type to Search Logo..."
           onTextChange={(e) => {
             console.log(e.target.value);
@@ -108,7 +134,7 @@ const LogoPicker = ({ fileRef, name, label = "", tag = "",onFileChange=null,onTe
         readOnly={false}/>
 
        
-
+        
 
         <ul className='logoList' style={{ display: "none" }} >{
           (foundLogos == null) ? <div style={{ fontSize: "10px" }} >Logo Not Found</div> : foundLogos.map((logo, i) => {
@@ -126,6 +152,15 @@ const LogoPicker = ({ fileRef, name, label = "", tag = "",onFileChange=null,onTe
 
 
         </ul>
+
+
+
+        
+      <div className='serverLogoFile'>
+          <div>Server Logo File: </div>
+          <div className='logoFileName'>{getStateValue(name)}</div>
+          <img ref={logoPreviewRef} />
+        </div>
 
       </div>
 

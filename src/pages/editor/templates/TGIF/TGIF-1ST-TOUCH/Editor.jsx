@@ -192,8 +192,15 @@ const Editor = ({ }) => {
 
 
         <Row>
-          <Col><LogoInput name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1} 
-          onFileChange={(filename)=>{alert(filename);setFormValue("LOGO_NAME",Math.random()+"---")} }/></Col>
+          <Col>
+          <LogoInput name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1} 
+          onFileChange={(filename)=>{
+          
+            setFormValue("LOGO_NAME",filename)
+            } 
+          }/>
+          
+          </Col>
           <Col>
             <FileInput name="THUMBNAIL_NAME" label="Thumbnail" tag="file" fileRef={filesRef.current.fileInput2}
              onTextChange={(filename)=>{ 

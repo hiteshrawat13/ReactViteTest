@@ -50,6 +50,91 @@
 
     // Function to extract form data
 function extractFormData(form) {
+
+
+
+    // 
+    // {
+    //     "type": "SelectBox",
+    //     "id": "revenue",
+    //     "label": "Revenue",
+    //     "name": "data[10]",
+    //     "isFullWidth": false,
+    //     "isRequired": true,
+    //     "isDisabled": false,
+    //     "isReadOnly": false
+    //   },
+    //   {
+    //     "type": "TextBox",
+    //     "inputType": "text",
+    //     "id": "job_title",
+    //     "label": "Job Title",
+    //     "name": "data[11]",
+    //     "placeholder": "",
+    //     "value": "",
+    //     "isRequired": true,
+    //     "isDisabled": false,
+    //     "isReadOnly": false
+    //   },
+    //   {
+    //     "type": "SelectBox",
+    //     "id": "industry",
+    //     "label": "Industry",
+    //     "name": "data[12]",
+    //     "options": [
+    //       {
+    //         "label": "Choose One",
+    //         "value": ""
+    //       }
+    //     ],
+    //     "isFullWidth": false,
+    //     "isRequired": true,
+    //     "isDisabled": false,
+    //     "isReadOnly": false
+    //   },
+    //   {
+    //     "type": "SelectBox",
+    //     "id": "job_function",
+    //     "label": "Job Function",
+    //     "name": "data[13]",
+    //     "options": [
+    //       {
+    //         "label": "Choose One",
+    //         "value": ""
+    //       }
+    //     ],
+    //     "isFullWidth": false,
+    //     "isRequired": true,
+    //     "isDisabled": false,
+    //     "isReadOnly": false
+    //   },
+    //   {
+    //     "type": "Text",
+    //     "id":"text_only",
+    //     "label": "I would like to receive information from suppliers sponsoring this content and willing to share the information above with Sponsor."
+    //   },
+    //   {
+    //     "type": "CheckGroup",
+    //     "id": "cq1",
+    //     "label": "Custom question 1",
+    //     "name": "data[14]",
+    //     "isRequired": true,
+    //     "isDisabled": false,
+    //     "isReadOnly": false,
+    //     "options": [
+    //       {
+    //         "label": "Option 1",
+    //         "value": "Option 1"
+    //       },
+    //       {
+    //         "label": "Option 2",
+    //         "value": "Option 2"
+    //       }
+    //     ]
+    //   },
+
+
+
     const formData = [];
 
     // Loop through all form elements
@@ -65,6 +150,22 @@ function extractFormData(form) {
         // Check if the element is an input or select and get type/details accordingly
         if (element.tagName.toLowerCase() === 'input') {
             const type = element.getAttribute('type');
+
+
+            if(type=="text"){
+
+            }
+            if(type=="email"){
+                
+            }
+            if(type=="tel"){
+                
+            }
+            if(type=="number"){
+                
+            }
+
+
             fieldData.inputType = type;
 
             // Get ID and required attributes
@@ -88,9 +189,9 @@ function extractFormData(form) {
             // Extract options
             fieldData.options = [];
             element.querySelectorAll('option').forEach(option => {
-                if (option.value) {
+                //if (option.value) {
                     fieldData.options.push(option.textContent.trim());
-                }
+               // }
             });
         }
 

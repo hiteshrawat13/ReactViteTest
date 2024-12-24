@@ -283,7 +283,7 @@ const FormBuilder = (defaultFieldsJson) => {
 
 
 <button id='recalculateBtn' onClick={handleNameDataRecalculate }>Rearange "data[]"</button>
-      <button id=' ' onClick={(e)=>{e.preventDefault();setAddScriptModalShow(true)}}>Add Script</button>
+      <button id=' ' className="btn-option" onClick={(e)=>{e.preventDefault();setAddScriptModalShow(true)}}>Add Script</button>
       <Modal
         closeOnOverlayClick={false}
         center
@@ -303,7 +303,7 @@ const FormBuilder = (defaultFieldsJson) => {
 
 
 
-      <button id=' ' onClick={(e)=>{e.preventDefault();setLoadJSONModalShow(true)}}>Load JSON</button>
+      <button id=' ' className="btn-option" onClick={(e)=>{e.preventDefault();setLoadJSONModalShow(true)}}>Load JSON</button>
       <Modal
         closeOnOverlayClick={false}
         center

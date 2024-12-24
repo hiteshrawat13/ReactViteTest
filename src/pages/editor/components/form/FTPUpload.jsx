@@ -379,8 +379,42 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
       {/* <div>Display File List</div>
       <div>Upload Button</div> */}
       {/* {(socketConnected) ? <b style={{color:"green"}}>Upload Server Connected</b> : <b style={{color:"red"}}>Upload Server Disconnected</b>} */}
-      <br /><br />
-      {filesToUpload.map((file, i) => {
+     
+
+      <table style={{ display: "table", width: "100%", borderCollapse: "collapse" }}>
+              <tr className="fileToUpload"  style={{ display: "table-row", width: "100%", backgroundColor: 'transparent' }}>
+              <td className='fileName' style={{ display: "table-cell", padding: "10px" }}>  </td>
+
+                <td className='fileName' style={{ display: "table-cell", padding: "10px" }}>Filename </td>
+                <td className='fileProgress' style={{ display: "table-cell", padding: "10px" }}>Progress</td>
+                <td><input type="checkbox" style={{ display: "table-cell", padding: "10px" }} onChange={(e) => handleFileCheckboxSelectAll(e)} checked={filesToUpload.some(ftu=>ftu.selected==true)}  /></td>
+              </tr>
+
+
+
+              {filesToUpload.map((file, i) => {
+              return <tr className="fileToUpload" key={i} style={{ display: "table-row", width: "100%", backgroundColor: `${file.selected == true ? '#45aaf2' : 'transparent'}` }}>
+                <td className='fileName' style={{ display: "table-cell", padding: "10px",width:"22px" }}> 
+                <span style={{display:"inline-block",width:"22px",height:"auto"}}>
+                <FileIcon extension={file.name.split('.').pop()} {...defaultStyles[file.name.split('.').pop()]} />
+                 
+                  </span>
+                </td>
+                <td className='fileName' style={{ display: "table-cell", padding: "10px" }}>
+                <b>{file.name}</b>
+                 <CheckLink link={campaignDataState.data["BASE_URL"] + file.name} />
+                  </td>
+                <td className='fileProgress' style={{ display: "table-cell", padding: "10px",width:"100px" }}>{(file.progress=="created")? "✔️":file.progress}</td>
+                <td><input type="checkbox" style={{ display: "table-cell", padding: "10px" }} onChange={(e) => handleFileCheckbox(e, i)} checked={file.selected} value={file.selected} /></td>
+              </tr>
+              })
+
+            }
+
+
+      </table>
+
+      {/* {filesToUpload.map((file, i) => {
         return <div className="fileToUpload" key={i}>
           <div className='fileName'>
           <span style={{display:"inline-block",width:"22px",height:"auto"}}>
@@ -391,7 +425,7 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
           <div className='fileProgress'>{file.progress}</div>
           <div><input type="checkbox" onChange={(e) => handleFileCheckbox(e, i)} checked={file.selected} value={file.selected} /></div>
         </div>
-      })}
+      })} */}
 
 
 
@@ -420,7 +454,7 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
                 <td><input type="checkbox" style={{ display: "table-cell", padding: "10px" }} onChange={(e) => handleFileCheckboxSelectAll(e)} checked={filesToUpload.some(ftu=>ftu.selected==true)}  /></td>
               </tr>
             {filesToUpload.map((file, i) => {
-              return <tr className="fileToUpload" key={i} style={{ display: "table-row", width: "100%", backgroundColor: `${file.selected == true ? '#209fcd' : 'transparent'}` }}>
+              return <tr className="fileToUpload" key={i} style={{ display: "table-row", width: "100%", backgroundColor: `${file.selected == true ? '#45aaf2' : 'transparent'}` }}>
                 <td className='fileName' style={{ display: "table-cell", padding: "10px",width:"22px" }}> 
                 <span style={{display:"inline-block",width:"22px",height:"auto"}}>
                 <FileIcon extension={file.name.split('.').pop()} {...defaultStyles[file.name.split('.').pop()]} />
@@ -428,10 +462,10 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
                   </span>
                 </td>
                 <td className='fileName' style={{ display: "table-cell", padding: "10px" }}>
-                 {file.name} 
+                 <b>{file.name}</b> 
                   
                   </td>
-                <td className='fileProgress' style={{ display: "table-cell", padding: "10px",width:"100px" }}>{file.progress}</td>
+                <td className='fileProgress' style={{ display: "table-cell", padding: "10px",width:"100px" }}>{(file.progress=="created")?"✔️":file.progress}</td>
                 <td><input type="checkbox" style={{ display: "table-cell", padding: "10px" }} onChange={(e) => handleFileCheckbox(e, i)} checked={file.selected} value={file.selected} /></td>
               </tr>
             })}

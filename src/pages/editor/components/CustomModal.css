@@ -1,0 +1,56 @@
+/* examples/custom-styling.css */
+  .customOverlay {
+     
+  }
+  .customModal {
+     
+    max-width: 500px;
+    width: 100%;
+    padding: 0px;
+    border-radius: 6px;
+
+    .header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding : 12px 7px;
+        border-bottom: 1px solid #bdc3c7;
+
+
+        .title{
+            font-weight: bold;
+        }
+
+        .close-icon{
+            padding: 9px;
+        }
+    }
+
+    .content{
+        padding : 12px 7px;
+        
+    }
+
+    .actions{
+        display: flex;
+        justify-content: right;
+        padding : 12px 7px;
+        border-top: 1px solid #bdc3c7;
+        gap:10px;
+
+
+        button{
+            padding:4px 8px;
+        }
+        
+    }
+
+  }
+
+
+  .react-responsive-modal-closeButton{
+    outline: none;
+    border:none;
+  }
+
+

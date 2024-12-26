@@ -10,6 +10,7 @@ import Cookies from 'js-cookie'
 import CheckLink from '../CheckLink'
 
 import { FileIcon, defaultStyles } from "react-file-icon";
+import ZIPDownload from './ZIPDownload'
 
 const FTPUpload = ({ publishHelper, filesRef }) => {
 
@@ -396,7 +397,7 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
               return <tr className="fileToUpload" key={i} style={{ display: "table-row", width: "100%", backgroundColor: `${file.selected == true ? '#45aaf2' : 'transparent'}` }}>
                 <td className='fileName' style={{ display: "table-cell", padding: "10px",width:"22px" }}> 
                 <span style={{display:"inline-block",width:"22px",height:"auto"}}>
-                <FileIcon extension={file.name.split('.').pop()} {...defaultStyles[file.name.split('.').pop()]} />
+                <FileIcon extension={file?.name?.split('.').pop()} {...defaultStyles[file?.name?.split('.').pop()]} />
                  
                   </span>
                 </td>
@@ -427,6 +428,7 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
         </div>
       })} */}
 
+<button className='greenBtn' onClick={(e) => { e.preventDefault(); handleSaveLink() }}>Save As Draft</button>
 
 
       <button className='greenBtn' onClick={(e) => { e.preventDefault(); setFTPUploadModalOpened(true) }}>Upload Files</button>
@@ -482,9 +484,9 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
 
 
 
+      <ZIPDownload publishHelper={publishHelper} filesRef={filesRef} />
 
-      <button className='greenBtn' onClick={(e) => { e.preventDefault(); handleSaveLink() }}>Save Link</button>
-
+     
       <br />
       <h4>Uploaded files to server ({uploadedFiles.length}): </h4>
       <ul className='uploadedFileList'>

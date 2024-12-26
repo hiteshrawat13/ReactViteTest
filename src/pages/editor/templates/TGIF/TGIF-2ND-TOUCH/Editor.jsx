@@ -28,7 +28,7 @@ import {
 import PublishHelper from './PublishHelper'
 import LinkDetails from '../TGIF-1ST-TOUCH/LinkDetails'
 import { EContext } from '../../../EditorMain'
-import BasicDetails from '../TGIF-1ST-TOUCH/BasicDetails'
+import BasicDetails from '../TGIF-1ST-TOUCH/components/BasicDetails'
 import EDMDetails from '../TGIF-1ST-TOUCH/EDMDetails'
 
 

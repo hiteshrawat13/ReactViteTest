@@ -5,6 +5,8 @@ import landing_html from './pages/landing.php.txt?raw'  //?raw is important to r
 import sendemail_html from './pages/sendemail.php.txt?raw'  //?raw is important to read text files
 import thanks_html from './pages/thanks.php.txt?raw'  //?raw is important to read text files
 
+//https://thebusinessinnovations.com/tbi/2024/10-Oct/30/HSI-APAC-CPL-Oct-Dec-2024-Q4-Donesafe-activation-UKI/01/The-global-ehs-readiness-index-report-2024.html
+
 import SpeakerRender from './SpeakerRender.js'
 
 import { getSendmailSubject } from './Base64.js'
@@ -166,9 +168,9 @@ This is to convert Chinese characters to Unicode numbers
 										</div>
 
                                     </td>
-                                    <td style="display: flex; flex: start;">
+                                    <td style="width:##EDM_THUMBNAIL_WIDTH##;" class="edm_thumbnail" align="center" valign="top">
                                         <a href="##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#" target="_blank">
-                                            <img src="##BASE_URL####THUMBNAIL_NAME##" alt="##EDM_TITLE##" class="img" />
+                                            <img src="##BASE_URL####THUMBNAIL_NAME##" alt="##EDM_TITLE##" class="img-full-width" />
                                         </a>
 
                                     </td>
@@ -185,9 +187,9 @@ This is to convert Chinese characters to Unicode numbers
                             <tbody class="table table-borderless table-responsive">
                            
 								<tr>
-								 <td colspan="2">
+								 <td colspan="2" align="center" valign="top">
                                         <a href="##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#" target="_blank">
-                                            <img src="##BASE_URL####THUMBNAIL_NAME##" alt="##EDM_TITLE##" class="img-full-width" />
+                                            <img src="##BASE_URL####THUMBNAIL_NAME##" alt="##EDM_TITLE##" class="img-full-width edm_thumbnail" style="width:##EDM_THUMBNAIL_WIDTH##;" />
                                         </a>
 
                                     </td>

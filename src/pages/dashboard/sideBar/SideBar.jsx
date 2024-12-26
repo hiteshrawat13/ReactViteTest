@@ -158,9 +158,11 @@ const SideBar = () => {
 </div> */}
     <div className={`sideBar ${(customizer.isCollapse)?'collapsed':'opened'}`} >
         <div style={{marginBottom:"10px"}}>
+
         <div className='logo' style={{marginRight:"auto"}}>
             <img src={logo} alt="logo" style={{width:"100%"}} />
         </div>
+        
         </div>
     <SimpleBar style={{ maxHeight: "100%" }} forceVisible={ 'y' }>
         <div className='sideBarHolder' >
@@ -186,7 +188,6 @@ const SideBar = () => {
                     }
                 })
             }
-           
         </div>
 
     

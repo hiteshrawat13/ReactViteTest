@@ -111,24 +111,18 @@ onClose={() => setOptionsModalOpened(false)}>
 </Modal>
 
             <button className='openModal' onClick={(e) => { e.preventDefault(); setOptionsModalOpened(true) }}>{options?.length} options <FaPencilAlt /></button>
-
             <label>
                 <span>Required?</span>
                 <input type="checkbox" name="isRequired" defaultChecked={data.isRequired} />
             </label>
-
             <label>
                 <span>Disabled?</span>
                 <input type="checkbox" name="isDisabled" defaultChecked={data.isDisabled} />
             </label>
-
             <label>
                 <span>ReadOnly?</span>
                 <input type="checkbox" name="isReadOnly" defaultChecked={data.isReadOnly} />
             </label>
-
-
-
             <button onClick={handleSubmit}>Submit</button>
         </div>
 

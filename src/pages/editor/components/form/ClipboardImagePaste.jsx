@@ -7,7 +7,7 @@ const ClipboardImagePaste = ({fileInputRefDummy}) => {
     
     const pasteHandler = useCallback((event) => {
        
-                 alert(event)
+                 
                  // Get the data of clipboard
                 const clipboardItems = event.clipboardData.items;
                 
@@ -16,6 +16,7 @@ const ClipboardImagePaste = ({fileInputRefDummy}) => {
                     return item.type.indexOf('image') !== -1;
                 });
                 if (items.length === 0) {
+                  alert("Clipboard is empty.")
                     return;
                 }
 
@@ -36,6 +37,7 @@ const ClipboardImagePaste = ({fileInputRefDummy}) => {
                 fileInputRefDummy.current.dispatchEvent(new Event('change'));
 
                 console.log(fileInputRefDummy.current.files);
+                alert("Image pasted.")
         
       }, []);
 
@@ -49,7 +51,7 @@ const ClipboardImagePaste = ({fileInputRefDummy}) => {
     
 
   return (
-    <div>ClipboardImagePaste</div>
+    <div  className='drop-zone'>Press CTRL + V to paste copied image to the file input</div>
   )
 }
 

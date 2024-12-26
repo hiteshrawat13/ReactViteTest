@@ -137,7 +137,7 @@ const ImageInput = ({label="Image Input",name=null,fileRef=null,tag=null,onFileC
                 {errors["THUMBNAIL_NAME"] && <p>Thumbnail file name is required</p>} */}
                     
 
-                    <div className='contextOptions' style={{display:"flex",gap:"6px"}}>
+                    <div className='contextOptions' style={{display:"flex",gap:"6px",marginBottom:"5px"}}>
                     <button className="" onClick={(e)=>{e.preventDefault();setReadOnlyText(prev=>!prev)} } title="Edit Filename">✎</button>
 
 
@@ -160,7 +160,7 @@ setShowClipboardImagePasteModal(true)
             e.preventDefault(); 
             setShowClipboardImagePasteModal(false)
 
-            }  }>Set Image</button>
+            }  }>Close</button>
         </div>
       </Modal>
 

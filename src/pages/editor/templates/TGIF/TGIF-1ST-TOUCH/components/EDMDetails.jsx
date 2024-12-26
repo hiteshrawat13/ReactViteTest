@@ -20,8 +20,8 @@ import {
     LanguageInput,
     CheckLink,
     Section
-  } from '../../../components/form/index'
-import { EContext } from '../../../EditorMain'
+  } from '../../../../components/form/index'
+  import { EContext } from '../../../../EditorMain'
 
 const EDMDetails = () => {
           const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData, setError } = useContext(EContext)

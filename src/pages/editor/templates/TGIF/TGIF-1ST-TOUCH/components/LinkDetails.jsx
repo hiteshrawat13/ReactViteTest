@@ -20,8 +20,8 @@ import {
     LanguageInput,
     CheckLink,
     Section
-  } from '../../../components/form/index'
-import { EContext } from '../../../EditorMain'
+  } from '../../../../components/form/index'
+  import { EContext } from '../../../../EditorMain'
 
 const LinkDetails = () => {
     
@@ -95,13 +95,19 @@ const LinkDetails = () => {
                   setFormValue("EDM_THUMBNAIL_NAME", `${val}-edm.png`)
                   setFormValue("PDF_NAME", `${val}.pdf`)
                   setFormValue("MP4_NAME", `${val}.mp4`)
-                  setFormValue("EXTRA_FILE_1", `${val}.png`)
+                  setFormValue("EXTRA_FILE_1", `${val}-extra_1.png`)
+                  setFormValue("EXTRA_FILE_2", `${val}-extra_2.png`)
+                  setFormValue("EXTRA_FILE_3", `${val}-extra_3.png`)
+                  setFormValue("EXTRA_FILE_4", `${val}-extra_4.png`)
+                  setFormValue("EXTRA_FILE_5", `${val}-extra_5.png`)
 
                 }
               } />
 
-            {(watch['LINK_NAME'] != "") && <CheckLink link={watch["BASE_URL"] + (watch['LINK_NAME']) + "-edm.html"} onExists={() => {
-
+{console.log(watch['LINK_NAME'],"WWW")
+}
+            {(watch['LINK_NAME']) && <CheckLink link={watch["BASE_URL"] + (watch['LINK_NAME']) + "-edm.html"} onExists={() => {
+            if(campData.mode === 'new')  setError('LINK_NAME',"Link already exists on server.")
 
             }} />}
           </Col>

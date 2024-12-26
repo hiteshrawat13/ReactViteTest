@@ -20,8 +20,8 @@ import {
     LanguageInput,
     CheckLink,
     Section
-  } from '../../../components/form/index'
-import { EContext } from '../../../EditorMain'
+  } from '../../../../components/form/index'
+  import { EContext } from '../../../../EditorMain'
 const BasicDetails = () => {
       const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData, setError } = useContext(EContext)
   return (
@@ -29,7 +29,9 @@ const BasicDetails = () => {
     <Section title="Details" >
     
         
-            <TextBox label="Pixel Link" name="PIXEL_LINK" required={true} />
+            <TextBox label="Pixel Link" 
+            helpText='Example like https://api.anteriad.com/track/pixel?c=NTQ2MDc=&p=Njc=&ev=1&e='
+            name="PIXEL_LINK" required={true} />
     
             <Row>
               <Col>

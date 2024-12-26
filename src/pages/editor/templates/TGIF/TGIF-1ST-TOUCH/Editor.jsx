@@ -27,9 +27,9 @@ import defaultFieldsJson from "./default-fields.json"
 import { EContext } from '../../../EditorMain'
 import PublishHelper from './PublishHelper'
 import Speakers from '../../../components/form/Speakers'
-import LinkDetails from './LinkDetails'
-import BasicDetails from './BasicDetails'
-import EDMDetails from './EDMDetails'
+import LinkDetails from './components/LinkDetails'
+import BasicDetails from './components/BasicDetails'
+import EDMDetails from './components/EDMDetails'
 
 
 
@@ -226,16 +226,18 @@ const Editor = ({ }) => {
 
              
             <CheckBox label="Add border to thumbnail" name="THUMBNAIL_BORDER" defaultChecked={true} />
+            <TextBox label="EDM Thumbnail width" name="EDM_THUMBNAIL_WIDTH" required={true} value="260px" helpText={`In % or px`}/>
+            <CheckBox label="Use different thumbnail for edm page" name="USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE" />
+
+            {(watch["USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE"] == true) &&
+              <FileInput name="EDM_THUMBNAIL_NAME" label="EDM Thumbnail" tag="file" fileRef={filesRef.current.fileInput3} />
+            }
           </Col>
         </Row>
 
 
 
-        <CheckBox label="Use different thumbnail for edm page" name="USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE" />
-
-        {(watch["USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE"] == true) &&
-          <FileInput name="EDM_THUMBNAIL_NAME" label="EDM Thumbnail" tag="file" fileRef={filesRef.current.fileInput3} />
-        }
+     
 
 
      
@@ -306,7 +308,11 @@ const Editor = ({ }) => {
      <Col>
        <CheckBox label="Upload Extra File [EXTRA_FILE_1]" name="ADD_EXTRA_FILE_1" defaultChecked={false} />
        {(watch["ADD_EXTRA_FILE_1"] == true) &&
-         <FileInput name="EXTRA_FILE_1" label="Extra File 1" tag="file" fileRef={filesRef.current.fileInput4} onChange={(e) => { setFormValue("EXTRA_FILE_1",e.target.value) }} />
+         <FileInput name="EXTRA_FILE_1" label="Extra File 1" tag="file" 
+         fileRef={filesRef.current.fileInput4} 
+         onFileChange={(filename) => { setFormValue("EXTRA_FILE_1",filename) }}
+     
+         />
        }
      </Col>
    </Row>
@@ -315,7 +321,9 @@ const Editor = ({ }) => {
      <Col>
        <CheckBox label="Upload Extra File [EXTRA_FILE_2]" name="ADD_EXTRA_FILE_2" defaultChecked={false}/>
        {(watch["ADD_EXTRA_FILE_2"] == true) &&
-         <FileInput name="EXTRA_FILE_2" label="Extra File 2" tag="file" fileRef={filesRef.current.fileInput5} onChange={(e) => { setFormValue("EXTRA_FILE_2",e.target.value) }} />
+         <FileInput name="EXTRA_FILE_2" label="Extra File 2" tag="file" fileRef={filesRef.current.fileInput5} 
+         onFileChange={(filename) => { setFormValue("EXTRA_FILE_2",filename) }}
+          />
        }
      </Col>
    </Row>
@@ -324,7 +332,10 @@ const Editor = ({ }) => {
      <Col>
        <CheckBox label="Upload Extra File [EXTRA_FILE_3]" name="ADD_EXTRA_FILE_3" defaultChecked={false}/>
        {(watch["ADD_EXTRA_FILE_3"] == true) &&
-         <FileInput name="EXTRA_FILE_3" label="Extra File 3" tag="file" fileRef={filesRef.current.fileInput6} onChange={(e) => {  setFormValue("EXTRA_FILE_3",e.target.value) }} />
+         <FileInput name="EXTRA_FILE_3" label="Extra File 3" tag="file" fileRef={filesRef.current.fileInput6} 
+         
+         onFileChange={(filename) => { setFormValue("EXTRA_FILE_3",filename) }}
+         />
        }
      </Col>
    </Row>
@@ -333,7 +344,10 @@ const Editor = ({ }) => {
      <Col>
        <CheckBox label="Upload Extra File [EXTRA_FILE_4]" name="ADD_EXTRA_FILE_4" defaultChecked={false}/>
        {(watch["ADD_EXTRA_FILE_4"] == true) &&
-         <FileInput name="EXTRA_FILE_4" label="Extra File 4" tag="file" fileRef={filesRef.current.fileInput7} onChange={(e) => { setFormValue("EXTRA_FILE_4",e.target.value) }} />
+         <FileInput name="EXTRA_FILE_4" label="Extra File 4" tag="file" fileRef={filesRef.current.fileInput7} 
+         
+         onFileChange={(filename) => { setFormValue("EXTRA_FILE_4",filename) }}
+         />
        }
      </Col>
    </Row>
@@ -342,7 +356,9 @@ const Editor = ({ }) => {
      <Col>
        <CheckBox label="Upload Extra File [EXTRA_FILE_5]" name="ADD_EXTRA_FILE_5" defaultChecked={false} />
        {(watch["ADD_EXTRA_FILE_5"] == true) &&
-         <FileInput name="EXTRA_FILE_5" label="Extra File 5" tag="file" fileRef={filesRef.current.fileInput8} onChange={(e) => { setFormValue("EXTRA_FILE_5",e.target.value) }} />
+         <FileInput name="EXTRA_FILE_5" label="Extra File 5" tag="file" fileRef={filesRef.current.fileInput8}
+         onFileChange={(filename) => { setFormValue("EXTRA_FILE_5",filename) }}
+           />
        }
      </Col>
    </Row>
@@ -443,7 +459,22 @@ const Editor = ({ }) => {
                 }} /> }
 
 
-                {}
+
+                
+ 
+          <TextBox type="text" label="EDM Thumbnail width" helpText='enter values in % or px' name="EDM_THUMBNAIL_WIDTH" onChange={(e) => {
+            console.log(e);
+            
+            iframe.contentDocument.querySelector('.edm_thumbnail').style.width = e.target.value + ""
+         
+            setStateValue("EDM_THUMBNAIL_WIDTH", e.target.value)
+          }} /> 
+
+
+ 
+
+
+           
 
               </div>
             </>
@@ -455,7 +486,7 @@ const Editor = ({ }) => {
     <Step title="Publish" key={1106}>
       <Section title="FTP Upload">
         <FTPUpload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />
-        <ZIPDownload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />
+        
       </Section>
 
 

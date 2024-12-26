@@ -13,6 +13,7 @@ import { useAuth } from '../../Auth';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import Config from '../../Config';
+import CustomModal from '../editor/components/CustomModal';
 const CreateCampaignPage = () => {
 
 
@@ -103,19 +104,20 @@ const CreateCampaignPage = () => {
 
     if (response.data.status == 200) {
       //  navigate(`/editor/${clientCode}`,{state: { 
-      navigate(`/linklist`, {
-        state: {
-          clientCode,
-          category,
-          campaignId,
-          campaignName,
-          campCreatedBy,
-          lastEditedBy,
-          comment,
-          country
+      // navigate(`/linklist`, {
+      //   state: {
+      //     clientCode,
+      //     category,
+      //     campaignId,
+      //     campaignName,
+      //     campCreatedBy,
+      //     lastEditedBy,
+      //     comment,
+      //     country
 
-        }
-      })
+      //   }
+      // })
+      navigate(`/linklist?campaignName=${encodeURIComponent(campaignName)}`)
       alert("campaign created")
 
 
@@ -128,7 +130,7 @@ const CreateCampaignPage = () => {
     <div style={{display:"flex",gap:"10px"}}>
 
       {
-        TemplateManager.map((client,i)=>{
+      TemplateManager.map((client,i)=>{
          return <div key={i} className='card'>
             <div>{client.title} </div>
             <div><button className='btn--primary' onClick={()=>openModal(client.clientCode)}>Create Campaign</button> </div>
@@ -144,6 +146,8 @@ const CreateCampaignPage = () => {
          <CampaignDetails campaignData={{clientCode,category,lastEditedBy,campCreatedBy}} onCancel={closeModal} onSubmit={onSubmit}/>
       </Modal>
 
+
+{/* <CustomModal/> */}
 
     </div>
   )

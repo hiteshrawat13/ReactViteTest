@@ -35,3 +35,16 @@ if  field  == <= >= ""  show id
 if  323  == <= >= ""  show id
 
 Province Show
+
+
+https://cloudtechalert.com/cta/2024/10-Oct/28/Salesforce-CPL-Nov-Jan-2024-2025-Q4-Q1-ABM/FINS-Insurance-ServiceData-AI-US/1/The-future-of-insurance-lp.html
+
+https://techversions.com/tvs/2024/12-Dec/03/Adobe-CPL-Dec-Feb-2024-2025-Q4-Q1-ABM-Double-Touch/Corp1-CC-Frame/1T/1/Frame-io-new-productivity-dimensionsfor-creative-workflows-lp.html
+
+https://thetechnobytes.com/ttb/2024/11-Nov/06/CyberArk-Software-CPL-Nov-Dec-2024-Q4-Double-Touch-One-RSVP/01/Is-now-the-right-time-to-re-evaluate-your-secrets-provider-lp.html
+
+https://thebusinessinnovations.com/tbi/2024/10-Oct/30/HSI-APAC-CPL-Oct-Dec-2024-Q4-Donesafe-activation-UKI/01/The-global-ehs-readiness-index-report-2024-lp.html
+
+https://preview.docshareit.com/dsi/2024/12-Dec/11/00115424/01/Eleven-mistakes-when-threading-nickel-based-alloys-lp.html
+
+https://thebusinessinnovations.com/tbi/2024/11-Nov/14/ServiceNow-PMG-US-CPL-Nov-Dec-2024-Q4-NNL-Top-Accounts/1/Customer-experience-cx-trends-customer-service-insights-in-the-gen-ai-era-lp.html

@@ -30,7 +30,7 @@ const TGIFFormRenderer = {
                 
                         </label>
         `
-        const select_box_html=` <select name="${obj.name}" ${obj.isRequired ? "required" : ""} id="${obj.id}"  ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""}>
+        const select_box_html=` <select name="${obj.name}" ${obj.isRequired ? "required" : ""} id="${obj.id}"  class="${obj.isReadOnly ? "readonly" : ""} "   ${obj.isDisabled ? "disabled" : ""}>
         
           ${(obj.placeholder && (obj.placeholder.length > 0)) ? `<option value="" selected>${obj.placeholder}</option>` : ""}
         

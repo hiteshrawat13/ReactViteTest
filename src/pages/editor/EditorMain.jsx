@@ -13,9 +13,11 @@ const EditorMain = () => {
   const filesRef = useRef({})
   const location = useLocation()
 
+ 
+
   const campData = location?.state;
 
-  console.log(campData);
+  //console.log(campData);
   
 
   // const Editor11 = useMemo(
@@ -91,6 +93,8 @@ const EditorMain = () => {
   }
 
   useEffect(() => {
+
+   
 
     //update state
     if (campData.jsonObject) {

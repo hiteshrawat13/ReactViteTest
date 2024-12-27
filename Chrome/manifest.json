@@ -1,9 +1,14 @@
 {
     "manifest_version": 3,
-    "name": "Form to JSON Converter",
+    "name": "CBTool Helper",
     "version": "1.0",
-    "description": "Parse all HTML forms on the current page and convert fields into JSON.",
-    "permissions": ["scripting", "activeTab"],
+    "description": "This tool is the helper for CBTool.",
+    "permissions": [
+      "scripting", 
+      "activeTab",
+      "contextMenus",
+        "clipboardWrite"  ],
+    
     "host_permissions": ["<all_urls>"],
     "action": {
       "default_popup": "popup.html",

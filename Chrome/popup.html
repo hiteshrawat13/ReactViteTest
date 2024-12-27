@@ -2,10 +2,42 @@
 <html>
 <head>
     <title>Form to JSON</title>
-   
+   <style>
+    body{
+        width: 300px;
+    }
+
+    .buttons button{
+        display: block;
+        width: 100%;
+        padding: 5px;
+        background-color: transparent;
+        border: 1px solid #444;
+        color:#444;
+        cursor: pointer;
+    }
+    .buttons button:hover{
+        background-color: #444;
+        color:#fff;
+    }
+
+   </style>
 </head>
 <body>
-    <button id="extractform">Extract Forms</button>
+
+    <div>
+         
+            <div>
+                <div><b>CBTool Helper</b></div>
+                <span class="version"></span>
+            </div>
+    </div>
+    <div class="buttons">
+        <button id="extractform">Extract Form  [TGIF Preview Link]</button>
+    </div>
+    
+
+ 
 </body>
 <script src="popup.js"></script>
 </html>

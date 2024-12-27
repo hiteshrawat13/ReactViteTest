@@ -49,7 +49,7 @@ const ZIPDownload = ({publishHelper,filesRef}) => {
     return (
         
       
-            <button onClick={handleZip} className='greenBtn'>Download Zip</button>
+            <button onClick={handleZip} className='greenBtn'>📦 Download Zip</button>
 
            
        

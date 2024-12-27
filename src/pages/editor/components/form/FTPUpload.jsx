@@ -415,23 +415,12 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
 
       </table>
 
-      {/* {filesToUpload.map((file, i) => {
-        return <div className="fileToUpload" key={i}>
-          <div className='fileName'>
-          <span style={{display:"inline-block",width:"22px",height:"auto"}}>
-                <FileIcon extension={file.name.split('.').pop()} {...defaultStyles[file.name.split('.').pop()]} />
-                 
-                  </span>
-            {file.name} <CheckLink link={campaignDataState.data["BASE_URL"] + file.name} /></div>
-          <div className='fileProgress'>{file.progress}</div>
-          <div><input type="checkbox" onChange={(e) => handleFileCheckbox(e, i)} checked={file.selected} value={file.selected} /></div>
-        </div>
-      })} */}
+  
 
-<button className='greenBtn' onClick={(e) => { e.preventDefault(); handleSaveLink() }}>Save As Draft</button>
+<button className='greenBtn' onClick={(e) => { e.preventDefault(); handleSaveLink() }}>📝 Save As Draft</button>
 
 
-      <button className='greenBtn' onClick={(e) => { e.preventDefault(); setFTPUploadModalOpened(true) }}>Upload Files</button>
+      <button className='greenBtn' onClick={(e) => { e.preventDefault(); setFTPUploadModalOpened(true) }}>📤 Upload Files</button>
       <Modal
         closeOnOverlayClick={false}
         center
@@ -441,7 +430,9 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
 
         <div style={{ width: "600px" }}>
 
-          <p style={{ fontSize: "13px" }}><strong>Important Message:</strong><br /><strong>Do NOT upload duplicate content!</strong> Before submitting any files (including links, abstract titles, logos, or thumbnails), <strong>immediately verify</strong> that they are unique. Uploading duplicates may cause critical errors, data conflicts, and severe system issues. Our system actively checks for duplicate entries, and <strong>repeated uploads could result in serious consequences</strong>. <strong>After uploading, you MUST check all content</strong> to ensure it has been correctly submitted and is free from duplication. <strong>Double-check your files and verify the content after upload</strong> to prevent unnecessary disruption and redundancy.<br /><br /></p>
+          <p style={{ fontSize: "13px" }}>
+            I have checked form fields, title and abstracts before uploading to server. I confirm that I will check all links that I have created after upload. <br/>
+          </p>
 
 
           <div>Socket Id: {socketId}</div>
@@ -474,7 +465,7 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
           </table>
           <div>{JSON.stringify(FTPProgress)}</div>
 
-          {(uploading) ? <div >Uploading</div> : <button className='greenBtn' onClick={(e) => { e.preventDefault(); handleUploadFiles() }}>Upload to Server</button>
+          {(uploading) ? <div >Uploading</div> : <button className='greenBtn' onClick={(e) => { e.preventDefault(); handleUploadFiles() }}>📤 Upload to Server</button>
           }
 
         </div>

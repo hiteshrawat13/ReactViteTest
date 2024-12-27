@@ -17,4 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         console.error("Button with ID 'extractForm' not found.");
     }
+
+    document.querySelector(".version").innerHTML=`version `+chrome.runtime.getManifest().version
 });

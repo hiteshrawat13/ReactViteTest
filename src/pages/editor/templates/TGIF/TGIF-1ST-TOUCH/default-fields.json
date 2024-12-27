@@ -37,7 +37,7 @@
   },
   {
     "type": "TextBox",
-    "inputType": "text",
+    "inputType": "number",
     "id": "phone",
     "label": "Phone",
     "name": "data[2]",

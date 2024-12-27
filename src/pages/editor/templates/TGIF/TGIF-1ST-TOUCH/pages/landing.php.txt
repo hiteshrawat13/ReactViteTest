@@ -83,6 +83,12 @@
             input:read-only{
 			background-color: #D3D3D3;
 			}
+
+            select.readonly{
+                appearance: none;
+                background-color: #D3D3D3;
+            }
+           
             
 			input.submit {
 				background: url("##BASE_URL##download-button-new.png") left top no-repeat;

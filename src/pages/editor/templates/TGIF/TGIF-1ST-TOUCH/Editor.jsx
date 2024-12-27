@@ -315,9 +315,8 @@ const Editor = ({ }) => {
          />
        }
      </Col>
-   </Row>
-
-   <Row>
+     </Row>
+     <Row>
      <Col>
        <CheckBox label="Upload Extra File [EXTRA_FILE_2]" name="ADD_EXTRA_FILE_2" defaultChecked={false}/>
        {(watch["ADD_EXTRA_FILE_2"] == true) &&

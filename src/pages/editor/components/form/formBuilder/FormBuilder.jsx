@@ -282,6 +282,22 @@ const FormBuilder = (defaultFieldsJson) => {
       } }>Load Default Fields</button>
 
 
+<button id='removeFieldsBtn' onClick={(e)=>{
+      e.preventDefault()
+   
+      if (confirm("Remove all form fields?") == true) {
+        try{
+          dispatch(loadFieldsFromJson([]))
+          alert("Fields removed.")
+        }catch(error){
+          alert("Error removing form fields.")
+        }
+      } else {
+         
+      }
+      
+      } }>Remove all Fields</button>
+
 <button id='recalculateBtn' onClick={handleNameDataRecalculate }>Rearange "data[]"</button>
       <button id=' ' className="btn-option" onClick={(e)=>{e.preventDefault();setAddScriptModalShow(true)}}>Add Script</button>
       <Modal

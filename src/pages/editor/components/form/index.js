@@ -19,6 +19,10 @@ import Col from './Col';
 import LanguageInput from './LanguageInput';
 import CheckLink from '../CheckLink';
 import Section from './Section';
+import SpeakerDetails from './SpeakerDetails';
+import AssetDetails from './formBuilder/AssetDetails';
+import LinkDetails from './LinkDetails';
+import ExtraFiles from './ExtraFiles';
 export {
     Stepper,
     Step,
@@ -40,5 +44,9 @@ export {
     Col,
     LanguageInput,
     CheckLink,
+    AssetDetails,
+  SpeakerDetails,
+  LinkDetails,
+  ExtraFiles,
     Section
 }

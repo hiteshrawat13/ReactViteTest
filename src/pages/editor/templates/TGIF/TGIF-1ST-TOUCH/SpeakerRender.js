@@ -15,7 +15,7 @@ if(STATE["SHOW_SPEAKERS"]==false){
     try {
         const SPEAKERS=JSON.parse(STATE["SPEAKERS"])
         if(SPEAKERS.length>0){
-            console.log("SPEAKERS FOUND",SPEAKERS.length);
+            //console.log("SPEAKERS FOUND",SPEAKERS.length);
 
 
            

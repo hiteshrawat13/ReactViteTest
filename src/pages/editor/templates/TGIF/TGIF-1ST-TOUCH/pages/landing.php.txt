@@ -113,6 +113,7 @@
             .thumbnail{
                 width:270px;
                 ##THUMBNAIL_BORDER## 
+                ##HIDE_THUMBNAIL##
                 border-radius: 5px;
             }
             .landing_abstract{
@@ -224,7 +225,11 @@
             .cta{
 
                 background-color:#0066b2;    
-                width:100%; color: white;  border-radius:8px; padding-top: 08px;  
+                width:auto; color: white;  border-radius:8px; 
+                padding:10px 20px;
+                margin-right: 0px;
+                margin-top:10px;
+                cursor:pointer;
             }
 
             /* Chrome, Safari, Edge, Opera */

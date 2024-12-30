@@ -34,8 +34,8 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
     const [templates,setTemplates]=useState(null)
     const [miniSwitch, setMiniSwitch] = useState(false);
     const [links, setLinks] = useState('');
-    console.log("STATE", TemplateManager);
-    console.log("STATE", location?.state?.clientCode);
+    //console.log("STATE", TemplateManager);
+    //console.log("STATE", location?.state?.clientCode);
   
  
     useEffect(() => {
@@ -142,7 +142,7 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
             );
 
 
-            console.log(response.data);
+            //console.log(response.data);
             const jobject = JSON.parse(response.data.json_data)
             navigate(`/editor/`, {
                 state: {
@@ -271,16 +271,7 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
         });
 
 
-        // axios
-        //     .get(d.link)
-        //     .then(function (response) {
-        //         const $ = cheerio.load(response);
-        //         console.log(response);
-        //     })
-        //     .catch(function (error){
-        //         console.log(error);
-        //     });
-
+ 
     }
 
     const columns = [
@@ -339,9 +330,9 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
             name: "Actions",
             minWidth: "180px",
             cell: (row) => <>
-                <button className='dropbtn' style={{ marginRight: '10px', marginTop: '10px' }} onClick={(e) => handleEditLink(e, row.link)} id={row.ID}>Edit</button>
+                <button key="edit button" className='dropbtn' style={{ marginRight: '10px', marginTop: '10px' }} onClick={(e) => handleEditLink(e, row.link)} id={row.ID}>Edit</button>
                 {/* <button onClick={(e)=>handleCopyJsonData(e,row.id)} id={row.ID}>Copy Data</button> */}
-                <button className='greenBtn' onClick={(e) => handleCreateNewFromExistingLink(e, row.link)} id={row.ID}>Duplicate Link</button>
+                <button key="duplicate button" className='greenBtn' onClick={(e) => handleCreateNewFromExistingLink(e, row.link)} id={row.ID}>Duplicate Link</button>
 
 
             </>,
@@ -385,7 +376,7 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
                         open={isUpdateCampaignModalOpened}
                         onClose={() => setUpdateCampaignModalOpened(false)}>
 
-                        <CampaignDetails campaignData={campaignDetails} onSubmit={(data) => { updateCampaign(data) }} onCancel={() => setUpdateCampaignModalOpened(false)} />
+                        <CampaignDetails campaignData={campaignDetails} onSubmit={(data) => { updateCampaign(data) }} onCancel={() => setUpdateCampaignModalOpened(false)}  edit={true} />
                     </Modal>
                     {miniSwitch ?
                         <></> :

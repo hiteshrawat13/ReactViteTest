@@ -9,6 +9,7 @@ const LanguageInput = () => {
             [
 { label : "Select Language.." , value : "" },   
 { label : "English (United States)" , value : "en-US" },   
+{ label : "English (United Kingdom)" , value : "en-GB" },
 { label : "Afrikaans" , value : "af" },
 { label : "Albanian - shqip" , value : "sq" },
 { label : "Amharic - አማርኛ" , value : "am" },
@@ -40,7 +41,7 @@ const LanguageInput = () => {
 { label : "English (India)" , value : "en-IN" },
 { label : "English (New Zealand)" , value : "en-NZ" },
 { label : "English (South Africa)" , value : "en-ZA" },
-{ label : "English (United Kingdom)" , value : "en-GB" },
+
 
 { label : "Esperanto - esperanto" , value : "eo" },
 { label : "Estonian - eesti" , value : "et" },

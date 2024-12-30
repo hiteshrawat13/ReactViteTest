@@ -102,7 +102,7 @@ const LogoPicker = ({ fileRef, name, label = "", tag = "",onFileChange=null,onTe
 
 
 
-      <div style={{ position: "relative" }}>
+      <div style={{ position: "relative",width:"100%" }} className='logoInput'>
 
 
 

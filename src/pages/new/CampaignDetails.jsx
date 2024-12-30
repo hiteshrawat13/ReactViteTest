@@ -5,7 +5,7 @@ import { SelectBox, TextBox } from '../editor/components/form'
 import { useAuth } from '../../Auth'
 
 import Cookies from 'js-cookie'
-const CampaignDetails = ({onSubmit,onCancel,campaignData,buttonValue="Submit"}) => {
+const CampaignDetails = ({onSubmit,onCancel,campaignData,buttonValue="Submit",edit=false}) => {
 
   const token = Cookies.get('access_token');
   const userName = Cookies.get('user_id');
@@ -25,7 +25,7 @@ const CampaignDetails = ({onSubmit,onCancel,campaignData,buttonValue="Submit"}) 
               { label: "CASL", value: "CASL" },
               { label: "Both ( NON-EU & CASL )", value: "BOTH" }
             ]}  required={true} />
-            <TextBox name="campaignName" label="Campaign Name" value={campaignName} required={true} />
+            <TextBox name="campaignName" label="Campaign Name" value={campaignName} required={true} readOnly ={(edit)==true?true:false} />
             <TextBox name="comment" label="Comment" value={comment} required={false} />
             <TextBox name="campCreatedBy" label="campCreatedBy" value={campCreatedBy} required={true} readOnly />
             <TextBox name="lastEditedBy" label="lastEditedBy" value={lastEditedBy} required={true} readOnly />

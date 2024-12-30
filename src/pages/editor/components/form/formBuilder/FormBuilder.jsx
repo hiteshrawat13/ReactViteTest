@@ -203,7 +203,7 @@ const FormBuilder = (defaultFieldsJson) => {
 
   useEffect(() => {
 
-    console.log("DEFAULT FIELDS", defaultFieldsJson.defaultFieldsJson );
+    //console.log("DEFAULT FIELDS", defaultFieldsJson.defaultFieldsJson );
     
     //dispatch(loadFieldsFromJson(defaultFieldsJson.defaultFieldsJson))
 
@@ -218,7 +218,7 @@ const FormBuilder = (defaultFieldsJson) => {
                     {
 
                     Object.keys(fields).map((field, i) => {
-                      return <div style={{
+                      return <div key={i} style={{
                         padding: "5px",
                         
                         cursor: "pointer",

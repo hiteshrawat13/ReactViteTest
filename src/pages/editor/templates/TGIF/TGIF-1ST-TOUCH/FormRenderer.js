@@ -153,7 +153,7 @@ const TGIFFormRenderer = {
     CTA: (obj) => {
         return `
     <tr class="form-group ${obj.id}-holder">
-    <td colspan='2'>
+    <td colspan='2' align="center" style="text-align:center;">
         <button type="submit" class="btn btn-primary1 cta"> ${obj.label}</button>
     </td>
     </tr>`

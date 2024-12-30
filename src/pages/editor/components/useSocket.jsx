@@ -12,30 +12,30 @@ const useSocket = () => {
     
     useEffect(() => {
         function onConnect(e) {
-            console.log("onConnected", e);
+            //console.log("onConnected", e);
             setsocketConnected(true);
         }
 
         function onDisconnect(e) {
-            console.log("onDisconnected", e);
+            //console.log("onDisconnected", e);
             setsocketConnected(false);
             
         }
 
         function onFooEvent(value) {
-            console.log("ON FOO", value);
+            //console.log("ON FOO", value);
             setSocketId(value.id)
             
         }
 
         function onUploadProgress(value) {
             setSocketUploadProgress(value)
-            console.log("Socket OnUploadProgress",value);
+            //console.log("Socket OnUploadProgress",value);
             
         }
         function onError(err){
             socket.socket.reconnect();
-            console.log("OnError",err);
+            //console.log("OnError",err);
         }
 
 
@@ -58,7 +58,7 @@ const useSocket = () => {
        
 
         return () => {
-            console.log("disconnected");
+            //console.log("disconnected");
             socket?.disconnect();
         }
 

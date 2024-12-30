@@ -20,16 +20,20 @@ import {
   Col,
   LanguageInput,
   CheckLink,
-  Section
+  AssetDetails,
+  SpeakerDetails,
+  LinkDetails,
+  Section,
+  ExtraFiles
 } from '../../../components/form/index'
 
 import defaultFieldsJson from "./default-fields.json"
 import { EContext } from '../../../EditorMain'
 import PublishHelper from './PublishHelper'
-import Speakers from '../../../components/form/Speakers'
-import LinkDetails from './components/LinkDetails'
 import BasicDetails from './components/BasicDetails'
 import EDMDetails from './components/EDMDetails'
+import HiddenData from './components/HiddenData'
+
 
 
 
@@ -46,7 +50,7 @@ const Editor = ({ }) => {
     //if (!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
     //alert("TGIF")
 
- 
+
     // setInterval(()=>{console.log("SETTING");
     //  setFormValue("LINK_NAME",Math.random())},1000)
   }, [campData])
@@ -57,42 +61,11 @@ const Editor = ({ }) => {
 
   return (<Stepper >
     <Step title="Basic Info" key={1101}>
-      {/* <button onClick={(e) => {
-        e.preventDefault();
-        const data = JSON.parse(localStorage.getItem("data"))
-        console.log(data);
 
-        for (const [key, value] of Object.entries(data)) {
-          setFormValue(key, value)
-        }
-        setStateValue("form", data.form)
-        alert("State Loaded")
+     <HiddenData/>
 
-      }} >Load State From Local Storage</button> */}
-
-
-
-
-
-      <HiddenField name="FTP_CONFIG_NAME" value="TGIF" />
-      <HiddenField name="LOGO_FOLDER" value="logo/" />
-      <HiddenField name="LOGO_WIDTH" value={`${(campData?.jsonObject?.LOGO_WIDTH) ? campData?.jsonObject?.LOGO_WIDTH : "180"}`} />
-      <HiddenField name="BASE_URL" value="https://resource.itbusinesstoday.com/whitepapers/cbtool_test/" />
-      <HiddenField name="YEAR" value={new Date().getFullYear() + ""} />
-   
-
-   <LinkDetails />
-
-
-
-  
-
-
-
-
-
-      <BasicDetails/>
-
+      <LinkDetails />
+      <BasicDetails />
 
     </Step>
 
@@ -100,8 +73,7 @@ const Editor = ({ }) => {
 
     <Step title="Abstract & Title" key={1102}>
       <Section title="EDM Details">
-
-        <EDMDetails/>
+        <EDMDetails />
       </Section>
 
 
@@ -133,21 +105,8 @@ const Editor = ({ }) => {
 
 
 
-    {/* Speakers Section */}
-    <Section title="Speakers">
-      <CheckBox label="Show Speakers" name="SHOW_SPEAKERS" defaultChecked={false} />
-
-       
-    
-       { (watch["SHOW_SPEAKERS"] === true  || getStateValue("SHOW_SPEAKERS") ==true )   &&
-        [<TextBox label="Speaker Heading" name="SPEAKER_HEADING" required={true}    />,
-        <Speakers name="SPEAKERS" filesRef={filesRef}/>,
-        <CheckBox label="Show Speakers on Landing Page" name="SHOW_SPEAKERS_ON_LANDING_PAGE" defaultChecked={false} />
-      ]
-       }
-      { watch["SHOW_SPEAKERS"] === false && [setStateValue("SHOW_SPEAKERS",false)]}
-        
-      </Section>
+      {/* Speakers Section */}
+      <SpeakerDetails />
 
 
 
@@ -193,40 +152,41 @@ const Editor = ({ }) => {
 
         <Row>
           <Col>
-          <LogoInput name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1} 
-          onFileChange={(filename)=>{
-          
-            setFormValue("LOGO_NAME",filename)
-            } 
-          }/>
-          
+            <LogoInput name="LOGO_NAME" label="Logo" tag="logo" fileRef={filesRef.current.fileInput1}
+              onFileChange={(filename) => {
+
+                setFormValue("LOGO_NAME", filename)
+              }
+              } />
+
           </Col>
           <Col>
             <FileInput name="THUMBNAIL_NAME" label="Thumbnail" tag="file" fileRef={filesRef.current.fileInput2}
-             onTextChange={(filename)=>{ 
-              
-            } 
-            } 
+              onTextChange={(filename) => {
 
-             onFileChange={(filename)=>{
-
-              if(filename.includes(".")){
-                let fn=filename.split('.')
-                fn.pop()
-                 
-                
-                alert(fn.join("."));
               }
-              
-              //setFormValue("LOGO_NAME",Math.random()+"---")
-              
-             }
-            }
-             />
+              }
 
-             
+              onFileChange={(filename) => {
+
+                if (filename.includes(".")) {
+                  let fn = filename.split('.')
+                  fn.pop()
+
+
+                  alert(fn.join("."));
+                }
+
+                //setFormValue("LOGO_NAME",Math.random()+"---")
+
+              }
+              }
+            />
+
+
+<CheckBox label="Hide thumbnails" name="HIDE_THUMBNAIL" defaultChecked={false} />
             <CheckBox label="Add border to thumbnail" name="THUMBNAIL_BORDER" defaultChecked={true} />
-            <TextBox label="EDM Thumbnail width" name="EDM_THUMBNAIL_WIDTH" required={true} value="260px" helpText={`In % or px`}/>
+            <TextBox label="EDM Thumbnail width" name="EDM_THUMBNAIL_WIDTH" required={true} value="260px" helpText={`In % or px`} />
             <CheckBox label="Use different thumbnail for edm page" name="USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE" />
 
             {(watch["USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE"] == true) &&
@@ -237,178 +197,40 @@ const Editor = ({ }) => {
 
 
 
-     
-
-
-     
-
-      </Section>
-
-
-  
-
-
-      <Section title="Asset">
-
-        <TextBox label="Asset Title" name="ASSET_TITLE" required={true} helpText={`Asset title will be displayed in thanks.php and sendmail.php file.`}/>
-
-
-        <RadioGroup name="ASSET_FORMAT" label="Asset Format" required={true} options={[
-          { label: "PDF", value: "PDF" },
-          { label: "MP4", value: "MP4" },
-          { label: "Client Link", value: "CLIENT_LINK" },
-          { label: "IFrame", value: "IFRAME" }
-        ]} />
-        {(watch["ASSET_FORMAT"] == "PDF") &&
-          <FileInput name="PDF_NAME" label="PDF" tag="file" fileRef={filesRef.current.fileInput11} />
-        }
-
-        {(watch["ASSET_FORMAT"] == "MP4") &&
-          <FileInput name="MP4_NAME" label="MP4" tag="file" fileRef={filesRef.current.fileInput12} />
-        }
-
-        {(watch["ASSET_FORMAT"] == "CLIENT_LINK") &&
-          <TextBox label="Client Link" required="true" name="CLIENT_LINK" />
-        }
-
-        {(watch["ASSET_FORMAT"] == "IFRAME") &&
-          <TextBox label="IFrame Url" required="true" name="IFRAME" />
-        }
 
 
 
 
 
       </Section>
+
+
+
+
+      {/* Asset Details */}
+      <AssetDetails />
 
 
 
 
       <Section title="Image Below Abstract">
-      <Row>
-        <Col>
-          <CheckBox label="Show Image Below Abstract" name="SHOW_IMAGE_BELOW_ABSTRACT" defaultChecked={false}/>
-          {(watch["SHOW_IMAGE_BELOW_ABSTRACT"] == true) &&
-          
-          [<FileInput name="IMAGE_BELOW_ABSTRACT" label="Image Below Abstract" tag="file" fileRef={filesRef.current.fileInput9} onFileChange={(filename) => { setFormValue("IMAGE_BELOW_ABSTRACT",filename) }} />
-          ,<TextBox label="IMAGE_BELOW_ABSTRACT_WIDTH" required="true" name="IMAGE_BELOW_ABSTRACT_WIDTH" value={'20%'} />
-          ,<CheckBox label="Show on Landing Page" name="SHOW_IMAGE_BELOW_ABSTRACT_ON_LANDING_PAGE" defaultChecked={false} />]
-          }
-        </Col>
-      </Row>
+        <Row>
+          <Col>
+            <CheckBox label="Show Image Below Abstract" name="SHOW_IMAGE_BELOW_ABSTRACT" defaultChecked={false} />
+            {(watch["SHOW_IMAGE_BELOW_ABSTRACT"] == true) &&
+
+              [<FileInput name="IMAGE_BELOW_ABSTRACT" label="Image Below Abstract" tag="file" fileRef={filesRef.current.fileInput9} onFileChange={(filename) => { setFormValue("IMAGE_BELOW_ABSTRACT", filename) }} />
+                , <TextBox label="IMAGE_BELOW_ABSTRACT_WIDTH" required="true" name="IMAGE_BELOW_ABSTRACT_WIDTH" value={'20%'} />
+                , <CheckBox label="Show on Landing Page" name="SHOW_IMAGE_BELOW_ABSTRACT_ON_LANDING_PAGE" defaultChecked={false} />]
+            }
+          </Col>
+        </Row>
       </Section>
 
 
 
-
- {/* Extra Files Upload Section Start*/}
- <Section title="Extra files to upload">
-   
-   <Row>
-     <Col>
-       <CheckBox label="Upload Extra File [EXTRA_FILE_1]" name="ADD_EXTRA_FILE_1" defaultChecked={false} />
-       {(watch["ADD_EXTRA_FILE_1"] == true) &&
-         <FileInput name="EXTRA_FILE_1" label="Extra File 1" tag="file" 
-         fileRef={filesRef.current.fileInput4} 
-         onFileChange={(filename) => { setFormValue("EXTRA_FILE_1",filename) }}
-     
-         />
-       }
-     </Col>
-     </Row>
-     <Row>
-     <Col>
-       <CheckBox label="Upload Extra File [EXTRA_FILE_2]" name="ADD_EXTRA_FILE_2" defaultChecked={false}/>
-       {(watch["ADD_EXTRA_FILE_2"] == true) &&
-         <FileInput name="EXTRA_FILE_2" label="Extra File 2" tag="file" fileRef={filesRef.current.fileInput5} 
-         onFileChange={(filename) => { setFormValue("EXTRA_FILE_2",filename) }}
-          />
-       }
-     </Col>
-   </Row>
-
-   <Row>
-     <Col>
-       <CheckBox label="Upload Extra File [EXTRA_FILE_3]" name="ADD_EXTRA_FILE_3" defaultChecked={false}/>
-       {(watch["ADD_EXTRA_FILE_3"] == true) &&
-         <FileInput name="EXTRA_FILE_3" label="Extra File 3" tag="file" fileRef={filesRef.current.fileInput6} 
-         
-         onFileChange={(filename) => { setFormValue("EXTRA_FILE_3",filename) }}
-         />
-       }
-     </Col>
-   </Row>
-
-   <Row>
-     <Col>
-       <CheckBox label="Upload Extra File [EXTRA_FILE_4]" name="ADD_EXTRA_FILE_4" defaultChecked={false}/>
-       {(watch["ADD_EXTRA_FILE_4"] == true) &&
-         <FileInput name="EXTRA_FILE_4" label="Extra File 4" tag="file" fileRef={filesRef.current.fileInput7} 
-         
-         onFileChange={(filename) => { setFormValue("EXTRA_FILE_4",filename) }}
-         />
-       }
-     </Col>
-   </Row>
-
-   <Row>
-     <Col>
-       <CheckBox label="Upload Extra File [EXTRA_FILE_5]" name="ADD_EXTRA_FILE_5" defaultChecked={false} />
-       {(watch["ADD_EXTRA_FILE_5"] == true) &&
-         <FileInput name="EXTRA_FILE_5" label="Extra File 5" tag="file" fileRef={filesRef.current.fileInput8}
-         onFileChange={(filename) => { setFormValue("EXTRA_FILE_5",filename) }}
-           />
-       }
-     </Col>
-   </Row>
-{/*  
-   <Row>
-     <Col>
-       <CheckBox label="Upload Extra File [EXTRA_FILE_6]" name="ADD_EXTRA_FILE_6" defaultChecked={false} />
-       {(watch["ADD_EXTRA_FILE_6"] == true) &&
-         <FileInput name="EXTRA_FILE_6" label="Extra File 6" tag="file" fileRef={filesRef.current.fileInput9} onChange={(e) => { setFormValue("EXTRA_FILE_6",e.target.value) }} />
-       }
-     </Col>
-   </Row>
- 
-   <Row>
-     <Col>
-       <CheckBox label="Upload Extra File [EXTRA_FILE_7]" name="ADD_EXTRA_FILE_7" defaultChecked={false}/>
-       {(watch["ADD_EXTRA_FILE_7"] == true) &&
-         <FileInput name="EXTRA_FILE_7" label="Extra File 7" tag="file" fileRef={filesRef.current.fileInput10} onChange={(e) => { setFormValue("EXTRA_FILE_7",e.target.value) }} />
-       }
-     </Col>
-   </Row>
-
-   <Row>
-     <Col>
-       <CheckBox label="Upload Extra File [EXTRA_FILE_8]" name="ADD_EXTRA_FILE_8" defaultChecked={false}/>
-       {(watch["ADD_EXTRA_FILE_8"] == true) &&
-         <FileInput name="EXTRA_FILE_8" label="Extra File 8" tag="file" fileRef={filesRef.current.fileInput11} onChange={(e) => { setFormValue("EXTRA_FILE_8",e.target.value) }} />
-       }
-     </Col>
-   </Row>
-
-   <Row>
-     <Col>
-       <CheckBox label="Upload Extra File [EXTRA_FILE_9]" name="ADD_EXTRA_FILE_9" defaultChecked={false}/>
-       {(watch["ADD_EXTRA_FILE_9"] == true) &&
-         <FileInput name="EXTRA_FILE_9" label="Extra File 9" tag="file" fileRef={filesRef.current.fileInput12} onChange={(e) => { setFormValue("EXTRA_FILE_9",e.target.value) }} />
-       }
-     </Col>
-   </Row>
-
-   <Row>
-     <Col>
-       <CheckBox label="Upload Extra File [EXTRA_FILE_10]" name="ADD_EXTRA_FILE_10" defaultChecked={false}/>
-       {(watch["ADD_EXTRA_FILE_10"] == true) &&
-         <FileInput name="EXTRA_FILE_10" label="Extra File 10" tag="file" fileRef={filesRef.current.fileInput13} onChange={(e) => {  setFormValue("EXTRA_FILE_10",e.target.value)  }} />
-       }
-     </Col>
-   </Row> */}
-
- </Section>
- {/* Extra Files Upload Section End */}
+          {/* Extra Files Section */}
+      <ExtraFiles/>
 
 
 
@@ -441,39 +263,39 @@ const Editor = ({ }) => {
                 }} />
 
 
-                
 
 
-                  {(getStateValue( "SHOW_IMAGE_BELOW_ABSTRACT" ) == true) &&
-          
-                <TextBox type="text" label="Logo Width" name="IMAGE_BELOW_ABSTRACT_WIDTH" onChange={(e) => {
+
+                {(getStateValue("SHOW_IMAGE_BELOW_ABSTRACT") == true) &&
+
+                  <TextBox type="text" label="Logo Width" name="IMAGE_BELOW_ABSTRACT_WIDTH" onChange={(e) => {
+                    console.log(e);
+                    if (!e.target.value.endsWith("%")) {
+                      alert("Please add percentage sign.")
+                      return
+                    }
+                    iframe.contentDocument.querySelector('.image_below_abstract').style.width = e.target.value + ""
+
+                    setStateValue("IMAGE_BELOW_ABSTRACT_WIDTH", e.target.value)
+                  }} />}
+
+
+
+
+
+                <TextBox type="text" label="EDM Thumbnail width" helpText='enter values in % or px' name="EDM_THUMBNAIL_WIDTH" onChange={(e) => {
                   console.log(e);
-                  if(!e.target.value.endsWith("%")){
-                    alert("Please add percentage sign.")
-                    return
-                  }
-                  iframe.contentDocument.querySelector('.image_below_abstract').style.width = e.target.value + ""
-               
-                  setStateValue("IMAGE_BELOW_ABSTRACT_WIDTH", e.target.value)
-                }} /> }
+
+                  iframe.contentDocument.querySelector('.edm_thumbnail').style.width = e.target.value + ""
+
+                  setStateValue("EDM_THUMBNAIL_WIDTH", e.target.value)
+                }} />
 
 
 
-                
- 
-          <TextBox type="text" label="EDM Thumbnail width" helpText='enter values in % or px' name="EDM_THUMBNAIL_WIDTH" onChange={(e) => {
-            console.log(e);
-            
-            iframe.contentDocument.querySelector('.edm_thumbnail').style.width = e.target.value + ""
-         
-            setStateValue("EDM_THUMBNAIL_WIDTH", e.target.value)
-          }} /> 
 
 
- 
 
-
-           
 
               </div>
             </>
@@ -485,7 +307,7 @@ const Editor = ({ }) => {
     <Step title="Publish" key={1106}>
       <Section title="FTP Upload">
         <FTPUpload publishHelper={publishHelperRef.current} filesRef={filesRef.current} />
-        
+
       </Section>
 
 

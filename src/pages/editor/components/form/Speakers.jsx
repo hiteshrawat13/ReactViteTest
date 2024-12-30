@@ -46,7 +46,7 @@ const Speakers = ({ filesRef, name = "SPEAKERS" }) => {
 
           }
         } else {
-          console.log("OSPEAKER ELESE",speaker.id,filesRef.current[speaker.id],filesRef.current);
+          //console.log("OSPEAKER ELESE",speaker.id,filesRef.current[speaker.id],filesRef.current);
           
           previewRef.current[speaker.id].src = (speaker.speakerImage.startsWith("http")) ? speaker.speakerImage : campaignDataState.data["BASE_URL"] + speaker.speakerImage
         }

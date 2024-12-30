@@ -172,6 +172,32 @@ function extractFormData(form) {
          formData.push( checkgroup );
      }
 
+
+
+     //Text
+     const ukgdprs=form.querySelectorAll("[id$=ukgdpr]")
+     if(ukgdprs.length){
+
+        ukgdprs.forEach(ukgdpr => {
+           const hasInputs= ukgdpr.querySelectorAll("input")
+           if(!hasInputs.length){
+            
+                 formData.push({
+                     "type": "Text",
+                     "id":"text-"+Math.floor(Math.random() * 6) + 1,
+                     "label": ukgdpr.innerHTML
+                   });
+           }
+
+
+        })
+
+        //  formData.push({
+        //      "type": "CTA",
+        //      "id":"cta_button",
+        //      "label": cta
+        //    });
+     }
  
      
     // CTA

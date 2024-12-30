@@ -37,7 +37,7 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
       );
 
 
-      console.log(response.data);
+      //console.log(response.data);
       const jobject = JSON.parse(response.data.json_data)
 
       if (jobject.files) {
@@ -59,7 +59,7 @@ const FTPUpload = ({ publishHelper, filesRef }) => {
     for (const [key, value] of Object.entries(filesRef)) {
 
 
-      console.log("--------------",filesRef[key]);
+      //console.log("--------------",filesRef[key]);
       
       if (filesRef[key] && filesRef[key].files[0] !=undefined) {
         //Speaker file

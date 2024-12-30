@@ -20,8 +20,8 @@ import {
     LanguageInput,
     CheckLink,
     Section
-  } from '../../../../components/form/index'
-  import { EContext } from '../../../../EditorMain'
+  } from '../../components/form/index'
+  import { EContext } from '../../EditorMain'
 
 const LinkDetails = () => {
     
@@ -104,8 +104,7 @@ const LinkDetails = () => {
                 }
               } />
 
-{console.log(watch['LINK_NAME'],"WWW")
-}
+ 
             {(watch['LINK_NAME']) && <CheckLink link={watch["BASE_URL"] + (watch['LINK_NAME']) + "-edm.html"} onExists={() => {
             if(campData.mode === 'new')  setError('LINK_NAME',"Link already exists on server.")
 

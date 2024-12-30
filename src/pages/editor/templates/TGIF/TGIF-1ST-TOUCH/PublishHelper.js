@@ -9,6 +9,8 @@ import thanks_html from './pages/thanks.php.txt?raw'  //?raw is important to rea
 
 import SpeakerRender from './SpeakerRender.js'
 
+import Functions from './functions.js'
+
 import { getSendmailSubject } from './Base64.js'
 class PublishHelper {
     constructor(state) {
@@ -149,8 +151,23 @@ This is to convert Chinese characters to Unicode numbers
 
     async getEdmHtml({ forPreview }) {
         let data = edm_html;
-        data = data.replaceAll(`##EDM_THANKS_TEXT_FOR_2ND_TOUCH##`, '') //Remove this .it is for 2nd touch
 
+        if(this.state['LINK_TYPE']=="1st_touch"){
+            data = data.replaceAll(`##EDM_THANKS_TEXT_FOR_2ND_TOUCH##`, '') //Remove this .it is for 2nd touch
+        }else{
+            if (this.state["EDM_THANKS_TEXT_FOR_2ND_TOUCH"] && (this.state["EDM_THANKS_TEXT_FOR_2ND_TOUCH"].trim().length > 0)) {
+                    data = data.replaceAll(`##EDM_THANKS_TEXT_FOR_2ND_TOUCH##`, `<p style="font-size: 14px;color: #6F6F6F;margin-bottom:5px;" class="body-sub-title">${Functions.convertToEntities(this.state["EDM_THANKS_TEXT_FOR_2ND_TOUCH"])}</p>`)
+            } else {
+                    data = data.replaceAll(`##EDM_THANKS_TEXT_FOR_2ND_TOUCHE##`, "")
+            }
+
+         
+           
+        }
+      
+        if(this.state['LINK_TYPE']=="2nd_touch"){
+            data = data.replaceAll(`##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#`, "##BASE_URL####LINK_NAME##-thanks.php")
+        }
 
 
         const traditional_layout = `
@@ -279,6 +296,11 @@ This is to convert Chinese characters to Unicode numbers
             data = data.replaceAll(`##EDM_SUB_TITLE##`, "")
         }
 
+        if (this.state["HIDE_THUMBNAIL"] == true) {
+            data = data.replaceAll(`##HIDE_THUMBNAIL##`, 'display:none;')
+        }else{
+            data = data.replaceAll(`##HIDE_THUMBNAIL##`, '') 
+        }
   
    
         
@@ -382,6 +404,12 @@ This is to convert Chinese characters to Unicode numbers
             data = data.replaceAll(`##LANDING_ABSTRACT##`, this.convertToEntities(this.state["EDM_ABSTRACT"]))
         }
 
+        if (this.state["HIDE_THUMBNAIL"] == true) {
+            data = data.replaceAll(`##HIDE_THUMBNAIL##`, 'display:none;')
+        }else{
+            data = data.replaceAll(`##HIDE_THUMBNAIL##`, '') 
+        }
+
         data = data.replaceAll(`##FORM##`, this.convertToEntities(this.getFormHtml(this.state.form, TGIFFormRenderer)))
 
         data=this.replaceHashVariables(data)
@@ -398,6 +426,10 @@ This is to convert Chinese characters to Unicode numbers
     //Sendmail
     getSendmailHtml({ forPreview }) {
         let data = sendemail_html
+
+         
+        
+
         data = data.replaceAll(`##MAPPED_DATA##`, this.getFormCurlApiSendmailMappedData(this.state.form))
 
         const hasSpecialCharsInSubject = this.convertToEntities(this.state["SENDMAIL_SUBJECT"]).includes("&#")
@@ -531,6 +563,12 @@ This is to convert Chinese characters to Unicode numbers
             data = data.replaceAll(`##THUMBNAIL_BORDER##`,  'border: 1px solid #e5e5e5;'  )
         } else   {
             data = data.replaceAll(`##THUMBNAIL_BORDER##`, '')
+        }
+
+        if (this.state["HIDE_THUMBNAIL"] == true) {
+            data = data.replaceAll(`##HIDE_THUMBNAIL##`, 'display:none;')
+        }else{
+            data = data.replaceAll(`##HIDE_THUMBNAIL##`, '') 
         }
 
 

@@ -7,8 +7,8 @@ import TemplateManager from './templates/TemplateManager';
 
 import './EditorMain.css'
 
-const Context = React.createContext();
-
+ 
+export const EContext = React.createContext("");
 const EditorMain = () => {
   const filesRef = useRef({})
   const location = useLocation()
@@ -17,33 +17,16 @@ const EditorMain = () => {
 
   const campData = location?.state;
 
-  //console.log(campData);
-  
-
-  // const Editor11 = useMemo(
-  //   () => TemplateManager.find(client => client.clientCode == campData.clientCode).templates.find(template => template.id == campData.templateId).editor,
-  //   [])
+ 
 
     const Editor11 =   TemplateManager
     .find(client => client.clientCode == campData.clientCode)
     .templates.find(template => template.id == campData.templateId)
-    .editor
+    .editor 
     
 
   const [editor, setEditor] = useState(null)
-
-  //   useEffect(()=>{
-  //     const importComponent = async () => {
-  //       const module = await import('http://localhost:5173/cbtool/template_files/ARC-1ST-TOUCH/Editor.jsx');
-  //       const Editor = module.default;
-  //       setEditor(<Editor />)
-
-
-  //     };
-  //     importComponent();
-  // },[])
-  //const LazyComponent = React.lazy(() => import('./components/Editor'));
-
+ 
 
 
 
@@ -111,10 +94,9 @@ const EditorMain = () => {
   }, [])
 
 
-  useEffect(()=>{
-    console.log("currentFormMethods loaded.:-",currentFormMethods);
+  // useEffect(()=>{
     
-  },[currentFormMethods])
+  // },[currentFormMethods])
 
   return (
     <div>
@@ -163,6 +145,7 @@ const EditorMain = () => {
        
         <span>Client Code :  <b>{campData.clientCode}</b></span>
         <span>Region: <b> {campData.country}</b></span>
+        {(getStateValue("LANGUAGE") )  &&  <span>Lang :  <b>{getStateValue("LANGUAGE") }</b></span> }
         <span>Type :<b> {campData.templateType}</b></span>
        
         </div>
@@ -173,30 +156,29 @@ const EditorMain = () => {
 
       
 
-      <Context.Provider value={{
-        campData,
-        watch,
-        setWatch,
-        setCurrentFormMethods,
-        setStateValue,
-        getStateValue,
-        setState,
-        setFormValue,
-        filesRef,
-        setError
+      <EContext.Provider value={{
+        campData:campData,
+        watch:watch,
+        setWatch:setWatch,
+        setCurrentFormMethods:setCurrentFormMethods,
+        setStateValue:setStateValue,
+        getStateValue:getStateValue,
+        setState:setState,
+        setFormValue:setFormValue,
+        filesRef:filesRef,
+        setError:setError
       }}>
 
         <Suspense fallback={<div>Loading...</div>}>
           {/* <Editor11 /> */}
-          {React.cloneElement(
-             <Editor11/>, {  })}
- 
+        {/* {React.cloneElement(
+             <Editor11/>, {  })}   */}
+          <Editor11/>
         </Suspense>
-      </Context.Provider>
+      </EContext.Provider>
     </div>
   )
 }
 
 export default EditorMain
 
-export const EContext = Context

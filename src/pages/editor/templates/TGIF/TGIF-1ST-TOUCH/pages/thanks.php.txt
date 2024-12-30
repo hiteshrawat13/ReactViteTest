@@ -82,6 +82,7 @@
              .thumbnail{
                height: auto !important; 
                ##THUMBNAIL_BORDER##   
+               ##HIDE_THUMBNAIL##
                 border-radius: 5px;
                 width:180px;
             }

@@ -170,8 +170,30 @@ const RichTextEditor = ({ label, name, required = false, width = null, value = n
         'hr',
         'eraser',
         'copyformat', '|',
-        'symbol',
+        // 'symbol',
         'fullsize',
+
+           {
+          name: 'translateButton',
+          icon: 'fa fa-language',
+          tooltip: 'Translate',
+          exec: async function (editor) {
+             
+            const to=campaignDataState.data["LANGUAGE"]
+            const text=editor.value
+            
+         let a = document.createElement("a");
+            a.setAttribute("style", "display: none");
+            a.href = `https://translate.google.co.in/?sl=${'en'}&tl=${to}&text=${encodeURIComponent(text)}&op=translate`;
+            a.target = "_blank";
+           // a.download = "MyFileName.pdf";
+            a.click();
+            a.innerHTML = "TranslateLink";
+            document.body.appendChild(a);
+            a.remove();
+           
+          }
+      },
 
         {
           name: 'Remove Styles',

@@ -72,7 +72,7 @@
 							 <tbody>
 								<tr>
 								   <td class="kmImageContent" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding:0;padding-top:5px;padding-bottom:10px;padding-left:0px;padding-right:0px;    text-align: right;">
-								   <p style="margin:0px;">##SPONSORED_BY_TEXT##</p>
+								   <p style=" margin:0px;    font-family: Arial, Helvetica, sans-serif;font-size:14px;">##SPONSORED_BY_TEXT##</p>
 <!-- CAMPAIGN COMPANY LOGO -->																			  
 								  
 <img class="splogo" src="##BASE_URL####LOGO_FOLDER####LOGO_NAME##" alt="Logo" style="width: ##LOGO_WIDTH##px; margin-top: 10px; margin-bottom: 6px;" />

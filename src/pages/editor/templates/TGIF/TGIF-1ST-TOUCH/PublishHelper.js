@@ -605,10 +605,15 @@ This is to convert Chinese characters to Unicode numbers
     async getTelemarketingEdmHtml({ forPreview }) {
         let data = telemarketing_edm_html
 
+
+        
+
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
+
+        data = this.convertToEntities(this.getPrivacyPolicy(data)) //Privacy Policy
 
         return data
     }
@@ -616,10 +621,14 @@ This is to convert Chinese characters to Unicode numbers
     async getTelemarketingThankyouHtml({ forPreview }) {
         let data = telemarketing_Thankyou_html
 
+        
+
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
+
+        data = this.convertToEntities(this.getPrivacyPolicy(data)) //Privacy Policy
 
         return data
 

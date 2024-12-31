@@ -43,26 +43,12 @@ const Editor = ({ }) => {
 
   const publishHelperRef = useRef(new PublishHelper())
   const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData, setError } = useContext(EContext)
-  useEffect(() => {
-    //setStateValue("FTP_CONFIG_NAME", "TGIF")
-    // setStateValue("FTP_CONFIG_NAME", "TEST")
-    //setStateValue("LOGO_FOLDER", "logo/")
-    //if (!campData?.jsonObject?.LOGO_WIDTH) setStateValue("LOGO_WIDTH", "180")
-    //alert("TGIF")
-
-
-    // setInterval(()=>{console.log("SETTING");
-    //  setFormValue("LINK_NAME",Math.random())},1000)
-  }, [campData])
-
-
-
 
 
   return (<Stepper >
     <Step title="Basic Info" key={1101}>
 
-     <HiddenData/>
+      <HiddenData />
 
       <LinkDetails />
       <BasicDetails />
@@ -77,36 +63,43 @@ const Editor = ({ }) => {
       </Section>
 
 
-      <Section title="Landing Page Details">
-        <CheckBox label="Landing title is same as EDM title" name="LANDING_TITLE_SAME_AS_EDM_TITLE" defaultChecked={true} />
-        {(watch["LANDING_TITLE_SAME_AS_EDM_TITLE"] == false) &&
-          <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} />
-        }
+      {
+        (getStateValue("LINK_TYPE") == "1st_touch") &&
 
-        <CheckBox label="Landing abstract is same as EDM abstract" name="LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT" defaultChecked={true} />
-        {(watch["LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT"] == false) && <>
-          <button onClick={(e) => {
-            e.preventDefault();
-            //using math random to update value otherwise gives blank result--
-            const boxHtml = `<div align="center"><div class="sub" data-key="${Math.random()}" align="center" style="background-color: #e2ebf3;margin-top: 30px; display: flex;padding: 10px;width: 250px;align-items: center;">
+
+        <Section title="Landing Page Details">
+          <CheckBox label="Landing title is same as EDM title" name="LANDING_TITLE_SAME_AS_EDM_TITLE" defaultChecked={true} />
+          {(watch["LANDING_TITLE_SAME_AS_EDM_TITLE"] == false) &&
+            <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} />
+          }
+
+          <CheckBox label="Landing abstract is same as EDM abstract" name="LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT" defaultChecked={true} />
+          {(watch["LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT"] == false) && <>
+            <button onClick={(e) => {
+              e.preventDefault();
+              //using math random to update value otherwise gives blank result--
+              const boxHtml = `<div align="center"><div class="sub" data-key="${Math.random()}" align="center" style="background-color: #e2ebf3;margin-top: 30px; display: flex;padding: 10px;width: 250px;align-items: center;">
             <p style="text-align: left; margin-top: 10px;">Please fill this form to get immediate access to this exclusive resource.</p>
             <div><img src="https://resource.itbusinesstoday.com/whitepapers/Arrow-pr.png" alt="Arrow" style="width: 50px;  " /></div>
             </div>
             </div>`
-            setFormValue("LANDING_ABSTRACT", boxHtml)
-          }
-          }>Add new format</button>
-          <RichTextEditor label="Landing Abstract" name="LANDING_ABSTRACT" required={true} />
-        </>}
+              setFormValue("LANDING_ABSTRACT", boxHtml)
+            }
+            }>Add new format</button>
+            <RichTextEditor label="Landing Abstract" name="LANDING_ABSTRACT" required={true} />
+          </>}
 
 
 
-      </Section>
+        </Section>
+      }
 
+      {
+        (getStateValue("LINK_TYPE") == "1st_touch" || getStateValue("LINK_TYPE") == "2nd_touch") &&
 
+        <SpeakerDetails />
 
-      {/* Speakers Section */}
-      <SpeakerDetails />
+      }
 
 
 
@@ -126,9 +119,14 @@ const Editor = ({ }) => {
         </>
 
       }
-      <Section title="Sendmail Details">
-        <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true} width="60%" value={`Thank you for requesting a ${getStateValue("ASSET_TYPE")}`} />
-        <RichTextEditor label="Sendmail Body" name="SENDMAIL_BODY" required={true} value={`<table>
+
+
+
+      {
+        (getStateValue("LINK_TYPE") == "1st_touch") &&
+        <Section title="Sendmail Details">
+          <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true} width="60%" value={`Thank you for requesting a ${getStateValue("ASSET_TYPE")}`} />
+          <RichTextEditor label="Sendmail Body" name="SENDMAIL_BODY" required={true} value={`<table>
 <tr><td>Dear&nbsp;<b>$firstname,</b></td></tr>
 <tr><td>&nbsp;</td></tr>
 <tr><td>Thank you for requesting <b>"##ASSET_TITLE##"</b>. You can view it immediately by clicking <a href='##BASE_URL####LINK_NAME##.pdf'>HERE</a>!</td></tr>
@@ -138,7 +136,9 @@ const Editor = ({ }) => {
 <tr><td>Nina Ridgeway</td></tr>
 <tr><td>ITBusinessToday</td></tr>
 </table>`} />
-      </Section>
+        </Section>
+
+      }
     </Step>
 
 
@@ -184,7 +184,7 @@ const Editor = ({ }) => {
             />
 
 
-<CheckBox label="Hide thumbnails" name="HIDE_THUMBNAIL" defaultChecked={false} />
+            <CheckBox label="Hide thumbnails" name="HIDE_THUMBNAIL" defaultChecked={false} />
             <CheckBox label="Add border to thumbnail" name="THUMBNAIL_BORDER" defaultChecked={true} />
             <TextBox label="EDM Thumbnail width" name="EDM_THUMBNAIL_WIDTH" required={true} value="260px" helpText={`In % or px`} />
             <CheckBox label="Use different thumbnail for edm page" name="USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE" />
@@ -229,19 +229,22 @@ const Editor = ({ }) => {
 
 
 
-          {/* Extra Files Section */}
-      <ExtraFiles/>
+      {/* Extra Files Section */}
+      <ExtraFiles />
 
 
 
     </Step>
 
+    {
+      (getStateValue("LINK_TYPE") == "1st_touch") &&
+      <Step title="Form" key={1104}>
+        <Section>
+          <FormBuilder defaultFieldsJson={defaultFieldsJson} />
+        </Section>
+      </Step>
 
-    <Step title="Form" key={1104}>
-      <Section>
-        <FormBuilder defaultFieldsJson={defaultFieldsJson} />
-      </Section>
-    </Step>
+    }
 
     <Step title="Preview" key={1105}>
       <Section>
@@ -266,9 +269,10 @@ const Editor = ({ }) => {
 
 
 
-                {(getStateValue("SHOW_IMAGE_BELOW_ABSTRACT") == true) &&
+                {
+                  (getStateValue("SHOW_IMAGE_BELOW_ABSTRACT") == true) &&
 
-                  <TextBox type="text" label="Logo Width" name="IMAGE_BELOW_ABSTRACT_WIDTH" onChange={(e) => {
+                  <TextBox type="text" label="Image Below Abstract Width" name="IMAGE_BELOW_ABSTRACT_WIDTH" onChange={(e) => {
                     console.log(e);
                     if (!e.target.value.endsWith("%")) {
                       alert("Please add percentage sign.")

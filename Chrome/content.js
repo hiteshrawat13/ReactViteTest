@@ -114,6 +114,7 @@ function extractFormData(form) {
 
 
     //checkbox
+    
      form.querySelectorAll("[id$=ukgdpr] .custom-checkbox").forEach(custom_checkbox => {
 
         const lbl=custom_checkbox.querySelector("label")
@@ -139,7 +140,7 @@ function extractFormData(form) {
 
      ///Checkgroup
      const checkboxes=form.querySelectorAll("div .custom-checkbox")
-     if(checkboxes.length>0){
+     if(checkboxes.length>1){ //more than one
         const lbl=checkboxes[0].closest("tr")?.previousElementSibling?.textContent?.trim()
         const checkgroup={
             "type": "CheckGroup",

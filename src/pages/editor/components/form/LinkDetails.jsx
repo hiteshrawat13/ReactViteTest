@@ -106,7 +106,13 @@ const LinkDetails = () => {
 
  
             {(watch['LINK_NAME']) && <CheckLink link={watch["BASE_URL"] + (watch['LINK_NAME']) + "-edm.html"} onExists={() => {
-            if(campData.mode === 'new')  setError('LINK_NAME',"Link already exists on server.")
+              if(campData.mode === 'new'){
+                setError('LINK_NAME',"Link already exists on server.")
+                console.log("ERRRRRRRRRRRRR@@@@@@@@",campData.mode);
+              }else{
+                console.log("ERRRRRRRRRRRRR",campData.mode);
+                
+              }
 
             }} />}
           </Col>

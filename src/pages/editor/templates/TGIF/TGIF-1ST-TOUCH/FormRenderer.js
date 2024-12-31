@@ -3,6 +3,48 @@
 
 const TGIFFormRenderer = {
     TextBox: (obj) => {
+
+
+
+
+        const textbox_label_html=`
+         <label for="${obj.id}">
+                   <span title="Required Field">${obj.label}</span>
+                   ${obj.isRequired ? `<span class="mandatory" style="color:red">*</span>` : ""}
+               </label>
+`
+const text_box_html=` <input type="${(obj.inputType) ? obj.inputType : 'text'}" name="${obj.name}" ${obj.isRequired ? "required" : ""} ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""}  id="${obj.id}" value="${obj.value || ''}" >
+               `
+
+
+
+        if (obj.isFullWidth) {
+            //Full Width
+            return `
+                <tr class="form-group ${obj.id}-holder">
+                    <td colspan="2">
+                        
+                        ${textbox_label_html}
+                        ${text_box_html}
+
+                    </td>
+                </tr>
+        `
+        } else {
+            //Not full Width
+            return `
+                <tr class="form-group ${obj.id}-holder">
+                    <th width="47%">
+                        ${textbox_label_html}
+                    </th>
+                    <td width="53%">
+                        ${text_box_html}
+                    </td>
+                </tr>
+        `
+        }
+
+
         return `
            <tr class="form-group ${obj.id}-holder">
                <th width="47%">

@@ -19,7 +19,13 @@ const TemplateManager=[
                 id:"TGIF-2ND-TOUCH",
                 type:"2nd_touch",
                 title:"TGIF 2nd Touch",
-                editor:lazy(() => import('./TGIF/TGIF-2ND-TOUCH/Editor'))
+                editor:lazy(() => import('./TGIF/TGIF-1ST-TOUCH/Editor'))
+            },
+            {
+                id:"TGIF-TELEMARKETING",
+                type:"telemarketing",
+                title:"TGIF Telemarketing",
+                editor:lazy(() => import('./TGIF/TGIF-1ST-TOUCH/Editor'))
             }
         ]
     },

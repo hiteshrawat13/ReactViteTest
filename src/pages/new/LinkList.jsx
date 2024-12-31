@@ -119,7 +119,7 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
         navigate(`/editor`, {
             state: {
                 ...campaignDetails,
-
+                mode:"new",
                 templateId,
                 templateType
 
@@ -240,7 +240,7 @@ const LinkList = ({ campData = {}, setCampData = null }) => {
             //alert( response.data.json_data )
 
 
-            handleCreateLink(state, state['LINK_ID'], ['LINK_TYPE'])
+            handleCreateLink(state, state['LINK_ID'], state['LINK_TYPE'])
 
         } catch (error) {
             alert(error)

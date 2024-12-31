@@ -1,0 +1,328 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="##LANGUAGE##">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ASSET TITLE -->	  
+<title>##EDM_TITLE##</title>
+
+<style type="text/css">
+@media only screen and (max-width:480px){body,table,td,p,a,li,blockquote{-webkit-text-size-adjust:none !important}body{width:100% !important;min-width:100% !important}td[id=bodyCell]{padding:10px !important}table.kmMobileHide{display:none !important}table[class=kmTextContentContainer]{width:100% !important}table[class=kmBoxedTextContentContainer]{width:100% !important}td[class=kmImageContent]{padding-left:0 !important;padding-right:0 !important}img[class=kmImage]{width:100% !important}td.kmMobileStretch{padding-left:0 !important;padding-right:0 !important}table[class=kmSplitContentLeftContentContainer],table[class=kmSplitContentRightContentContainer],table[class=kmColumnContainer],td[class=kmVerticalButtonBarContentOuter] table[class=kmButtonBarContent],td[class=kmVerticalButtonCollectionContentOuter] table[class=kmButtonCollectionContent],table[class=kmVerticalButton],table[class=kmVerticalButtonContent]{width:100% !important}td[class=kmButtonCollectionInner]{padding-left:9px !important;padding-right:9px !important;padding-top:9px !important;padding-bottom:0 !important;background-color:transparent !important}td[class=kmVerticalButtonIconContent],td[class=kmVerticalButtonTextContent],td[class=kmVerticalButtonContentOuter]{padding-left:0 !important;padding-right:0 !important;padding-bottom:9px !important}table[class=kmSplitContentLeftContentContainer] td[class=kmTextContent],table[class=kmSplitContentRightContentContainer] td[class=kmTextContent],table[class=kmColumnContainer] td[class=kmTextContent],table[class=kmSplitContentLeftContentContainer] td[class=kmImageContent],table[class=kmSplitContentRightContentContainer] td[class=kmImageContent]{padding-top:9px !important}td[class="rowContainer kmFloatLeft"],td[class="rowContainer kmFloatLeft firstColumn"],td[class="rowContainer kmFloatLeft lastColumn"]{float:left;clear:both;width:100% !important}table[id=templateContainer],table[class=templateRow]{max-width:700px !important;width:100% !important}h1{font-size:24px !important;line-height:130% !important}h2{font-size:20px !important;line-height:130% !important}h3{font-size:18px !important;line-height:130% !important}h4{font-size:16px !important;line-height:130% !important}td[class=kmTextContent]{font-size:14px !important;line-height:130% !important}td[class=kmTextBlockInner] td[class=kmTextContent]{padding-right:18px !important;padding-left:18px !important}table[class="kmTableBlock kmTableMobile"] td[class=kmTableBlockInner]{padding-left:9px !important;padding-right:9px !important}table[class="kmTableBlock kmTableMobile"] td[class=kmTableBlockInner] [class=kmTextContent]{font-size:14px !important;line-height:130% !important;padding-left:4px !important;padding-right:4px !important}} .downloadlink {	-webkit-text-size-adjust: 80% !important;
+-ms-text-size-adjust: 80% !important;
+}
+.toc-heading {	-webkit-text-size-adjust: 80% !important;
+-ms-text-size-adjust: 80% !important;
+}
+</style>
+</head>
+<body style="margin:0;padding:0;background-color:#c7c7c7">
+<center>
+<table align="center" border="0" cellpadding="0" cellspacing="0" id="bodyTable" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding:0;background-color:#EFEFEF;height:100%;margin:0;width:100%">
+<tbody>
+<tr>
+<td align="center" id="bodyCell" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding-top:20px;padding-left:20px;padding-bottom:20px;padding-right:20px;border-top:0;height:100%;margin:0;width:100%">
+<table border="0" cellpadding="0" cellspacing="0" id="templateContainer" width="700" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;border:0 solid #aaa;background-color:#FFF;border-radius:0">
+<tbody>
+<tr>
+<td id="templateContainerInner" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding:0">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+<tbody><tr>
+<td align="center" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+<table border="0" cellpadding="0" cellspacing="0" class="templateRow" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+<tbody>
+<tr>
+<td class="rowContainer kmFloatLeft" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+  <table border="0" cellpadding="0" cellspacing="0" class="kmSplitBlock" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+	 <tbody class="kmSplitBlockOuter">
+		<tr>
+		   <td class="kmSplitBlockInner" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding-top:10px;padding-bottom:9px;padding-left:20px;padding-right:20px;">
+			  <table align="right" border="0" cellpadding="0" cellspacing="0" class="kmSplitContentOuter" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+				 <tbody>
+					<tr>
+					   <td class="kmSplitContentInner" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+						<table align="left" border="0" cellpadding="0" cellspacing="0" class="kmSplitContentLeftContentContainer" width="300" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+							 <tbody>
+								<tr>
+ <td align="center" valign="top" class="kmImageContent" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding:0;padding-top:5px;padding-bottom:0;padding-left:px;padding-right:9px;text-align:left;">
+								   
+<!-- LOGO -->
+
+<img align="center" alt="BusinessTech Alert" class="kmImage" src="https://resource.itbusinesstoday.com/whitepapers/IT-BUSINESS-TODAY-COLOUR-1.png" width="160" style="  padding-top:px;border:0;height:auto;line-height:100%;outline:none;text-decoration:none; padding-top: 15px; padding-bottom:0; padding-right:5px;display:inline;vertical-align:bottom;margin-right:0;max-width:375px;">
+
+
+								   </td>
+								</tr>
+							 </tbody>
+						  </table>
+						  <table align="right" border="0" cellpadding="0" cellspacing="0" class="kmSplitContentRightContentContainer" width="200" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+							 <tbody>
+								<tr>
+								   <td class="kmImageContent" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding:0;padding-top:5px;padding-bottom:10px;padding-left:0px;padding-right:0px;    text-align: right;">
+								   <p style="margin:0px;">##SPONSORED_BY_TEXT##</p>
+<!-- CAMPAIGN COMPANY LOGO -->																			  
+ <img class="splogo" src="##BASE_URL####LOGO_FOLDER####LOGO_NAME##" alt="Logo" style="width: ##LOGO_WIDTH##px; margin-top: 10px; margin-bottom: 6px;" />
+								   </td>
+								</tr>
+							 </tbody>
+						  </table>
+					   </td>
+					</tr>
+				 </tbody>
+			  </table>
+		   </td>
+		</tr>
+	 </tbody>
+  </table>
+  <table border="0" cellpadding="0" cellspacing="0" class="kmSplitBlock" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+	 <tbody class="kmSplitBlockOuter">
+	 </tbody>
+  </table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td align="center" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+<table border="0" cellpadding="0" cellspacing="0" class="templateRow" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+<tbody>
+<tr>
+<td class="rowContainer kmFloatLeft" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+  <table border="0" cellpadding="0" cellspacing="0" class="kmSplitBlock" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+	 <tbody class="kmSplitBlockOuter">
+		<tr>
+		   <td class="kmSplitBlockInner" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding-top:10px;padding-bottom:9px;padding-left:20px;padding-right:20px;">
+		   
+<!-- ASSET HEADLINE -->
+<span style="color:#000000; font-family: Arial, Helvetica, sans-serif; font-size: 20px;  font-weight: bold; line-height:140%;">##EDM_TITLE##</span>
+
+<div>##EDM_SUB_TITLE##</div>
+ 
+                                        
+                                   
+
+			  <table align="left" border="0" cellpadding="0" cellspacing="0" class="kmSplitContentOuter" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+				 <tbody>
+					<tr>
+					   <td class="kmSplitContentInner" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+						  <table align="left" border="0" cellpadding="0" cellspacing="0" class="kmSplitContentLeftContentContainer" width="442" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;">
+							 <tbody>
+								<tr>
+								   <td width="442" valign="top" class="kmTextContent" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;color:#505050;  font-family: Arial, Helvetica, sans-serif; font-size:14px;line-height:150%;text-align:left">
+									  <span style="color:#FFFFFF;"></span>
+									  
+<!-- ABSTRACT DATA  -->
+
+<div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; padding-top:0px;margin-top: 21px;">
+##EDM_ABSTRACT##
+</div>
+					 
+
+
+					 <br><br>
+								   </td>
+								</tr>
+								<tr>
+								   <td class="kmVerticalButtonContentOuter" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding-bottom: 10px;  padding-top: 10px;">
+									  <table align="left" border="0" cellpadding="0" cellspacing="0" class="kmVerticalButtonContent" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;">
+										 <tbody>
+											<tr>
+											   <td align="center" valign="middle" class="kmButtonContent" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;color:white;font-family:Helvetica, Arial;font-size:16px;color:#666666;font-weight:normal;font-size:20px;">
+											   
+<!-- LANDING PAGE LINK -->
+
+<a class="kmButton" title="" href="https://resource.itbusinesstoday.com/whitepapers/51939-Spectrum-MQ-TELE-1-Thankyou.html" target="_self" style="word-wrap:break-word;font-weight:normal;line-height:100%;text-align:center; text-decoration: none; font-size:16px;color:#ffffff;font-weight:normal;font-size:22px;text-decoration: none;color:#454545;font-weight:bold;font-size:20px;font-family:Arial;padding-top:0;padding-bottom:0;">
+##EDM_CTA##
+ &nbsp;»</a>
+											   </td>
+											</tr>
+										 </tbody>
+									  </table>
+								   </td>
+								</tr>
+							 </tbody>
+						  </table>
+						  <table align="right" border="0" cellpadding="0" cellspacing="0" class="kmSplitContentRightContentContainer" width="202" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+							 <tbody>
+								<tr>
+								   <td width="202" valign="top" class="kmImageContent" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding:0;padding-top:0px;padding-bottom:06px;padding-left:0px;padding-right:0px;">
+								   
+<!-- LANDING PAGE LINK TO PDF IMAGE  -->
+
+<a href="https://resource.itbusinesstoday.com/whitepapers/51939-Spectrum-MQ-TELE-1-Thankyou.html" target="_blank">
+<img src="https://resource.itbusinesstoday.com/whitepapers/51939-Spectrum-MQ-TELE-1.png" alt="##EDM_TITLE##" width="200" align="right" class="kmImage" style="border:0;height:auto;line-height:100%;outline:none;text-decoration:none;padding-bottom:0; padding-top:30px; padding-right:12px; padding-left:0px;display:inline;vertical-align:bottom;margin-left:0;max-width:232px;">
+</a>
+								   </td>
+								</tr>
+								<tr>
+								   <td align="center" valign="middle" class="kmButtonContent" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;color:white;font-family:Helvetica, Arial;font-size:16px;padding:15px;padding-top:8px;padding-bottom:12px; padding-right:25px; color:#666666;font-weight:normal;font-size:20px;font-family:Arial;">
+								   
+<!-- LANDING PAGE LINK TO BUTTON -->
+
+<a href="https://resource.itbusinesstoday.com/whitepapers/51939-Spectrum-MQ-TELE-1-Thankyou.html" target="_self" style="word-wrap:break-word;font-weight:normal;letter-spacing:-0.5px;line-height:100%;text-align:center;color:#ffffff;font-weight:normal;font-size:18px;font-family: Arial, Helvetica, sans-serif; padding-top:0;padding-bottom:0; text-decoration:none; background-color:#3776B4;  border-radius: 6px; padding-bottom: 0; padding-right:10px; padding: 5px 10px;">Download Now</a>
+									
+									</td>
+
+								</tr>
+							 </tbody>
+						  </table>
+					   </td>
+					</tr>
+				 </tbody>
+			  </table>
+			  <h3 style="color:#666;display:block;  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:25px;font-style:normal;font-weight:normal;line-height:110%;letter-spacing:normal;margin:0;margin-bottom:9px;text-align:left"><span style="color:#000000; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 25px;  font-weight: bold;"></span></h3>
+		   </td>
+		</tr>
+	 </tbody>
+  </table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody></table>
+<table border="0" cellpadding="0" cellspacing="0" class="kmButtonCollectionContentContainer" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+<tbody>
+<tr>
+<td align="center" class="kmVerticalButtonCollectionContentOuter" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+<table border="0" cellpadding="0" cellspacing="0" class="kmButtonCollectionContent" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;font-family:Helvetica, Arial">
+<tbody>
+<tr>
+  <td align="center" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+	 <table border="0" cellpadding="0" cellspacing="0" class="kmVerticalButton" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+		<tbody>
+		   <tr>
+			  <td valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+				 <table align="left" border="0" cellpadding="0" cellspacing="0" class="kmVerticalButton" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+					<tbody><tr>
+					   <td class="kmVerticalButtonContentOuter" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;">
+						  <table align="left" border="0" cellpadding="0" cellspacing="0" class="kmVerticalButtonContent" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;">
+						  </table>
+					   </td>
+					</tr>
+				 </tbody></table>
+				 <!--[if gte mso 6]>
+			  </td>
+			  <td align="left" valign="top">
+				 <![endif]-->
+			  </td>
+		   </tr>
+		</tbody>
+	 </table>
+  </td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" class="kmSplitBlock" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+<tbody class="kmSplitBlockOuter">
+<tr>
+<td class="kmSplitBlockInner" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding-top:9px;padding-bottom:9px;padding-left:20px;padding-right:20px;">
+<table align="left" border="0" cellpadding="0" cellspacing="0" class="kmSplitContentOuter" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+<tbody>
+<tr>
+  <td class="kmSplitContentInner" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+	 <table align="left" border="0" cellpadding="0" cellspacing="0" class="kmSplitContentLeftContentContainer" width="655" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+		<tbody>
+		   <tr>
+			  <td class="kmTextContent" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;color:#000;font-family:Arial;font-size:12px;line-height:130%;text-align:left">
+			  
+			  <span style="font-size:9px; line-height:0px; color:#666666; padding-bottom:10px; ">
+			  ##EDM_OPTIN##
+			  </span>
+			  
+			  <br><br><br>	
+				 Best regards,<br>
+				 The Editorial Team<br>
+				 ITBusinessToday
+			  </td>
+		   </tr>
+		</tbody>
+	 </table>
+	 <table align="right" border="0" cellpadding="0" cellspacing="0" class="kmSplitContentRightContentContainer" width="264" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+		<tbody>
+		   <tr>
+			  <td class="kmTextContent" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;color:#505050;font-family:Helvetica, Arial;font-size:14px;line-height:150%;text-align:left"></td>
+		   </tr>
+		</tbody>
+	 </table>
+  </td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td align="center" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" class="kmDividerBlock" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+<tbody class="kmDividerBlockOuter">
+<tr>
+<td class="kmDividerBlockInner" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;padding-top:0px;padding-bottom:0px;padding-left:20px;padding-right:20px;">
+<table class="kmDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;border-top-width:1px;border-top-style:solid;border-top-color:#EFEFEF;">
+<tbody>
+<tr>
+<td style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0"><span></span></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" class="templateRow" width="100%" style="background-color:#D3D3D3;border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+<tbody>
+<tr>
+<td class="rowContainer kmFloatLeft" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+<table border="0" cellpadding="0" cellspacing="0" class="kmTextBlock" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+<tbody class="kmTextBlockOuter">
+<tr>
+<td class="kmTextBlockInner" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;">
+<table align="left" border="0" cellpadding="0" cellspacing="0" class="kmTextContentContainer" width="100%" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0">
+<tbody>
+<tr>
+  <td class="kmTextContent" valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;color:#505050;font-family:Arial;line-height:150%;text-align:center;font-size:11px;color:#333333;padding-bottom:9px;padding-right:20px;padding-left:20px;padding-top:9px;">
+	 <p style="margin:0;padding-bottom:0">
+	 
+	 ##FOOTER##
+
+	 </p>
+  </td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody></table>
+
+
+
+
+
+
+
+
+</center>
+
+</body></html>

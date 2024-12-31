@@ -45,8 +45,9 @@ const EditorMain = () => {
 
   const dispatch = useDispatch()
   //this is used to get current form value which is changes during key down events
-  const [watch, setWatch] = useState({})
+  const [watch, setWatch] = useState([])
   const [currentFormMethods, setCurrentFormMethods] = useState(null)
+  // const [loading, setLoading] = useState(null)
 
   const setStateValue = (key, value) => {
     dispatch(updateData({ prop: key, value: value }))
@@ -77,7 +78,15 @@ const EditorMain = () => {
 
   useEffect(() => {
 
-   
+    if (campData) {
+        setStateValue("CLIENT_CODE", campData?.clientCode )
+        setStateValue("LINK_TYPE", campData?.templateType )
+        setStateValue("TEMPLATE_ID", campData?.templateId )
+        setStateValue("REGION", campData?.country )
+        setStateValue("CAMP_ID", campData?.campaignId )
+        setStateValue("CAMP_NAME", campData?.campaignName )
+        setStateValue("CAMP_NAME", campData?.campaignName )
+      }
 
     //update state
     if (campData.jsonObject) {
@@ -88,15 +97,19 @@ const EditorMain = () => {
     }
 
 
+
+    console.log(".🧡🧡",campData);
+    
+
     return () => {
       //dispatch(clearData())
     }
   }, [])
 
 
-  // useEffect(()=>{
-    
-  // },[currentFormMethods])
+  //   useEffect(()=>{
+ 
+  //  },[currentFormMethods])
 
   return (
     <div>
@@ -158,15 +171,15 @@ const EditorMain = () => {
 
       <EContext.Provider value={{
         campData:campData,
-        watch:watch,
-        setWatch:setWatch,
-        setCurrentFormMethods:setCurrentFormMethods,
-        setStateValue:setStateValue,
-        getStateValue:getStateValue,
-        setState:setState,
-        setFormValue:setFormValue,
+        watch:watch || [],
+        setWatch:setWatch ||   function() { } ,
+        setCurrentFormMethods:setCurrentFormMethods || function() { } ,
+        setStateValue:setStateValue || function(key, value) { } ,
+        getStateValue:getStateValue || function(key) { } ,
+        setState:setState || function() { } ,
+        setFormValue:setFormValue || function(key, value) { } ,
         filesRef:filesRef,
-        setError:setError
+        setError:setError || function(field,error) { } 
       }}>
 
         <Suspense fallback={<div>Loading...</div>}>

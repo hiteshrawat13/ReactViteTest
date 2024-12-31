@@ -76,7 +76,7 @@
 			.abstract p , .abstract ul{
                  font-size: 14px;
                 line-height: 1.5;
-                color: #505050;
+                color: #414141;
             }
 
              .thumbnail{
@@ -118,7 +118,7 @@
                                     </td>
                                     <td width="234" align="right">
                                         <span style="font-size: 13px;color: #0066b2;">##SPONSORED_BY_TEXT##</span><br />
-                                        <img class="splogo" src="##BASE_URL####LOGO_FOLDER####LOGO_NAME##" alt="Logo" style="width:##LOGO_WIDTH##px; margin-top: 6px; margin-bottom: 6px;" />
+                                        <img class="splogo" src="##BASE_URL####LOGO_FOLDER####LOGO_NAME##" alt="Logo" style="width:##LOGO_WIDTH##px; margin-top: 10px; margin-bottom: 6px;" />
                                     </td>
                                 </tr>
                             </tbody>

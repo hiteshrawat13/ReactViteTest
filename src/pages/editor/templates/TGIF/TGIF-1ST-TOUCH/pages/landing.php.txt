@@ -41,11 +41,12 @@
 			table.leadForm th,
 			table.leadForm td {
 				color: #000000;
-				padding: 5px;
+				padding:5px  0px;
 				text-align: left;
 				font: normal 13px/21px "Noto Sans", sans-serif;
                 font-size:12px;
 			}
+		 
 			table.leadForm select {
 				border-radius: 2px;
 				width: 100%;
@@ -119,7 +120,7 @@
             .landing_abstract{
                 font-size: 13px;
 				line-height: 1.5;
-				color: #505050;
+				color: #414141;
             
             }
 
@@ -127,7 +128,7 @@
 			.abstract ul {
 				font-size: 14px;
 				line-height: 1.5;
-				color: #505050;
+				color: #414141;
 			}
 
 			ul li {
@@ -186,7 +187,7 @@
 
              .speaker{
                 font-size: 14px;
-                color: #505050;
+                color: #414141;
                 margin-bottom:7px;
                  border-collapse: separate; /* allow spacing between cell borders */
                 border-spacing: 0 5px; /* NOTE: syntax is <horizontal value> <vertical value> */
@@ -194,7 +195,7 @@
 
             .speaker-heading{
                 font-size: 15px;
-                color: #505050;
+                color: #414141;
                 font-weight:bold;
                 padding-bottom:9px;
             }
@@ -250,7 +251,7 @@
                .abstract p , .abstract ul{
                  font-size: 14px;
                 line-height: 1.5;
-                color: #505050;
+                color: #414141;
             }
 
 
@@ -335,7 +336,7 @@
                                     </td>
                                     <td width="234" align="right">
                                         <span style="font-size: 13px;color: #0066b2;">##SPONSORED_BY_TEXT##</span><br />
-                                        <img class="splogo land" src="##BASE_URL####LOGO_FOLDER####LOGO_NAME##" alt="Logo"  style="width:##LOGO_WIDTH##px; margin-top: 6px; margin-bottom: 6px;" />
+                                        <img class="splogo land" src="##BASE_URL####LOGO_FOLDER####LOGO_NAME##" alt="Logo"  style="width:##LOGO_WIDTH##px; margin-top: 10px; margin-bottom: 6px;" />
                                   
                                    
                                     </td>

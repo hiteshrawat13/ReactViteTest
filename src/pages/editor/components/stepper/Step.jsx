@@ -14,20 +14,15 @@ const Step =  ({ children}) => {
 
     useEffect(()=>{
       Stepper.setCurrentStepFormTriggerMethod({trigger:methods.trigger,handleSubmit:methods.handleSubmit,methods})
-       
         setCurrentFormMethods(methods)
     },[methods])
 
- 
     const watchedValue=useWatch(methods)
-   
     useEffect(() => {
       //console.log(watchedValue);
       //This condition passes to top form value change
       setWatch(watchedValue)
-      return () => {
-       
-      }
+      return () => { }
     }, [watchedValue])
     
   
@@ -36,7 +31,7 @@ const Step =  ({ children}) => {
 
     return (
         <FormProvider {...methods}>
-            <form    >
+            <form>
                 {children}
             </form>
         </FormProvider>

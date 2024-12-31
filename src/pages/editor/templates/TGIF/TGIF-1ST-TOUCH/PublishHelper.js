@@ -5,6 +5,13 @@ import landing_html from './pages/landing.php.txt?raw'  //?raw is important to r
 import sendemail_html from './pages/sendemail.php.txt?raw'  //?raw is important to read text files
 import thanks_html from './pages/thanks.php.txt?raw'  //?raw is important to read text files
 
+
+
+
+import telemarketing_edm_html from './pages/telemarketing/edm.html.txt?raw'  //?raw is important to read text files
+import telemarketing_Thankyou_html from './pages/telemarketing/Thankyou.html.txt?raw'  //?raw is important to read text files
+
+
 //https://thebusinessinnovations.com/tbi/2024/10-Oct/30/HSI-APAC-CPL-Oct-Dec-2024-Q4-Donesafe-activation-UKI/01/The-global-ehs-readiness-index-report-2024.html
 
 import SpeakerRender from './SpeakerRender.js'
@@ -156,7 +163,7 @@ This is to convert Chinese characters to Unicode numbers
             data = data.replaceAll(`##EDM_THANKS_TEXT_FOR_2ND_TOUCH##`, '') //Remove this .it is for 2nd touch
         }else{
             if (this.state["EDM_THANKS_TEXT_FOR_2ND_TOUCH"] && (this.state["EDM_THANKS_TEXT_FOR_2ND_TOUCH"].trim().length > 0)) {
-                    data = data.replaceAll(`##EDM_THANKS_TEXT_FOR_2ND_TOUCH##`, `<p style="font-size: 14px;color: #6F6F6F;margin-bottom:5px;" class="body-sub-title">${Functions.convertToEntities(this.state["EDM_THANKS_TEXT_FOR_2ND_TOUCH"])}</p>`)
+                    data = data.replaceAll(`##EDM_THANKS_TEXT_FOR_2ND_TOUCH##`, `<p style="font-size: 14px;color: #505050;margin-bottom:5px;" class="body-sub-title">${Functions.convertToEntities(this.state["EDM_THANKS_TEXT_FOR_2ND_TOUCH"])}</p>`)
             } else {
                     data = data.replaceAll(`##EDM_THANKS_TEXT_FOR_2ND_TOUCHE##`, "")
             }
@@ -587,6 +594,44 @@ This is to convert Chinese characters to Unicode numbers
     }
 
 
+
+
+
+
+
+
+
+//For telemarketing START---------------------
+    async getTelemarketingEdmHtml({ forPreview }) {
+        let data = telemarketing_edm_html
+
+        data=this.replaceHashVariables(data)
+        data=this.replaceHashVariables(data)
+        data=this.replaceHashVariables(data)
+        data=this.replaceHashVariables(data)
+
+        return data
+    }
+
+    async getTelemarketingThankyouHtml({ forPreview }) {
+        let data = telemarketing_Thankyou_html
+
+        data=this.replaceHashVariables(data)
+        data=this.replaceHashVariables(data)
+        data=this.replaceHashVariables(data)
+        data=this.replaceHashVariables(data)
+
+        return data
+
+    }
+//For telemarketing END-----------------------
+
+
+
+
+
+
+
     async getPageFiles({ forPreview = false, filesRef = null, state = null }) {
 
 
@@ -595,10 +640,26 @@ This is to convert Chinese characters to Unicode numbers
 
         let files = []
 
-        files.push({ name: `${this.state["LINK_NAME"]}-edm.html`, data: await this.getEdmHtml({ forPreview }) })
-        files.push({ name: `${this.state["LINK_NAME"]}-landing.php`, data: await this.getLandingHtml({ forPreview }) })
-        files.push({ name: `${this.state["LINK_NAME"]}-sendemail.php`, data: await this.getSendmailHtml({ forPreview }) })
-        files.push({ name: `${this.state["LINK_NAME"]}-thanks.php`, data: await this.getThanksHtml({ forPreview }) })
+        if(this.state["LINK_TYPE"]=="1st_touch" || this.state["LINK_TYPE"]=="2nd_touch"){
+
+            files.push({ name: `${this.state["LINK_NAME"]}-edm.html`, data: await this.getEdmHtml({ forPreview }) })
+
+            if(this.state["LINK_TYPE"]=="1st_touch"){
+                files.push({ name: `${this.state["LINK_NAME"]}-landing.php`, data: await this.getLandingHtml({ forPreview }) })
+                files.push({ name: `${this.state["LINK_NAME"]}-sendemail.php`, data: await this.getSendmailHtml({ forPreview }) })
+            }
+        
+            files.push({ name: `${this.state["LINK_NAME"]}-thanks.php`, data: await this.getThanksHtml({ forPreview }) })
+
+        }
+
+
+        //For telemarketing
+        if(this.state["LINK_TYPE"]=="telemarketing"){
+            files.push({ name: `${this.state["LINK_NAME"]}-edm.html`, data: await this.getTelemarketingEdmHtml({ forPreview }) })
+            files.push({ name: `${this.state["LINK_NAME"]}-Thankyou.html`, data: await this.getTelemarketingThankyouHtml({ forPreview }) })
+       
+        }
         // if(this.state["ASSET_FORMAT"]=='MP4' || this.state["ASSET_FORMAT"]=='IFrame'){
 
         // }else{

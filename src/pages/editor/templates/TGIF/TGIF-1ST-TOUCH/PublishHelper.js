@@ -4,21 +4,14 @@ import edm_html from './pages/edm.html.txt?raw'  //?raw is important to read tex
 import landing_html from './pages/landing.php.txt?raw'  //?raw is important to read text files
 import sendemail_html from './pages/sendemail.php.txt?raw'  //?raw is important to read text files
 import thanks_html from './pages/thanks.php.txt?raw'  //?raw is important to read text files
-
-
-
-
 import telemarketing_edm_html from './pages/telemarketing/edm.html.txt?raw'  //?raw is important to read text files
 import telemarketing_Thankyou_html from './pages/telemarketing/Thankyou.html.txt?raw'  //?raw is important to read text files
-
 
 //https://thebusinessinnovations.com/tbi/2024/10-Oct/30/HSI-APAC-CPL-Oct-Dec-2024-Q4-Donesafe-activation-UKI/01/The-global-ehs-readiness-index-report-2024.html
 
 import SpeakerRender from './SpeakerRender.js'
-
-import Functions from './functions.js'
-
 import { getSendmailSubject } from './Base64.js'
+
 class PublishHelper {
     constructor(state) {
         this.state = state
@@ -129,9 +122,7 @@ This is to convert Chinese characters to Unicode numbers
     }
 
 
-    getFooter(){
-        //const this.state.FOOTER = `<a href="https://itbusinesstoday.com/eu-data-protection">Privacy Policy</a>`
-    }
+  
 
 
     getPrivacyPolicy(data) {
@@ -163,19 +154,15 @@ This is to convert Chinese characters to Unicode numbers
             data = data.replaceAll(`##EDM_THANKS_TEXT_FOR_2ND_TOUCH##`, '') //Remove this .it is for 2nd touch
         }else{
             if (this.state["EDM_THANKS_TEXT_FOR_2ND_TOUCH"] && (this.state["EDM_THANKS_TEXT_FOR_2ND_TOUCH"].trim().length > 0)) {
-                    data = data.replaceAll(`##EDM_THANKS_TEXT_FOR_2ND_TOUCH##`, `<p style="font-size: 14px;color: #505050;margin-bottom:5px;" class="body-sub-title">${Functions.convertToEntities(this.state["EDM_THANKS_TEXT_FOR_2ND_TOUCH"])}</p>`)
+                    data = data.replaceAll(`##EDM_THANKS_TEXT_FOR_2ND_TOUCH##`, `<p style="font-size: 14px;color: #505050;margin-bottom:5px;" class="body-sub-title">${this.convertToEntities(this.state["EDM_THANKS_TEXT_FOR_2ND_TOUCH"])}</p>`)
             } else {
                     data = data.replaceAll(`##EDM_THANKS_TEXT_FOR_2ND_TOUCHE##`, "")
             }
-
-         
-           
         }
       
         if(this.state['LINK_TYPE']=="2nd_touch"){
             data = data.replaceAll(`##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#`, "##BASE_URL####LINK_NAME##-thanks.php")
         }
-
 
         const traditional_layout = `
         <table width="100%" style="background-color: #ffffff; padding: 0% 2%;" align="center" class="font-style">
@@ -204,7 +191,6 @@ This is to convert Chinese characters to Unicode numbers
                             </tbody>
                         </table>
         `
-
 
         const full_width_layout = `
         <table width="100%" style="background-color: #ffffff; padding: 0% 2%;" align="center" class="font-style">
@@ -240,7 +226,6 @@ This is to convert Chinese characters to Unicode numbers
             data = data.replaceAll(`##EDM_LAYOUT##`, this.convertToEntities(full_width_layout))
         }
 
-
         // EDM IMAGE_BELOW_ABSTRACT 
 
         if(this.state['SHOW_IMAGE_BELOW_ABSTRACT'] ==true){
@@ -256,9 +241,6 @@ This is to convert Chinese characters to Unicode numbers
         }
          // IMAGE_BELOW_ABSTRACT  END
 
-        
-        
-
         try{
             data = await SpeakerRender({datas:data,STATE:this.state,filesRef:this.filesRef,forPreview,getBase64Image:this.getBase64Image})
 
@@ -268,20 +250,12 @@ This is to convert Chinese characters to Unicode numbers
         }
 
 
-
-
-
         if (this.state["THUMBNAIL_BORDER"] == true) {
             data = data.replaceAll(`##THUMBNAIL_BORDER##`,  'border: 1px solid #e5e5e5;'  )
         } else {
             data = data.replaceAll(`##THUMBNAIL_BORDER##`, '')
         }
         
-        
-
-
-      
-
 
         if (forPreview == true) {
             if (this.filesRef.fileInput1.files[0]) { data = data.replaceAll(`##BASE_URL####LOGO_FOLDER####LOGO_NAME##`, await this.getBase64Image(this.filesRef.fileInput1.files[0])) }
@@ -295,10 +269,8 @@ This is to convert Chinese characters to Unicode numbers
             }
         }
 
-
-
         if (this.state["EDM_SUB_TITLE"] && (this.state["EDM_SUB_TITLE"].trim().length > 0)) {
-            data = data.replaceAll(`##EDM_SUB_TITLE##`, `<p style="font-size: 15px;color: #6F6F6F;margin-top:12px;margin-bottom:5px;font-weight:bold;" class="body-sub-title">${this.convertToEntities(this.state["EDM_SUB_TITLE"])}</p>`)
+            data = data.replaceAll(`##EDM_SUB_TITLE##`, `<p style="font-size: 15px;color: #414141;margin-top:12px;margin-bottom:5px;font-weight:bold;" class="body-sub-title">${this.convertToEntities(this.state["EDM_SUB_TITLE"])}</p>`)
         } else {
             data = data.replaceAll(`##EDM_SUB_TITLE##`, "")
         }
@@ -309,23 +281,16 @@ This is to convert Chinese characters to Unicode numbers
             data = data.replaceAll(`##HIDE_THUMBNAIL##`, '') 
         }
   
-   
-        
-
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
-
         data = this.convertToEntities(this.getPrivacyPolicy(data)) //Privacy Policy
-
         return data
     }
 
     async getLandingHtml({ forPreview }) {
-
         let data = landing_html
-
         const traditional_landing_layout = `
         <div class="img" align="center">
             <img   src="##BASE_URL####THUMBNAIL_NAME##"  class="thumbnail"  alt="thumbnail" />                          
@@ -338,7 +303,6 @@ This is to convert Chinese characters to Unicode numbers
             ##SPEAKERS##
         </div>
        `
-
         const landing_layout_logo_below_abstract = `
         <div class="landing_abstract">
           ##LANDING_ABSTRACT##
@@ -351,14 +315,11 @@ This is to convert Chinese characters to Unicode numbers
             <img   src="##BASE_URL####THUMBNAIL_NAME##"   class="thumbnail"   alt="thumbnail" />                          
         </div>
       `
-
-
         if (this.state["LANDING_LAYOUT"] == "Traditional") {
             data = data.replaceAll(`##LANDING_LAYOUT##`, this.convertToEntities(traditional_landing_layout))
         } else if (this.state["LANDING_LAYOUT"] == "Thumbnail below abstract") {
             data = data.replaceAll(`##LANDING_LAYOUT##`, this.convertToEntities(landing_layout_logo_below_abstract))
         }
-
 
         //LP IMAGE_BELOW_ABSTRACT
         if(this.state['SHOW_IMAGE_BELOW_ABSTRACT'] ==true && this.state['SHOW_IMAGE_BELOW_ABSTRACT_ON_LANDING_PAGE'] == true){
@@ -373,8 +334,6 @@ This is to convert Chinese characters to Unicode numbers
             data = data.replaceAll(`##IMAGE_BELOW_ABSTRACT##`, '')
         }
    
-
-
         //LP SPEAKERS
         try{
             if(this.state['SHOW_SPEAKERS_ON_LANDING_PAGE']==true){
@@ -382,7 +341,6 @@ This is to convert Chinese characters to Unicode numbers
             }else{
                 data=data.replaceAll(`##SPEAKERS##`, "")
             }
-
         }catch(error){
             console.log(error); 
         }
@@ -392,16 +350,13 @@ This is to convert Chinese characters to Unicode numbers
             if (this.filesRef.fileInput1.files[0]) { data = data.replaceAll(`##BASE_URL####LOGO_FOLDER####LOGO_NAME##`, await this.getBase64Image(this.filesRef.fileInput1.files[0])) }
             if (this.filesRef.fileInput2.files[0]) { data = data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, await this.getBase64Image(this.filesRef.fileInput2.files[0])) }
         }
-
         if (this.state["THUMBNAIL_BORDER"] == true) {
             data = data.replaceAll(`##THUMBNAIL_BORDER##`,  'border: 1px solid #e5e5e5;'  )
         } else   {
             data = data.replaceAll(`##THUMBNAIL_BORDER##`, '')
         }
 
-
         data = this.getPrivacyPolicy(data) //Privacy Policy
-
         if (this.state["LANDING_TITLE_SAME_AS_EDM_TITLE"] == true) {
             data = data.replaceAll(`##LANDING_TITLE##`, this.convertToEntities(this.state["EDM_TITLE"]))
         }
@@ -433,24 +388,15 @@ This is to convert Chinese characters to Unicode numbers
     //Sendmail
     getSendmailHtml({ forPreview }) {
         let data = sendemail_html
-
-         
-        
-
         data = data.replaceAll(`##MAPPED_DATA##`, this.getFormCurlApiSendmailMappedData(this.state.form))
-
         const hasSpecialCharsInSubject = this.convertToEntities(this.state["SENDMAIL_SUBJECT"]).includes("&#")
         data = data.replaceAll(`##SENDMAIL_SUBJECT##`, (hasSpecialCharsInSubject) ? getSendmailSubject(this.state["SENDMAIL_SUBJECT"]) : this.state["SENDMAIL_SUBJECT"].replaceAll("\\'", "'"))
         data = data.replaceAll(`##SENDMAIL_BODY##`, this.convertToEntities(this.state["SENDMAIL_BODY"]).replaceAll('"', '\\"'))
 
-
-
         switch (this.state["ASSET_FORMAT"]) {
             case "PDF":
-                
                 break;
             case "MP4":
-                
                 data = data.replaceAll(`##BASE_URL####LINK_NAME##.pdf`, '##BASE_URL####LINK_NAME##-thanks.php')
                 break;
             case "CLIENT_LINK":
@@ -460,12 +406,7 @@ This is to convert Chinese characters to Unicode numbers
                 data = data.replaceAll(`##BASE_URL####LINK_NAME##.pdf`, '##BASE_URL####LINK_NAME##-thanks.php')  
                 break;
         }
-
-
         data=this.replaceHashVariables(data)
-
- 
-
         if (forPreview == true) {
             //Escape html for preview to prevent redirects
             data = `<pre>${new Option(data).innerHTML}</pre>`
@@ -473,9 +414,9 @@ This is to convert Chinese characters to Unicode numbers
 
         return data
     }
+
     async getThanksHtml({ forPreview }) {
         let data = thanks_html
-
         data = this.getPrivacyPolicy(data) //Privacy Policy
         const normal_thankyou = `\t
         <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
@@ -505,9 +446,7 @@ This is to convert Chinese characters to Unicode numbers
                                 </tr>
                             </tbody>
                         </table>
-        
         \n`
-
         const iframe_thankyou = `
         <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
                             <tbody>
@@ -578,7 +517,6 @@ This is to convert Chinese characters to Unicode numbers
             data = data.replaceAll(`##HIDE_THUMBNAIL##`, '') 
         }
 
-
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
@@ -587,93 +525,53 @@ This is to convert Chinese characters to Unicode numbers
         data = this.convertToEntities(this.getPrivacyPolicy(data)) //Privacy Policy
         return data
     }
-
 
     getThankyouDoubleOptinHtml({ forPreview }) {
 
     }
 
-
-
-
-
-
-
-
-
 //For telemarketing START---------------------
     async getTelemarketingEdmHtml({ forPreview }) {
         let data = telemarketing_edm_html
-
-
-        
-
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
-
         data = this.convertToEntities(this.getPrivacyPolicy(data)) //Privacy Policy
-
         return data
     }
 
     async getTelemarketingThankyouHtml({ forPreview }) {
         let data = telemarketing_Thankyou_html
-
-        
-
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
-
         data = this.convertToEntities(this.getPrivacyPolicy(data)) //Privacy Policy
-
         return data
 
     }
 //For telemarketing END-----------------------
 
-
-
-
-
-
-
     async getPageFiles({ forPreview = false, filesRef = null, state = null }) {
-
-
         this.filesRef = filesRef
         this.state = state
-
         let files = []
 
         if(this.state["LINK_TYPE"]=="1st_touch" || this.state["LINK_TYPE"]=="2nd_touch"){
-
             files.push({ name: `${this.state["LINK_NAME"]}-edm.html`, data: await this.getEdmHtml({ forPreview }) })
-
             if(this.state["LINK_TYPE"]=="1st_touch"){
                 files.push({ name: `${this.state["LINK_NAME"]}-landing.php`, data: await this.getLandingHtml({ forPreview }) })
                 files.push({ name: `${this.state["LINK_NAME"]}-sendemail.php`, data: await this.getSendmailHtml({ forPreview }) })
             }
-        
             files.push({ name: `${this.state["LINK_NAME"]}-thanks.php`, data: await this.getThanksHtml({ forPreview }) })
-
         }
-
 
         //For telemarketing
         if(this.state["LINK_TYPE"]=="telemarketing"){
             files.push({ name: `${this.state["LINK_NAME"]}-edm.html`, data: await this.getTelemarketingEdmHtml({ forPreview }) })
             files.push({ name: `${this.state["LINK_NAME"]}-Thankyou.html`, data: await this.getTelemarketingThankyouHtml({ forPreview }) })
-       
         }
-        // if(this.state["ASSET_FORMAT"]=='MP4' || this.state["ASSET_FORMAT"]=='IFrame'){
-
-        // }else{
-
-        // }
         return files;
     }
 }

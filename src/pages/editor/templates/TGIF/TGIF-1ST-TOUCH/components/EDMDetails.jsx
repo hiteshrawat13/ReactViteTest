@@ -54,12 +54,12 @@ const EDMDetails = () => {
 
 
       <RichTextEditor label="Edm Abstract" name="EDM_ABSTRACT" required={true} />
-      <TextBox label="EDM Optin" name="EDM_OPTIN" required={true} value="By clicking/downloading the asset, you agree to allow the sponsor to have your contact information and for the sponsor to contact you." html />
+      <TextBox label="EDM Optin Text" name="EDM_OPTIN" required={true} value="By clicking/downloading the asset, you agree to allow the sponsor to have your contact information and for the sponsor to contact you." html />
 
       <Row>
-        <Col> <TextBox label="EDM CTA" name="EDM_CTA" required={true} value="Download Now" /></Col>
+        <Col> <TextBox label="EDM CTA Button Text" name="EDM_CTA" required={true} value="Download Now" /></Col>
         <Col>
-          <RadioGroup name="EDM_CTA_ALIGNMENT" label="CTA Alignment" options={[
+          <RadioGroup name="EDM_CTA_ALIGNMENT" label="CTA Button Alignment"  required="required" options={[
             { label: "Left", value: "left" },
             { label: "Center", value: "center" },
             { label: "Right", value: "right" },
@@ -70,7 +70,7 @@ const EDMDetails = () => {
 
       {
         (getStateValue("LINK_TYPE") == "1st_touch" || getStateValue("LINK_TYPE") == "2nd_touch") &&
-        <TextBox label="Add Text Below the CTA Button" name="EDM_TEXT_BELOW_CTA" html />
+        <TextBox label="Text Below the CTA Button" name="EDM_TEXT_BELOW_CTA" html />
 
       }
     </>

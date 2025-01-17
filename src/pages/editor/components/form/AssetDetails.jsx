@@ -20,8 +20,8 @@ import {
     LanguageInput,
     CheckLink,
     Section
-} from '../../form/index'
-import { EContext } from '../../../EditorMain'
+} from '../form/index'
+import { EContext } from '../../EditorMain'
 
 const AssetDetails = () => {
     const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData, setError } = useContext(EContext)

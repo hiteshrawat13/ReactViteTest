@@ -168,27 +168,28 @@ const EditorMain = () => {
       </div>
 
       
-
+      <Suspense fallback={<div>Loading...</div>}>
       <EContext.Provider value={{
         campData:campData,
-        watch:watch || [],
-        setWatch:setWatch ||   function() { } ,
-        setCurrentFormMethods:setCurrentFormMethods || function() { } ,
-        setStateValue:setStateValue || function(key, value) { } ,
-        getStateValue:getStateValue || function(key) { } ,
-        setState:setState || function() { } ,
-        setFormValue:setFormValue || function(key, value) { } ,
+        watch:watch || null,
+        setWatch:setWatch || null,
+        setCurrentFormMethods:setCurrentFormMethods || null ,
+        setStateValue:setStateValue || null ,
+        getStateValue:getStateValue || null ,
+        setState:setState || null ,
+        setFormValue:setFormValue || null ,
         filesRef:filesRef,
-        setError:setError || function(field,error) { } 
+        setError:setError || null 
       }}>
 
-        <Suspense fallback={<div>Loading...</div>}>
+        
           {/* <Editor11 /> */}
         {/* {React.cloneElement(
              <Editor11/>, {  })}   */}
           <Editor11/>
-        </Suspense>
+       
       </EContext.Provider>
+      </Suspense>
     </div>
   )
 }

@@ -13,6 +13,10 @@ const OptionList = ({ setOptions, options }) => {
 
     const labelsTextareaRef = useRef()
     const valuesTextareaRef = useRef()
+
+    const [labelsTextareaVal, setLabelsTextareaVal] = useState("")
+    const [valuesTextareaVal, setValuesTextareaVal] = useState("")
+
     const [isOptionAddModalOpened, setOptionAddModalOpened] = useState(false)
 
 
@@ -134,12 +138,32 @@ const OptionList = ({ setOptions, options }) => {
     return (
         <>
             <div style={{}}>
-                <Modal open={isOptionAddModalOpened} onClose={() => setOptionAddModalOpened(false)}>
+                <Modal 
+               center
+                open={isOptionAddModalOpened}
+                 onClose={() => setOptionAddModalOpened(false)}>
 
-                    <div style={{ padding: "10px", background: "#888888", maxHeight: "auto" }}>
-                        <div style={{ display: "flex", gap: "10px" }}>
-                            <textarea ref={labelsTextareaRef} style={{ width: "100%", minHeight: "300px", height: "auto", resize: "none", padding: "10px" }} defaultValue={data.map(item => item.label + "\r\n").join("").trim()}></textarea>
-                            <textarea ref={valuesTextareaRef} style={{ width: "100%", minHeight: "300px", height: "auto", resize: "none", padding: "10px" }} defaultValue={data.map(item => item.value + "\r\n").join("").trim()}></textarea>
+                    <div style={{width:"700px",height:"500px",  background: "#888888", maxHeight: "auto" }}>
+                        <div style={{ display: "flex", gap: "10px" , height:"100%"}}>
+                            <div style={{ width: "100%",display: "flex",flexDirection:"column"}} >
+                                <h5>Labels</h5>
+                            <textarea ref={labelsTextareaRef} style={{ width: "100%",  flex:"1",  resize: "none", padding: "10px" ,overflow:"auto",whiteSpace:"nowrap"}} 
+                            //defaultValue={data.map(item => item.label + "\r\n").join("").trim()}
+                            value={labelsTextareaVal}
+                            onChange={(e)=>{setLabelsTextareaVal(e.target.value)}}
+                            ></textarea>
+
+                            </div>
+
+                            <div style={{ width: "100%",display: "flex",flexDirection:"column"}}>
+                            <h5>Values</h5>
+                            <textarea ref={valuesTextareaRef} style={{ width: "100%",  flex:"1", resize: "none", padding: "10px" }}
+                            // defaultValue={data.map(item => item.value + "\r\n").join("").trim()}
+                            value={valuesTextareaVal}
+                            onChange={(e)=>{setValuesTextareaVal(e.target.value)}}
+                             ></textarea>
+
+                            </div>
                         </div>
 
                         <button style={{ marginTop: "5px" }} onClick={handleOptionTextData}>Add Options</button>
@@ -149,8 +173,12 @@ const OptionList = ({ setOptions, options }) => {
                 <button onClick={(e) => {
                     e.preventDefault();
                     setOptionAddModalOpened(true);
-                    labelsTextareaRef.current.value = data.join("")
-                    valuesTextareaRef.current.value = data.join("")
+                 
+                     //labelsTextareaRef.current.value = data.join("")
+                     //valuesTextareaRef.current.value = data.join("")
+
+                     setLabelsTextareaVal(data.map(item => item.label  ).join("\r\n"))
+                     setValuesTextareaVal(data.map(item => item.value  ).join("\r\n"))
                 }}>Option Generate</button>
 
                 <div style={{ position: "relative", width: "700px", maxHeight: "400px", overflowY: "scroll" }}>

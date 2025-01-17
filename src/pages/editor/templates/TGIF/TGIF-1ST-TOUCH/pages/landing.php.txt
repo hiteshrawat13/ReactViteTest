@@ -166,11 +166,17 @@
             margin-top: 6px;
             }
 
+            
+
             .radio-option > span{
             margin:0;
             padding:0;
-            font-size:12px;
+            font-size:11px;
             color:#1a1a1a;
+            }
+
+            .radio-option > p{
+            font-size:11px;
             }
 
             .form-group p{

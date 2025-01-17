@@ -4,7 +4,7 @@ import { addField, updateField, loadFieldsFromJson ,setFields} from '../../../..
 import { useDispatch, useSelector } from 'react-redux'
 import FieldList from './FieldList'
 import { fields, editors } from './fieldEditor/Fields'
-
+ 
 
 
 const CTAEditor = React.lazy(() => import("./fieldEditor/CTAEditor"));
@@ -66,11 +66,15 @@ const FormBuilder = (defaultFieldsJson) => {
   const formScriptsDropdownRef=useRef()
 
   const [selectedField, setSelectedField] = useState(-1)
+  
+  const [fieldPropsModalOpened,setFieldPropsModalOpened]=useState(false)
   const [addScriptModalShow,setAddScriptModalShow]=useState(false)
   const [loadJSONModalShow,setLoadJSONModalShow]=useState(false)
   const JSONTextareaRef=useRef()
 
   const dispatch = useDispatch()
+
+ 
 
 
   //API For FormScripts
@@ -175,6 +179,7 @@ const FormBuilder = (defaultFieldsJson) => {
 
   const handleFieldDataUpdate = (id, state) => {
     dispatch(updateField({ fieldId: id, state: state }))
+    setFieldPropsModalOpened(false)
   }
 
 
@@ -317,7 +322,17 @@ const FormBuilder = (defaultFieldsJson) => {
       </Modal>
 
 
+      <button id=' ' className="btn-option" onClick={(e)=>{
+        e.preventDefault();
+        navigator.clipboard.writeText(JSON.stringify(state.form)).then(function() {
+         alert("Form JSON copied")
+        }, function(err) {
+          alert("Error : Form JSON not copied")
+          console.log(err);
+          
+        });
 
+      }}>Copy JSON</button>
 
       <button id=' ' className="btn-option" onClick={(e)=>{e.preventDefault();setLoadJSONModalShow(true)}}>Load JSON</button>
       <Modal
@@ -336,9 +351,41 @@ const FormBuilder = (defaultFieldsJson) => {
       <br /><br />
       <div className='formBuilder'>
 
-        <FieldList getIcon={getIcon} setSelectedField={setSelectedField} selectedField={selectedField} />
 
-        <div className="fieldEditor">
+        {/* Field List */}
+        <FieldList getIcon={getIcon} 
+        setSelectedField={setSelectedField} 
+        selectedField={selectedField}
+        onFieldSelect={()=>{setFieldPropsModalOpened(true)}} />
+
+
+
+
+{state.form[selectedField] && <Suspense fallback={<div>Loading ... </div>}>
+
+  
+<Modal 
+center
+open={fieldPropsModalOpened}
+onClose={() => setFieldPropsModalOpened(false)}>
+  <div style={{width:"600px"}}>
+    {(state.form[selectedField]?.type == "TextBox") && <TextBoxEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+    {(state.form[selectedField]?.type == "SelectBox") && <SelectBoxEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+    {(state.form[selectedField]?.type == "CheckBox") && <CheckBoxEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+    {(state.form[selectedField]?.type == "CheckGroup") && <CheckGroupEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+    {(state.form[selectedField]?.type == "RadioGroup") && <RadioGroupEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+    {(state.form[selectedField]?.type == "Text") && <TextEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+    {(state.form[selectedField]?.type == "Html") && <HtmlEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+    {(state.form[selectedField]?.type == "HiddenInput") && <HiddenInputEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+    {(state.form[selectedField]?.type == "CTA") && <CTAEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+  </div>
+
+
+</Modal>  
+</Suspense>
+}
+
+        {/* <div className="fieldEditor">
           <div className='fieldEditorHolder'>
             {(selectedField == -1 || !state.form[selectedField]?.type)
               &&
@@ -346,19 +393,29 @@ const FormBuilder = (defaultFieldsJson) => {
 
             {state.form[selectedField] && <Suspense fallback={<div>Loading ... </div>}>
 
-              {(state.form[selectedField]?.type == "TextBox") && <TextBoxEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
-              {(state.form[selectedField]?.type == "SelectBox") && <SelectBoxEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
-              {(state.form[selectedField]?.type == "CheckBox") && <CheckBoxEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
-              {(state.form[selectedField]?.type == "CheckGroup") && <CheckGroupEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
-              {(state.form[selectedField]?.type == "RadioGroup") && <RadioGroupEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
-              {(state.form[selectedField]?.type == "Text") && <TextEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
-              {(state.form[selectedField]?.type == "Html") && <HtmlEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
-              {(state.form[selectedField]?.type == "HiddenInput") && <HiddenInputEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
-              {(state.form[selectedField]?.type == "CTA") && <CTAEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+  
+              <Modal 
+              center
+              open={fieldPropsModalOpened}
+              onClose={() => setFieldPropsModalOpened(false)}>
+                <div style={{width:"600px"}}>
+                  {(state.form[selectedField]?.type == "TextBox") && <TextBoxEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+                  {(state.form[selectedField]?.type == "SelectBox") && <SelectBoxEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+                  {(state.form[selectedField]?.type == "CheckBox") && <CheckBoxEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+                  {(state.form[selectedField]?.type == "CheckGroup") && <CheckGroupEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+                  {(state.form[selectedField]?.type == "RadioGroup") && <RadioGroupEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+                  {(state.form[selectedField]?.type == "Text") && <TextEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+                  {(state.form[selectedField]?.type == "Html") && <HtmlEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+                  {(state.form[selectedField]?.type == "HiddenInput") && <HiddenInputEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+                  {(state.form[selectedField]?.type == "CTA") && <CTAEditor key={Math.random()} data={state.form[selectedField]} toast={toast} handleFieldDataUpdate={handleFieldDataUpdate} id={selectedField} />}
+                </div>
+             
+          
+              </Modal>  
             </Suspense>
             }
           </div>
-        </div>
+        </div> */}
 
       </div>
     </>

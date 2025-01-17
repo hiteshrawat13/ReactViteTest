@@ -115,7 +115,7 @@ function extractFormData(form) {
 
     //checkbox
     
-     form.querySelectorAll("[id$=ukgdpr] .custom-checkbox").forEach(custom_checkbox => {
+     form.querySelectorAll("[id*=ukgdpr] .custom-checkbox").forEach(custom_checkbox => {
 
         const lbl=custom_checkbox.querySelector("label")
         const inpt=custom_checkbox.querySelector("[type=checkbox]")
@@ -176,7 +176,7 @@ function extractFormData(form) {
 
 
      //Text
-     const ukgdprs=form.querySelectorAll("[id$=ukgdpr]")
+     const ukgdprs=form.querySelectorAll("[id*=ukgdpr]")
      if(ukgdprs.length){
 
         ukgdprs.forEach(ukgdpr => {

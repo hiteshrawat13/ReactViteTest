@@ -97,12 +97,12 @@ const BasicDetails = () => {
 
             {(watch["USE_CUSTOM_FOOTER"] == true || getStateValue("USE_CUSTOM_FOOTER") == true) &&
 
-              <RichTextEditor label="Custom Footer" name="FOOTER" required={true} value={`<p><a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> | ##PRIVACY_POLICY##<br /> Copyright &#169; ##YEAR## XDBS Corporation <br /> Hawthorne, CA 90250 USA<br /> 3501, Jack Northorp Ave, Ste C3873<br /></p>`} />
+              <RichTextEditor label="Custom Footer" name="FOOTER" required={true} value={`<p><a href="##BASE_URL##unsubscribed.html" style="">Unsubscribe</a> | ##PRIVACY_POLICY##<br /> Copyright &#169; ##YEAR## XDBS Corporation <br /> Hawthorne, CA 90250 USA<br /> 3501, Jack Northorp Ave, Ste C3873<br /></p>`} />
             }
             {(watch["USE_CUSTOM_FOOTER"] == false || getStateValue("USE_CUSTOM_FOOTER") == false) && [
               setStateValue("USE_CUSTOM_FOOTER", false),
 
-              setStateValue("FOOTER", `<p><a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> | ##PRIVACY_POLICY##<br /> Copyright &#169; ##YEAR## XDBS Corporation <br /> Hawthorne, CA 90250 USA<br /> 3501, Jack Northorp Ave, Ste C3873<br /></p>`)
+              setStateValue("FOOTER", `<p><a href="##BASE_URL##unsubscribed.html" style="">Unsubscribe</a> | ##PRIVACY_POLICY##<br /> Copyright &#169; ##YEAR## XDBS Corporation <br /> Hawthorne, CA 90250 USA<br /> 3501, Jack Northorp Ave, Ste C3873<br /></p>`)
             ]}
             {/* {(getStateValue("FOOTER") == null)&& setFormValue( "FOOTER" , `<p><a href="##BASE_URL##unsubscribed.html" style="color: #3673b5;">Unsubscribe</a> | ##PRIVACY_POLICY##<br /> Copyright &#169; ##YEAR## XDBS Corporation <br /> Hawthorne, CA 90250 USA<br /> 3501, Jack Northorp Ave, Ste C3873</p>`)} */}
           </Col>

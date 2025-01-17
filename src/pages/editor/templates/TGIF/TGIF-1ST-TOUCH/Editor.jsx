@@ -184,7 +184,7 @@ const Editor = ({ }) => {
             />
 
 
-            <CheckBox label="Hide thumbnails" name="HIDE_THUMBNAIL" defaultChecked={false} />
+          <br/>
             <CheckBox label="Add border to thumbnail" name="THUMBNAIL_BORDER" defaultChecked={true} />
             <TextBox label="EDM Thumbnail width" name="EDM_THUMBNAIL_WIDTH" required={true} value="260px" helpText={`In % or px`} />
             <CheckBox label="Use different thumbnail for edm page" name="USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE" />
@@ -192,6 +192,9 @@ const Editor = ({ }) => {
             {(watch["USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE"] == true) &&
               <FileInput name="EDM_THUMBNAIL_NAME" label="EDM Thumbnail" tag="file" fileRef={filesRef.current.fileInput3} />
             }
+
+
+            <CheckBox label="Hide all thumbnails" name="HIDE_THUMBNAIL" defaultChecked={false} />
           </Col>
         </Row>
 
@@ -213,15 +216,16 @@ const Editor = ({ }) => {
 
 
 
-      <Section title="Image Below Abstract">
+      {/* Extra Image */}
+      <Section title="Extra Image Below the Abstract">
         <Row>
           <Col>
-            <CheckBox label="Show Image Below Abstract" name="SHOW_IMAGE_BELOW_ABSTRACT" defaultChecked={false} />
+            <CheckBox label="Add extra Image Below the Abstract" name="SHOW_IMAGE_BELOW_ABSTRACT" defaultChecked={false} />
             {(watch["SHOW_IMAGE_BELOW_ABSTRACT"] == true) &&
 
               [<FileInput name="IMAGE_BELOW_ABSTRACT" label="Image Below Abstract" tag="file" fileRef={filesRef.current.fileInput9} onFileChange={(filename) => { setFormValue("IMAGE_BELOW_ABSTRACT", filename) }} />
                 , <TextBox label="IMAGE_BELOW_ABSTRACT_WIDTH" required="true" name="IMAGE_BELOW_ABSTRACT_WIDTH" value={'20%'} />
-                , <CheckBox label="Show on Landing Page" name="SHOW_IMAGE_BELOW_ABSTRACT_ON_LANDING_PAGE" defaultChecked={false} />]
+                , <CheckBox label="Show extra image on Landing Page" name="SHOW_IMAGE_BELOW_ABSTRACT_ON_LANDING_PAGE" defaultChecked={false} />]
             }
           </Col>
         </Row>

@@ -1,3 +1,107 @@
+.fieldListTable{
+    width: 100%;
+    font-size: 14px;
+    border: 1px solid #bebebe;
+    border-collapse: collapse;
+    tr{ display: flex;
+        user-select: none;
+        width: 100%;
+        border-bottom: 1px solid #bebebe;
+        background-color: #fff;
+
+
+        &.selected{
+            background-color: #95afc0;
+            color: #fff !important;
+        }
+
+        &:hover{
+            background-color: #bebebe;
+        }
+
+        th, td {
+        
+            text-align: left;
+            width: auto;
+            padding: 5px 1px;
+        }
+        th{
+            font-size: 12px;
+        }
+        td{
+            font-size: 12px;
+        }
+        
+        .fieldNumber{
+            padding-left: 5px;
+            width: 80px;
+            span{
+                display: inline-block;
+                border-radius: 1px;
+                width: 15px;
+                height: 15px;
+                font-size: 9px;
+                text-align: center;
+                color:#646464;
+                border: 1px solid #bbbbbb;
+            }
+
+            sup{
+                color:#df4d4d;
+            }
+        }
+        .fieldIcon{
+            color:#3d7181;
+            width: 60px;
+        }
+
+        .fieldLabel{
+            width: 100%;
+            color:#000;
+        }
+
+        .fieldId{
+            width: 200px;
+            color:#646464;
+        }
+        .fieldName{
+            width: 180px;
+            color:#646464;
+
+        }
+        .fieldDelete{
+            width: 90px;
+            text-align: center;
+             
+             
+        }
+        .fieldDuplicate{
+            width: 90px;
+            text-align: center;
+        }
+
+        .actionButton{
+            border:none;
+            padding: 2px;
+            cursor: pointer;
+            border:1px solid #c2c2c2;
+             
+        }
+        .btnDelete{
+            color:#e66767
+        }
+        .btnDuplicate{
+            color:#028b93
+        }
+    }
+
+   
+
+}
+
+
+
+
 .fieldList{
     width: 100%;
     flex:2;

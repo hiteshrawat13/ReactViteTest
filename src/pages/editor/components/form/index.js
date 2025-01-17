@@ -20,7 +20,7 @@ import LanguageInput from './LanguageInput';
 import CheckLink from '../CheckLink';
 import Section from './Section';
 import SpeakerDetails from './SpeakerDetails';
-import AssetDetails from './formBuilder/AssetDetails';
+import AssetDetails from './AssetDetails';
 import LinkDetails from './LinkDetails';
 import ExtraFiles from './ExtraFiles';
 export {
@@ -45,8 +45,8 @@ export {
     LanguageInput,
     CheckLink,
     AssetDetails,
-  SpeakerDetails,
-  LinkDetails,
-  ExtraFiles,
+    SpeakerDetails,
+    LinkDetails,
+    ExtraFiles,
     Section
 }

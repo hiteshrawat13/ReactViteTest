@@ -24,7 +24,8 @@ import {
   SpeakerDetails,
   LinkDetails,
   Section,
-  ExtraFiles
+  ExtraFiles,
+  TextArea
 } from '../../../components/form/index'
 
 import defaultFieldsJson from "./default-fields.json"
@@ -53,6 +54,30 @@ const Editor = ({ }) => {
       <LinkDetails />
       <BasicDetails />
 
+      <Section title="Double Optin">
+        <CheckBox label="Add Double Optin to this link" name="IS_DOUBLE_OPTIN" defaultChecked={false} />
+
+  
+
+        {(  watch["IS_DOUBLE_OPTIN"] == true || (watch["IS_DOUBLE_OPTIN"] == undefined && getStateValue("IS_DOUBLE_OPTIN" )==true ) ) && <>
+      
+          <RichTextEditor label="Double Optin Content" name="DOUBLE_OPTIN_CONTENT" required={true} value={`
+<h1>Thank you...</h1>
+<span>  
+ Thank you for your interest and registering for this [Sponsor Name] asset.
+<br><br>
+You will receive a confirmation email shortly with a link to download this content.
+<br><br>
+If you do not receive the link in your inbox, also check your junk/spam folder if the email was marked with the link.
+<br><br>
+The email and link are both from "ITBusinessToday".
+</span>`} />
+
+<TextArea label="Countries List" name="DOUBLE_OPTIN_COUNTRIES"/>
+        </>}
+
+       
+      </Section>
     </Step>
 
 
@@ -184,7 +209,7 @@ const Editor = ({ }) => {
             />
 
 
-          <br/>
+            <br />
             <CheckBox label="Add border to thumbnail" name="THUMBNAIL_BORDER" defaultChecked={true} />
             <TextBox label="EDM Thumbnail width" name="EDM_THUMBNAIL_WIDTH" required={true} value="260px" helpText={`In % or px`} />
             <CheckBox label="Use different thumbnail for edm page" name="USE_DIFFERENT_THUMBNAIL_FOR_EDM_PAGE" />

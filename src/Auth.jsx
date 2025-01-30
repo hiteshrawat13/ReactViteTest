@@ -7,15 +7,8 @@ import Cookies from 'js-cookie';
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  
   const token = Cookies.get('access_token');
   const userName = Cookies.get('user_id');
-
-  
-
- 
-  
-
   return (
     <AuthContext.Provider value={{ token, userName }}>
       {children}

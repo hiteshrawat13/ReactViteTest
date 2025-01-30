@@ -23,6 +23,7 @@ import SpeakerDetails from './SpeakerDetails';
 import AssetDetails from './AssetDetails';
 import LinkDetails from './LinkDetails';
 import ExtraFiles from './ExtraFiles';
+import TextArea from './TextArea';
 export {
     Stepper,
     Step,
@@ -48,5 +49,6 @@ export {
     SpeakerDetails,
     LinkDetails,
     ExtraFiles,
-    Section
+    Section,
+    TextArea
 }

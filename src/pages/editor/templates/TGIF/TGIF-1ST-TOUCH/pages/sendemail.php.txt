@@ -4,9 +4,9 @@ require "DataCurlNodeApi/DataCurlNodeApiFunctions.php";
 
 $ENDURL = "##BASE_URL####LINK_NAME##-thanks.php";
 
-
 ##MAPPED_DATA##
 
+##DOUBLE_OPTIN_CONDITION##
 
 $mapped_data = [];
 
@@ -43,9 +43,12 @@ $mail->AltBody = "";
 try {
     $mail->send();
     //echo "Message has been sent successfully";
-	echo "<script>window.location.href = '##BASE_URL####LINK_NAME##-thanks.php';</script>";
+	echo "<script>window.location.href = '$ENDURL';</script>";
 } catch (Exception $e) {
     //echo "Mailer Error: " . $mail->ErrorInfo;
 }
+
+
+
 
 ?>

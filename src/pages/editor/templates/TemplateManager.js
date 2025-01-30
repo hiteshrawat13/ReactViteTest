@@ -21,12 +21,12 @@ const TemplateManager=[
                 title:"TGIF 2nd Touch",
                 editor:lazy(() => import('./TGIF/TGIF-1ST-TOUCH/Editor'))
             },
-            {
-                id:"TGIF-TELEMARKETING",
-                type:"telemarketing",
-                title:"TGIF Telemarketing",
-                editor:lazy(() => import('./TGIF/TGIF-1ST-TOUCH/Editor'))
-            }
+            // {
+            //     id:"TGIF-TELEMARKETING",
+            //     type:"telemarketing",
+            //     title:"TGIF Telemarketing",
+            //     editor:lazy(() => import('./TGIF/TGIF-1ST-TOUCH/Editor'))
+            // }
         ]
     },
 

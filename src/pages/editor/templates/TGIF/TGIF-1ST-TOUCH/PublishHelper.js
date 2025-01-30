@@ -388,6 +388,22 @@ This is to convert Chinese characters to Unicode numbers
     //Sendmail
     getSendmailHtml({ forPreview }) {
         let data = sendemail_html
+
+
+       
+        if(this.state["IS_DOUBLE_OPTIN"]==true){
+            const countries=this.state["DOUBLE_OPTIN_COUNTRIES"].trim().split(String.fromCharCode(10))
+            countries.map(country=>`""`)
+            $people = array("Peter", "Joe", "Glenn", "Cleveland");
+            
+            data = data.replaceAll(`##DOUBLE_OPTIN_CONDITION##`, countries)
+            
+        } 
+         
+       
+        
+
+       
         data = data.replaceAll(`##MAPPED_DATA##`, this.getFormCurlApiSendmailMappedData(this.state.form))
         const hasSpecialCharsInSubject = this.convertToEntities(this.state["SENDMAIL_SUBJECT"]).includes("&#")
         data = data.replaceAll(`##SENDMAIL_SUBJECT##`, (hasSpecialCharsInSubject) ? getSendmailSubject(this.state["SENDMAIL_SUBJECT"]) : this.state["SENDMAIL_SUBJECT"].replaceAll("\\'", "'"))
@@ -418,6 +434,12 @@ This is to convert Chinese characters to Unicode numbers
     async getThanksHtml({ forPreview }) {
         let data = thanks_html
         data = this.getPrivacyPolicy(data) //Privacy Policy
+
+
+
+       
+
+
         const normal_thankyou = `\t
         <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
                             <tbody>
@@ -482,6 +504,34 @@ This is to convert Chinese characters to Unicode numbers
                         </table>
         `
 
+
+         const doubleoptin_thankyou = `
+          <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
+                            <tbody>
+                                <tr>
+                                    <td align="left" class="whitepaper" style="align-items: start; display: flex;">
+                                        <img  class="thumbnail"  alt="##EDM_TITLE##" src="##BASE_URL####THUMBNAIL_NAME##"    />
+                                    </td>
+
+                                    <td align="left" valign="top" class="style1 thankyou abstract">
+   
+                                        ${this.state["DOUBLE_OPTIN_CONTENT"]}
+ 
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+        \n
+         
+         `
+
+
+         if(this.state["IS_DOUBLE_OPTIN"]==true){
+            data = data.replaceAll(`##THANK_YOU_CONTENT##`, this.convertToEntities(doubleoptin_thankyou))
+            data = data.replaceAll(`header( "refresh:5;url=##BASE_URL####LINK_NAME##.pdf" ); `, "")//remove redirect 
+         } 
+         
+
         switch (this.state["ASSET_FORMAT"]) {
             case "PDF":
                 data = data.replaceAll(`##THANK_YOU_CONTENT##`, this.convertToEntities(normal_thankyou))
@@ -527,6 +577,8 @@ This is to convert Chinese characters to Unicode numbers
     }
 
     getThankyouDoubleOptinHtml({ forPreview }) {
+
+   
 
     }
 

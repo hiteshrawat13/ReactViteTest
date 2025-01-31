@@ -74,6 +74,8 @@ The email and link are both from "ITBusinessToday".
 </span>`} />
 
 <TextArea label="Countries List" name="DOUBLE_OPTIN_COUNTRIES"/>
+<TextBox label="Country Form Filed's name attribute" name="DOUBLE_OPTIN_COUNTRY_FIELD_NAME_ATTRIBUTE" required={true}     />
+
         </>}
 
        
@@ -112,6 +114,8 @@ The email and link are both from "ITBusinessToday".
             }
             }>Add new format</button>
             <RichTextEditor label="Landing Abstract" name="LANDING_ABSTRACT" required={true} />
+                      <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true} width="60%" value={`Thank you for requesting a ${getStateValue("ASSET_TYPE")}`} />
+
           </>}
 
 

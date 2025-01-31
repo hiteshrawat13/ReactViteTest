@@ -391,14 +391,28 @@ This is to convert Chinese characters to Unicode numbers
 
 
        
-        if(this.state["IS_DOUBLE_OPTIN"]==true){
-            const countries=this.state["DOUBLE_OPTIN_COUNTRIES"].trim().split(String.fromCharCode(10))
-            countries.map(country=>`""`)
-            $people = array("Peter", "Joe", "Glenn", "Cleveland");
+        // if(this.state["IS_DOUBLE_OPTIN"]==true){
+        //     const countries=this.state["DOUBLE_OPTIN_COUNTRIES"].trim().split(String.fromCharCode(10))
+        //     const country_field_name_attribute=this.state["DOUBLE_OPTIN_COUNTRY_FIELD_NAME_ATTRIBUTE"]
             
-            data = data.replaceAll(`##DOUBLE_OPTIN_CONDITION##`, countries)
-            
-        } 
+        //     const countries_with_double_quotes = countries.map(country=>`"${country}"`)
+
+        //     const do_url=`##BASE_URL####LINK_NAME##-thanks.php`
+
+        //     const php_code=`
+        //         $double_optin_countries = array(${countries_with_double_quotes});
+        //         if (in_array($_POST["${country_field_name_attribute}"], $double_optin_countries))
+        //         {
+        //             $ENDURL = "${do_url}";
+        //         }else{
+        //             $ENDURL = "##BASE_URL####LINK_NAME##-thanks.php";
+        //         }
+        //     `
+        //     data = data.replaceAll(`##DOUBLE_OPTIN_CONDITION##`, php_code)
+        // } 
+
+
+
          
        
         
@@ -434,11 +448,6 @@ This is to convert Chinese characters to Unicode numbers
     async getThanksHtml({ forPreview }) {
         let data = thanks_html
         data = this.getPrivacyPolicy(data) //Privacy Policy
-
-
-
-       
-
 
         const normal_thankyou = `\t
         <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">

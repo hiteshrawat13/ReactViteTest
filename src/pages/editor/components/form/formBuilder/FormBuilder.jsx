@@ -86,9 +86,12 @@ const FormBuilder = (defaultFieldsJson) => {
    if(script){
    // script.script.run()
     console.log(script.script.run());
+    alert("Script Added Successfully.")
+    return true;
     
    }else{
     alert("No Script Found")
+    return false;
    }
  }
 
@@ -287,7 +290,8 @@ const FormBuilder = (defaultFieldsJson) => {
       } }>Load Default Fields</button>
 
 
-<button id='removeFieldsBtn' onClick={(e)=>{
+      {/* Remove All Fields Button */}
+      <button id='removeFieldsBtn' onClick={(e)=>{
       e.preventDefault()
    
       if (confirm("Remove all form fields?") == true) {
@@ -303,7 +307,12 @@ const FormBuilder = (defaultFieldsJson) => {
       
       } }>Remove all Fields</button>
 
-<button id='recalculateBtn' onClick={handleNameDataRecalculate }>Rearange "data[]"</button>
+
+      {/* Rearrange Data Button */}
+      <button id='recalculateBtn' onClick={handleNameDataRecalculate }>Rearange "data[]"</button>
+      
+      
+      {/* Add Script Button */}
       <button id=' ' className="btn-option" onClick={(e)=>{e.preventDefault();setAddScriptModalShow(true)}}>Add Script</button>
       <Modal
         closeOnOverlayClick={false}
@@ -317,11 +326,18 @@ const FormBuilder = (defaultFieldsJson) => {
               FormScripts(null).list?.map((script,i)=>{ return <option key={i}>{script.title}</option> })
             }
           </select>
-          <button onClick={(e)=>{  e.preventDefault();applyFormScript(formScriptsDropdownRef.current.value)  }}>Add Script</button>
+          <button onClick={(e)=>{  
+              e.preventDefault();
+              if(applyFormScript(formScriptsDropdownRef.current.value)){ 
+                setAddScriptModalShow(false) 
+              }  
+            }
+          }>Add Script</button>
         </div>
       </Modal>
 
 
+      {/* Copy JSON button */}
       <button id=' ' className="btn-option" onClick={(e)=>{
         e.preventDefault();
         navigator.clipboard.writeText(JSON.stringify(state.form)).then(function() {
@@ -334,6 +350,8 @@ const FormBuilder = (defaultFieldsJson) => {
 
       }}>Copy JSON</button>
 
+
+      {/* Load JSON Button */}
       <button id=' ' className="btn-option" onClick={(e)=>{e.preventDefault();setLoadJSONModalShow(true)}}>Load JSON</button>
       <Modal
         closeOnOverlayClick={false}

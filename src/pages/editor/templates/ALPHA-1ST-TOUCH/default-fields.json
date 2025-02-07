@@ -27,7 +27,7 @@
     "type": "TextBox",
     "inputType": "email",
     "id": "email",
-    "label": "Business Email",
+    "label": "Work Email",
     "name": "data[1]",
     "placeholder": "",
     "value": "",
@@ -37,9 +37,9 @@
   },
   {
     "type": "TextBox",
-    "inputType": "text",
+    "inputType": "number",
     "id": "phone",
-    "label": "Phone",
+    "label": "Work Phone",
     "name": "data[2]",
     "placeholder": "",
     "value": "",
@@ -51,7 +51,19 @@
     "type": "TextBox",
     "inputType": "text",
     "id": "company",
-    "label": "Company",
+    "label": "Company Name",
+    "name": "data[3]",
+    "placeholder": "",
+    "value": "",
+    "isRequired": true,
+    "isDisabled": false,
+    "isReadOnly": false
+  },
+  {
+    "type": "TextBox",
+    "inputType": "text",
+    "id": "job_title",
+    "label": "Job Title",
     "name": "data[3]",
     "placeholder": "",
     "value": "",
@@ -91,7 +103,7 @@
     "name": "data[6]",
     "placeholder": "",
     "value": "",
-    "isRequired": false,
+    "isRequired": true,
     "isDisabled": false,
     "isReadOnly": true
   },
@@ -101,13 +113,14 @@
     "label": "Country",
     "name": "data[7]",
     "isFullWidth": false,
-    "isRequired": false,
+    "isRequired": true,
     "isDisabled": false,
     "isReadOnly": false,
     "options": [
       {
         "label": "Choose One",
-        "value": ""
+        "value": "",
+        "disabled":true
       }
     ]
   },
@@ -143,18 +156,7 @@
     "isDisabled": false,
     "isReadOnly": false
   },
-  {
-    "type": "TextBox",
-    "inputType": "text",
-    "id": "job_title",
-    "label": "Job Title",
-    "name": "data[11]",
-    "placeholder": "",
-    "value": "",
-    "isRequired": true,
-    "isDisabled": false,
-    "isReadOnly": false
-  },
+   
   {
     "type": "SelectBox",
     "id": "industry",
@@ -163,7 +165,8 @@
     "options": [
       {
         "label": "Choose One",
-        "value": ""
+        "value": "",
+        "disabled":true
       }
     ],
     "isFullWidth": false,
@@ -189,6 +192,7 @@
   },
   {
     "type": "Text",
+    "id":"text_only",
     "label": "I would like to receive information from suppliers sponsoring this content and willing to share the information above with Sponsor."
   },
   {
@@ -257,6 +261,7 @@
   },
   {
     "type": "CTA",
+    "id":"cta_button",
     "label": "Download Now"
   }
 ]

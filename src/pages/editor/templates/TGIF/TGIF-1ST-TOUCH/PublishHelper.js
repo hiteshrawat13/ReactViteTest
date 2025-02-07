@@ -150,6 +150,14 @@ This is to convert Chinese characters to Unicode numbers
     async getEdmHtml({ forPreview }) {
         let data = edm_html;
 
+
+
+        if(this.state['HIDE_EDM_TITLE']==true){
+            //Hide EDM Title
+            data = data.replaceAll(`<h1 style="font-size: 20px;font-weight:normal; color: #0066b2;margin-top:0px;margin-bottom:0px;padding-left:0px;" class="body-title">##EDM_TITLE##</h1>`, '')  
+        }
+      
+
         if(this.state['LINK_TYPE']=="1st_touch"){
             data = data.replaceAll(`##EDM_THANKS_TEXT_FOR_2ND_TOUCH##`, '') //Remove this .it is for 2nd touch
         }else{
@@ -165,7 +173,7 @@ This is to convert Chinese characters to Unicode numbers
         }
 
         const traditional_layout = `
-        <table width="100%" style="background-color: #ffffff; padding: 0% 2%;" align="center" class="font-style">
+        <table width="700px" style="background-color: #ffffff; padding: 0% 2%;" align="center" class="font-style">
                             <tbody class="table table-borderless table-responsive">
                                 <tr scope="col">
                                     <td style="vertical-align: top;padding-right: 18px;">
@@ -179,9 +187,9 @@ This is to convert Chinese characters to Unicode numbers
 										</div>
 
                                     </td>
-                                    <td style="width:##EDM_THUMBNAIL_WIDTH##;" class="edm_thumbnail" align="center" valign="top">
+                                    <td style="width:##EDM_THUMBNAIL_WIDTH##;"  width="##EDM_THUMBNAIL_WIDTH##" class="edm_thumbnail" align="center" valign="top">
                                         <a href="##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#" target="_blank">
-                                            <img src="##BASE_URL####THUMBNAIL_NAME##" alt="##EDM_TITLE##" class="img-full-width" />
+                                            <img src="##BASE_URL####THUMBNAIL_NAME##" alt="##EDM_TITLE##" class="img-full-width" width="##EDM_THUMBNAIL_WIDTH##" style="width:##EDM_THUMBNAIL_WIDTH##;" />
                                         </a>
 
                                     </td>
@@ -193,7 +201,7 @@ This is to convert Chinese characters to Unicode numbers
         `
 
         const full_width_layout = `
-        <table width="100%" style="background-color: #ffffff; padding: 0% 2%;" align="center" class="font-style">
+        <table width="700px" style="background-color: #ffffff; padding: 0% 2%;" align="center" class="font-style">
                             <tbody class="table table-borderless table-responsive">
                            
 								<tr>
@@ -390,26 +398,46 @@ This is to convert Chinese characters to Unicode numbers
         let data = sendemail_html
 
 
-       
-        // if(this.state["IS_DOUBLE_OPTIN"]==true){
-        //     const countries=this.state["DOUBLE_OPTIN_COUNTRIES"].trim().split(String.fromCharCode(10))
-        //     const country_field_name_attribute=this.state["DOUBLE_OPTIN_COUNTRY_FIELD_NAME_ATTRIBUTE"]
+       //For Double Optin
+        if(this.state["IS_DOUBLE_OPTIN"]==true){
+            const countries=this.state["DOUBLE_OPTIN_COUNTRIES"].trim().split(String.fromCharCode(10))
+           
+
             
-        //     const countries_with_double_quotes = countries.map(country=>`"${country}"`)
 
-        //     const do_url=`##BASE_URL####LINK_NAME##-thanks.php`
+           
+            const country_field_name_attribute=this.state["DOUBLE_OPTIN_COUNTRY_FIELD_NAME_ATTRIBUTE"]
+            const countries_with_double_quotes = countries.map(country=>`"${country}"`)
+            const double_optin_url=`##BASE_URL####LINK_NAME##-thankyou.php`
 
-        //     const php_code=`
-        //         $double_optin_countries = array(${countries_with_double_quotes});
-        //         if (in_array($_POST["${country_field_name_attribute}"], $double_optin_countries))
-        //         {
-        //             $ENDURL = "${do_url}";
-        //         }else{
-        //             $ENDURL = "##BASE_URL####LINK_NAME##-thanks.php";
-        //         }
-        //     `
-        //     data = data.replaceAll(`##DOUBLE_OPTIN_CONDITION##`, php_code)
-        // } 
+            console.log(countries,countries.length);
+            
+            if(countries.join("").length>0){
+                const php_code=`
+                    $double_optin_countries = array(${countries_with_double_quotes});
+                    if (in_array($_POST["${country_field_name_attribute}"], $double_optin_countries))
+                    {
+                        $ENDURL = "${double_optin_url}";
+                    }else{
+                        $ENDURL = "##BASE_URL####LINK_NAME##-thanks.php";
+                    }
+                `
+                data = data.replaceAll(`$ENDURL = "##BASE_URL####LINK_NAME##-thanks.php";`, php_code)
+
+            }else{
+                const php_code=`
+                $ENDURL = "${double_optin_url}";
+                `
+                data = data.replaceAll(`$ENDURL = "##BASE_URL####LINK_NAME##-thanks.php";`, php_code)
+
+            }
+            
+
+          
+
+        } else{
+            
+        }
 
 
 
@@ -445,10 +473,10 @@ This is to convert Chinese characters to Unicode numbers
         return data
     }
 
-    async getThanksHtml({ forPreview }) {
-        let data = thanks_html
-        data = this.getPrivacyPolicy(data) //Privacy Policy
 
+    ///helper for thankyou and thanks double optin page
+     thanks_page=async ({data,forPreview})=>{
+        data = this.getPrivacyPolicy(data) //Privacy Policy
         const normal_thankyou = `\t
         <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
                             <tbody>
@@ -496,7 +524,6 @@ This is to convert Chinese characters to Unicode numbers
                             </tbody>
                         </table>
         `
-
         const mp4_thankyou = `
         <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
                             <tbody>
@@ -513,34 +540,8 @@ This is to convert Chinese characters to Unicode numbers
                         </table>
         `
 
-
-         const doubleoptin_thankyou = `
-          <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
-                            <tbody>
-                                <tr>
-                                    <td align="left" class="whitepaper" style="align-items: start; display: flex;">
-                                        <img  class="thumbnail"  alt="##EDM_TITLE##" src="##BASE_URL####THUMBNAIL_NAME##"    />
-                                    </td>
-
-                                    <td align="left" valign="top" class="style1 thankyou abstract">
-   
-                                        ${this.state["DOUBLE_OPTIN_CONTENT"]}
- 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-        \n
          
-         `
-
-
-         if(this.state["IS_DOUBLE_OPTIN"]==true){
-            data = data.replaceAll(`##THANK_YOU_CONTENT##`, this.convertToEntities(doubleoptin_thankyou))
-            data = data.replaceAll(`header( "refresh:5;url=##BASE_URL####LINK_NAME##.pdf" ); `, "")//remove redirect 
-         } 
-         
-
+        
         switch (this.state["ASSET_FORMAT"]) {
             case "PDF":
                 data = data.replaceAll(`##THANK_YOU_CONTENT##`, this.convertToEntities(normal_thankyou))
@@ -558,36 +559,64 @@ This is to convert Chinese characters to Unicode numbers
                 data = data.replaceAll(`header( "refresh:5;url=##BASE_URL####LINK_NAME##.pdf" ); `, "")//remove redirect    
                 break;
         }
-
         if (forPreview == true) {
             if (this.filesRef.fileInput1.files[0]) { data = data.replaceAll(`##BASE_URL####LOGO_FOLDER####LOGO_NAME##`, await this.getBase64Image(this.filesRef.fileInput1.files[0])) }
             if (this.filesRef.fileInput2.files[0]) { data = data.replaceAll(`##BASE_URL####THUMBNAIL_NAME##`, await this.getBase64Image(this.filesRef.fileInput2.files[0])) }
         }
-
         if (this.state["THUMBNAIL_BORDER"] == true) {
             data = data.replaceAll(`##THUMBNAIL_BORDER##`,  'border: 1px solid #e5e5e5;'  )
         } else   {
             data = data.replaceAll(`##THUMBNAIL_BORDER##`, '')
         }
-
         if (this.state["HIDE_THUMBNAIL"] == true) {
             data = data.replaceAll(`##HIDE_THUMBNAIL##`, 'display:none;')
         }else{
             data = data.replaceAll(`##HIDE_THUMBNAIL##`, '') 
         }
-
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
-
         data = this.convertToEntities(this.getPrivacyPolicy(data)) //Privacy Policy
+
+        return data
+    }
+
+
+
+    async getThanksHtml({ forPreview }) {
+        let data = thanks_html
+        data=this.thanks_page({data,forPreview})
+ 
+
+       
         return data
     }
 
     getThankyouDoubleOptinHtml({ forPreview }) {
+        let data = thanks_html
+         
+        if(this.state["IS_DOUBLE_OPTIN"]==true){
+            const double_optin_thankyou = `\t
+            <table width="100%" cellspacing="0" cellpadding="10" border="0" class="content_body">
+                                <tbody>
+                                    <tr>
+                                        <td align="left" class="whitepaper" style="align-items: start; display: flex;">
+                                            <img  class="thumbnail"  alt="##EDM_TITLE##" src="##BASE_URL####THUMBNAIL_NAME##"    />
+                                        </td> 
+                                        <td align="left" valign="top" class="style1 thankyou abstract">
+                                            ${this.state["DOUBLE_OPTIN_CONTENT"]}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+            \n`
+            data = data.replaceAll(`##THANK_YOU_CONTENT##`, this.convertToEntities(double_optin_thankyou))
+            data = data.replaceAll(`header( "refresh:5;url=##BASE_URL####LINK_NAME##.pdf" ); `, "") //remove redirect 
+        } 
+        data=this.thanks_page({data,forPreview})
 
-   
+        return data
 
     }
 
@@ -625,7 +654,16 @@ This is to convert Chinese characters to Unicode numbers
                 files.push({ name: `${this.state["LINK_NAME"]}-landing.php`, data: await this.getLandingHtml({ forPreview }) })
                 files.push({ name: `${this.state["LINK_NAME"]}-sendemail.php`, data: await this.getSendmailHtml({ forPreview }) })
             }
+
+
             files.push({ name: `${this.state["LINK_NAME"]}-thanks.php`, data: await this.getThanksHtml({ forPreview }) })
+
+            //For double optin
+            if(this.state["IS_DOUBLE_OPTIN"]==true){
+                files.push({ name: `${this.state["LINK_NAME"]}-thankyou.php`, data: await this.getThankyouDoubleOptinHtml({ forPreview }) })
+            }
+
+
         }
 
         //For telemarketing

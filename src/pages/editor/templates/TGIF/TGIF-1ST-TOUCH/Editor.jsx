@@ -73,7 +73,7 @@ If you do not receive the link in your inbox, also check your junk/spam folder i
 The email and link are both from "ITBusinessToday".
 </span>`} />
 
-<TextArea label="Countries List" name="DOUBLE_OPTIN_COUNTRIES"/>
+<TextArea label="Countries List" helpText={`Leave empty to apply double optin on all countries.`} name="DOUBLE_OPTIN_COUNTRIES"/>
 <TextBox label="Country Form Filed's name attribute" name="DOUBLE_OPTIN_COUNTRY_FIELD_NAME_ATTRIBUTE" required={true}     />
 
         </>}

@@ -28,7 +28,7 @@ const ALPHAFormRenderer = {
         <label class="select" for="${obj.id}" >
         <select name="${obj.name}" ${obj.isRequired ? "required" : ""} id="${obj.id}"  ${obj.isReadOnly ? "readonly" : ""}   ${obj.isDisabled ? "disabled" : ""} >
             ${obj.options?.map((option, index) => {
-            return `<option value="${option.value}" ${(option.disabled) ? 'disabled' : ''}>${option.label}</option>`
+            return `<option value="${option.value}" ${(option.disabled) ? 'disabled=""   selected=""' : ''}>${option.label}</option>`
         }).join("")}     
             </select>
         <i></i>

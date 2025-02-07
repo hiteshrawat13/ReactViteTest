@@ -257,7 +257,7 @@
                                             <form action="##LINK_NAME##-sendmail.php" method="POST" id="sky-form" class="sky-form" autocomplete="off">
                                                 <header>
                                                     <h3 style="font-size: 24px; text-align: left;" id="landingTitle">##LANDING_TITLE##</h3>
-                                                    <p style="text-align: left; font-size: 16px;" id="LandingHeading">
+                                                    <p style="text-align: left; font-size: 16px;margin-top:5px;margin-bottom:5px;" id="LandingHeading">
                                                         <b>##LANDING_HEADING##</b>
                                                     </p>
                                                     <p style="text-align: left; font-size: 16px;" id="sponsorbyText">##SPONSORED_BY_TEXT##</p>
@@ -283,7 +283,7 @@
                                     <br />
                                     <a href="https://www.itbusinessplus.com/unsubscribe/">Click here to unsubscribe</a> | ##PRIVACY_POLICY##
                                     <br />
-                                    Copyright &#169; 2024 XDBS Corporation<br />
+                                    Copyright &#169; ##YEAR## XDBS Corporation<br />
                                     3501, Jack Northorp Ave, Ste C3873 <br />
                                     Hawthorne, CA 90250 USA
                                 </center>

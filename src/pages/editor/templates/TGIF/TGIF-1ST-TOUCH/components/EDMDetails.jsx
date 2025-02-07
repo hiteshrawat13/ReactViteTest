@@ -47,7 +47,11 @@ const EDMDetails = () => {
 
             }
           }
-        /></Col>
+        />
+        
+          <CheckBox label="Hide EDM title" name="HIDE_EDM_TITLE" defaultChecked={false} />
+        
+        </Col>
         <Col><TextBox label="EDM Sub Title" name="EDM_SUB_TITLE" required={false} width="100%" /></Col>
       </Row>
 

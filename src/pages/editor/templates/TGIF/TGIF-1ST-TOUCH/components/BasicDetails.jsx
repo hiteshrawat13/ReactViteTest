@@ -47,6 +47,7 @@ const BasicDetails = () => {
                 { label: "Case Study", value: "Case Study" },
                 { label: "Report", value: "Report" },
                 { label: "Webinar OnDemand", value: "Webinar" },
+                { label: "Video", value: "Video" },
                 { label: "Infographic", value: "Infographic" }
               ]}
             />

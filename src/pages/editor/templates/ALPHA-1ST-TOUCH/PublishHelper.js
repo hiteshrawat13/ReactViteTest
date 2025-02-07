@@ -3,7 +3,7 @@ import { ALPHAFormRenderer } from './FormRenderer.js'
 import edm_html from './pages/edm.html.txt?raw'  //?raw is important to read text files
 import landing_html from './pages/landing.html.txt?raw'  //?raw is important to read text files
 import sendemail_html from './pages/sendemail.php.txt?raw'  //?raw is important to read text files
-import thanks_html from './pages/thanks.html.txt?raw'  //?raw is important to read text files
+import thanks_html from './pages/thankyou.html.txt?raw'  //?raw is important to read text files
 import thanks_video_html from './pages/thanks-video.html.txt?raw'  //?raw is important to read text files
 import { getSendmailSubject } from './Base64.js'
 class PublishHelper {
@@ -88,6 +88,10 @@ class PublishHelper {
 
     EUScript = () => {
         const EU_MAPPED_DATA = this.getEUFormCurlApiLandingMappedData(this.state.form)
+
+        console.log(EU_MAPPED_DATA,"{{{{{{{{{{{{{{{{{{{{",this.state.form);
+        
+
         return ` submitHandler: function(form, event) {
                     event.preventDefault(); // Prevent default form submission
                     console.log(form);
@@ -324,11 +328,11 @@ class PublishHelper {
         let files = []
         files.push({ name: `${this.state["LINK_NAME"]}-edm.html`, data: await this.getEdmHtml({ forPreview }) })
         files.push({ name: `${this.state["LINK_NAME"]}-landing.html`, data: await this.getLandingHtml({ forPreview }) })
-        if (this.state.REGION != "EU") {
+        if (this.state['REGION'] != "EU") {
             //Sendmail not required for EU data is passed from landing page
             files.push({ name: `${this.state["LINK_NAME"]}-sendemail.php`, data: await this.getSendmailHtml({ forPreview }) })
         }
-        files.push({ name: `${this.state["LINK_NAME"]}-thanks.html`, data: await this.getThanksHtml({ forPreview }) })
+        files.push({ name: `${this.state["LINK_NAME"]}-thankyou.html`, data: await this.getThanksHtml({ forPreview }) })
         if (this.state["ASSET_FORMAT"] == 'MP4' || this.state["ASSET_FORMAT"] == 'IFRAME') {
             files.push({ name: `${this.state["LINK_NAME"]}-thanks-vid.html`, data: await this.getThanksVideoHtml({ forPreview }) })
         }

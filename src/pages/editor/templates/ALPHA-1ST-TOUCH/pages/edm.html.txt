@@ -1,246 +1,255 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "https://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="https://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
-    <head>
-        <!--[if gte mso 9]>
-            <xml>
-                <o:OfficeDocumentSettings>
-                    <o:AllowPNG />
-                    <o:PixelsPerInch>96</o:PixelsPerInch>
-                </o:OfficeDocumentSettings>
-            </xml>
-        <![endif]-->
-        <!-- fix outlook zooming on 120 DPI windows devices -->
-        <meta https-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <!-- So that mobile will display zoomed in -->
-        <meta https-equiv="X-UA-Compatible" content="IE=edge" />
-        <!-- enable media queries for windows phone 8 -->
-        <meta name="format-detection" content="date=no" />
-        <!-- disable auto date linking in iOS 7-9 -->
-        <meta name="format-detection" content="telephone=no" />
-        <!-- disable auto telephone linking in iOS 7-9 -->
-        <title>##EDM_TITLE##</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
-        <link rel="stylesheet" href="##BASE_URL##/css/sky-forms.css" />
-        <style type="text/css">
-            body {
-                margin: 0;
-                padding: 0;
-                -ms-text-size-adjust: 100%;
-                -webkit-text-size-adjust: 100%;
-            }
 
-            table {
-                border-spacing: 0;
-            }
 
-            table td {
-                border-collapse: collapse;
-            }
 
-            .ExternalClass {
-                width: 100%;
-            }
 
-            .ExternalClass,
-            .ExternalClass p,
-            .ExternalClass span,
-            .ExternalClass font,
-            .ExternalClass td,
-            .ExternalClass div {
-                line-height: 100%;
-            }
 
-            .ReadMsgBody {
-                width: 100%;
-                background-color: #ebebeb;
-            }
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+ xmlns:v="urn:schemas-microsoft-com:vml"
+ xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <!--[if gte mso 9]><xml>
+   <o:OfficeDocumentSettings>
+    <o:AllowPNG/>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+   </o:OfficeDocumentSettings>
+  </xml><![endif]-->
+  <!-- fix outlook zooming on 120 DPI windows devices -->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- So that mobile will display zoomed in -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- enable media queries for windows phone 8 -->
+  <meta name="format-detection" content="date=no"> <!-- disable auto date linking in iOS 7-9 -->
+  <meta name="format-detection" content="telephone=no"> <!-- disable auto telephone linking in iOS 7-9 -->
+  <title>##EDM_TITLE##</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/sky-forms.css">
+  <style type="text/css">
+body {
+  margin: 0;
+  padding: 0;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-family: Sans-Serif;
+}
 
-            table {
-                mso-table-lspace: 0pt;
-                mso-table-rspace: 0pt;
-            }
+table {
+  border-spacing: 0;
+}
 
-            img {
-                -ms-interpolation-mode: bicubic;
-            }
+table td {
+  border-collapse: collapse;
+}
 
-            .yshortcuts a {
-                border-bottom: none !important;
-            }
+.ExternalClass {
+  width: 100%;
+}
+p{
+    text-align: justify;
+    font-size: 12px;
+}
+.ExternalClass,
+.ExternalClass p,
+.ExternalClass span,
+.ExternalClass font,
+.ExternalClass td,
+.ExternalClass div {
+  line-height: 100%;
+}
 
-            @media screen and (max-width: 599px) {
-                .force-row,
-                .container {
-                    width: 100% !important;
-                    max-width: 100% !important;
-                }
-            }
-            @media screen and (max-width: 400px) {
-                .container-padding {
-                    padding-left: 12px !important;
-                    padding-right: 12px !important;
-                }
-            }
-            .ios-footer a {
-                color: #aaaaaa !important;
-                text-decoration: underline;
-            }
+.ReadMsgBody {
+  width: 100%;
+  background-color: #ebebeb;
+}
 
-            @media screen and (max-width: 599px) {
-                .col {
-                    width: 100% !important;
-                    border-top: 1px solid #eee;
-                    padding-bottom: 0 !important;
-                }
+table {
+  mso-table-lspace: 0pt;
+  mso-table-rspace: 0pt;
+}
 
-                .cols-wrapper {
-                    padding-top: 18px;
-                }
+img {
+  -ms-interpolation-mode: bicubic;
+}
 
-                .img-wrapper {
-                    float: right;
-                    max-width: 40% !important;
-                    height: auto !important;
-                    margin-left: 12px;
-                }
+.yshortcuts a {
+  border-bottom: none !important;
+}
 
-                .subtitle {
-                    margin-top: 0 !important;
-                }
-            }
-            @media screen and (max-width: 400px) {
-                .cols-wrapper {
-                    padding-left: 0 !important;
-                    padding-right: 0 !important;
-                }
+@media screen and (max-width: 599px) {
+  .force-row,
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+@media screen and (max-width: 400px) {
+  .container-padding {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+}
+.ios-footer a {
+  color: #aaaaaa !important;
+  text-decoration: underline;
+}
 
-                .content-wrapper {
-                    padding-left: 12px !important;
-                    padding-right: 12px !important;
-                }
-            }
-            a[href^="x-apple-data-detectors:"],
-            a[x-apple-data-detectors] {
-                color: inherit !important;
-                text-decoration: none !important;
-                font-size: inherit !important;
-                font-family: inherit !important;
-                font-weight: inherit !important;
-                line-height: inherit !important;
-            }
-            .w3-btn {
-                margin-bottom: 10px;
-                font-weight: bold;
-                font-size: 16px;
-                width: 150px;
-                height: 45px;
-                background-color: #1f70c1;
-                cursor: pointer;
-            }
-            .w3-border {
-                border: 1px solid #ccc !important;
-            }
-            .w3-round-xlarge {
-                border-radius: 16px !important;
-            }
-            p, ul ,ol{
-                text-align: left;
-                font-size: 14px;
-                color: Black;
-            }
-            li {
-                color: Black;
-                margin-bottom: 8px;
-            }
-        </style>
-    </head>
+@media screen and (max-width: 599px) {
+  .col {
+    width: 100% !important;
+    border-top: 1px solid #eee;
+    padding-bottom: 0 !important;
+  }
 
-    <body style="margin: 0; padding: 0; background-color: #f0f0f0;" bgcolor="#F0F0F0" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-        <!-- 100% background wrapper (grey background) -->
-        <table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" bgcolor="#F0F0F0">
-            <tr>
-                <td align="center" valign="top" bgcolor="#F0F0F0" style="background-color: #f0f0f0;">
-                    <br />
-                    <!-- 700px container (white background) -->
-                    <table border="0" width="700" cellpadding="0" cellspacing="0" class="container" style="width: 700px; max-width: 700px;">
-                        <tr>
-                            <td
-                                class="container-padding header"
-                                style="font-family: Helvetica, Arial, sans-serif; font-size: 18px; font-weight: bold; padding-bottom: 12px; color: #df4726; padding-left: 24px; padding-right: 24px; background-color: #ffffff;"
-                            >
-                                <div class="col-md-12">
-                                    <img src="##BASE_URL##itbp_logo_2019.png" id="clientLogo" alt="ITBP Logo" style="width: 50%; margin-top: 25px;" />
-                                </div>
-                                <div class="col-md-12">
-                                    <img src="##BASE_URL##New-Featured-Content-logo.png" id="clientLogo2" alt="Rich Featured" style="width: 50%;" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="content" align="left" style="padding-top: 12px; padding-bottom: 12px; background-color: #ffffff;">
-                                <div class="text-left">
-                                    <div class="row" style="margin-right: 15px; margin-left: 15px;">
-                                        <div class="">
-                                            <h3 id="edmTitle">##EDM_TITLE##</h3>
-                                            <!--Heading-->
-                                            <p style="text-align: left; font-size: 16px;" id="edmHeading">
-                                                <b>##EDM_HEADING##</b>
-                                            </p>
-                                            <p style="text-align: left; font-size: 16px;" id="sponsorbyText">##SPONSORED_BY_TEXT##</p>
-                                        </div>
-                                        <div class="col-md-12 well" style="background-color: white;">
-                                            <div class="col-sm-6" style="border-right: 2px #e0e0e0 solid;">
-                                                ##EDM_ABSTRACT##
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <center>
-                                                    <img id="sponsorLogo" width="##LOGO_WIDTH##" ; style="margin-left: 6px; margin-bottom: 10px; margin-top: 8px;" src="##BASE_URL####LOGO_FOLDER####LOGO_NAME##" />
-                                                </center>
+  .cols-wrapper {
+    padding-top: 18px;
+  }
 
-                                                <img src="##BASE_URL####THUMBNAIL_NAME##" width="##THUMBNAIL_WIDTH##" id="edmThumbnail" style="padding-top: 0px; border: 1px solid #cccccc;" />
-                                            </div>
-                                            <div class="sky-form">
-                                                <a href="##BASE_URL####LINK_NAME##-landing.html" target="_BLANK">
-                                                    <button type="submit" class="button" style="background-color: #4c77c7; padding: 0 246px; float: left; margin: 45px 0 0 10px;" id="edmCTA">##EDM_CTA##</button>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <small id="edmOptin">
-                                                You are agreeing to receive communication from the Sponsor and consent to the processing, and storage of your contact details in accordance with the Sponsor's privacy policy.
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="container-padding footer-text" align="left" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px; line-height: 16px; color: #aaaaaa; padding-left: 24px; padding-right: 24px;">
-                                <center>
-                                    <br />
-                                    <a href="https://www.itbusinessplus.com/unsubscribe/">Click here to unsubscribe</a> | ##PRIVACY_POLICY##
-                                    <br />
-                                    Copyright &#169; ##YEAR## XDBS Corporation<br />
-                                    3501, Jack Northorp Ave, Ste C3873 <br />
-                                    Hawthorne, CA 90250 USA
-                                </center>
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                            </td>
-                        </tr>
-                    </table>
-                    <!--/700px container -->
-                </td>
-            </tr>
-        </table>
-        <!--/100% background wrapper-->
-    </body>
+  .img-wrapper {
+    float: right;
+    max-width: 40% !important;
+    height: auto !important;
+    margin-left: 12px;
+  }
+
+  .subtitle {
+    margin-top: 0 !important;
+  }
+}
+@media screen and (max-width: 400px) {
+  .cols-wrapper {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .content-wrapper {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+}
+a[href^="x-apple-data-detectors:"],
+a[x-apple-data-detectors] {
+  color: inherit !important;
+  text-decoration: none !important;
+  font-size: inherit !important;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+}
+ .w3-btn {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    width: 150px;
+    height: 45px;
+    background-color: #1F70C1;
+	cursor:pointer;
+}
+.w3-border {
+    border: 1px solid #ccc !important;
+}
+.w3-round-xlarge {
+    border-radius: 16px !important;
+}
+
+
+p{
+text-align: left;
+    font-size: 14px;
+	}
+ul{
+text-align: left;
+    font-size: 14px;
+	}
+
+    ul li{
+
+    margin-bottom:8px;
+    }
+</style>
+</head>
+
+<body style="margin:0; padding:0;" bgcolor="#F0F0F0" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+   <!-- 100% background wrapper (grey background) -->
+   <table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" bgcolor="#F0F0F0">
+      <tr>
+         <td align="center" valign="top" bgcolor="#F0F0F0" style="background-color: #F0F0F0;">
+            <br>
+            <!-- 700px container (white background) -->
+            <table border="0" width="700" cellpadding="0" cellspacing="0" class="container" style="width:700px;max-width:700px">
+               <tr>
+                  <td class="container-padding header" style="font-family:Helvetica, Arial, sans-serif;font-size:24px;font-weight:bold;padding-bottom:12px;color:#DF4726;padding-left:24px;padding-right:24px;background-color: #ffffff;">
+					<div class="col-md-12">
+						<img src="##BASE_URL##itbp_logo_2019.png" alt="ITBP Logo" style="width: 50%;margin-top:25px;">
+					</div>
+					<div class="col-md-12">
+						<img src="##BASE_URL##New-Featured-Content-logo.png" alt="New-Featured-Content-logo" style="width: 50%;margin-left: 0px;">  
+				    </div>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="content" align="left" style="padding-top:12px;padding-bottom:12px;background-color:#ffffff">
+                     <div class="text-left">
+                        <div class="row" style="margin-right: 15px;margin-left: 15px;">
+						<div class="">
+						<h3>##EDM_TITLE##</h3>
+						   <p style="text-align: left;font-size: 16px;">
+                                <b>##EDM_HEADING##</b> 
+                            </p>
+						   <!--<p style="text-align: left;font-size: 16px;"><b>Blog post (Not sure that is an option)</b></p> -->  
+						<p style="text-align: left;font-size: 16px;">Sponsored By: Paycor </p>
+						</div>
+						<div class="col-md-12 well" style="background-color:white;">
+                           <div class="col-sm-6" style="border-right: 2px #e0e0e0 solid;">    
+								 
+                            ##EDM_ABSTRACT##						 
+                           </div>
+						   <div class="col-sm-6"  align="center" style="text-align:center;">
+								<img id="sponsorLogo" src="##BASE_URL####LOGO_FOLDER####LOGO_NAME##" width="##LOGO_WIDTH##"  style="width: ##LOGO_WIDTH##; "  width=100%/> <br> <br>
+								<img id="edmThumbnail" src="##BASE_URL####THUMBNAIL_NAME##" width=100%/>
+                             
+                           </div>
+						    <div class="sky-form">
+                            <a href="##BASE_URL####LINK_NAME##-landing.html" target=_BLANK><button type="submit" class="button" style="background-color: #4c77c7;   float: left;  font-weight: 600;    float: right;
+                            height: 39px;
+                            width:100%;
+                            overflow: hidden;
+                            margin: 10px 0 0 0px;
+                            padding: 0 0px;
+                            outline: none;
+                            border: 0;
+                            font: 300 15px / 39px 'Open Sans', Helvetica, Arial, sans-serif;
+                            text-decoration: none;
+                            color: #fff;
+                            cursor: pointer;">##EDM_CTA##</button></a>
+                          </div>
+						 
+                         <div style=" clear:both"></div>
+									
+                          </div>
+                           <small>You are agreeing to receive communication from the Sponsor and consent to the processing, and storage of your contact details in accordance with the Sponsor&#8217;s privacy policy.</small>
+                        </div>
+                     </div>
+                  </td>
+               </tr>
+               <tr>
+			  
+                  <td class="container-padding footer-text" align="left" style="font-family:Helvetica, Arial, sans-serif;font-size:12px;line-height:16px;color:#aaaaaa;padding-left:24px;padding-right:24px">
+                     <center><br>
+                     <a href="https://www.itbusinessplus.com/unsubscribe/">Click here to unsubscribe</a> | 
+                     ##PRIVACY_POLICY##
+                     <br>
+                     Copyright &#169; ##YEAR## XDBS Corporation<br>3501, Jack Northorp Ave, Ste C3873 <br>Hawthorne, CA 90250 USA <br>(302) 566-3002
+                     </center>  
+                     <br><br><br><br><br><br><br>
+                  </td>
+				
+               </tr>
+            </table>
+            <!--/700px container -->
+         </td>
+      </tr>
+   </table>
+   <!--/100% background wrapper-->
+</body>
 </html>

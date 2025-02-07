@@ -6,7 +6,7 @@ $ENDURL = "##BASE_URL####LINK_NAME##-thanks.php";
 
 ##MAPPED_DATA##
 
-##DOUBLE_OPTIN_CONDITION##
+ 
 
 $mapped_data = [];
 

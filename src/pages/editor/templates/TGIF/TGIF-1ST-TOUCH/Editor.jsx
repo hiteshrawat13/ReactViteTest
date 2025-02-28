@@ -25,7 +25,8 @@ import {
   LinkDetails,
   Section,
   ExtraFiles,
-  TextArea
+  TextArea,
+  NumberInput
 } from '../../../components/form/index'
 
 import defaultFieldsJson from "./default-fields.json"
@@ -43,11 +44,12 @@ const Editor = ({ }) => {
 
 
   const publishHelperRef = useRef(new PublishHelper())
-  const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData, setError } = useContext(EContext)
+  const { setStateValue, getStateValue, watch, getFormValue, setFormValue, filesRef, campData, setError,state } = useContext(EContext)
 
 
   return (<Stepper >
     <Step title="Basic Info" key={1101}>
+
 
       <HiddenData />
 
@@ -56,11 +58,13 @@ const Editor = ({ }) => {
 
       <Section title="Double Optin">
         <CheckBox label="Add Double Optin to this link" name="IS_DOUBLE_OPTIN" defaultChecked={false} />
+ 
+        
 
-  
 
-        {(  watch["IS_DOUBLE_OPTIN"] == true || (watch["IS_DOUBLE_OPTIN"] == undefined && getStateValue("IS_DOUBLE_OPTIN" )==true ) ) && <>
-      
+        {( watch["IS_DOUBLE_OPTIN"] == true  ) && <>
+
+
           <RichTextEditor label="Double Optin Content" name="DOUBLE_OPTIN_CONTENT" required={true} value={`
 <h1>Thank you...</h1>
 <span>  
@@ -73,12 +77,12 @@ If you do not receive the link in your inbox, also check your junk/spam folder i
 The email and link are both from "ITBusinessToday".
 </span>`} />
 
-<TextArea label="Countries List" helpText={`Leave empty to apply double optin on all countries.`} name="DOUBLE_OPTIN_COUNTRIES"/>
-<TextBox label="Country Form Filed's name attribute" name="DOUBLE_OPTIN_COUNTRY_FIELD_NAME_ATTRIBUTE" required={true}     />
+          <TextArea label="Countries List" helpText={`Leave empty to apply double optin on all countries.`} name="DOUBLE_OPTIN_COUNTRIES" />
+          <TextBox label="Country Form Filed's name attribute" name="DOUBLE_OPTIN_COUNTRY_FIELD_NAME_ATTRIBUTE" required={true} />
 
         </>}
 
-       
+
       </Section>
     </Step>
 
@@ -100,7 +104,7 @@ The email and link are both from "ITBusinessToday".
             <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} />
           }
 
-          <CheckBox label="Landing abstract is same as EDM abstract" name="LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT" defaultChecked={true} />
+          <CheckBox label="Landing abstract is same as EDM abstract" name="LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT" defaultChecked={false} />
           {(watch["LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT"] == false) && <>
             <button onClick={(e) => {
               e.preventDefault();
@@ -112,9 +116,12 @@ The email and link are both from "ITBusinessToday".
             </div>`
               setFormValue("LANDING_ABSTRACT", boxHtml)
             }
-            }>Add new format</button>
-            <RichTextEditor label="Landing Abstract" name="LANDING_ABSTRACT" required={true} />
-                      <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true} width="60%" value={`Thank you for requesting a ${getStateValue("ASSET_TYPE")}`} />
+            }>Add new format of Landing Page</button>
+            <RichTextEditor label="Landing Abstract" name="LANDING_ABSTRACT" required={true} value={`<div align="center"><div class="sub" data-key="${Math.random()}" align="center" style="background-color: #e2ebf3;margin-top: 30px; display: flex;padding: 10px;width: 250px;align-items: center;">
+            <p style="text-align: left; margin-top: 10px;">Please fill this form to get immediate access to this exclusive resource.</p>
+            <div><img src="https://resource.itbusinesstoday.com/whitepapers/Arrow-pr.png" alt="Arrow" style="width: 50px;  " /></div>
+            </div>
+            </div>`} />
 
           </>}
 
@@ -135,12 +142,7 @@ The email and link are both from "ITBusinessToday".
       {(getStateValue("ASSET_TYPE") != "Webinar") &&
         <>
           <Section title="Thankyou Page Details">
-            <RichTextEditor label="Thank You Page" name="NORMAL_THANK_YOU_PAGE_TEXT" required={true} value={`
-        <h1>Thank you...</h1>
-        <span>for downloading <strong>"##ASSET_TITLE##"</strong><br><br>
-        Your download will automatically start in <span id="countdown">10</span> seconds...<br>If your download doesn't start automatically, <a href="##BASE_URL####LINK_NAME##.pdf">click here</a> to start your download.</span>
-
-          `} />
+            <RichTextEditor label="Thank You Page" name="NORMAL_THANK_YOU_PAGE_TEXT" required={true} />
 
 
           </Section>
@@ -155,16 +157,7 @@ The email and link are both from "ITBusinessToday".
         (getStateValue("LINK_TYPE") == "1st_touch") &&
         <Section title="Sendmail Details">
           <TextBox label="Sendmail Subject" name="SENDMAIL_SUBJECT" required={true} width="60%" value={`Thank you for requesting a ${getStateValue("ASSET_TYPE")}`} />
-          <RichTextEditor label="Sendmail Body" name="SENDMAIL_BODY" required={true} value={`<table>
-<tr><td>Dear&nbsp;<b>$firstname,</b></td></tr>
-<tr><td>&nbsp;</td></tr>
-<tr><td>Thank you for requesting <b>"##ASSET_TITLE##"</b>. You can view it immediately by clicking <a href='##BASE_URL####LINK_NAME##.pdf'>HERE</a>!</td></tr>
-<tr><td>&nbsp;</td></tr>
-<tr><td>&nbsp;</td></tr>
-<tr><td>Sincerely,</td></tr>
-<tr><td>Nina Ridgeway</td></tr>
-<tr><td>ITBusinessToday</td></tr>
-</table>`} />
+          <RichTextEditor label="Sendmail Body" name="SENDMAIL_BODY" required={true} />
         </Section>
 
       }
@@ -291,7 +284,7 @@ The email and link are both from "ITBusinessToday".
                 padding: '10px',
                 paddingTop: '3px'
               }}>
-                <TextBox type="number" label="Logo Width" name="LOGO_WIDTH" onChange={(e) => {
+                <TextBox type="number" label="Logo Width (px)" name="LOGO_WIDTH" onChange={(e) => {
                   console.log(e);
                   iframe.contentDocument.querySelector('.splogo').style.width = e.target.value + "px"
                   console.log(iframe.contentDocument.querySelector('.splogo'));
@@ -305,28 +298,56 @@ The email and link are both from "ITBusinessToday".
                 {
                   (getStateValue("SHOW_IMAGE_BELOW_ABSTRACT") == true) &&
 
-                  <TextBox type="text" label="Image Below Abstract Width" name="IMAGE_BELOW_ABSTRACT_WIDTH" onChange={(e) => {
-                    console.log(e);
-                    if (!e.target.value.endsWith("%")) {
-                      alert("Please add percentage sign.")
-                      return
-                    }
-                    iframe.contentDocument.querySelector('.image_below_abstract').style.width = e.target.value + ""
-
-                    setStateValue("IMAGE_BELOW_ABSTRACT_WIDTH", e.target.value)
-                  }} />}
 
 
+                  <NumberInput
+                    label="Image Below Abstract Width"
+                    name="IMAGE_BELOW_ABSTRACT_WIDTH"
+                    helpText='enter values in px'
+                    required={true}
+                    hasSuffix={true}
+                    suffixOptions={['px']}
+                    onChange={(value) => {
+
+
+                      iframe.contentDocument.querySelector('.image_below_abstract').style.width = value
+
+                      setStateValue("IMAGE_BELOW_ABSTRACT_WIDTH", value)
+                    }} />
 
 
 
-                <TextBox type="text" label="EDM Thumbnail width" helpText='enter values in % or px' name="EDM_THUMBNAIL_WIDTH" onChange={(e) => {
+                }
+
+
+
+
+
+                <NumberInput
+                  label="EDM Thumbnail Width"
+                  name="EDM_THUMBNAIL_WIDTH"
+                  helpText='enter values in % or px'
+                  required={true}
+                  hasSuffix={true}
+                  suffixOptions={['px']}
+                  onChange={(value) => {
+
+
+                    iframe.contentDocument.querySelectorAll('.edm_thumbnail').forEach((element) => {
+                      element.style.width = value
+                    });
+
+                    setStateValue("EDM_THUMBNAIL_WIDTH", value)
+                  }} />
+
+
+                {/* <TextBox type="text" label="EDM Thumbnail width" helpText='enter values in % or px' name="EDM_THUMBNAIL_WIDTH" onChange={(e) => {
                   console.log(e);
 
                   iframe.contentDocument.querySelector('.edm_thumbnail').style.width = e.target.value + ""
 
                   setStateValue("EDM_THUMBNAIL_WIDTH", e.target.value)
-                }} />
+                }} /> */}
 
 
 

@@ -1,29 +1,40 @@
 import React, { forwardRef, useContext, useEffect, useImperativeHandle } from 'react'
-import { useForm ,FormProvider, useWatch  } from 'react-hook-form';
+import { useForm ,FormProvider, useWatch ,useFormContext } from 'react-hook-form';
 import { StepperContext } from './StepperContext';
 import { EContext } from '../../EditorMain';
 
 const Step =  ({ children}) => {
  
-  const {  setWatch, setCurrentFormMethods }=useContext(EContext)
+  const {  setWatch, setCurrentFormMethods,state }=useContext(EContext)
 
   const Stepper=useContext(StepperContext)
     const methods = useForm({
-      mode: "onChange"
+       mode: "onChange"
+       
     })
-
+    
+    
+    
+    const watchedValue=useWatch({
+      control:methods.control,  // Pass control to link it to the form
+       
+    })
+ 
+    
     useEffect(()=>{
       Stepper.setCurrentStepFormTriggerMethod({trigger:methods.trigger,handleSubmit:methods.handleSubmit,methods})
         setCurrentFormMethods(methods)
+        //setWatch(watchedValue)
+       
     },[methods])
 
-    const watchedValue=useWatch(methods)
+   
     useEffect(() => {
       //console.log(watchedValue);
       //This condition passes to top form value change
       setWatch(watchedValue)
       return () => { }
-    }, [watchedValue])
+    }, [watchedValue,methods ])
     
   
 

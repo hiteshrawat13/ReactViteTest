@@ -1,5 +1,15 @@
-<html lang="##LANGUAGE##">
+<html lang="##LANGUAGE##"   xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
     <head>
+
+        <!--[if gte mso 9]>
+        <xml>
+        <o:OfficeDocumentSettings>
+        <o:AllowPNG/>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+        </xml>
+        <![endif]-->
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>##EDM_TITLE##</title>
@@ -15,45 +25,14 @@
             body {
                 background-color: #e8ecee;
             }
-            .box {
-                /*
-			  box-shadow:
-			  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-			  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
-			  0 12.5px 10px rgba(0, 0, 0, 0.06),
-			  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
-			  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-			  0 100px 80px rgba(0, 0, 0, 0.12);
-
-			  min-height: 10px;
-			  width: 50vw;
-			  margin: 30px auto;
-			  background: white;
-			  border-radius: 5px;
-			*/
-
-                box-shadow:   0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
-  0 12.5px 10px rgba(0, 0, 0, 0.06),
-  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
-  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-  0 100px 80px rgba(0, 0, 0, 0.12);
-
-                border-radius: 5px;
-                margin-bottom: 10px;
-            }
+            
 
             .font-style {
             }
             .body-title {
                  
             }
-            .border-style {
-                border-top: 10px solid#0066b2;
-
-                border-bottom: 10px solid#0066b2;
-                width: 700px;
-            }
+         
             p {
                 font-size: 14px;
             }
@@ -131,19 +110,22 @@
             }
 
             p,
-            ul {
+            ul,ol {
                 font-size: inherit;
                 line-height: 1.5;
                  
             }
 
-            .abstract p , .abstract ul{
+            .abstract p , .abstract ul, .abstract ol{
                  font-size: 14px;
                 line-height: 1.5;
                 color: #414141;
             }
 
             ul li {
+                padding-bottom: 12px;
+            }
+            ol li {
                 padding-bottom: 12px;
             }
 
@@ -196,13 +178,39 @@
         </style>
     </head>
     <body>
+
+    <!--[if mso]>
+    <style type="text/css">
+    body, table, td {font-family: Arial, Helvetica, sans-serif !important;}
+    </style>
+    <![endif]-->
+
         <!--Body part Starts-->
 
         <table width="100%" border="0" cellspacing="0" cellpadding="0"  bgcolor="#e8ecee"  style="background-color: #e8ecee;">
             <tr>
                 <td align="center">
-                    <div class="container box border-style" style="background-color: #ffffff; margin: 3% auto;" align="center">
-                        <table width="700px" style="background-color: #ffffff; border-bottom: 1px solid rgb(192, 192, 192); padding: 0% 2%;" align="center" class="font-style">
+
+                <table width="700" width="700" style="
+
+          box-shadow: 0 10px 10px 3px #888;
+
+                border-radius: 5px;
+                margin-bottom: 10px;
+
+
+ 
+mso-border-top-alt: solid #0066b2 10px; 
+mso-border-bottom-alt: solid #0066b2 10px; 
+                border-top: 10px solid #0066b2;
+                border-bottom: 10px solid #0066b2;
+                width: 700px;
+                background-color: #ffffff; margin: 3% auto;" align="center">
+                            <tbody class="table table-borderless table-responsive">
+                                <tr scope="col">
+                                <td>
+                    <div class="container " >
+                        <table width="700" style="background-color: #ffffff; border-bottom: 1px solid rgb(192, 192, 192); padding: 0% 2%;" align="center" class="font-style">
                             <tbody class="table table-borderless table-responsive">
                                 <tr scope="col">
                                     <td width="454" style="padding-top: 20px; padding-bottom: 14px;">
@@ -210,14 +218,14 @@
                                     </td>
 
                                     <td width="234" align="right">
-                                        <span style="font-size: 13px;color: #0066b2;">##SPONSORED_BY_TEXT##</span><br />
-                                        <img class="splogo" src="##BASE_URL####LOGO_FOLDER####LOGO_NAME##" alt="Logo" style="width: ##LOGO_WIDTH##px; margin-top: 10px; margin-bottom: 6px;" />
+                                        <span style="font-family: Arial, Helvetica, sans-serif;font-size: 13px;color: #0066b2;">##SPONSORED_BY_TEXT##</span><br />
+                                        <img class="splogo" src="##BASE_URL####LOGO_FOLDER####LOGO_NAME##" alt="Logo" width="##LOGO_WIDTH_FOR_ATTR##" style="width: ##LOGO_WIDTH##px; margin-top: 10px; margin-bottom: 6px;" />
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <!-- Full Width title start -->
-                        <table width="700px" style="background-color: #ffffff; padding: 1% 2%;padding-top:15px;" align="center" class="font-style">
+                        <table width="700" style="background-color: #ffffff; padding: 1% 2%;padding-top:15px;" align="center" class="font-style">
                             <tbody class="table table-borderless table-responsive">
                                 <tr scope="col">
                                     <td style="  vertical-align: top;  ">
@@ -235,7 +243,7 @@
                         <!--Body part Ends here-->
                         <!--Privancy statement & call to action-->
 
-                        <table width="700px" align="center" style="background-color: #ffffff; border-bottom: 1px solid rgb(192, 192, 192); padding: 2% 2%;" class="font-style">
+                        <table width="700" align="center" style="background-color: #ffffff; border-bottom: 1px solid rgb(192, 192, 192); padding: 2% 2%;" class="font-style">
                             <tbody class="table table-borderless table-responsive">
                                 <tr scope="col">
                                     <td style="">
@@ -243,10 +251,22 @@
                                             ##EDM_OPTIN##
                                         </div>
 
-                                        <div align="##EDM_CTA_ALIGNMENT##" >
+
+                                        <div align="##EDM_CTA_ALIGNMENT##" valign="middle" >
+
+
+                                        <!--[if mso]>
+  <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://www.EXAMPLE.com/" style="mso-wrap-style:none; mso-position-horizontal: center" arcsize="10%" strokecolor="#0066b2" strokeweight="1px" fillcolor="#0066b2">
+    <v:textbox style="mso-fit-shape-to-text:true">   <![endif]-->
+          
+
+
+ 
+
                                             <a
                                                 href="##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#"
                                                 target="_self"
+                                                valign="middle"
                                                 style="
                                                     display:inline-block;
                                                     word-wrap: break-word;
@@ -258,11 +278,10 @@
                                                     font-weight: normal;
                                                     font-size: 20px;
                                                     font-family: Arial, Helvetica, sans-serif;
-                                                    padding-top: 0;
-                                                    padding-bottom: 0;
                                                     text-decoration: none;
                                                     background-color: #0066b2;
                                                     border-radius: 6px;
+                                                    padding-top: 0;
                                                     padding-bottom: 0;
                                                     padding-right: 10px;
                                                     padding: 9px 16px;
@@ -270,18 +289,19 @@
                                                 "
                                             >
                                                 <span style="margin-left: 10px; margin-right: 8px; text-align: center;">##EDM_CTA##</span>
-                                                <img src="##BASE_URL##arrow-right-circle.png" width="16px" alt="" style="" />
+                                                <img src="##BASE_URL##arrow-right-circle.png" width="16" height="16" alt="" style="width:16px;height:16px; " />
                                             </a>
-                                           
+                                             <!--[if mso]>  </v:textbox>
+  </v:roundrect>  <![endif]-->
                                         </div>
 
                                         
 
-                                        <div style="margin-top:10px;font-size: 11px; color: #414141; margin-bottom: 18px;" class="extra_text">
+                                        <div style="margin-top:10px;font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #414141; margin-bottom: 18px;" class="extra_text">
                                             ##EDM_TEXT_BELOW_CTA##
                                         </div>
 
-                                        <div style="padding-top: 15px; font-size: 13px; color: #414141;">
+                                        <div style="padding-top: 15px; font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #414141;">
                                             Best regards,<br />
                                             The Editorial Team<br />
                                             ITBusinessToday
@@ -292,11 +312,11 @@
                         </table>
                         <!--Privancy statement & call to action Ends-->
                         <!--Footer section-->
-                        <table width="700px" style="background-color: #ffffff;" align="center" class="font-style">
+                        <table width="700" style="background-color: #ffffff;" align="center" class="font-style">
                             <tbody class="table table-borderless table-responsive">
                                 <tr scope="col">
                                     <td>
-                                        <div align="center" class="footer" style="padding-top: 1%; padding-bottom: 1%; font-size: 11px;"> 
+                                        <div align="center" class="footer" style="padding-top: 1%; padding-bottom: 1%; font-family: Arial, Helvetica, sans-serif; font-size: 11px;"> 
                                             ##FOOTER##
                                         </div>
                                     </td>
@@ -304,6 +324,10 @@
                             </tbody>
                         </table>
                         <!--Footer section Ends-->
+                           </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </td>
             </tr>

@@ -173,7 +173,7 @@ This is to convert Chinese characters to Unicode numbers
         }
 
         const traditional_layout = `
-        <table width="700px" style="background-color: #ffffff; padding: 0% 2%;" align="center" class="font-style">
+        <table width="700" height="auto" style="background-color: #ffffff; padding: 0% 2%;" align="center" class="font-style">
                             <tbody class="table table-borderless table-responsive">
                                 <tr scope="col">
                                     <td style="vertical-align: top;padding-right: 18px;">
@@ -187,9 +187,9 @@ This is to convert Chinese characters to Unicode numbers
 										</div>
 
                                     </td>
-                                    <td style="width:##EDM_THUMBNAIL_WIDTH##;"  width="##EDM_THUMBNAIL_WIDTH##" class="edm_thumbnail" align="center" valign="top">
-                                        <a href="##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#" target="_blank">
-                                            <img src="##BASE_URL####THUMBNAIL_NAME##" alt="##EDM_TITLE##" class="img-full-width" width="##EDM_THUMBNAIL_WIDTH##" style="width:##EDM_THUMBNAIL_WIDTH##;" />
+                                    <td style="width:##EDM_THUMBNAIL_WIDTH##;"  width="##EDM_THUMBNAIL_WIDTH_ATTR##" class="edm_thumbnail" align="center" valign="top">
+                                        <a href="##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#" target="_blank" style="display:block">
+                                            <img src="##BASE_URL####THUMBNAIL_NAME##" alt="##EDM_TITLE##"  width="##EDM_THUMBNAIL_WIDTH_ATTR##" height="auto" class="img-full-width edm_thumbnail" style="width:##EDM_THUMBNAIL_WIDTH##;height:auto;display:block;" />
                                         </a>
 
                                     </td>
@@ -201,13 +201,13 @@ This is to convert Chinese characters to Unicode numbers
         `
 
         const full_width_layout = `
-        <table width="700px" style="background-color: #ffffff; padding: 0% 2%;" align="center" class="font-style">
+        <table width="700" height="auto" style="background-color: #ffffff; padding: 0% 2%;" align="center" class="font-style">
                             <tbody class="table table-borderless table-responsive">
                            
 								<tr>
 								 <td colspan="2" align="center" valign="top">
-                                        <a href="##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#" target="_blank">
-                                            <img src="##BASE_URL####THUMBNAIL_NAME##" alt="##EDM_TITLE##" class="img-full-width edm_thumbnail" style="width:##EDM_THUMBNAIL_WIDTH##;" />
+                                        <a href="##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#" target="_blank" style="display:block">
+                                            <img src="##BASE_URL####THUMBNAIL_NAME##" alt="##EDM_TITLE##" class="img-full-width edm_thumbnail"  width="##EDM_THUMBNAIL_WIDTH_ATTR##" height="auto" style="width:##EDM_THUMBNAIL_WIDTH##;height:auto;display:block;" />
                                         </a>
 
                                     </td>
@@ -288,6 +288,16 @@ This is to convert Chinese characters to Unicode numbers
         }else{
             data = data.replaceAll(`##HIDE_THUMBNAIL##`, '') 
         }
+
+
+        //FOR outlook removw px from width="" attribute
+        for (let i = 0; i < 3; i++) {
+            data = data.replaceAll(`##LOGO_WIDTH_FOR_ATTR##`, this.state["LOGO_WIDTH"].replaceAll("px","")) //remove px for width="" attribute
+            data = data.replaceAll(`##EDM_THUMBNAIL_WIDTH_ATTR##`, this.state["EDM_THUMBNAIL_WIDTH"].replaceAll("px","")) //remove px for width="" attribute
+     
+            
+        }
+     
   
         data=this.replaceHashVariables(data)
         data=this.replaceHashVariables(data)
@@ -413,9 +423,23 @@ This is to convert Chinese characters to Unicode numbers
             console.log(countries,countries.length);
             
             if(countries.join("").length>0){
+
+                let _post_str=``
+                if(country_field_name_attribute.includes("data[")){
+
+                   //find int in data[int here]
+                    const match = country_field_name_attribute.match(/\d+/); // This will find one or more digits
+                    const number = match ? parseInt(match[0]) : NaN;
+
+                    _post_str= `$_POST["data"][${number}]`
+                }else{
+                    _post_str= `$_POST["${country_field_name_attribute}"]`
+                }
+
+                
                 const php_code=`
                     $double_optin_countries = array(${countries_with_double_quotes});
-                    if (in_array($_POST["${country_field_name_attribute}"], $double_optin_countries))
+                    if (in_array(${_post_str}, $double_optin_countries))
                     {
                         $ENDURL = "${double_optin_url}";
                     }else{
@@ -656,8 +680,14 @@ This is to convert Chinese characters to Unicode numbers
             }
 
 
-            files.push({ name: `${this.state["LINK_NAME"]}-thanks.php`, data: await this.getThanksHtml({ forPreview }) })
 
+ 
+            if(this.state["IS_DOUBLE_OPTIN"]==true && this.state["DOUBLE_OPTIN_COUNTRIES"] !=null && this.state["DOUBLE_OPTIN_COUNTRIES"].trim().length==0){
+                // if double optin countries left empty dont create thanks.php directly redirect to thankyou.php double optin page
+            }else{
+                //add thanks.php if double optin condition is not satisfied.
+                files.push({ name: `${this.state["LINK_NAME"]}-thanks.php`, data: await this.getThanksHtml({ forPreview }) })
+            }
             //For double optin
             if(this.state["IS_DOUBLE_OPTIN"]==true){
                 files.push({ name: `${this.state["LINK_NAME"]}-thankyou.php`, data: await this.getThankyouDoubleOptinHtml({ forPreview }) })

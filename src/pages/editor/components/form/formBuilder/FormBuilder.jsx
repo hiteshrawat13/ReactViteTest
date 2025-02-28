@@ -340,13 +340,30 @@ const FormBuilder = (defaultFieldsJson) => {
       {/* Copy JSON button */}
       <button id=' ' className="btn-option" onClick={(e)=>{
         e.preventDefault();
-        navigator.clipboard.writeText(JSON.stringify(state.form)).then(function() {
-         alert("Form JSON copied")
-        }, function(err) {
-          alert("Error : Form JSON not copied")
-          console.log(err);
-          
-        });
+
+
+
+        try{
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(JSON.stringify(state.form))
+            alert("Form JSON copied to clipboard [navigator]")
+          } else {
+            const input = document.createElement('textarea')
+            input.value = JSON.stringify(state.form)
+            document.body.appendChild(input)
+            input.select()
+            document.execCommand('copy')
+            document.body.removeChild(input)
+            alert("Form JSON copied to clipboard [exec]")
+          }
+        }catch(error){
+          alert("Error copy form fields")
+        }
+     
+         
+        
+
+ 
 
       }}>Copy JSON</button>
 

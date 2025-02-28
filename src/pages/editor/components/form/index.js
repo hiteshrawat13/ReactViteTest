@@ -24,6 +24,7 @@ import AssetDetails from './AssetDetails';
 import LinkDetails from './LinkDetails';
 import ExtraFiles from './ExtraFiles';
 import TextArea from './TextArea';
+import NumberInput from './NumberInput';
 export {
     Stepper,
     Step,
@@ -50,5 +51,6 @@ export {
     LinkDetails,
     ExtraFiles,
     Section,
-    TextArea
+    TextArea,
+    NumberInput
 }

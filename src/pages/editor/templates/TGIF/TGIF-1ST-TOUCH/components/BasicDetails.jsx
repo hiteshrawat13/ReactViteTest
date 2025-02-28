@@ -22,8 +22,11 @@ import {
   Section
 } from '../../../../components/form/index'
 import { EContext } from '../../../../EditorMain'
+
+import translations from '../translations'
+
 const BasicDetails = () => {
-  const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData, setError } = useContext(EContext)
+  const { setStateValue, getStateValue, watch, getFormValue,setFormValue, filesRef, campData, setError,reactHookFormMethods } = useContext(EContext)
   return (
     <>
       <Section title="Details" >
@@ -50,7 +53,52 @@ const BasicDetails = () => {
                 { label: "Video", value: "Video" },
                 { label: "Infographic", value: "Infographic" }
               ]}
+ 
+              onChange={(e) => {
+                
+
+                const selectedLanguage=reactHookFormMethods.getValues("LANGUAGE")
+                const translation=translations.find((element) => element.language.toLowerCase() == selectedLanguage.toLowerCase() )
+
+             
+                setStateValue("SENDMAIL_BODY",translation.mailBody1.trim() )
+                
+                if((e.target.value!="Webinar") && (e.target.value!="Video")  ){
+                  setStateValue("NORMAL_THANK_YOU_PAGE_TEXT",translation.tyPage )
+                }
+
+                switch (e.target.value) {
+                  case "White Paper":
+                    setStateValue("SENDMAIL_SUBJECT",translation.sub1 )
+                    break;
+                  case "Buyers Guide":
+                    setStateValue("SENDMAIL_SUBJECT",translation.sub2 )
+                    break;
+                  case "E Book":
+                    setStateValue("SENDMAIL_SUBJECT",translation.sub3 )
+                    break;
+                  case "Case Study":
+                    setStateValue("SENDMAIL_SUBJECT",translation.sub4 )
+                    break;
+                  case "Report":
+                    setStateValue("SENDMAIL_SUBJECT",translation.sub5 )
+                    break;
+                  case "Webinar":
+                    setStateValue("SENDMAIL_SUBJECT",translation.sub6 )
+                    break;
+                  case "Video":
+                    setStateValue("SENDMAIL_SUBJECT",translation.sub7 )
+                    break;
+                  case "Infographic":
+                    setStateValue("SENDMAIL_SUBJECT",translation.sub8 )
+                    break;
+
+                }
+
+              }}
             />
+
+
           </Col>
           <Col>
             <TextBox label="Text above the logo" name="SPONSORED_BY_TEXT" required={true} value="Sponsored by" />

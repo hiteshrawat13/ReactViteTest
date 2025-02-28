@@ -59,6 +59,8 @@ const LinkDetails = () => {
                   { label: "Both ( NON-EU & CASL )", value: "BOTH" }
                 ]}
                 width="100%"
+
+                style={{fontWeight:"bold",fontStyle:"italic", color:"#0097e6"}}
               /></Col>
               <Col>
                 <TextBox label="Campaign Id" name="CAMP_ID" required={true} value={campData?.campaignId} readOnly />

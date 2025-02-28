@@ -125,13 +125,17 @@
             }
 
 			.abstract p,
-			.abstract ul {
+			.abstract ul ,
+            .abstract ol {
 				font-size: 14px;
 				line-height: 1.5;
 				color: #414141;
 			}
 
 			ul li {
+				padding-bottom: 12px;
+			}
+            ol li {
 				padding-bottom: 12px;
 			}
 

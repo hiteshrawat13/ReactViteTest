@@ -69,6 +69,15 @@ const EditorMain = () => {
     dispatch(setData(data))
   }
 
+
+  
+  const getFormValue = (key) => {
+
+     // console.log(currentFormMethods.getValues);
+  
+     currentFormMethods.getValues(key)   //{shouldValidate:true} removes errors
+    }
+
   const setFormValue = (key, value) => {
 
   //  console.log(currentFormMethods);
@@ -177,9 +186,12 @@ const EditorMain = () => {
         setStateValue:setStateValue || null ,
         getStateValue:getStateValue || null ,
         setState:setState || null ,
+        getFormValue:getFormValue || null,
         setFormValue:setFormValue || null ,
+        reactHookFormMethods:currentFormMethods || null,
         filesRef:filesRef,
-        setError:setError || null 
+        setError:setError || null ,
+        state:data
       }}>
 
         

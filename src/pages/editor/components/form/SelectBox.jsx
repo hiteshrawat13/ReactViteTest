@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 
-const SelectBox = ({label,name,value=null,required,options,width=null,helpText=null,...rest}) => {
+const SelectBox = ({label,name,value=null,required,options,width=null,helpText=null,onChange=null,...rest}) => {
     const campaignDataState = useSelector(state => state.campaignData)
     const { register,unregister,setValue, formState: { errors } } = useFormContext()
 
@@ -23,7 +23,7 @@ const SelectBox = ({label,name,value=null,required,options,width=null,helpText=n
             <select 
             //defaultValue={campaignDataState.data[name] || ""}
             {...rest} 
-            {...register(name, { required: required })}>
+            {...register(name, { required: required,onChange: (e) => { onChange && onChange(e) } })}  >
                 {options?.map((opt,i)=>{
                     return <option value={opt.value} key={i}>{opt.label}</option>
                 })}

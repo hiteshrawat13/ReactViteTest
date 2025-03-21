@@ -12,6 +12,9 @@ import { fields } from './Fields'
 import { FaPencilAlt } from "react-icons/fa";
 import OptionList from '../../OptionList'
 
+
+import Jodit from './Jodit'
+
 const RadioGroupEditor = ({  id,data ,toast,handleFieldDataUpdate}) => {
 
     const [isLabelModalOpened, setLabelModalOpened] = useState(false)
@@ -20,6 +23,8 @@ const RadioGroupEditor = ({  id,data ,toast,handleFieldDataUpdate}) => {
 
     const [label, setLabel] = useState(data.label)
     const [options, setOptions] = useState(data.options)
+
+ 
 
     const dispatch = useDispatch()
 
@@ -73,12 +78,31 @@ const RadioGroupEditor = ({  id,data ,toast,handleFieldDataUpdate}) => {
             </Modal>} */}
 
 
-<Modal open={isLabelModalOpened} onClose={() => setLabelModalOpened(false)}>
+{/* <Modal open={isLabelModalOpened} onClose={() => setLabelModalOpened(false)}>
 <label style={{ width: "90%", height: "90%" }}>
                     <span>Label</span>
                     <textarea type="text" name="label" value={label} onChange={(e) => { setLabel(e.target.value) }} style={{ width: "90%", height: "90%" }} />
                 </label>
-      </Modal>
+      </Modal> */}
+
+
+
+
+      <Modal
+          center
+          open={isLabelModalOpened}
+          onClose={() => setLabelModalOpened(false)}>
+          <label style={{ width: "90%", height: "90%" }}>
+            <Jodit value={label} onChange={(e) => { setLabel(e) }} />
+          </label>
+          <div style={{ display: "flex", justifyContent: "center", padding: "3px 20px" }}><button className='btn--primary' style={{ width: "100%" }} onClick={() => setLabelModalOpened(false)}>Save</button></div>
+        
+        
+        
+        </Modal>
+
+
+
             <button className='openModal' onClick={(e) => { e.preventDefault(); setLabelModalOpened(true) }}><FaPencilAlt /></button>
 
             <label>

@@ -48,6 +48,14 @@ const Editor = ({ }) => {
 
 
   return (<Stepper >
+
+<Step title="Start" key={11065}>
+  
+  <Section title="Disclaimer">
+  <p>TGIF Editor</p>
+  </Section>
+  </Step>
+
     <Step title="Basic Info" key={1101}>
 
 

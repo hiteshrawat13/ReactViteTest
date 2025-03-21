@@ -5,26 +5,43 @@ import { EContext } from '../../EditorMain';
 
 const Step =  ({ children}) => {
  
-  const {  setWatch, setCurrentFormMethods,state }=useContext(EContext)
+  const {  setWatch, setCurrentFormMethods,state , onFormLoad }=useContext(EContext)
 
   const Stepper=useContext(StepperContext)
     const methods = useForm({
        mode: "onChange"
        
     })
+
+    // useEffect(() => {
+    //   methods.reset(state);
+       
+    // }, [state]);
+
+    useEffect(() => {
+      
+      methods.trigger().then(res=>{
+    
+        console.log("❌🔴" ,res )
+        if(onFormLoad)onFormLoad();
+        
+      });
+    
+ 
+    
+    }, [methods]);
     
     
     
     const watchedValue=useWatch({
       control:methods.control,  // Pass control to link it to the form
-       
     })
  
     
     useEffect(()=>{
       Stepper.setCurrentStepFormTriggerMethod({trigger:methods.trigger,handleSubmit:methods.handleSubmit,methods})
         setCurrentFormMethods(methods)
-        //setWatch(watchedValue)
+         setWatch(watchedValue)
        
     },[methods])
 

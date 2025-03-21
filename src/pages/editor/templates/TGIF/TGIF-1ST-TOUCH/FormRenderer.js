@@ -119,11 +119,11 @@ const text_box_html=` <input type="${(obj.inputType) ? obj.inputType : 'text'}" 
                                           
 <tr class="form-group ${obj.id}-holder">
     <td colspan="2" >
-        <div>${obj.label} ${(obj.label && obj.isRequired) ? `<span style="color: red;">*</span>` : ""}</div>
+        <div class="check-group-label" >${obj.label} ${(obj.label && obj.isRequired) ? `<span style="color: red;">*</span>` : ""}</div>
         <div class="check-group">
         ${obj.options?.map(option => `
             <label class="radio-option">
-                <input type="checkbox" name="${obj.name}" value="${option.value}" ${obj.isRequired ? "required" : ""}  ${obj.isReadOnly ? "readonly" : ""}  ${obj.isDisabled ? "disabled" : ""}>
+                <input type="checkbox" name="${obj.name}[]" value="${option.value}" ${obj.isRequired ? "required" : ""}  ${obj.isReadOnly ? "readonly" : ""}  ${obj.isDisabled ? "disabled" : ""}>
                 <span>${option.label}</span>
             </label>
         `).join("")}
@@ -139,7 +139,7 @@ const text_box_html=` <input type="${(obj.inputType) ? obj.inputType : 'text'}" 
                                           
 <tr class="form-group ${obj.id}-holder">
 <td colspan="2">
-       <div>${obj.label} ${(obj.label && obj.isRequired) ? `<span style="color: red;">*</span>` : ""}</div>
+       <div class="check-group-label">${obj.label} ${(obj.label && obj.isRequired) ? `<span style="color: red;">*</span>` : ""}</div>
        <div class="check-group">
        ${obj.options?.map(option => `
        <label class="radio-option">

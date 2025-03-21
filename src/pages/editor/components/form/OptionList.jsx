@@ -35,6 +35,56 @@ const OptionList = ({ setOptions, options }) => {
 
 
 
+
+
+ 
+  
+    const handleMoveLineUp = (textareaRef, setTextareaVal) => {
+      const lines = textareaRef.current.value.split("\n");
+      const selectedLineIndex = textareaRef.current.selectionStart;
+      const selectedLine = lines.findIndex((line, index) => {
+        const lineStart = textareaRef.current.value.indexOf(line);
+        const lineEnd = lineStart + line.length;
+        return selectedLineIndex >= lineStart && selectedLineIndex <= lineEnd;
+      });
+  
+      if (selectedLine > 0) {
+        // Swap lines
+        const temp = lines[selectedLine];
+        lines[selectedLine] = lines[selectedLine - 1];
+        lines[selectedLine - 1] = temp;
+  
+        setTextareaVal(lines.join("\n"));
+      }
+    };
+  
+    const handleMoveLineDown = (textareaRef, setTextareaVal) => {
+      const lines = textareaRef.current.value.split("\n");
+      const selectedLineIndex = textareaRef.current.selectionStart;
+      const selectedLine = lines.findIndex((line, index) => {
+        const lineStart = textareaRef.current.value.indexOf(line);
+        const lineEnd = lineStart + line.length;
+        return selectedLineIndex >= lineStart && selectedLineIndex <= lineEnd;
+      });
+  
+      if (selectedLine < lines.length - 1) {
+        // Swap lines
+        const temp = lines[selectedLine];
+        lines[selectedLine] = lines[selectedLine + 1];
+        lines[selectedLine + 1] = temp;
+  
+        setTextareaVal(lines.join("\n"));
+      }
+    };
+
+
+
+
+
+
+
+
+
     const handleDrop = (droppedItem) => {
         // Ignore drop outside droppable container
         if (!droppedItem.destination) return;
@@ -165,6 +215,11 @@ const OptionList = ({ setOptions, options }) => {
 
                             </div>
                         </div>
+
+            <div>
+              <button onClick={() => handleMoveLineUp(labelsTextareaRef, setLabelsTextareaVal)}>Move Line Up</button>
+              <button onClick={() => handleMoveLineDown(labelsTextareaRef, setLabelsTextareaVal)}>Move Line Down</button>
+            </div>
 
                         <button style={{ marginTop: "5px" }} onClick={handleOptionTextData}>Add Options</button>
                     </div>

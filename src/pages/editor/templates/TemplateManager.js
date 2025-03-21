@@ -1,8 +1,5 @@
 import { lazy } from "react"
-
-
 const TemplateManager=[
-
     {
         clientCode:"TGIF",
         title:"TGIF",
@@ -46,7 +43,6 @@ const TemplateManager=[
     //     ]
     // }
 
-
        {
         clientCode:"ALPHA",
         title:"Alpha",
@@ -56,13 +52,9 @@ const TemplateManager=[
                 id:"ALPHA-1ST-TOUCH",
                 type:"1st_touch",
                 title:"Alpha 1st Touch",
-               
                 editor:lazy(() => import('./ALPHA-1ST-TOUCH/Editor'))
             }
         ]
     }
-
-
 ]
-
 export default TemplateManager

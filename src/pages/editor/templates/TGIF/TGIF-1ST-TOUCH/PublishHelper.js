@@ -168,9 +168,7 @@ This is to convert Chinese characters to Unicode numbers
             }
         }
       
-        if(this.state['LINK_TYPE']=="2nd_touch"){
-            data = data.replaceAll(`##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#`, "##BASE_URL####LINK_NAME##-thanks.php")
-        }
+      
 
         const traditional_layout = `
         <table width="700" height="auto" style="background-color: #ffffff; padding: 0% 2%;" align="center" class="font-style">
@@ -232,6 +230,12 @@ This is to convert Chinese characters to Unicode numbers
             data = data.replaceAll(`##EDM_LAYOUT##`, this.convertToEntities(traditional_layout))
         } else if (this.state["EDM_LAYOUT"] == "Full width thumbnail and abstract") {
             data = data.replaceAll(`##EDM_LAYOUT##`, this.convertToEntities(full_width_layout))
+        }
+
+
+
+        if(this.state['LINK_TYPE']=="2nd_touch"){
+            data = data.replaceAll(`##BASE_URL####LINK_NAME##-landing.php?e=#e-mail#`, "##BASE_URL####LINK_NAME##-thanks.php")
         }
 
         // EDM IMAGE_BELOW_ABSTRACT 

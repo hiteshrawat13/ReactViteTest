@@ -28,6 +28,7 @@ const EditorMain = () => {
   const [editor, setEditor] = useState(null)
  
 
+  const [onStepLoad, setOnStepLoad] = useState(null)
 
 
   const { data } = useSelector(state => state.campaignData)
@@ -83,6 +84,12 @@ const EditorMain = () => {
   //  console.log(currentFormMethods);
 
    currentFormMethods.setValue(key, value, { shouldValidate: true })   //{shouldValidate:true} removes errors
+  }
+
+
+
+  const watchField=(key,value)=>{
+    return watch[key] == value  || (watch["IS_DOUBLE_OPTIN"]==undefined && getStateValue(key)==value )  
   }
 
   useEffect(() => {
@@ -191,7 +198,8 @@ const EditorMain = () => {
         reactHookFormMethods:currentFormMethods || null,
         filesRef:filesRef,
         setError:setError || null ,
-        state:data
+        state:data,
+        onStepLoad, setOnStepLoad
       }}>
 
         
@@ -199,7 +207,7 @@ const EditorMain = () => {
         {/* {React.cloneElement(
              <Editor11/>, {  })}   */}
           <Editor11/>
-       
+       {onStepLoad}
       </EContext.Provider>
       </Suspense>
     </div>

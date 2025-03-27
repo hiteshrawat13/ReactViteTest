@@ -1,8 +1,8 @@
  //Dont forget to add extension while importing module
  import {ARCFormRenderer} from './FormRenderer.js'
- import edm_html from './edm.html.txt?raw'  //?raw is important to read text files
- import landing_html from './landing.html.txt?raw'  //?raw is important to read text files
- import sendemail_html from './sendemail.php.txt?raw'  //?raw is important to read text files
+ import edm_html from './pages/edm.html.txt?raw'  //?raw is important to read text files
+ import landing_html from './pages/landing.html.txt?raw'  //?raw is important to read text files
+ import sendemail_html from './pages/sendemail.php.txt?raw'  //?raw is important to read text files
 class PublishHelper{
     constructor(state){
         this.state=state

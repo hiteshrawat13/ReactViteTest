@@ -3,9 +3,9 @@ import { useForm ,FormProvider, useWatch ,useFormContext } from 'react-hook-form
 import { StepperContext } from './StepperContext';
 import { EContext } from '../../EditorMain';
 
-const Step =  ({ children}) => {
+const Step =  ({ children,title}) => {
  
-  const {  setWatch, setCurrentFormMethods,state , onFormLoad }=useContext(EContext)
+  const {  setWatch, setCurrentFormMethods,state , setOnStepLoad }=useContext(EContext)
 
   const Stepper=useContext(StepperContext)
     const methods = useForm({
@@ -20,12 +20,12 @@ const Step =  ({ children}) => {
 
     useEffect(() => {
       
-      methods.trigger().then(res=>{
+      // methods.trigger().then(res=>{
     
-        console.log("❌🔴" ,res )
-        if(onFormLoad)onFormLoad();
+      //  // console.log("ON FROM Load" ,res )
+      //   if(setOnStepLoad)setOnStepLoad(title);
         
-      });
+      // });
     
  
     

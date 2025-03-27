@@ -8,17 +8,17 @@ const CheckBox = ({ label, name, required = false, defaultChecked = false, ...re
 
   useEffect(() => {
     if (campaignDataState.data[name] != undefined) {
-      setValue(name, campaignDataState.data[name])
+      setValue(name, campaignDataState.data[name],{shouldValidate:true})
         
     } else {
-      setValue(name, defaultChecked || false)
+      setValue(name, defaultChecked || false,{shouldValidate:true})
     }
 
     
     return () => {
       unregister(name)
     }
-  }, [campaignDataState.data[name],defaultChecked,setValue])
+  }, [campaignDataState.data[name] ])
 
 
  

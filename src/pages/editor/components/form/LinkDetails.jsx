@@ -25,7 +25,7 @@ import {
 
 const LinkDetails = () => {
     
-      const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData, setError } = useContext(EContext)
+      const { setStateValue, getStateValue, watch, setFormValue, filesRef, campData, setError,onStepLoad } = useContext(EContext)
   return (
     <Section title="Link Details">
 
@@ -107,9 +107,9 @@ const LinkDetails = () => {
               } />
 
  
-          {(watch['LINK_NAME']) && <>wewewewe</>}
+           
 
-            {(watch['LINK_NAME']) && <CheckLink link={watch["BASE_URL"] + (watch['LINK_NAME']) + "-edm.html"} onExists={() => {
+            {(watch['LINK_NAME'] != getStateValue('LINK_NAME') ) && <CheckLink link={watch["BASE_URL"] + (watch['LINK_NAME']) + "-edm.html"} onExists={() => {
               if(campData.mode === 'new'){
                 setError('LINK_NAME',"Link already exists on server.")
                 console.log("ERRRRRRRRRRRRR@@@@@@@@",campData.mode);

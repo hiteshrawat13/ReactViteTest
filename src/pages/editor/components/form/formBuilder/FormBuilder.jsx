@@ -187,7 +187,13 @@ const FormBuilder = (defaultFieldsJson) => {
 
 
   const handleNameDataRecalculate=(e)=>{
-    e.preventDefault()
+    e.preventDefault();
+
+
+    if(state.form.find(e => e.name === 'firstname') ==null){
+      alert(`name="firstname" NOT form in the form.`)
+      return;
+    }
    
     let counter=0;
     let updatedForm=[]
@@ -452,7 +458,15 @@ onClose={() => setFieldPropsModalOpened(false)}>
           </div>
         </div> */}
 
+       
+
       </div>
+          <br/>
+      <div>{(state.form.find(e => e.name === 'firstname')!=null) ? 
+        <div style={{color:"green"}}>✅name="firstname" found</div> : 
+        <div style={{color:"red"}}>❌name="firstname" <i>NOT</i> found</div>
+        }
+        </div>
     </>
   )
 }

@@ -21,3 +21,19 @@
         gap:4px;
     }
 }
+
+
+.disclaimer{
+    font-size: 14px;
+    p{
+        margin-bottom: 12px;
+    }
+
+    ul{
+        margin-bottom: 12px;
+
+        li{
+            margin-bottom: 12px;
+        }
+    }
+}

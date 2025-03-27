@@ -72,8 +72,17 @@ const OptionList = ({ setOptions, options }) => {
         const temp = lines[selectedLine];
         lines[selectedLine] = lines[selectedLine + 1];
         lines[selectedLine + 1] = temp;
-  
+
+        let newCursorPosition = selectedLineIndex;
+        newCursorPosition += lines[selectedLine - 1].length + 1;
+       //
+       
         setTextareaVal(lines.join("\n"));
+        setTimeout(() => {
+            textareaRef.current.focus()
+            textareaRef.current.setSelectionRange(newCursorPosition,newCursorPosition)
+        }, 80);
+        
       }
     };
 
@@ -197,10 +206,34 @@ const OptionList = ({ setOptions, options }) => {
                         <div style={{ display: "flex", gap: "10px" , height:"100%"}}>
                             <div style={{ width: "100%",display: "flex",flexDirection:"column"}} >
                                 <h5>Labels</h5>
-                            <textarea ref={labelsTextareaRef} style={{ width: "100%",  flex:"1",  resize: "none", padding: "10px" ,overflow:"auto",whiteSpace:"nowrap"}} 
+                            <textarea ref={labelsTextareaRef} 
+                            style={{ width: "100%",  flex:"1",  resize: "none", padding: "10px" ,overflow:"auto",whiteSpace:"nowrap"}} 
                             //defaultValue={data.map(item => item.label + "\r\n").join("").trim()}
                             value={labelsTextareaVal}
                             onChange={(e)=>{setLabelsTextareaVal(e.target.value)}}
+                            onKeyDown={(e)=>{
+                            
+                                if(e.altKey && e.key=="ArrowUp"){
+                                  
+                                    e.preventDefault(); // Prevent default scrolling behavior
+             
+                                    // Move line up function
+                                    //handleMoveLineUp(labelsTextareaRef, setLabelsTextareaVal);
+ 
+                                }else if(e.altKey && e.key=="ArrowDown"){
+                                    
+                                    e.preventDefault(); // Prevent default scrolling behavior
+             
+                                    // Move line down function
+                                   // handleMoveLineDown(labelsTextareaRef, setLabelsTextareaVal);
+                        
+                                    
+                                   
+                                }
+
+                               
+                                
+                            }}      
                             ></textarea>
 
                             </div>
@@ -216,10 +249,7 @@ const OptionList = ({ setOptions, options }) => {
                             </div>
                         </div>
 
-            <div>
-              <button onClick={() => handleMoveLineUp(labelsTextareaRef, setLabelsTextareaVal)}>Move Line Up</button>
-              <button onClick={() => handleMoveLineDown(labelsTextareaRef, setLabelsTextareaVal)}>Move Line Down</button>
-            </div>
+         
 
                         <button style={{ marginTop: "5px" }} onClick={handleOptionTextData}>Add Options</button>
                     </div>

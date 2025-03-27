@@ -44,17 +44,31 @@ const Editor = ({ }) => {
 
 
   const publishHelperRef = useRef(new PublishHelper())
-  const { setStateValue, getStateValue, watch, getFormValue, setFormValue, filesRef, campData, setError,state } = useContext(EContext)
+  const { setStateValue, getStateValue, watch, getFormValue, setFormValue, filesRef, campData, setError, state } = useContext(EContext)
 
 
   return (<Stepper >
 
-<Step title="Start" key={11065}>
-  
-  <Section title="Disclaimer">
-  <p>TGIF Editor</p>
-  </Section>
-  </Step>
+    <Step title="Start" key={11065}>
+
+      <Section title="Disclaimer">
+        <div className="disclaimer">
+          <p><span className="important">Important Notice:</span> When using the Campaign Builder Tool, please ensure you follow the guidelines below to avoid potential issues:</p>
+          <ul style={{ marginLeft: "30px" }}>
+            <li><strong>Duplicate File Names:</strong> Ensure that you do not upload files with duplicate names to the FTP server. Duplicate file names may result in overwriting or errors in your campaign.</li>
+            <li><strong>Logo and Title Abstract:</strong> Verify that your logo and title abstract are correctly uploaded and appear as intended. A missing or incorrect logo/title can affect the professional appearance of your campaign.</li>
+            <li><strong>PDF and Webinar Links:</strong> Double-check that all PDF documents and webinar links are functioning correctly. Broken or incorrect links may hinder user access to important content.</li>
+            <li><strong>Form Fields:</strong> Review all form fields to ensure they are properly configured. Incorrect or missing form fields may result in inaccurate data collection or broken functionality.</li>
+            <li><strong>CTA Names:</strong> Verify that the Call-to-Action (CTA) buttons and links, including form fields CTA and EDM CTA, are correctly labeled and linked to the intended actions.</li>
+            <li><strong>Privacy Policies:</strong> Make sure that your privacy policy links are correctly included and lead to the appropriate document to ensure compliance with legal requirements.</li>
+            <li><strong>Thumbnails:</strong> Confirm that all thumbnails are correctly uploaded and display as expected across all devices and platforms.</li>
+            <li><strong>Link Checking:</strong> After creating your campaign, carefully check and test all links to ensure they are functioning as intended. Broken or incorrect links can lead to poor user experience and campaign performance.</li>
+          </ul>
+          <p>By using this tool, you agree to carefully review and verify the elements listed above to ensure a smooth and effective campaign execution.</p>
+        </div>
+
+      </Section>
+    </Step>
 
     <Step title="Basic Info" key={1101}>
 
@@ -65,12 +79,13 @@ const Editor = ({ }) => {
       <BasicDetails />
 
       <Section title="Double Optin">
-        <CheckBox label="Add Double Optin to this link" name="IS_DOUBLE_OPTIN" defaultChecked={false} />
- 
-        
+        {JSON.stringify(watch["IS_DOUBLE_OPTIN"])}
+        <CheckBox label="Add Double Optin to this link" name="IS_DOUBLE_OPTIN" defaultChecked={getStateValue("IS_DOUBLE_OPTIN")} />
 
 
-        {( watch["IS_DOUBLE_OPTIN"] == true  ) && <>
+
+
+        {(watch["IS_DOUBLE_OPTIN"] == true || (watch["IS_DOUBLE_OPTIN"] == undefined && getStateValue("IS_DOUBLE_OPTIN") == true)) && <>
 
 
           <RichTextEditor label="Double Optin Content" name="DOUBLE_OPTIN_CONTENT" required={true} value={`
@@ -107,10 +122,22 @@ The email and link are both from "ITBusinessToday".
 
 
         <Section title="Landing Page Details">
-          <CheckBox label="Landing title is same as EDM title" name="LANDING_TITLE_SAME_AS_EDM_TITLE" defaultChecked={true} />
+          <CheckBox label="Landing title is same as EDM title" name="LANDING_TITLE_SAME_AS_EDM_TITLE" defaultChecked={true}  />
           {(watch["LANDING_TITLE_SAME_AS_EDM_TITLE"] == false) &&
-            <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true} />
+          <>
+           <TextBox label="Landing Page Title" name="LANDING_TITLE" required={true}
+
+onChange={
+  (e) => {
+    const val = e.target.value
+    setFormValue("ASSET_TITLE", `${val}`)
+  }
+}
+/>
+            
+            </>
           }
+         
 
           <CheckBox label="Landing abstract is same as EDM abstract" name="LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT" defaultChecked={false} />
           {(watch["LANDING_ABSTRACT_SAME_AS_EDM_ABSTRACT"] == false) && <>
@@ -253,9 +280,12 @@ The email and link are both from "ITBusinessToday".
             <CheckBox label="Add extra Image Below the Abstract" name="SHOW_IMAGE_BELOW_ABSTRACT" defaultChecked={false} />
             {(watch["SHOW_IMAGE_BELOW_ABSTRACT"] == true) &&
 
-              [<FileInput name="IMAGE_BELOW_ABSTRACT" label="Image Below Abstract" tag="file" fileRef={filesRef.current.fileInput9} onFileChange={(filename) => { setFormValue("IMAGE_BELOW_ABSTRACT", filename) }} />
-                , <TextBox label="IMAGE_BELOW_ABSTRACT_WIDTH" required="true" name="IMAGE_BELOW_ABSTRACT_WIDTH" value={'20%'} />
-                , <CheckBox label="Show extra image on Landing Page" name="SHOW_IMAGE_BELOW_ABSTRACT_ON_LANDING_PAGE" defaultChecked={false} />]
+            <div className='insetLeft'>
+<FileInput name="IMAGE_BELOW_ABSTRACT" label="Image Below Abstract" tag="file" fileRef={filesRef.current.fileInput9} onFileChange={(filename) => { setFormValue("IMAGE_BELOW_ABSTRACT", filename) }} />
+<TextBox label="IMAGE_BELOW_ABSTRACT_WIDTH" required="true" name="IMAGE_BELOW_ABSTRACT_WIDTH" value={'20%'} />
+<CheckBox label="Show extra image on Landing Page" name="SHOW_IMAGE_BELOW_ABSTRACT_ON_LANDING_PAGE" defaultChecked={false} />
+            </div>
+ 
             }
           </Col>
         </Row>

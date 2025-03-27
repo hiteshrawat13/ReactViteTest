@@ -173,7 +173,7 @@ const Stepper = forwardRef(({ children, onStepChange = null}, ref) => {
         }}>
             {
                 stepsArray.map((child, i) => {
-                    return (i == step) && <div key={i}  >{React.cloneElement(child, {  })}</div>
+                    return (i == step) && <div key={i} title={child.props.title} >{React.cloneElement(child, {  })}</div>
                 })
             }
         </StepperContext.Provider>

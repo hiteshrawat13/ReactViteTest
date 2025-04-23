@@ -8,6 +8,7 @@ import CampaignList from "../pages/new/CampaignList"
 import LinkList from "../pages/new/LinkList"
 import Login from "../pages/login/Login"
 import UserHome from "../pages/dashboard/UserHome";
+import Form from "../TestV2/Form";
 
  
 
@@ -17,6 +18,15 @@ const Router = [
     // element: <AuthProvider> <App/> </AuthProvider> ,
     element: <App />,
     children: [
+
+
+
+      // TEST V2
+      {
+        path: '/v2',
+        element: <Form/>,
+        title: "Test V2"
+      },
    
       {
         path: "/",
